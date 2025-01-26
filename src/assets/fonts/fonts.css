@@ -1,0 +1,27 @@
+@font-face {
+  font-family: "Wix Madefor Text";
+  src: url("./WixMadeforText-Regular.ttf");
+  font-weight: 400;
+}
+@font-face {
+    font-family: "Wix Madefor Text";
+    src: url("./WixMadeforText-Medium.ttf");
+    font-weight: 500;
+  }
+
+  @font-face {
+    font-family: "Wix Madefor Text";
+    src: url("./WixMadeforText-SemiBold.ttf");
+    font-weight: 600;
+  }
+
+  @font-face {
+    font-family: "Wix Madefor Text";
+    src: url("./WixMadeforText-Bold.ttf");
+    font-weight: 700;
+  }
+  @font-face {
+    font-family: "Wix Madefor Text";
+    src: url("./WixMadeforText-ExtraBold.ttf");
+    font-weight: 800;
+  }
