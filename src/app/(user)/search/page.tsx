@@ -1,10 +1,9 @@
 type Props = {
-  params: { id: string };
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
 const SearchPage = ({ searchParams }: Props) => {
-  const query = searchParams.query || "Default Query"; 
+  const query = searchParams.query || "Default Query";
 
   console.log(query);
 
