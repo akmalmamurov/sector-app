@@ -1,16 +1,14 @@
-type Props = {
-  searchParams: { [key: string]: string | string[] | undefined };
-};
+"use client";
+import { useSearchParams } from "next/navigation";
+const SearchPage = () => {
+  const searchParams = useSearchParams();
 
-const SearchPage = ({ searchParams }: Props) => {
-  const query = searchParams.query || "Default Query";
-
-  console.log(query);
+  const search = searchParams.get("query");
 
   return (
     <div>
       <h1 className="text-2xl font-bold text-center text-blue-600 uppercase">
-        {query}
+        {search}
       </h1>
     </div>
   );
