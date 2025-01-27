@@ -4,4 +4,6 @@ export * from "./CompareIcon";
 export * from "./DiscountIcon";
 export * from "./HeartIcon";
 export * from "./SearchIcon";
-export * from "./UserIcon"
+export * from "./UserIcon";
+export * from "./CatalogIcon";
+export * from "./CloseIcon";

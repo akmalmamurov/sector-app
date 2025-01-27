@@ -14,6 +14,9 @@ export default {
         whiteOut: "#FBFBFB",
         background: "#FAFAFA",
         superSilver: "#EEEEEE",
+        textColor: "#333333",
+        cottonBall: "#F2F6FB",
+        whisperBlue: "#E5EAF1",
         foreground: "hsl(var(--foreground))",
         card: {
           DEFAULT: "hsl(var(--card))",
@@ -54,6 +57,7 @@ export default {
           "5": "hsl(var(--chart-5))",
         },
       },
+
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",

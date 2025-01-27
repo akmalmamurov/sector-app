@@ -14,7 +14,7 @@ const HeaderTop = () => {
           <Link href="/login" className="flex ml-0.5">
             <p className={`underline ${className}`}>авторизуйтесь</p>
             <span>
-              <ArrowRightIcon/>
+              <ArrowRightIcon />
             </span>
           </Link>
         </div>

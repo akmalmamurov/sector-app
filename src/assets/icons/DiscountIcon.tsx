@@ -1,10 +1,10 @@
-type Props = React.SVGProps<SVGSVGElement>;
+type DiscountProps = React.SVGProps<SVGSVGElement>;
 
-export const DiscountIcon: React.FC<Props> = (props) => {
+export const DiscountIcon: React.FC<DiscountProps> = (props) => {
   return (
     <svg
-      width={16}
-      height={16}
+      width={21}
+      height={20}
       viewBox="0 0 16 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
