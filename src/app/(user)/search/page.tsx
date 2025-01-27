@@ -1,9 +1,9 @@
 interface Props {
   searchParams: {
-    query: string;
+    query?: string;
   };
 }
-const SearchPage = async ({ searchParams }: Props) => {
+const SearchPage = ({ searchParams }: Props) => {
   const { query } = searchParams;
   console.log(query);
 
