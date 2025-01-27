@@ -1,10 +1,11 @@
-interface Props {
-  searchParams: {
-    query?: string;
-  };
-}
+type Props = {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
 const SearchPage = ({ searchParams }: Props) => {
-  const { query } = searchParams;
+  const query = searchParams.query || "Default Query"; 
+
   console.log(query);
 
   return (
