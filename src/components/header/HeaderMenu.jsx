@@ -7,7 +7,7 @@ import Link from "next/link";
 import { headerMenuData } from "@/data/header-menu-data";
 const HeaderMenu = () => {
   return (
-    <div className="py-2 bg-white border-b border-b-superSilver">
+    <div className="py-2 border-b border-b-superSilver">
       <Container className="flex justify-between items-center gap-[42px]">
         {/* logo */}
         <Link href="/">

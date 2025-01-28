@@ -1,3 +1,5 @@
 import logo from "./logo.png";
 import flagUz from "./flaguz.png";
-export { logo, flagUz };
+import banner1 from "./banner1.webp";
+import banner2 from "./banner2.webp";
+export { logo, flagUz, banner1, banner2 };
