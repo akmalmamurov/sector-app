@@ -9,6 +9,14 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: "380px",
+        sm: "576px",
+        md: "768px",
+        lg: "992px",
+        xl: "1280px",
+        "2xl": "1400px",
+      },
       colors: {
         cerulean: "#0054AE",
         whiteOut: "#FBFBFB",
@@ -62,6 +70,10 @@ export default {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      boxShadow: {
+        navListShadow:
+          "0 2px 4px -1px rgba(0,0,0,.04),0 4px 5px 0 rgba(0,0,0,.05),0 1px 10px 0 rgba(0,0,0,.07)",
       },
     },
   },

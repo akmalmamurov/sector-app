@@ -72,6 +72,9 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+  .hoverEffect {
+    @apply duration-300 ease-in-out;
+  }
   
 }
 .input-autofill:-webkit-autofill,

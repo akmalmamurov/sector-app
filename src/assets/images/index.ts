@@ -1,3 +1,3 @@
 import logo from "./logo.png";
-
-export { logo };
+import flagUz from "./flaguz.png";
+export { logo, flagUz };

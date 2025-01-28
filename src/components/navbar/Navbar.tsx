@@ -3,6 +3,10 @@ import { Container } from "../container";
 import { Button } from "../ui/button";
 import CatalogMenu from "../catalog-menu/CatalogMenu";
 import { useRef, useState } from "react";
+import Image from "next/image";
+import { flagUz } from "@/assets/images";
+import Link from "next/link";
+import NavbarList from "./NavbarList";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,9 +14,9 @@ const Navbar = () => {
   return (
     <>
       <nav className="bg-white py-2">
-        <Container>
+        <Container className="flex items-center justify-between">
           {/* catalog */}
-          <div>
+          <div className="flex gap-[23px] items-center">
             <Button
               ref={toggleButtonRef}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -44,7 +48,22 @@ const Navbar = () => {
               </div>
               Каталог товаров
             </Button>
+            <div className="flex items-center gap-4">
+              <div className="flex gap-2 items-center">
+                <Image src={flagUz} alt="flag" />
+                <h2 className="font-semibold text-xs text-textColor leading-[18px]">
+                  Ташкент
+                </h2>
+              </div>
+              <Link
+                href={"tel:+9999999999"}
+                className="font-semibold text-xs text-textColor leading-[18px]"
+              >
+                +9999999999
+              </Link>
+            </div>
           </div>
+          <NavbarList />
         </Container>
       </nav>
       {isMenuOpen && (

@@ -7,3 +7,4 @@ export * from "./SearchIcon";
 export * from "./UserIcon";
 export * from "./CatalogIcon";
 export * from "./CloseIcon";
+export * from "./ChevronBottomIcon";
