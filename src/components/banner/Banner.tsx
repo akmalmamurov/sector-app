@@ -6,12 +6,12 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Container } from "../container";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 
 interface BannerProps {
   banner: {
     id: number;
-    image: string;
+    image: string | StaticImageData; 
   }[];
 }
 
