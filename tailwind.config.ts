@@ -25,6 +25,8 @@ export default {
         textColor: "#333333",
         cottonBall: "#F2F6FB",
         whisperBlue: "#E5EAF1",
+        stoneCold: "#555555",
+        darkSoul: "#A3A3A3",
         foreground: "hsl(var(--foreground))",
         card: {
           DEFAULT: "hsl(var(--card))",
@@ -74,6 +76,7 @@ export default {
       boxShadow: {
         navListShadow:
           "0 2px 4px -1px rgba(0,0,0,.04),0 4px 5px 0 rgba(0,0,0,.05),0 1px 10px 0 rgba(0,0,0,.07)",
+        sidebarWadow: "0 10px 36px rgba(0, 0, 0, .1);",
       },
     },
   },

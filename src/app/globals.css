@@ -8,7 +8,6 @@ body {
   font-family: "Wix Madefor Text", sans-serif;
 }
 
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -75,11 +74,9 @@ body {
   .hoverEffect {
     @apply duration-300 ease-in-out;
   }
-  
 }
 .input-autofill:-webkit-autofill,
 .input-autofill:-webkit-autofill:focus {
   background-color: transparent !important;
   transition: background-color 5000s ease-in-out 0s !important;
 }
-

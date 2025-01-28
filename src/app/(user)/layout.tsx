@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "../globals.css";
 import { Header } from "@/components/header";
+import { Sidebar } from "@/components/sidebar";
 
 export const metadata: Metadata = {
   title: "Sector App",
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body>
         <Header />
         {children}
+        <Sidebar />
       </body>
     </html>
   );

@@ -1,17 +1,18 @@
 "use client";
 
+import Image, { StaticImageData } from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Container } from "../container";
-import Image, { StaticImageData } from "next/image";
+import Link from "next/link";
 
 interface BannerProps {
   banner: {
     id: number;
-    image: string | StaticImageData; 
+    image: string | StaticImageData;
   }[];
 }
 
@@ -34,13 +35,15 @@ export const Banner = ({ banner }: BannerProps) => {
         >
           {banner.map((item) => (
             <SwiperSlide key={item.id}>
-              <Image
-                src={item.image}
-                alt={`Banner ${item.id}`}
-                className="w-full object-cover h-full rounded-md"
-                width={1440}
-                height={413}
-              />
+              <Link href={"/"} >
+                <Image
+                  src={item.image}
+                  alt={`Banner ${item.id}`}
+                  className="w-full object-cover h-full rounded-md"
+                  width={1440}
+                  height={413}
+                />
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>
