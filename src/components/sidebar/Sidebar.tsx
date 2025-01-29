@@ -18,7 +18,7 @@ export const Sidebar = () => {
   const [open, setOpen] = useState(true);
   return (
     <aside
-      className={`fixed bottom-0 right-0 w-12 h-[76vh]  z-[999] flex flex-col justify-between transition-opacity duration-300 ease-in-out  ${
+      className={`fixed bottom-0 right-0 w-12 h-[76vh]  z-50 flex flex-col justify-between transition-opacity duration-300 ease-in-out  ${
         open ? " shadow-sidebarWadow bg-white" : " shadow-none bg-transparent"
       }`}
     >

@@ -15,3 +15,4 @@ export * from "./SidebarHeartIcon";
 export * from "./SidebarCompareIcon";
 export * from "./SidebarSharesIcon";
 export * from "./SidebarChatIcon";
+export * from "./CategoryRightIcon";
