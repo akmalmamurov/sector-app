@@ -3,6 +3,7 @@ import { banner1, banner2 } from "@/assets/images";
 import { HomeCategory } from "@/components/home-category";
 import { HomeBrands } from "@/components/home-brand";
 import { brandsData } from "@/data";
+import { ProductList } from "@/components/product-list";
 
 export default function Home() {
   const banners = [
@@ -21,6 +22,7 @@ export default function Home() {
       <Banner banner={banners} />
       <HomeCategory />
       <HomeBrands brands={brandsData} />
+      <ProductList />
     </div>
   );
 }

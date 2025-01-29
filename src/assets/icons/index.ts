@@ -17,3 +17,5 @@ export * from "./SidebarChatIcon";
 export * from "./InstagramIcon";
 export * from "./TelegramIcon";
 export * from "./FacebookIcon";
+export * from "./ChevronRightIcon";
+export * from "./TimeIcon";
