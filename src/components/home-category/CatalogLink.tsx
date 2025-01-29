@@ -16,7 +16,7 @@ const CatalogLink = () => {
         </p>
       </div>
       <div className="px-4">
-        <p className="text-sm font-normal text-darkSoul">123123 товар</p>
+        <p className="text-sm font-normal text-darkSoul">5223 товаров</p>
       </div>
       <div className="bg-[#0054AE1F] w-[150px] h-[150px] rounded-full absolute top-[8px] -left-[82px]"></div>
       <div className="bg-[#0054AE1F] w-[270px] h-[270px] rounded-full absolute -top-[48px] -left-[122px]"></div>

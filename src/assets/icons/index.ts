@@ -16,3 +16,6 @@ export * from "./SidebarCompareIcon";
 export * from "./SidebarSharesIcon";
 export * from "./SidebarChatIcon";
 export * from "./CategoryRightIcon";
+export * from "./InstagramIcon";
+export * from "./TelegramIcon";
+export * from "./FacebookIcon";

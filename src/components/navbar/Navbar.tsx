@@ -59,7 +59,7 @@ const Navbar = () => {
                 href={"tel:+9999999999"}
                 className="font-semibold text-xs text-textColor leading-[18px]"
               >
-                +9999999999
+                    +998 99 999 9999
               </Link>
             </div>
           </div>
@@ -70,6 +70,7 @@ const Navbar = () => {
         <CatalogMenu
           setMenuOpen={setIsMenuOpen}
           toggleButtonRef={toggleButtonRef}
+          open={isMenuOpen}
         />
       )}
     </>
