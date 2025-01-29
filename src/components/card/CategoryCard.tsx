@@ -22,7 +22,7 @@ export const CategoryCard = ({ category }: Props) => {
   return (
     <div
       onClick={goCatalog}
-      className="bg-white group relative shadow-2xl overflow-hidden pb-1 min-h-[190px] rounded-[10px] cursor-pointer flex flex-col justify-between"
+      className="bg-white group relative shadow-md overflow-hidden pb-1 min-h-[190px] rounded-[10px] cursor-pointer flex flex-col justify-between"
     >
       {/* Image */}
       <div className="w-[150px] h-[100px] overflow-hidden ">

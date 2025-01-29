@@ -16,6 +16,12 @@ import { Tooltip } from "../tolltip";
 
 export const Sidebar = () => {
   const [open, setOpen] = useState(true);
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   return (
     <aside
       className={`fixed bottom-0 right-0 w-12 h-[76vh]  z-50 flex flex-col justify-between transition-opacity duration-300 ease-in-out  ${
@@ -104,7 +110,10 @@ export const Sidebar = () => {
           </button>
         </Tooltip>
         <Tooltip text="Bверх">
-          <button className="w-[34px] h-[34px] bg-superSilver rounded-full flex items-center justify-center">
+          <button
+            onClick={scrollToTop}
+            className="w-[34px] h-[34px] bg-superSilver rounded-full flex items-center justify-center"
+          >
             <SidebarTopIcon />
           </button>
         </Tooltip>
