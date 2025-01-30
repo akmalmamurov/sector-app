@@ -6,7 +6,7 @@ const FooterTop = () => {
     <div className="grid grid-cols-4 gap-7.5 pb-[56px]">
       {footerData.map((el, index) => (
         <div key={index}>
-          <h3 className="text-white font-medium text-sm leading-[21px] uppercase">
+          <h3 className="text-white font-medium text-sm leading-[21px] uppercase w-fit">
             {el.name}
           </h3>
           <ul className="pt-6 flex flex-col gap-4">
@@ -24,7 +24,7 @@ const FooterTop = () => {
         </div>
       ))}
       <div>
-        <h3 className="text-white font-medium text-sm leading-[21px] uppercase">
+        <h3 className="text-white font-medium text-sm leading-[21px] uppercase w-fit">
           Ваш офис
         </h3>
         <ul className="pt-6 flex flex-col gap-4">
