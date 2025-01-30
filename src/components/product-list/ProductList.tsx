@@ -1,17 +1,20 @@
 import { Container } from "../container";
 import { InfoList } from "../info-list";
+import ProductTabs from "../product-tabs/ProductTabs";
 
 export const ProductList = () => {
   return (
     <section className="pb-20">
-      <Container className="grid grid-cols-12">
-        {/* left side information */}
+      <Container className="grid grid-cols-12 gap-8">
+        {/* Chap panel */}
         <div className="col-span-3">
           <InfoList />
         </div>
 
-        {/* products  */}
-        <div className="col-span-9"></div>
+        {/* Mahsulotlar */}
+        <div className="col-span-9">
+          <ProductTabs />
+        </div>
       </Container>
     </section>
   );
