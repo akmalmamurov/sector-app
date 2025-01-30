@@ -42,7 +42,7 @@ const saleCategory: Category = {
 };
 
 const ProductTabs = () => {
-  let formattedData: FormattedData = productData.reduce(
+  const formattedData: FormattedData = productData.reduce(
     (acc: FormattedData, category) => {
       const [key, value] = Object.entries(category)[0];
       acc[key] = value as Category;
