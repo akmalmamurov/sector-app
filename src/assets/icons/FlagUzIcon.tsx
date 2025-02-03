@@ -1,5 +1,5 @@
-type Props = React.SVGProps<SVGSVGElement>
-export const FlagUzIcon: React.FC<Props> = (props) => {
+
+export const FlagUzIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       width={31}

@@ -1,5 +1,5 @@
-type Props = React.SVGProps<SVGSVGElement>;
-export const FacebookIcon: React.FC<Props> = (props) => {
+
+export const FacebookIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       width={26}

@@ -1,5 +1,5 @@
-type Props = React.SVGProps<SVGSVGElement>;
-export const ToggleSidebarIcon: React.FC<Props> = (props) => {
+
+export const ToggleSidebarIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       width={21}

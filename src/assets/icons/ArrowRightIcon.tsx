@@ -1,6 +1,5 @@
-type ArrowRightIconProps = React.SVGProps<SVGSVGElement>;
 
-export const ArrowRightIcon: React.FC<ArrowRightIconProps> = (props) => {
+export const ArrowRightIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       width={25}

@@ -1,6 +1,6 @@
-type DiscountProps = React.SVGProps<SVGSVGElement>;
 
-export const DiscountIcon: React.FC<DiscountProps> = (props) => {
+
+export const DiscountIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       width={21}

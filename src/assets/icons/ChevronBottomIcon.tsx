@@ -1,5 +1,5 @@
-type Props = React.SVGProps<SVGSVGElement>;
-export const ChevronBottomIcon: React.FC<Props> = (props) => {
+
+export const ChevronBottomIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       width={17}

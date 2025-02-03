@@ -1,5 +1,5 @@
-type Props = React.SVGProps<SVGSVGElement>;
-export const TimeIcon: React.FC<Props> = (props) => {
+
+export const TimeIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       width={16}

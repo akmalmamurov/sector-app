@@ -1,6 +1,5 @@
-type Props = React.SVGProps<SVGSVGElement>;
 
-export const UserIcon: React.FC<Props> = (props) => {
+export const UserIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       width={20}

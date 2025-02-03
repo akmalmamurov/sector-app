@@ -1,5 +1,5 @@
-type SearchIconProps = React.SVGProps<SVGSVGElement>;
-export const SearchIcon: React.FC<SearchIconProps> = (props) => {
+
+export const SearchIcon= (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       width={25}

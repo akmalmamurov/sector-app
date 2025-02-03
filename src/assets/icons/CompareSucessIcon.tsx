@@ -1,0 +1,48 @@
+export const CompareSucessIcon = (props: React.SVGProps<SVGSVGElement>) => {
+  return (
+    <svg
+      width={25}
+      height={25}
+      viewBox="0 0 25 25"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <defs>
+        <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style={{ stopColor: "#0054AE", stopOpacity: 1 }} />
+          <stop
+            offset="100%"
+            style={{ stopColor: "#93c5fd", stopOpacity: 1 }}
+          />
+        </linearGradient>
+      </defs>
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M9.47545 8.87012C10.2644 8.87012 10.904 9.42976 10.904 10.1201V21.3701C10.904 22.0605 10.2644 22.6201 9.47545 22.6201C8.68647 22.6201 8.04688 22.0605 8.04688 21.3701V10.1201C8.04688 9.42976 8.68647 8.87012 9.47545 8.87012Z"
+        fill="#2563eb"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M15.1897 2.62012C15.9787 2.62012 16.6183 3.17976 16.6183 3.87012V21.3701C16.6183 22.0605 15.9787 22.6201 15.1897 22.6201C14.4008 22.6201 13.7612 22.0605 13.7612 21.3701V3.87012C13.7612 3.17976 14.4008 2.62012 15.1897 2.62012Z"
+        fill="url(#gradient)"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M3.76109 13.8701C4.55007 13.8701 5.18966 14.4297 5.18966 15.1201V21.3701C5.18966 22.0605 4.55007 22.6201 3.76109 22.6201C2.97211 22.6201 2.33252 22.0605 2.33252 21.3701V15.1201C2.33252 14.4297 2.97211 13.8701 3.76109 13.8701Z"
+        fill="#3b82f6"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M20.9038 13.8701C21.6928 13.8701 22.3324 14.4297 22.3324 15.1201V21.3701C22.3324 22.0605 21.6928 22.6201 20.9038 22.6201C20.1148 22.6201 19.4753 22.0605 19.4753 21.3701V15.1201C19.4753 14.4297 20.1148 13.8701 20.9038 13.8701Z"
+        fill="url(#gradient)"
+      />
+    </svg>
+  );
+};
+
+export default CompareSucessIcon;

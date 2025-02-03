@@ -1,5 +1,5 @@
-type Props = React.SVGProps<SVGSVGElement>;
-export const SidebarHeartIcon: React.FC<Props> = (props) => {
+
+export const SidebarHeartIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       width={21}

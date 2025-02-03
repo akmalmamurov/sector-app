@@ -1,5 +1,5 @@
-type Props = React.SVGProps<SVGSVGElement>;
-export const TelegramIcon: React.FC<Props> = (props) => {
+
+export const TelegramIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       width={26}

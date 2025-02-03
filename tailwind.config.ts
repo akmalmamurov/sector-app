@@ -27,6 +27,10 @@ export default {
         whisperBlue: "#E5EAF1",
         stoneCold: "#555555",
         darkSoul: "#A3A3A3",
+        titleColor: "#3B3B3B",
+        wasabiColor: "#929292",
+        dangerColor: "#EF403D",
+        lightBg: "#F5F5F5",
         foreground: "hsl(var(--foreground))",
         card: {
           DEFAULT: "hsl(var(--card))",
