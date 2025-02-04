@@ -16,7 +16,6 @@ import useStore from "@/context/store";
 
 export const ProductCard = ({ product }: { product: ProductData }) => {
   const { toggleFavorites, favorites, toggleCompare, compares } = useStore();
-  console.log(compares);
 
   const isFavorite = favorites.some((item) => item.product.id === product.id);
   const isCompare = compares.some((item) => item.product.id === product.id);
@@ -101,7 +100,11 @@ export const ProductCard = ({ product }: { product: ProductData }) => {
           )}
         </button>
         <button onClick={handleToCompare}>
-          {isCompare ? <CompareSucessIcon /> : <CartCompareIcon className="text-darkSoul"/>}
+          {isCompare ? (
+            <CompareSucessIcon />
+          ) : (
+            <CartCompareIcon className="text-darkSoul" />
+          )}
         </button>
 
         <button className="w-[42px] h-[42px] bg-lightBg rounded-full flex items-center justify-center">

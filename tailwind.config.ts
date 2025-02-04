@@ -9,6 +9,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        arial: ["Arial", "sans-serif"],
+      },
       screens: {
         xs: "380px",
         sm: "576px",
