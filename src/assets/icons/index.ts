@@ -24,4 +24,7 @@ export * from "./CartHeartIcon";
 export * from "./CartAddIcon";
 export * from "./CartCompareIcon";
 export * from "./HeartActiveIcon";
-export * from "./CompareSucessIcon"
+export * from "./CompareSucessIcon";
+export * from "./YandexIcon";
+export * from "./GoogleIcon";
+export * from "./LinkedinIcon"

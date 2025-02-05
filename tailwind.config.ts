@@ -11,6 +11,7 @@ export default {
     extend: {
       fontFamily: {
         arial: ["Arial", "sans-serif"],
+        wix: ["Wix Madefor Text", "sans-serif"],
       },
       screens: {
         xs: "380px",
@@ -34,6 +35,8 @@ export default {
         wasabiColor: "#929292",
         dangerColor: "#EF403D",
         lightBg: "#F5F5F5",
+        linkColor: "#3A92F0",
+        beluga: "#F1F1F1",
         foreground: "hsl(var(--foreground))",
         card: {
           DEFAULT: "hsl(var(--card))",

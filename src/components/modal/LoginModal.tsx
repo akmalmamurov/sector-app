@@ -1,108 +1,94 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { X } from "lucide-react";
-import { useState } from "react";
-import { Input } from "../ui/input";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "../ui/form";
-
-const formSchema = z.object({
-  contact: z.string().refine((val) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phoneRegex = /^\+?[1-9]\d{1,14}$/;
-    return emailRegex.test(val) || phoneRegex.test(val);
-  }, "Введите корректный E-mail или номер телефона"),
-});
+import Login from "./Login";
+import LoginPassword from "./LoginPassword";
+import LoginReset from "./LoginReset";
 
 interface Props {
   isOpen: boolean;
   handleOpen: () => void;
 }
 
+const formSchemaStep1 = z.object({
+  contact: z
+    .string()
+    .min(1, "Поле обязательно для заполнения")
+    .refine((val) => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const phoneRegex = /^\+?[1-9]\d{1,14}$/;
+      return emailRegex.test(val) || phoneRegex.test(val);
+    }, "Введите корректный E-mail или номер телефона"),
+});
+
+const formSchemaStep2 = z.object({
+  email: z.string().email("Введите корректный E-mail"),
+  password: z.string().min(6, "Пароль должен содержать минимум 6 символов"),
+});
+
+const formSchemaStep3 = z.object({
+  resetEmail: z.string().email("Введите корректный E-mail"),
+});
+
 const LoginModal = ({ isOpen, handleOpen }: Props) => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      contact: "",
-    },
+  const [step, setStep] = useState(1);
+
+  const formStep1 = useForm({
+    resolver: zodResolver(formSchemaStep1),
+    defaultValues: { contact: "" },
   });
 
-  const [inputType, setInputType] = useState<"email" | "tel">("email");
+  const formStep2 = useForm({
+    resolver: zodResolver(formSchemaStep2),
+    defaultValues: { email: "", password: "" },
+  });
 
-  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phoneRegex = /^\+?[1-9]\d{1,14}$/;
+  const formStep3 = useForm({
+    resolver: zodResolver(formSchemaStep3),
+    defaultValues: { resetEmail: "" },
+  });
+  const resetForm = () => {
+    formStep1.reset();
+    formStep2.reset();
+    formStep3.reset();
+  };
 
-    if (value.includes("@")) {
-      setInputType("email");
+  const handleClose = (newStep?: number) => {
+    if (newStep) {
+      setStep(newStep);
+      resetForm();
     } else {
-      setInputType("tel");
+      setStep(1);
     }
-
-    form.setValue("contact", value);
   };
 
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log("Form Data:", data);
-  };
+  const fullClose = ()=>{
+    setStep(1);
+    handleOpen();
+    resetForm();
+  }
+  useEffect(() => {
+    if (isOpen) {
+      setStep(1);
+      resetForm();
+    }
+  }, [isOpen]); 
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpen}>
-      <DialogContent className="sm:max-w-[600px] rounded-none top-72 sm:rounded-none p-0">
-        <DialogHeader className="px-[50px] py-10">
-          <DialogTitle className="font-arial font-normal text-[26px] text-black">
-            Вход и регистрация
-          </DialogTitle>
-          <button
-            onClick={handleOpen}
-            className="text-black hover:text-gray-600 focus:outline-none absolute right-4 top-4"
-          >
-            <X className="w-6 h-6" />
-          </button>
-        </DialogHeader>
-        <div className="px-[50px]">
-          <Form {...form}>
-            <form noValidate onSubmit={form.handleSubmit(onSubmit)}>
-              <FormField
-                control={form.control}
-                name="contact"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input
-                        placeholder="Телефон или E-mail"
-                        type={inputType}
-                        {...field}
-                        onChange={onInputChange}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <button
-                type="submit"
-                className="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
-              >
-                Отправить
-              </button>
-            </form>
-          </Form>
-        </div>
+      <DialogContent className="sm:max-w-[500px] rounded-none sm:rounded-none p-0">
+        {step === 1 && (
+          <Login handleClose={handleClose} formMethods={formStep1} fullClose={fullClose}/>
+        )}
+        {step === 2 && (
+          <LoginPassword handleClose={handleClose} formMethods={formStep2} fullClose={fullClose}/>
+        )}
+        {step === 3 && (
+          <LoginReset  formMethods={formStep3} fullClose={fullClose}/>
+        )}
       </DialogContent>
     </Dialog>
   );
