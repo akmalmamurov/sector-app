@@ -122,7 +122,7 @@ const LoginPassword = ({ handleClose, formMethods, fullClose }: Props) => {
             </p>
           </button>
         </div>
-        <LoginBrowser />
+        <LoginBrowser fullClose={fullClose} />
       </div>
     </>
   );

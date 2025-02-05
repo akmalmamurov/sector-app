@@ -105,7 +105,7 @@ const Login = ({ handleClose, formMethods, fullClose }: Props) => {
           </Button>
         </div>
 
-        <LoginBrowser />
+        <LoginBrowser fullClose={fullClose}/>
       </div>
     </>
   );
