@@ -1,6 +1,6 @@
 import { ProductData } from "@/types";
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 interface StoreItem {
   product: ProductData;
@@ -74,11 +74,10 @@ const useStore = create<StoreState>()(
               ),
             };
           } else {
-            return { compares: [...state.compares, { product }] }; 
+            return { compares: [...state.compares, { product }] };
           }
         });
       },
-      
 
       removeFromFavorites: (id) => {
         set((state) => ({
@@ -99,7 +98,8 @@ const useStore = create<StoreState>()(
       },
     }),
     {
-      name: "store-storage", // localStorage nomi
+      name: "sector-app",
+      storage: createJSONStorage(() => localStorage),
     }
   )
 );
