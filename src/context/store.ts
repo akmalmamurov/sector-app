@@ -2,8 +2,7 @@ import { ProductData } from "@/types";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-interface StoreItem {
-  product: ProductData;
+export interface StoreItem extends ProductData {
   quantity?: number;
 }
 
@@ -29,71 +28,62 @@ const useStore = create<StoreState>()(
       toggleFavorites: (product) => {
         set((state) => {
           const isFavorite = state.favorites.some(
-            (item) => item.product.id === product.id
+            (item) => item.id === product.id
           );
           if (isFavorite) {
             return {
-              favorites: state.favorites.filter(
-                (item) => item.product.id !== product.id
-              ),
+              favorites: state.favorites.filter((item) => item.id !== product.id),
             };
           } else {
-            return { favorites: [...state.favorites, { product }] };
+            return { favorites: [...state.favorites, product] };
           }
         });
       },
 
       addToCart: (product) => {
         set((state) => {
-          const existingItem = state.cart.find(
-            (item) => item.product.id === product.id
-          );
-          if (existingItem) {
-            return {
-              cart: state.cart.map((item) =>
-                item.product.id === product.id
-                  ? { ...item, quantity: (item.quantity || 1) + 1 }
-                  : item
-              ),
-            };
-          } else {
-            return { cart: [...state.cart, { product, quantity: 1 }] };
-          }
+          return {
+            cart: state.cart.map((item) =>
+              item.id === product.id
+                ? { ...item, quantity: (item.quantity || 1) + 1 } 
+                : item
+            ).concat(
+              state.cart.some((item) => item.id === product.id) ? [] : [{ ...product, quantity: 1 }] 
+            ),
+          };
         });
       },
 
       toggleCompare: (product) => {
         set((state) => {
           const isCompare = state.compares.some(
-            (item) => item.product.id === product.id
+            (item) => item.id === product.id
           );
           if (isCompare) {
             return {
-              compares: state.compares.filter(
-                (item) => item.product.id !== product.id
-              ),
+              compares: state.compares.filter((item) => item.id !== product.id),
             };
           } else {
-            return { compares: [...state.compares, { product }] };
+            return { compares: [...state.compares, product] };
           }
         });
       },
 
       removeFromFavorites: (id) => {
         set((state) => ({
-          favorites: state.favorites.filter((item) => item.product.id !== id),
+          favorites: state.favorites.filter((item) => item.id !== id),
         }));
       },
 
       removeFromCart: (id) => {
         set((state) => ({
-          cart: state.cart.filter((item) => item.product.id !== id),
+          cart: state.cart.filter((item) => item.id !== id),
         }));
       },
 
       removeFromCompares: (id) => {
         set((state) => ({
-          compares: state.compares.filter((item) => item.product.id !== id),
+          compares: state.compares.filter((item) => item.id !== id),
         }));
       },
     }),
