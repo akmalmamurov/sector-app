@@ -1,4 +1,4 @@
-import { CartHeartIcon, HeartActiveIcon } from "@/assets/icons";
+import { HeartActiveIcon, HeartIcon } from "@/assets/icons";
 import useStore from "@/context/store";
 import { ProductData } from "@/types";
 import { isProductInList } from "@/utils";
@@ -21,7 +21,7 @@ export const AddToFavorites = ({ product }: { product: ProductData }) => {
       {isFavorite ? (
         <HeartActiveIcon className="text-dangerColor" />
       ) : (
-        <CartHeartIcon />
+        <HeartIcon />
       )}
     </button>
   );

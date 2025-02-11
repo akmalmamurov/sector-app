@@ -70,7 +70,7 @@ const Login = ({ handleClose, formMethods, fullClose }: Props) => {
                       type="text"
                       {...field}
                       onChange={onInputChange}
-                      className={`w-full px-3 py-[12px] text-sm placeholder:text-darkSoul focus:outline-none hoverEffect 
+                      className={`w-full px-3 py-[12px] text-sm placeholder:text-darkSoul focus:outline-none 
                         ring-1 ring-darkSoul focus:ring-2 hover:ring-cerulean/70
                         ${
                           errors.contact
@@ -105,7 +105,7 @@ const Login = ({ handleClose, formMethods, fullClose }: Props) => {
           </Button>
         </div>
 
-        <LoginBrowser fullClose={fullClose}/>
+        <LoginBrowser fullClose={fullClose} />
       </div>
     </>
   );

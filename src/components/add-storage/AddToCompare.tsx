@@ -1,5 +1,5 @@
 import toast from "react-hot-toast";
-import { CartCompareIcon, CompareSucessIcon } from "@/assets/icons";
+import { CompareIcon, CompareSucessIcon } from "@/assets/icons";
 import useStore from "@/context/store";
 import { ProductData } from "@/types";
 import { isProductInList } from "@/utils";
@@ -21,7 +21,7 @@ export const AddToCompare = ({ product }: { product: ProductData }) => {
       {isCompare ? (
         <CompareSucessIcon />
       ) : (
-        <CartCompareIcon className="text-darkSoul" />
+        <CompareIcon className="text-darkSoul" />
       )}
     </button>
   );

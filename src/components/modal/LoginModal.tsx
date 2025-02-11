@@ -66,7 +66,6 @@ const LoginModal = ({ isOpen, handleOpen }: Props) => {
   };
 
   const fullClose = ()=>{
-    setStep(1);
     handleOpen();
     resetForm();
   }

@@ -1,12 +1,13 @@
-import { ProductData } from "@/types";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+import { ProductData } from "@/types";
 
 export interface StoreItem extends ProductData {
   quantity?: number;
 }
 
 interface StoreState {
+  auth: boolean;
   favorites: StoreItem[];
   cart: StoreItem[];
   compares: StoreItem[];
@@ -21,6 +22,7 @@ interface StoreState {
 const useStore = create<StoreState>()(
   persist(
     (set) => ({
+      auth: false,
       favorites: [],
       cart: [],
       compares: [],
@@ -32,7 +34,9 @@ const useStore = create<StoreState>()(
           );
           if (isFavorite) {
             return {
-              favorites: state.favorites.filter((item) => item.id !== product.id),
+              favorites: state.favorites.filter(
+                (item) => item.id !== product.id
+              ),
             };
           } else {
             return { favorites: [...state.favorites, product] };
@@ -43,13 +47,17 @@ const useStore = create<StoreState>()(
       addToCart: (product) => {
         set((state) => {
           return {
-            cart: state.cart.map((item) =>
-              item.id === product.id
-                ? { ...item, quantity: (item.quantity || 1) + 1 } 
-                : item
-            ).concat(
-              state.cart.some((item) => item.id === product.id) ? [] : [{ ...product, quantity: 1 }] 
-            ),
+            cart: state.cart
+              .map((item) =>
+                item.id === product.id
+                  ? { ...item, quantity: (item.quantity || 1) + 1 }
+                  : item
+              )
+              .concat(
+                state.cart.some((item) => item.id === product.id)
+                  ? []
+                  : [{ ...product, quantity: 1 }]
+              ),
           };
         });
       },
