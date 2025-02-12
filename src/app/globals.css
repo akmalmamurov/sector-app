@@ -114,6 +114,9 @@ body {
   }
 }
 @layer components {
+  .info-bold{
+    @apply font-bold text-base leading-[24px] text-textColor
+  }
   .info-title{
     @apply font-normal text-[26px] text-textColor leading-[31px]
   }
