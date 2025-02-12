@@ -17,6 +17,8 @@ interface StoreState {
   removeFromFavorites: (id: number) => void;
   removeFromCart: (id: number) => void;
   removeFromCompares: (id: number) => void;
+  resetCart: () => void;
+  resetFavorites: () => void;
 }
 
 const useStore = create<StoreState>()(
@@ -42,6 +44,9 @@ const useStore = create<StoreState>()(
             return { favorites: [...state.favorites, product] };
           }
         });
+      },
+      resetFavorites: () => {
+        set({ favorites: [] });
       },
 
       addToCart: (product) => {
@@ -87,6 +92,9 @@ const useStore = create<StoreState>()(
         set((state) => ({
           cart: state.cart.filter((item) => item.id !== id),
         }));
+      },
+      resetCart: () => {
+        set({ cart: [] });
       },
 
       removeFromCompares: (id) => {

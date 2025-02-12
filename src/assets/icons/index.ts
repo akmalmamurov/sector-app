@@ -25,4 +25,5 @@ export * from "./HeartActiveIcon";
 export * from "./CompareSucessIcon";
 export * from "./YandexIcon";
 export * from "./GoogleIcon";
-export * from "./LinkedinIcon"
+export * from "./LinkedinIcon";
+export * from "./HomeIcon";

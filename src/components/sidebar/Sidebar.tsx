@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState, useCallback } from "react";
 import {
   FlagUzIcon,
   SidebarChatIcon,
@@ -11,7 +12,6 @@ import {
 import { sidebarLogo } from "@/assets/images";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { Tooltip } from "../tolltip";
 import { MonitorSpeaker } from "lucide-react";
 
@@ -19,48 +19,48 @@ export const Sidebar = () => {
   const [open, setOpen] = useState(true);
   const [isActive, setIsActive] = useState(false);
 
+  // 🔹 Matnni ovoz bilan o‘qish funksiyasi
+  const handleMouseOver = useCallback(
+    (event: Event) => {
+      if (!isActive) return;
+
+      const target = event.target as HTMLElement;
+      if (!target || !target.innerText) return;
+
+      const text = target.innerText.trim();
+      if (text.length > 0) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "ru-RU";
+        speechSynthesis.cancel();
+        speechSynthesis.speak(utterance);
+      }
+    },
+    [isActive]
+  );
+
   useEffect(() => {
+    const elements = document.querySelectorAll(
+      "p, h1, h2, h3, h4, h5, h6, span, a"
+    );
+
     if (isActive) {
       document.body.style.cursor = "text";
-      document
-        .querySelectorAll("p, h1, h2, h3, h4, h5, h6, span, a")
-        .forEach((el) => {
-          el.addEventListener("mouseover", handleMouseOver);
-        });
+      elements.forEach((el) =>
+        el.addEventListener("mouseover", handleMouseOver)
+      );
     } else {
       document.body.style.cursor = "default";
-      document
-        .querySelectorAll("p, h1, h2, h3, h4, h5, h6, span, a")
-        .forEach((el) => {
-          el.removeEventListener("mouseover", handleMouseOver);
-        });
     }
 
     return () => {
-      document
-        .querySelectorAll("p, h1, h2, h3, h4, h5, h6, span, a")
-        .forEach((el) => {
-          el.removeEventListener("mouseover", handleMouseOver);
-        });
+      elements.forEach((el) =>
+        el.removeEventListener("mouseover", handleMouseOver)
+      );
+      document.body.style.cursor = "default"; // 🔹 Default kursorni qaytarish
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isActive]);
+  }, [isActive, handleMouseOver]);
 
-  const handleMouseOver = (event: Event) => {
-    if (!isActive) return;
-
-    const target = event.target as HTMLElement;
-    if (!target || !target.innerText) return;
-
-    const text = target.innerText.trim();
-    if (text.length > 0) {
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = "ru-RU";
-      speechSynthesis.cancel();
-      speechSynthesis.speak(utterance);
-    }
-  };
-
+  // 🔹 Scroll to top funksiyasi
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -82,9 +82,7 @@ export const Sidebar = () => {
         <div className="h-12 flex items-center justify-center">
           <Image src={sidebarLogo} alt="logo" width={42} />
         </div>
-        <div
-          className={`pt-[10px] flex justify-center bg-superSilver shadow-none`}
-        >
+        <div className="pt-[10px] flex justify-center bg-superSilver shadow-none">
           <button className="font-normal text-xs leading-[18px] text-stoneCold">
             <FlagUzIcon className="mb-1" />
             <p>Uz</p>

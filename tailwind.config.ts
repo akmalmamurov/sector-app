@@ -36,6 +36,7 @@ export default {
         dangerColor: "#EF403D",
         lightBg: "#F5F5F5",
         linkColor: "#3A92F0",
+        celBlue: "#008CCB",
         beluga: "#F1F1F1",
         foreground: "hsl(var(--foreground))",
         card: {

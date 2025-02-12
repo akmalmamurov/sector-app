@@ -3,6 +3,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.input-autofill:-webkit-autofill,
+.input-autofill:-webkit-autofill:focus {
+  background-color: transparent !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+}
+.gradient-text {
+  background: linear-gradient(to right, #0054AE, #003A7D);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 body {
   font-family: "Wix Madefor Text", sans-serif;
@@ -103,13 +113,11 @@ body {
     @apply bg-accent;
   }
 }
-.input-autofill:-webkit-autofill,
-.input-autofill:-webkit-autofill:focus {
-  background-color: transparent !important;
-  transition: background-color 5000s ease-in-out 0s !important;
-}
-.gradient-text {
-  background: linear-gradient(to right, #0054AE, #003A7D);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+@layer components {
+  .info-title{
+    @apply font-normal text-[26px] text-textColor leading-[31px]
+  }
+  .info-text{
+    @apply font-normal text-base leading-[24px] text-textColor
+  }
 }
