@@ -38,6 +38,8 @@ export default {
         linkColor: "#3A92F0",
         celBlue: "#008CCB",
         beluga: "#F1F1F1",
+        sunColor: "#FF8C00",
+        christmas:"#E0E0E0",
         foreground: "hsl(var(--foreground))",
         card: {
           DEFAULT: "hsl(var(--card))",

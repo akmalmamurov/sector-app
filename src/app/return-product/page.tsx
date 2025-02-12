@@ -1,15 +1,15 @@
+import Link from "next/link";
 import { HomeCrumb } from "@/components/bread-crumb";
 import { Container } from "@/components/container";
 import { InfoHeader } from "@/components/div";
 import { Section } from "@/components/section";
 import { InfoTitle } from "@/components/title";
-import Link from "next/link";
 const oneItem = [
   " Поставка товара ненадлежащего качества - ст. 408 ГК РУ.",
   "Несоответствие количества товара договору/спецификации к договору. - ст. 399 ГК РУ.",
   "Несоответствие ассортимента или комплектности товара, осуществляется согласно ст. 413 и ст. 452 ГК РУ.",
 ];
-const ReturnProduct = () => {
+const ReturnProductPage = () => {
   return (
     <Container className="pb-[58px]">
       <HomeCrumb paths={[{ name: "Возврат товара" }]} />
@@ -123,4 +123,4 @@ const ReturnProduct = () => {
   );
 };
 
-export default ReturnProduct;
+export default ReturnProductPage;
