@@ -28,7 +28,7 @@ export const navbarList = [
       },
       {
         name: "База знаний",
-        link: "/knowledge-base",
+        link: "/article/knowledge-base",
       },
       {
         name: "Конфигураторы",

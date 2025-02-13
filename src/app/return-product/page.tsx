@@ -4,6 +4,11 @@ import { Container } from "@/components/container";
 import { InfoHeader } from "@/components/div";
 import { Section } from "@/components/section";
 import { InfoTitle } from "@/components/title";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Возврат товара | Sector App",
+  description: "Описание возврата товара или услуги.",
+};
 const oneItem = [
   " Поставка товара ненадлежащего качества - ст. 408 ГК РУ.",
   "Несоответствие количества товара договору/спецификации к договору. - ст. 399 ГК РУ.",

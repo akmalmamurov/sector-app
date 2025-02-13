@@ -3,6 +3,7 @@ import { Container } from "@/components/container";
 import { InfoHeader } from "@/components/div";
 import { Section } from "@/components/section";
 import { InfoTitle } from "@/components/title";
+import { Metadata } from "next";
 import {
   Table,
   TableBody,
@@ -12,6 +13,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Доставка товара | Sector App",
+  description: "Информация о доставке товаров по Узбекистану и за его пределы.",
+};
 const data = [
   {
     title: "Условия и сроки ",

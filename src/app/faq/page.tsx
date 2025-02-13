@@ -4,8 +4,12 @@ import { InfoHeader } from "@/components/div";
 import { Section } from "@/components/section";
 import { InfoTitle } from "@/components/title";
 import { faqData, faqLinks } from "@/data";
+import { Metadata } from "next";
 import Link from "next/link";
-
+export const metadata: Metadata = {
+  title: "Вопросы и ответы | Sector App",
+  description: "Вопросы и ответы на часто задаваемые вопросы",
+};
 const FaqPage = () => {
   return (
     <Container className="pb-[58px]">

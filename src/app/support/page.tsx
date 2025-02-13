@@ -4,9 +4,13 @@ import { Container } from "@/components/container";
 import { InfoHeader } from "@/components/div";
 import { Section } from "@/components/section";
 import { InfoTitle } from "@/components/title";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-
+export const metadata: Metadata = {
+  title: "On-line поддержка | Sector App",
+  description: "Поддержка на нашем сайте",
+};
 const SupportPage = () => {
   return (
     <Container className="pb-[58px]">
