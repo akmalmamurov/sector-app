@@ -9,7 +9,7 @@
   transition: background-color 5000s ease-in-out 0s !important;
 }
 .gradient-text {
-  background: linear-gradient(to right, #0054AE, #003A7D);
+  background: linear-gradient(to right, #0054ae, #003a7d);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -19,7 +19,7 @@ body {
 }
 * {
   scrollbar-width: thin;
-  scrollbar-color:  var(--background);
+  scrollbar-color: var(--background);
 }
 ::-webkit-scrollbar {
   width: 6px;
@@ -97,9 +97,6 @@ body {
   body {
     @apply bg-background text-foreground;
   }
-  .hoverEffect {
-    @apply duration-300 ease-in-out;
-  }
   ::-webkit-scrollbar {
     @apply w-[6px] h-[6px];
   }
@@ -114,13 +111,22 @@ body {
   }
 }
 @layer components {
-  .info-bold{
-    @apply font-bold text-base leading-[24px] text-textColor
+  .hoverEffect {
+    @apply duration-300 ease-in-out;
   }
-  .info-title{
-    @apply font-normal text-[26px] text-textColor leading-[31px]
+  .info-bold {
+    @apply font-bold text-base leading-[24px] text-textColor;
   }
-  .info-text{
-    @apply font-normal text-base leading-[24px] text-textColor
+  .info-title {
+    @apply font-normal text-[26px] text-textColor leading-[31px];
   }
+  .info-text {
+    @apply font-normal text-base leading-[24px] text-textColor;
+  }
+}
+.faq-section {
+  scroll-margin-top: 180px; 
+}
+.faq-top {
+  scroll-margin-top: 180px; 
 }

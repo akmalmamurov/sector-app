@@ -32,7 +32,7 @@ export const HomeCrumb = ({ paths }: BreadcrumbProps) => {
               href={item.href}
               className={`hover:text-blue-500 ${
                 index === paths.length - 1
-                  ? "text-celBlue font-medium"
+                  ? "text-celBlue font-normal text-xs"
                   : "text-gray-500"
               }`}
             >
