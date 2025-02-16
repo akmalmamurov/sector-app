@@ -1,10 +1,12 @@
 "use client";
 import { useEffect, useState, useCallback } from "react";
 import {
+  CompareIcon,
+  CompareSucessIcon,
   FlagUzIcon,
+  HeartActiveIcon,
+  HeartIcon,
   SidebarChatIcon,
-  SidebarCompareIcon,
-  SidebarHeartIcon,
   SidebarSharesIcon,
   SidebarTopIcon,
   ToggleSidebarIcon,
@@ -13,13 +15,13 @@ import { sidebarLogo } from "@/assets/images";
 import Image from "next/image";
 import Link from "next/link";
 import { Tooltip } from "../tolltip";
-import { MonitorSpeaker } from "lucide-react";
+import { Volume2Icon } from "lucide-react";
+import useStore from "@/context/store";
 
 export const Sidebar = () => {
   const [open, setOpen] = useState(true);
   const [isActive, setIsActive] = useState(false);
-
-  // 🔹 Matnni ovoz bilan o‘qish funksiyasi
+  const { favorites, compares } = useStore();
   const handleMouseOver = useCallback(
     (event: Event) => {
       if (!isActive) return;
@@ -56,11 +58,10 @@ export const Sidebar = () => {
       elements.forEach((el) =>
         el.removeEventListener("mouseover", handleMouseOver)
       );
-      document.body.style.cursor = "default"; // 🔹 Default kursorni qaytarish
+      document.body.style.cursor = "default";
     };
   }, [isActive, handleMouseOver]);
 
-  // 🔹 Scroll to top funksiyasi
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -95,17 +96,35 @@ export const Sidebar = () => {
                 href="/favorites"
                 className="w-[34px] h-[34px] rounded-full bg-transparent hover:bg-superSilver flex items-center justify-center"
               >
-                <SidebarHeartIcon />
+                {favorites?.length > 0 ? (
+                  <span className="h-6 w-6 relative">
+                    <HeartActiveIcon className="text-dangerColor" />
+                    <span className="absolute -top-[4px] border -right-[4px] w-[18px] h-[18px] rounded-full text-white bg-dangerColor flex items-center justify-center text-xs font-medium">
+                      {favorites?.length}
+                    </span>
+                  </span>
+                ) : (
+                  <HeartIcon />
+                )}
               </Link>
             </Tooltip>
           </div>
           <div className="h-12">
             <Tooltip text="Сравнить">
               <Link
-                href="/favorites"
+                href="/compare"
                 className="w-[34px] h-[34px] rounded-full bg-transparent hover:bg-superSilver flex items-center justify-center"
               >
-                <SidebarCompareIcon />
+                {compares?.length > 0 ? (
+                  <span className="h-6 w-6 relative">
+                    <CompareSucessIcon />
+                    <span className="absolute -top-[4px] border -right-[6px] w-[18px] h-[18px] rounded-full text-white bg-dangerColor flex items-center justify-center text-xs font-medium">
+                      {compares?.length}
+                    </span>
+                  </span>
+                ) : (
+                  <CompareIcon />
+                )}
               </Link>
             </Tooltip>
           </div>
@@ -115,7 +134,7 @@ export const Sidebar = () => {
                 type="button"
                 className="w-[34px] h-[34px] rounded-full bg-transparent hover:bg-superSilver flex items-center justify-center"
               >
-                <SidebarSharesIcon />
+                <SidebarSharesIcon className="text-black"/>
               </button>
             </Tooltip>
           </div>
@@ -138,7 +157,7 @@ export const Sidebar = () => {
                   isActive ? "bg-blue-500 text-white" : "bg-transparent"
                 } hover:bg-superSilver flex items-center justify-center`}
               >
-                <MonitorSpeaker />
+                <Volume2Icon className="text-black w-5 h-5"/>
               </button>
             </Tooltip>
           </div>

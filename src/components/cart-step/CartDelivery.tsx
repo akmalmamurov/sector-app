@@ -1,7 +1,9 @@
 
-export const CartDelivery = () => {
+export const CartDelivery = ({ onNextStep }: { onNextStep: () => void }) => {
   return (
-    <div>CartDelivery</div>
+    <div>CartDelivery
+      <button onClick={onNextStep}>gg</button>
+    </div>
   )
 }
 

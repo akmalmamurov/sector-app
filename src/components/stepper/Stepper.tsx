@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { StepperIcon } from "@/assets/icons";
+import { StepperIcon, StepperOtherIcon } from "@/assets/icons";
 
 interface StepperProps {
   steps: string[];
@@ -11,14 +11,20 @@ export const Stepper = ({ steps, activeStep }: StepperProps) => {
     <div className="grid grid-cols-4 gap-5">
       {steps.map((step, index) => (
         <div key={index} className="relative flex flex-col items-center w-full">
-          {/* Stepper Icon - Icon ichiga matn joylashadi */}
           <div className="relative flex items-center justify-center">
-            <StepperIcon
-              className={cn(
-                activeStep >= index ? "text-cerulean" : "text-gray-400"
-              )}
-            />
-            {/* Matnni StepperIcon markaziga joylashtiramiz */}
+            {index === 0 ? (
+              <StepperIcon
+                className={cn(
+                  activeStep >= index ? "text-cerulean" : "text-gray-400"
+                )}
+              />
+            ) : (
+              <StepperOtherIcon
+                className={cn(
+                  activeStep >= index ? "text-cerulean" : "text-gray-400"
+                )}
+              />
+            )}
             <p
               className={cn(
                 "absolute text-sm font-medium",
@@ -28,7 +34,6 @@ export const Stepper = ({ steps, activeStep }: StepperProps) => {
               {step}
             </p>
           </div>
-
         </div>
       ))}
     </div>

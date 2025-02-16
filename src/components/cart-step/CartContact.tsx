@@ -1,7 +1,10 @@
 
-export const CartContact = () => {
+export const CartContact = ({ onNextStep }: { onNextStep: () => void }) => {
   return (
-    <div>CartContact</div>
+    <div>
+      <div>asdsad</div>
+      <button onClick={onNextStep}>gg</button>
+    </div>
   )
 }
 

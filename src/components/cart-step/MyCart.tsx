@@ -1,12 +1,12 @@
 interface Props {
-  handleNext: () => void;
+  onNextStep: () => void;
 }
 
-export const MyCart = ({ handleNext }: Props) => {
+export const MyCart = ({ onNextStep }: Props) => {
   return (
     <div>
       as
-      <button onClick={handleNext}>gg</button>
+      <button onClick={onNextStep}>gg</button>
     </div>
   );
 };

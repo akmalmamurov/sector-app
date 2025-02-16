@@ -11,7 +11,6 @@ export * from "./SidebarTopIcon";
 export * from "./ToggleSidebarIcon";
 export * from "./FlagUzIcon";
 export * from "./SidebarHeartIcon";
-export * from "./SidebarCompareIcon";
 export * from "./SidebarSharesIcon";
 export * from "./SidebarChatIcon";
 export * from "./InstagramIcon";
@@ -29,3 +28,4 @@ export * from "./LinkedinIcon";
 export * from "./HomeIcon";
 export * from "./StepperIcon";
 export * from "./LoaderIcon";
+export * from "./StepperOtherIcon"
