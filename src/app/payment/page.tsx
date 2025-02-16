@@ -19,7 +19,7 @@ const PaymentPage = () => {
       <HomeCrumb paths={[{ name: "Условия оплаты и поставки" }]} />
       <Section className="py-6 px-0">
         <InfoHeader>
-          <InfoTitle>Условия оплаты и поставки</InfoTitle>
+          <InfoTitle> Условия оплаты и поставки</InfoTitle>
         </InfoHeader>
         <div className="p-6">
           <h4 className="info-title mb-[22px]">Условия оплаты</h4>
@@ -111,6 +111,7 @@ const PaymentPage = () => {
               </li>
             </ul>
           </div>
+
           <div>
             <h5 className="info-title my-[22px]">
               Комплектность и порядок поставки
