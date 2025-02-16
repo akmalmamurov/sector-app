@@ -7,3 +7,4 @@ export * from "./sale-data";
 export * from "./guarantee-data";
 export * from "./faq-data";
 export * from "./payment-data";
+export * from "./step-data";

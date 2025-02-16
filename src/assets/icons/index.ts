@@ -27,3 +27,5 @@ export * from "./YandexIcon";
 export * from "./GoogleIcon";
 export * from "./LinkedinIcon";
 export * from "./HomeIcon";
+export * from "./StepperIcon";
+export * from "./LoaderIcon";
