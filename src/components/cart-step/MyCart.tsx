@@ -5,7 +5,7 @@ interface Props {
 export const MyCart = ({ onNextStep }: Props) => {
   return (
     <div>
-      as
+      <div>asdsad</div>
       <button onClick={onNextStep}>gg</button>
     </div>
   );
