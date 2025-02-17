@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@editorjs/table": "^2.4.3",
     "@hookform/resolvers": "^3.10.0",
     "@radix-ui/react-dialog": "^1.1.5",
     "@radix-ui/react-hover-card": "^1.1.5",
@@ -23,6 +24,7 @@
     "next-auth": "^4.24.11",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-editor-js": "^2.1.0",
     "react-hook-form": "^7.54.2",
     "react-hot-toast": "^2.5.1",
     "swiper": "^11.2.1",
