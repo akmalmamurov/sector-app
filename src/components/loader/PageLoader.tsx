@@ -1,29 +1,13 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import { LoaderIcon } from "@/assets/icons";
 
 export const PageLoader = () => {
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    setProgress(10);
-
-   const interval = setInterval(() => {
-      setProgress((prev) => (prev < 95 ? prev + Math.random() * 10 : prev));
-    }, 200);
-
-    return () => {
-      clearInterval(interval);
-      setProgress(100);
-    };
-  }, []);
-
   return (
-    <div className="fixed top-0 left-0 w-full h-[4px] bg-gray-300 overflow-hidden z-50">
-      <div
-        className="h-full bg-gradient-to-r from-red-500 to-red-700 transition-all duration-300 ease-in-out"
-        style={{ width: `${progress}%` }}
-      />
+    <div className="flex flex-col items-center justify-center h-[calc(100vh-400px)]">
+      {/* Spinner */}
+      <LoaderIcon className="animate-spin w-20 h-20" />
+
+      {/* Loading text */}
+      <p className="mt-[26px] text-black text-xl">Загрузка</p>
     </div>
   );
 };

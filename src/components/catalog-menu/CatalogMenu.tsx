@@ -95,7 +95,7 @@ const CatalogMenu = ({ setMenuOpen, toggleButtonRef, open }: Props) => {
                                   onClick={() => setMenuOpen(false)}
                                   href={`/catalog/${links?.id}`}
                                   key={`link-${hoveredParentIndex}-${subIndex}-${linkIndex}`}
-                                  className="font-normal text-black text-sm"
+                                  className="font-normal text-black text-sm hover:text-cerulean hoverEffect"
                                 >
                                   {links?.name}
                                 </Link>
