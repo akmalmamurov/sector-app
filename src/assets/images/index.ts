@@ -23,6 +23,10 @@ import thirdPicWifi from "./third-pic-wifi.png";
 import fourthPicWifi from "./fourth-pic-wifi.png";
 import fifthPicWifi from "./fifth-pic-wifi.png";
 
+// Extended page images
+import deliverCar from "./extended_deliver_car.png";
+import diagramExtended from "./diagram-extended.png";
+
 export {
   logo,
   flagUz,
@@ -43,4 +47,6 @@ export {
   thirdPicWifi,
   fourthPicWifi,
   fifthPicWifi,
+  deliverCar,
+  diagramExtended,
 };
