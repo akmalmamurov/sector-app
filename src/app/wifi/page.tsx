@@ -11,6 +11,7 @@ import { InfoHeader } from "@/components/div";
 import { Section } from "@/components/section";
 import { InfoTitle } from "@/components/title";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const Wifi = () => {
@@ -33,6 +34,7 @@ const Wifi = () => {
           <p className="pt-[22px] text-[#333] font-semibold text-[26px] text-center text-w-md">
             Услуги по построению сети Wi-Fi
           </p>
+          {/* table */}
           <div className="border-[1px] m-[22px] flex">
             <div className="border-[1px]">
               <div className="p-2 ">
@@ -227,7 +229,10 @@ const Wifi = () => {
                   Если у вас возникла потребность в организации Wi-Fіили просто
                   есть вопросы по этой тематике, то свяжитесь с нами
                 </p>
-                <p className="text-blue-500 pl-1">sales@nag.uz</p>.
+                <Link href="#" className=" text-cerulean pl-1">
+                  sales@nag.uz
+                </Link>
+                .
               </div>
               <p>Ваша проблема, наше решение.</p>
             </div>
