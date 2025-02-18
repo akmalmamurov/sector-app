@@ -21,6 +21,7 @@ import firstPicWifi from "./first-pic-wifi.png";
 import secondPicWifi from "./second-pic-wifi.png";
 import thirdPicWifi from "./third-pic-wifi.png";
 import fourthPicWifi from "./fourth-pic-wifi.png";
+import fifthPicWifi from "./fifth-pic-wifi.png";
 
 export {
   logo,
@@ -41,4 +42,5 @@ export {
   secondPicWifi,
   thirdPicWifi,
   fourthPicWifi,
+  fifthPicWifi,
 };
