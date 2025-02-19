@@ -3,16 +3,11 @@ import { HomeCrumb } from "@/components/bread-crumb";
 import { Container } from "@/components/container";
 import { InfoHeader } from "@/components/div";
 import { Section } from "@/components/section";
+import SpecialTexts from "@/components/text/specialTexts";
 import { InfoTitle } from "@/components/title";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-
-// constants.ts
-export const sunColorNBD = {
-  text: "NBD",
-  className: "text-sunColor font-bold pl-1 pr-1",
-};
 
 const ExtendedWarranty = () => {
   return (
@@ -99,20 +94,17 @@ const ExtendedWarranty = () => {
             <p className="flex flex-wrap pl-2">
               Кроме стандартной расширенной гарантии мы можем предложить
               гарантию уровня
-              <span className={sunColorNBD.className}>
-                Next Business Day ( {sunColorNBD.text}) на срок до 3х лет.
+              <span className="text-sunColor font-bold pl-1 pr-1">
+                Next Business Day на срок до 3х лет (<SpecialTexts />)
               </span>
-              В рамках сервиса
-              <span className={sunColorNBD.className}>{sunColorNBD.text}</span>
-              мы отправим Вам замену на следующий рабочий день после регистрации
-              обращения, не дожидаясь доставки устройства на диагностику. При
-              оформлении расширенной гарантии{" "}
-              {/* <span className={sunColorNBD.className}>{sunColorNBD.text}</span> */}
-              NBD на одном из наших складов будет зарезервировано оборудование
-              специально для Вас. В  случае возникновения аварийной ситуации оно
-              будет Вам отправлено по первой заявке максимум на следующий
-              рабочий день. Это подходит для тех, кто хочет спать спокойно и не
-              тратить лишние средства
+              В рамках сервиса <SpecialTexts /> мы отправим Вам замену на
+              следующий рабочий день после регистрации обращения, не дожидаясь
+              доставки устройства на диагностику. При оформлении расширенной
+              гарантии NBD на одном из наших складов будет зарезервировано
+              оборудование специально для Вас. В случае возникновения аварийной
+              ситуации оно будет Вам отправлено по первой заявке максимум на
+              следующий рабочий день. Это подходит для тех, кто хочет спать
+              спокойно и не тратить лишние средства.
             </p>
           </div>
           <p className="text-textColor">
@@ -120,16 +112,16 @@ const ExtendedWarranty = () => {
             нам гарантийное  оборудование уже после получения замены.
           </p>
           <p className="pt-5 text-textColor">
-            Возможность предоставления гарантии{" "}
-            <span className={sunColorNBD.className}>{sunColorNBD.text}</span> и
-            её{" "}
+            Возможность предоставления гарантии
+            <SpecialTexts />
+            её
             <Link href="#" className="text-cerulean">
               стоимость уточняйте у менеджера
             </Link>
           </p>
           <p className="pt-5 text-textColor">
             Расширенная гарантия и гарантия уровня
-            <span className={sunColorNBD.className}>{sunColorNBD.text}</span> и
+            <SpecialTexts />
             её может быть приобретена на оборудование в кондиции used. Каждое
             устройство, поставляемое в кондиции used, проходит перед отгрузкой
             тщательное тестирование.
