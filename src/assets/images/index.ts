@@ -34,6 +34,13 @@ import noteContact from "./noteContact.png";
 import officeContact from "./officeContact.png";
 import warehouseContact from "./officeContact.png";
 
+// Integration page images
+import testImageIntegration from "./testImageIntegratiom.jpg";
+import firstIntegration from "./firstPicIntegration.png";
+import secondIntegration from "./secondPicIntegration.png";
+import thirdIntegration from "./thirdPicIntegration.png";
+import fourthIntegration from "./fourthPicIntegration.png";
+
 export {
   logo,
   flagUz,
@@ -61,4 +68,9 @@ export {
   noteContact,
   officeContact,
   warehouseContact,
+  testImageIntegration,
+  firstIntegration,
+  secondIntegration,
+  thirdIntegration,
+  fourthIntegration,
 };
