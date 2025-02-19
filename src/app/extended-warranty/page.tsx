@@ -13,7 +13,7 @@ const ExtendedWarranty = () => {
   return (
     <Container>
       <HomeCrumb paths={[{ name: "Расширенная гарантия" }]} />
-      <Section className="mb-12">
+      <Section className="mb-12 shadow-md">
         <InfoHeader className="mb-5">
           <InfoTitle>Расширенная гарантия</InfoTitle>
         </InfoHeader>

@@ -5,18 +5,17 @@ import { Section } from "@/components/section";
 import { InfoTitle } from "@/components/title";
 import React from "react";
 
-const SystemIntegration = () => {
+const News = () => {
   return (
     <Container>
-      <HomeCrumb paths={[{ name: "Системная интеграция от НАГ" }]} />
-      <Section className="shadow-md">
+      <HomeCrumb paths={[{ name: "Новости" }]} />
+      <Section className="mb-5 shadow-md">
         <InfoHeader className="mb-5">
-          <InfoTitle>Системная интеграция от НАГ</InfoTitle>
+          <InfoTitle>Новости</InfoTitle>
         </InfoHeader>
-        <div></div>
       </Section>
     </Container>
   );
 };
 
-export default SystemIntegration;
+export default News;

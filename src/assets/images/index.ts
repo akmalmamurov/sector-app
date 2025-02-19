@@ -27,6 +27,13 @@ import fifthPicWifi from "./fifth-pic-wifi.png";
 import deliverCar from "./extended_deliver_car.png";
 import diagramExtended from "./diagram-extended.png";
 
+// Contact page images
+import operatorContact from "./operatorContact.png";
+import mailContact from "./mailContact.png";
+import noteContact from "./noteContact.png";
+import officeContact from "./officeContact.png";
+import warehouseContact from "./officeContact.png";
+
 export {
   logo,
   flagUz,
@@ -49,4 +56,9 @@ export {
   fifthPicWifi,
   deliverCar,
   diagramExtended,
+  operatorContact,
+  mailContact,
+  noteContact,
+  officeContact,
+  warehouseContact,
 };

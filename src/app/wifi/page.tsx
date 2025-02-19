@@ -18,7 +18,7 @@ const Wifi = () => {
   return (
     <Container>
       <HomeCrumb paths={[{ name: "Wi-Fi «под ключ»" }]} />
-      <Section className="py-6 px-0 mb-12">
+      <Section className="py-6 px-0 mb-12 shadow-md">
         <InfoHeader className="mb-5">
           <InfoTitle>Wi-Fi «под ключ»</InfoTitle>
         </InfoHeader>
