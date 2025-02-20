@@ -27,6 +27,20 @@ import fifthPicWifi from "./fifth-pic-wifi.png";
 import deliverCar from "./extended_deliver_car.png";
 import diagramExtended from "./diagram-extended.png";
 
+// Contact page images
+import operatorContact from "./operatorContact.png";
+import mailContact from "./mailContact.png";
+import noteContact from "./noteContact.png";
+import officeContact from "./officeContact.png";
+import warehouseContact from "./officeContact.png";
+
+// Integration page images
+import testImageIntegration from "./testImageIntegratiom.jpg";
+import firstIntegration from "./firstPicIntegration.png";
+import secondIntegration from "./secondPicIntegration.png";
+import thirdIntegration from "./thirdPicIntegration.png";
+import fourthIntegration from "./fourthPicIntegration.png";
+
 export {
   logo,
   flagUz,
@@ -49,4 +63,14 @@ export {
   fifthPicWifi,
   deliverCar,
   diagramExtended,
+  operatorContact,
+  mailContact,
+  noteContact,
+  officeContact,
+  warehouseContact,
+  testImageIntegration,
+  firstIntegration,
+  secondIntegration,
+  thirdIntegration,
+  fourthIntegration,
 };
