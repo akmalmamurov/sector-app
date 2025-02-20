@@ -208,7 +208,7 @@ const Wifi = () => {
             </div>
           </div>
           <div>
-            <p className="font-semibold text-[#333] text-[26px] pt-7 text-center pt-6">
+            <p className="font-semibold text-[#333] text-[26px] pt-7 text-center">
               Основные этапы проекта:
             </p>
             <div className="pt-4 pl-6 text-[#333]">

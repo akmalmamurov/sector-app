@@ -1,10 +1,4 @@
-import {
-  firstIntegration,
-  fourthIntegration,
-  secondIntegration,
-  testImageIntegration,
-  thirdIntegration,
-} from "@/assets/images";
+import { firstIntegration, testImageIntegration } from "@/assets/images";
 import { HomeCrumb } from "@/components/bread-crumb";
 import { Container } from "@/components/container";
 import { InfoHeader } from "@/components/div";
