@@ -130,3 +130,14 @@ body {
 .faq-top {
   scroll-margin-top: 180px; 
 }
+.system-li::marker {
+  font-family: Wix Madefor Text, Trebuchet MS, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #0054AE;
+}
+strong{
+  font-weight: bold;
+}

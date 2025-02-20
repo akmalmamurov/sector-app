@@ -18,7 +18,7 @@ const ReturnProductPage = () => {
   return (
     <Container className="pb-[58px]">
       <HomeCrumb paths={[{ name: "Возврат товара" }]} />
-      <Section className="py-6 px-0">
+      <Section className="py-6 px-0 shadow-sectionShadow">
         <InfoHeader className="mb-5">
           <InfoTitle>Возврат товара</InfoTitle>
         </InfoHeader>
