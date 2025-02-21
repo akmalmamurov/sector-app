@@ -37,6 +37,24 @@ import warehouseContact from "./officeContact.png";
 // Integration page images
 import testImageIntegration from "./testImageIntegratiom.jpg";
 
+// About page images
+import firstImageAbout from "./firstImageAbout.png";
+import secondImageAbout from "./secondImageAbout.png";
+import thirdImageAbout from "./thirdImageAbout.png";
+import fourthImageAbout from "./fourthImageAbout.png";
+import fifthImageAbout from "./fifthImageAbout.png";
+import sixthImageAbout from "./sixthImageAbout.png";
+import seventhImageAbout from "./seventhImageAbout.png";
+import eighthImageAbout from "./eighthImageAbout.png";
+import ninethImageAbout from "./ninethImageAbout.png";
+import tenthImageAbout from "./tenthImageAbout.png";
+import eleventhImageAbout from "./eleventhImageAbout.png";
+import twelvethImageAbout from "./twelvethImageAbout.png";
+import thirteenthImageAbout from "./thirteenImageAbout.png";
+import fourteenthImageAbout from "./fourteenth.png";
+import fifeteenthImageAbout from "./fifeteenth.png";
+import sixteenthImageAbout from "./sixteenthImageAbout.png";
+import correctImageAbout from "./correctImageAbout.png";
 
 export {
   logo,
@@ -66,5 +84,21 @@ export {
   officeContact,
   warehouseContact,
   testImageIntegration,
-
+  firstImageAbout,
+  secondImageAbout,
+  thirdImageAbout,
+  fourthImageAbout,
+  fifthImageAbout,
+  sixthImageAbout,
+  seventhImageAbout,
+  eighthImageAbout,
+  ninethImageAbout,
+  tenthImageAbout,
+  eleventhImageAbout,
+  twelvethImageAbout,
+  thirteenthImageAbout,
+  fourteenthImageAbout,
+  fifeteenthImageAbout,
+  sixteenthImageAbout,
+  correctImageAbout,
 };
