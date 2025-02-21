@@ -3,7 +3,7 @@ import useStore from "@/context/store";
 import { ProductData } from "@/types";
 import { isProductInList } from "@/utils";
 import { Check } from "lucide-react";
-import toast from "react-hot-toast";
+import { showSuccess } from "../toast/Toast";
 
 export const AddToCart = ({ product }: { product: ProductData }) => {
   const { addToCart, cart } = useStore();
@@ -11,7 +11,7 @@ export const AddToCart = ({ product }: { product: ProductData }) => {
 
   const handleToCart = () => {
     addToCart(product);
-    toast.success(`Добавлено в корзину`);
+   showSuccess(`Товар ${product?.article} Добавлен в корзину`);
   };
   return (
     <button
