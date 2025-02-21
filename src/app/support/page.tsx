@@ -15,7 +15,7 @@ const SupportPage = () => {
   return (
     <Container className="pb-[58px]">
       <HomeCrumb paths={[{ name: "On-line поддержка" }]} />
-      <Section className="py-6 px-0">
+      <Section className="py-6 px-0 shadow-sectionShadow">
         <InfoHeader className="mb-5">
           <InfoTitle>On-line поддержка</InfoTitle>
         </InfoHeader>

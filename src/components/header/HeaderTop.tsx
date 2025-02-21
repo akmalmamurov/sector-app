@@ -11,9 +11,9 @@ const HeaderTop = () => {
   const handleOpen = () => setIsOpen(!isOpen);
 
   return (
-    <div className="w-full bg-cerulean h-10">
+    <div className="w-full hidden sm:block bg-cerulean md:h-10 h-16">
       <Container className="flex justify-center items-center h-full">
-        <div onClick={handleOpen} className="flex cursor-pointer">
+        <div onClick={handleOpen} className="flex flex-wrap cursor-pointer">
           <p className={className}>
             Корзина неавторизованных пользователей хранится 7 дней. Пожалуйста,
           </p>

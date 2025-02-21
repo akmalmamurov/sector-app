@@ -10,11 +10,11 @@ const News = () => {
   return (
     <Container>
       <HomeCrumb paths={[{ name: "Новости" }]} />
-      <Section className="mb-5 shadow-md">
+      <Section className="py-6 px-0 shadow-sectionShadow mb-5">
         <InfoHeader className="mb-5">
           <InfoTitle>Новости</InfoTitle>
         </InfoHeader>
-        <section className="">
+        <section>
           <div className="flex flex-wrap">
             <div className="flex gap-2">
               <button className="w-[88px] h-[42px] border-2 hover:bg-cerulean hover:text-whiteOut duration-500">

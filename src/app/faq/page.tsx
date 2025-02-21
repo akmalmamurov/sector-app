@@ -14,7 +14,7 @@ const FaqPage = () => {
   return (
     <Container className="pb-[58px]">
       <HomeCrumb paths={[{ name: "Вопросы и ответы" }]} />
-      <Section className="py-6 px-0">
+      <Section className="py-6 px-0 shadow-sectionShadow">
         <InfoHeader className="mb-5">
           <InfoTitle>Вопросы и ответы</InfoTitle>
         </InfoHeader>

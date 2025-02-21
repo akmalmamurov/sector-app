@@ -36,7 +36,7 @@ const DeliveryPage = () => {
   return (
     <Container className="pb-[58px]">
       <HomeCrumb paths={[{ name: "Доставка товара" }]} />
-      <Section className="py-6 px-0">
+      <Section className="py-6 px-0 shadow-sectionShadow">
         <InfoHeader className="mb-5">
           <InfoTitle>Доставка товара</InfoTitle>
         </InfoHeader>

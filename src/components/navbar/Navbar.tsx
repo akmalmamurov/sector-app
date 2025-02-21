@@ -59,7 +59,7 @@ const Navbar = () => {
                 href={"tel:+9999999999"}
                 className="font-semibold text-xs text-textColor leading-[18px]"
               >
-                    +998 99 999 9999
+                +998 99 999 9999
               </Link>
             </div>
           </div>

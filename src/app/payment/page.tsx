@@ -17,7 +17,7 @@ const PaymentPage = () => {
   return (
     <Container className="pb-[58px]">
       <HomeCrumb paths={[{ name: "Условия оплаты и поставки" }]} />
-      <Section className="py-6 px-0">
+      <Section className="py-6 px-0 shadow-sectionShadow">
         <InfoHeader>
           <InfoTitle> Условия оплаты и поставки</InfoTitle>
         </InfoHeader>
