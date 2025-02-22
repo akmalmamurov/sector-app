@@ -2,14 +2,14 @@ import useStore from "@/context/store";
 import PriceFormatter from "../format-price/PriceFormatter";
 import { useEffect, useState } from "react";
 import { PageLoader } from "../loader";
-import { CircleAlert, X } from "lucide-react";
+import { Check, CircleAlert, X } from "lucide-react";
 
 interface Props {
   onNextStep: () => void;
 }
 
 export const MyCart = ({ onNextStep }: Props) => {
-  const [city, setCity] = useState<string | null>(null);
+  const [city, setCity] = useState<string>("");
   const [isClient, setIsClient] = useState(false);
   const { getTotalPrice } = useStore();
   useEffect(() => setIsClient(true), []);
@@ -20,13 +20,17 @@ export const MyCart = ({ onNextStep }: Props) => {
     <div className="grid grid-cols-4 gap-[23px]">
       {/* left */}
       <div className="col-span-3">
-        <div>
+        <div className="space-y-6">
           <div className="bg-white border shadow-sectionShadow py-[23px] px-[15px]">
             <div className="flex items-center gap-2">
               <h5 className="text-textColor text-base">
                 Выберите город доставки
               </h5>
-              {!city && (
+              {city === "Ташкент" ? (
+                <div className="w-5 h-5 bg-green-600 rounded-full flex items-center justify-center">
+                  <Check className="w-3 h-3 text-white" />
+                </div>
+              ) : (
                 <div className="flex items-center gap-2">
                   <span className="">
                     <CircleAlert className="w-4 h-4 text-orangeSun" />
@@ -56,7 +60,7 @@ export const MyCart = ({ onNextStep }: Props) => {
                 <span
                   className="ml-1"
                   onClick={(e) => {
-                    e.stopPropagation(); 
+                    e.stopPropagation();
                     setCity("");
                   }}
                 >
@@ -65,6 +69,7 @@ export const MyCart = ({ onNextStep }: Props) => {
               )}
             </button>
           </div>
+          <div className="bg-white border shadow-sectionShadow py-[23px] px-[15px]"></div>
         </div>
       </div>
       <div className="col-span-1">
