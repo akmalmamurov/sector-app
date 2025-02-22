@@ -5,8 +5,8 @@ const FooterBottom = () => {
   const currentYear = new Date().getFullYear(); // Hozirgi yilni olish
 
   return (
-    <div className="py-[55px] flex items-center justify-between">
-      <p className="text-white font-normal text-sm">
+    <div className="py-[55px] flex items-center justify-center md:justify-between flex-wrap md:flex-nowrap gap-8 gap-y-8">
+      <p className="text-linkColor sm:text-white font-normal text-sm">
         © 2022–{currentYear} sectortechnology.uz
       </p>
       <div className="flex gap-[115px]">
@@ -16,15 +16,18 @@ const FooterBottom = () => {
         <Link href={"https://t.me/akmalmamuroff"} target="_blank">
           <TelegramIcon />
         </Link>
-        <Link href={"https://www.facebook.com/akmal.mamuroff.5/"} target="_blank">
+        <Link
+          href={"https://www.facebook.com/akmal.mamuroff.5/"}
+          target="_blank"
+        >
           <FacebookIcon />
         </Link>
       </div>
-      <div>
-        <p className="text-end text-white font-normal text-sm">
+      <div className="flex gap-2 gap-y-4">
+        <p className="text-end text-linkColor sm:text-white font-normal text-sm">
           Политика конфиденциальности
         </p>
-        <p className="text-white font-normal text-sm">
+        <p className="text-linkColor sm:text-white font-normal text-sm">
           Политика обработки персональных данных
         </p>
       </div>

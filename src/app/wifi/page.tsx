@@ -18,7 +18,7 @@ const Wifi = () => {
   return (
     <Container>
       <HomeCrumb paths={[{ name: "Wi-Fi «под ключ»" }]} />
-      <Section className="py-6 px-0 mb-12 shadow-md">
+      <Section className="py-6 sm:px-2 lg:px-0 mb-12 shadow-md">
         <InfoHeader className="mb-5">
           <InfoTitle>Wi-Fi «под ключ»</InfoTitle>
         </InfoHeader>
@@ -35,9 +35,9 @@ const Wifi = () => {
             Услуги по построению сети Wi-Fi
           </p>
           {/* table */}
-          <div className="border-[1px] m-[22px] flex">
+          <div className="border-[1px]  sm:m-[22px] sm:flex">
             <div className="border-[1px]">
-              <div className="p-2 ">
+              <div className="p-2">
                 <p className="font-semibold">Радиопланирование</p>
                 <p>
                   комплекс мероприятий направленный на моделирование работы
@@ -72,7 +72,7 @@ const Wifi = () => {
                   оптимизации Wi-Fi сети на объекте заказчика.
                 </p>
               </div>
-              <div className="border-[1px] p-2  bg-[#efefef]">
+              <div className="border-[1px] p-2 pb-2 bg-[#efefef]">
                 <p>
                   Выезд на объект с использованием портативного
                   спектроанализатора
@@ -97,7 +97,7 @@ const Wifi = () => {
           <p className="text-[26px] text-[#333] font-semibold text-center pt-7">
             Основные преимущества работы с компанией «НАГ», это:
           </p>
-          <div className="pt-6 pl-6 text-[#333] ">
+          <div className="pt-6 pl-2 sm:pl-6 text-[#333] ">
             <li className="pt-4">
               Возможность получить весь комплекс от одного поставщика –
               интегратора.
@@ -127,7 +127,7 @@ const Wifi = () => {
             <div className="flex justify-center">
               <Image src={secondPicWifi} alt="pic" />
             </div>
-            <div className="pt-4 pl-6 text-[#333]">
+            <div className="pt-4 pl-2 sm:pl-6 text-[#333]">
               <p className="pt-4">
                 В зависимости от размера и конфигурации склада для создания
                 Wi-Fi-сети,  могут использоваться различные решения:
@@ -156,7 +156,7 @@ const Wifi = () => {
                 Требуется стабильный Wi-Fi?  Вам могут быть интересны следующие
                 решения:
               </p>
-              <div className="pl-7">
+              <div className="pl-2 sm:pl-7">
                 <li className="pt-4">Масштабируемая сеть.</li>
                 <li className="pt-4">Бесшовный роуминг.</li>
                 <li className="pt-4">Централизованное управление.</li>
@@ -179,7 +179,7 @@ const Wifi = () => {
                 могут справиться с такой нагрузкой. В таком случае, вам поможет
                 организация сети Wi-Fi, особенностью которой будут:
               </p>
-              <div className="pl-7">
+              <div className="pl-2 sm:pl-7">
                 <li className="pt-4">Масштабируемая сеть.</li>
                 <li className="pt-4">Бесшовный роуминг.</li>
                 <li className="pt-4">Централизованное управление.</li>
@@ -195,7 +195,7 @@ const Wifi = () => {
               <Image src={fifthPicWifi} alt="pic" />
             </div>
             <div className="pt-4 pl-6 text-[#333]">
-              <div className="pl-7">
+              <div className="pl-2 sm:pl-7">
                 <li className="pt-4">
                   Организация Wi-Fi-сети поможет вам решить ряд задач, например:
                 </li>
@@ -212,7 +212,7 @@ const Wifi = () => {
               Основные этапы проекта:
             </p>
             <div className="pt-4 pl-6 text-[#333]">
-              <div className="pl-7">
+              <div className="pl-2 sm:pl-7">
                 <li className="pt-4">
                   Организация Wi-Fi-сети поможет вам решить ряд задач, например:
                 </li>
@@ -224,7 +224,7 @@ const Wifi = () => {
               </div>
             </div>
             <div className="pl-6  font-semibold pt-8">
-              <div className="flex">
+              <div className="flex flex-wrap lg:flex-wrap:nowrap">
                 <p>
                   Если у вас возникла потребность в организации Wi-Fіили просто
                   есть вопросы по этой тематике, то свяжитесь с нами
