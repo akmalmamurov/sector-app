@@ -10,22 +10,31 @@ import { Container } from "../container";
 import { Stepper } from "../stepper";
 import useStore from "@/context/store";
 import { showError } from "../toast/Toast";
+import { PageLoader } from "../loader";
 
 const CartStepper = () => {
   const { auth } = useStore();
   const [activeStep, setActiveStep] = useState(0);
+  const [isClient, setIsClient] = useState(false);
+  const authErrorShown = useRef(false); 
 
-  const toastShown = useRef(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (auth === false && !authErrorShown.current) {
+      showError("Вы не авторизованы, рекомендуем авторизоваться");
+      authErrorShown.current = true; 
+    }
+  }, [auth]);
 
   const steps = stepsData || [];
   const isLastStep = activeStep === steps.length - 1;
 
-  useEffect(() => {
-    if (auth === false && !toastShown.current) {
-      showError("Вы не авторизованы, рекомендуем авторизоваться");
-      toastShown.current = true; 
-    }
-  }, [auth]);
+  if (!isClient) {
+    return <PageLoader />;
+  }
 
   if (auth === undefined) return null;
 

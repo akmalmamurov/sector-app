@@ -1,9 +1,10 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
+
 import { ProductData } from "@/types";
 import { CopyIcon } from "@/assets/icons";
 import PriceFormatter from "../format-price/PriceFormatter";
-import Link from "next/link";
 import { AddToCart, AddToCompare, AddToFavorites } from "../add-storage";
 import { copyToClipboard } from "@/utils";
 

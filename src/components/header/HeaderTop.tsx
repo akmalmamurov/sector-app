@@ -7,6 +7,7 @@ import LoginModal from "../modal/LoginModal";
 
 const HeaderTop = () => {
   const className = "font-normal text-sm leading-[21px] text-whiteOut";
+
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => setIsOpen(!isOpen);
 

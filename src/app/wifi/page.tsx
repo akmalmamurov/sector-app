@@ -10,10 +10,13 @@ import { Container } from "@/components/container";
 import { InfoHeader } from "@/components/div";
 import { Section } from "@/components/section";
 import { InfoTitle } from "@/components/title";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
-
+export const metadata: Metadata = {
+  title: "Wi-Fi «под ключ» | Sector App",
+  description: "Wi-Fi «под ключ»",
+};
 const Wifi = () => {
   return (
     <Container>
@@ -31,7 +34,7 @@ const Wifi = () => {
           <div className="flex justify-center items-center pt-[16px]">
             <Image src={firstPicWifi} alt="picture" />
           </div>
-          <p className="pt-[22px] text-[#333] font-semibold text-[26px] text-center text-w-md">
+          <p className="pt-[22px] text-textColor font-semibold text-[26px] text-center text-w-md">
             Услуги по построению сети Wi-Fi
           </p>
           {/* table */}
@@ -78,7 +81,7 @@ const Wifi = () => {
                   спектроанализатора
                 </p>
               </div>
-              <div className=" p-2 pt-2">
+              <div className=" p-2 pt-2 ">
                 <p>Решаемые задачи:</p>
                 <div className="pl-[24px]">
                   <li>
@@ -94,10 +97,10 @@ const Wifi = () => {
           </div>
         </section>
         <section>
-          <p className="text-[26px] text-[#333] font-semibold text-center pt-7">
+          <p className="text-[26px] text-textColor font-semibold text-center pt-7">
             Основные преимущества работы с компанией «НАГ», это:
           </p>
-          <div className="pt-6 pl-6 text-[#333] ">
+          <div className="pt-6 pl-6 text-textColor ">
             <li className="pt-4">
               Возможность получить весь комплекс от одного поставщика –
               интегратора.
@@ -208,7 +211,7 @@ const Wifi = () => {
             </div>
           </div>
           <div>
-            <p className="font-semibold text-[#333] text-[26px] pt-7 text-center pt-6">
+            <p className="font-semibold text-[#333] text-[26px]  text-center pt-6">
               Основные этапы проекта:
             </p>
             <div className="pt-4 pl-6 text-[#333]">

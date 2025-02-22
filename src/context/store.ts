@@ -15,15 +15,17 @@ interface StoreState {
   addToCart: (product: ProductData) => void;
   toggleCompare: (product: ProductData) => void;
   removeFromFavorites: (id: number) => void;
-  removeFromCart: (id: number) => void;
+  deleteCart: (id: number) => void;
   removeFromCompares: (id: number) => void;
   resetCart: () => void;
   resetFavorites: () => void;
+  getTotalPrice: () => number;
+  getGroupedItems: () => StoreItem[];
 }
 
 const useStore = create<StoreState>()(
   persist(
-    (set) => ({
+    (set,get) => ({
       auth: false,
       favorites: [],
       cart: [],
@@ -88,7 +90,7 @@ const useStore = create<StoreState>()(
         }));
       },
 
-      removeFromCart: (id) => {
+      deleteCart: (id) => {
         set((state) => ({
           cart: state.cart.filter((item) => item.id !== id),
         }));
@@ -102,6 +104,14 @@ const useStore = create<StoreState>()(
           compares: state.compares.filter((item) => item.id !== id),
         }));
       },
+      getTotalPrice: () => {
+        return get().cart.reduce(
+          (total, item) => total + (item.price ?? 0) * (item.quantity ?? 1),
+          0
+        );
+      },
+      
+      getGroupedItems: () => get().cart,
     }),
     {
       name: "sector-app",
