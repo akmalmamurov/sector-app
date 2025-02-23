@@ -3,7 +3,13 @@ import { Container } from "@/components/container";
 import { InfoHeader } from "@/components/div";
 import { Section } from "@/components/section";
 import { InfoTitle } from "@/components/title";
+import { Metadata } from "next";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Банковские реквизиты | Sector App",
+  description: "Платежные реквизиты компании",
+};
 
 const BankAccounts = () => {
   return (

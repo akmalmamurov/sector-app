@@ -9,9 +9,16 @@ import { Container } from "@/components/container";
 import { InfoHeader } from "@/components/div";
 import { Section } from "@/components/section";
 import { InfoTitle } from "@/components/title";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+
+export const metadata: Metadata = {
+  title:
+    "Офисы продаж и склады магазина Sector Technology в г. Ташкент | Sector App",
+  description: "Офисы продаж и склады магазина Sector Technology в г. Ташкент",
+};
 
 const Contact = () => {
   return (

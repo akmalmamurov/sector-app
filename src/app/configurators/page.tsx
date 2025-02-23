@@ -14,6 +14,12 @@ import {
 import Image from "next/image";
 import { InfoHeader } from "@/components/div";
 import { InfoTitle } from "@/components/title";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Конфигураторы оборудования | Sector App",
+  description: "Поддержка на нашем сайте",
+};
 
 const Configurators = () => {
   return (

@@ -5,9 +5,15 @@ import { InfoHeader } from "@/components/div";
 import { Section } from "@/components/section";
 import SpecialTexts from "@/components/text/specialTexts";
 import { InfoTitle } from "@/components/title";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Расширенная гарантия | Sector App",
+  description: "Информация о гарантии нашей компании",
+};
 
 const ExtendedWarranty = () => {
   return (
@@ -32,13 +38,13 @@ const ExtendedWarranty = () => {
           </Link>
           {/* table */}
           <div className="mt-4 flex">
-            <div className="border-[1px]">
+            <div className="border-[1px] ">
               <div className="p-2 bg-celBlue">
-                <p className="font-semibold text-whiteOut pt-4 pl-4 pb-4 pr-32">
+                <p className="font-semibold text-whiteOut  pl-4 pb-4 md:pr-32">
                   Срок расширенной гарантии
                 </p>
               </div>
-              <div className="border-[1px] p-2 bg-[#efefef] pt-4 pl-4">
+              <div className=" md:py-0 border-[1px] p-2 bg-[#efefef] pt-4 pl-4">
                 <p>+1 год к стандартной гарантии</p>
               </div>
               <div className="border-[1px] p-2 pt-4 pl-4">
@@ -48,19 +54,19 @@ const ExtendedWarranty = () => {
                 <p>+3 года к стандартной гарантии</p>
               </div>
             </div>
-            <div className="border-[1px]">
-              <div className="p-2 bg-celBlue">
-                <p className="font-semibold text-whiteOut pt-4 pl-4 pb-4 pr-32">
+            <div className="border-[1px] max-w-[268px]">
+              <div className="p-2 py-0 sm:py-3 md:py-3 bg-celBlue">
+                <p className="font-semibold text-whiteOut pt-4  md:pl-4 pb-4 md:pr-32">
                   Срок расширенной гарантии
                 </p>
               </div>
-              <div className="border-[1px] p-2 bg-[#efefef] pt-4 pl-4">
+              <div className="border-[1px] p-2  bg-[#efefef] pt-4 md:pl-4">
                 <p>10% от стоимости оборудования*</p>
               </div>
-              <div className="border-[1px] p-2 pt-4 pl-4">
+              <div className="border-[1px] p-2 pt-4 md:pl-4">
                 <p>20% от стоимости оборудования*</p>
               </div>
-              <div className="border-[1px] p-2 bg-[#efefef] pt-4 pl-4">
+              <div className="border-[1px] p-2 bg-[#efefef] pt-4 md:pl-4">
                 <p>30% от стоимости оборудования*</p>
               </div>
             </div>
@@ -133,7 +139,9 @@ const ExtendedWarranty = () => {
             рынок новых линеек. Именно поэтому оборудование “с пробегом” из
             Европы и США  пользуется большой популярностью на мировом рынке.
           </p>
-          <Image src={diagramExtended} alt="pic" className="pt-2" />
+          <div className="flex lg:block justify-center">
+            <Image src={diagramExtended} alt="pic" className="pt-2 " />
+          </div>
           <p className="pt-5 text-textColor">
             С общими положениями гарантийного ремонта/замены оборудования можно
             ознакомиться по ссылке (/article/warranty).
