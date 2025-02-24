@@ -4,14 +4,13 @@ import { logo } from "@/assets/images";
 import Form from "next/form";
 import { SearchIcon } from "@/assets/icons";
 import Link from "next/link";
-import { headerMenuData } from "@/data/header-menu-data";
 import HeaderMenuLink from "./HeaderMenuLink";
 const HeaderMenu = () => {
   return (
     <div className="py-2 border-b border-b-superSilver">
       <Container className="flex justify-between items-center gap-[42px]">
         {/* logo */}
-        <Link href="/">
+        <Link href="/" className="hidden lg:block">
           <Image src={logo} alt="logo" />
         </Link>
         {/* search */}

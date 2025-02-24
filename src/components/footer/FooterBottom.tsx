@@ -2,7 +2,7 @@ import { FacebookIcon, InstagramIcon, TelegramIcon } from "@/assets/icons";
 import Link from "next/link";
 
 const FooterBottom = () => {
-  const currentYear = new Date().getFullYear(); // Hozirgi yilni olish
+  const currentYear = new Date().getFullYear(); 
 
   return (
     <div className="py-[55px] flex items-center justify-center md:justify-between flex-wrap md:flex-nowrap gap-8 gap-y-8">

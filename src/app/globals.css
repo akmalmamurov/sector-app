@@ -123,21 +123,29 @@ body {
   .info-text {
     @apply font-normal text-base leading-[24px] text-textColor;
   }
+  .inputs {
+    @apply w-full px-3 py-[12px] text-sm placeholder:text-darkSoul focus:outline-none 
+    ring-1 ring-darkSoul focus:ring-1 hover:ring-cerulean/70 focus:ring-cerulean/70;
+  }
 }
 .faq-section {
-  scroll-margin-top: 180px; 
+  scroll-margin-top: 180px;
 }
 .faq-top {
-  scroll-margin-top: 180px; 
+  scroll-margin-top: 180px;
 }
 .system-li::marker {
-  font-family: Wix Madefor Text, Trebuchet MS, Arial, sans-serif;
+  font-family:
+    Wix Madefor Text,
+    Trebuchet MS,
+    Arial,
+    sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.5;
-  color: #0054AE;
+  color: #0054ae;
 }
-strong{
+strong {
   font-weight: bold;
 }

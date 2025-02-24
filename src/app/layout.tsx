@@ -30,17 +30,6 @@ export default function RootLayout({
             right: "50px",
             top: "20px",
           }}
-          toastOptions={{
-            style: {
-              padding: "8px 12px",
-              borderRadius: "2px",
-              fontSize: "14px",
-              maxWidth: "500px",
-            },
-            success: {
-              icon: false,
-            },
-          }}
         />
 
         <Footer />

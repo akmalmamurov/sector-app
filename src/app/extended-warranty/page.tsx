@@ -19,11 +19,11 @@ const ExtendedWarranty = () => {
   return (
     <Container>
       <HomeCrumb paths={[{ name: "Расширенная гарантия" }]} />
-      <Section className="mb-12 shadow-md">
+      <Section className="mb-12 shadow-shadow-sectionShadow px-0 py-6">
         <InfoHeader className="mb-5">
           <InfoTitle>Расширенная гарантия</InfoTitle>
         </InfoHeader>
-        <div>
+        <div className="p-6">
           <p>
             Компания “НАГ” уверена в качестве оборудования, которое предлагает
             своим клиентам.
