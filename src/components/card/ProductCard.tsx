@@ -53,9 +53,9 @@ export const ProductCard = ({ product }: { product: ProductData }) => {
           <CopyIcon className="text-explosiveGrey" />
         </span>
       </div>
-      {product?.amount ? (
+      {product?.inStock ? (
         <p className="text-cerulean text-xs leading-[18px]">
-          В наличии {product.amount}
+          В наличии {product.inStock}
         </p>
       ) : (
         <p className="text-wasabiColor text-xs leading-[18px]">Подзаказ</p>
