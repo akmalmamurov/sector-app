@@ -2,7 +2,11 @@ import useStore from "@/context/store";
 import PriceFormatter from "../format-price/PriceFormatter";
 import { useEffect, useState } from "react";
 import { PageLoader } from "../loader";
-import { Check, CircleAlert, X } from "lucide-react";
+import { Check, ChevronUp, CircleAlert, Trash2Icon, X } from "lucide-react";
+import { CopyIcon, HeartIcon } from "@/assets/icons";
+import { Separator } from "../ui/separator";
+import Image from "next/image";
+import { copyToClipboard } from "@/utils";
 
 interface Props {
   onNextStep: () => void;
@@ -11,7 +15,9 @@ interface Props {
 export const MyCart = ({ onNextStep }: Props) => {
   const [city, setCity] = useState<string>("");
   const [isClient, setIsClient] = useState(false);
-  const { getTotalPrice } = useStore();
+  const { getTotalPrice, cart, setQuantity } = useStore();
+  console.log("cart", cart);
+
   useEffect(() => setIsClient(true), []);
   if (!isClient) {
     return <PageLoader />;
@@ -69,11 +75,158 @@ export const MyCart = ({ onNextStep }: Props) => {
               )}
             </button>
           </div>
-          <div className="bg-white border shadow-sectionShadow py-[23px] px-[15px]"></div>
+          <div className="bg-white border shadow-sectionShadow py-[23px] px-[15px] text-textColor">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <input
+                  id="all-check"
+                  type="checkbox"
+                  className="bg-green-600 cursor-pointer w-[18px] h-[18px] checked:bg-green-600"
+                />
+                <label htmlFor="all-check" className="cursor-pointer">
+                  выбрать все
+                </label>
+              </div>
+              <div>
+                <span className="text-sm font-normal text-textColor cursor-pointer">
+                  Очистить корзину
+                </span>
+              </div>
+            </div>
+          </div>
+          {/* cart map */}
+          {cart?.map((product) => (
+            <div
+              key={product.id}
+              className="p-[15px] bg-white border shadow-sectionShadow text-textColor"
+            >
+              {/* header */}
+              <div className="flex justify-between ">
+                <input type="checkbox" />
+                <div className="flex h-[26px] items-center">
+                  <button className="flex items-center gap-2 group ">
+                    <span className="text-xs group-hover:opacity-70 duration-200 ease-in-out">
+                      перенести в избранное
+                    </span>
+                    <span>
+                      <HeartIcon className="w-[18px] h-[18px] group-hover:opacity-70 duration-200 ease-in-out" />
+                    </span>
+                  </button>
+                  <div className="w-[2px] h-full  bg-superSilver mx-[15px]"></div>
+                  <button className="flex items-center gap-2 group ">
+                    <span className="text-xs group-hover:opacity-70 duration-200 ease-in-out">
+                      удалить из корзины
+                    </span>
+                    <span>
+                      <Trash2Icon className="w-[18px] h-[18px] group-hover:opacity-70 duration-200 ease-in-out" />
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <Separator className="my-2" />
+              <div className="flex gap-2">
+                {/* image */}
+                <div className="border w-[130px] h-[130px] border-superSilver">
+                  <Image
+                    src={product.image}
+                    alt={product.title}
+                    width={100}
+                    height={100}
+                    className="p-2 w-full h-full"
+                  />
+                </div>
+                <div className="w-full">
+                  <div className="flex flex-col gap-2">
+                    <div className="flex h-fit gap-[15px]">
+                      <p className="text-xs text-wasabiColor">
+                        {product.article}
+                      </p>
+                      <span
+                        className="cursor-pointer text-explosiveGrey hover:text-cerulean hoverEffect"
+                        onClick={() =>
+                          copyToClipboard(
+                            product.article,
+                            `Артикул ${product.article} скопирован в буфер обмена`
+                          )
+                        }
+                      >
+                        <CopyIcon />
+                      </span>
+                    </div>
+                    <div className="flex h-fit gap-[15px] justify-between w-full">
+                      <p className="text-base text-text-color">
+                        {product.title.length > 90
+                          ? product.title.slice(0, 90) + "..."
+                          : product.title}
+                      </p>
+                      <span
+                        className="cursor-pointer text-explosiveGrey hover:text-cerulean hoverEffect"
+                        onClick={() =>
+                          copyToClipboard(
+                            product.title,
+                            "Наименование скопировано в буфер обмена"
+                          )
+                        }
+                      >
+                        <CopyIcon />
+                      </span>
+                    </div>
+                  </div>
+                  <div className="mt-[15px]">
+                    <div className="flex flex-col gap-2">
+                      <div className="flex justify-between">
+                        <div className="w-[90px] h-[42px] relative ">
+                          <input
+                            type="number"
+                            value={product.quantity}
+                            className="w-[90px] h-[42px] text-center pr-3 border focus:outline-none text-textColor"
+                            onChange={(e) =>
+                              setQuantity(product.id, Number(e.target.value))
+                            }
+                          />
+                          <div className="absolute top-0 h-full right-[10px] flex flex-col justify-center">
+                            <span
+                              className="cursor-pointer"
+                              onClick={() =>
+                                setQuantity(
+                                  product.id,
+                                  Number(product.quantity) + 1
+                                )
+                              }
+                            >
+                              <ChevronUp strokeWidth={2.75} size={16} />
+                            </span>
+                            <span
+                              className="cursor-pointer"
+                              onClick={() =>
+                                setQuantity(
+                                  product.id,
+                                  Number(product.quantity) - 1
+                                )
+                              }
+                            >
+                              <ChevronUp
+                                size={16}
+                                strokeWidth={2.75}
+                                className="rotate-180"
+                              />
+                            </span>
+                          </div>
+                        </div>
+                        <div>
+                          <PriceFormatter amount={product.price} className="text-2xl text-textColor font-normal"/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-      <div className="col-span-1">
-        <div className="bg-white border shadow-sectionShadow p-[23px]">
+      <div className="col-span-1 ">
+        <div className="bg-white border shadow-sectionShadow p-[23px] sticky top-[185px]">
           <PriceFormatter amount={getTotalPrice()} />
         </div>
       </div>

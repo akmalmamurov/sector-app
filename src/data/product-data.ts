@@ -8,7 +8,7 @@ export const productData = [
           title:
             "Серверная платформа SNR-SR2225RS, 2U, Scalable, DDR4, 25xHDD, резервируемый БП",
           article: "SNR-SR2225RS",
-          price: 33896128,
+          price: 33795707.70,
           amount: 10,
           image: "/pr1.webp",
         },
@@ -18,7 +18,7 @@ export const productData = [
           title:
             "Шнур питания электрический силовой, серии TP-PC, EU-Schuko/IEC 60320 С13 прямой, 250B, 10A, 3х1.0 мм², 3 м",
           article: "TP-PC-SH-С13-10A-3",
-          price: 71535,
+          price: 71204,
           image: "/pr2.webp",
         },
         {
@@ -26,7 +26,7 @@ export const productData = [
           title:
             "Шнур питания электрический силовой, серии TP-PC, EU-Schuko/IEC 60320 C19 прямой, 250B, 16A, 3х1.5 мм², 1.8 м",
           article: "TP-PC-SH-C19-16A-1.8",
-          price: 71535,
+          price: 84599.99,
           amount: 40,
           image: "/pr3.webp",
         },

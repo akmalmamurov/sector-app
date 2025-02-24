@@ -51,7 +51,7 @@ export const Sidebar = () => {
         el.addEventListener("mouseover", handleMouseOver)
       );
     } else {
-      document.body.style.cursor = "default";
+      document.body.style.cursor = "text";
     }
 
     return () => {

@@ -14,6 +14,7 @@ interface StoreState {
   toggleFavorites: (product: ProductData) => void;
   addToCart: (product: ProductData) => void;
   toggleCompare: (product: ProductData) => void;
+  setQuantity: (id: number, quantity: number) => void;
   removeFromFavorites: (id: number) => void;
   deleteCart: (id: number) => void;
   removeFromCompares: (id: number) => void;
@@ -68,7 +69,15 @@ const useStore = create<StoreState>()(
           };
         });
       },
-
+      setQuantity: (id, quantity) => {
+        set((state) => ({
+          cart: state.cart.map((item) =>
+            item.id === id
+              ? { ...item, quantity: Math.max(quantity, 1) }
+              : item
+          ),
+        }));
+      },
       toggleCompare: (product) => {
         set((state) => {
           const isCompare = state.compares.some(
