@@ -6,7 +6,7 @@ interface InfoHeaderProps {
 }
 export const InfoHeader = ({ children, className }: InfoHeaderProps) => {
   return (
-    <div className={cn("pb-[25px] px-6 border-b", className)}>{children}</div>
+    <div className={cn("pb-[25px] px-6  border-b", className)}>{children}</div>
   );
 };
 

@@ -13,7 +13,7 @@ const Navbar = () => {
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
   return (
     <>
-      <nav className=" py-2 ">
+      <nav className=" py-2 hidden md:block ">
         <Container className="flex items-center justify-between">
           {/* catalog */}
           <div className="flex gap-[23px] items-center">
@@ -21,7 +21,7 @@ const Navbar = () => {
               ref={toggleButtonRef}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               variant="outline"
-              className="bg-cerulean w-[191px] h-10 flex items-center gap-[11px] text-white font-semibold text-sm leading-[18px] rounded-[9px] border-none hover:text-cerulean duration-300 ease-in-out group"
+              className="bg-cerulean  lg:w-[191px] h-10 flex items-center gap-[11px] text-white font-semibold text-sm leading-[18px] rounded-[9px] border-none hover:text-cerulean duration-300 ease-in-out group"
             >
               <div className="flex flex-col justify-between h-[15px] group transition-all duration-300 ease-in-out">
                 <span
