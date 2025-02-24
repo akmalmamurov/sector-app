@@ -11,6 +11,7 @@ interface StoreState {
   favorites: StoreItem[];
   cart: StoreItem[];
   compares: StoreItem[];
+  setAuth: (value: boolean) => void;
   toggleFavorites: (product: ProductData) => void;
   addToCart: (product: ProductData) => void;
   toggleCompare: (product: ProductData) => void;
@@ -26,12 +27,15 @@ interface StoreState {
 
 const useStore = create<StoreState>()(
   persist(
-    (set,get) => ({
+    (set, get) => ({
       auth: false,
       favorites: [],
       cart: [],
       compares: [],
 
+      setAuth: (value: boolean) => {
+        set({ auth: value });
+      },
       toggleFavorites: (product) => {
         set((state) => {
           const isFavorite = state.favorites.some(
@@ -72,9 +76,7 @@ const useStore = create<StoreState>()(
       setQuantity: (id, quantity) => {
         set((state) => ({
           cart: state.cart.map((item) =>
-            item.id === id
-              ? { ...item, quantity: Math.max(quantity, 1) }
-              : item
+            item.id === id ? { ...item, quantity: Math.max(quantity, 1) } : item
           ),
         }));
       },
@@ -119,7 +121,7 @@ const useStore = create<StoreState>()(
           0
         );
       },
-      
+
       getGroupedItems: () => get().cart,
     }),
     {
