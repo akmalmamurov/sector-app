@@ -15,7 +15,7 @@ interface BreadcrumbProps {
 
 export const HomeCrumb = ({ paths }: BreadcrumbProps) => {
   return (
-    <div className="flex items-center gap-[15px]  text-gray-600 h-[58px]">
+    <div className="flex items-center pl-2 sm:pl-1 gap-[15px]  text-gray-600 h-[58px]">
       {/* Home Link */}
       <Link
         href="/"

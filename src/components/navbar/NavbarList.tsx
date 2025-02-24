@@ -15,7 +15,11 @@ const NavbarList = () => {
     <div>
       <div className="flex gap-1">
         {navbarList?.map((item, index) => (
-          <Popover key={index} open={openPopover === index} onOpenChange={(isOpen) => setOpenPopover(isOpen ? index : null)}>
+          <Popover
+            key={index}
+            open={openPopover === index}
+            onOpenChange={(isOpen) => setOpenPopover(isOpen ? index : null)}
+          >
             <PopoverTrigger className="flex items-center gap-[3.26px] py-1 px-[23px]">
               <p className="font-medium text-sm text-textColor leading-[18px]">
                 {item.name}
@@ -28,7 +32,7 @@ const NavbarList = () => {
                   key={subindex}
                   href={subitem.link}
                   className="font-normal text-xs text-textColor py-2 px-[15px] hover:opacity-70 hoverEffect"
-                  onClick={handleClose} 
+                  onClick={handleClose}
                 >
                   {subitem.name}
                 </Link>

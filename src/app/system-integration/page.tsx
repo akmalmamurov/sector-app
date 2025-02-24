@@ -1,4 +1,8 @@
+// <<<<<<< HEAD
+// import { firstIntegration, testImageIntegration } from "@/assets/images";
+// =======
 import { testImageIntegration } from "@/assets/images";
+// >>>>>>> master
 import { HomeCrumb } from "@/components/bread-crumb";
 import { Container } from "@/components/container";
 import { InfoHeader } from "@/components/div";
