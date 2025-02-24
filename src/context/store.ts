@@ -11,7 +11,7 @@ interface StoreState {
   favorites: StoreItem[];
   cart: StoreItem[];
   compares: StoreItem[];
-  setAuth: (value: boolean) => void;
+  setAuth: () => void;
   toggleFavorites: (product: ProductData) => void;
   addToCart: (product: ProductData) => void;
   toggleCompare: (product: ProductData) => void;
@@ -32,8 +32,8 @@ const useStore = create<StoreState>()(
       favorites: [],
       cart: [],
       compares: [],
-      setAuth: (value: boolean) => {
-        set({ auth: value });
+      setAuth: () => {
+        set({ auth: true });
       },
       toggleFavorites: (product) => {
         set((state) => {

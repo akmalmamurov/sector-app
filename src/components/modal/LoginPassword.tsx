@@ -26,7 +26,7 @@ const LoginPassword = ({ handleClose, formMethods, fullClose }: Props) => {
     handleSubmit,
     formState: { errors, isValid },
   } = formMethods;
-  const setAuth = useStore((state) => state.setAuth);
+  const { setAuth } = useStore();
 
   const onSubmitStep2 = async (data: { email: string; password: string }) => {
     try {
@@ -41,7 +41,7 @@ const LoginPassword = ({ handleClose, formMethods, fullClose }: Props) => {
       );
       if (response.statusText === "OK") {
         fullClose();
-        setAuth(true);
+        setAuth();
         localStorage.setItem("sector-token", response.data.token);
         showSuccess("Вы успешно вошли в систему!");
       }
@@ -84,13 +84,9 @@ const LoginPassword = ({ handleClose, formMethods, fullClose }: Props) => {
                       placeholder="Введите E-mail"
                       type="email"
                       {...field}
-                      className={`w-full px-3 py-[12px] text-sm placeholder:text-darkSoul focus:outline-none
-    ring-1 ring-darkSoul focus:ring-2 hover:ring-cerulean/70
-    ${
-      errors.email
-        ? "ring-red-500 focus:ring-red-500"
-        : "focus:ring-cerulean/70"
-    }`}
+                      className={`w-full px-3 py-[12px] text-sm placeholder:text-darkSoul focus:outline-none ring-1 
+                        ring-darkSoul focus:ring-2 hover:ring-cerulean/70
+                      ${errors.email ? "ring-red-500 focus:ring-red-500" : "focus:ring-cerulean/70"}`}
                     />
                   </FormControl>
                   <FormMessage>{errors.email?.message}</FormMessage>

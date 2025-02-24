@@ -10,7 +10,7 @@ interface Props {
 export const MyCart = ({ onNextStep }: Props) => {
   const [city, setCity] = useState<string>("");
   const [isClient, setIsClient] = useState(false);
-  const { cart, setQuantity } = useStore();
+  const { cart, setQuantity,deleteCart,resetCart } = useStore();
   const [selectedItems, setSelectedItems] = useState<number[]>(
     cart.map((item) => item.id)
   );
@@ -50,7 +50,7 @@ export const MyCart = ({ onNextStep }: Props) => {
   const props = {
     toggleSingleItem, toggleAllItems,
     isAllChecked, setQuantity,
-    city,setCity,cart,selectedItems
+    city,setCity,cart,selectedItems,deleteCart,resetCart
   };
   return (
     <div>

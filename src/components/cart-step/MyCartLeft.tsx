@@ -1,12 +1,12 @@
+import Image from "next/image";
 import { Check, ChevronUp, CircleAlert, Trash2Icon, X } from "lucide-react";
 import PriceFormatter from "../format-price/PriceFormatter";
 import { CopyIcon, HeartIcon } from "@/assets/icons";
 import { copyToClipboard } from "@/utils";
-import Image from "next/image";
 import { Separator } from "../ui/separator";
-import { useState } from "react";
 import { StoreItem } from "@/context/store";
 import { ConfirmModal } from "../modal";
+import { useConfirmModal } from "@/hooks";
 interface Props {
   city: string;
   setCity: (city: string) => void;
@@ -16,6 +16,8 @@ interface Props {
   setQuantity: (id: number, quantity: number) => void;
   toggleSingleItem: (id: number) => void;
   selectedItems: number[];
+  deleteCart: (id: number) => void;
+  resetCart: () => void;
 }
 const MyCartLeft = ({
   city,
@@ -26,8 +28,26 @@ const MyCartLeft = ({
   cart,
   toggleSingleItem,
   selectedItems,
+  deleteCart,
+  resetCart,
 }: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const {
+    isOpen: isConfirmOpen,
+    message,
+    openModal,
+    closeModal,
+    onConfirm,
+  } = useConfirmModal();
+  const handleDeleteAll = () => {
+    openModal("Вы уверены, что хотите удалить все товары из корзины?", () => {
+      resetCart();
+    });
+  };
+  const handleDeleteClick = (id: number) => {
+    openModal("Вы уверены, что хотите удалить товар из корзины?", () => {
+      deleteCart(id);
+    });
+  };
   return (
     <div className="col-span-3">
       <div className="space-y-6">
@@ -94,7 +114,10 @@ const MyCartLeft = ({
               </label>
             </div>
             <div>
-              <span className="text-sm font-normal text-textColor cursor-pointer">
+              <span
+                onClick={handleDeleteAll}
+                className="text-sm font-normal text-textColor cursor-pointer"
+              >
                 Очистить корзину
               </span>
             </div>
@@ -125,7 +148,7 @@ const MyCartLeft = ({
                 <div className="w-[2px] h-full  bg-superSilver mx-[15px]"></div>
                 <button
                   className="flex items-center gap-2 group "
-                  onClick={() => setIsOpen(true)}
+                  onClick={() => handleDeleteClick(product.id)}
                 >
                   <span className="text-xs group-hover:opacity-70 duration-200 ease-in-out">
                     удалить из корзины
@@ -243,7 +266,12 @@ const MyCartLeft = ({
           </div>
         ))}
       </div>
-      <ConfirmModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <ConfirmModal
+        isOpen={isConfirmOpen}
+        message={message}
+        onConfirm={onConfirm}
+        closeModal={closeModal}
+      />
     </div>
   );
 };
