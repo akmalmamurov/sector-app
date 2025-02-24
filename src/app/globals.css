@@ -15,7 +15,11 @@
 }
 
 body {
-  font-family: "Wix Madefor Text", sans-serif;
+  font-family:
+    "Wix Madefor Text",
+    Trebuchet MS,
+    Arial,
+    sans-serif;
 }
 * {
   scrollbar-width: thin;
