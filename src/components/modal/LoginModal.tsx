@@ -26,7 +26,7 @@ const formSchemaStep1 = z.object({
 
 const formSchemaStep2 = z.object({
   email: z.string().email("Введите корректный E-mail"),
-  password: z.string().min(6, "Пароль должен содержать минимум 6 символов"),
+  password: z.string().min(4, "Пароль должен содержать минимум 4 символов"),
 });
 
 const formSchemaStep3 = z.object({

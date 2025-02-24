@@ -32,8 +32,6 @@ const useStore = create<StoreState>()(
       favorites: [],
       cart: [],
       compares: [],
-
-
       setAuth: (value: boolean) => {
         set({ auth: value });
       },
