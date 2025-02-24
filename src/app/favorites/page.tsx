@@ -3,6 +3,13 @@ import { Container } from "@/components/container";
 import { InfoHeader } from "@/components/div";
 import { Section } from "@/components/section";
 import { InfoTitle } from "@/components/title";
+import { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: "Избранное | Sector App",
+  description: "Ваш список избранных товаров и материалов.",
+};
 
 const FavoritesPage = () => {
   return (
