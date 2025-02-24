@@ -15,6 +15,7 @@ interface StoreState {
   addToCart: (product: ProductData) => void;
   toggleCompare: (product: ProductData) => void;
   setQuantity: (id: number, quantity: number) => void;
+  login: () => void;
   removeFromFavorites: (id: number) => void;
   deleteCart: (id: number) => void;
   removeFromCompares: (id: number) => void;
@@ -31,7 +32,7 @@ const useStore = create<StoreState>()(
       favorites: [],
       cart: [],
       compares: [],
-
+      login: () => set({ auth: true }),
       toggleFavorites: (product) => {
         set((state) => {
           const isFavorite = state.favorites.some(
