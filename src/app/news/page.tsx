@@ -14,15 +14,15 @@ export const metadata: Metadata = {
 
 const News = () => {
   return (
-    <Container>
+    <Container className="pb-[58px]">
       <HomeCrumb paths={[{ name: "Новости" }]} />
-      <Section className="py-6 px-0 shadow-sectionShadow mb-5">
+      <Section className="py-6 px-0 shadow-sectionShadow">
         <InfoHeader className="mb-5">
           <InfoTitle>Новости</InfoTitle>
         </InfoHeader>
         <section>
           <div className="flex flex-wrap">
-            <div className="flex gap-2 pl-[15px] lg:pl-1">
+            <div className="flex gap-2 pl-[15px] lg:pl-6">
               <button className="w-[88px] h-[42px] border-2 hover:bg-cerulean hover:text-whiteOut duration-500">
                 2024
               </button>
