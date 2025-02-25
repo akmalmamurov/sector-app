@@ -1,3 +1,4 @@
+import { Button } from "../ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, } from "../ui/dialog";
 import { Separator } from "../ui/separator";
 interface Props {
@@ -28,21 +29,21 @@ export const ConfirmModal = ({
 
           </p>
           <div className="flex justify-end gap-2">
-            <button
+            <Button
               onClick={() => {
                 if (onConfirm) onConfirm();
                 closeModal();
               }}
-              className="w-[108px] h-[42px] bg-dangerColor text-white flex justify-center items-center font-semibold hover:opacity-80 hoverEffect"
+              className="w-[108px] py-5 bg-dangerColor hover:bg-dangerColor text-white flex justify-center items-center font-semibold hover:opacity-80 duration-200 ease-in-out rounded-none"
             >
               Удалить
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={closeModal}
-              className="w-[108px] h-[42px] border border-wasabiColor bg-white text-wasabiColor flex justify-center items-center font-semibold hover:border-cerulean hover:text-cerulean hoverEffect"
+              className="w-[108px] py-5 border border-wasabiColor bg-white text-wasabiColor flex justify-center items-center font-semibold hover:border-cerulean hover:text-cerulean duration-200 ease-in-out rounded-none hover:bg-white"
             >
               Отмена
-            </button>
+            </Button>
           </div>
         </div>
       </DialogContent>

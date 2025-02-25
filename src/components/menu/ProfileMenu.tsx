@@ -75,7 +75,7 @@ export const ProfileMenu = () => {
             </div>
             {/* logout */}
             <div className="py-[5px] px-[15px] flex justify-center items-center">
-              <button onClick={handleLogout} className="text-dangerColor hover:opacity-70 duration-100 ease-in-out">
+              <button onClick={handleLogout} className="text-dangerColor hover:opacity-70 duration-100 ease-in-out w-full">
                 Выход
               </button>
             </div>
