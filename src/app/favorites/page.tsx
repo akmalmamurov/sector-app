@@ -20,13 +20,9 @@ import { useConfirmModal } from "@/hooks";
 import { copyToClipboard } from "@/utils";
 import { Trash2Icon } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
 
 const FavoritesPage = () => {
   const { favorites, resetFavorites } = useStore();
-  const [selectedItems, setSelectedItems] = useState<number[]>(
-    favorites.map((item) => item.id)
-  );
   const {
     isOpen: isConfirmOpen,
     message,
@@ -40,21 +36,6 @@ const FavoritesPage = () => {
       resetFavorites();
     });
   };
-  const isAllChecked =
-    favorites.length > 0 && selectedItems.length === favorites.length;
-  const toggleAllItems = () => {
-    if (isAllChecked) {
-      setSelectedItems([]);
-    } else {
-      setSelectedItems(favorites.map((item) => item.id));
-    }
-  };
-  const toggleSingleItem = (id: number) => {
-    setSelectedItems((prev) =>
-      prev.includes(id) ? prev.filter((itemId) => itemId !== id) : [...prev, id]
-    );
-  };
-  console.log(favorites);
 
   return (
     <Container>
@@ -66,19 +47,7 @@ const FavoritesPage = () => {
 
         <section className="p-6">
           <div className="bg-white border shadow-sectionShadow py-[23px] px-[15px] text-textColor mb-3">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <input
-                  id="all-check"
-                  type="checkbox"
-                  checked={isAllChecked}
-                  onChange={toggleAllItems}
-                  className="bg-green-600 cursor-pointer w-[18px] h-[18px] checked:bg-green-600"
-                />
-                <label htmlFor="all-check" className="cursor-pointer">
-                  выбрать все
-                </label>
-              </div>
+            <div className="flex items-center justify-end">
               <div>
                 <span
                   onClick={handleDeleteAll}
@@ -89,11 +58,9 @@ const FavoritesPage = () => {
               </div>
             </div>
           </div>
-          {/* <h4 className="info-text mb-5">В избранном нет товаров</h4> */}
           <Table className="border border-gray-300 rounded-none overflow-hidden w-full">
             <TableHeader>
               <TableRow className="bg-gray-100 text-left">
-                <TableHead className="p-4 text-center border-r"></TableHead>
                 <TableHead className="p-4 text-center border-r">
                   Наименование товара
                 </TableHead>
@@ -111,13 +78,6 @@ const FavoritesPage = () => {
             <TableBody>
               {favorites?.map((product) => (
                 <TableRow key={product.id}>
-                  <TableCell className=" text-sunColor text-2xl font-normal px-2.5 py-6 border-r">
-                    <input
-                      type="checkbox"
-                      checked={selectedItems.includes(product.id)}
-                      onChange={() => toggleSingleItem(product.id)}
-                    />
-                  </TableCell>
                   <TableCell className="border-r ">
                     <div className="flex items-center gap-2 justify-start">
                       <div className="border w-[65px] h-full border-superSilver">

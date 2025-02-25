@@ -1,4 +1,4 @@
-export const DeleteIcon = () => {
+export const DeleteIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       width={19}
@@ -6,6 +6,7 @@ export const DeleteIcon = () => {
       viewBox="0 0 19 22"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      {...props}
     >
       <path
         fillRule="evenodd"

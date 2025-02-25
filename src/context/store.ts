@@ -23,6 +23,7 @@ interface StoreState {
   resetFavorites: () => void;
   getTotalPrice: () => number;
   getGroupedItems: () => StoreItem[];
+  logOut: () => void;
 }
 
 const useStore = create<StoreState>()(
@@ -122,6 +123,10 @@ const useStore = create<StoreState>()(
       },
 
       getGroupedItems: () => get().cart,
+      logOut: () => {
+        set({ auth: false });
+        localStorage.removeItem("sector_token");
+      },
     }),
     {
       name: "sector-app",

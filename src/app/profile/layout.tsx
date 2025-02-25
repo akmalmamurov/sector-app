@@ -22,18 +22,24 @@ export default function ProfileLayout({
   return (
     <div className="py-[58px]">
       <Container>
-        <div className="grid grid-cols-5">
-          {tabs.map((tab) => {
-            const isActive = pathname === tab.href;
-            return (
-              <Link key={tab.name} href={tab.href} className={`${isActive ? "text-cerulean" : ""}`}>
-                {tab.name}
-              </Link>
-            );
-          })}
-        </div>
+        <div className=" bg-white shadow-sectionShadow border  rounded-[10px]">
+          <div className="grid grid-cols-5 p-6 border-b-[0.5px] border-bottomBorder">
+            {tabs.map((tab) => {
+              const isActive = pathname === tab.href;
+              return (
+                <Link
+                  key={tab.name}
+                  href={tab.href}
+                  className={`${isActive ? "text-cerulean" : ""}`}
+                >
+                  {tab.name}
+                </Link>
+              );
+            })}
+          </div>
 
-        <div>{children}</div>
+          <div className="p-6">{children}</div>
+        </div>
       </Container>
     </div>
   );
