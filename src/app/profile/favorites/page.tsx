@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { Trash2Icon } from "lucide-react";
-import { CopyIcon, FavoritCartIcon } from "@/assets/icons";
+import { CopyIcon } from "@/assets/icons";
 import PriceFormatter from "@/components/format-price/PriceFormatter";
 import { ConfirmModal } from "@/components/modal";
 import {
@@ -15,8 +15,10 @@ import {
 import useStore from "@/context/store";
 import { copyToClipboard } from "@/utils";
 import { useConfirmModal } from "@/hooks";
+import { AddToCart } from "@/components/add-storage";
 const FavoritesPage = () => {
   const { favorites, resetFavorites, deleteFavorites } = useStore();
+
   const {
     isOpen: isConfirmOpen,
     message,
@@ -37,6 +39,7 @@ const FavoritesPage = () => {
       }
     );
   };
+
   return (
     <>
       <div>
@@ -123,9 +126,7 @@ const FavoritesPage = () => {
                 </TableCell>
                 <TableCell className="px-4 py-[14.5px] text-xs font-normal text-textColor border-r">
                   <div className="w-full flex justify-center items-center">
-                    <button className="w-[42px] h-[42px] rounded-full bg-lightBg hover:bg-cerulean flex items-center justify-center text-cerulean hover:text-white hoverEffect">
-                      <FavoritCartIcon />
-                    </button>
+                    <AddToCart saved={true} product={product} />
                   </div>
                 </TableCell>
                 <TableCell className="px-4 py-[14.5px] text-xs font-normal text-textColor ">
