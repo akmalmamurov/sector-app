@@ -29,4 +29,3 @@ export * from "./HomeIcon";
 export * from "./StepperIcon";
 export * from "./LoaderIcon";
 export * from "./StepperOtherIcon"
-export * from "./DeleteIcon"
