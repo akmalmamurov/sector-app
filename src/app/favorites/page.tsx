@@ -94,7 +94,7 @@ const FavoritesPage = () => {
                       onClick={handleDeleteAll}
                       className="text-sm font-normal text-textColor cursor-pointer"
                     >
-                      Очистить корзину
+                      Очистить избранное
                     </span>
                   </div>
                 </div>
