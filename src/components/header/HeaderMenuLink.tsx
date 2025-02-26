@@ -12,6 +12,7 @@ import {
 import useStore from "@/context/store";
 import { useState } from "react";
 import LoginModal from "../modal/LoginModal";
+import { ProfileMenu } from "../menu";
 
 const HeaderMenuLink = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +31,7 @@ const HeaderMenuLink = () => {
         <span className="text-sm leading-[18px] font-medium">Аксии</span>
       </Link>
       <Link
-        href={"/favorites"}
+        href={"/profile/favorites"}
         className="w-[100px] flex items-center flex-col h-[50px] justify-between text-textColor "
       >
         {favorites?.length > 0 ? (
@@ -67,18 +68,13 @@ const HeaderMenuLink = () => {
         )}
         <span className="text-sm leading-[18px] font-medium">Сравнить</span>
       </Link>
-      {auth ? (
-        <Link
-          href={"/profile"}
+      {!auth ? (
+        <ProfileMenu />
+      ) : (
+        <button
+          onClick={handleOpen}
           className="w-[100px] flex items-center flex-col h-[50px] justify-between text-textColor"
         >
-          <span className="h-6 w-6">
-            <UserIcon />
-          </span>
-          <span className="text-sm leading-[18px] font-medium">Кабинет</span>
-        </Link>
-      ) : (
-        <button onClick={handleOpen} className="w-[100px] flex items-center flex-col h-[50px] justify-between text-textColor">
           <span className="h-6 w-6">
             <UserIcon />
           </span>

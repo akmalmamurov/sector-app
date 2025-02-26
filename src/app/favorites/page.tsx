@@ -24,7 +24,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 const FavoritesPage = () => {
-  const { favorites, resetFavorites, removeFromFavorites } = useStore();
+  const { favorites, resetFavorites, deleteFavorites } = useStore();
   const [selectedItems, setSelectedItems] = useState<number[]>(
     favorites.map((item) => item.id)
   );
@@ -60,7 +60,7 @@ const FavoritesPage = () => {
   };
   const handleDeleteClick = (id: number) => {
     openModal("Вы уверены, что хотите удалить товар из избранного?", () => {
-      removeFromFavorites(id);
+      deleteFavorites(id);
     });
   };
 
