@@ -37,9 +37,12 @@ const FavoritesPage = () => {
   } = useConfirmModal();
 
   const handleDeleteAll = () => {
-    openModal("Вы уверены, что хотите удалить все товары из избранного?", () => {
-      resetFavorites();
-    });
+    openModal(
+      "Вы уверены, что хотите удалить все товары из избранного?",
+      () => {
+        resetFavorites();
+      }
+    );
   };
   const isAllChecked =
     favorites.length > 0 && selectedItems.length === favorites.length;
@@ -60,7 +63,6 @@ const FavoritesPage = () => {
       removeFromFavorites(id);
     });
   };
-
 
   return (
     <Container>
@@ -127,7 +129,7 @@ const FavoritesPage = () => {
                           onChange={() => toggleSingleItem(product.id)}
                         />
                       </TableCell>
-                      <TableCell className="border-r ">
+                      <TableCell className="border-r">
                         <div className="flex items-center gap-2 justify-start">
                           <div className="border w-[65px] h-full border-superSilver">
                             <Image
@@ -173,14 +175,17 @@ const FavoritesPage = () => {
                       </TableCell>
                       <TableCell className="px-4 py-6 text-xs font-normal text-textColor border-r">
                         <div className="w-full flex justify-center items-center">
-                          <button onClick={() => handleDeleteClick(product.id)} className="w-[42px] h-[42px] rounded-full bg-[#F5F5F5] flex items-center justify-center">
-                            <Trash2Icon className="text-[#EF403D] w-[18px] h-[18px] group-hover:opacity-70 duration-200 ease-in-out" />
-                          </button>
+                          <AddToCart product={product} />
                         </div>
                       </TableCell>
                       <TableCell className="px-4 py-6 text-xs font-normal text-textColor">
                         <div className="w-full flex justify-center items-center">
-                          <AddToCart product={product} />
+                          <button
+                            onClick={() => handleDeleteClick(product.id)}
+                            className="w-[42px] h-[42px] rounded-full bg-[#F5F5F5] flex items-center justify-center"
+                          >
+                            <Trash2Icon className="text-[#EF403D] w-[18px] h-[18px] group-hover:opacity-70 duration-200 ease-in-out" />
+                          </button>
                         </div>
                       </TableCell>
                     </TableRow>
