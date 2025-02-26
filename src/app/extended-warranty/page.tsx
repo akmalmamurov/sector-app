@@ -37,38 +37,46 @@ const ExtendedWarranty = () => {
             бизнеса? 
           </Link>
           {/* table */}
-          <div className="mt-4 flex">
-            <div className="border-[1px] ">
-              <div className="p-2 bg-celBlue">
-                <p className="font-semibold text-whiteOut  pl-4 pb-4 md:pr-32">
+          <div className="mt-4 flex w-max">
+            {/* min-w-250 */}
+            <div className="border-[1px] w-[250px] sm:w-[270px] md:w-[308px] ">
+              <div className=" bg-celBlue  pl-[10px] py-[26px]">
+                <p className="font-semibold text-whiteOut  text-[12px]">
                   Срок расширенной гарантии
                 </p>
               </div>
-              <div className=" md:py-0 border-[1px] p-2 bg-[#efefef] pt-4 pl-4">
+              <div className="border-[1px] pl-[10px] py-6 bg-[#efefef] text-[12px]">
                 <p>+1 год к стандартной гарантии</p>
               </div>
-              <div className="border-[1px] p-2 pt-4 pl-4">
+              <div className="border-[1px] pl-[10px] py-6 bg-[#efefef] text-[12px]">
                 <p>+2 года к стандартной гарантии</p>
               </div>
-              <div className="border-[1px] p-2 bg-[#efefef] pt-4 pl-4">
+              <div className="border-[1px] pl-[10px] py-6 bg-[#efefef] text-[12px]">
                 <p>+3 года к стандартной гарантии</p>
               </div>
             </div>
-            <div className="border-[1px] max-w-[268px]">
-              <div className="p-2 py-0 sm:py-3 md:py-3 bg-celBlue">
-                <p className="font-semibold text-whiteOut pt-4  md:pl-4 pb-4 md:pr-32">
+            {/* min-w-106 */}
+            <div className="border-[1px] w-[106px] md:w-[224px] text-[12px]">
+              <div className="bg-celBlue py-2 px-2 sm:pl-[10px] md:py-[26px]">
+                <p className="font-semibold text-whiteOut ">
                   Срок расширенной гарантии
                 </p>
               </div>
-              <div className="border-[1px] p-2  bg-[#efefef] pt-4 md:pl-4">
+              <div className="border-[1px] px-2 py-[6px] sm:pl-[10px] md:py-6 bg-[#efefef] text-[12px] sm:pr-2 md:pr-0">
                 <p>10% от стоимости оборудования*</p>
               </div>
-              <div className="border-[1px] p-2 pt-4 md:pl-4">
+              <div className="border-[1px] px-2 py-[6px] sm:pl-[10px] md:py-6 bg-[#efefef] text-[12px] sm:pr-2 md:pr-0">
+                <p>10% от стоимости оборудования*</p>
+              </div>
+              <div className="border-[1px] px-2 py-[6px] sm:pl-[10px] md:py-6 bg-[#efefef] text-[12px] sm:pr-2 md:pr-0">
+                <p>10% от стоимости оборудования*</p>
+              </div>
+              {/* <div className="border-[1px] pl-[10px] py-6 bg-[#efefef] text-[12px] pr-2 md:pr-0">
                 <p>20% от стоимости оборудования*</p>
               </div>
-              <div className="border-[1px] p-2 bg-[#efefef] pt-4 md:pl-4">
+              <div className="border-[1px] pl-[10px] py-6 bg-[#efefef] text-[12px] pr-2 md:pr-0">
                 <p>30% от стоимости оборудования*</p>
-              </div>
+              </div> */}
             </div>
           </div>
           <p className="pt-10 text-textColor">
