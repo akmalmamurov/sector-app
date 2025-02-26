@@ -28,10 +28,9 @@ export * from "./LinkedinIcon";
 export * from "./HomeIcon";
 export * from "./StepperIcon";
 export * from "./LoaderIcon";
-export * from "./StepperOtherIcon";
+export * from "./StepperOtherIcon"
 export * from "./profile-menu-icon/MenuContractorsIcon";
 export * from "./profile-menu-icon/MenuIssuesIcon";
 export * from "./profile-menu-icon/MenuLegalIcon";
 export * from "./profile-menu-icon/MenuOrderIcon";
-export * from "./profile-menu-icon/MenuSettingsIcon";
-export * from "./FavoritCartIcon";
+export * from "./profile-menu-icon/MenuSettingsIcon"
