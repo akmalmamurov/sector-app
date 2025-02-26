@@ -38,7 +38,6 @@ const ExtendedWarranty = () => {
           </Link>
           {/* table */}
           <div className="mt-4 flex w-max">
-            {/* min-w-250 */}
             <div className="border-[1px] w-[250px] sm:w-[270px] md:w-[308px] ">
               <div className=" bg-celBlue  pl-[10px] py-[26px]">
                 <p className="font-semibold text-whiteOut  text-[12px]">
@@ -55,7 +54,6 @@ const ExtendedWarranty = () => {
                 <p>+3 года к стандартной гарантии</p>
               </div>
             </div>
-            {/* min-w-106 */}
             <div className="border-[1px] w-[106px] md:w-[224px] text-[12px]">
               <div className="bg-celBlue py-2 px-2 sm:pl-[10px] md:py-[26px]">
                 <p className="font-semibold text-whiteOut ">
@@ -66,17 +64,11 @@ const ExtendedWarranty = () => {
                 <p>10% от стоимости оборудования*</p>
               </div>
               <div className="border-[1px] px-2 py-[6px] sm:pl-[10px] md:py-6 bg-[#efefef] text-[12px] sm:pr-2 md:pr-0">
-                <p>10% от стоимости оборудования*</p>
-              </div>
-              <div className="border-[1px] px-2 py-[6px] sm:pl-[10px] md:py-6 bg-[#efefef] text-[12px] sm:pr-2 md:pr-0">
-                <p>10% от стоимости оборудования*</p>
-              </div>
-              {/* <div className="border-[1px] pl-[10px] py-6 bg-[#efefef] text-[12px] pr-2 md:pr-0">
                 <p>20% от стоимости оборудования*</p>
               </div>
-              <div className="border-[1px] pl-[10px] py-6 bg-[#efefef] text-[12px] pr-2 md:pr-0">
+              <div className="border-[1px] px-2 py-[6px] sm:pl-[10px] md:py-6 bg-[#efefef] text-[12px] sm:pr-2 md:pr-0">
                 <p>30% от стоимости оборудования*</p>
-              </div> */}
+              </div>
             </div>
           </div>
           <p className="pt-10 text-textColor">
