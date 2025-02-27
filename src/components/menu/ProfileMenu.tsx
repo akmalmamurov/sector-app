@@ -10,6 +10,7 @@ export const ProfileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const { logOut } = useStore();
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -24,7 +25,7 @@ export const ProfileMenu = () => {
   const handleLogout = () => {
     logOut();
     setIsOpen(false);
-  }
+  };
   return (
     <div
       ref={menuRef}
@@ -75,7 +76,10 @@ export const ProfileMenu = () => {
             </div>
             {/* logout */}
             <div className="py-[5px] px-[15px] flex justify-center items-center">
-              <button onClick={handleLogout} className="text-dangerColor hover:opacity-70 duration-100 ease-in-out w-full">
+              <button
+                onClick={handleLogout}
+                className="text-dangerColor hover:opacity-70 duration-100 ease-in-out w-full"
+              >
                 Выход
               </button>
             </div>
