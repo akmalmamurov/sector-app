@@ -1,18 +1,8 @@
 import { X } from "lucide-react";
-import {
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "../ui/form";
-import LoginBrowser from "./LoginBrowser";
 import { UseFormReturn } from "react-hook-form";
+import { DialogDescription, DialogHeader, DialogTitle, } from "@/components/ui/dialog";
+ import { Form, FormControl, FormField, FormItem, FormMessage, } from "../ui/form";
+import LoginBrowser from "./LoginBrowser";
 import { Button } from "../ui/button";
 
 interface Props {

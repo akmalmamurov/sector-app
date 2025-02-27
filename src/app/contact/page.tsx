@@ -111,7 +111,7 @@ const Contact = () => {
           </InfoHeader>
           <div className="flex flex-wrap gap-12 justify-center items-center md:justify-start">
             <div className="text-textColor">
-              <p className="text-[21px] ">Юридический адрес</p>
+              <p className="text-[21px]">Юридический адрес</p>
               <p>
                 г. Ташкент, М.Улугбекский район, ул. Сайрам 7-тор (бывшая
                 Э.Мараимова), д. 52

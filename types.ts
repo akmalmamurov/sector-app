@@ -3,6 +3,6 @@ export interface ProductData {
   title: string;
   article: string;
   price: number;
-  amount?: number;
+  inStock?: string;
   image: string;
 }

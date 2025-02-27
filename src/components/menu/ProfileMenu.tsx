@@ -1,0 +1,89 @@
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { X } from "lucide-react";
+
+import { UserIcon } from "@/assets/icons";
+import { profileMenuData } from "@/data";
+import useStore from "@/context/store";
+
+export const ProfileMenu = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const { logOut } = useStore();
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+  const handleLogout = () => {
+    logOut();
+    setIsOpen(false);
+  }
+  return (
+    <div
+      ref={menuRef}
+      className="w-[100px] h-[50px] flex items-center justify-center relative"
+    >
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex-col flex items-center justify-between h-full text-textColor"
+      >
+        <span className="h-6 w-6">
+          <UserIcon />
+        </span>
+        <span className="text-sm leading-[18px] font-medium">Кабинет</span>
+      </button>
+
+      {isOpen && (
+        <div
+          className={`
+            w-[343px] bg-white absolute top-[57px] -right-[82px] border shadow-navListShadow
+            animate-in slide-in-from-bottom-2 duration-200 overflow-hidden
+          `}
+        >
+          {/* header */}
+          <div className="p-[15px] flex justify-between items-center border-b">
+            <h3 className="text-base text-textColor">UserName</h3>
+            <button onClick={() => setIsOpen(false)}>
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+          {/* content */}
+          <div className="mt-[15px]">
+            <div className="border-b">
+              <ul className=" mb-[15px]">
+                {profileMenuData.map(({ name, link, icon }, index) => (
+                  <Link
+                    href={link}
+                    key={index}
+                    className="bg-white hover:bg-superSilver h-10 flex items-center duration-200 ease-in-out"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <div className="flex items-center gap-[15px] text-xs px-[15px]">
+                      <span className="w-[17px] h-[17px]">{icon}</span>
+                      <span>{name}</span>
+                    </div>
+                  </Link>
+                ))}
+              </ul>
+            </div>
+            {/* logout */}
+            <div className="py-[5px] px-[15px] flex justify-center items-center">
+              <button onClick={handleLogout} className="text-dangerColor hover:opacity-70 duration-100 ease-in-out w-full">
+                Выход
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default ProfileMenu;

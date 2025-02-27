@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
     unoptimized: true, 
     domains: ["cdn.example.com", "some-site.com"], 
   },
+  env: {
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+  },
 };
 
 export default nextConfig;
