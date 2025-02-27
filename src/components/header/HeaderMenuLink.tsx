@@ -20,7 +20,7 @@ const HeaderMenuLink = () => {
   const { favorites, cart, compares, auth } = useStore();
 
   return (
-    <div className="lg:flex items-center hidden">
+    <div className="md:flex items-center hidden">
       <Link
         href={"/discounts"}
         className="w-[100px] flex items-center flex-col h-[50px] justify-between text-textColor"
@@ -78,6 +78,13 @@ const HeaderMenuLink = () => {
           <span className="h-6 w-6">
             <UserIcon />
           </span>
+          <span className="text-sm leading-[18px] font-medium">Кабинет</span>
+        </Link>
+      ) : (
+        <button
+          onClick={handleOpen}
+          className="w-[100px] flex items-center flex-col h-[50px] justify-between text-textColor"
+        >
           <span className="text-sm leading-[18px] font-medium">Войти</span>
         </button>
       )}
