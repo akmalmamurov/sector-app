@@ -7,8 +7,15 @@ import Image from "next/image";
 import { flagUz } from "@/assets/images";
 import Link from "next/link";
 import NavbarList from "./NavbarList";
+import { useQuery } from "@tanstack/react-query";
+import { getCatalog } from "@/api/catalog";
 
 const Navbar = () => {
+  const { data: catalogData = [] } = useQuery({
+    queryKey: ["catalog"],
+    queryFn: getCatalog,
+  });
+  console.log("catalogs", catalogData);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
   return (
@@ -69,6 +76,7 @@ const Navbar = () => {
       </nav>
       {isMenuOpen && (
         <CatalogMenu
+          catalogData={catalogData}
           setMenuOpen={setIsMenuOpen}
           toggleButtonRef={toggleButtonRef}
           open={isMenuOpen}

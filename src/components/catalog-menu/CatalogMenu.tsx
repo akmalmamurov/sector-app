@@ -1,16 +1,22 @@
 import { useState, useRef, useEffect } from "react";
-import { catalogMenu } from "@/data/catalogMenu";
 import { Container } from "../container";
 import Link from "next/link";
 import { CloseIcon } from "@/assets/icons";
+import { CatalogData } from "@/types";
 
 interface Props {
   setMenuOpen: (open: boolean) => void;
   open: boolean;
   toggleButtonRef: React.RefObject<HTMLButtonElement | null>;
+  catalogData: CatalogData[];
 }
 
-const CatalogMenu = ({ setMenuOpen, toggleButtonRef, open }: Props) => {
+const CatalogMenu = ({
+  setMenuOpen,
+  toggleButtonRef,
+  open,
+  catalogData,
+}: Props) => {
   const [hoveredParentIndex, setHoveredParentIndex] = useState<number>(0);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -51,15 +57,15 @@ const CatalogMenu = ({ setMenuOpen, toggleButtonRef, open }: Props) => {
         >
           <div className="flex h-full">
             {/* Parent Links */}
-            <div className="w-[537px] bg-cottonBall h-full py-7">
-              <ul className="flex flex-col gap-[15px]">
-                {catalogMenu.map((item, parentIndex) => (
+            <div className="w-[537px] bg-cottonBall h-full py-6">
+              <ul className="flex flex-col">
+                {catalogData?.map((item, parentIndex) => (
                   <Link
-                    href={`/catalog/${item.id}`}
+                    href={`/catalog/${item.slug}`}
                     key={`parent-${parentIndex}`}
                     onClick={() => setMenuOpen(false)}
                     onMouseEnter={() => setHoveredParentIndex(parentIndex)}
-                    className={`relative block py-[10px] px-4 text-sm font-semibold transition-all duration-300 
+                    className={`relative block py-[10px] px-4 text-sm font-normal transition-all duration-300  text-black
                       ${
                         hoveredParentIndex === parentIndex
                           ? "bg-whisperBlue"
@@ -67,39 +73,40 @@ const CatalogMenu = ({ setMenuOpen, toggleButtonRef, open }: Props) => {
                       }
                     `}
                   >
-                    {item.name}
+                    {item.title}
                   </Link>
                 ))}
               </ul>
             </div>
 
-            {/* Submenu Section */}
             <div className="bg-white w-full pl-[26px] pr-10 pt-7 pb-12 relative overflow-y-auto h-[calc(100vh-200px)] flex justify-between">
               <div className="w-[80%]">
                 {hoveredParentIndex !== null && (
                   <div className="transition-opacity duration-300 opacity-100">
                     <ul className="grid grid-cols-3 gap-8">
-                      {catalogMenu[hoveredParentIndex].subLinks.map(
-                        (subLink, subIndex) => (
+                      {catalogData[hoveredParentIndex]?.subcatalogs?.map(
+                        (subCatalog, subIndex) => (
                           <li key={`sub-${hoveredParentIndex}-${subIndex}`}>
                             <Link
                               onClick={() => setMenuOpen(false)}
-                              href={`/catalog/${subLink._id}`}
+                              href={`/catalog/${subCatalog.slug}`}
                               className="text-sm block font-semibold mb-[25px]"
                             >
-                              {subLink.name}
+                              {subCatalog?.title}
                             </Link>
                             <div className="flex flex-col gap-2">
-                              {subLink.links.map((links, linkIndex) => (
-                                <Link
-                                  onClick={() => setMenuOpen(false)}
-                                  href={`/catalog/${links?.id}`}
-                                  key={`link-${hoveredParentIndex}-${subIndex}-${linkIndex}`}
-                                  className="font-normal text-black text-sm hover:text-cerulean hoverEffect"
-                                >
-                                  {links?.name}
-                                </Link>
-                              ))}
+                              {subCatalog?.categories?.map(
+                                (category, linkIndex) => (
+                                  <Link
+                                    onClick={() => setMenuOpen(false)}
+                                    href={`/catalog/${category?.slug}`}
+                                    key={`link-${hoveredParentIndex}-${subIndex}-${linkIndex}`}
+                                    className="font-normal text-black text-sm hover:text-cerulean hoverEffect"
+                                  >
+                                    {category?.title}
+                                  </Link>
+                                )
+                              )}
                             </div>
                           </li>
                         )

@@ -4,6 +4,7 @@ import { Header } from "@/components/header";
 import { Sidebar } from "@/components/sidebar";
 import { Footer } from "@/components/footer";
 import { Toaster } from "react-hot-toast";
+import { Providers } from "@/components/providers";
 
 export const metadata: Metadata = {
   title: "Sector App",
@@ -21,8 +22,10 @@ export default function RootLayout({
         <link rel="icon" type="image/svg+xml" href="/logo.svg" />
       </head>
       <body>
-        <Header />
-        {children}
+        <Providers>
+          <Header />
+          {children}
+        </Providers>
         <Sidebar />
         <Toaster
           position="top-right"
