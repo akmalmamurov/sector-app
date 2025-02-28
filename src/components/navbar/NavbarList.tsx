@@ -10,7 +10,7 @@ const NavbarList = () => {
   const [openPopover, setOpenPopover] = useState<number | null>(null);
 
   const handleClose = () => setOpenPopover(null);
-
+  
   return (
     <div>
       <div className="flex gap-1">

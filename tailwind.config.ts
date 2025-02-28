@@ -25,6 +25,7 @@ export default {
       colors: {
         cerulean: "#0054AE",
         whiteOut: "#FBFBFB",
+        greenLight: "#6AB04C",
         background: "#FAFAFA",
         superSilver: "#EEEEEE",
         textColor: "#333333",
