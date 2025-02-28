@@ -16,21 +16,24 @@ const HeaderMenu = () => {
     <div className="py-2 border-b border-b-superSilver">
       <Container className="flex justify-between items-center gap-[42px]">
         {/* logo */}
-        <Link href="/" className="hidden md:block">
+        <Link href="/" className="hidden md:block md:py-2 lg:py-0">
           <Image src={logo} alt="logo" />
         </Link>
         {/* search */}
-        <Form action="/search" className="flex-1 relative">
-          <input
-            type="text"
-            name="query"
-            placeholder="Введите поисковый запрос"
-            className="input-autofill w-full py-[15px] pl-4 pr-[13px] rounded-[10px] border bg-background focus:outline-none focus:border-transparent focus:shadow-lg focus:bg-white placeholder-opacity-0"
-          />
-          <button className="absolute top-[13px] right-[15px]">
-            <SearchIcon />
-          </button>
+        <Form action="/search" className="flex-1 relative ">
+          <div className="relative w-full">
+            <input
+              type="text"
+              name="query"
+              placeholder="Введите поисковый запрос"
+              className="input-autofill w-full py-[15px] pl-4 pr-[40px] rounded-[10px] border bg-background focus:outline-none focus:border-transparent focus:shadow-lg focus:bg-white placeholder-opacity-0 text-ellipsis overflow-hidden whitespace-nowrap"
+            />
+            <button className="absolute top-1/2 right-[15px] -translate-y-1/2">
+              <SearchIcon />
+            </button>
+          </div>
         </Form>
+
         <div className="flex">
           <div className="hidden lg:block">
             <HeaderMenuLink />

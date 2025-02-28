@@ -19,7 +19,7 @@ const HeaderMenuLink = () => {
   const { favorites, cart, compares, auth } = useStore();
 
   return (
-    <div className="md:flex items-center hidden">
+    <div className="lg:flex items-center ">
       <Link
         href={"/discounts"}
         className="w-[100px] flex items-center flex-col h-[50px] justify-between text-textColor"

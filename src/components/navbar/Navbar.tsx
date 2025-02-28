@@ -13,7 +13,7 @@ const Navbar = () => {
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
   return (
     <>
-      <nav className=" py-2 hidden md:block ">
+      <nav className=" py-2 hidden lg:block ">
         <Container className="flex items-center justify-between">
           {/* catalog */}
           <div className="flex gap-[23px] items-center">
