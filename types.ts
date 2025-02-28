@@ -1,7 +1,9 @@
-export interface CategoryData {
+export interface CatalogData {
   id: string;
   slug: string;
   title: string;
+  subcatalogs: SubcatalogData[];
+  categories: CategoryData[];
 }
 export interface SubcatalogData {
   id: string;
@@ -9,11 +11,10 @@ export interface SubcatalogData {
   title: string;
   categories: CategoryData[];
 }
-export interface CatalogData {
+export interface CategoryData {
   id: string;
   slug: string;
   title: string;
-  subcatalogs: SubcatalogData[];
 }
 export interface ProductData {
   id: number;

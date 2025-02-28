@@ -5,7 +5,7 @@ import Link from "next/link";
 import { HomeIcon } from "@/assets/icons";
 
 interface BreadcrumbItem {
-  name: string;
+  name: string | React.ReactNode;
   href?: string;
 }
 
@@ -30,10 +30,10 @@ export const HomeCrumb = ({ paths }: BreadcrumbProps) => {
           {item.href ? (
             <Link
               href={item.href}
-              className={`hover:text-blue-500 ${
+              className={` font-normal text-xs  ${
                 index === paths.length - 1
-                  ? "text-celBlue font-normal text-xs"
-                  : "text-gray-500"
+                  ? "text-gray-500"
+                  : "text-celBlue"
               }`}
             >
               {item.name}
