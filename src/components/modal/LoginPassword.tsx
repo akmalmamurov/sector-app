@@ -10,6 +10,9 @@ import {
 import LoginBrowser from "./LoginBrowser";
 import { UseFormReturn } from "react-hook-form";
 import { Button } from "../ui/button";
+import axios from "axios";
+import { showError, showSuccess } from "../toast/Toast";
+import useStore from "@/context/store";
 
 interface Props {
   handleClose: (newStep?: number) => void;
@@ -23,9 +26,31 @@ const LoginPassword = ({ handleClose, formMethods, fullClose }: Props) => {
     handleSubmit,
     formState: { errors, isValid },
   } = formMethods;
+  const { setAuth } = useStore();
 
-  const onSubmitStep2 = (data: { email: string; password: string }) => {
-    console.log("Step 2 Data:", data);
+  const onSubmitStep2 = async (data: { email: string; password: string }) => {
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/user/auth/login`,
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.statusText === "OK") {
+        fullClose();
+        setAuth();
+        localStorage.setItem("sector-token", response.data.token);
+        showSuccess("Вы успешно вошли в систему!");
+      }
+
+      return response.data;
+    } catch (error) {
+      console.error("Login error:", error);
+      showError("Ошибка входа");
+    }
   };
 
   return (
@@ -59,13 +84,9 @@ const LoginPassword = ({ handleClose, formMethods, fullClose }: Props) => {
                       placeholder="Введите E-mail"
                       type="email"
                       {...field}
-                      className={`w-full px-3 py-[12px] text-sm placeholder:text-darkSoul focus:outline-none
-    ring-1 ring-darkSoul focus:ring-2 hover:ring-cerulean/70
-    ${
-      errors.email
-        ? "ring-red-500 focus:ring-red-500"
-        : "focus:ring-cerulean/70"
-    }`}
+                      className={`w-full px-3 py-[12px] text-sm placeholder:text-darkSoul focus:outline-none ring-1 
+                        ring-darkSoul focus:ring-2 hover:ring-cerulean/70
+                      ${errors.email ? "ring-red-500 focus:ring-red-500" : "focus:ring-cerulean/70"}`}
                     />
                   </FormControl>
                   <FormMessage>{errors.email?.message}</FormMessage>
@@ -96,7 +117,7 @@ const LoginPassword = ({ handleClose, formMethods, fullClose }: Props) => {
               )}
             />
             <Button
-            disabled={!isValid}
+              disabled={!isValid}
               type="submit"
               className={`mt-6 w-full h-12 bg-cerulean text-white pt-[15px] pb-[17px] font-bold text-base leading-[18px] rounded-[9px] hover:bg-cerulean/90 hoverEffect
                 ${!isValid ? " bg-darkSoul " : ""}`}

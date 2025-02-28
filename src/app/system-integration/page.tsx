@@ -41,7 +41,7 @@ const SystemIntegration = () => {
                         alt={service.title}
                       />
                     </td>
-                    <td className="align-top ">
+                    <td className="align-top">
                       <div className="border-b py-[21px] px-2">
                         <p className="text-[18px] font-normal text-textColor ">
                           {service.title}

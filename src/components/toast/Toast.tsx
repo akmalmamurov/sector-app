@@ -47,6 +47,7 @@ const showToast = ({ message, type }: ToastProps) => {
               <path d="m6 6 12 12" />
             </svg>
           </button>
+          
         </div>
       </div>
     );

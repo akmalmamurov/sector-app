@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: "Акции, расподажи и скидки",
 };
 const DiscountPage = () => {
-return (
+  return (
     <Container className="pb-[58px]">
       <HomeCrumb paths={[{ name: "Акции" }]} />
       <Section className="py-[23px] px-0 rounded-none shadow-sectionShadow">
@@ -18,11 +18,9 @@ return (
           <InfoTitle className="font-wix text-[21px]">Акции</InfoTitle>
         </InfoHeader>
         <div className="p-[23px]">
-            <div className="flex justify-center flex-wrap">
-                    <div className="bg-white shadow-discountWadow p-2">
-
-                    </div>
-            </div>
+          <div className="flex justify-center flex-wrap">
+            <div className="bg-white shadow-discountWadow p-2"></div>
+          </div>
         </div>
       </Section>
     </Container>

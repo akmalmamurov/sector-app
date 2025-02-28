@@ -41,6 +41,8 @@ export default {
         sunColor: "#FF8C00",
         orangeSun: "#EE8202",
         christmas: "#E0E0E0",
+        hoverBg: "rgb(251, 251, 251)",
+        explosiveGrey: "#C4C4C4",
         foreground: "hsl(var(--foreground))",
         card: {
           DEFAULT: "hsl(var(--card))",
