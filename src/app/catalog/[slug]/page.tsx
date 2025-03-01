@@ -52,7 +52,6 @@ export default function SingleCatalog() {
     queryKey: ["catalog"],
     queryFn: getCatalog,
   });
-  console.log(catalogData);
 
   const { slug } = useParams();
   const slugString = Array.isArray(slug) ? slug.join("/") : slug;
