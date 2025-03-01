@@ -8,44 +8,7 @@ import { Container } from "@/components/container";
 import { HomeIcon } from "@/assets/icons";
 import { ChevronRight } from "lucide-react";
 import { CatalogData, CategoryData } from "@/types";
-
-function findCatalogItem(
-  items: CatalogData[],
-  targetSlug: string
-): CatalogData | undefined {
-  for (const item of items) {
-    if (item.slug === targetSlug) return item;
-    if (item.subcatalogs) {
-      const found = findCatalogItem(
-        item.subcatalogs as CatalogData[],
-        targetSlug
-      );
-      if (found) return found;
-    }
-  }
-  return undefined;
-}
-
-function getCatalogPath(
-  items: CatalogData[],
-  targetSlug: string,
-  path: CatalogData[] = []
-): CatalogData[] {
-  for (const item of items) {
-    if (item.slug === targetSlug) {
-      return [...path, item];
-    }
-    if (item.subcatalogs) {
-      const foundPath = getCatalogPath(
-        item.subcatalogs as CatalogData[],
-        targetSlug,
-        [...path, item]
-      );
-      if (foundPath.length) return foundPath;
-    }
-  }
-  return [];
-}
+import { findCatalogItem, getCatalogPath } from "@/utils/catalog-slug";
 
 function BreadcrumbHoverLink({
   item,
@@ -181,7 +144,6 @@ export default function CategoryPage() {
           />
         ))}
       </div>
-
       <div className="bg-white border p-[23px] shadow-sectionShadow"></div>
     </Container>
   );
