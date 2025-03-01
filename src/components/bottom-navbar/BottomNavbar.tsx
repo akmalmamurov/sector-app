@@ -11,7 +11,7 @@ import React from "react";
 
 const BottomNavbar = () => {
   return (
-    <div className="fixed bottom-0 left-0 w-full bg-white shadow-md border-t flex justify-around py-2">
+    <div className="fixed bottom-0 left-0 w-full z-50 bg-white shadow-md border-t flex justify-around py-2">
       <NavItem src={homeNavBottom} label="Главная" href="#" />
       <NavItem src={infoNavBottom} label="Информация" href="#" />
       <NavItem src={catalogNavBottom} label="Каталог" href="/catalog" />
