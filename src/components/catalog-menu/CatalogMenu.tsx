@@ -90,18 +90,18 @@ const CatalogMenu = ({
                             <Link
                               onClick={() => setMenuOpen(false)}
                               href={`/catalog/${subCatalog.slug}`}
-                              className="text-sm block font-semibold mb-[25px]"
+                              className="text-sm block font-semibold mb-3 text-black hover:text-cerulean duration-150"
                             >
                               {subCatalog?.title}
                             </Link>
-                            <div className="flex flex-col gap-2">
+                            <div className="flex flex-col gap-4">
                               {subCatalog?.categories?.map(
                                 (category, linkIndex) => (
                                   <Link
                                     onClick={() => setMenuOpen(false)}
                                     href={`/catalog/${category?.slug}`}
                                     key={`link-${hoveredParentIndex}-${subIndex}-${linkIndex}`}
-                                    className="font-normal text-black text-sm hover:text-cerulean hoverEffect"
+                                    className="font-normal text-black text-xs hover:text-cerulean duration-150 "
                                   >
                                     {category?.title}
                                   </Link>

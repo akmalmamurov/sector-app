@@ -15,7 +15,6 @@ const Navbar = () => {
     queryKey: ["catalog"],
     queryFn: getCatalog,
   });
-  console.log("catalogs", catalogData);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
   return (
