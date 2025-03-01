@@ -46,7 +46,63 @@ function getCatalogPath(
   }
   return [];
 }
+function BreadcrumbHoverLink({
+  item,
+  isLast,
+}: {
+  item: {
+    name: string;
+    href?: string;
+    catalogItem?: CatalogData;
+  };
+  isLast: boolean;
+}) {
+  const [isHovered, setIsHovered] = useState(false);
 
+  const subcatalogs = item.catalogItem?.subcatalogs || [];
+
+  return (
+    <div
+      className="flex items-center gap-[15px] relative"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <ChevronRight className="text-gray-400" size={14} />
+
+      {item.href ? (
+        <Link
+          href={item.href}
+          className={`font-normal text-xs ${
+            isLast ? "text-gray-500" : "text-celBlue"
+          }`}
+        >
+          {item.name}
+        </Link>
+      ) : (
+        <span className="text-celBlue font-normal text-xs cursor-text">
+          {item.name}
+        </span>
+      )}
+
+      {!isLast && subcatalogs.length > 0 && isHovered && (
+        <div className="absolute top-full left-0 z-50 bg-white border shadow-md p-2">
+          <ul className="min-w-[180px]">
+            {subcatalogs.map((sub) => (
+              <li key={sub.id} className="my-1">
+                <Link
+                  href={`/catalog/${sub.slug}`}
+                  className="text-sm text-gray-700 hover:text-celBlue"
+                >
+                  {sub.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
 export default function SingleCatalog() {
   const { data: catalogData = [] } = useQuery({
     queryKey: ["catalog"],
@@ -129,60 +185,4 @@ export default function SingleCatalog() {
   );
 }
 
-function BreadcrumbHoverLink({
-  item,
-  isLast,
-}: {
-  item: {
-    name: string;
-    href?: string;
-    catalogItem?: CatalogData;
-  };
-  isLast: boolean;
-}) {
-  const [isHovered, setIsHovered] = useState(false);
 
-  const subcatalogs = item.catalogItem?.subcatalogs || [];
-
-  return (
-    <div
-      className="flex items-center gap-[15px] relative"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <ChevronRight className="text-gray-400" size={14} />
-
-      {item.href ? (
-        <Link
-          href={item.href}
-          className={`font-normal text-xs ${
-            isLast ? "text-gray-500" : "text-celBlue"
-          }`}
-        >
-          {item.name}
-        </Link>
-      ) : (
-        <span className="text-celBlue font-normal text-xs cursor-text">
-          {item.name}
-        </span>
-      )}
-
-      {!isLast && subcatalogs.length > 0 && isHovered && (
-        <div className="absolute top-full left-0 z-50 bg-white border shadow-md p-2">
-          <ul className="min-w-[180px]">
-            {subcatalogs.map((sub) => (
-              <li key={sub.id} className="my-1">
-                <Link
-                  href={`/catalog/${sub.slug}`}
-                  className="text-sm text-gray-700 hover:text-celBlue"
-                >
-                  {sub.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
-  );
-}
