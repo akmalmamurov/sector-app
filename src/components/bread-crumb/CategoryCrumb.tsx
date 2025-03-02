@@ -1,58 +1,109 @@
 "use client";
+
+import { CrumbChevronDownIcon } from "@/assets/icons";
+import { CatalogData } from "@/types";
+import { ChevronRight, ChevronRightIcon } from "lucide-react";
 import Link from "next/link";
-import { CatalogData, CategoryData } from "@/types";
+import { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 
-interface BreadcrumbHoverMenuProps {
-  subcatalogs: CatalogData[];
-  categories: CategoryData[];
-  parentSlug?: string; // Kategoriya linklari uchun kerak bo‘ladi
-}
+export const CategoryCrumb = ({
+  item,
+  isLast,
+}: {
+  item: { name: string; href?: string; catalogItem?: CatalogData };
+  isLast: boolean;
+}) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [dropdownStyle, setDropdownStyle] = useState({ top: 0, left: 0 });
+  const containerRef = useRef<HTMLDivElement>(null);
 
-export default function BreadcrumbHoverMenu({
-  subcatalogs,
-  categories,
-  parentSlug,
-}: BreadcrumbHoverMenuProps) {
+  useEffect(() => {
+    if (isHovered && containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      setDropdownStyle({ top: rect.bottom, left: rect.left });
+    }
+  }, [isHovered]);
+
+  const childSubcatalogs = item.catalogItem?.subcatalogs || [];
+  const childCategories = item.catalogItem?.categories || [];
+  const showDropdown =
+    item.href !== undefined &&
+    item.catalogItem &&
+    (childSubcatalogs.length > 0 || childCategories.length > 0);
+
   return (
-    <div className="absolute top-full left-0 bg-white border shadow-md p-2 w-full min-w-[280px]">
-      {/* Subcatalog bo‘limi */}
-      {subcatalogs.length > 0 && (
-        <>
-          <div className="font-semibold text-sm mb-1">Subcataloglar</div>
-          <ul className="mb-2">
-            {subcatalogs.map((sub) => (
-              <li key={sub.id} className="my-1">
-                <Link
-                  href={`/catalog/${sub.slug}`}
-                  className="text-xs text-weekColor hover:underline"
-                >
-                  {sub.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
+    <div
+      ref={containerRef}
+      className="flex items-center gap-[15px] relative"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className="flex items-center">
+        {showDropdown && <CrumbChevronDownIcon className="mr-2" />}
+        {item.href ? (
+          <Link
+            href={item.href}
+            className={`font-normal text-xs ${
+              !isLast ? "text-weekColor hover:underline" : "text-celBlue"
+            }`}
+          >
+            {item.name}
+          </Link>
+        ) : (
+          <span className="text-celBlue font-normal text-xs cursor-text">
+            {item.name}
+          </span>
+        )}
+      </div>
 
-      {/* Category bo‘limi */}
-      {categories.length > 0 && (
-        <>
-          <div className="font-semibold text-sm mb-1">Kategoriya</div>
-          <ul>
-            {categories.map((cat) => (
-              <li key={cat.id} className="my-1">
-                {/* parentSlug bo‘lmasa, oddiy /catalog/[category-slug] ko‘rinishida link berilishi mumkin */}
-                <Link
-                  href={`/catalog/${parentSlug ?? ""}/${cat.slug}`}
-                  className="text-xs text-weekColor hover:underline"
-                >
-                  {cat.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
+      {!isLast && <ChevronRight className="text-weekColor" size={14} />}
+
+      {showDropdown &&
+        isHovered &&
+        createPortal(
+          <div
+            className="bg-white border shadow-md p-2 w-fit "
+            style={{
+              position: "absolute",
+              top: dropdownStyle.top,
+              left: dropdownStyle.left,
+              zIndex: 10,
+            }}
+          >
+            {childSubcatalogs.length > 0 && (
+              <ul>
+                {childSubcatalogs.map((sub) => (
+                  <li key={sub.id}>
+                    <Link
+                      href={`/catalog/${sub.slug}`}
+                      className="text-xs text-weekColor hover:underline flex"
+                    >
+                            <ChevronRightIcon className="text-weekColor" size={14} />
+                      {sub.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {childCategories.length > 0 && (
+              <ul>
+                {childCategories.map((cat) => (
+                  <li key={cat.id}>
+                    <Link
+                      href={`/catalog/${item.catalogItem?.slug}/${cat.slug}`}
+                      className="text-xs text-weekColor hover:underline flex"
+                    >
+                      <ChevronRightIcon className="text-weekColor" size={14} />
+                      {cat.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>,
+          document.body
+        )}
     </div>
   );
-}
+};
