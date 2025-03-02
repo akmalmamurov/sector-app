@@ -2,10 +2,11 @@ import { Banner } from "@/components/banner";
 import { banner1, banner2 } from "@/assets/images";
 import { HomeCategory } from "@/components/home-category";
 import { HomeBrands } from "@/components/home-brand";
-import { brandsData } from "@/data";
 import { ProductList } from "@/components/product-list";
+import { getBrandPopular } from "@/api";
 
-export default function Home() {
+export default async function Home() {
+  const brandsData = await getBrandPopular();
   const banners = [
     {
       id: 1,
