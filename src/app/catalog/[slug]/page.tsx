@@ -24,7 +24,6 @@ export default function SingleCatalog() {
     ? findCatalogItem(catalogData, slugString)
     : undefined;
   const catalogPath = slugString ? getCatalogPath(catalogData, slugString) : [];
-  console.log(catalogPath);
 
   const breadcrumbPaths = [
     ...catalogPath.map((item, index) => ({
