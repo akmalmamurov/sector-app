@@ -99,7 +99,7 @@ const CatalogMenu = ({
                                 (category, linkIndex) => (
                                   <Link
                                     onClick={() => setMenuOpen(false)}
-                                    href={`/catalog/${category?.slug}`}
+                                    href={`/catalog/${subCatalog.slug}/${category?.slug}`}
                                     key={`link-${hoveredParentIndex}-${subIndex}-${linkIndex}`}
                                     className="font-normal text-black text-xs hover:text-cerulean duration-150 "
                                   >

@@ -99,7 +99,7 @@ export default function BrandList(props: BrandsClientProps) {
                 <div className="grid grid-cols-6 gap-3">
                   {brands.map((brand) => (
                     <Link
-                      href={`/brands/${brand.slug}`}
+                      href={`/brands/${brand.id}`}
                       key={brand.id}
                       className="border border-superSilver flex flex-col justify-center items-center h-[121px] px-10 group gap-[15px]"
                     >
