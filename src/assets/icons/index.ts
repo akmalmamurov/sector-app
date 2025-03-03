@@ -29,8 +29,11 @@ export * from "./HomeIcon";
 export * from "./StepperIcon";
 export * from "./LoaderIcon";
 export * from "./StepperOtherIcon"
+export * from "./TelegramBlueIcon"
 export * from "./profile-menu-icon/MenuContractorsIcon";
 export * from "./profile-menu-icon/MenuIssuesIcon";
 export * from "./profile-menu-icon/MenuLegalIcon";
 export * from "./profile-menu-icon/MenuOrderIcon";
 export * from "./profile-menu-icon/MenuSettingsIcon"
+export * from "./CatalogChevronIcon";
+export * from "./CrumbChevronDownIcon"

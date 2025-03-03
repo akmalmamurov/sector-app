@@ -5,6 +5,7 @@ import { Sidebar } from "@/components/sidebar";
 import { Footer } from "@/components/footer";
 import { Toaster } from "react-hot-toast";
 import BottomNavbar from "@/components/bottom-navbar/BottomNavbar";
+import { Providers } from "@/components/providers";
 
 export const metadata: Metadata = {
   title: "Sector App",
@@ -22,16 +23,15 @@ export default function RootLayout({
         <link rel="icon" type="image/svg+xml" href="/logo.svg" />
       </head>
       <body>
-        <Header />
-        {children}
-        <div>
-          <div className="hidden lg:flex">
-            <Sidebar />
-          </div>
-          <div className="lg:hidden flex">
+
+        <Providers>
+          <Header />
+          {children}
+        </Providers>
+        <Sidebar />
+   <div className="lg:hidden flex">
             <BottomNavbar />
           </div>
-        </div>
         <Toaster
           position="top-right"
           containerStyle={{

@@ -22,7 +22,7 @@ export default function ProfileLayout({
   return (
     <div className="py-[58px]">
       <Container>
-        <div className="bg-white shadow-sectionShadow border">
+        <div className="bg-white shadow-sectionShadow border rounded-[10px]">
           <div className="grid grid-cols-5 border-b-[0.5px] border-superSilver">
             {tabs.map((tab) => {
               const isActive = pathname === tab.href;
@@ -39,7 +39,7 @@ export default function ProfileLayout({
                     absolute -bottom-0 left-0 w-full h-[5px] transition-opacity
                     ${
                       isActive
-                        ? "bg-gradient-to-r from-blue-400 to-cerulean opacity-100"
+                        ? "bg-gradient-to-r from-cerulean to-blue-400 opacity-100"
                         : "bg-superSilver opacity-0 group-hover:opacity-100 "
                     }
                   `}

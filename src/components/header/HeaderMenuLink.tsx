@@ -68,26 +68,6 @@ const HeaderMenuLink = () => {
         )}
         <span className="text-sm leading-[18px] font-medium">Сравнить</span>
       </Link>
-      {/* {!auth ? (
-        <ProfileMenu />
-      ) : (
-        <button
-          onClick={handleOpen}
-          className="w-[100px] flex items-center flex-col h-[50px] justify-between text-textColor"
-        >
-          <span className="h-6 w-6">
-            <UserIcon />
-          </span>
-          <span className="text-sm leading-[18px] font-medium">Кабинет</span>
-        </button>
-      ) : (
-        <button
-          onClick={handleOpen}
-          className="w-[100px] flex items-center flex-col h-[50px] justify-between text-textColor"
-        >
-          <span className="text-sm leading-[18px] font-medium">Войти</span>
-        </button>
-      )} */}
       {!auth ? (
         <ProfileMenu />
       ) : (

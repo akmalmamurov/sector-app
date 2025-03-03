@@ -4,14 +4,7 @@ import { Trash2Icon } from "lucide-react";
 import { CopyIcon } from "@/assets/icons";
 import PriceFormatter from "@/components/format-price/PriceFormatter";
 import { ConfirmModal } from "@/components/modal";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table";
 import useStore from "@/context/store";
 import { copyToClipboard } from "@/utils";
 import { useConfirmModal } from "@/hooks";
