@@ -78,7 +78,7 @@ export default function SingleCatalog() {
           ) : catalogItem?.categories?.length ? (
             (catalogItem.categories as CategoryData[]).map((category) => (
               <Link
-                key={category.id}
+                key={category?.id}
                 href={`/catalog/${catalogItem.slug}/${category.slug}`}
                 className="border p-2 m-2 text-textColor"
               >

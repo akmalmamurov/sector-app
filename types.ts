@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image";
+
 export interface CatalogData {
   id: string;
   slug: string;
@@ -31,4 +33,19 @@ export interface BrandData {
   path: string;
   title: string;
   latinTitle?: string;
+}
+
+export interface BrandsData {
+  id: string;
+  path: string;
+  popularBrand: string | null;
+  slug: string;
+  title: string;
+}
+
+export interface BannerData {
+  id: number;
+  imagePath: string | StaticImageData;
+  redirectUrl: string;
+  routePath: string;
 }

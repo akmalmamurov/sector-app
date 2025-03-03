@@ -1,29 +1,10 @@
-import { Banner } from "@/components/banner";
-import { banner1, banner2 } from "@/assets/images";
-import { HomeCategory } from "@/components/home-category";
-import { HomeBrands } from "@/components/home-brand";
-import { ProductList } from "@/components/product-list";
 import { getBrandPopular } from "@/api";
+import { getBanner } from "@/api/banner";
+import HomeClient from "../components/home-client/HomeClient";
 
 export default async function Home() {
   const brandsData = await getBrandPopular();
-  const banners = [
-    {
-      id: 1,
-      image: banner1,
-    },
-    {
-      id: 2,
-      image: banner2,
-    },
-  ];
+  const banners = await getBanner({ routePath: "/" });
 
-  return (
-    <div>
-      <Banner banner={banners} />
-      <HomeCategory />
-      <HomeBrands brands={brandsData} />
-      <ProductList />
-    </div>
-  );
+  return <HomeClient banners={banners} brands={brandsData} />;
 }
