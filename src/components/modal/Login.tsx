@@ -26,6 +26,7 @@ const Login = ({ handleClose, formMethods, fullClose }: Props) => {
   };
 
   const onSubmitStep = (data: { contact: string }) => {
+    
     console.log("Step 1 Data:", data);
   };
   

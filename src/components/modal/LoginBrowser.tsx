@@ -1,9 +1,13 @@
 "use client";
 import { GoogleIcon, LinkedinIcon, YandexIcon } from "@/assets/icons";
 import Link from "next/link";
+import useStore from "@/context/store";
 
 const LoginBrowser = ({ fullClose }: { fullClose: () => void }) => {
-  
+  const {setAuth} = useStore();
+
+
+
   const handleOAuthLogin = (
     provider: "google" | "linkedin" | "facebook" | "yandex"
   ) => {
@@ -15,27 +19,41 @@ const LoginBrowser = ({ fullClose }: { fullClose: () => void }) => {
     };
     window.location.href = urls[provider];
   };
+  const googleLogin = () => {
+    handleOAuthLogin("google");
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");  
+    localStorage.setItem("sector-token", token ?? '');
+    setAuth();
+  };
+
   return (
-    <div className="py-5  font-arial">
-      <h5 className="text-center font-normal text-base  text-textColor mb-5">
+    <div className="py-5 font-arial">
+      <h5 className="text-center font-normal text-base text-textColor mb-5">
         Войти с помощью
       </h5>
       <div className="flex gap-[10px] justify-center mb-7">
         <button
-          onClick={() => handleOAuthLogin("google")}
+          onClick={() => googleLogin()}
           className="w-[68px] h-[50px] flex items-center justify-center bg-lightBg rounded-[10px] shadow-sm hover:bg-cerulean hoverEffect"
         >
           <GoogleIcon />
         </button>
-        <button onClick={() => handleOAuthLogin("linkedin")} className="w-[68px] h-[50px] flex items-center justify-center bg-lightBg rounded-[10px] shadow-sm hover:bg-cerulean hoverEffect">
+        <button
+          onClick={() => handleOAuthLogin("linkedin")}
+          className="w-[68px] h-[50px] flex items-center justify-center bg-lightBg rounded-[10px] shadow-sm hover:bg-cerulean hoverEffect"
+        >
           <LinkedinIcon />
         </button>
-        <button onClick={() => handleOAuthLogin("yandex")} className="w-[68px] h-[50px] flex items-center justify-center bg-lightBg rounded-[10px] shadow-sm hover:bg-cerulean hoverEffect">
+        <button
+          onClick={() => handleOAuthLogin("yandex")}
+          className="w-[68px] h-[50px] flex items-center justify-center bg-lightBg rounded-[10px] shadow-sm hover:bg-cerulean hoverEffect"
+        >
           <YandexIcon />
         </button>
       </div>
       <p className="text-center font-normal text-xs">
-        Я согласен на обработку персональных данных, с 
+        Я согласен на обработку персональных данных, с{" "}
         <Link
           href="/"
           target="_blank"

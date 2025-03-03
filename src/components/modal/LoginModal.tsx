@@ -85,7 +85,11 @@ const LoginModal = ({ isOpen, handleOpen }: Props) => {
         {step === 2 && (
           <LoginPassword handleClose={handleClose} formMethods={formStep2} fullClose={fullClose}/>
         )}
+        
         {step === 3 && (
+          <LoginReset  formMethods={formStep3} fullClose={fullClose}/>
+        )}
+        {step === 4 && (
           <LoginReset  formMethods={formStep3} fullClose={fullClose}/>
         )}
       </DialogContent>

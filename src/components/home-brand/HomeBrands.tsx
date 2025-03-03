@@ -18,7 +18,7 @@ export const HomeBrands = ({ brands }: Props) => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
           {brands?.slice(0, 5)?.map((el, index) => (
             <Link
-              href={`/brands/${el.slug}`}
+              href={`/brands/${el.id}`}
               key={index}
               className="bg-white py-[5px] px-8 flex justify-center items-center opacity-80 hover:opacity-100 hoverEffect shadow-cardShadow rounded-[10px]"
             >
