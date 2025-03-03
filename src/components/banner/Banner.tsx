@@ -12,9 +12,7 @@ import Link from "next/link";
 interface BannerProps {
   banner: {
     id: number;
-    imagePath: string | StaticImageData;
-    redirectUrl: string;
-    routePath: string
+    image: string | StaticImageData;
   }[];
 }
 
@@ -37,9 +35,9 @@ export const Banner = ({ banner }: BannerProps) => {
         >
           {banner.map((item) => (
             <SwiperSlide key={item.id}>
-              <Link href={item.redirectUrl} >
+              <Link href={"/"} >
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_API_URL}/${item.imagePath}`}
+                  src={item.image}
                   alt={`Banner ${item.id}`}
                   className="w-full object-cover h-full rounded-md"
                   width={1440}
