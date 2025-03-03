@@ -77,13 +77,15 @@ const SettingsPage = () => {
               onSubmit={handleSubmit(onSubmitStep)}
               className="pb-5"
             >
-              <div className="grid grid-cols-4 gap-6 items-center mb-4">
-                <p className="text-[#000000DE] text-sm">Основные данные</p>
+              <div className="grid grid-cols-11 gap-6 items-center mb-4">
+                <p className="text-[#000000DE] col-span-2 text-sm">
+                  Основные данные
+                </p>
                 <FormField
                   control={control}
                   name="select"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="col-span-3">
                       <FormControl>
                         <div className="relative w-full">
                           <Label
@@ -109,7 +111,7 @@ const SettingsPage = () => {
                   control={control}
                   name="search"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="col-span-3">
                       <FormControl>
                         <div className="relative w-full">
                           <Label
@@ -148,14 +150,16 @@ const SettingsPage = () => {
               onSubmit={handleSubmit2(onSubmitStep2)}
               className="pb-5"
             >
-              <div className="grid grid-cols-4 gap-6 items-center mb-3">
-                <p className="text-[#000000DE] text-sm">Безопасность</p>
+              <div className="grid grid-cols-11 gap-6 items-center mb-3">
+                <p className="text-[#000000DE] col-span-2 text-sm">
+                  Безопасность
+                </p>
 
                 <FormField
                   control={control2}
                   name="oldPassword"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="col-span-3">
                       <FormControl>
                         <div className="relative w-full flex flex-col">
                           <Label
@@ -186,7 +190,7 @@ const SettingsPage = () => {
                   control={control2}
                   name="newPassword"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="col-span-3">
                       <FormControl>
                         <div className="relative w-full flex flex-col">
                           <Label
@@ -217,7 +221,7 @@ const SettingsPage = () => {
                   control={control2}
                   name="oldPassword"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="col-span-3">
                       <FormControl>
                         <div className="relative w-full flex flex-col">
                           <Label
@@ -271,9 +275,9 @@ const SettingsPage = () => {
           </Form>
         </div>
         <div className="border-b border-superSilver py-5">
-          <div className="grid grid-cols-4 gap-6 items-center mb-3">
-            <p className="text-[#000000DE] text-sm">Контакты</p>
-            <div className="pb-12">
+          <div className="grid grid-cols-11 gap-6 items-center mb-3">
+            <p className="text-[#000000DE] col-span-2 text-sm">Контакты</p>
+            <div className="pb-12 col-span-3">
               <p className="text-sm text-[#000000DE] font-normal">Телефон</p>
               <span className="text-base font-normal">+998 99 861 6951</span>
             </div>
@@ -286,9 +290,9 @@ const SettingsPage = () => {
           </button>
         </div>
         <div className="border-b border-superSilver pt-5 pb-2">
-          <div className="grid grid-cols-8 gap-6 items-center mb-3">
+          <div className="grid grid-cols-11 gap-6 items-center mb-3">
             <p className="text-[#000000DE] text-sm col-span-2">Уведомления</p>
-            <div className="col-span-6 place-self-start">
+            <div className="col-span-9 place-self-start">
               <table className="w-full border-separate border-spacing-y-3">
                 <tbody>
                   <tr>
@@ -378,11 +382,11 @@ const SettingsPage = () => {
           </div>
         </div>
         <div className="pt-5 pb-2">
-          <div className="grid grid-cols-8 gap-6 items-center mb-3">
+          <div className="grid grid-cols-11 gap-6 items-center mb-3">
             <p className="text-[#000000DE] text-sm col-span-2">
               Дополнительные <br /> настройки
             </p>
-            <div className="col-span-5 place-self-start flex items-center w-full gap-4">
+            <div className="col-span-7 place-self-start flex items-center w-full gap-4">
               <div className="flex flex-col flex-1">
                 <Label
                   htmlFor="name"
@@ -390,7 +394,9 @@ const SettingsPage = () => {
                 >
                   Валюта магазина
                 </Label>
-                <button className="bg-greenLight py-1.5 text-white border text-base font-semibold text-center border-greenLight">UZS(сум)</button>
+                <button className="bg-greenLight py-1.5 text-white border text-base font-semibold text-center border-greenLight">
+                  UZS(сум)
+                </button>
               </div>
               <div className="flex flex-col w-full flex-1">
                 <Label
@@ -400,8 +406,12 @@ const SettingsPage = () => {
                   Отображение каталога
                 </Label>
                 <div className="flex items-center w-full">
-                  <button className="bg-white w-1/2 py-1.5 text-[#8C8C8C] border border-superSilver text-base font-semibold text-center ">Таблица</button>
-                  <button className="bg-greenLight w-1/2 py-1.5 text-white border text-base font-semibold text-center border-greenLight">Плитка</button>
+                  <button className="bg-white w-1/2 py-1.5 text-[#8C8C8C] border border-superSilver text-base font-semibold text-center ">
+                    Таблица
+                  </button>
+                  <button className="bg-greenLight w-1/2 py-1.5 text-white border text-base font-semibold text-center border-greenLight">
+                    Плитка
+                  </button>
                 </div>
               </div>
             </div>

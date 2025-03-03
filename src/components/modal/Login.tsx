@@ -19,6 +19,7 @@ const Login = ({ handleClose, formMethods, fullClose }: Props) => {
     formState: { errors, isValid },
   } = formMethods;
 
+
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setValue("contact", value, { shouldValidate: true });
@@ -27,6 +28,9 @@ const Login = ({ handleClose, formMethods, fullClose }: Props) => {
   const onSubmitStep = (data: { contact: string }) => {
     console.log("Step 1 Data:", data);
   };
+  
+  
+  
 
   return (
     <>
