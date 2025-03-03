@@ -23,15 +23,14 @@ export default function RootLayout({
         <link rel="icon" type="image/svg+xml" href="/logo.svg" />
       </head>
       <body>
-
         <Providers>
           <Header />
           {children}
         </Providers>
         <Sidebar />
-   <div className="lg:hidden flex">
-            <BottomNavbar />
-          </div>
+        <div className="lg:hidden flex">
+          <BottomNavbar />
+        </div>
         <Toaster
           position="top-right"
           containerStyle={{

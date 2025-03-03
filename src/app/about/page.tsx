@@ -1,12 +1,4 @@
-import {
-  correctImageAbout,
-  eighthImageAbout,
-  eleventhImageAbout,
-  fifeteenthImageAbout,
-  fifthImageAbout,
-  firstImageAbout,
-  fourteenthImageAbout,
-  fourthImageAbout,
+import { correctImageAbout, eighthImageAbout, eleventhImageAbout, fifeteenthImageAbout, fifthImageAbout, firstImageAbout, fourteenthImageAbout, fourthImageAbout,
   ninethImageAbout,
   secondImageAbout,
   seventhImageAbout,

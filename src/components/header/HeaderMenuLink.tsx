@@ -10,29 +10,14 @@ import {
   UserIcon,
 } from "@/assets/icons";
 import useStore from "@/context/store";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import LoginModal from "../modal/LoginModal";
 import { ProfileMenu } from "../menu";
-import { useSearchParams } from "next/navigation";
 
 const HeaderMenuLink = () => {
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => setIsOpen(!isOpen);
-  const { favorites, cart, compares, auth, setAuth } = useStore();
-  const searchParams = useSearchParams();
-  const token = searchParams.get("token");
-  useEffect(() => {
-    if (token) {
-      localStorage.setItem("sector-token", token);
-      window.location.href = "http://localhost:3000";
-    }
-  }, []);
-
-  useEffect(() => {
-    if (localStorage.getItem("sector-token")) {
-      setAuth();
-    }
-  }, [setAuth]);
+  const { favorites, cart, compares, auth } = useStore();
 
   return (
     <div className="lg:flex items-center ">
