@@ -29,16 +29,16 @@ export const ProfileMenu = () => {
   return (
     <div
       ref={menuRef}
-      className="w-[100px] h-[50px] flex items-center justify-center relative"
+      className="w-[50px] xl:w-[100px] h-[50px] flex items-center justify-center relative"
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex-col flex items-center justify-between h-full text-textColor"
+        className="w-[50px] xl:w-[100px] h-10 xl:h-[50px]  flex items-center flex-col justify-between text-textColor"
       >
-        <span className="h-6 w-6">
-          <UserIcon />
+        <span>
+          <UserIcon className="w-5 h-5 xl:w-6 xl:h-6"/>
         </span>
-        <span className="text-sm leading-[18px] font-medium">Кабинет</span>
+        <span className="header-menu-link">Кабинет</span>
       </button>
 
       {isOpen && (

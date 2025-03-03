@@ -136,6 +136,15 @@ input[type="number"]::-webkit-inner-spin-button {
     @apply w-full px-3 py-[12px] text-sm placeholder:text-darkSoul focus:outline-none 
     ring-1 ring-darkSoul focus:ring-1 hover:ring-cerulean/70 focus:ring-cerulean/70;
   }
+  .header-menu-item{
+    @apply w-[50px] xl:w-[100px] h-10 xl:h-[50px]  flex items-center flex-col justify-between text-textColor
+  }
+  .header-menu-link{
+    @apply text-[10px] xl:text-sm leading-[18px] xl:font-medium text-textColor
+  }
+  .header-menu-badge{
+    @apply absolute -top-[8px] xl:-top-[10px] -right-4 xl:-right-5 w-4 h-4 xl:w-5 xl:h-5 rounded-full text-white bg-dangerColor flex items-center justify-center text-[10px] xl:text-xs xl:font-medium
+  }
 }
 .faq-section {
   scroll-margin-top: 180px;

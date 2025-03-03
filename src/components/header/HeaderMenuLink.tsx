@@ -20,83 +20,85 @@ const HeaderMenuLink = () => {
   const { favorites, cart, compares, auth } = useStore();
 
   return (
-    <div className="lg:flex items-center ">
+    <div className="lg:flex items-center gap-1 xl:gap-0">
       <Link
         href={"/discounts"}
-        className="w-[100px] flex items-center flex-col h-[50px] justify-between text-textColor"
+        className="header-menu-item"
       >
-        <span className="h-6 w-6">
-          <DiscountIcon />
+        <span>
+          <DiscountIcon className="w-5 h-5 xl:w-6 xl:h-6" />
         </span>
-        <span className="text-sm leading-[18px] font-medium">Аксии</span>
+        <span className="header-menu-link">Аксии</span>
       </Link>
       <Link
         href={"/profile/favorites"}
-        className="w-[100px] flex items-center flex-col h-[50px] justify-between text-textColor "
+        className="header-menu-item"
       >
         {favorites?.length > 0 ? (
           <>
-            <span className="h-6 w-6 relative">
-              <HeartActiveIcon className="text-dangerColor" />
-              <span className="absolute -top-[10px] -right-5 w-5 h-5 rounded-full text-white bg-dangerColor flex items-center justify-center text-xs font-medium">
+            <span className="relative">
+              <HeartActiveIcon className="text-dangerColor w-5 h-5 xl:w-6 xl:h-6" />
+              <span className="header-menu-badge">
                 {favorites?.length}
               </span>
             </span>
           </>
         ) : (
-          <span className="h-6 w-6">
-            <HeartIcon />
+          <span>
+            <HeartIcon className="w-5 h-5 xl:w-6 xl:h-6" />
           </span>
         )}
-        <span className="text-sm leading-[18px] font-medium">Избранное</span>
+        <span className="header-menu-link">Избранное</span>
       </Link>
       <Link
         href={"/compare"}
-        className="w-[100px] flex items-center flex-col h-[50px] justify-between text-textColor "
+        className="header-menu-item"
       >
         {compares?.length > 0 ? (
-          <span className="h-6 w-6 relative">
-            <CompareSucessIcon />
-            <span className="absolute -top-[10px] -right-5 w-5 h-5 rounded-full text-white bg-dangerColor flex items-center justify-center text-xs font-medium">
+          <span className="relative">
+            <CompareSucessIcon className="w-5 h-5 xl:w-6 xl:h-6" />
+            <span className="header-menu-badge">
               {compares?.length}
             </span>
           </span>
         ) : (
-          <span className="h-6 w-6">
-            <CompareIcon />
+          <span>
+            <CompareIcon className="w-5 h-5 xl:w-6 xl:h-6" />
           </span>
         )}
-        <span className="text-sm leading-[18px] font-medium">Сравнить</span>
+        <span className="header-menu-link">Сравнить</span>
       </Link>
       {auth ? (
         <ProfileMenu />
       ) : (
         <button
           onClick={handleOpen}
-          className="w-[100px] flex items-center flex-col h-[50px] justify-between text-textColor"
+          className="header-menu-item"
         >
-          <span className="h-6 w-6">
-            <UserIcon />
+          <span>
+            <UserIcon className="w-5 h-5 xl:w-6 xl:h-6" />
           </span>
-          <span className="text-sm leading-[18px] font-medium">
-            {auth ? "Кабинет" : "Войти"}
-          </span>
+          <span className="header-menu-link">{auth ? "Кабинет" : "Войти"}</span>
         </button>
       )}
       <Link
         href={"/cart"}
-        className="w-[100px] flex items-center flex-col h-[50px] justify-between text-textColor relative"
+        className="header-menu-item"
       >
-        <span className="h-6 w-6">
-          <CartIcon />
-        </span>
-        {cart?.length > 0 && (
-          <span className="absolute -top-[10px] right-[20px] w-5 h-5 rounded-full text-white bg-dangerColor flex items-center justify-center text-xs font-medium">
-            {cart?.length}
+        {cart?.length > 0 ? (
+          <span className="relative">
+            <CartIcon className="w-5 h-5 xl:w-6 xl:h-6" />
+            <span className="header-menu-badge">
+              {cart?.length}
+            </span>
+          </span>
+        ) : (
+          <span>
+            <CartIcon className="w-5 h-5 xl:w-6 xl:h-6" />
           </span>
         )}
 
-        <span className="text-sm leading-[18px] font-medium">Корзина</span>
+        <span className="header-menu-link">Корзина</span>
       </Link>
       <LoginModal isOpen={isOpen} handleOpen={handleOpen} />
     </div>

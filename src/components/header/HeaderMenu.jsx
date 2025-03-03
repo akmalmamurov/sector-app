@@ -13,11 +13,11 @@ import { Menu, X } from "lucide-react";
 const HeaderMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="py-2 border-b border-b-superSilver">
-      <Container className="flex justify-between items-center gap-[42px]">
+    <div className="py-[14px] xl:py-2 border-b border-b-superSilver">
+      <Container className="flex justify-between items-center lg:gap-[18px] xl:gap-[42px]">
         {/* logo */}
         <Link href="/" className=" overflow-hidden">
-          <Image src={logo} alt="logo" className="lgl:w-auto lgl:h-auto w-[150px] h-[48px]" />
+          <Image src={logo} alt="logo" className="xl:w-auto xl:h-auto w-[150px] h-[48px]" />
         </Link>
         {/* search */}
         <Form action="/search" className="flex-1 relative ">
@@ -26,7 +26,7 @@ const HeaderMenu = () => {
               type="text"
               name="query"
               placeholder="Введите поисковый запрос"
-              className="input-autofill w-full py-[15px] pl-4 pr-[40px] rounded-[10px] border bg-background focus:outline-none focus:border-transparent focus:shadow-lg focus:bg-white placeholder-opacity-0 text-ellipsis overflow-hidden whitespace-nowrap"
+              className="input-autofill w-full py-[12px] xl:py-[15px] pl-4 pr-[40px] rounded-[10px] border bg-background focus:outline-none focus:border-transparent focus:shadow-lg focus:bg-white placeholder-opacity-0 text-ellipsis overflow-hidden whitespace-nowrap"
             />
             <button className="absolute top-1/2 right-[15px] -translate-y-1/2">
               <SearchIcon />
