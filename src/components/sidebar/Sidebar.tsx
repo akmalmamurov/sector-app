@@ -134,7 +134,7 @@ export const Sidebar = () => {
                 type="button"
                 className="w-[34px] h-[34px] rounded-full bg-transparent hover:bg-superSilver flex items-center justify-center"
               >
-                <SidebarSharesIcon className="text-black"/>
+                <SidebarSharesIcon className="text-black" />
               </button>
             </Tooltip>
           </div>
@@ -157,7 +157,7 @@ export const Sidebar = () => {
                   isActive ? "bg-blue-500 text-white" : "bg-transparent"
                 } hover:bg-superSilver flex items-center justify-center`}
               >
-                <Volume2Icon className="text-black w-5 h-5"/>
+                <Volume2Icon className="text-black w-5 h-5" />
               </button>
             </Tooltip>
           </div>

@@ -20,7 +20,7 @@ const HeaderMenuLink = () => {
   const { favorites, cart, compares, auth } = useStore();
 
   return (
-    <div className="md:flex items-center hidden">
+    <div className="lg:flex items-center ">
       <Link
         href={"/discounts"}
         className="w-[100px] flex items-center flex-col h-[50px] justify-between text-textColor"
@@ -78,7 +78,9 @@ const HeaderMenuLink = () => {
           <span className="h-6 w-6">
             <UserIcon />
           </span>
-          <span className="text-sm leading-[18px] font-medium">Войти</span>
+          <span className="text-sm leading-[18px] font-medium">
+            {auth ? "Кабинет" : "Войти"} {/* ✅ Fix: No extra `:` */}
+          </span>
         </button>
       )}
       <Link

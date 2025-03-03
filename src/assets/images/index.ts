@@ -56,6 +56,13 @@ import fifeteenthImageAbout from "./fifeteenth.png";
 import sixteenthImageAbout from "./sixteenthImageAbout.png";
 import correctImageAbout from "./correctImageAbout.png";
 
+// Nav bottom fixed
+import homeNavBottom from "./home_nav_bottom.png";
+import infoNavBottom from "./info_nav_bottom.png";
+import catalogNavBottom from "./catalog_nav_bottom.png";
+import korzinaNavBottom from "./korzina_nav_bottom.png";
+import profileNavBottom from "./profile_nav_bottom.png";
+
 export {
   logo,
   flagUz,
@@ -101,4 +108,9 @@ export {
   fifeteenthImageAbout,
   sixteenthImageAbout,
   correctImageAbout,
+  homeNavBottom,
+  infoNavBottom,
+  catalogNavBottom,
+  korzinaNavBottom,
+  profileNavBottom,
 };
