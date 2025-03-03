@@ -24,3 +24,11 @@ export interface ProductData {
   inStock?: string;
   image: string;
 }
+
+export interface BrandData {
+  id: string;
+  slug: string;
+  path: string;
+  title: string;
+  latinTitle?: string;
+}

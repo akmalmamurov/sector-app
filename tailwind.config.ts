@@ -43,6 +43,7 @@ export default {
         sunColor: "#FF8C00",
         orangeSun: "#EE8202",
         christmas: "#E0E0E0",
+        weekColor: "#8C8C8C",
         hoverBg: "rgb(251, 251, 251)",
         explosiveGrey: "#C4C4C4",
         foreground: "hsl(var(--foreground))",
@@ -98,6 +99,7 @@ export default {
           "0 2px 4px -1px rgba(0,0,0,.04),0 4px 5px 0 rgba(0,0,0,.05),0 1px 10px 0 rgba(0,0,0,.07)",
         sidebarWadow: "0 10px 36px rgba(0, 0, 0, .1);",
         infoShadow: "rgba(0, 0, 0, 0.07) 0px 7px 20px;",
+        cardShadow: "0 12px 24px rgba(44, 39, 56, .02), 0 24px 48px rgba(44, 39, 56, .04)",
         toastShadow:
           "rgba(0,0,0,0.4) 0px 2px 4px -1px,rgba(0,0,0,0.05) 0px 4px 5px 0px,rgba(0,0,0,0.07) 0px 1px 10px 0px",
       },

@@ -18,6 +18,7 @@ const CatalogMenu = ({
   catalogData,
 }: Props) => {
   const [hoveredParentIndex, setHoveredParentIndex] = useState<number>(0);
+  const [delayedHoveredParentIndex, setDelayedHoveredParentIndex] = useState<number>(0);
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -38,10 +39,17 @@ const CatalogMenu = ({
     };
   }, [setMenuOpen, toggleButtonRef]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDelayedHoveredParentIndex(hoveredParentIndex);
+    }, 300); 
+    return () => clearTimeout(timer);
+  }, [hoveredParentIndex]);
+
   return (
     <div
       data-state={open ? "open" : "closed"}
-      className={`fixed  z-50 bg-gray-500/50 flex justify-center transition-all ease-in-out  w-full
+      className={`fixed z-50 bg-gray-500/50 flex justify-center transition-all ease-in-out w-full
         ${
           open
             ? "animate-in fade-in opacity-100 duration-300"
@@ -52,11 +60,9 @@ const CatalogMenu = ({
       <Container>
         <div
           ref={menuRef}
-          className="w-full bg-white h-screen overflow-y-auto shadow-lg  transition-all duration-300 transform 
-       "
+          className="w-full bg-white h-screen overflow-y-auto shadow-lg transition-all duration-300 transform"
         >
           <div className="flex h-full">
-            {/* Parent Links */}
             <div className="w-[537px] bg-cottonBall h-full py-6">
               <ul className="flex flex-col">
                 {catalogData?.map((item, parentIndex) => (
@@ -65,7 +71,7 @@ const CatalogMenu = ({
                     key={`parent-${parentIndex}`}
                     onClick={() => setMenuOpen(false)}
                     onMouseEnter={() => setHoveredParentIndex(parentIndex)}
-                    className={`relative block py-[10px] px-4 text-sm font-normal transition-all duration-300  text-black
+                    className={`relative block py-[10px] px-4 text-sm font-normal transition-all duration-300 text-black
                       ${
                         hoveredParentIndex === parentIndex
                           ? "bg-whisperBlue"
@@ -81,12 +87,15 @@ const CatalogMenu = ({
 
             <div className="bg-white w-full pl-[26px] pr-10 pt-7 pb-12 relative overflow-y-auto h-[calc(100vh-200px)] flex justify-between">
               <div className="w-[80%]">
-                {hoveredParentIndex !== null && (
-                  <div className="transition-opacity duration-300 opacity-100">
+                {delayedHoveredParentIndex !== null && (
+                  <div
+                    key={delayedHoveredParentIndex}
+                    className="transition-all duration-300 ease-in-out opacity-100"
+                  >
                     <ul className="grid grid-cols-3 gap-8">
-                      {catalogData[hoveredParentIndex]?.subcatalogs?.map(
+                      {catalogData[delayedHoveredParentIndex]?.subcatalogs?.map(
                         (subCatalog, subIndex) => (
-                          <li key={`sub-${hoveredParentIndex}-${subIndex}`}>
+                          <li key={`sub-${delayedHoveredParentIndex}-${subIndex}`}>
                             <Link
                               onClick={() => setMenuOpen(false)}
                               href={`/catalog/${subCatalog.slug}`}
@@ -94,14 +103,14 @@ const CatalogMenu = ({
                             >
                               {subCatalog?.title}
                             </Link>
-                            <div className="flex flex-col gap-4">
+                            <div className="flex flex-col gap-4 transition-all duration-300 ease-in-out">
                               {subCatalog?.categories?.map(
                                 (category, linkIndex) => (
                                   <Link
                                     onClick={() => setMenuOpen(false)}
-                                    href={`/catalog/${category?.slug}`}
-                                    key={`link-${hoveredParentIndex}-${subIndex}-${linkIndex}`}
-                                    className="font-normal text-black text-xs hover:text-cerulean duration-150 "
+                                    href={`/catalog/${subCatalog.slug}/${category?.slug}`}
+                                    key={`link-${delayedHoveredParentIndex}-${subIndex}-${linkIndex}`}
+                                    className="font-normal text-black text-xs hover:text-cerulean duration-150"
                                   >
                                     {category?.title}
                                   </Link>
@@ -116,7 +125,6 @@ const CatalogMenu = ({
                 )}
               </div>
 
-              {/* Close Button */}
               <div className="flex justify-start h-fit w-[20%]">
                 <button
                   onClick={() => setMenuOpen(false)}
