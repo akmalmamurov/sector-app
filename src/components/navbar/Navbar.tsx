@@ -19,21 +19,21 @@ const Navbar = () => {
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
   return (
     <>
-      <nav className=" py-2 hidden lg:block ">
+      <nav className="py-2 hidden lg:block ">
         <Container className="flex items-center justify-between">
           {/* catalog */}
-          <div className="flex gap-[23px] items-center">
+          <div className="flex gap-[18px] xl:gap-[23px] items-center">
             <Button
               ref={toggleButtonRef}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               variant="outline"
-              className="bg-cerulean  lg:w-[191px] h-10 flex items-center gap-[11px] text-white font-semibold text-sm leading-[18px] rounded-[9px] border-none hover:text-cerulean duration-300 ease-in-out group"
+              className="bg-cerulean lg:w-[153px] xl:w-[191px] h-10 flex items-center gap-[11px] text-white font-semibold text-xs xl:text-sm leading-[18px] rounded-[9px] border-none hover:text-cerulean duration-300 ease-in-out group"
             >
-              <div className="flex flex-col justify-between h-[15px] group transition-all duration-300 ease-in-out">
+              <div className="flex flex-col justify-between h-3 xl:h-[15px] group transition-all duration-300 ease-in-out">
                 <span
                   className={`block w-[18px] h-[2px] bg-white rounded-full group-hover:bg-cerulean transition-all duration-300 ease-in-out origin-center delay-100 ${
                     isMenuOpen
-                      ? "transform rotate-45 translate-y-[7px]"
+                      ? "transform rotate-45 translate-y-[4px] xl:translate-y-[7px]"
                       : "translate-y-0"
                   }`}
                 ></span>
@@ -58,13 +58,13 @@ const Navbar = () => {
             <div className="flex items-center gap-4">
               <div className="flex gap-2 items-center">
                 <Image src={flagUz} alt="flag" />
-                <h2 className="font-semibold text-xs text-textColor leading-[18px]">
+                <h2 className="font-bold text-xs text-textColor leading-[18px] xl:block hidden">
                   Ташкент
                 </h2>
               </div>
               <Link
                 href={"tel:+9999999999"}
-                className="font-semibold text-xs text-textColor leading-[18px]"
+                className="font-bold text-xs text-textColor leading-[18px]"
               >
                 +998 99 999 9999
               </Link>

@@ -24,7 +24,6 @@ export const CategoryCard = ({ category }: Props) => {
       onClick={goCatalog}
       className="bg-white group relative shadow-md overflow-hidden pb-1 min-h-[190px] rounded-[10px] cursor-pointer flex flex-col justify-between"
     >
-      {/* Image */}
       <div className="w-[150px] h-[100px] overflow-hidden ">
         <Image
           src={category.image}
@@ -35,17 +34,14 @@ export const CategoryCard = ({ category }: Props) => {
         />
       </div>
 
-      {/* Text section */}
       <div className="px-4">
         <p className="font-semibold text-sm text-textColor leading-[21px]">
           {category.name}
         </p>
       </div>
       <div className="px-4">
-        {/* Product number (Always at the bottom) */}
         <p className="text-sm font-normal text-darkSoul">{category.product} товаров</p>
       </div>
-      {/* Background Design */}
       <div className="bg-[#0054AE1F] w-[150px] h-[150px] rounded-full absolute -top-[38px] -left-[28px]"></div>
     </div>
   );

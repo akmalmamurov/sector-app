@@ -26,7 +26,7 @@ export const InfoList = () => {
   const borderClass =
     "w-full h-[6px] bg-gradient-to-r from-blue-500 to-cerulean";
   return (
-    <div className="flex flex-col gap-[57px]">
+    <div className="flex flex-col gap-[36px] lgl:gap-[57px]">
       {/* novosti */}
       <div className="flex flex-col shadow-infoWadow ">
         {/* news */}

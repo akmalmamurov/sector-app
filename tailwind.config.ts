@@ -19,6 +19,7 @@ export default {
         sm: "576px",
         md: "768px",
         lg: "992px",
+        lgl: "1025px",
         xl: "1280px",
         "2xl": "1382px",
       },

@@ -20,8 +20,8 @@ const NavbarList = () => {
             open={openPopover === index}
             onOpenChange={(isOpen) => setOpenPopover(isOpen ? index : null)}
           >
-            <PopoverTrigger className="flex items-center gap-[3.26px] py-1 px-[23px]">
-              <p className="font-medium text-sm text-textColor leading-[18px]">
+            <PopoverTrigger className="flex items-center gap-[3.26px] py-1 px-4 xl:px-[23px]">
+              <p className="font-medium text-xs xl:text-sm text-textColor xl:leading-[18px]">
                 {item.name}
               </p>
               <ChevronBottomIcon />
@@ -40,8 +40,8 @@ const NavbarList = () => {
             </PopoverContent>
           </Popover>
         ))}
-        <div className="py-1 px-[23px]">
-          <button className="font-medium text-sm text-textColor leading-[18px]">
+        <div className="py-1 px-4 xl:px-[23px]">
+          <button className="font-medium text-xs xl:text-sm text-textColor leading-[18px]">
             Онлайн чат
           </button>
         </div>

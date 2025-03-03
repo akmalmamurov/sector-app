@@ -40,7 +40,7 @@ const ProductTabs = () => {
         <TabsContent
           key={key}
           value={key}
-          className="grid grid-cols-4 gap-4 px-5"
+          className="grid grid-cols-3 lgl:grid-cols-4 gap-4 px-5"
         >
           {category.products.map((product) => (
             <ProductCard key={product.id} product={product} />

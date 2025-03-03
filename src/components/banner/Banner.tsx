@@ -12,7 +12,7 @@ import { BannerData } from "@/types";
 
 export const Banner = ({ banner }: { banner: BannerData[] }) => {
   return (
-    <div className="slider-container pt-[51px]">
+    <div className="slider-container pt-[51px] hidden lgl:block">
       <Container>
         <Swiper
           modules={[Autoplay, Pagination, Navigation]}

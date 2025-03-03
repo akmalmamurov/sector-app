@@ -62,8 +62,8 @@ const CatalogMenu = ({
           ref={menuRef}
           className="w-full bg-white h-screen overflow-y-auto shadow-lg transition-all duration-300 transform"
         >
-          <div className="flex h-full">
-            <div className="w-[537px] bg-cottonBall h-full py-6">
+          <div className="flex h-full w-full">
+            <div className="w-[450px] xl:w-[537px] bg-cottonBall h-full py-6">
               <ul className="flex flex-col">
                 {catalogData?.map((item, parentIndex) => (
                   <Link
@@ -71,7 +71,7 @@ const CatalogMenu = ({
                     key={`parent-${parentIndex}`}
                     onClick={() => setMenuOpen(false)}
                     onMouseEnter={() => setHoveredParentIndex(parentIndex)}
-                    className={`relative block py-[10px] px-4 text-sm font-normal transition-all duration-300 text-black
+                    className={`relative block py-[10px] px-3 xl:px-4 text-xs xl:text-sm font-normal transition-all duration-300 text-black
                       ${
                         hoveredParentIndex === parentIndex
                           ? "bg-whisperBlue"
@@ -85,8 +85,8 @@ const CatalogMenu = ({
               </ul>
             </div>
 
-            <div className="bg-white w-full pl-[26px] pr-10 pt-7 pb-12 relative overflow-y-auto h-[calc(100vh-200px)] flex justify-between">
-              <div className="w-[80%]">
+            <div className="bg-white w-full pl-5 xl:pl-[26px] xl:pr-10 pt-7 pb-12 relative overflow-y-auto h-[calc(100vh-200px)] flex justify-between">
+              <div className="xl:w-[80%]">
                 {delayedHoveredParentIndex !== null && (
                   <div
                     key={delayedHoveredParentIndex}

@@ -12,7 +12,7 @@ interface Props {
 
 export const HomeBrands = ({ brands }: Props) => {
   return (
-    <div className="pb-[61px]">
+    <div className="lgl:pb-[61px] py-[30px]">
       <Container>
         <Title className="mb-5">Популярные бренды</Title>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
