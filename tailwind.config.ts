@@ -13,14 +13,26 @@ export default {
         arial: ["Arial", "sans-serif"],
         wix: ["Wix Madefor Text", "sans-serif"],
       },
+
       screens: {
-        xs: "380px",
+        xs: "390px",
         sm: "576px",
         md: "768px",
-        lg: "972px",
-        lgl: "1024px",
+        lg: "992px",
         xl: "1280px",
-        "2xl": "1400px",
+        "2xl": "1382px",
+      },
+      container: {
+        center: true,
+        padding: "1rem", 
+        screens: {
+          xs: "390px",
+          sm: "476px",
+          md: "668px",
+          lg: "892px",
+          xl: "1180px",
+          "2xl": "1482px",
+        },
       },
       colors: {
         cerulean: "#0054AE",
@@ -99,7 +111,8 @@ export default {
           "0 2px 4px -1px rgba(0,0,0,.04),0 4px 5px 0 rgba(0,0,0,.05),0 1px 10px 0 rgba(0,0,0,.07)",
         sidebarWadow: "0 10px 36px rgba(0, 0, 0, .1);",
         infoShadow: "rgba(0, 0, 0, 0.07) 0px 7px 20px;",
-        cardShadow: "0 12px 24px rgba(44, 39, 56, .02), 0 24px 48px rgba(44, 39, 56, .04)",
+        cardShadow:
+          "0 12px 24px rgba(44, 39, 56, .02), 0 24px 48px rgba(44, 39, 56, .04)",
         toastShadow:
           "rgba(0,0,0,0.4) 0px 2px 4px -1px,rgba(0,0,0,0.05) 0px 4px 5px 0px,rgba(0,0,0,0.07) 0px 1px 10px 0px",
       },

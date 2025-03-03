@@ -27,7 +27,9 @@ export default function RootLayout({
           <Header />
           {children}
         </Providers>
-        <Sidebar />
+        <div className="lg:block hidden">
+          <Sidebar />
+        </div>
         <div className="lg:hidden flex">
           <BottomNavbar />
         </div>
