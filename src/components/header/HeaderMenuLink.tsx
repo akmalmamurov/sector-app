@@ -79,7 +79,7 @@ const HeaderMenuLink = () => {
             <UserIcon />
           </span>
           <span className="text-sm leading-[18px] font-medium">
-            {auth ? "Кабинет" : "Войти"} {/* ✅ Fix: No extra `:` */}
+            {auth ? "Кабинет" : "Войти"}
           </span>
         </button>
       )}
