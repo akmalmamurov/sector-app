@@ -1,4 +1,3 @@
-
 import { BrandData } from "@/types";
 
 export function groupBrandsByFirstLetter(brands: BrandData[]): Record<string, BrandData[]> {
@@ -20,3 +19,25 @@ export const cyrillicLetters = [
   "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Щ",
   "Э", "Ю", "Я"
 ];
+
+
+export function getLatinLettersForDisplay(
+  groupedBrands: Record<string, BrandData[]>,
+  latin: string[],
+  cyrillic: string[]
+): string[] {
+  const extra = Object.keys(groupedBrands).filter(letter =>
+    !latin.includes(letter) && !cyrillic.includes(letter) && groupedBrands[letter].length > 0
+  );
+
+  const availableLatin = latin.filter(letter => groupedBrands[letter]?.length);
+
+  return [...extra, ...availableLatin];
+}
+
+export function getCyrillicLettersForDisplay(
+  groupedBrands: Record<string, BrandData[]>,
+  cyrillic: string[]
+): string[] {
+  return cyrillic.filter(letter => groupedBrands[letter]?.length);
+}

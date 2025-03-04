@@ -6,6 +6,10 @@ import { InfoHeader } from "../div";
 import { InfoTitle } from "../title";
 import Link from "next/link";
 import Image from "next/image";
+import {
+  getLatinLettersForDisplay,
+  getCyrillicLettersForDisplay,
+} from "@/utils";
 
 interface BrandsClientProps {
   groupedBrands: Record<string, BrandData[]>;
@@ -17,14 +21,16 @@ export default function BrandList(props: BrandsClientProps) {
   const { groupedBrands, latinLetters, cyrillicLetters } = props;
   const [selectedLetters, setSelectedLetters] = useState<string[]>([]);
 
-  const lettersToDisplay = () => {
-    const keys = Object.keys(groupedBrands);
-    const filteredKeys =
-      selectedLetters.length > 0
-        ? keys.filter((letter) => selectedLetters.includes(letter))
-        : keys;
-    return filteredKeys.sort((a, b) => a.localeCompare(b, "ru"));
-  };
+
+  const displayLatinLetters = getLatinLettersForDisplay(
+    groupedBrands,
+    latinLetters,
+    cyrillicLetters
+  );
+  const displayCyrillicLetters = getCyrillicLettersForDisplay(
+    groupedBrands,
+    cyrillicLetters
+  );
 
   const toggleLetter = (letter: string) => {
     if (selectedLetters.includes(letter)) {
@@ -43,7 +49,7 @@ export default function BrandList(props: BrandsClientProps) {
       <div className="grid grid-cols-2 gap-20 px-6 pb-6">
         <div>
           <div className="flex flex-wrap gap-2">
-            {latinLetters.map((letter) => {
+            {displayLatinLetters.map((letter) => {
               const isActive = selectedLetters.includes(letter);
               const disabled = isLetterDisabled(letter);
               return (
@@ -61,10 +67,10 @@ export default function BrandList(props: BrandsClientProps) {
             })}
           </div>
         </div>
-        {/* Kirill */}
+        {/* Kirill belgilar */}
         <div>
           <div className="flex flex-wrap gap-2">
-            {cyrillicLetters.map((letter) => {
+            {displayCyrillicLetters.map((letter) => {
               const isActive = selectedLetters.includes(letter);
               const disabled = isLetterDisabled(letter);
               return (
@@ -90,37 +96,49 @@ export default function BrandList(props: BrandsClientProps) {
             <InfoTitle>Бренды по алфавиту</InfoTitle>
           </div>
         </InfoHeader>
-        {lettersToDisplay().length > 0 ? (
-          lettersToDisplay().map((letter: string) => {
-            const brands = groupedBrands[letter] || [];
-            return (
-              <div key={letter} className="mb-[31px] p-6">
-                <h2 className="text-textColor text-[26px] font-normal mb-[31px]">{letter}</h2>
-                <div className="grid grid-cols-6 gap-3">
-                  {brands.map((brand) => (
-                    <Link
-                      href={`/brands/${brand.id}`}
-                      key={brand.id}
-                      className="border border-superSilver flex flex-col justify-center items-center h-[121px] px-10 group gap-[15px]"
-                    >
-                     {brand.path ? (
+        {Object.keys(groupedBrands).length > 0 ? (
+          Object.keys(groupedBrands)
+            .filter(
+              (letter) =>
+                selectedLetters.length === 0 || selectedLetters.includes(letter)
+            )
+            .sort((a, b) => a.localeCompare(b, "ru"))
+            .map((letter: string) => {
+              const brands = groupedBrands[letter] || [];
+              return (
+                <div key={letter} className="mb-[31px] p-6">
+                  <h2 className="text-textColor text-[26px] font-normal mb-[31px]">
+                    {letter}
+                  </h2>
+                  <div className="grid grid-cols-6 gap-3">
+                    {brands.map((brand) => (
+                      <Link
+                        href={`/brands/${brand.id}`}
+                        key={brand.id}
+                        className="border border-superSilver flex flex-col justify-center items-center h-[121px] px-10 group gap-[15px]"
+                      >
+                        {brand.path ? (
                           <Image
-                          src={`${process.env.NEXT_PUBLIC_API_URL}/${brand.path}`}
-                          alt={brand.slug}
-                          width={150}
-                          height={60}
-                          className={`w-[120px] h-[50px] object-contain}`}
-                        />
-                     ) : (
-                         <span className="text-black text-base font-semibold group-hover:underline">{brand.title}</span>
-                     )}
-                      <span className="text-black text-sm font-normal group-hover:underline text-center">{brand.title}</span>
-                    </Link>
-                  ))}
+                            src={`${process.env.NEXT_PUBLIC_API_URL}/${brand.path}`}
+                            alt={brand.slug}
+                            width={150}
+                            height={60}
+                            className="w-[120px] h-[50px] object-contain"
+                          />
+                        ) : (
+                          <span className="text-black text-base font-semibold group-hover:underline">
+                            {brand.title}
+                          </span>
+                        )}
+                        <span className="text-black text-sm font-normal group-hover:underline text-center">
+                          {brand.title}
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            );
-          })
+              );
+            })
         ) : (
           <p className="text-gray-500">
             {selectedLetters.length > 0
