@@ -3,27 +3,28 @@ import { GoogleIcon, LinkedinIcon, YandexIcon } from "@/assets/icons";
 import Link from "next/link";
 import useStore from "@/context/store";
 
+
+type loginProp = "google" | "linkedin" | "facebook" | "yandex";
 const LoginBrowser = ({ fullClose }: { fullClose: () => void }) => {
-  const {setAuth} = useStore();
-
-
-
+  const { setAuth } = useStore();
+  
   const handleOAuthLogin = (
-    provider: "google" | "linkedin" | "facebook" | "yandex"
+    provider: loginProp
   ) => {
     const urls = {
-      google: "https://api.sectortechnology.uz/user/auth/google/login",
-      linkedin: "https://api.sectortechnology.uz/user/auth/linkedin/login",
-      facebook: "https://api.sectortechnology.uz/user/auth/facebook/login",
-      yandex: "https://api.sectortechnology.uz/user/auth/yandex/login",
+      google: `${process.env.NEXT_PUBLIC_API_URL}/user/auth/google/login`,
+      linkedin: `${process.env.NEXT_PUBLIC_API_URL}/user/auth/linkedin/login`,
+      facebook: `${process.env.NEXT_PUBLIC_API_URL}/user/auth/facebook/login`,
+      yandex: `${process.env.NEXT_PUBLIC_API_URL}/user/auth/yandex/login`,
     };
     window.location.href = urls[provider];
   };
-  const googleLogin = () => {
-    handleOAuthLogin("google");
+ 
+  const googleLogin = (text: loginProp) => {
+    handleOAuthLogin(text);
     const params = new URLSearchParams(window.location.search);
-    const token = params.get("token");  
-    localStorage.setItem("sector-token", token ?? '');
+    const token = params.get("token");
+    localStorage.setItem("sector-token", token ?? "");
     setAuth();
   };
 
@@ -34,19 +35,19 @@ const LoginBrowser = ({ fullClose }: { fullClose: () => void }) => {
       </h5>
       <div className="flex gap-[10px] justify-center mb-7">
         <button
-          onClick={() => googleLogin()}
+          onClick={() => googleLogin("google")}
           className="w-[68px] h-[50px] flex items-center justify-center bg-lightBg rounded-[10px] shadow-sm hover:bg-cerulean hoverEffect"
         >
           <GoogleIcon />
         </button>
         <button
-          onClick={() => handleOAuthLogin("linkedin")}
+          onClick={() => googleLogin("linkedin")}
           className="w-[68px] h-[50px] flex items-center justify-center bg-lightBg rounded-[10px] shadow-sm hover:bg-cerulean hoverEffect"
         >
           <LinkedinIcon />
         </button>
         <button
-          onClick={() => handleOAuthLogin("yandex")}
+          onClick={() => googleLogin("yandex")}
           className="w-[68px] h-[50px] flex items-center justify-center bg-lightBg rounded-[10px] shadow-sm hover:bg-cerulean hoverEffect"
         >
           <YandexIcon />

@@ -7,6 +7,7 @@ import * as z from "zod";
 import Login from "./Login";
 import LoginPassword from "./LoginPassword";
 import LoginReset from "./LoginReset";
+import LoginConfirmPassword from "./LoginConfirmPassword";
 
 interface Props {
   isOpen: boolean;
@@ -33,7 +34,12 @@ const formSchemaStep3 = z.object({
   resetEmail: z.string().email("Введите корректный E-mail"),
 });
 
+const formSchemaStep4 = z.object({
+  optCode: z.string().min(4, "Пароль должен содержать минимум 4 символов"),
+});
+
 const LoginModal = ({ isOpen, handleOpen }: Props) => {
+  
   const [step, setStep] = useState(1);
 
   const formStep1 = useForm({
@@ -50,10 +56,16 @@ const LoginModal = ({ isOpen, handleOpen }: Props) => {
     resolver: zodResolver(formSchemaStep3),
     defaultValues: { resetEmail: "" },
   });
+
+  const formStep4 = useForm({
+    resolver: zodResolver(formSchemaStep4),
+    defaultValues: { optCode: "" },
+  });
   const resetForm = () => {
     formStep1.reset();
     formStep2.reset();
     formStep3.reset();
+    formStep4.reset();
   };
 
   const handleClose = (newStep?: number) => {
@@ -65,32 +77,44 @@ const LoginModal = ({ isOpen, handleOpen }: Props) => {
     }
   };
 
-  const fullClose = ()=>{
+  const fullClose = () => {
     handleOpen();
     resetForm();
-  }
+  };
   useEffect(() => {
     if (isOpen) {
       setStep(1);
       resetForm();
     }
-  }, [isOpen]); 
+  }, [isOpen]);
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpen}>
       <DialogContent className="sm:max-w-[500px] rounded-none sm:rounded-none p-0">
         {step === 1 && (
-          <Login handleClose={handleClose} formMethods={formStep1} fullClose={fullClose}/>
+          <Login
+            handleClose={handleClose}
+            formMethods={formStep1}
+            fullClose={fullClose}
+          />
         )}
         {step === 2 && (
-          <LoginPassword handleClose={handleClose} formMethods={formStep2} fullClose={fullClose}/>
+          <LoginPassword
+            handleClose={handleClose}
+            formMethods={formStep2}
+            fullClose={fullClose}
+          />
         )}
-        
+
         {step === 3 && (
-          <LoginReset  formMethods={formStep3} fullClose={fullClose}/>
+          <LoginReset formMethods={formStep3} fullClose={fullClose} />
         )}
         {step === 4 && (
-          <LoginReset  formMethods={formStep3} fullClose={fullClose}/>
+          <LoginConfirmPassword
+            handleClose={handleClose}
+            formMethods={formStep4}
+            fullClose={fullClose}
+          />
         )}
       </DialogContent>
     </Dialog>

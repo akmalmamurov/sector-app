@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   images: {
     unoptimized: true,
-    domains: ["https://api.sectortechnology.uz", "sectortechnology.uz"],
+    domains: [`${process.env.NEXT_PUBLIC_API_URL}`, "sectortechnology.uz"],
   },
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,

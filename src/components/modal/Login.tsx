@@ -1,9 +1,22 @@
 import { X } from "lucide-react";
 import { UseFormReturn } from "react-hook-form";
-import { DialogDescription, DialogHeader, DialogTitle, } from "@/components/ui/dialog";
- import { Form, FormControl, FormField, FormItem, FormMessage, } from "../ui/form";
+import {
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "../ui/form";
 import LoginBrowser from "./LoginBrowser";
 import { Button } from "../ui/button";
+import useStore from "@/context/store";
+import axios from "axios";
+import { showError } from "../toast/Toast";
 
 interface Props {
   handleClose: (newStep?: number) => void;
@@ -12,6 +25,7 @@ interface Props {
 }
 
 const Login = ({ handleClose, formMethods, fullClose }: Props) => {
+  const { setContact } = useStore();
   const {
     control,
     handleSubmit,
@@ -19,19 +33,32 @@ const Login = ({ handleClose, formMethods, fullClose }: Props) => {
     formState: { errors, isValid },
   } = formMethods;
 
-
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setValue("contact", value, { shouldValidate: true });
   };
 
-  const onSubmitStep = (data: { contact: string }) => {
-    
-    console.log("Step 1 Data:", data);
+  const onSubmitStep = async (data: { contact: string }) => {
+    setContact(data.contact);
+
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/user/auth/send-otp`,
+        { email: data.contact },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.statusText === "OK") {
+        handleClose(4);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      showError("OTP уже отправлен, попробуйте еще раз");
+    }
   };
-  
-  
-  
 
   return (
     <>
