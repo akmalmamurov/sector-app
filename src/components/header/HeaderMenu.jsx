@@ -16,8 +16,12 @@ const HeaderMenu = () => {
     <div className="py-[14px] xl:py-2 border-b border-b-superSilver">
       <Container className="flex justify-between items-center lg:gap-[18px] xl:gap-[42px]">
         {/* logo */}
-        <Link href="/" className=" overflow-hidden">
-          <Image src={logo} alt="logo" className="xl:w-auto xl:h-auto w-[150px] h-[48px]" />
+        <Link href="/" className=" overflow-hidden hidden pr-4 md:flex">
+          <Image
+            src={logo}
+            alt="logo"
+            className="xl:w-auto xl:h-auto w-[150px] h-[48px]"
+          />
         </Link>
         {/* search */}
         <Form action="/search" className="flex-1 relative ">
