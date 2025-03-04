@@ -39,7 +39,7 @@ const useStore = create<StoreState>()(
       setAuth: () => {
         set({ auth: true });
       },
-      setContact: (info) => {
+      setContact: (info) => { 
         set({ contact: info })
       },
       toggleFavorites: (product) => {

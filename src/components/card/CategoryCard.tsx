@@ -1,18 +1,12 @@
 "use client";
 
-import Image, { StaticImageData } from "next/image";
+import { PopularCategory } from "@/types";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-interface Props {
-  category: {
-    id: string;
-    name: string;
-    product: number;
-    image: string | StaticImageData;
-  };
-}
 
-export const CategoryCard = ({ category }: Props) => {
+
+export const CategoryCard = ({ category }: {category: PopularCategory}) => {
   const router = useRouter();
 
   const goCatalog = () => {
@@ -26,8 +20,8 @@ export const CategoryCard = ({ category }: Props) => {
     >
       <div className="w-[150px] h-[100px] overflow-hidden ">
         <Image
-          src={category.image}
-          alt={category.name}
+          src={`${process.env.NEXT_PUBLIC_API_URL}/${category.path}`}
+          alt={category.title}
           width={150}
           height={100}
           className="w-full h-full object-cover group-hover:scale-105 duration-300 ease-in-out"
@@ -36,11 +30,11 @@ export const CategoryCard = ({ category }: Props) => {
 
       <div className="px-4">
         <p className="font-semibold text-sm text-textColor leading-[21px]">
-          {category.name}
+          {category.title}
         </p>
       </div>
       <div className="px-4">
-        <p className="text-sm font-normal text-darkSoul">{category.product} товаров</p>
+        <p className="text-sm font-normal text-darkSoul">100 товаров</p>
       </div>
       <div className="bg-[#0054AE1F] w-[150px] h-[150px] rounded-full absolute -top-[38px] -left-[28px]"></div>
     </div>

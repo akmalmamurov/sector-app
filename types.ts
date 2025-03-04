@@ -18,6 +18,15 @@ export interface CategoryData {
   slug: string;
   title: string;
 }
+export interface PopularCategory {
+  id: string;
+  path: string | StaticImageData;
+  slug: string;
+  title: string;
+  popularCategory: {
+    id: string;
+  };
+}
 export interface ProductData {
   id: number;
   title: string;
