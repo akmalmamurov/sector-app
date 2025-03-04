@@ -8,10 +8,12 @@ export interface StoreItem extends ProductData {
 
 interface StoreState {
   auth: boolean;
+  contact: string;
   favorites: StoreItem[];
   cart: StoreItem[];
   compares: StoreItem[];
   setAuth: () => void;
+  setContact: (info: string) => void;
   toggleFavorites: (product: ProductData) => void;
   addToCart: (product: ProductData) => void;
   toggleCompare: (product: ProductData) => void;
@@ -30,11 +32,15 @@ const useStore = create<StoreState>()(
   persist(
     (set, get) => ({
       auth: false,
+      contact: "",
       favorites: [],
       cart: [],
       compares: [],
       setAuth: () => {
         set({ auth: true });
+      },
+      setContact: (info) => {
+        set({ contact: info })
       },
       toggleFavorites: (product) => {
         set((state) => {

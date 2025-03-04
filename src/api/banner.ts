@@ -11,3 +11,5 @@ export const getBanner = async (queryParams: Record<string, string>) => {
     console.log(error);
   }
 };
+
+
