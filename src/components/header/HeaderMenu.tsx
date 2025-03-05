@@ -10,14 +10,27 @@ import HeaderMenuLink from "./HeaderMenuLink";
 
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { getCatalog } from "@/api/catalog";
+import HeaderMobile from "./HeaderMobile";
 const HeaderMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { data: catalogData = [] } = useQuery({
+    queryKey: ["catalog"],
+    queryFn: getCatalog,
+  });
+  console.log(catalogData);
+
   return (
     <div className="py-[14px] xl:py-2 border-b border-b-superSilver">
       <Container className="flex justify-between items-center lg:gap-[18px] xl:gap-[42px]">
         {/* logo */}
         <Link href="/" className=" overflow-hidden">
-          <Image src={logo} alt="logo" className="xl:w-auto xl:h-auto w-[150px] h-[48px]" />
+          <Image
+            src={logo}
+            alt="logo"
+            className="xl:w-auto xl:h-auto w-[150px] h-[48px]"
+          />
         </Link>
         {/* search */}
         <Form action="/search" className="flex-1 relative ">
@@ -38,6 +51,7 @@ const HeaderMenu = () => {
           <div className="hidden lg:block">
             <HeaderMenuLink />
           </div>
+
           <div className="flex lg:hidden ">
             <div className="relative lg:hidden">
               <button
@@ -51,7 +65,7 @@ const HeaderMenu = () => {
                 )}
               </button>
 
-              {isOpen && (
+              {/* {isOpen && (
                 <div className="fixed inset-0 z-50 bg-background flex flex-col items-center justify-center shadow-lg w-full h-full">
                   <button
                     onClick={() => setIsOpen(false)}
@@ -59,32 +73,12 @@ const HeaderMenu = () => {
                   >
                     <X className="w-8 h-8 text-cerulean" />
                   </button>
-                  <a
-                    href="#"
-                    className="block px-4 py-6 text-2xl text-textColor hover:bg-gray-100 w-full text-center"
-                  >
-                    Home
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-6 text-2xl text-textColor hover:bg-gray-100 w-full text-center"
-                  >
-                    About
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-6 text-2xl text-textColor hover:bg-gray-100 w-full text-center"
-                  >
-                    Services
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-6 text-2xl text-textColor hover:bg-gray-100 w-full text-center"
-                  >
-                    Contact
-                  </a>
+                  {catalogData.map((item: CatalogData) => (
+                    <HeaderMobile key={item.id} data={item} />
+                  ))}
                 </div>
-              )}
+              )} */}
+              <HeaderMobile isOpen={isOpen} setIsOpen={setIsOpen} data={catalogData} />
             </div>
           </div>
         </div>
