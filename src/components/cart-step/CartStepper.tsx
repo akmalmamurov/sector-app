@@ -13,10 +13,10 @@ import { showError } from "../toast/Toast";
 import { PageLoader } from "../loader";
 
 const CartStepper = () => {
-  const { auth,clearDataAfterTimeout  } = useStore();
+  const { auth, clearDataAfterTimeout } = useStore();
   const [activeStep, setActiveStep] = useState(0);
   const [isClient, setIsClient] = useState(false);
-  const authErrorShown = useRef(false); 
+  const authErrorShown = useRef(false);
   useEffect(() => {
     if (!auth) {
       clearDataAfterTimeout();
@@ -29,7 +29,7 @@ const CartStepper = () => {
   useEffect(() => {
     if (auth === false && !authErrorShown.current) {
       showError("Вы не авторизованы, рекомендуем авторизоваться");
-      authErrorShown.current = true; 
+      authErrorShown.current = true;
     }
   }, [auth]);
 

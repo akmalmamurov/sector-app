@@ -120,7 +120,7 @@ const useStore = create<StoreState>()(
           auth: false,
           contact: "",
         });
-        localStorage.removeItem("sector_token");
+        localStorage.removeItem("sector-token");
       },
       clearDataAfterTimeout: () => {
         if (!get().auth) {
