@@ -3,14 +3,11 @@ import { GoogleIcon, LinkedinIcon, YandexIcon } from "@/assets/icons";
 import Link from "next/link";
 import useStore from "@/context/store";
 
-
 type loginProp = "google" | "linkedin" | "facebook" | "yandex";
 const LoginBrowser = ({ fullClose }: { fullClose: () => void }) => {
   const { setAuth } = useStore();
-  
-  const handleOAuthLogin = (
-    provider: loginProp
-  ) => {
+
+  const handleOAuthLogin = (provider: loginProp) => {
     const urls = {
       google: `${process.env.NEXT_PUBLIC_API_URL}/user/auth/google/login`,
       linkedin: `${process.env.NEXT_PUBLIC_API_URL}/user/auth/linkedin/login`,
@@ -19,8 +16,8 @@ const LoginBrowser = ({ fullClose }: { fullClose: () => void }) => {
     };
     window.location.href = urls[provider];
   };
- 
-  const googleLogin = (text: loginProp) => {
+
+  const handleLogin = (text: loginProp) => {
     handleOAuthLogin(text);
     const params = new URLSearchParams(window.location.search);
     const token = params.get("token");
@@ -35,19 +32,19 @@ const LoginBrowser = ({ fullClose }: { fullClose: () => void }) => {
       </h5>
       <div className="flex gap-[10px] justify-center mb-7">
         <button
-          onClick={() => googleLogin("google")}
+          onClick={() => handleLogin("google")}
           className="w-[68px] h-[50px] flex items-center justify-center bg-lightBg rounded-[10px] shadow-sm hover:bg-cerulean hoverEffect"
         >
           <GoogleIcon />
         </button>
         <button
-          onClick={() => googleLogin("linkedin")}
+          onClick={() => handleLogin("linkedin")}
           className="w-[68px] h-[50px] flex items-center justify-center bg-lightBg rounded-[10px] shadow-sm hover:bg-cerulean hoverEffect"
         >
           <LinkedinIcon />
         </button>
         <button
-          onClick={() => googleLogin("yandex")}
+          onClick={() => handleLogin("yandex")}
           className="w-[68px] h-[50px] flex items-center justify-center bg-lightBg rounded-[10px] shadow-sm hover:bg-cerulean hoverEffect"
         >
           <YandexIcon />

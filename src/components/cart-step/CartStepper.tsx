@@ -13,11 +13,15 @@ import { showError } from "../toast/Toast";
 import { PageLoader } from "../loader";
 
 const CartStepper = () => {
-  const { auth } = useStore();
+  const { auth,clearDataAfterTimeout  } = useStore();
   const [activeStep, setActiveStep] = useState(0);
   const [isClient, setIsClient] = useState(false);
   const authErrorShown = useRef(false); 
-
+  useEffect(() => {
+    if (!auth) {
+      clearDataAfterTimeout();
+    }
+  }, [auth, clearDataAfterTimeout]);
   useEffect(() => {
     setIsClient(true);
   }, []);
