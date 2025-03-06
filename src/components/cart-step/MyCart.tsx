@@ -13,9 +13,7 @@ export const MyCart = ({ onNextStep }: Props) => {
   const [city, setCity] = useState<string>("");
   const [isClient, setIsClient] = useState(false);
   const { cart, setQuantity, deleteCart, resetCart } = useStore();
-  const [selectedItems, setSelectedItems] = useState<number[]>(
-    cart.map((item) => item.id)
-  );
+  const [selectedItems, setSelectedItems] = useState<number[]>( cart.map((item) => item.id) );
   const [prevCartLength, setPrevCartLength] = useState(cart.length);
 
   const isAllChecked = cart.length > 0 && selectedItems.length === cart.length;

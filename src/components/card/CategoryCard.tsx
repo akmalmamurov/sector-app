@@ -1,16 +1,43 @@
 "use client";
 
-import { PopularCategory } from "@/types";
+import { getCatalog } from "@/api";
+import { PopularCategory, CatalogData } from "@/types";
+import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-
-
-export const CategoryCard = ({ category }: {category: PopularCategory}) => {
+export const CategoryCard = ({ category }: { category: PopularCategory }) => {
   const router = useRouter();
+  const { data: catalogData = [] } = useQuery({
+    queryKey: ["catalog"],
+    queryFn: getCatalog,
+  });
+
+  const getSubcatalogSlug = (
+    data: CatalogData[],
+    targetSlug: string
+  ): string | undefined => {
+    for (const catalog of data) {
+      if (catalog.subcatalogs) {
+        for (const subcatalog of catalog.subcatalogs) {
+          if (
+            subcatalog.categories &&
+            subcatalog.categories.some((cat) => cat.slug === targetSlug)
+          ) {
+            return subcatalog.slug;
+          }
+        }
+      }
+    }
+    return undefined;
+  };
+
+  const subcatalogSlug = getSubcatalogSlug(catalogData, category.slug);
 
   const goCatalog = () => {
-    router.push(`/catalog/${category.id}`);
+    if (subcatalogSlug) {
+      router.push(`/catalog/${subcatalogSlug}/${category.slug}`);
+    }
   };
 
   return (
@@ -18,7 +45,7 @@ export const CategoryCard = ({ category }: {category: PopularCategory}) => {
       onClick={goCatalog}
       className="bg-white group relative shadow-md overflow-hidden pb-1 min-h-[190px] rounded-[10px] cursor-pointer flex flex-col justify-between"
     >
-      <div className="w-[150px] h-[100px] overflow-hidden ">
+      <div className="w-[150px] h-[100px] overflow-hidden">
         <Image
           src={`${process.env.NEXT_PUBLIC_API_URL}/${category.path}`}
           alt={category.title}

@@ -11,7 +11,7 @@ export const ProductCard = ({ product }: { product: ProductData }) => {
   return (
     <div className="p-[13px] border border-superSilver rounded-[10px] group hover:border-cerulean hoverEffect">
       <div className="overflow-hidden">
-        <Link href={`/`} className="">
+        <Link href={`/`}>
           <Image
             src={product?.image}
             alt={product?.title}

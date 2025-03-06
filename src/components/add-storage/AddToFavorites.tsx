@@ -3,23 +3,23 @@ import useStore from "@/context/store";
 import { cn } from "@/lib/utils";
 import { ProductData } from "@/types";
 import { isProductInList } from "@/utils";
-import toast from "react-hot-toast";
+import { showSuccess } from "../toast/Toast";
 
 export const AddToFavorites = ({
   product,
   className,
 }: {
   product: ProductData;
-  className: string;
+  className?: string;
 }) => {
   const { toggleFavorites, favorites } = useStore();
 
   const isFavorite = isProductInList(favorites, product);
   const handleToFavorites = () => {
     if (isFavorite) {
-      toast.success(`Удалено из избранного`);
+      showSuccess(`Удалено из избранного`);
     } else {
-      toast.success(`Добавлено в избранное`);
+   showSuccess(`Добавлено в избранное`);
     }
     toggleFavorites(product);
   };

@@ -19,7 +19,6 @@ const HeaderMenu = () => {
     queryKey: ["catalog"],
     queryFn: getCatalog,
   });
-  console.log(catalogData);
 
   return (
     <div className="py-[14px] xl:py-2 border-b border-b-superSilver">
