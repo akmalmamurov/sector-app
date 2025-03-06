@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { PageLoader } from "../loader";
 import MyCartLeft from "./MyCartLeft";
 import { Share2 } from "lucide-react";
+import Link from "next/link";
 interface Props {
   onNextStep: () => void;
 }
@@ -75,7 +76,28 @@ export const MyCart = ({ onNextStep }: Props) => {
                 </p>
                 <Share2 className="text-[#0054AEFF]" />
               </div>
-              <PriceFormatter amount={selectedTotal} />
+              <div>
+                <div>
+                  <p>Вес</p>
+                  <span>8.56 кг</span>
+                </div>
+                <div>
+                  <p>Объём</p>
+                  <span>
+                    0.0348 м<sup>3</sup>
+                  </span>
+                </div>
+                <div>
+                  <p>Итого</p>
+                  <PriceFormatter amount={selectedTotal} />
+                </div>
+                <div>
+                  <button>Оформить заказ</button>
+                </div>
+                <p>
+                  Прочитал и согласен с  <Link href={"/"}>условиями пользовательского соглашения.</Link>
+                </p>
+              </div>
             </div>
           </div>
           {/* right */}

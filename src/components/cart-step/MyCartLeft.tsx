@@ -48,6 +48,7 @@ const MyCartLeft = ({
       deleteCart(id);
     });
   };
+
   return (
     <div className="col-span-3">
       <div className="space-y-6">
