@@ -17,14 +17,14 @@ export const metadata: Metadata = {
 const Map = async () => {
   const catalogData = await getCatalog();
   return (
-    <Container>
+    <Container className="pb-[58px]">
       <HomeCrumb paths={[{ name: "Карта сайта" }]} />
       <Section className="mb-5 shadow-md">
         <InfoHeader className="mb-5">
           <InfoTitle>Карта сайта</InfoTitle>
         </InfoHeader>
-        <section className="grid grid-cols-2 gap-2 pb-6">
-          <div className="pl-6 col-span-1 flex flex-col gap-8">
+        <section className="grid grid-cols-2 sm:gap-2 gap-6 pb-6">
+          <div className="sm:pl-6 pl-0  sm:col-span-1 col-span-2 flex flex-col gap-8">
             <div>
               <p className="text-[20px] font-bold leading-[30px] text-textColor">
                 Покупателям
@@ -245,7 +245,7 @@ const Map = async () => {
               </div>
             </div>
           </div>
-          <div className="col-span-1 flex flex-col gap-8">
+          <div className="sm:col-span-1 col-span-2 flex flex-col gap-8">
             {catalogData?.map((item: CatalogData) => (
               <div key={item?.id} className="">
                 <Link
