@@ -1,12 +1,13 @@
 import Image from "next/image";
 import { Check, ChevronUp, CircleAlert, Trash2Icon, X } from "lucide-react";
 import PriceFormatter from "../format-price/PriceFormatter";
-import { CopyIcon, HeartIcon } from "@/assets/icons";
+import { CopyIcon } from "@/assets/icons";
 import { copyToClipboard } from "@/utils";
 import { Separator } from "../ui/separator";
 import { StoreItem } from "@/context/store";
 import { ConfirmModal } from "../modal";
 import { useConfirmModal } from "@/hooks";
+import { AddToFavorites } from "../add-storage";
 interface Props {
   city: string;
   setCity: (city: string) => void;
@@ -142,9 +143,7 @@ const MyCartLeft = ({
                   <span className="text-xs group-hover:opacity-70 duration-200 ease-in-out">
                     перенести в избранное
                   </span>
-                  <span>
-                    <HeartIcon className="w-[18px] h-[18px] group-hover:opacity-70 duration-200 ease-in-out" />
-                  </span>
+                  <AddToFavorites className="text-textColor text-sm w-[18px] h-[18px] group-hover:opacity-70 duration-200 ease-in-out" product={product} />
                 </button>
                 <div className="w-[2px] h-full  bg-superSilver mx-[15px]"></div>
                 <button

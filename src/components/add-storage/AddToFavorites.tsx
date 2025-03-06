@@ -1,10 +1,17 @@
 import { HeartActiveIcon, HeartIcon } from "@/assets/icons";
 import useStore from "@/context/store";
+import { cn } from "@/lib/utils";
 import { ProductData } from "@/types";
 import { isProductInList } from "@/utils";
 import toast from "react-hot-toast";
 
-export const AddToFavorites = ({ product }: { product: ProductData }) => {
+export const AddToFavorites = ({
+  product,
+  className,
+}: {
+  product: ProductData;
+  className: string;
+}) => {
   const { toggleFavorites, favorites } = useStore();
 
   const isFavorite = isProductInList(favorites, product);
@@ -19,9 +26,9 @@ export const AddToFavorites = ({ product }: { product: ProductData }) => {
   return (
     <button onClick={handleToFavorites} className="text-darkSoul">
       {isFavorite ? (
-        <HeartActiveIcon className="text-dangerColor" />
+        <HeartActiveIcon className={cn(className, "text-dangerColor")} />
       ) : (
-        <HeartIcon />
+        <HeartIcon className={cn(className)} />
       )}
     </button>
   );
