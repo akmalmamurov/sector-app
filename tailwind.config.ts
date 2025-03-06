@@ -32,7 +32,7 @@ export default {
           md: "668px",
           lg: "892px",
           xl: "1180px",
-          "2xl": "1482px",
+          "2xl": "1422px",
         },
       },
       colors: {

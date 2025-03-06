@@ -33,7 +33,10 @@ interface StoreState {
 const useStore = create<StoreState>()(
   persist(
     (set, get) => ({
-      auth: typeof window !== "undefined" ? !!localStorage.getItem("sector-token") : false,
+      auth:
+        typeof window !== "undefined"
+          ? !!localStorage.getItem("sector-token")
+          : false,
       contact: "",
       favorites: [],
       cart: [],
