@@ -1,0 +1,109 @@
+export const brandCardData = [
+  {
+    id: 1243,
+    title:
+      "Серверная платформа SNR-SR2225RS, 2U, Scalable, DDR4, 25xHDD, резервируемый БП",
+    article: "SNR-SR2225RS",
+    price: 33795707.7,
+    inStock: "10",
+    image: "/pr1.webp",
+  },
+
+  {
+    id: 1244,
+    title:
+      "Шнур питания электрический силовой, серии TP-PC, IEC 60320 C14/IEC 60320 С19 прямой, 250B, 10A, 3х1.0 мм², 1.8 м",
+    article: "TP-PC-SH-С13-10A-3",
+    inStock: "20",
+    price: 71204,
+    image: "/pr2.webp",
+  },
+  {
+    id: 1245,
+    title:
+      "Шнур питания электрический силовой, серии TP-PC, EU-Schuko/IEC 60320 C19 прямой, 250B, 16A, 3х1.5 мм², 1.8 м",
+    article: "TP-PC-SH-C19-16A-1.8",
+    price: 84599.99,
+    inStock: "40",
+    image: "/pr3.webp",
+  },
+  {
+    id: 1246,
+    title:
+      "Кабельный органайзер 1U в телекоммуникационный шкаф 19 LANsens (9001-ORG-100)",
+    article: "9001-ORG-100",
+    price: 114899,
+    inStock: "13",
+    image: "/pr4.webp",
+  },
+  {
+    id: 1247,
+    title:
+      "OLT BDCOM 3310 с 4 портами GEPON (SFP), 2 комбо-портами, 2хSFP, 2хRJ-45, 2 БП АC, FEC",
+    article: "P3310D-2AC",
+    price: 5722848,
+    inStock: "3",
+    image: "/pr5.webp",
+  },
+  {
+    id: 1248,
+    title: "Заглушка 1U в телекоммуникационный шкаф 19 LANsens (9001-BP-100)",
+    article: "9001-BP-100",
+    price: 114899,
+    image: "/pr6.webp",
+  },
+  {
+    id: 1249,
+    title:
+      "Серверная платформа SNR-SR2225RS, 2U, Scalable, DDR4, 25xHDD, резервируемый БП",
+    article: "SNR-SR2225RS",
+    price: 33896128,
+    inStock: "10",
+    image: "/pr7.webp",
+  },
+  {
+    id: 12431,
+    title:
+      "Серверная платформа SNR-SR2225RS, 2U, Scalable, DDR4, 25xHDD, резервируемый БП",
+    article: "SNR-SR2225RS",
+    price: 33896128,
+    inStock: "10",
+    image: "/pr8.webp",
+  },
+  {
+    id: 12432,
+    title:
+      "Серверная платформа SNR-SR2225RS, 2U, Scalable, DDR4, 25xHDD, резервируемый БП",
+    article: "SNR-SR2225RS",
+    price: 33896128,
+    inStock: "10",
+    image: "/pr9.webp",
+  },
+  {
+    id: 12433,
+    title:
+      "Серверная платформа SNR-SR2225RS, 2U, Scalable, DDR4, 25xHDD, резервируемый БП",
+    article: "SNR-SR2225RS",
+    price: 33896128,
+    inStock: "10",
+    image: "/pr10.webp",
+  },
+  {
+    id: 12434,
+    title:
+      "Серверная платформа SNR-SR2225RS, 2U, Scalable, DDR4, 25xHDD, резервируемый БП",
+    article: "SNR-SR2225RS",
+    price: 33896128,
+    inStock: "10",
+    image: "/pr11.webp",
+  },
+  {
+    id: 12435,
+    title:
+      "Серверная платформа SNR-SR2225RS, 2U, Scalable, DDR4, 25xHDD, резервируемый БП",
+    article: "SNR-SR2225RS",
+    price: 33896128,
+    inStock: "10",
+    image: "/pr12.webp",
+  },
+];
