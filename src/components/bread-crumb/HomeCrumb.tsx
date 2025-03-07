@@ -31,9 +31,7 @@ export const HomeCrumb = ({ paths }: BreadcrumbProps) => {
             <Link
               href={item.href}
               className={` font-normal text-xs  ${
-                index === paths.length - 1
-                  ? "text-gray-500"
-                  : "text-celBlue"
+                index === paths.length - 2 ? "text-weekColor" : "text-celBlue"
               }`}
             >
               {item.name}

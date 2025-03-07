@@ -20,7 +20,7 @@ const SingleBrandPage = async ({
 
   return (
     <Container className="pb-[58px]">
-      <HomeCrumb paths={[{ name: `${brand.title}` }]} />
+      <HomeCrumb paths={[{ name: "Каталог брендов", href: "/brands" }, { name: `${brand.title}` }]} />
       <div className="grid grid-cols-12 gap-4 lg:gap-8">
         <div className="col-span-3">
           <BrandFilter />
