@@ -4,7 +4,7 @@ import ProductTabs from "../product-tabs/ProductTabs";
 
 export const ProductList = () => {
   return (
-    <section className="pb-20">
+    <section>
       <Container className="grid grid-cols-12 gap-4 lg:gap-8">
         {/* Chap panel */}
         <div className="col-span-3">
