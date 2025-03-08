@@ -111,7 +111,8 @@ export default {
         navListShadow:
           "0 2px 4px -1px rgba(0,0,0,.04),0 4px 5px 0 rgba(0,0,0,.05),0 1px 10px 0 rgba(0,0,0,.07)",
         sidebarWadow: "0 10px 36px rgba(0, 0, 0, .1);",
-        infoShadow: "rgba(0, 0, 0, 0.07) 0px 7px 20px;",
+        infoShadow: "0px 7px 20px rgba(0, 0, 0, 0.07)",
+        productListShadow: "0 2px 4px -1px rgba(0, 0, 0, .04), 0 4px 5px 0 rgba(0, 0, 0, .05), 0 1px 10px 0 rgba(0, 0, 0, .07)",
         cardShadow:
           "0 12px 24px rgba(44, 39, 56, .02), 0 24px 48px rgba(44, 39, 56, .04)",
         toastShadow:
