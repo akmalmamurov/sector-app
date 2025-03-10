@@ -18,6 +18,8 @@ export default function CategoryPage() {
   });
 
   const subcatalogItem = slug ? findCatalogItem(catalogData, slug) : undefined;
+  console.log(subcatalogItem);
+  
 
   const categoryItem =
     subcatalogItem && subcatalogItem.categories && subSlug

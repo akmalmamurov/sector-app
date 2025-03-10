@@ -14,7 +14,7 @@ export const ConfirmModal = ({
   closeModal,
 }: Props) => {
   return (
-    <Dialog open={isOpen} onOpenChange={closeModal}>
+    <Dialog modal={true} open={isOpen} onOpenChange={closeModal}>
       <DialogContent className="max-w-[600px] sm:rounded-none p-0 border-none">
         <DialogHeader className="px-[23px] pt-[23px] pb-1">
           <DialogTitle className="text-textColor font-normal text-lg">

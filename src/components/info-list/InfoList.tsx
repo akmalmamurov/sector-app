@@ -28,7 +28,7 @@ export const InfoList = () => {
   return (
     <div className="flex flex-col gap-[36px] lgl:gap-[57px]">
       {/* novosti */}
-      <div className="flex flex-col shadow-infoWadow ">
+      <div className="flex flex-col shadow-infoShadow ">
         {/* news */}
         <div className="bg-white p-[23px] rounded-t-[10px] ">
           <Link href="/news" className={className}>
@@ -73,7 +73,7 @@ export const InfoList = () => {
         <div className={borderClass}></div>
       </div>
       {/* nashi proekti */}
-      <div className="shadow-infoWadow ">
+      <div className="shadow-infoShadow ">
         <div className="bg-white p-[23px] rounded-t-[10px] ">
           <p className="font-normal text-[26px] leading-[31px] text-stoneCold w-fit">
             Наши проекты
@@ -96,7 +96,7 @@ export const InfoList = () => {
         <div className={borderClass}></div>
       </div>
       {/* last */}
-      <div className="shadow-infoWadow">
+      <div className="shadow-infoShadow">
         <div className="bg-white p-[23px] rounded-t-[10px] ">
           <p className="font-normal text-[26px] leading-[31px] text-stoneCold w-fit">
             Как мы работаем

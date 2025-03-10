@@ -1,8 +1,8 @@
-import toast from "react-hot-toast";
 import { CompareIcon, CompareSucessIcon } from "@/assets/icons";
 import useStore from "@/context/store";
 import { ProductData } from "@/types";
 import { isProductInList } from "@/utils";
+import { showSuccess } from "../toast/Toast";
 
 export const AddToCompare = ({ product }: { product: ProductData }) => {
   const { toggleCompare, compares } = useStore();
@@ -11,9 +11,9 @@ export const AddToCompare = ({ product }: { product: ProductData }) => {
   const handleToCompare = () => {
     toggleCompare(product);
     if (isCompare) {
-      toast.success(`Удалено из сравнения`);
+      showSuccess(`Удалено из сравнения`);
     } else {
-      toast.success(`Добавлено в сравнение`);
+      showSuccess(`Добавлено в сравнение`);
     }
   };
   return (
