@@ -9,7 +9,7 @@ import { copyToClipboard, formatPrice } from "@/utils";
 
 export const ProductCard = ({ product }: { product: ProductData }) => {
   return (
-    <div className="p-[13px] border border-superSilver rounded-[10px] group hover:border-cerulean hoverEffect">
+    <div className="px-[13px] border border-superSilver rounded-[10px] group hover:border-cerulean hoverEffect">
       <div className="overflow-hidden">
         <Link href={`/`}>
           <Image

@@ -5,15 +5,16 @@ import { HomeCategory } from "@/components/home-category";
 import { HomeBrands } from "@/components/home-brand";
 import { ProductList } from "@/components/product-list";
 import { BannerData, BrandsData, PopularCategory } from "@/types";
+import { HomeFooter } from "../home-footer";
 
 export default function HomeClient({
   banners,
   brands,
-  categories
+  categories,
 }: {
   banners: BannerData[];
   brands: BrandsData[];
-  categories: PopularCategory[]
+  categories: PopularCategory[];
 }) {
   return (
     <div>
@@ -21,6 +22,7 @@ export default function HomeClient({
       <HomeCategory categories={categories} />
       <HomeBrands brands={brands} />
       <ProductList />
+      <HomeFooter />
     </div>
   );
 }
