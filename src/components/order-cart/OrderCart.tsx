@@ -19,7 +19,7 @@ const OrderCart = ({
     0
   );
 
-  function orderHandle() {
+  const  orderHandle = () => {
     if (onNextStep) {
       onNextStep();
       selectedCardsList(selectedCards);

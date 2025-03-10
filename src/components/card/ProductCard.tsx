@@ -8,7 +8,6 @@ import { AddToCart, AddToCompare, AddToFavorites } from "../add-storage";
 import { copyToClipboard, formatPrice } from "@/utils";
 
 export const ProductCard = ({ product }: { product: ProductData }) => {
-  console.log(product);
   
   return (
     <div className="px-[13px] border border-superSilver rounded-[10px] group hover:border-cerulean hoverEffect">
