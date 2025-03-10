@@ -139,7 +139,7 @@ export const CartOrder = ({
                         <div className="flex items-center gap-2 justify-start">
                           <div className="w-[65px] h-full">
                             <Image
-                              src={product.image}
+                              src={product.mainImage}
                               alt={product.title}
                               width={65}
                               height={65}
@@ -153,7 +153,7 @@ export const CartOrder = ({
                       </TableCell>
                       <TableCell className="px-3 py-6 border-r text-xs text-textColor">
                         <div className="flex items-center gap-2 justify-between">
-                          <p className="flex-1">{product.article}</p>
+                          <p className="flex-1">{product.articul}</p>
                           <span
                             className="cursor-pointer text-explosiveGrey hover:text-cerulean hoverEffect"
                             onClick={() =>

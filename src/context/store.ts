@@ -45,13 +45,6 @@ const useStore = create<StoreState>()(
       compares: [],
       selected: [],
       setAuth: () => set({ auth: true }),
-      // setQuantity: (id, quantity) => {
-      //   set((state) => ({
-      //     cart: state.cart.map((item) =>
-      //       item.id === id ? { ...item, quantity: Math.max(quantity, 1) } : item
-      //     ),
-      //   }));
-      // },
       selectedCardsList: (products) => {
         set(() => ({
           selected: products,
