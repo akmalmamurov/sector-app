@@ -12,10 +12,12 @@ interface StoreState {
   favorites: StoreItem[];
   cart: StoreItem[];
   compares: StoreItem[];
+  selected: StoreItem[];
   setAuth: () => void;
   setContact: (info: string) => void;
   toggleFavorites: (product: ProductData) => void;
   addToCart: (product: ProductData) => void;
+  selectedCardsList: (products: ProductData[]) => void;
   toggleCompare: (product: ProductData) => void;
   setQuantity: (id: number, quantity: number) => void;
   deleteFavorites: (id: number) => void;
@@ -41,7 +43,20 @@ const useStore = create<StoreState>()(
       favorites: [],
       cart: [],
       compares: [],
+      selected: [],
       setAuth: () => set({ auth: true }),
+      // setQuantity: (id, quantity) => {
+      //   set((state) => ({
+      //     cart: state.cart.map((item) =>
+      //       item.id === id ? { ...item, quantity: Math.max(quantity, 1) } : item
+      //     ),
+      //   }));
+      // },
+      selectedCardsList: (products) => {
+        set(() => ({
+          selected: products,
+        }));
+      },
       setContact: (info) => set({ contact: info }),
       toggleFavorites: (product) => {
         set((state) => {

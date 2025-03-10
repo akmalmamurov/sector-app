@@ -34,6 +34,7 @@ export interface ProductData {
   price: number;
   inStock?: string;
   image: string;
+  quantity?: number
 }
 
 export interface BrandData {
