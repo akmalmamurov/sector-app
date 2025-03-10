@@ -30,10 +30,10 @@ export interface PopularCategory {
 export interface ProductData {
   id: number;
   title: string;
-  article: string;
+  articul: string;
   price: number;
   inStock?: string;
-  image: string;
+  mainImage: string;
   quantity?: number
 }
 

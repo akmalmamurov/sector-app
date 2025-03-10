@@ -30,13 +30,15 @@ export const Banner = ({ banner }: { banner: BannerData[] }) => {
           {banner.map((item) => (
             <SwiperSlide key={item.id}>
               <Link href={item.redirectUrl}>
-                <Image
-                  src={`${process.env.NEXT_PUBLIC_API_URL}/${item.imagePath}`}
-                  alt={`Banner ${item.id}`}
-                  className="w-full object-cover h-full rounded-md"
-                  width={1440}
-                  height={413}
-                />
+                <div className="relative w-full h-[413px]">
+                  <Image
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/${item.imagePath}`}
+                    alt={`Banner ${item.id}`}
+                    fill
+                    style={{ objectFit: "cover" }}
+                    className="rounded-md"
+                  />
+                </div>
               </Link>
             </SwiperSlide>
           ))}
