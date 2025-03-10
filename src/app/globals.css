@@ -170,3 +170,25 @@ strong {
     @apply bg-background text-foreground;
   }
 }
+
+.bg-custom {
+  background-image: url('/bg_img.png');
+  background-repeat: no-repeat;
+  background-position: 110% 80px;
+  height: 200px;
+}
+.bg_final1 {
+  background-image: url('/bg_final_1.png');
+  background-repeat: no-repeat;
+  background-position: 98.8%;
+}
+.bg_final {
+  background-image: url('/bg_final.png');
+  background-repeat: no-repeat;
+  background-position: right bottom;
+}
+.contact_info_bg {
+  background-image: url('/contact_info_bg.png');
+  background-repeat: no-repeat;
+  background-position: bottom right;
+}

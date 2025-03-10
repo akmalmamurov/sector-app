@@ -53,7 +53,7 @@ const MyCartLeft = ({
   return (
     <div className="col-span-3">
       <div className="space-y-6">
-        <div className="bg-white border shadow-sectionShadow py-[23px] px-[15px]">
+        <div className="bg-white border shadow-sectionShadow py-[23px] px-[20px]">
           <div className="flex items-center gap-2">
             <h5 className="text-textColor text-base">
               Выберите город доставки
@@ -101,7 +101,7 @@ const MyCartLeft = ({
             )}
           </button>
         </div>
-        <div className="bg-white border shadow-sectionShadow py-[23px] px-[15px] text-textColor">
+        <div className="bg-white border shadow-sectionShadow py-[23px] px-[20px] text-textColor">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <input

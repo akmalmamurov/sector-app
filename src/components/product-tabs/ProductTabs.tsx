@@ -21,10 +21,12 @@ const ProductTabs = () => {
   });
 
   formattedData["sale"] = saleCategory;
-
+  
   return (
+
     <Tabs defaultValue={Object.keys(formattedData)[0]} className="bg-white shadow-productListShadow">
       <TabsList className="flex gap-4  border-b h-[54px] justify-between bg-white p-0">
+
         {Object.entries(formattedData).map(([key, category]) => (
           <TabsTrigger
             key={key}
