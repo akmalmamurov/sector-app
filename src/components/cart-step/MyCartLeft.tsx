@@ -164,7 +164,7 @@ const MyCartLeft = ({
               {/* image */}
               <div className="border w-[130px] h-[130px] border-superSilver">
                 <Image
-                  src={product.image}
+                  src={product.mainImage}
                   alt={product.title}
                   width={100}
                   height={100}
@@ -175,14 +175,14 @@ const MyCartLeft = ({
                 <div className="flex flex-col gap-2">
                   <div className="flex h-fit gap-[15px]">
                     <p className="text-xs text-wasabiColor">
-                      {product.article}
+                      {product.articul}
                     </p>
                     <span
                       className="cursor-pointer text-explosiveGrey hover:text-cerulean hoverEffect"
                       onClick={() =>
                         copyToClipboard(
-                          product.article,
-                          `Артикул ${product.article} скопирован в буфер обмена`
+                          product.articul,
+                          `Артикул ${product.articul} скопирован в буфер обмена`
                         )
                       }
                     >
