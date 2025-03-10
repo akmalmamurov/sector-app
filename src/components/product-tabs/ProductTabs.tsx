@@ -7,32 +7,21 @@ import { getProducts } from "@/api/product";
 
 const tabs = [
   { key: "recommended", label: "Рекомендуем" },
-  { key: "novinki", label: "Новинки" },
-  { key: "popular", label: "Популярное" },
+  { key: "condition", label: "Новинки" },
+  { key: "revalance", label: "Популярное" },
 ];
-
-// Active tabga qarab faqat shu kalitni true qilib qaytaramiz
-const getQueryParams = (activeTab: string): Record<string, string> => {
-  switch (activeTab) {
-    case "recommended":
-      return { recommended: "true" };
-    case "novinki":
-      return { condition: "true" };
-    case "popular":
-      return { revalance: "true" };
-    default:
-      return {};
-  }
-};
 
 const ProductTabs = () => {
   const [activeTab, setActiveTab] = useState("recommended");
 
-  const { data: products = [], isLoading, error } = useQuery({
+  const {
+    data: products = [],
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["products", activeTab],
     queryFn: () => {
-      const queryParams = getQueryParams(activeTab);
-      return getProducts(queryParams);
+      return getProducts(activeTab);
     },
   });
 
