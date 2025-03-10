@@ -33,9 +33,9 @@ const Contact = () => {
         <Link href="#" className="text-cerulean text-[24px] pl-6">
           Ташкент
         </Link>
-        <section className="block md:flex">
-          <div className="min-h-[507px]">
-            <div className="p-2 m-6 bg-superSilver">
+        <section className="block lg:flex ">
+          <div className="lg:min-h-[507px]">
+            <div className="p-2 lg:m-6 bg-superSilver">
               <div className="flex">
                 <Image src={officeContact} alt="pic" />
                 <Link href="#" className="text-cerulean text-[21px] pl-4">
@@ -105,7 +105,7 @@ const Contact = () => {
           </div>
         </section>
 
-        <section>
+        <section className="pt-10 lg:pt-0">
           <InfoHeader className="mb-5 mt-10 md:mt-0">
             <InfoTitle>Для корреспонденции</InfoTitle>
           </InfoHeader>
