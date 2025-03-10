@@ -9,6 +9,7 @@ import useStore from "@/context/store";
 import { copyToClipboard } from "@/utils";
 import { useConfirmModal } from "@/hooks";
 import { AddToCart } from "@/components/add-storage";
+import { DOMAIN } from "@/constants";
 const FavoritesPage = () => {
   const { favorites, resetFavorites, deleteFavorites } = useStore();
 
@@ -73,7 +74,7 @@ const FavoritesPage = () => {
                   <div className="flex items-center gap-2 justify-start">
                     <div className="w-[65px] h-full">
                       <Image
-                        src={product.image}
+                        src={`${DOMAIN}/${product.mainImage}`}
                         alt={product.title}
                         width={65}
                         height={65}
@@ -87,7 +88,7 @@ const FavoritesPage = () => {
                 </TableCell>
                 <TableCell className="px-3 py-4 border-r text-xs text-textColor">
                   <div className="flex items-center gap-2 justify-between">
-                    <p className="flex-1">{product.article}</p>
+                    <p className="flex-1">{product.articul}</p>
                     <span
                       className="cursor-pointer text-explosiveGrey hover:text-cerulean hoverEffect"
                       onClick={() =>
