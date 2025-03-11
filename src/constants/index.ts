@@ -5,3 +5,5 @@ export const GET_BRAND_POPULAR = "/user/brand/all?isPopular=true";
 export const GET_BRAND_SINGLE = "/user/brand"
 export const GET_BANNER = "/user/banner/all"
 export const GET_POPULAR = "/user/popular/all"
+export const GET_PRODUCTS = "/user/product/all"
+export const GET_PROMOTION = "/user/promotion/all"

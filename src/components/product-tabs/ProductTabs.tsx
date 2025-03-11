@@ -1,54 +1,81 @@
+"use client";
+import React, { useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { productData, saleCategory } from "@/data";
 import { ProductCard } from "../card";
-import { ProductData } from "@/types";
+import { useQuery } from "@tanstack/react-query";
+import { getProducts } from "@/api/product";
+import { getPromotion } from "@/api/promotion";
+import { ProductData, PromotionData } from "@/types";
+import { PromotionCard } from "../card/PromotionCard";
 
-type Category = {
-  head: string;
-  products: ProductData[];
-};
-
-type FormattedData = {
-  [key: string]: Category;
-};
+const tabs = [
+  { key: "recommended", label: "Рекомендуем" },
+  { key: "condition", label: "Новинки" },
+  { key: "promotion", label: "Акции" },
+  { key: "popular", label: "Популярное" },
+];
 
 const ProductTabs = () => {
-  const formattedData: FormattedData = {};
+  const [activeTab, setActiveTab] = useState("recommended");
 
-  productData.forEach((category) => {
-    const [key, value] = Object.entries(category)[0];
-    formattedData[key] = value as Category;
+  const {
+    data: data = [],
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey:
+      activeTab === "promotion"
+        ? ["promotion", activeTab]
+        : ["products", activeTab],
+    queryFn: () => {
+      if (activeTab === "promotion") {
+        return getPromotion();
+      } else {
+        return getProducts(activeTab);
+      }
+    },
   });
 
-  formattedData["sale"] = saleCategory;
+  console.log(data);
 
   return (
-    <Tabs defaultValue={Object.keys(formattedData)[0]} className="bg-white shadow-productListShadow">
-      <TabsList className="flex gap-4  border-b h-[54px] justify-between bg-white p-0">
-        {Object.entries(formattedData).map(([key, category]) => (
+    <Tabs
+      defaultValue={activeTab}
+      value={activeTab}
+      onValueChange={(value) => setActiveTab(value)}
+      className="bg-white shadow-productListShadow"
+    >
+      <TabsList className="flex gap-4 border-b h-[54px] justify-between bg-white p-0">
+        {tabs.map((tab) => (
           <TabsTrigger
-            key={key}
-            value={key}
-            className="relative font-medium text-base data-[state=active]:bg-white w-[208px] text-gray-600 rounded-none data-[state=active]:text-cerulean data-[state=active]:shadow-none transition-all before:absolute before:-bottom-[15px] 
-            before:left-0 before:w-full before:h-[5px] before:bg-gradient-to-r before:from-blue-400 before:to-cerulean before:opacity-0 data-[state=active]:before:opacity-100"
+            key={tab.key}
+            value={tab.key}
+            className="relative font-medium text-base data-[state=active]:bg-white w-[208px] text-gray-600 rounded-none data-[state=active]:text-cerulean data-[state=active]:shadow-none transition-all before:absolute before:-bottom-[15px] before:left-0 before:w-full before:h-[5px] before:bg-gradient-to-r before:from-blue-400 before:to-cerulean before:opacity-0 data-[state=active]:before:opacity-100"
           >
-            {category.head}
+            {tab.label}
           </TabsTrigger>
         ))}
       </TabsList>
 
       <div className="py-[32px]">
-        {Object.entries(formattedData).map(([key, category]) => (
-          <TabsContent
-            key={key}
-            value={key}
-            className="grid grid-cols-3 lgl:grid-cols-4 gap-4 px-5 mt-0"
-          >
-            {category.products.map((product) => (
+        <TabsContent
+          value={activeTab}
+          className={`grid  px-5 mt-0 ${activeTab === "promotion" ? "grid-cols-2 lgl:grid-cols-3 gap-7" : "grid-cols-3 lgl:grid-cols-4 gap-4"}`}
+        >
+          {isLoading ? (
+            <div>Loading...</div>
+          ) : error ? (
+            <div>Error loading products.</div>
+          ) : activeTab === "promotion" ? (
+            data?.map((item: PromotionData) => (
+              <PromotionCard key={item.id} promotion={item} />
+            ))
+          ) : (
+            data?.map((product: ProductData) => (
               <ProductCard key={product.id} product={product} />
-            ))}
-          </TabsContent>
-        ))}
+            ))
+          )}
+        </TabsContent>
       </div>
     </Tabs>
   );

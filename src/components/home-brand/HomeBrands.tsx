@@ -5,12 +5,12 @@ import Link from "next/link";
 import { ArrowRightIcon } from "@/assets/icons";
 import { BrandData } from "@/types";
 
-
 interface Props {
   brands: BrandData[];
 }
 
 export const HomeBrands = ({ brands }: Props) => {
+  
   return (
     <div className="lgl:pb-[61px] py-[30px]">
       <Container>
@@ -18,16 +18,16 @@ export const HomeBrands = ({ brands }: Props) => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
           {brands?.slice(0, 5)?.map((el, index) => (
             <Link
-              href={`/brands/${el.id}`}
+              href={`/brands/${el.slug}`}
               key={index}
-              className="bg-white py-[5px] px-8 flex justify-center items-center opacity-80 hover:opacity-100 hoverEffect shadow-cardShadow rounded-[10px]"
+              className="bg-white py-[5px] px-[35px] flex justify-center items-center opacity-80 hover:opacity-100 hoverEffect shadow-cardShadow rounded-[10px]"
             >
               <Image
                 src={`${process.env.NEXT_PUBLIC_API_URL}/${el.path}`}
                 alt={el.slug}
-                width={150}
-                height={60}
-                className="max-w-[150px] max-h-[60px] object-contain"
+                width={200}
+                height={200}
+                className="max-h-[60px] w-full object-contain"
               />
             </Link>
           ))}

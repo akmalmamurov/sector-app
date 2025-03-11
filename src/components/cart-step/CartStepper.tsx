@@ -47,17 +47,22 @@ const CartStepper = () => {
       setActiveStep((prevStep) => prevStep + 1);
     }
   };
+  const handlePrevStep = () => {
+    if (activeStep) {
+      setActiveStep((prevStep) => prevStep - 1);
+    }
+  };
 
   const renderCurrentStepContent = () => {
     switch (activeStep) {
       case 0:
-        return <MyCart onNextStep={handleNextStep} />;
+        return <MyCart step={activeStep} onNextStep={handleNextStep} />;
       case 1:
-        return <CartContact onNextStep={handleNextStep} />;
+        return <CartContact step={activeStep} onPrevStep={handlePrevStep} onNextStep={handleNextStep} />;
       case 2:
-        return <CartDelivery onNextStep={handleNextStep} />;
+        return <CartDelivery step={activeStep} onPrevStep={handlePrevStep} onNextStep={handleNextStep} />;
       case 3:
-        return <CartOrder />;
+        return <CartOrder onPrevStep={handlePrevStep} step={activeStep} />;
       default:
         return null;
     }

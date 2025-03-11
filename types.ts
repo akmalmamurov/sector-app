@@ -30,10 +30,11 @@ export interface PopularCategory {
 export interface ProductData {
   id: number;
   title: string;
-  article: string;
+  articul: string;
   price: number;
   inStock?: string;
-  image: string;
+  mainImage: string;
+  quantity?: number
 }
 
 export interface BrandData {
@@ -57,4 +58,13 @@ export interface BannerData {
   imagePath: string | StaticImageData;
   redirectUrl: string;
   routePath: string;
+}
+
+
+export interface PromotionData {
+  coverImage: string;
+  expireDate: string;
+  id: string;
+  slug: string;
+  title: string;
 }

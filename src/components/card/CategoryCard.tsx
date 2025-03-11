@@ -4,10 +4,9 @@ import { getCatalog } from "@/api";
 import { PopularCategory, CatalogData } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export const CategoryCard = ({ category }: { category: PopularCategory }) => {
-  const router = useRouter();
   const { data: catalogData = [] } = useQuery({
     queryKey: ["catalog"],
     queryFn: getCatalog,
@@ -34,15 +33,9 @@ export const CategoryCard = ({ category }: { category: PopularCategory }) => {
 
   const subcatalogSlug = getSubcatalogSlug(catalogData, category.slug);
 
-  const goCatalog = () => {
-    if (subcatalogSlug) {
-      router.push(`/catalog/${subcatalogSlug}/${category.slug}`);
-    }
-  };
-
   return (
-    <div
-      onClick={goCatalog}
+    <Link
+      href={`/catalog/${subcatalogSlug}/${category.slug}`}
       className="bg-white group relative shadow-md overflow-hidden pb-1 min-h-[190px] rounded-[10px] cursor-pointer flex flex-col justify-between"
     >
       <div className="w-[150px] h-[100px] overflow-hidden">
@@ -64,7 +57,7 @@ export const CategoryCard = ({ category }: { category: PopularCategory }) => {
         <p className="text-sm font-normal text-darkSoul">100 товаров</p>
       </div>
       <div className="bg-[#0054AE1F] w-[150px] h-[150px] rounded-full absolute -top-[38px] -left-[28px]"></div>
-    </div>
+    </Link>
   );
 };
 

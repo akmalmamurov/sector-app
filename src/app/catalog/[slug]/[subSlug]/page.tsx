@@ -12,13 +12,9 @@ import { CategoryCrumb } from "@/components/bread-crumb";
 export default function CategoryPage() {
   const { slug, subSlug } = useParams() as { slug?: string; subSlug?: string };
 
-  const { data: catalogData = [] } = useQuery({
-    queryKey: ["catalog"],
-    queryFn: getCatalog,
-  });
+  const { data: catalogData = [] } = useQuery({ queryKey: ["catalog"], queryFn: getCatalog,});
 
   const subcatalogItem = slug ? findCatalogItem(catalogData, slug) : undefined;
-  console.log(subcatalogItem);
   
 
   const categoryItem =

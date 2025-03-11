@@ -8,12 +8,13 @@ import { AddToCart, AddToCompare, AddToFavorites } from "../add-storage";
 import { copyToClipboard, formatPrice } from "@/utils";
 
 export const ProductCard = ({ product }: { product: ProductData }) => {
+  
   return (
     <div className="px-[13px] border border-superSilver rounded-[10px] group hover:border-cerulean hoverEffect">
       <div className="overflow-hidden">
         <Link href={`/`}>
           <Image
-            src={product?.image}
+            src={`${process.env.NEXT_PUBLIC_API_URL}/${product?.mainImage}`}
             alt={product?.title}
             width={230}
             height={230}
@@ -24,7 +25,7 @@ export const ProductCard = ({ product }: { product: ProductData }) => {
       </div>
 
       <div className="flex justify-between gap-2 mt-2 h-[72px] overflow-hidden">
-        <h3 className="font-normal text-xs leading-[18px] text-titleColor text-left line-clamp-4 ">
+        <h3 className="font-normal text-xs leading-[18px] text-titleColor text-left line-clamp-3 h-fit">
           {product.title}
         </h3>
         <span
@@ -40,13 +41,13 @@ export const ProductCard = ({ product }: { product: ProductData }) => {
         </span>
       </div>
       <div className="flex justify-between gap-2 mb-3">
-        <p className="text-xs text-wasabiColor">{product.article}</p>
+        <p className="text-xs text-wasabiColor">{product.articul}</p>
         <span
           className="cursor-pointer"
           onClick={() =>
             copyToClipboard(
-              product.article,
-              `Артикул ${product.article} скопирован в буфер обмена`
+              product.articul,
+              `Артикул ${product.articul} скопирован в буфер обмена`
             )
           }
         >

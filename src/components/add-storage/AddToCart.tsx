@@ -18,7 +18,7 @@ export const AddToCart = ({
 
   const handleToCart = () => {
     addToCart(product);
-    showSuccess(`Товар ${product?.article} Добавлен в корзину`);
+    showSuccess(`Товар ${product?.articul} Добавлен в корзину`);
   };
   return (
     <>
