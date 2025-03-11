@@ -17,6 +17,7 @@ const SingleBrandPage = async ({
 }) => {
   const { slug } = await params;
   const brand = await getBrandSingle(slug);
+  
 
   return (
     <Container className="pb-[58px]">
@@ -37,8 +38,8 @@ const SingleBrandPage = async ({
                   src={`${process.env.NEXT_PUBLIC_API_URL}/${brand?.path}`}
                   alt={brand?.title}
                   className="w-auto h-auto max-w-[150px] max-h-[60px]"
-                  width={150}
-                  height={60}
+                  width={200}
+                  height={100}
                 />
               </div>
               <h4 className="info-text text-base text-textColor">

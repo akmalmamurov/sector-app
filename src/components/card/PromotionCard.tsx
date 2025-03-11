@@ -15,8 +15,8 @@ export const PromotionCard = ({ promotion }: { promotion: PromotionData }) => {
         <Image
           src={`${process.env.NEXT_PUBLIC_API_URL}/${promotion?.coverImage}`}
           alt={promotion?.title}
-          width={230}
-          height={148}
+          width={250}
+          height={150}
           loading="lazy"
           className="object-cover w-full h-[148px]"
         />

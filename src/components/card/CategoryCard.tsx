@@ -1,17 +1,11 @@
-"use client";
-
-import { getCatalog } from "@/api";
 import { PopularCategory, CatalogData } from "@/types";
-import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
-
-export const CategoryCard = ({ category }: { category: PopularCategory }) => {
-  const { data: catalogData = [] } = useQuery({
-    queryKey: ["catalog"],
-    queryFn: getCatalog,
-  });
-
+interface CategoryCardProps {
+  catalogData: CatalogData[];
+  category: PopularCategory;
+}
+export const CategoryCard = ({ category, catalogData }: CategoryCardProps) => {
   const getSubcatalogSlug = (
     data: CatalogData[],
     targetSlug: string
@@ -50,7 +44,7 @@ export const CategoryCard = ({ category }: { category: PopularCategory }) => {
 
       <div className="px-4">
         <p className="font-semibold text-sm text-textColor leading-[21px]">
-          {category.title}
+          {category?.title}
         </p>
       </div>
       <div className="px-4">

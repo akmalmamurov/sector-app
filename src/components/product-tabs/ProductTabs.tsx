@@ -36,7 +36,6 @@ const ProductTabs = () => {
     },
   });
 
-  console.log(data);
 
   return (
     <Tabs

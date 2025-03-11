@@ -16,8 +16,8 @@ export const ProductCard = ({ product }: { product: ProductData }) => {
           <Image
             src={`${process.env.NEXT_PUBLIC_API_URL}/${product?.mainImage}`}
             alt={product?.title}
-            width={230}
-            height={230}
+            width={250}
+            height={250}
             loading="lazy"
             className="w-full h-[230px] object-cover hover:scale-105 hoverEffect"
           />
