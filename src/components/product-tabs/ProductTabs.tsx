@@ -4,26 +4,39 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ProductCard } from "../card";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "@/api/product";
+import { getPromotion } from "@/api/promotion";
+import { ProductData, PromotionData } from "@/types";
+import { PromotionCard } from "../card/PromotionCard";
 
 const tabs = [
   { key: "recommended", label: "Рекомендуем" },
   { key: "condition", label: "Новинки" },
-  { key: "revalance", label: "Популярное" },
+  { key: "promotion", label: "Акции" },
+  { key: "popular", label: "Популярное" },
 ];
 
 const ProductTabs = () => {
   const [activeTab, setActiveTab] = useState("recommended");
 
   const {
-    data: products = [],
+    data: data = [],
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["products", activeTab],
+    queryKey:
+      activeTab === "promotion"
+        ? ["promotion", activeTab]
+        : ["products", activeTab],
     queryFn: () => {
-      return getProducts(activeTab);
+      if (activeTab === "promotion") {
+        return getPromotion();
+      } else {
+        return getProducts(activeTab);
+      }
     },
   });
+
+  console.log(data);
 
   return (
     <Tabs
@@ -47,14 +60,18 @@ const ProductTabs = () => {
       <div className="py-[32px]">
         <TabsContent
           value={activeTab}
-          className="grid grid-cols-3 lgl:grid-cols-4 gap-4 px-5 mt-0"
+          className={`grid  px-5 mt-0 ${activeTab === "promotion" ? "grid-cols-2 lgl:grid-cols-3 gap-7" : "grid-cols-3 lgl:grid-cols-4 gap-4"}`}
         >
           {isLoading ? (
             <div>Loading...</div>
           ) : error ? (
             <div>Error loading products.</div>
+          ) : activeTab === "promotion" ? (
+            data?.map((item: PromotionData) => (
+              <PromotionCard key={item.id} promotion={item} />
+            ))
           ) : (
-            products?.map((product) => (
+            data?.map((product: ProductData) => (
               <ProductCard key={product.id} product={product} />
             ))
           )}
