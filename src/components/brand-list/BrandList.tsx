@@ -21,7 +21,6 @@ export default function BrandList(props: BrandsClientProps) {
   const { groupedBrands, latinLetters, cyrillicLetters } = props;
   const [selectedLetters, setSelectedLetters] = useState<string[]>([]);
 
-
   const displayLatinLetters = getLatinLettersForDisplay(
     groupedBrands,
     latinLetters,
@@ -46,9 +45,10 @@ export default function BrandList(props: BrandsClientProps) {
 
   return (
     <div>
-      <div className="grid grid-cols-2 gap-20 px-6 pb-6">
+      {/* <div className="flex justify-center items-center"> */}
+      <div className="flex flex-col md:grid grid-cols-2 gap-8 lg:gap-20 md:px-6 pb-6">
         <div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex justify-center md:justify-start flex-wrap gap-2">
             {displayLatinLetters.map((letter) => {
               const isActive = selectedLetters.includes(letter);
               const disabled = isLetterDisabled(letter);
@@ -69,7 +69,7 @@ export default function BrandList(props: BrandsClientProps) {
         </div>
         {/* Kirill belgilar */}
         <div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex justify-center md:justify-start flex-wrap gap-2">
             {displayCyrillicLetters.map((letter) => {
               const isActive = selectedLetters.includes(letter);
               const disabled = isLetterDisabled(letter);
@@ -110,12 +110,12 @@ export default function BrandList(props: BrandsClientProps) {
                   <h2 className="text-textColor text-[26px] font-normal mb-[31px]">
                     {letter}
                   </h2>
-                  <div className="grid grid-cols-6 gap-3">
+                  <div className="flex flex-wrap gap-3 justify-center lg:justify-start items-center ">
                     {brands.map((brand) => (
                       <Link
                         href={`/brands/${brand.slug}`}
                         key={brand.id}
-                        className="border border-superSilver flex flex-col justify-center items-center h-[121px] px-10 group gap-[15px]"
+                        className="border border-superSilver flex flex-col justify-center items-center w-[215px] h-[145px] px-10 group gap-[15px]"
                       >
                         {brand.path ? (
                           <Image

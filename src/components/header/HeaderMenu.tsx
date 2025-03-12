@@ -24,7 +24,7 @@ const HeaderMenu = () => {
     <div className="py-[14px] xl:py-2 border-b border-b-superSilver">
       <Container className="flex justify-between items-center lg:gap-[18px] xl:gap-[42px]">
         {/* logo */}
-        <Link href="/" className=" overflow-hidden">
+        <Link href="/" className=" overflow-hidden hidden sm:flex pr-4 lg:pr-0">
           <Image
             src={logo}
             alt="logo"
@@ -77,7 +77,11 @@ const HeaderMenu = () => {
                   ))}
                 </div>
               )} */}
-              <HeaderMobile isOpen={isOpen} setIsOpen={setIsOpen} data={catalogData} />
+              <HeaderMobile
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+                data={catalogData}
+              />
             </div>
           </div>
         </div>
