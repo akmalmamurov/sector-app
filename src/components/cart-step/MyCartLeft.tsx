@@ -16,10 +16,10 @@ interface Props {
   isAllChecked: boolean;
   toggleAllItems: () => void;
   cart: StoreItem[];
-  setQuantity: (id: number, quantity: number) => void;
-  toggleSingleItem: (id: number) => void;
-  selectedItems: number[];
-  deleteCart: (id: number) => void;
+  setQuantity: (id: string, quantity: number) => void;
+  toggleSingleItem: (id: string) => void;
+  selectedItems: string[];
+  deleteCart: (id: string) => void;
   resetCart: () => void;
 }
 
@@ -50,7 +50,7 @@ const MyCartLeft = ({
     });
   };
 
-  const handleDeleteClick = (id: number) => {
+  const handleDeleteClick = (id: string) => {
     openModal("Вы уверены, что хотите удалить товар из корзины?", () => {
       deleteCart(id);
     });
@@ -243,9 +243,13 @@ const MyCartLeft = ({
                             type="number"
                             value={product.quantity}
                             className="w-[90px] h-[42px] text-center pr-3 border focus:outline-none text-textColor"
-                            onChange={(e) =>
-                              setQuantity(product.id, Number(e.target.value))
-                            }
+                            onChange={(e) => {
+                              let value = Number(e.target.value);
+                              if (value > 9999) {
+                                value = 9999;
+                              }
+                              setQuantity(product.id, value);
+                            }}
                           />
                           <div className="absolute top-0 h-full right-[10px] flex flex-col justify-center">
                             <span
