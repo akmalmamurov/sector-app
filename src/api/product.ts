@@ -23,13 +23,14 @@ export const getProducts = async (
     return [];
   }
 };
-
-export const getProductCategory = async (params: string) => {
+export const getProductCategory = async (queryParams: string) => {
   try {
-    const res = await request(`${GET_PRODUCT_CATEGORY}?category=${params}`);
+    const res = await request(GET_PRODUCT_CATEGORY, {
+      params: { categorySlug: queryParams } 
+    });
     return res.data.data;
   } catch (error) {
     console.log(error);
-    return [];
   }
 };
+

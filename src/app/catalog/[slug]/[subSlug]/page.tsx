@@ -15,7 +15,7 @@ const CategoryPage = async ({
 }) => {
   const { slug, subSlug } = await params;
   const catalogData = await getCatalog();
-  const data = subSlug ? await getProductCategory(subSlug) : [];
+  const data =  await getProductCategory(subSlug || "");
 
   const breadcrumbPaths = getCategoryBreadcrumbPaths( catalogData, slug, subSlug );
   const categoryTitle = getCategoryTitle(catalogData, slug, subSlug);
