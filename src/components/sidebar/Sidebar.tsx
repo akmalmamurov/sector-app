@@ -93,7 +93,7 @@ export const Sidebar = () => {
           <div className="h-12">
             <Tooltip text="Избранное">
               <Link
-                href="/favorites"
+                href="/profile/favorites"
                 className="w-[34px] h-[34px] rounded-full bg-transparent hover:bg-superSilver flex items-center justify-center"
               >
                 {favorites?.length > 0 ? (

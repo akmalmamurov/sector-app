@@ -10,11 +10,7 @@ import { brandCardData } from "@/data/brand-card-data";
 import { ProductData } from "@/types";
 import Image from "next/image";
 
-const SingleBrandPage = async ({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) => {
+const SingleBrandPage = async ({ params, }: { params: Promise<{ slug: string }>; }) => {
   const { slug } = await params;
   const brand = await getBrandSingle(slug);
   

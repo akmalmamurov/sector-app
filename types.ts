@@ -28,13 +28,13 @@ export interface PopularCategory {
   };
 }
 export interface ProductData {
-  id: number;
+  id: string;
   title: string;
   articul: string;
   price: number;
   inStock?: string;
   mainImage: string;
-  quantity?: number
+  quantity?: number;
 }
 
 export interface BrandData {
@@ -60,11 +60,17 @@ export interface BannerData {
   routePath: string;
 }
 
-
 export interface PromotionData {
   coverImage: string;
   expireDate: string;
   id: string;
   slug: string;
   title: string;
+}
+
+export interface CategoryProducts {
+  limitNumber: number;
+  pageNumber: number;
+  total: number;
+  products: ProductData[];
 }

@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, GET_PROMOTION } from "@/constants";
+import { GET_PRODUCT_CATEGORY, GET_PRODUCTS, GET_PROMOTION } from "@/constants";
 import request from "@/services";
 import { ProductData } from "@/types";
 
@@ -17,6 +17,16 @@ export const getProducts = async (
     else queryStr = GET_PRODUCTS;
 
     const res = await request.get(queryStr);
+    return res.data.data;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};
+
+export const getProductCategory = async (params: string) => {
+  try {
+    const res = await request(`${GET_PRODUCT_CATEGORY}?category=${params}`);
     return res.data.data;
   } catch (error) {
     console.log(error);
