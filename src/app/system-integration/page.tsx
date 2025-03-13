@@ -32,22 +32,22 @@ const SystemIntegration = () => {
               <tbody>
                 {integrationTable.map((service, index) => (
                   <tr key={index} className="border-b border-superSilver">
-                    <td className=" border-r border-superSilver w-[198px] h-[198px] flex items-center justify-center">
+                    <td className="border-superSilver w-[95px] sm:w-[120px] md:w-[198px] h-[95px] sm:h-[120px] md:h-[198px] flex items-center justify-center ">
                       <Image
                         src={service.image}
                         width={150}
                         height={150}
-                        className="w-[150px] h-[150px]"
+                        className="w-[120px] md:w-[150px] h-[120px} md:h-[150px}"
                         alt={service.title}
                       />
                     </td>
-                    <td className="align-top">
+                    <td className="align-top  border-l">
                       <div className="border-b py-[21px] px-2">
                         <p className="text-[18px] font-normal text-textColor ">
                           {service.title}
                         </p>
                       </div>
-                      <p className="text-textColor text-sm pl-2 pr-7 py-5">
+                      <p className="text-textColor text-sm pl-2 pr-3 sm:pr-7 py-2 sm:py-5 ">
                         {service.description}
                       </p>
                     </td>
@@ -56,12 +56,12 @@ const SystemIntegration = () => {
               </tbody>
             </table>
           </div>
-          <div className="my-[56px]  border border-superSilver  bg-white w-fit ">
+          <div className="my-[56px] -ml-5 sm:-ml-0 border border-superSilver  bg-white w-fit ">
             <div className="flex">
               {integrationBottom.map(({ images, title, list }, index) => (
                 <div
                   key={index}
-                  className="border-r last:border-r-0   w-[454px] last:w-[390px]"
+                  className="border-r last:border-r-0   max-w-[454px] "
                 >
                   <div className=" w-full border-b h-[83px] flex items-center justify-center">
                     <div className="flex items-center gap-4">
@@ -72,8 +72,8 @@ const SystemIntegration = () => {
 
                   <div className="py-4">
                     {list.map(({ text }, idx) => (
-                      <ul key={idx} className="pl-10 py-[2px] ">
-                        <li className="list-disc text-sm text-textColor system-li">
+                      <ul key={idx} className="md:pl-10 py-[2px] ">
+                        <li className="list-disc text-sm text-textColor system-li ml-5 md:ml-0">
                           {text}
                         </li>
                       </ul>
@@ -83,6 +83,7 @@ const SystemIntegration = () => {
               ))}
             </div>
           </div>
+
           <p>
             <span className="text-sm">
               <strong>

@@ -1,4 +1,4 @@
-import { CatalogData } from "@/types";
+import { CatalogData, CategoryData } from "@/types";
 
 export function findCatalogItem(
   items: CatalogData[],
@@ -28,3 +28,17 @@ export function getCatalogPath(
   }
   return [];
 }
+export const getCategoryTitle = (
+  catalogData: CatalogData[],
+  slug?: string,
+  subSlug?: string
+): string | undefined => {
+  const subcatalogItem = slug ? findCatalogItem(catalogData, slug) : undefined;
+  const categoryItem =
+    subcatalogItem && subcatalogItem.categories && subSlug
+      ? (subcatalogItem.categories as CategoryData[]).find(
+          (cat) => cat.slug === subSlug
+        )
+      : undefined;
+  return categoryItem?.title;
+};

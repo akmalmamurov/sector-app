@@ -27,12 +27,12 @@ const Configurators = () => {
       <HomeCrumb paths={[{ name: "Конфигураторы оборудования" }]} />
       <Section className="py-6 px-0 mb-[58px] shadow-md">
         <section>
-          <div className="flex justify-between pl-[83px] pr-[53px] pt-[53px]">
+          <div className="flex justify-between pl-[83px] pr-[53px] md:pt-[53px]">
             <Image src={circleBlueConfg} alt="blueIcon" />
             <Image src={circleWhiteConfg} alt="blueIcon" />
           </div>
-          <div className="block justify-between  text-[#333] md:flex ">
-            <div className="pl-[53px] pt-[23px] max-w-[632px] ">
+          <div className="px-5 flex flex-col justify-center items-center lgl:justify-between  text-[#333] lgl:flex-row ">
+            <div className="lgl:pl-[53px] pt-[23px] max-w-[632px] ">
               <p className="text-[#0054AE] text-[29px]">
                 Конфигураторы оборудования
               </p>
@@ -59,7 +59,7 @@ const Configurators = () => {
                 </li>
               </div>
             </div>
-            <div className="[pt-16] pr-[160px]">
+            <div className="pt-[30px] px-[30px] lgl:px-0  lgl:pr-[160px]">
               <Image src={firstSectionPic} alt="mainPic" />
             </div>
           </div>
@@ -75,12 +75,12 @@ const Configurators = () => {
               </div>
             </InfoHeader>
           </div>
-          <div className="flex">
-            <div className="pt-[40px] pl-[95px] pr-[115px]">
+          <div className=" px-5 flex flex-col justify-center items-center lgl:justify-between  text-[#333] lgl:flex-row ">
+            <div className="pt-[40px] px-[30px] lgl:px-0 lgl:pl-[95px] lgl:pr-[115px]">
               <Image src={secondSectionPic} alt="pic" />
             </div>
             <div className="max-w-[610px] text-[#333]">
-              <p className="pt-[128px]">
+              <p className="lg:pt-[128px]">
                 Сконфигурируйте сервер, полностью отвечающий вашим задачам и
                 бюджету. Подберите сервер по производителю, выберите процессор,
                 память и диски. Конфигуратор автоматически подберет совместимое
@@ -92,7 +92,7 @@ const Configurators = () => {
                 вашу задачу и нагрузку, действуют спец. цены и предложения.
               </p>
 
-              <button className="group mt-[17px] text-center flex justify-center items-center text-white bg-[#6AB04C] w-[261px] h-[42px] rounded-[10px] hover:bg-[#5a9e40] transition-all duration-300">
+              <button className="group mt-[17px] text-center flex justify-center items-center text-white bg-[#6AB04C] w-[261px] h-[42px] rounded-[10px] hover:bg-[#5a9e40] transition-all duration-300 mb-4">
                 <p className="relative flex items-center">
                   <Image
                     src={rightVector}
@@ -115,9 +115,9 @@ const Configurators = () => {
               </div>
             </InfoHeader>
           </div>
-          <div className="flex">
+          <div className="px-5 flex flex-col justify-center items-center lgl:justify-between  text-[#333] lgl:flex-row ">
             <div className="max-w-[610px] text-[#333] pl-[30px]">
-              <p className="pt-[128px]">
+              <p className="lg:pt-[128px]">
                 Рассчитайте онлайн требуемый объем жесткого диска для систем
                 видеонаблюдения. В зависимости от битрейта и качества видео,
                 количества камер и срока хранения записей, система рассчитает
@@ -142,7 +142,7 @@ const Configurators = () => {
                 </p>
               </button>
             </div>
-            <div className="pt-[40px] pl-[95px] pr-[115px]">
+            <div className="pt-[40px] px-[30px] lgl:px-0 lgl:pl-[95px] lgl:pr-[115px]">
               <Image src={thirdSectionPic} alt="pic" />
             </div>
           </div>

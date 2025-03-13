@@ -10,18 +10,19 @@ import { brandCardData } from "@/data/brand-card-data";
 import { ProductData } from "@/types";
 import Image from "next/image";
 
-const SingleBrandPage = async ({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) => {
+const SingleBrandPage = async ({ params, }: { params: Promise<{ slug: string }>; }) => {
   const { slug } = await params;
   const brand = await getBrandSingle(slug);
   
 
   return (
     <Container className="pb-[58px]">
-      <HomeCrumb paths={[{ name: "Каталог брендов", href: "/brands" }, { name: `${brand?.title}` }]} />
+      <HomeCrumb
+        paths={[
+          { name: "Каталог брендов", href: "/brands" },
+          { name: `${brand?.title}` },
+        ]}
+      />
       <div className="grid grid-cols-12 gap-4 lg:gap-8">
         <div className="col-span-3">
           <BrandFilter />

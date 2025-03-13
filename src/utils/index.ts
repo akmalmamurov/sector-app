@@ -4,3 +4,5 @@ export * from "./clipboard";
 export * from "./mask-email";
 export * from "./brand-alphabet";
 export * from "./validate-number";
+export * from "./catalog-slug-crumb"
+export * from "./catalog-slug"

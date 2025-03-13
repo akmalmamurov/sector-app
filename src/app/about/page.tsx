@@ -1,4 +1,12 @@
-import { correctImageAbout, eighthImageAbout, eleventhImageAbout, fifeteenthImageAbout, fifthImageAbout, firstImageAbout, fourteenthImageAbout, fourthImageAbout,
+import {
+  correctImageAbout,
+  eighthImageAbout,
+  eleventhImageAbout,
+  fifeteenthImageAbout,
+  fifthImageAbout,
+  firstImageAbout,
+  fourteenthImageAbout,
+  fourthImageAbout,
   ninethImageAbout,
   secondImageAbout,
   seventhImageAbout,
@@ -28,8 +36,12 @@ const About = () => {
         </InfoHeader>
         <section>
           <div className="relative">
-            <Image src={firstImageAbout} alt="pic" className="w-full h-auto" />
-            <div className="absolute top-[190px] left-0 p-6 bg-opacity-50 ">
+            <Image
+              src={firstImageAbout}
+              alt="pic"
+              className="w-full h-auto hidden xl:flex"
+            />
+            <div className="xl:absolute top-[190px] left-0 p-6 bg-opacity-50 ">
               <Link href="#" className="text-[29px] text-cerulean">
                 НАГ сегодня это —
               </Link>
@@ -41,7 +53,11 @@ const About = () => {
           </div>
           <div className="flex flex-wrap justify-center gap-8 pt-12">
             <div>
-              <Image src={secondImageAbout} alt="img" />
+              <Image
+                src={secondImageAbout}
+                alt="img"
+                className="px-6 md:px-0"
+              />
             </div>
             <div className="border border-superSilver flex flex-col justify-center items-center pb-10 w-[290px]">
               <Image src={thirdImageAbout} alt="pic" />
@@ -67,24 +83,26 @@ const About = () => {
           </div>
         </section>
         <section className="pt-8 px-4">
-          <div className="relative">
+          <div>
             <Image src={sixthImageAbout} alt="pic" />
-            <div className="absolute flex justify-center items-center gap-8 top-[466px] left-1/2 transform -translate-x-1/2">
-              <div className="border bg-white border-superSilver flex flex-col justify-center items-center pb-10 w-[330px] h-[244px] pt-[46px]">
+            {/* <div className=" flex flex-wrap justify-center items-center gap-8 xl:top-[466px] xl:left-1/2 xl:transform -translate-x-1/2"> */}
+
+            <div className="lg:-mt-32 xl:-mt-48 flex flex-wrap justify-center items-center gap-8 ">
+              <div className="border bg-white border-superSilver flex flex-col justify-center items-center md:py-20 py-11 w-[330px]  ">
                 <Image src={seventhImageAbout} alt="pic" />
                 <p className="text-[29px] text-textColor">Офисы</p>
                 <p className="text-[18px] text-[#8C8C8C] max-w-[200px] text-center">
                   Ташкент, Алматы{" "}
                 </p>
               </div>
-              <div className="border bg-white border-superSilver flex flex-col justify-center items-center pb-10 w-[330px] h-[244px] pt-[46px]">
+              <div className="border bg-white border-superSilver flex flex-col justify-center items-center md:py-20 py-11 w-[330px]">
                 <Image src={eighthImageAbout} alt="pic" />
                 <p className="text-[29px] text-textColor">Склады</p>
                 <p className="text-[18px] text-[#8C8C8C] max-w-[200px] text-center">
                   Ташкент, Алматы{" "}
                 </p>
               </div>
-              <div className="border bg-white border-superSilver flex flex-col justify-center items-center pb-10 w-[330px] h-[244px] pt-[46px]">
+              <div className="border bg-white border-superSilver flex flex-col justify-center items-center md:py-[67px] py-[31px] w-[330px]">
                 <Image src={ninethImageAbout} alt="pic" />
                 <p className="text-[29px] text-textColor">Центры логистики</p>
                 <p className="text-[18px] text-[#8C8C8C] max-w-[270px] text-center">
@@ -102,14 +120,16 @@ const About = () => {
         <section>
           <div>
             <div className="flex flex-wrap pt-[23px] gap-8 justify-center ">
-              <div className="flex border border-superSilver w-[627px] h-[260px] pl-[31px]">
-                <Image
-                  src={tenthImageAbout}
-                  alt="pic"
-                  className="pt-[55px] pb-[55px]"
-                />
-                <div className="pt-8">
-                  <p className="text-[24px] text-textColor">Важен каждый</p>
+              <div className="px-4 py-4 flex flex-col md:flex-row  border border-superSilver max-w-[627px]  md:pl-[31px]">
+                <div className="md:block flex justify-center items-center">
+                  <Image
+                    src={tenthImageAbout}
+                    alt="pic"
+                    className="md:pt-[55px] md:pb-[55px]"
+                  />
+                </div>
+                <div className="md:pt-[58px] md:pl-8 ">
+                  <p className="text-[24px] text-textColor ">Важен каждый</p>
                   <p className="text-[18px] max-w-[298px] pt-2 text-textColor">
                     Мы поможем подобрать товар с учетом всех индивидуальных
                     пожеланий, ответим на 3 151 вопрос и не отпустим клиента,
@@ -117,13 +137,16 @@ const About = () => {
                   </p>
                 </div>
               </div>
-              <div className="flex border border-superSilver w-[627px] h-[260px] pl-[31px] ">
-                <Image
-                  src={eleventhImageAbout}
-                  alt="pic"
-                  className="pt-[55px] pb-[55px]"
-                />
-                <div className="pt-[58px] pl-8">
+
+              <div className="px-4 py-4 flex flex-col md:flex-row  border border-superSilver max-w-[627px]  md:pl-[31px]">
+                <div className="md:block flex justify-center items-center">
+                  <Image
+                    src={eleventhImageAbout}
+                    alt="pic"
+                    className="md:pt-[55px] md:pb-[55px]"
+                  />
+                </div>
+                <div className="md:pt-[58px] md:pl-8 ">
                   <p className="text-[24px] text-textColor ">
                     Гибкость решений
                   </p>
@@ -133,13 +156,16 @@ const About = () => {
                   </p>
                 </div>
               </div>
-              <div className="flex border border-superSilver w-[627px] h-[260px] pl-[31px]">
-                <Image
-                  src={twelvethImageAbout}
-                  alt="pic"
-                  className="pt-[55px] pb-[55px]"
-                />
-                <div className="flex flex-col justify-center pl-[30px]">
+
+              <div className="px-4 py-4 flex flex-col md:flex-row  border border-superSilver max-w-[627px]  md:pl-[31px]">
+                <div className="md:block flex justify-center items-center">
+                  <Image
+                    src={twelvethImageAbout}
+                    alt="pic"
+                    className="md:pt-[55px] md:pb-[55px]"
+                  />
+                </div>
+                <div className="flex flex-col justify-center md:pl-[30px]">
                   <p className="text-[24px] text-textColor">Удобно платить</p>
                   <p className="text-[18px] max-w-[298px] text-textColor">
                     Доступны все виды кредитных инструментов: лизинг, факторинг,
@@ -147,13 +173,16 @@ const About = () => {
                   </p>
                 </div>
               </div>
-              <div className="flex border border-superSilver w-[627px] h-[260px] pl-[31px]">
-                <Image
-                  src={thirteenthImageAbout}
-                  alt="pic"
-                  className="pt-[55px] pb-[55px]"
-                />
-                <div className="flex flex-col justify-center pl-[30px]">
+
+              <div className="px-4 py-4 flex flex-col md:flex-row  border border-superSilver max-w-[627px]  md:pl-[31px]">
+                <div className="md:block flex justify-center items-center">
+                  <Image
+                    src={thirteenthImageAbout}
+                    alt="pic"
+                    className="md:pt-[55px] md:pb-[55px]"
+                  />
+                </div>
+                <div className="flex flex-col justify-center md:pl-[30px]">
                   <p className="text-[24px] text-textColor">
                     Управление online
                   </p>
@@ -164,13 +193,16 @@ const About = () => {
                   </p>
                 </div>
               </div>
-              <div className="flex border border-superSilver w-[627px] h-[260px] pl-[31px]">
-                <Image
-                  src={fourteenthImageAbout}
-                  alt="pic"
-                  className="pt-[55px] pb-[55px]"
-                />
-                <div className="flex flex-col justify-center pl-[30px]">
+
+              <div className="px-4 py-4 flex flex-col md:flex-row  border border-superSilver max-w-[627px]  md:pl-[31px]">
+                <div className="md:block flex justify-center items-center">
+                  <Image
+                    src={fourteenthImageAbout}
+                    alt="pic"
+                    className="md:pt-[55px] md:pb-[55px]"
+                  />
+                </div>
+                <div className="flex flex-col justify-center md:pl-[30px]">
                   <p className="text-[24px] text-textColor">Аккуратность</p>
                   <p className="text-[18px] max-w-[298px] text-textColor">
                     Бережное перемещение товара. С нами работают лидеры
@@ -179,13 +211,16 @@ const About = () => {
                   </p>
                 </div>
               </div>
-              <div className="flex border border-superSilver w-[627px] h-[260px] pl-[31px]">
-                <Image
-                  src={fifeteenthImageAbout}
-                  alt="pic"
-                  className="pt-[55px] pb-[55px]"
-                />
-                <div className="flex flex-col justify-center pl-[30px]">
+
+              <div className="px-4 py-4 flex flex-col md:flex-row  border border-superSilver max-w-[627px]  md:pl-[31px]">
+                <div className="md:block flex justify-center items-center">
+                  <Image
+                    src={fifeteenthImageAbout}
+                    alt="pic"
+                    className="md:pt-[55px] md:pb-[55px]"
+                  />
+                </div>
+                <div className="flex flex-col justify-center md:pl-[30px]">
                   <p className="text-[24px] text-textColor">Одна точка входа</p>
                   <p className="text-[18px] max-w-[298px] text-textColor">
                     Все в одном месте. Закрываем потребности через «одно» окно.
@@ -193,13 +228,13 @@ const About = () => {
                 </div>
               </div>
             </div>
-            <div className="pt-[30px] pl-[62px] flex justify-center items-center pr-[150px]">
+            <div className="pt-[30px] md:pl-[62px] flex flex-col lg:flex-row justify-center items-center px-4 md:pr-[150px]">
               <Image
                 src={sixteenthImageAbout}
                 alt="pic"
                 className="w-[234px] h-[245px]"
               />
-              <div className="pl-[40px]">
+              <div className="md:pl-[40px]">
                 <Link href="#" className="text-cerulean text-[24px]">
                   НАГ — свобода выбора
                 </Link>
@@ -238,7 +273,7 @@ const About = () => {
             <InfoTitle>Нам доверяют</InfoTitle>
           </div>
         </InfoHeader>
-        <section className="pl-[48px] text-textColor">
+        <section className="px-8 md:pl-[48px] text-textColor">
           <div className="flex flex-wrap items-center ">
             <p className="inline">
               Мы являемся поставщиком решений ведущих производителей
@@ -259,52 +294,52 @@ const About = () => {
             и охраны.
           </p>
           <p className="pt-5">Среди наших заказчиков:</p>
-          <div className="pl-[15px]">
-            <div className="flex pt-[18px]">
-              <Image src={correctImageAbout} alt="pic" />
+          <div className="md:pl-[15px]">
+            <div className="flex items-center pt-[18px]">
+              <Image src={correctImageAbout} alt="pic" className="w-5 h-6" />
               <p className="pl-[15px]">
                 Телекоммуникационные компании и IT-компании: Uztelecom,
                 East-Telecom, Turon Telecom, Сomnet, Shark Telekom, Sarkor
                 Telekom, SOLA
               </p>
             </div>
-            <div className="flex pt-[18px]">
-              <Image src={correctImageAbout} alt="pic" />
+            <div className="flex items-center pt-[18px]">
+              <Image src={correctImageAbout} alt="pic" className="w-5 h-6" />
               <p className="pl-[15px]">
                 Мобильные операторы связи: Uzmobile, Ucell, Beeline, Mobiuz,
                 Perfectum Mobile
               </p>
             </div>
-            <div className="flex pt-[18px]">
-              <Image src={correctImageAbout} alt="pic" />
+            <div className="flex items-center pt-[18px]">
+              <Image src={correctImageAbout} alt="pic" className="w-5 h-6" />
               <p className="pl-[15px]">
                 Промышленность: AGMK, NGMK, Uzbekneftegaz, UzAuto Motors,
                 SamAuto, Enter Engineering, LUKOIL Uzbekistan, O’zmetkombinat
               </p>
             </div>
-            <div className="flex pt-[18px]">
-              <Image src={correctImageAbout} alt="pic" />
+            <div className="flex items-center pt-[18px]">
+              <Image src={correctImageAbout} alt="pic" className="w-5 h-6" />
               <p className="pl-[15px]">
                 Финансы: CBU, NBU, UZCARD, UZUM, Kapitalbank, InFinBank, Ipak
                 Yo’li Bank, OrientFinansBank, TBC Bank, AnorBank, Tenge Bank
               </p>
             </div>
-            <div className="flex pt-[18px]">
-              <Image src={correctImageAbout} alt="pic" />
+            <div className="flex items-center pt-[18px]">
+              <Image src={correctImageAbout} alt="pic" className="w-5 h-6" />
               <p className="pl-[15px]">
                 Корпоративный сектор: Artel, Wildberries, OLX, UZUM Market,
                 Korzinka, Makro, Coca Cola
               </p>
             </div>
-            <div className="flex pt-[18px]">
-              <Image src={correctImageAbout} alt="pic" />
+            <div className="flex items-center pt-[18px]">
+              <Image src={correctImageAbout} alt="pic" className="w-5 h-6" />
               <p className="pl-[15px]">
                 Дата центр: Uztelecom, Uzinfocom, Unicon, East-Telecom, Data
                 Space System
               </p>
             </div>
             <div className="flex pt-[18px]">
-              <Image src={correctImageAbout} alt="pic" />
+              <Image src={correctImageAbout} alt="pic" className="w-5 h-6" />
               <p className="pl-[15px]">IХ: Tas-IX, UZ-IX, SNS-IX, ITI–IX</p>
             </div>
           </div>

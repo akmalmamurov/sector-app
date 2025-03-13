@@ -31,7 +31,7 @@ const HeaderMenu = () => {
     <div className="py-[14px] xl:py-2 border-b border-b-superSilver">
       <Container className="flex justify-between items-center lg:gap-[18px] xl:gap-[42px]">
         {/* logo */}
-        <Link href="/" className=" overflow-hidden">
+        <Link href="/" className=" overflow-hidden hidden sm:flex pr-4 lg:pr-0">
           <Image
             priority={true}
             src={logo}

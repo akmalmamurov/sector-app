@@ -19,10 +19,10 @@ interface StoreState {
   addToCart: (product: ProductData) => void;
   selectedCardsList: (products: ProductData[]) => void;
   toggleCompare: (product: ProductData) => void;
-  setQuantity: (id: number, quantity: number) => void;
-  deleteFavorites: (id: number) => void;
-  deleteCart: (id: number) => void;
-  removeFromCompares: (id: number) => void;
+  setQuantity: (id: string, quantity: number) => void;
+  deleteFavorites: (id: string) => void;
+  deleteCart: (id: string) => void;
+  removeFromCompares: (id: string) => void;
   resetCart: () => void;
   resetFavorites: () => void;
   resetCompares: () => void;

@@ -12,7 +12,7 @@ export const MyCart = ({ onNextStep, step }: Props) => {
   const [city, setCity] = useState<string>("");
   const [isClient, setIsClient] = useState(false);
   const { cart, setQuantity, deleteCart, resetCart } = useStore();
-  const [selectedItems, setSelectedItems] = useState<number[]>(
+  const [selectedItems, setSelectedItems] = useState<string[]>(
     cart.map((item) => item.id)
   );
   const [prevCartLength, setPrevCartLength] = useState(cart.length);
@@ -38,7 +38,7 @@ export const MyCart = ({ onNextStep, step }: Props) => {
     }
   };
 
-  const toggleSingleItem = (id: number) => {
+  const toggleSingleItem = (id: string) => {
     setSelectedItems((prev) =>
       prev.includes(id) ? prev.filter((itemId) => itemId !== id) : [...prev, id]
     );
