@@ -1,13 +1,11 @@
 import { getBrandSingle } from "@/api";
 import BrandFilter from "@/components/brand-filter/BrandFilter";
 import { HomeCrumb } from "@/components/bread-crumb";
-import { ProductCard } from "@/components/card";
 import { Container } from "@/components/container";
 import { InfoHeader } from "@/components/div";
 import { Section } from "@/components/section";
 import { InfoTitle } from "@/components/title";
-import { brandCardData } from "@/data/brand-card-data";
-import { ProductData } from "@/types";
+
 import Image from "next/image";
 
 const SingleBrandPage = async ({ params, }: { params: Promise<{ slug: string }>; }) => {
@@ -53,13 +51,7 @@ const SingleBrandPage = async ({ params, }: { params: Promise<{ slug: string }>;
               <InfoTitle>Товары {brand?.title}</InfoTitle>
             </InfoHeader>
 
-            <section className="pt-6">
-              <div className="grid grid-cols-3 lgl:grid-cols-4 gap-4 px-5">
-                {/* {brandCardData.map((item: ProductData) => (
-                  <ProductCard key={item?.id} product={item} />
-                ))} */}
-              </div>
-            </section>
+          
           </Section>
         </div>
       </div>
