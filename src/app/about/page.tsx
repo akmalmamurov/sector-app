@@ -232,7 +232,7 @@ const About = () => {
               <Image
                 src={sixteenthImageAbout}
                 alt="pic"
-                className=" w-[234px] h-[245px]"
+                className="w-[234px] h-[245px]"
               />
               <div className="md:pl-[40px]">
                 <Link href="#" className="text-cerulean text-[24px]">

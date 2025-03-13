@@ -6,6 +6,7 @@ import { HomeBrands } from "@/components/home-brand";
 import { ProductList } from "@/components/product-list";
 import { HomeFooter } from "@/components/home-footer";
 
+
 export default async function Home() {
   const brandsData = await getBrandPopular();
   const banners = await getBanner({ routePath: "/" });

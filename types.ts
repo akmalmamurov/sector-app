@@ -34,7 +34,16 @@ export interface ProductData {
   price: number;
   inStock?: string;
   mainImage: string;
+  slug: string;
   quantity?: number;
+  catalog: {
+    slug: string;
+    title: string
+  };
+  category: {
+    slug: string;
+    title: string
+  };
 }
 
 export interface BrandData {

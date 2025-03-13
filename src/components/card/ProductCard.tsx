@@ -20,7 +20,9 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
       )}
     >
       <div className="overflow-hidden">
-        <Link href={`/`}>
+        <Link
+          href={`/catalog/${product.catalog.slug}/${product.category.slug}/${product.slug}`}
+        >
           <Image
             src={`${process.env.NEXT_PUBLIC_API_URL}/${product?.mainImage}`}
             alt={product?.title}
@@ -38,14 +40,15 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
         </h3>
         <span
           className="cursor-pointer"
-          onClick={() =>
+          onClick={(e) => {
+            e.stopPropagation();
             copyToClipboard(
               product.title,
               "Наименование скопировано в буфер обмена"
-            )
-          }
+            );
+          }}
         >
-          <CopyIcon className="text-explosiveGrey" />
+          <CopyIcon className="text-explosiveGrey hover:text-cerulean transition-colors" />
         </span>
       </div>
       <div className="flex justify-between gap-2 mb-3">

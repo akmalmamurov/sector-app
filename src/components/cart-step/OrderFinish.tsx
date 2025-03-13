@@ -130,13 +130,13 @@ export const OrderFinish = () => {
                 <TableRow>
                   <TableCell className="border-r p-0">
                     <div className="flex items-center gap-2 justify-start">
-                      <div className="w-[65px] h-full">
+                      <div className="w-auto h-auto">
                         <Image
                           src={product.mainImage}
                           alt={product.title}
                           width={65}
                           height={65}
-                          className="p-2 w-full h-full"
+                          className="p-2 aspect-square"
                         />
                       </div>
                       <p className="text-stoneCold text-sm font-normal text-wrap flex-1">
