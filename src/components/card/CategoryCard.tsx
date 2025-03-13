@@ -48,8 +48,8 @@ export const CategoryCard = ({ category }: { category: PopularCategory }) => {
         />
       </div>
 
-      <div className="px-4">
-        <p className="font-semibold text-sm text-textColor leading-[21px]">
+      <div className="px-4 ">
+        <p className="font-semibold text-sm pr-5 text-textColor leading-[21px] text text-wrap  w-40 truncate  ">
           {category.title}
         </p>
       </div>

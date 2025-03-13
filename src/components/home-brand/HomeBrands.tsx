@@ -10,17 +10,19 @@ interface Props {
 }
 
 export const HomeBrands = ({ brands }: Props) => {
-  
   return (
     <div className="lgl:pb-[61px] py-[30px]">
       <Container>
         <Title className="mb-5">Популярные бренды</Title>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
+        <div
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          className="flex  lg:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 overflow-x-auto whitespace-nowrap lg:whitespace-normal "
+        >
           {brands?.slice(0, 5)?.map((el, index) => (
             <Link
               href={`/brands/${el.slug}`}
               key={index}
-              className="bg-white py-[5px] px-[35px] flex justify-center items-center opacity-80 hover:opacity-100 hoverEffect shadow-cardShadow rounded-[10px]"
+              className="bg-white py-[5px] px-[35px] flex justify-center items-center opacity-80 hover:opacity-100 hoverEffect shadow-cardShadow rounded-[10px] min-w-[150px] lg:min-w-0 mb-4"
             >
               <Image
                 src={`${process.env.NEXT_PUBLIC_API_URL}/${el.path}`}
@@ -33,8 +35,8 @@ export const HomeBrands = ({ brands }: Props) => {
           ))}
           <Link
             href="/brands"
-            className="bg-white text-cerulean font-medium text-sm leading-[21px]  gap-3 items-center py-[5px] px-8 flex justify-center 
-             opacity-80 hover:opacity-100 hoverEffect shadow-md rounded-[10px]"
+            className="bg-white text-cerulean font-medium text-sm leading-[21px] gap-3 items-center py-[5px] px-8 flex justify-center 
+             opacity-80 hover:opacity-100 hoverEffect shadow-md rounded-[10px] min-w-[150px] lg:min-w-0 mb-4"
           >
             Все бренды
             <span>
