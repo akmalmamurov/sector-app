@@ -6,18 +6,28 @@ import { ProductData } from "@/types";
 import { CopyIcon } from "@/assets/icons";
 import { AddToCart, AddToCompare, AddToFavorites } from "../add-storage";
 import { copyToClipboard, formatPrice } from "@/utils";
-
-export const ProductCard = ({ product }: { product: ProductData }) => {
-  
+import { cn } from "@/lib/utils";
+interface ProductCardProps {
+  product: ProductData;
+  className?: string;
+}
+export const ProductCard = ({ product, className }: ProductCardProps) => {
   return (
-    <div className="px-[13px] border border-superSilver rounded-[10px] group hover:border-cerulean hoverEffect">
+    <div
+      className={cn(
+        "px-[13px] border border-superSilver rounded-[10px] group hover:border-cerulean hoverEffect",
+        className
+      )}
+    >
       <div className="overflow-hidden">
-        <Link href={`/`}>
+        <Link
+          href={`/catalog/${product.catalog.slug}/${product.category.slug}/${product.slug}`}
+        >
           <Image
             src={`${process.env.NEXT_PUBLIC_API_URL}/${product?.mainImage}`}
             alt={product?.title}
-            width={230}
-            height={230}
+            width={250}
+            height={250}
             loading="lazy"
             className="w-full h-[230px] object-cover hover:scale-105 hoverEffect"
           />
@@ -30,14 +40,15 @@ export const ProductCard = ({ product }: { product: ProductData }) => {
         </h3>
         <span
           className="cursor-pointer"
-          onClick={() =>
+          onClick={(e) => {
+            e.stopPropagation();
             copyToClipboard(
               product.title,
               "Наименование скопировано в буфер обмена"
-            )
-          }
+            );
+          }}
         >
-          <CopyIcon className="text-explosiveGrey" />
+          <CopyIcon className="text-explosiveGrey hover:text-cerulean transition-colors" />
         </span>
       </div>
       <div className="flex justify-between gap-2 mb-3">

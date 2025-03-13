@@ -113,7 +113,7 @@ export default function BrandList(props: BrandsClientProps) {
                   <div className="flex flex-wrap gap-3 justify-center lg:justify-start items-center ">
                     {brands.map((brand) => (
                       <Link
-                        href={`/brands/${brand.id}`}
+                        href={`/brands/${brand.slug}`}
                         key={brand.id}
                         className="border border-superSilver flex flex-col justify-center items-center w-[215px] h-[145px] px-10 group gap-[15px]"
                       >

@@ -132,6 +132,9 @@ input[type="number"]::-webkit-inner-spin-button {
   .info-text {
     @apply font-normal text-base leading-[24px] text-textColor;
   }
+  .text-style {
+    @apply font-normal text-sm text-textColor
+  }
   .inputs {
     @apply w-full px-3 py-[12px] text-sm placeholder:text-darkSoul focus:outline-none 
     ring-1 ring-darkSoul focus:ring-1 hover:ring-cerulean/70 focus:ring-cerulean/70;
@@ -191,4 +194,14 @@ strong {
   background-image: url('/contact_info_bg.png');
   background-repeat: no-repeat;
   background-position: bottom right;
+}
+.title_gradient::after{
+  content: "";
+  position: absolute;
+  width: 100%;
+  background: linear-gradient(to right, #0054AE, #3A92F0);
+  height: 4px;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }

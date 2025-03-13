@@ -1,43 +1,21 @@
-"use client";
-import { useQuery } from "@tanstack/react-query";
 import { getCatalog } from "@/api/catalog";
 import { Container } from "@/components/container";
 import { HomeIcon } from "@/assets/icons";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import { CategoryData } from "@/types";
-import { findCatalogItem, getCatalogPath } from "@/utils/catalog-slug";
+import { findCatalogItem } from "@/utils/catalog-slug";
 import BreadcrumbHoverLink from "@/components/bread-crumb/CatalogCrumb";
 import { ChevronRightIcon } from "lucide-react";
+import { getBreadcrumbPaths, getSlugString } from "@/utils";
 
-export default function SingleCatalog() {
-  const { data: catalogData = [] } = useQuery({
-    queryKey: ["catalog"],
-    queryFn: getCatalog,
-    initialData: [],
-  });
+const SingleCatalogPage = async ({ params }: { params: Promise<{ slug: string }>; }) => {
+  const { slug } = await params;
+ const catalogData = await getCatalog();
 
-  const { slug } = useParams();
-  const slugString = Array.isArray(slug) ? slug.join("/") : slug;
+ const slugString = getSlugString(slug);
+ const catalogItem = slugString ? findCatalogItem(catalogData, slugString) : undefined;
+ const breadcrumbPaths = getBreadcrumbPaths(catalogData, slugString);
 
-  const catalogItem = slugString
-    ? findCatalogItem(catalogData, slugString)
-    : undefined;
-  const catalogPath = slugString ? getCatalogPath(catalogData, slugString) : [];
-
-  const breadcrumbPaths = [
-    ...catalogPath.map((item, index) => ({
-      name: item.title,
-      href:
-        index < catalogPath.length - 1
-          ? `/catalog/${catalogPath
-              .slice(0, index + 1)
-              .map((i) => i.slug)
-              .join("/")}`
-          : undefined,
-      catalogItem: item,
-    })),
-  ];
 
   return (
     <Container className="pb-[58px]">
@@ -92,4 +70,6 @@ export default function SingleCatalog() {
       </div>
     </Container>
   );
-}
+};
+
+export default SingleCatalogPage;

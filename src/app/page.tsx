@@ -1,12 +1,23 @@
 import { getBrandPopular } from "@/api";
 import { getBanner } from "@/api/banner";
-import HomeClient from "../components/home-client/HomeClient";
-import { getPopular } from "@/api/popular";
+import { Banner } from "@/components/banner";
+import { HomeCategory } from "@/components/home-category";
+import { HomeBrands } from "@/components/home-brand";
+import { ProductList } from "@/components/product-list";
+import { HomeFooter } from "@/components/home-footer";
+
 
 export default async function Home() {
   const brandsData = await getBrandPopular();
-  const popularData = await getPopular();
   const banners = await getBanner({ routePath: "/" });
 
-  return <HomeClient banners={banners} categories={popularData?.categories}  brands={brandsData} />;
+  return (
+    <>
+      <Banner banner={banners} />
+      <HomeCategory  />
+      <HomeBrands brands={brandsData} />
+      <ProductList />
+      <HomeFooter />
+    </>
+  );
 }

@@ -3,8 +3,9 @@ import useStore from "@/context/store";
 import { ProductData } from "@/types";
 import { isProductInList } from "@/utils";
 import { showSuccess } from "../toast/Toast";
+import { cn } from "@/lib/utils";
 
-export const AddToCompare = ({ product }: { product: ProductData }) => {
+export const AddToCompare = ({ product, className }: { product: ProductData, className?: string; }) => {
   const { toggleCompare, compares } = useStore();
   const isCompare = isProductInList(compares, product);
 
@@ -19,9 +20,10 @@ export const AddToCompare = ({ product }: { product: ProductData }) => {
   return (
     <button onClick={handleToCompare}>
       {isCompare ? (
-        <CompareSucessIcon />
+        <CompareSucessIcon className={cn(className)} />
+
       ) : (
-        <CompareIcon className="text-darkSoul" />
+        <CompareIcon className={cn(className, "text-darkSoul")} />
       )}
     </button>
   );
