@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, GET_PROMOTION } from "@/constants";
+import { GET_PRODUCT_SINGLE, GET_PRODUCTS, GET_PROMOTION } from "@/constants";
 import request from "@/services";
 import { ProductData } from "@/types";
 
@@ -21,5 +21,14 @@ export const getProducts = async (
   } catch (error) {
     console.log(error);
     return [];
+  }
+};
+
+export const getProductSingle = async (slug: string) => {
+  try {
+    const res = await request(`${GET_PRODUCT_SINGLE}/${slug}`);
+    return res.data.data;
+  } catch (error) {
+    console.log(error);
   }
 };

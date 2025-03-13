@@ -8,13 +8,20 @@ import { SearchIcon } from "@/assets/icons";
 import Link from "next/link";
 import HeaderMenuLink from "./HeaderMenuLink";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { getCatalog } from "@/api/catalog";
 import HeaderMobile from "./HeaderMobile";
+import { usePathname } from "next/navigation";
 const HeaderMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
   const { data: catalogData = [] } = useQuery({
     queryKey: ["catalog"],
     queryFn: getCatalog,
@@ -26,6 +33,7 @@ const HeaderMenu = () => {
         {/* logo */}
         <Link href="/" className=" overflow-hidden">
           <Image
+            priority={true}
             src={logo}
             alt="logo"
             className="xl:w-auto xl:h-auto w-[150px] h-[48px]"
@@ -63,21 +71,11 @@ const HeaderMenu = () => {
                   <Menu className="w-8 h-8" />
                 )}
               </button>
-
-              {/* {isOpen && (
-                <div className="fixed inset-0 z-50 bg-background flex flex-col items-center justify-center shadow-lg w-full h-full">
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="absolute top-4 right-4 p-2"
-                  >
-                    <X className="w-8 h-8 text-cerulean" />
-                  </button>
-                  {catalogData.map((item: CatalogData) => (
-                    <HeaderMobile key={item.id} data={item} />
-                  ))}
-                </div>
-              )} */}
-              <HeaderMobile isOpen={isOpen} setIsOpen={setIsOpen} data={catalogData} />
+              <HeaderMobile
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+                data={catalogData}
+              />
             </div>
           </div>
         </div>

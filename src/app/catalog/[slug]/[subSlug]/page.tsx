@@ -64,7 +64,9 @@ export default function CategoryPage() {
           />
         ))}
       </div>
-      <div className="bg-white border p-[23px] shadow-sectionShadow"></div>
+      <div className="bg-white border p-[23px] shadow-sectionShadow">
+        shadhh
+      </div>
     </Container>
   );
 }

@@ -8,11 +8,12 @@ import { AddToCart, AddToCompare, AddToFavorites } from "../add-storage";
 import { copyToClipboard, formatPrice } from "@/utils";
 
 export const ProductCard = ({ product }: { product: ProductData }) => {
-  
   return (
     <div className="px-[13px] border border-superSilver rounded-[10px] group hover:border-cerulean hoverEffect">
       <div className="overflow-hidden">
-        <Link href={`/`}>
+        <Link
+          href={`/catalog/${product.catalog.slug}/${product.category.slug}/${product.slug}`}
+        >
           <Image
             src={`${process.env.NEXT_PUBLIC_API_URL}/${product?.mainImage}`}
             alt={product?.title}
@@ -30,14 +31,15 @@ export const ProductCard = ({ product }: { product: ProductData }) => {
         </h3>
         <span
           className="cursor-pointer"
-          onClick={() =>
+          onClick={(e) => {
+            e.stopPropagation();
             copyToClipboard(
               product.title,
               "Наименование скопировано в буфер обмена"
-            )
-          }
+            );
+          }}
         >
-          <CopyIcon className="text-explosiveGrey" />
+          <CopyIcon className="text-explosiveGrey hover:text-cerulean transition-colors" />
         </span>
       </div>
       <div className="flex justify-between gap-2 mb-3">

@@ -29,28 +29,36 @@ const HeaderMobile = ({
 
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
-      <SheetContent side="left" className="w-full p-4 max-h-screen overflow-y-auto">
+      <SheetContent
+        side="left"
+        aria-describedby={undefined}
+        className="w-full p-4 max-h-screen overflow-y-auto"
+      >
         <SheetTitle className="sr-only">Katalog</SheetTitle>
         {!activeSub ? (
           <>
-            <div className="flex items-center mb-4">
+            <div className="flex items-center pb-4 mb-4 border-b border-stoneCold">
               <AlignJustify className="h-5 w-5 text-stoneCold" />
-              <h2 className="text-lg ml-2 text-stoneCold font-normal">Katalog</h2>
+              <h2 className="text-lg ml-2 text-stoneCold font-normal">
+                Katalog
+              </h2>
             </div>
 
             <ul className="space-y-2">
               {data.map((item) => (
                 <li
                   key={item.title}
-                  className="flex justify-between items-center cursor-pointer hover:bg-gray-100 p-2 rounded-md"
+                  className="flex justify-between items-center cursor-pointer hover:bg-gray-100 py-2 rounded-md"
                   onClick={() => {
                     setActiveSub(item.title);
                   }}
                 >
-                  <p className="">{item.title}</p>
-                  {item.subcatalogs.length > 0 && (
-                    <ChevronRight className="h-4 w-4" />
-                  )}
+                  <p className="flex-1">{item.title}</p>
+                  <div className="w-4 h-4">
+                    {item.subcatalogs.length > 0 && (
+                      <ChevronRight className="w-full h-full" />
+                    )}
+                  </div>
                 </li>
               ))}
             </ul>
@@ -77,7 +85,7 @@ const HeaderMobile = ({
                       setSubSlug(item.slug);
                     }}
                   >
-                    {item.title}
+                    <p>{item.title}</p>
                     {item.categories.length > 0 && (
                       <ChevronRight className="h-4 w-4" />
                     )}
