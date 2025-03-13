@@ -41,10 +41,9 @@ export const CategoryCard = ({ category, catalogData }: CategoryCardProps) => {
           className="w-full h-full object-cover group-hover:scale-105 duration-300 ease-in-out"
         />
       </div>
-
-      <div className="px-4">
-        <p className="font-semibold text-sm text-textColor leading-[21px]">
-          {category?.title}
+      <div className="px-4 ">
+        <p className="font-semibold text-sm pr-5 text-textColor leading-[21px] text text-wrap  w-40 truncate  ">
+          {category.title} 
         </p>
       </div>
       <div className="px-4">

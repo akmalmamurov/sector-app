@@ -13,7 +13,8 @@ export const HomeCategory = async () => {
     <section className="xl:py-12 pt-[23px]">
       <Container>
         <Title className="mb-[28px]">Популярные категории</Title>
-        <div className="grid lg:grid-cols-3 xl:grid-cols-6 gap-5 ">
+        <div  style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+className="grid grid-rows-2 grid-flow-col gap-4 overflow-x-auto scrollbar-hide lg:grid-rows-1 lg:grid-cols-3 xl:grid-cols-6 px-4 lg:flex lg:flex-wrap lg:[&>*]:w-[calc(100%/3-16px)] xl:[&>*]:w-[calc(100%/6-16px)]">
           {popularData?.categories
             ?.slice(0, 11)
             ?.map((item: PopularCategory) => (
