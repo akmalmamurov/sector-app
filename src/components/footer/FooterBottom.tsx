@@ -2,14 +2,14 @@ import { FacebookIcon, InstagramIcon, TelegramIcon } from "@/assets/icons";
 import Link from "next/link";
 
 const FooterBottom = () => {
-  const currentYear = new Date().getFullYear(); 
+  const currentYear = new Date().getFullYear();
 
   return (
     <div className="py-[55px] flex items-center justify-center md:justify-between flex-wrap md:flex-nowrap gap-8 gap-y-8">
       <p className="text-linkColor sm:text-white font-normal text-sm">
         © 2022–{currentYear} sectortechnology.uz
       </p>
-      <div className="flex gap-[115px]">
+      <div className="flex gap-[80px]">
         <Link href={"https://www.instagram.com/akmalmamuroff"} target="_blank">
           <InstagramIcon />
         </Link>
