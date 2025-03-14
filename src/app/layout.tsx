@@ -25,7 +25,7 @@ export default function RootLayout({
       <body>
         <Providers>
           <Header />
-          {children}
+        {children}
         </Providers>
         <div className="lg:block hidden">
           <Sidebar />

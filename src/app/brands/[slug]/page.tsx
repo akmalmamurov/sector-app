@@ -1,13 +1,11 @@
 import { getBrandSingle } from "@/api";
 import BrandFilter from "@/components/brand-filter/BrandFilter";
 import { HomeCrumb } from "@/components/bread-crumb";
-import { ProductCard } from "@/components/card";
 import { Container } from "@/components/container";
 import { InfoHeader } from "@/components/div";
 import { Section } from "@/components/section";
 import { InfoTitle } from "@/components/title";
-import { brandCardData } from "@/data/brand-card-data";
-import { ProductData } from "@/types";
+
 import Image from "next/image";
 
 const SingleBrandPage = async ({
@@ -42,8 +40,8 @@ const SingleBrandPage = async ({
                   src={`${process.env.NEXT_PUBLIC_API_URL}/${brand?.path}`}
                   alt={brand?.title}
                   className="w-auto h-auto max-w-[150px] max-h-[60px]"
-                  width={150}
-                  height={60}
+                  width={200}
+                  height={100}
                 />
               </div>
               <h4 className="info-text text-base text-textColor">
@@ -55,14 +53,6 @@ const SingleBrandPage = async ({
             <InfoHeader className="mb-2">
               <InfoTitle>Товары {brand?.title}</InfoTitle>
             </InfoHeader>
-
-            <section className="pt-6">
-              <div className="grid grid-cols-2 lg:grid-cols-3 lgl:grid-cols-4 gap-4 px-5">
-                {brandCardData.map((item: ProductData) => (
-                  <ProductCard key={item?.id} product={item} />
-                ))}
-              </div>
-            </section>
           </Section>
         </div>
       </div>

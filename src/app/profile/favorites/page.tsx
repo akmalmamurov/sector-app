@@ -20,7 +20,7 @@ const FavoritesPage = () => {
     closeModal,
     onConfirm,
   } = useConfirmModal();
-  const handleDeleteFavorite = (id: number) => {
+  const handleDeleteFavorite = (id: string) => {
     openModal("Вы уверены, что хотите удалить товар из избранного?", () => {
       deleteFavorites(id);
     });

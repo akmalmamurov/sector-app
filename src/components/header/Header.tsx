@@ -3,7 +3,7 @@ import HeaderMenu from "./HeaderMenu";
 import Navbar from "../navbar/Navbar";
 export const Header = () => {
   return (
-    <header className="bg-white shadow-md sticky top-0 z-10">
+    <header className="bg-white shadow-md sticky w-full top-0 z-10">
       <HeaderTop />
       <HeaderMenu />
       <Navbar />

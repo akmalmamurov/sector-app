@@ -57,6 +57,8 @@ export default {
         orangeSun: "#EE8202",
         christmas: "#E0E0E0",
         weekColor: "#8C8C8C",
+        merlin: "#408ed4",
+        dove: "#8a8a8a",
         hoverBg: "rgb(251, 251, 251)",
         explosiveGrey: "#C4C4C4",
         foreground: "hsl(var(--foreground))",

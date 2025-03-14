@@ -79,7 +79,7 @@ export const CategoryCrumb = ({
                       href={`/catalog/${sub.slug}`}
                       className="text-xs text-weekColor hover:underline flex"
                     >
-                            <ChevronRightIcon className="text-weekColor" size={14} />
+                      <ChevronRightIcon className="text-weekColor" size={14} />
                       {sub.title}
                     </Link>
                   </li>
