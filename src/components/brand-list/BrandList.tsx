@@ -110,12 +110,12 @@ export default function BrandList(props: BrandsClientProps) {
                   <h2 className="text-textColor text-[26px] font-normal mb-[31px]">
                     {letter}
                   </h2>
-                  <div className="flex flex-wrap gap-3 justify-center lg:justify-start items-center ">
+                  <div className="flex flex-wrap gap-3 justify-center md:justify-start items-center ">
                     {brands.map((brand) => (
                       <Link
                         href={`/brands/${brand.id}`}
                         key={brand.id}
-                        className="border border-superSilver flex flex-col justify-center items-center w-[215px] h-[145px] px-10 group gap-[15px]"
+                        className="border border-superSilver flex flex-col justify-center items-center w-full xs:w-[265px] h-[145px] px-10 group gap-[15px]"
                       >
                         {brand.path ? (
                           <Image

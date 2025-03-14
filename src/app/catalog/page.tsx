@@ -19,13 +19,13 @@ const CatalogPage = async () => {
         <InfoHeader className="mb-5">
           <InfoTitle>Каталог товаров</InfoTitle>
         </InfoHeader>
-        <div className="p-6 grid grid-cols-2">
+        <div className="p-4  md:p-6 grid grid-cols-2">
           {catalogData?.map((item: CatalogData) => (
             <div key={item?.id} className="mb-[50px]">
               <div className="mb-7">
                 <Link
                   href={`/catalog/${item?.slug}`}
-                  className="font-normal text-[21px] text-textColor hover:text-celBlue duration-150 ease-in-out"
+                  className="font-normal text-[16px] sm:text-[21px] text-textColor hover:text-celBlue duration-150 ease-in-out text-wrap"
                 >
                   {item?.title}
                 </Link>
@@ -35,7 +35,7 @@ const CatalogPage = async () => {
                   <Link
                     key={subcatalog?.id}
                     href={`/catalog/${subcatalog?.slug}`}
-                    className="flex items-center text-xs text-textColor hover:text-celBlue duration-150 ease-in-out"
+                    className="flex items-center text-xs text-textColor hover:text-celBlue duration-150 ease-in-out text-wrap"
                   >
                     <span className="mr-[4.68px]">
                       <CatalogChevronIcon />

@@ -57,7 +57,7 @@ const SingleBrandPage = async ({
             </InfoHeader>
 
             <section className="pt-6">
-              <div className="grid grid-cols-3 lgl:grid-cols-4 gap-4 px-5">
+              <div className="grid grid-cols-2 lg:grid-cols-3 lgl:grid-cols-4 gap-4 px-5">
                 {brandCardData.map((item: ProductData) => (
                   <ProductCard key={item?.id} product={item} />
                 ))}
