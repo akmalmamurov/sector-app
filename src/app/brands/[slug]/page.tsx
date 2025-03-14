@@ -8,10 +8,13 @@ import { InfoTitle } from "@/components/title";
 
 import Image from "next/image";
 
-const SingleBrandPage = async ({ params, }: { params: Promise<{ slug: string }>; }) => {
+const SingleBrandPage = async ({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) => {
   const { slug } = await params;
   const brand = await getBrandSingle(slug);
-  
 
   return (
     <Container className="pb-[58px]">
@@ -32,7 +35,7 @@ const SingleBrandPage = async ({ params, }: { params: Promise<{ slug: string }>;
             </InfoHeader>
 
             <section className="p-6 min-h-[250px] relative">
-              <div className="w-[300px] h-[250px] flex float-right justify-center items-center border border-superSilver mb-6 ml-5">
+              <div className="w-[260px] h-[250px] flex float-right justify-center items-center border border-superSilver mb-6 ml-5">
                 <Image
                   src={`${process.env.NEXT_PUBLIC_API_URL}/${brand?.path}`}
                   alt={brand?.title}
@@ -50,8 +53,6 @@ const SingleBrandPage = async ({ params, }: { params: Promise<{ slug: string }>;
             <InfoHeader className="mb-2">
               <InfoTitle>Товары {brand?.title}</InfoTitle>
             </InfoHeader>
-
-          
           </Section>
         </div>
       </div>
