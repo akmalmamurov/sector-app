@@ -24,7 +24,7 @@ const SingleBrandPage = async ({
           { name: `${brand?.title}` },
         ]}
       />
-      <div className="grid grid-cols-12 gap-4 lg:gap-8">
+      <div className="block lg:grid grid-cols-12 gap-4 lg:gap-8">
         <div className="col-span-3">
           <BrandFilter />
         </div>

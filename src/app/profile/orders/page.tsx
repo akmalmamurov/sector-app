@@ -27,7 +27,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { useState } from "react";
-import { CalendarDays, ChevronDown, ChevronsUpDown, Search } from "lucide-react";
+import {
+  CalendarDays,
+  ChevronDown,
+  ChevronsUpDown,
+  Search,
+} from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
   Table,
@@ -77,7 +82,7 @@ const OrdersPage = () => {
         <form
           noValidate
           onSubmit={handleSubmit(onSubmitStep2)}
-          className="pb-5 grid grid-cols-4 gap-6 mb-10"
+          className="pb-5 grid grid-cols-1 sm:grid-cols-2 lgl:grid-cols-3 gap-6 mb-10"
         >
           <FormField
             control={control}
@@ -186,7 +191,10 @@ const OrdersPage = () => {
               <FormItem>
                 <FormControl>
                   <Popover {...field}>
-                    <PopoverTrigger className="text-[14px] leading-[25px] h-[41px]" asChild>
+                    <PopoverTrigger
+                      className="text-[14px] leading-[25px] h-[41px]"
+                      asChild
+                    >
                       <Button
                         variant={"outline"}
                         className={cn(
@@ -223,7 +231,10 @@ const OrdersPage = () => {
               <FormItem>
                 <FormControl>
                   <Popover {...field}>
-                    <PopoverTrigger className="text-[14px] leading-[25px] h-[41px]" asChild>
+                    <PopoverTrigger
+                      className="text-[14px] leading-[25px] h-[41px]"
+                      asChild
+                    >
                       <Button
                         variant={"outline"}
                         className={cn(
@@ -279,33 +290,40 @@ const OrdersPage = () => {
         </form>
       </Form>
 
-      <Table className="border border-[#E2DFDF]  overflow-hidden w-full rounded-[10px]">
-        <TableHeader>
-          <TableRow className="bg-superSilver text-center border-[#E2DFDF]">
-            <TableHead className="px-2 text-center border-r text-[15px] leading-[25px] font-medium text-textColor relative">
-              <span>Заказы</span>
-              <ChevronDown className="w-[16px] h-[16px] absolute right-3 top-1/2 -translate-y-1/2" />
-            </TableHead>
-            <TableHead className="px-2 text-center border-r text-[15px] leading-[25px] font-medium text-textColor relative">
-              <span>Контрагент</span>
-              <ChevronDown className="w-[16px] h-[16px] absolute right-3 top-1/2 -translate-y-1/2" />
-            </TableHead>
-            <TableHead className="px-2 text-center border-r text-[15px] leading-[25px] font-medium text-textColor">
-              Доставка
-            </TableHead>
-            <TableHead className="px-2 text-center border-r text-[15px] leading-[25px] font-medium text-textColor">
-              Статус оплаты
-            </TableHead>
-            <TableHead className="px-2 text-center border-r text-[15px] leading-[25px] font-medium text-textColor relative">
-              <span>Сумма</span>
-              <ChevronsUpDown className="w-[19px] h-[19px] absolute right-3 top-1/2 -translate-y-1/2" />
-            </TableHead>
-            <TableHead className="px-2 text-center border-r text-[15px] leading-[25px] font-medium text-textColor relative">
-            </TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody></TableBody>
-      </Table>
+      <div
+        style={{
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+        }}
+        className="w-full overflow-x-auto"
+      >
+        <Table className="border border-[#E2DFDF] w-full rounded-[10px] min-w-[700px]">
+          <TableHeader>
+            <TableRow className="bg-superSilver text-center border-[#E2DFDF]">
+              <TableHead className="px-2 text-center border-r text-[15px] leading-[25px] font-medium text-textColor relative">
+                <span>Заказы</span>
+                <ChevronDown className="w-[16px] h-[16px] absolute right-3 top-1/2 -translate-y-1/2" />
+              </TableHead>
+              <TableHead className="px-2 text-center border-r text-[15px] leading-[25px] font-medium text-textColor relative">
+                <span>Контрагент</span>
+                <ChevronDown className="w-[16px] h-[16px] absolute right-3 top-1/2 -translate-y-1/2" />
+              </TableHead>
+              <TableHead className="px-2 text-center border-r text-[15px] leading-[25px] font-medium text-textColor">
+                Доставка
+              </TableHead>
+              <TableHead className="px-2 text-center border-r text-[15px] leading-[25px] font-medium text-textColor">
+                Статус оплаты
+              </TableHead>
+              <TableHead className="px-2 text-center border-r text-[15px] leading-[25px] font-medium text-textColor relative">
+                <span>Сумма</span>
+                <ChevronsUpDown className="w-[19px] h-[19px] absolute right-3 top-1/2 -translate-y-1/2" />
+              </TableHead>
+              <TableHead className="px-2 text-center border-r text-[15px] leading-[25px] font-medium text-textColor relative"></TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody></TableBody>
+        </Table>
+      </div>
     </div>
   );
 };

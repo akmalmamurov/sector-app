@@ -77,8 +77,8 @@ const SettingsPage = () => {
               onSubmit={handleSubmit(onSubmitStep)}
               className="pb-5"
             >
-              <div className="grid grid-cols-11 gap-6 items-center mb-4">
-                <p className="text-[#000000DE] col-span-2 text-sm">
+              <div className="block lg:grid grid-cols-11 gap-6 items-center mb-4">
+                <p className="text-[#000000DE] col-span-2 text-sm pt-5">
                   Основные данные
                 </p>
                 <FormField
@@ -90,7 +90,7 @@ const SettingsPage = () => {
                         <div className="relative w-full">
                           <Label
                             htmlFor="name"
-                            className="text-textColor font-normal text-sm inline-block pb-2"
+                            className="text-textColor font-normal text-sm inline-block pb-2 pt-10 lg:pt-0"
                           >
                             Имя
                           </Label>
@@ -116,7 +116,7 @@ const SettingsPage = () => {
                         <div className="relative w-full">
                           <Label
                             htmlFor="email"
-                            className="text-textColor font-normal text-sm inline-block pb-2"
+                            className="text-textColor font-normal text-sm inline-block pb-2 pt-10 lg:pt-0"
                           >
                             Email
                           </Label>
@@ -150,8 +150,8 @@ const SettingsPage = () => {
               onSubmit={handleSubmit2(onSubmitStep2)}
               className="pb-5"
             >
-              <div className="grid grid-cols-11 gap-6 items-center mb-3">
-                <p className="text-[#000000DE] col-span-2 text-sm">
+              <div className="block lg:grid grid-cols-11 gap-6 items-center mb-3">
+                <p className="text-[#000000DE] col-span-2 text-sm pt-5">
                   Безопасность
                 </p>
 
@@ -164,7 +164,7 @@ const SettingsPage = () => {
                         <div className="relative w-full flex flex-col">
                           <Label
                             htmlFor="oldPassword"
-                            className="text-textColor font-normal text-sm inline-block pb-2"
+                            className="text-textColor font-normal text-sm inline-block pb-2 pt-10 lg:pt-0"
                           >
                             Старый пароль
                           </Label>
@@ -195,7 +195,7 @@ const SettingsPage = () => {
                         <div className="relative w-full flex flex-col">
                           <Label
                             htmlFor="newPassword"
-                            className="text-textColor font-normal text-sm inline-block pb-2"
+                            className="text-textColor font-normal text-sm inline-block pb-2 pt-5 lg:pt-0"
                           >
                             Новый пароль
                           </Label>
@@ -226,7 +226,7 @@ const SettingsPage = () => {
                         <div className="relative w-full flex flex-col">
                           <Label
                             htmlFor="repeatPassword"
-                            className="text-textColor font-normal text-sm inline-block pb-2"
+                            className="text-textColor font-normal text-sm inline-block pb-2 pt-10 lg:pt-0"
                           >
                             Новый пароль (повтор)
                           </Label>
@@ -251,7 +251,7 @@ const SettingsPage = () => {
                   )}
                 />
               </div>
-              <div className="bg-whiteOut flex items-center gap-2 mb-6 p-5 pl-0 w-[72%] ml-auto">
+              <div className="bg-whiteOut flex items-center gap-2 mb-6 p-5 pl-0 w-[100%] lg:w-[72%] ml-auto">
                 <div className="w-[70px] flex justify-center items-center">
                   <TriangleAlert className="text-[#8C8C8C] w-[24px] h-[24px]" />
                 </div>
@@ -275,11 +275,15 @@ const SettingsPage = () => {
           </Form>
         </div>
         <div className="border-b border-superSilver py-5">
-          <div className="grid grid-cols-11 gap-6 items-center mb-3">
-            <p className="text-[#000000DE] col-span-2 text-sm">Контакты</p>
-            <div className="pb-12 col-span-3">
-              <p className="text-sm text-[#000000DE] font-normal">Телефон</p>
-              <span className="text-base font-normal">+998 99 861 6951</span>
+          <div className="block lg:grid lg:grid-cols-11 gap-6 items-center mb-3">
+            <p className="text-[#000000DE] col-span-2 text-sm pt-8 lg:pt-0">
+              Контакты
+            </p>
+            <div className="pb-8 lg:pb-12 col-span-3 pt-10 lg:pt-0">
+              <p className="text-sm text-[#000000DE] font-normal pb-5 lg:pt-0">
+                Телефон
+              </p>
+              <span className="text-base font-normal ">+998 99 861 6951</span>
             </div>
           </div>
           <button className="border border-cerulean rounded-xl flex items-center gap-2 h-[42px] p-4 justify-self-end">
@@ -290,9 +294,9 @@ const SettingsPage = () => {
           </button>
         </div>
         <div className="border-b border-superSilver pt-5 pb-2">
-          <div className="grid grid-cols-11 gap-6 items-center mb-3">
+          <div className="block lg:grid grid-cols-11 gap-6 items-center mb-3">
             <p className="text-[#000000DE] text-sm col-span-2">Уведомления</p>
-            <div className="col-span-9 place-self-start">
+            <div className="col-span-9 -ml-3 sm:-ml-0 place-self-start">
               <table className="w-full border-separate border-spacing-y-3">
                 <tbody>
                   <tr>
@@ -382,11 +386,11 @@ const SettingsPage = () => {
           </div>
         </div>
         <div className="pt-5 pb-2">
-          <div className="grid grid-cols-11 gap-6 items-center mb-3">
+          <div className="block lg:grid grid-cols-11 gap-6 items-center mb-3">
             <p className="text-[#000000DE] text-sm col-span-2">
               Дополнительные <br /> настройки
             </p>
-            <div className="col-span-7 place-self-start flex items-center w-full gap-4">
+            <div className="col-span-7 place-self-start block lg:flex items-center w-full gap-4 pt-10 lg:pt-0">
               <div className="flex flex-col flex-1">
                 <Label
                   htmlFor="name"
@@ -398,7 +402,7 @@ const SettingsPage = () => {
                   UZS(сум)
                 </button>
               </div>
-              <div className="flex flex-col w-full flex-1">
+              <div className="flex flex-col w-full flex-1 pt-6 lg:pt-0">
                 <Label
                   htmlFor="name"
                   className="text-textColor font-normal text-sm inline-block pb-2"
