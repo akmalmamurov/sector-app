@@ -39,3 +39,4 @@ export * from "./CatalogChevronIcon";
 export * from "./CrumbChevronDownIcon";
 export * from "./FlexIcon";
 export * from "./FlexColIcon";
+export * from "./GoToSectionIcon";
