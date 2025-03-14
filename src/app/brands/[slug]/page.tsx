@@ -35,7 +35,7 @@ const SingleBrandPage = async ({
             </InfoHeader>
 
             <section className="p-6 min-h-[250px] relative">
-              <div className="w-[300px] h-[250px] flex float-right justify-center items-center border border-superSilver mb-6 ml-5">
+              <div className="w-[260px] h-[250px] flex float-right justify-center items-center border border-superSilver mb-6 ml-5">
                 <Image
                   src={`${process.env.NEXT_PUBLIC_API_URL}/${brand?.path}`}
                   alt={brand?.title}

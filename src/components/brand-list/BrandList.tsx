@@ -115,7 +115,7 @@ export default function BrandList(props: BrandsClientProps) {
                       <Link
                         href={`/brands/${brand.slug}`}
                         key={brand.id}
-                        className="border border-superSilver flex flex-col justify-center items-center w-full xs:w-[265px] h-[145px] px-10 group gap-[15px]"
+                        className="border border-superSilver flex flex-col justify-center items-center w-full xs:w-[265px] sm:w-[245px] md:w-[255px] h-[145px] px-10 group gap-[15px]"
                       >
                         {brand.path ? (
                           <Image
