@@ -36,7 +36,6 @@ const ProductTabs = () => {
     },
   });
 
-
   return (
     <Tabs
       defaultValue={activeTab}
