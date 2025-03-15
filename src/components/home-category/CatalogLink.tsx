@@ -5,7 +5,7 @@ const CatalogLink = () => {
   return (
     <Link
       href={"/catalog"}
-      className="bg-white relative shadow-2xl overflow-hidden pb-1 min-h-[190px] rounded-[10px] cursor-pointer flex flex-col justify-between"
+      className="bg-white relative shadow-2xl overflow-hidden pb-1 w-[175px] h-[165px] lg:w-[282px] lg:min-h-[190px] rounded-[10px] cursor-pointer flex flex-col justify-between"
     >
       <div className="px-4 py-6">
         <SidebarTopIcon className="rotate-90 w-4 h-5" />

@@ -30,9 +30,9 @@ export const CategoryCard = ({ category, catalogData }: CategoryCardProps) => {
   return (
     <Link
       href={`/catalog/${subcatalogSlug}/${category.slug}`}
-      className="bg-white group relative shadow-md overflow-hidden pb-1 min-h-[190px] rounded-[10px] cursor-pointer flex flex-col justify-between"
+      className="bg-white group relative shadow-md overflow-hidden pb-1  rounded-[10px] cursor-pointer flex flex-col justify-between w-[175px] h-[165px] lg:w-[282px] lg:min-h-[190px]"
     >
-      <div className="w-[150px] h-[100px] overflow-hidden">
+      <div className="w-[125px] h-[85px] lg:w-[150px] lg:h-[100px] overflow-hidden">
         <Image
           src={`${process.env.NEXT_PUBLIC_API_URL}/${category.path}`}
           alt={category.title}
@@ -43,7 +43,7 @@ export const CategoryCard = ({ category, catalogData }: CategoryCardProps) => {
       </div>
       <div className="px-4 ">
         <p className="font-semibold text-sm pr-5 text-textColor leading-[21px] text text-wrap  w-40 truncate  ">
-          {category.title} 
+          {category.title}
         </p>
       </div>
       <div className="px-4">
