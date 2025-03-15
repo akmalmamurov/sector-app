@@ -28,7 +28,8 @@ export const HomeCategory = async () => {
                 />
               ))}
             <CatalogLink />
-          </div>
+
+
         </div>
       </Container>
     </section>
