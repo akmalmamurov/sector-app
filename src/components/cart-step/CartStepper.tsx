@@ -58,9 +58,21 @@ const CartStepper = () => {
       case 0:
         return <MyCart step={activeStep} onNextStep={handleNextStep} />;
       case 1:
-        return <CartContact step={activeStep} onPrevStep={handlePrevStep} onNextStep={handleNextStep} />;
+        return (
+          <CartContact
+            step={activeStep}
+            onPrevStep={handlePrevStep}
+            onNextStep={handleNextStep}
+          />
+        );
       case 2:
-        return <CartDelivery step={activeStep} onPrevStep={handlePrevStep} onNextStep={handleNextStep} />;
+        return (
+          <CartDelivery
+            step={activeStep}
+            onPrevStep={handlePrevStep}
+            onNextStep={handleNextStep}
+          />
+        );
       case 3:
         return <CartOrder onPrevStep={handlePrevStep} step={activeStep} />;
       default:
@@ -70,7 +82,9 @@ const CartStepper = () => {
 
   return (
     <Container className="pt-5 pb-[58px]">
-      <Stepper steps={steps} activeStep={activeStep} />
+      <div className="hidden lg:block">
+        <Stepper steps={steps} activeStep={activeStep} />
+      </div>
       <div className="mt-[23px]">{renderCurrentStepContent()}</div>
     </Container>
   );
