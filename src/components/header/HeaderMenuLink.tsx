@@ -21,26 +21,18 @@ const HeaderMenuLink = () => {
 
   return (
     <div className="lg:flex items-center gap-[7px] xl:gap-0">
-      <Link
-        href={"/discounts"}
-        className="header-menu-item"
-      >
+      <Link href={"/discounts"} className="header-menu-item">
         <span>
           <DiscountIcon className="w-5 h-5 xl:w-6 xl:h-6" />
         </span>
         <span className="header-menu-link">Аксии</span>
       </Link>
-      <Link
-        href={"/profile/favorites"}
-        className="header-menu-item"
-      >
+      <Link href={"/profile/favorites"} className="header-menu-item">
         {favorites?.length > 0 ? (
           <>
             <span className="relative">
               <HeartActiveIcon className="text-dangerColor w-5 h-5 xl:w-6 xl:h-6" />
-              <span className="header-menu-badge">
-                {favorites?.length}
-              </span>
+              <span className="header-menu-badge">{favorites?.length}</span>
             </span>
           </>
         ) : (
@@ -50,16 +42,11 @@ const HeaderMenuLink = () => {
         )}
         <span className="header-menu-link">Избранное</span>
       </Link>
-      <Link
-        href={"/compare"}
-        className="header-menu-item"
-      >
+      <Link href={"/compare"} className="header-menu-item">
         {compares?.length > 0 ? (
           <span className="relative">
             <CompareSucessIcon className="w-5 h-5 xl:w-6 xl:h-6" />
-            <span className="header-menu-badge">
-              {compares?.length}
-            </span>
+            <span className="header-menu-badge">{compares?.length}</span>
           </span>
         ) : (
           <span>
@@ -68,29 +55,23 @@ const HeaderMenuLink = () => {
         )}
         <span className="header-menu-link">Сравнить</span>
       </Link>
+      {/* Profile */}
       {auth ? (
         <ProfileMenu />
       ) : (
-        <button
-          onClick={handleOpen}
-          className="header-menu-item"
-        >
+        <button onClick={handleOpen} className="header-menu-item">
           <span>
             <UserIcon className="w-5 h-5 xl:w-6 xl:h-6" />
           </span>
           <span className="header-menu-link">{auth ? "Кабинет" : "Войти"}</span>
         </button>
       )}
-      <Link
-        href={"/cart"}
-        className="header-menu-item"
-      >
+
+      <Link href={"/cart"} className="header-menu-item">
         {cart?.length > 0 ? (
           <span className="relative">
             <CartIcon className="w-5 h-5 xl:w-6 xl:h-6" />
-            <span className="header-menu-badge">
-              {cart?.length}
-            </span>
+            <span className="header-menu-badge">{cart?.length}</span>
           </span>
         ) : (
           <span>
@@ -100,6 +81,7 @@ const HeaderMenuLink = () => {
 
         <span className="header-menu-link">Корзина</span>
       </Link>
+
       <LoginModal isOpen={isOpen} handleOpen={handleOpen} />
     </div>
   );

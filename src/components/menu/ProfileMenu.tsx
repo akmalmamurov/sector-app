@@ -29,16 +29,19 @@ export const ProfileMenu = () => {
   return (
     <div
       ref={menuRef}
-      className="w-[50px] xl:w-[100px] h-[50px] flex items-center justify-center relative"
+      className="w-[50px] xl:w-[100px] h-[50px] flex items-center justify-center relative "
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-[50px] xl:w-[100px] h-10 xl:h-[50px]  flex items-center flex-col justify-between text-textColor"
       >
         <span>
-          <UserIcon className="w-5 h-5 xl:w-6 xl:h-6"/>
+          <UserIcon className="w-7 h-6 lg:w-5 lg:h-5 xl:w-6 xl:h-6" />
         </span>
-        <span className="header-menu-link">Кабинет</span>
+        <span className="header-menu-link hidden lg:block">Кабинет</span>
+        <span className="header-menu-link block lg:hidden p-[2px] text-[9px] pt-1">
+          Профиль
+        </span>
       </button>
 
       {isOpen && (
