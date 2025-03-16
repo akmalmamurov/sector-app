@@ -55,6 +55,7 @@ const HeaderMenuLink = () => {
         )}
         <span className="header-menu-link">Сравнить</span>
       </Link>
+      {/* Profile */}
       {auth ? (
         <ProfileMenu />
       ) : (
@@ -79,6 +80,7 @@ const HeaderMenuLink = () => {
 
         <span className="header-menu-link">Корзина</span>
       </Link>
+
       <LoginModal isOpen={isOpen} handleOpen={handleOpen} />
     </div>
   );

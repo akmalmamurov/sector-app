@@ -57,9 +57,9 @@ export const MyCart = ({ onNextStep, step }: Props) => {
     resetCart,
   };
   return (
-    <div className="grid grid-cols-4 gap-[23px]">
+    <div className="block lg:grid grid-cols-4 gap-[23px]">
       <MyCartLeft {...props} />
-      <div className="col-span-1">
+      <div className="col-span-1 mt-5">
         <OrderCart
           onNextStep={onNextStep}
           step={step}
