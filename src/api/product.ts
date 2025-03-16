@@ -32,11 +32,14 @@ export const getProductSingle = async (slug: string) => {
     console.log(error);
   }
 };
-
-export const getProductCategory = async (queryParams: string) => {
+export const getProductCategory = async (
+  queryParams: string,
+  page: number,
+  limit: number
+) => {
   try {
     const res = await request(GET_PRODUCT_CATEGORY, {
-      params: { categorySlug: queryParams } 
+      params: { categorySlug: queryParams, page, limit },
     });
     return res.data.data;
   } catch (error) {

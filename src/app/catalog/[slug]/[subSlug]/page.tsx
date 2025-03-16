@@ -4,7 +4,6 @@ import { Container } from "@/components/container";
 import { HomeIcon } from "@/assets/icons";
 import { CategoryCrumb } from "@/components/bread-crumb";
 import { getCategoryBreadcrumbPaths, getCategoryTitle } from "@/utils";
-import { getProductCategory } from "@/api/product";
 import CategoryLeft from "@/components/category/CategoryLeft";
 import { CategoryRight } from "@/components/category";
 
@@ -15,7 +14,6 @@ const CategoryPage = async ({
 }) => {
   const { slug, subSlug } = await params;
   const catalogData = await getCatalog();
-  const data =  await getProductCategory(subSlug || "");
 
   const breadcrumbPaths = getCategoryBreadcrumbPaths( catalogData, slug, subSlug );
   const categoryTitle = getCategoryTitle(catalogData, slug, subSlug);
@@ -41,7 +39,7 @@ const CategoryPage = async ({
         {/* filters */}
         <CategoryLeft />
         {/* products */}
-        <CategoryRight data={data} title={categoryTitle} />
+        <CategoryRight slug={subSlug} title={categoryTitle} />
       </div>
     </Container>
   );

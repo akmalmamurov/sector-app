@@ -8,14 +8,19 @@ import BreadcrumbHoverLink from "@/components/bread-crumb/CatalogCrumb";
 import { ChevronRightIcon } from "lucide-react";
 import { getBreadcrumbPaths, getSlugString } from "@/utils";
 
-const SingleCatalogPage = async ({ params }: { params: Promise<{ slug: string }>; }) => {
+const SingleCatalogPage = async ({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) => {
   const { slug } = await params;
- const catalogData = await getCatalog();
+  const catalogData = await getCatalog();
 
- const slugString = getSlugString(slug);
- const catalogItem = slugString ? findCatalogItem(catalogData, slugString) : undefined;
- const breadcrumbPaths = getBreadcrumbPaths(catalogData, slugString);
-
+  const slugString = getSlugString(slug);
+  const catalogItem = slugString
+    ? findCatalogItem(catalogData, slugString)
+    : undefined;
+  const breadcrumbPaths = getBreadcrumbPaths(catalogData, slugString);
 
   return (
     <Container className="pb-[58px]">
@@ -41,24 +46,27 @@ const SingleCatalogPage = async ({ params }: { params: Promise<{ slug: string }>
         ))}
       </div>
 
-      <div className="bg-white border p-[23px] shadow-sectionShadow">
+      <div className="bg-white border p-[23px] shadow-sectionShadow ">
         <div className="flex flex-wrap items-start">
           {catalogItem?.subcatalogs?.length ? (
             catalogItem.subcatalogs.map((sub) => (
               <Link
-                key={sub.id}
-                href={`/catalog/${sub.slug}`}
-                className="border p-2 m-2 text-textColor"
-              >
+              key={sub.id}
+              href={`/catalog/${sub.slug}`}
+              className="relative border p-2 m-2 text-textColor bg-whiteOut hover:text-cerulean hover:bg-white hover:shadow-lg before:hidden hover:before:block before:w-full before:h-[2px] before:bg-cerulean before:absolute before:bottom-0 before:left-0 duration-200 ease-in-out"
+            >
+              <span>
                 {sub.title}
-              </Link>
+              </span>
+            </Link>
+            
             ))
           ) : catalogItem?.categories?.length ? (
             (catalogItem.categories as CategoryData[]).map((category) => (
               <Link
                 key={category?.id}
                 href={`/catalog/${catalogItem.slug}/${category.slug}`}
-                className="border p-2 m-2 text-textColor"
+                    className="relative border p-2 m-2 text-textColor bg-whiteOut hover:text-cerulean hover:bg-white hover:shadow-lg before:hidden hover:before:block before:w-full before:h-[2px] before:bg-cerulean before:absolute before:bottom-0 before:left-0 duration-200 ease-in-out"
               >
                 {category.title}
               </Link>

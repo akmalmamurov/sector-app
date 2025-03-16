@@ -26,7 +26,7 @@ export default function BreadcrumbHoverLink({
 const showDropdown = item.href !== undefined && item.catalogItem && subcatalogs.length > 0;
   return (
     <div
-      className="flex items-center gap-[15px]  relative"
+      className="flex items-center gap-[15px] relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -50,7 +50,7 @@ const showDropdown = item.href !== undefined && item.catalogItem && subcatalogs.
 
       {!isLast && <ChevronRight className="text-weekColor" size={14} />}
       {!isLast && subcatalogs.length > 0 && isHovered && (
-        <div className="absolute top-full left-0  bg-white border shadow-md py-2 pr-2 pl-4 w-full min-w-[280px]">
+        <div className="absolute top-full left-0  bg-white border shadow-md py-2 pr-2 pl-4 w-full min-w-[280px] z-[2]">
           <ul className="flex flex-col gap-1">
             {subcatalogs.map((sub) => (
               <Link
