@@ -61,6 +61,8 @@ import catalogNavBottom from "./catalog_nav_bottom.png";
 import korzinaNavBottom from "./korzina_nav_bottom.png";
 import profileNavBottom from "./profile_nav_bottom.png";
 
+import partnersLogo from "./partners_page.png";
+
 export {
   logo,
   flagUz,
@@ -109,4 +111,5 @@ export {
   catalogNavBottom,
   korzinaNavBottom,
   profileNavBottom,
+  partnersLogo,
 };
