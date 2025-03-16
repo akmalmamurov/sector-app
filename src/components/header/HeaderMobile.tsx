@@ -1,129 +1,134 @@
 "use client";
 
-import { CatalogData } from "@/types";
 import { useState } from "react";
-import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
-import { AlignJustify, ArrowLeft, ChevronRight } from "lucide-react";
+import { Sheet, SheetContent, SheetDescription, SheetTitle } from "@/components/ui/sheet";
+import { AlignJustify, ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { CatalogData, SubcatalogData } from "@/types";
+import MobileGoSection from "./MobileGoSection";
+import { ChevronRightIcon } from "@/assets/icons";
 
-const HeaderMobile = ({
-  data,
-  isOpen,
-  setIsOpen,
-}: {
+interface HeaderMobileProps {
   data: CatalogData[];
   isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
-}) => {
-  const router = useRouter();
-  const [activeSub, setActiveSub] = useState<string | null>(null);
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const [subSlug, setSubSlug] = useState<string | null>(null);
+  setIsOpen: (open: boolean) => void;
+}
 
-  function onClose() {
+const HeaderMobile = ({ data, isOpen, setIsOpen }: HeaderMobileProps) => {
+  const router = useRouter();
+  const [selectedCatalog, setSelectedCatalog] = useState<CatalogData | null>(
+    null
+  );
+  const [selectedSubcatalog, setSelectedSubcatalog] =
+    useState<SubcatalogData | null>(null);
+  const onClose = () => {
     setIsOpen(false);
-    setActiveSub(null);
-    setActiveCategory(null);
-    setSubSlug(null);
-  }
+    setSelectedCatalog(null);
+    setSelectedSubcatalog(null);
+  };
+
+  const handleGoToSection = () => {
+    if (selectedCatalog && selectedSubcatalog) {
+      router.push(`/catalog/${selectedSubcatalog.slug}`);
+      console.log(`Subcatalog slug: ${selectedSubcatalog.slug}`);
+      onClose();
+    } else if (selectedCatalog) {
+      router.push(`/catalog/${selectedCatalog.slug}`);
+      onClose();
+    }
+  };
 
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
       <SheetContent
         side="left"
-        aria-describedby={undefined}
-        className="w-full p-4 max-h-screen overflow-y-auto"
+        className="w-full max-h-screen overflow-y-auto p-0"
       >
-        <SheetTitle className="sr-only">Katalog</SheetTitle>
-        {!activeSub ? (
-          <>
-            <div className="flex items-center pb-4 mb-4 border-b border-stoneCold">
-              <AlignJustify className="h-5 w-5 text-stoneCold" />
-              <h2 className="text-lg ml-2 text-stoneCold font-normal">
-                Katalog
-              </h2>
-            </div>
+        <SheetTitle className="hidden"></SheetTitle>
+        <SheetDescription className="hidden"></SheetDescription>
+        {/* header */}
+        <div className="flex items-center p-[23px] border-b border-superSilver">
+          {selectedCatalog ? (
+            <button
+              className="text-stoneCold"
+              onClick={() => {
+                if (selectedSubcatalog) {
+                  setSelectedSubcatalog(null);
+                } else {
+                  setSelectedCatalog(null);
+                }
+              }}
+            >
+              <ChevronLeft className="h-5 w-5 cursor-pointer" />
+            </button>
+          ) : (
+            <AlignJustify className="h-5 w-5 text-stoneCold" />
+          )}
+          <h2 className="text-lg ml-2 text-stoneCold font-normal">
+            {selectedCatalog
+              ? selectedSubcatalog
+                ? selectedSubcatalog.title
+                : selectedCatalog.title
+              : "Каталог"}
+          </h2>
+        </div>
 
-            <ul className="space-y-2">
-              {data.map((item) => (
-                <li
-                  key={item.title}
-                  className="flex justify-between items-center cursor-pointer hover:bg-gray-100 py-2 rounded-md"
-                  onClick={() => {
-                    setActiveSub(item.title);
-                  }}
-                >
-                  <p className="flex-1">{item.title}</p>
-                  <div className="w-4 h-4">
-                    {item.subcatalogs.length > 0 && (
-                      <ChevronRight className="w-full h-full" />
-                    )}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </>
-        ) : !activeCategory ? (
-          <>
-            <div className="flex items-center mb-4">
-              <ArrowLeft
-                className="h-5 w-5 cursor-pointer"
-                onClick={() => setActiveSub(null)}
-              />
-              <h2 className="text-lg font-bold ml-2">{activeSub}</h2>
-            </div>
+        <MobileGoSection selectedCatalog={selectedCatalog} handleGoToSection={handleGoToSection} onClose={onClose}/>
 
-            <ul className="space-y-2">
-              {data
-                .find((sub) => sub.title === activeSub)
-                ?.subcatalogs.map((item) => (
-                  <li
-                    key={item.title}
-                    className="flex justify-between items-center cursor-pointer hover:bg-gray-100 p-2 rounded-md"
-                    onClick={() => {
-                      setActiveCategory(item.title);
-                      setSubSlug(item.slug);
-                    }}
-                  >
-                    <p>{item.title}</p>
-                    {item.categories.length > 0 && (
-                      <ChevronRight className="h-4 w-4" />
-                    )}
-                  </li>
-                ))}
-            </ul>
-          </>
-        ) : (
-          <>
-            <div className="flex items-center mb-4">
-              <ArrowLeft
-                className="h-5 w-5 cursor-pointer"
-                onClick={() => setActiveCategory(null)}
-              />
-              <h2 className="text-lg font-bold ml-2">{activeCategory}</h2>
-            </div>
-            <ul className="space-y-2">
-              {data
-                .find((sub) => sub.title === activeSub)
-                ?.subcatalogs.find(
-                  (category) => category.title === activeCategory
-                )
-                ?.categories.map((item) => (
-                  <li
-                    onClick={() => {
-                      if (subSlug) {
-                        router.push(`/catalog/${subSlug}/${item.slug}`);
-                        onClose();
-                      }
-                    }}
-                    key={item.id}
-                    className="p-2 hover:bg-gray-100 rounded-md cursor-pointer"
-                  >
-                    {item.title}
-                  </li>
-                ))}
-            </ul>
-          </>
+        {!selectedCatalog && (
+          <ul className="px-[23px] ">
+            {data.map((catalog) => (
+              <li
+                key={catalog.slug}
+                className="cursor-pointer py-2 text-textColor border-b border-superSilver flex justify-between items-center"
+                onClick={() => setSelectedCatalog(catalog)}
+              >
+                {catalog.title}
+                <span>
+                  <ChevronRightIcon/>
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {selectedCatalog && !selectedSubcatalog && (
+          <ul className="px-[23px]">
+            {selectedCatalog.subcatalogs.map((subcatalog) => (
+              <li
+                key={subcatalog.slug}
+                className="cursor-pointer  py-2 text-textColor border-b border-superSilver flex justify-between items-center"
+                onClick={() => setSelectedSubcatalog(subcatalog)}
+              >
+                {subcatalog.title}
+                <span>
+                  <ChevronRightIcon/>
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {selectedSubcatalog && (
+          <ul className="px-[23px]">
+            {selectedSubcatalog.categories.map((category) => (
+              <li
+                key={category.slug}
+                className="cursor-pointer py-2 text-textColor border-b border-superSilver flex justify-between items-center"
+                onClick={() => {
+                  router.push(
+                    `/catalog/${selectedSubcatalog.slug}/${category.slug}`
+                  );
+                  onClose();
+                }}
+              >
+                {category.title}
+                <span>
+                  <ChevronRightIcon/>
+                </span>
+              </li>
+            ))}
+          </ul>
         )}
       </SheetContent>
     </Sheet>

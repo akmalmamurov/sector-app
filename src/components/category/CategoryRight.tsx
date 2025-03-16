@@ -13,7 +13,6 @@ interface CategoryRightProps {
 }
 export const CategoryRight = ({ data, title }: CategoryRightProps) => {
   const [rowCol, setRowCol] = useState("row");
-  console.log(data);
   const productData = data?.products;
   return (
     <div className="col-span-9">

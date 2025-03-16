@@ -63,10 +63,9 @@ const HeaderMenuLink = () => {
           <span>
             <UserIcon className="w-5 h-5 xl:w-6 xl:h-6" />
           </span>
-          <span className="header-menu-link">{auth ? "Кабинет" : "Войти"}</span>
+          <span className="header-menu-link"> Войти</span>
         </button>
       )}
-
       <Link href={"/cart"} className="header-menu-item">
         {cart?.length > 0 ? (
           <span className="relative">
