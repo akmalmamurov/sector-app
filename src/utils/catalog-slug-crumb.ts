@@ -41,10 +41,12 @@ export const getCategoryBreadcrumbPaths = (
     ...(slug
       ? getCatalogPath(catalogData, slug).map((item, index, arr) => ({
           name: item.title,
-          href: `/catalog/${arr
-            .slice(0, index + 1)
-            .map((i) => i.slug)
-            .join("/")}`,
+          href:
+            subSlug && index === arr.length - 1
+              ? 
+                `/catalog/${item.slug}`
+              : 
+                `/catalog/${arr.slice(0, index + 1).map((i) => i.slug).join("/")}`,
           catalogItem: item,
         }))
       : []),

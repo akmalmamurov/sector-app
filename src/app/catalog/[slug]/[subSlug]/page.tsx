@@ -3,7 +3,7 @@ import { getCatalog } from "@/api/catalog";
 import { Container } from "@/components/container";
 import { HomeIcon } from "@/assets/icons";
 import { CategoryCrumb } from "@/components/bread-crumb";
-import { getCategoryBreadcrumbPaths, getCategoryTitle } from "@/utils";
+import { getCategoryBreadcrumbPaths, getTitleBySlug } from "@/utils";
 import CategoryLeft from "@/components/category/CategoryLeft";
 import { CategoryRight } from "@/components/category";
 
@@ -16,7 +16,7 @@ const CategoryPage = async ({
   const catalogData = await getCatalog();
 
   const breadcrumbPaths = getCategoryBreadcrumbPaths( catalogData, slug, subSlug );
-  const categoryTitle = getCategoryTitle(catalogData, slug, subSlug);
+  const categoryTitle = getTitleBySlug(catalogData,  subSlug || "");
   return (
     <Container className="pb-[58px]">
       <div className="flex items-center pl-2 sm:pl-1 gap-[15px] text-gray-600 h-[60px]">
@@ -39,7 +39,7 @@ const CategoryPage = async ({
         {/* filters */}
         <CategoryLeft />
         {/* products */}
-        <CategoryRight slug={subSlug} title={categoryTitle} />
+        <CategoryRight slug={subSlug} title={categoryTitle} paramKey="categorySlug"/>
       </div>
     </Container>
   );

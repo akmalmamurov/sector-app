@@ -28,16 +28,19 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
             alt={product?.title}
             width={250}
             height={250}
-            loading="lazy"
-            className="w-full h-[230px] object-cover hover:scale-105 hoverEffect"
+            priority
+            className="w-full h-[230px] object-cover"
           />
         </Link>
       </div>
 
       <div className="flex justify-between gap-2 mt-2 h-[72px] overflow-hidden">
-        <h3 className="font-normal text-xs leading-[18px] text-titleColor text-left line-clamp-3 h-fit">
+        <Link
+          href={`/catalog/${product.catalog.slug}/${product.category.slug}/${product.slug}`}
+          className="font-normal text-xs leading-[18px] text-titleColor text-left line-clamp-3 h-fit hover:text-cerulean hoverEffect"
+        >
           {product.title}
-        </h3>
+        </Link>
         <span
           className="cursor-pointer"
           onClick={(e) => {

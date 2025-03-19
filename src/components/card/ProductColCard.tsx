@@ -8,6 +8,7 @@ import { copyToClipboard, formatPrice } from "@/utils";
 import { cn } from "@/lib/utils";
 import { ChevronUp } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
 
 interface ProductColCardProps {
   product: ProductData;
@@ -35,9 +36,12 @@ export const ProductColCard = ({ product, className }: ProductColCardProps) => {
       {/* Title */}
       <div className="col-span-5">
         <div className="flex justify-between gap-2 py-[10px] px-[15px] w-full">
-          <h3 className="font-normal text-xs leading-[18px] text-titleColor max-w-[354px]">
+          <Link
+            href={`/catalog/${product.catalog.slug}/${product.category.slug}/${product.slug}`}
+            className="font-normal text-xs leading-[18px] text-titleColor max-w-[354px] hover:text-celBlue hoverEffect"
+          >
             {product.title}
-          </h3>
+          </Link>
           <span
             className="cursor-pointer w-10"
             onClick={(e) => {

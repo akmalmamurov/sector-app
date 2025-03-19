@@ -1,4 +1,9 @@
-import { GET_PRODUCT_CATEGORY, GET_PRODUCTS, GET_PROMOTION,GET_PRODUCT_SINGLE, } from "@/constants";
+import {
+  GET_PRODUCT_CATEGORY,
+  GET_PRODUCTS,
+  GET_PROMOTION,
+  GET_PRODUCT_SINGLE,
+} from "@/constants";
 import request from "@/services";
 import { ProductData } from "@/types";
 
@@ -35,14 +40,28 @@ export const getProductSingle = async (slug: string) => {
 export const getProductCategory = async (
   queryParams: string,
   page: number,
-  limit: number
+  limit: number,
+  paramKey: string,
+  inStock: boolean,
+  popular: boolean,
+  priceSort: "asc" | "desc" | null,
+  nameSort: "asc" | "desc" | null
 ) => {
   try {
-    const res = await request(GET_PRODUCT_CATEGORY, {
-      params: { categorySlug: queryParams, page, limit },
-    });
+    const params = {
+      [paramKey]: queryParams,
+      page,
+      limit,
+      ...(inStock && { inStock: true }),
+      ...(popular && { popular: true }),
+      ...(priceSort && {price:priceSort }),
+      ...(nameSort && {name:nameSort }),
+    };
+    const res = await request(GET_PRODUCT_CATEGORY, { params });
     return res.data.data;
   } catch (error) {
     console.log(error);
   }
 };
+
+

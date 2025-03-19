@@ -3,10 +3,11 @@ import { Container } from "@/components/container";
 import { HomeIcon } from "@/assets/icons";
 import Link from "next/link";
 import { CategoryData } from "@/types";
-import { findCatalogItem } from "@/utils/catalog-slug";
+import { findCatalogItem, getTitleBySlug,  } from "@/utils/catalog-slug";
 import BreadcrumbHoverLink from "@/components/bread-crumb/CatalogCrumb";
 import { ChevronRightIcon } from "lucide-react";
 import { getBreadcrumbPaths, getSlugString } from "@/utils";
+import { CategoryLeft, CategoryRight } from "@/components/category";
 
 const SingleCatalogPage = async ({
   params,
@@ -21,7 +22,7 @@ const SingleCatalogPage = async ({
     ? findCatalogItem(catalogData, slugString)
     : undefined;
   const breadcrumbPaths = getBreadcrumbPaths(catalogData, slugString);
-
+  const categoryTitle = getTitleBySlug(catalogData, slug);
   return (
     <Container className="pb-[58px]">
       <div className="flex items-center pl-2 gap-[15px] text-weekColor h-[58px]">
@@ -46,7 +47,7 @@ const SingleCatalogPage = async ({
         ))}
       </div>
 
-      <div className="bg-white border p-[23px] shadow-sectionShadow ">
+      <div className="bg-white border p-[23px] shadow-sectionShadow mb-[23px]">
         <div className="flex flex-wrap items-start">
           {catalogItem?.subcatalogs?.length ? (
             catalogItem.subcatalogs.map((sub) => (
@@ -75,6 +76,13 @@ const SingleCatalogPage = async ({
             <p className="text-textColor">Каталог пуст</p>
           )}
         </div>
+      </div>
+          {/* filter product */}
+          <div className="grid grid-cols-12 gap-6">
+        {/* filters */}
+        <CategoryLeft />
+        {/* products */}
+        <CategoryRight slug={slug} title={categoryTitle} paramKey="catalogSlug" />
       </div>
     </Container>
   );

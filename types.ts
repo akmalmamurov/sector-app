@@ -38,11 +38,15 @@ export interface ProductData {
   quantity?: number;
   catalog: {
     slug: string;
-    title: string
+    title: string;
   };
   category: {
     slug: string;
-    title: string
+    title: string;
+  };
+  subcatalog: {
+    slug: string;
+    title: string;
   };
 }
 
