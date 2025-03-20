@@ -5,8 +5,6 @@ import { useQuery } from "@tanstack/react-query";
 import { getCatalog } from "@/api/catalog";
 import { Container } from "@/components/container";
 import { CartIcon, CopyIcon, HomeIcon } from "@/assets/icons";
-import { CategoryData } from "@/types";
-import { findCatalogItem, getCatalogPath } from "@/utils/catalog-slug";
 import { CategoryCrumb } from "@/components/bread-crumb";
 import { getProductSingle } from "@/api/product";
 import ThumbsGallery from "@/components/thumbs-gallery/ThumbsGallery";
@@ -14,7 +12,7 @@ import Image from "next/image";
 import { BadgeCheck, CircleAlert, Download, Share2, Truck } from "lucide-react";
 import CommentsIcon from "@/assets/icons/CommentsIcon";
 import QuestionCommentIcon from "@/assets/icons/QuestionCommentIcon";
-import { copyToClipboard } from "@/utils";
+import { copyToClipboard, getCategoryBreadcrumbPaths } from "@/utils";
 import { AddToCompare, AddToFavorites } from "@/components/add-storage";
 import FreePickUpIcon from "@/assets/icons/FreePickUpIcon";
 import InStockIcon from "@/assets/icons/InStockIcon";
@@ -40,37 +38,7 @@ export default function ProductPage() {
 
   console.log(product);
 
-  const subcatalogItem = slug ? findCatalogItem(catalogData, slug) : undefined;
-
-  const categoryItem =
-    subcatalogItem && subcatalogItem.categories && subSlug
-      ? (subcatalogItem.categories as CategoryData[]).find(
-          (cat) => cat.slug === subSlug
-        )
-      : undefined;
-
-  const breadcrumbPaths = [
-    { name: "Каталог", href: "/catalog", catalogItem: undefined },
-    ...(slug
-      ? getCatalogPath(catalogData, slug).map((item, index, arr) => ({
-          name: item.title,
-          href: `/catalog/${arr
-            .slice(0, index + 1)
-            .map((i) => i.slug)
-            .join("/")}`,
-          catalogItem: item,
-        }))
-      : []),
-    ...(categoryItem
-      ? [
-          {
-            name: categoryItem.title,
-            href: undefined,
-            catalogItem: subcatalogItem,
-          },
-        ]
-      : []),
-  ];
+  const breadcrumbPaths = getCategoryBreadcrumbPaths( catalogData, slug, subSlug,true );
 
   return (
     <Container className="pb-[58px]">

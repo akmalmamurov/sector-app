@@ -25,7 +25,8 @@ export const getBreadcrumbPaths = (
 export const getCategoryBreadcrumbPaths = (
   catalogData: CatalogData[],
   slug?: string,
-  subSlug?: string
+  subSlug?: string,
+  category?: boolean
 ) => {
   const subcatalogItem = slug ? findCatalogItem(catalogData, slug) : undefined;
 
@@ -43,10 +44,8 @@ export const getCategoryBreadcrumbPaths = (
           name: item.title,
           href:
             subSlug && index === arr.length - 1
-              ? 
-                `/catalog/${item.slug}`
-              : 
-                `/catalog/${arr.slice(0, index + 1).map((i) => i.slug).join("/")}`,
+              ? `/catalog/${item.slug}`
+              : `/catalog/${arr.slice(0, index + 1).map((i) => i.slug).join("/")}`,
           catalogItem: item,
         }))
       : []),
@@ -54,7 +53,7 @@ export const getCategoryBreadcrumbPaths = (
       ? [
           {
             name: categoryItem.title,
-            href: undefined,
+            href: category ? `/catalog/${subcatalogItem?.slug}/${categoryItem.slug} ` : undefined,
             catalogItem: subcatalogItem,
           },
         ]

@@ -21,7 +21,7 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
     >
       <div className="overflow-hidden">
         <Link
-          href={`/catalog/${product.catalog.slug}/${product.category.slug}/${product.slug}`}
+          href={`/catalog/${product.subcatalog.slug}/${product.category.slug}/${product.slug}`}
         >
           <Image
             src={`${process.env.NEXT_PUBLIC_API_URL}/${product?.mainImage}`}
@@ -36,7 +36,7 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
 
       <div className="flex justify-between gap-2 mt-2 h-[72px] overflow-hidden">
         <Link
-          href={`/catalog/${product.catalog.slug}/${product.category.slug}/${product.slug}`}
+          href={`/catalog/${product.subcatalog.slug}/${product.category.slug}/${product.slug}`}
           className="font-normal text-xs leading-[18px] text-titleColor text-left line-clamp-3 h-fit hover:text-cerulean hoverEffect"
         >
           {product.title}

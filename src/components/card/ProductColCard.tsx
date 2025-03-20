@@ -37,7 +37,7 @@ export const ProductColCard = ({ product, className }: ProductColCardProps) => {
       <div className="col-span-5">
         <div className="flex justify-between gap-2 py-[10px] px-[15px] w-full">
           <Link
-            href={`/catalog/${product.catalog.slug}/${product.category.slug}/${product.slug}`}
+            href={`/catalog/${product.subcatalog.slug}/${product.category.slug}/${product.slug}`}
             className="font-normal text-xs leading-[18px] text-titleColor max-w-[354px] hover:text-celBlue hoverEffect"
           >
             {product.title}
