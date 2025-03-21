@@ -27,6 +27,14 @@ export interface PopularCategory {
     id: string;
   };
 }
+type Options = {
+  name: string;
+  value: string;
+}
+export interface CharacteristicsData {
+  title?: string;
+  options: Options[]
+}
 export interface ProductData {
   id: string;
   title: string;
@@ -48,6 +56,12 @@ export interface ProductData {
     slug: string;
     title: string;
   };
+  images?: string[];
+  brand?: BrandData;
+  productCode?: string;
+  characteristics?: CharacteristicsData[];
+  fullDescription?: string;
+  fullDescriptionImages?: string[] | string;
 }
 
 export interface BrandData {

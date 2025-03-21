@@ -2,7 +2,7 @@ import { getCatalog } from "@/api/catalog";
 import { Container } from "@/components/container";
 import { HomeIcon } from "@/assets/icons";
 import Link from "next/link";
-import { CategoryData } from "@/types";
+import { CategoryData, CatalogData } from "@/types";
 import { findCatalogItem, getTitleBySlug,  } from "@/utils/catalog-slug";
 import BreadcrumbHoverLink from "@/components/bread-crumb/CatalogCrumb";
 import { ChevronRightIcon } from "lucide-react";
@@ -50,17 +50,16 @@ const SingleCatalogPage = async ({
       <div className="bg-white border p-[23px] shadow-sectionShadow mb-[23px]">
         <div className="flex flex-wrap items-start">
           {catalogItem?.subcatalogs?.length ? (
-            catalogItem.subcatalogs.map((sub) => (
+            catalogItem.subcatalogs.map((sub: CatalogData) => (
               <Link
-              key={sub.id}
-              href={`/catalog/${sub.slug}`}
-              className="relative border p-2 m-2 text-textColor bg-whiteOut hover:text-cerulean hover:bg-white hover:shadow-lg before:hidden hover:before:block before:w-full before:h-[2px] before:bg-cerulean before:absolute before:bottom-0 before:left-0 duration-200 ease-in-out"
-            >
-              <span>
-                {sub.title}
-              </span>
-            </Link>
-            
+                key={sub.id}
+                href={`/catalog/${sub.slug}`}
+                className="relative border p-2 m-2 text-textColor bg-whiteOut hover:text-cerulean hover:bg-white hover:shadow-lg before:hidden hover:before:block before:w-full before:h-[2px] before:bg-cerulean before:absolute before:bottom-0 before:left-0 duration-200 ease-in-out"
+              >
+                <span>
+                  {sub.title}
+                </span>
+              </Link>
             ))
           ) : catalogItem?.categories?.length ? (
             (catalogItem.categories as CategoryData[]).map((category) => (

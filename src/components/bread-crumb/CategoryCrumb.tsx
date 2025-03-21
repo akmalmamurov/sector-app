@@ -1,11 +1,11 @@
 "use client";
+import Link from "next/link";
+import { useState, useRef, useEffect } from "react";
+import { ChevronRight, ChevronRightIcon } from "lucide-react";
+import { createPortal } from "react-dom";
 
 import { CrumbChevronDownIcon } from "@/assets/icons";
 import { CatalogData } from "@/types";
-import { ChevronRight, ChevronRightIcon } from "lucide-react";
-import Link from "next/link";
-import { useState, useRef, useEffect } from "react";
-import { createPortal } from "react-dom";
 interface CategoryCrumbProps {
   item: { name: string; href?: string; catalogItem?: CatalogData };
   isLast: boolean;
