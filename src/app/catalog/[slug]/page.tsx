@@ -2,7 +2,7 @@ import { getCatalog } from "@/api/catalog";
 import { Container } from "@/components/container";
 import { HomeIcon } from "@/assets/icons";
 import Link from "next/link";
-import { CategoryData, CatalogData } from "@/types";
+import { CategoryData } from "@/types";
 import { findCatalogItem, getTitleBySlug,  } from "@/utils/catalog-slug";
 import BreadcrumbHoverLink from "@/components/bread-crumb/CatalogCrumb";
 import { ChevronRightIcon } from "lucide-react";
@@ -50,7 +50,7 @@ const SingleCatalogPage = async ({
       <div className="bg-white border p-[23px] shadow-sectionShadow mb-[23px]">
         <div className="flex flex-wrap items-start">
           {catalogItem?.subcatalogs?.length ? (
-            catalogItem.subcatalogs.map((sub: CatalogData) => (
+            catalogItem.subcatalogs.map((sub) => (
               <Link
                 key={sub.id}
                 href={`/catalog/${sub.slug}`}
