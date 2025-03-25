@@ -155,7 +155,7 @@ input[type="number"]::-webkit-inner-spin-button {
     @apply list-decimal;
   }
   .prose img {
-    @apply rounded-none;
+    @apply rounded-lg shadow-lg;
   }
 }
 .faq-section {

@@ -3,6 +3,8 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { DOMAIN } from "@/constants";
 import { ProductData } from "@/types";
+import { CircleAlert, CirclePlus } from "lucide-react";
+import StarIcon from "@/assets/icons/StarIcon";
 interface Block {
   id: string;
   type: string;
@@ -85,12 +87,7 @@ function renderEditorBlocks(editorJson: EditorData, fullImages: string[]) {
         const caption = block.data.caption || "";
         return (
           <div key={block.id} className="relative w-1/2 h-64 my-4">
-            <Image
-              src={imageUrl}
-              alt={caption}
-              fill
-              className=""
-            />
+            <Image src={imageUrl} alt={caption} fill className="" />
             {caption && <p className="text-center text-sm mt-2">{caption}</p>}
           </div>
         );
@@ -211,12 +208,12 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
             }}
             className="py-[53px]"
           >
-            <div className="border-l-[8px] pl-[23px] mb-[23px] border-cerulean">
-              <h2 className="text-2xl font-bold mb-4 flex items-center">
+            <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
+              <h2 className="text-xl font-semibold mb-4 flex items-center">
                 Описание
               </h2>
             </div>
-            <div className="prose max-w-none">{editorContent}</div>
+            <div className="prose max-w-none pl-[31px]">{editorContent}</div>
           </section>
         )}
 
@@ -228,8 +225,8 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
             }}
             className="py-[53px]"
           >
-            <div className="border-l-[8px] pl-[23px] mb-[23px] border-cerulean">
-              <h2 className="text-2xl font-bold mb-6">Характеристики</h2>
+            <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
+              <h2 className="text-xl font-semibold mb-6">Характеристики</h2>
             </div>
             <div>
               {product.characteristics.map((group, index) => (
@@ -263,6 +260,80 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
             </div>
           </section>
         )}
+
+        <section
+          id="reviews"
+          ref={(el: HTMLElement | null): void => {
+            sectionRefs.current.reviews = el;
+          }}
+          className="py-[53px] bg-whiteOut"
+          style={{ scrollMarginTop: "100px" }}
+        >
+          <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
+            <h2 className="text-xl font-semibold mb-4 flex items-center">
+              Отзывы о товаре
+            </h2>
+          </div>
+          <div className="max-w-none pl-[31px]">
+            <p className="text-base font-normal text-textColor mb-6">
+              Пока нет ни одного отзыва
+            </p>
+            <div className="flex gap-5 items-center">
+              <button className="bg-cerulean hover:opacity-90 transition-opacity px-6 py-[10px] text-base font-semibold text-white inline-flex items-center justify-center gap-2">
+                <CirclePlus className="text-white w-5 h-5" />
+                <span>Добавить отзыв</span>
+              </button>
+              <div className="flex gap-2 items-center">
+                <StarIcon className="text-white w-[25px] h-[22px]" />
+                <span className="text-[26px] font-normal text-textColor leading-[39px]">
+                  0
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section
+          id="questions"
+          ref={(el: HTMLElement | null): void => {
+            sectionRefs.current.questions = el;
+          }}
+          className="py-[53px] mb-10"
+          style={{ scrollMarginTop: "100px" }}
+        >
+          <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
+            <h2 className="text-xl font-semibold mb-4 flex items-center">
+              Вопросы о товаре
+            </h2>
+          </div>
+          <div className="max-w-none pl-[31px]">
+            <p className="text-base font-normal text-textColor mb-6">
+              Пока нет ни одного вопроса.
+            </p>
+            <button className="bg-cerulean hover:opacity-90 transition-opacity px-6 py-[10px] text-base font-semibold text-white inline-flex items-center justify-center gap-2">
+              <CirclePlus className="text-white w-5 h-5" />
+              <span>Задать вопрос</span>
+            </button>
+          </div>
+        </section>
+        <div className="">
+          <div className="flex items-center gap-4 border rounded-[10px] border-cerulean p-3.5">
+            <CircleAlert className="w-5 h-5 text-cerulean" />
+            <div className="flex flex-col gap-5 flex-1">
+              <p className="text-cerulean text-xs font-normal">
+                Уважаемые покупатели. <br />
+                Обращаем Ваше внимание, что размещенная на данном сайте
+                справочная информация о товарах не является офертой, наличие и
+                стоимость оборудования необходимо уточнить у менеджеров  "НАГ
+                Узбекистан", которые с удовольствием помогут Вам в выборе
+                оборудования и оформлении на него заказа.
+              </p>
+              <p className="text-cerulean text-xs font-normal">
+                Производитель оставляет за собой право изменять внешний вид,
+                технические характеристики и комплектацию без уведомления.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
