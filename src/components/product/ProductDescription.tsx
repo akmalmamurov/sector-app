@@ -1,8 +1,10 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { DOMAIN } from "@/constants"; 
+import { DOMAIN } from "@/constants";
 import { ProductData } from "@/types";
+import { CircleAlert, CirclePlus } from "lucide-react";
+import StarIcon from "@/assets/icons/StarIcon";
 interface Block {
   id: string;
   type: string;
@@ -37,52 +39,64 @@ function renderEditorBlocks(editorJson: EditorData, fullImages: string[]) {
   if (!editorJson?.blocks || !Array.isArray(editorJson.blocks)) {
     return null;
   }
-  let imageIndex = 0; 
+  let imageIndex = 0;
   return editorJson.blocks.map((block: Block) => {
     if (!block.data) return null;
-    
+
     switch (block.type) {
       case "paragraph":
         return (
           <p
             key={block.id}
-            dangerouslySetInnerHTML={{ __html: block.data.text || '' }}
+            dangerouslySetInnerHTML={{ __html: block.data.text || "" }}
           />
         );
       case "header":
         const level = block.data.level || 2;
-        const HeaderTag = `h${level}` as `h1` | `h2` | `h3` | `h4` | `h5` | `h6`;
-        return React.createElement(HeaderTag, { key: block.id }, block.data.text || '');
+        const HeaderTag = `h${level}` as
+          | `h1`
+          | `h2`
+          | `h3`
+          | `h4`
+          | `h5`
+          | `h6`;
+        return React.createElement(
+          HeaderTag,
+          { key: block.id },
+          block.data.text || ""
+        );
       case "list":
         const isOrdered = block.data.style === "ordered";
         const ListTag = isOrdered ? "ol" : "ul";
         return (
           <ListTag key={block.id}>
             {block.data.items?.map((item: { content: string }, idx: number) => (
-              <li key={idx} dangerouslySetInnerHTML={{ __html: item.content }} />
+              <li
+                key={idx}
+                dangerouslySetInnerHTML={{ __html: item.content }}
+              />
             ))}
           </ListTag>
         );
-      case "image":
-        {
-          let imageUrl = fullImages[imageIndex] || "";
-          imageIndex++;
-          if (DOMAIN && !imageUrl.startsWith("http")) {
-            imageUrl = DOMAIN + (imageUrl.startsWith("/") ? "" : "/") + imageUrl;
-          }
-          const caption = block.data.caption || "";
-          return (
-            <div key={block.id} className="relative w-full h-64 my-4">
-              <Image
-                src={imageUrl}
-                alt={caption}
-                fill
-                style={{ objectFit: "contain" }}
-              />
-              {caption && <p className="text-center text-sm mt-2">{caption}</p>}
-            </div>
-          );
+      case "image": {
+        let imageUrl = fullImages[imageIndex] || "";
+        imageIndex++;
+        if (DOMAIN && !imageUrl.startsWith("http")) {
+          imageUrl = DOMAIN + (imageUrl.startsWith("/") ? "" : "/") + imageUrl;
         }
+        const caption = block.data.caption || "";
+        return (
+          <div key={block.id} className="relative w-full h-64 my-4">
+            <Image
+              src={imageUrl}
+              alt={caption}
+              fill
+              style={{ objectFit: "contain" }}
+            />
+            {caption && <p className="text-center text-sm mt-2">{caption}</p>}
+          </div>
+        );
+      }
       default:
         return null;
     }
@@ -94,11 +108,11 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
 
   let fullImages: string[] = [];
-  if (typeof product.fullDescriptionImages === 'string') {
+  if (typeof product.fullDescriptionImages === "string") {
     try {
-      fullImages = JSON.parse(product.fullDescriptionImages || '[]');
+      fullImages = JSON.parse(product.fullDescriptionImages || "[]");
     } catch (error) {
-      console.error('Error parsing fullDescriptionImages:', error);
+      console.error("Error parsing fullDescriptionImages:", error);
     }
   } else if (Array.isArray(product.fullDescriptionImages)) {
     fullImages = product.fullDescriptionImages;
@@ -106,7 +120,11 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
 
   let editorContent: React.ReactNode = null;
   try {
-    const descObj = JSON.parse(typeof product.fullDescription === 'string' ? product.fullDescription : "{}");
+    const descObj = JSON.parse(
+      typeof product.fullDescription === "string"
+        ? product.fullDescription
+        : "{}"
+    );
     editorContent = renderEditorBlocks(descObj, fullImages);
   } catch (error) {
     console.log("Parsing fullDescription error:", error);
@@ -158,7 +176,9 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
                   : "border-transparent"
               }`}
               onClick={() =>
-                document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+                document
+                  .getElementById(id)
+                  ?.scrollIntoView({ behavior: "smooth" })
               }
             >
               {label}
@@ -167,7 +187,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
         })}
       </div>
 
-      <div className="p-[23px] space-y-20 bg-white">
+      <div className="p-[23px] space-y-12 bg-white">
         {editorContent && (
           <section
             id="description"
@@ -177,8 +197,8 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
             className="pt-8"
             style={{ scrollMarginTop: "180px" }}
           >
-            <div className="border-l-[8px] pl-[23px] mb-[23px] border-cerulean">
-              <h2 className="text-2xl font-bold mb-4 flex items-center">
+            <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
+              <h2 className="text-xl font-semibold mb-4 flex items-center">
                 Описание
               </h2>
             </div>
@@ -193,20 +213,20 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
               sectionRefs.current.specs = el;
             }}
             className="pt-8"
-            style={{ scrollMarginTop: "180px" }}
+            style={{ scrollMarginTop: "100px" }}
           >
-            <div className="border-l-[8px] pl-[23px] mb-[23px] border-cerulean">
-              <h2 className="text-2xl font-bold mb-6">Характеристики</h2>
+            <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
+              <h2 className="text-xl font-semibold mb-6">Характеристики</h2>
             </div>
             <div>
               {product.characteristics.map((group, index) => (
-                <div key={index} className="overflow-auto bg-white shadow mb-6">
+                <div key={index} className="overflow-auto bg-white shadow">
                   <table className="w-full text-left border-collapse">
                     <thead>
-                      <tr className="bg-gray-100 border-b">
+                      <tr className="bg-superSilver border-b">
                         <th
                           colSpan={2}
-                          className="py-4 font-semibold text-lg text-gray-700 text-center"
+                          className="py-2.5 font-semibold text-sm text-textColor text-center"
                         >
                           {group.title}
                         </th>
@@ -214,11 +234,14 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
                     </thead>
                     <tbody>
                       {group.options.map((option, optIndex) => (
-                        <tr key={optIndex} className="border-b">
-                          <td className="p-4 w-1/2 font-medium text-gray-600">
+                        <tr
+                          key={optIndex}
+                          className="border-b text-sm text-textColor"
+                        >
+                          <td className="p-3 w-1/2 font-medium text-gray-600">
                             {option.name}
                           </td>
-                          <td className="p-4 w-1/2 text-gray-900">
+                          <td className="p-3 w-1/2 text-gray-900 border-l border-superSilver">
                             {option.value}
                           </td>
                         </tr>
@@ -231,7 +254,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
           </section>
         )}
 
-        {["related", "reviews", "questions"].map((id) => {
+        {/* {["related", "reviews", "questions"].map((id) => {
           const label = sections.find((section) => section.id === id)?.label || "";
           return (
             <section
@@ -247,7 +270,75 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
               <p>Контент для раздела {label}...</p>
             </section>
           );
-        })}
+        })} */}
+        <section
+          id="reviews"
+          ref={(el: HTMLElement | null): void => {
+            sectionRefs.current.reviews = el;
+          }}
+          className="py-12 bg-whiteOut"
+          style={{ scrollMarginTop: "100px" }}
+        >
+          <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
+            <h2 className="text-xl font-semibold mb-4 flex items-center">
+              Отзывы о товаре
+            </h2>
+          </div>
+          <div className="max-w-none pl-[31px]">
+            <p className="text-base font-normal text-textColor mb-6">
+              Пока нет ни одного отзыва
+            </p>
+            <div className="flex gap-5 items-center">
+              <button className="bg-cerulean hover:opacity-90 transition-opacity px-6 py-[10px] text-base font-semibold text-white inline-flex items-center justify-center gap-2">
+                <CirclePlus className="text-white w-5 h-5" />
+                <span>Добавить отзыв</span>
+              </button>
+              <div className="flex gap-2 items-center">
+                <StarIcon className="text-white w-[25px] h-[22px]" />
+                <span className="text-[26px] font-normal text-textColor leading-[39px]">
+                  0
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section
+          id="questions"
+          ref={(el: HTMLElement | null): void => {
+            sectionRefs.current.questions = el;
+          }}
+          className="py-12"
+          style={{ scrollMarginTop: "100px" }}
+        >
+          <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
+            <h2 className="text-xl font-semibold mb-4 flex items-center">
+              Вопросы о товаре
+            </h2>
+          </div>
+          <div className="max-w-none pl-[31px]">
+            <p className="text-base font-normal text-textColor mb-6">
+              Пока нет ни одного вопроса.
+            </p>
+            <button className="bg-cerulean hover:opacity-90 transition-opacity px-6 py-[10px] text-base font-semibold text-white inline-flex items-center justify-center gap-2">
+              <CirclePlus className="text-white w-5 h-5" />
+              <span>Задать вопрос</span>
+            </button>
+          </div>
+        </section>
+        <div className="flex items-center gap-4 border rounded-[10px] border-cerulean p-3.5">
+          <CircleAlert className="w-5 h-5 text-cerulean" />
+          <div className="flex flex-col gap-5 flex-1">
+          <p className="text-cerulean text-xs font-normal">
+            Уважаемые покупатели. <br />
+             Обращаем Ваше внимание, что размещенная на
+            данном сайте справочная информация о товарах не является офертой,
+            наличие и стоимость оборудования необходимо уточнить у менеджеров
+             "НАГ Узбекистан", которые с удовольствием помогут Вам в выборе
+            оборудования и оформлении на него заказа.
+          </p>
+          <p className="text-cerulean text-xs font-normal">Производитель оставляет за собой право изменять внешний вид, технические характеристики и комплектацию без уведомления.</p>
+          </div>
+        </div>
       </div>
     </div>
   );
