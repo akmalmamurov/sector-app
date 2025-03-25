@@ -3,8 +3,29 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { DOMAIN } from "@/constants";
 import { ProductData } from "@/types";
-import { CircleAlert, CirclePlus } from "lucide-react";
+import { CircleAlert, CirclePlus, X } from "lucide-react";
 import StarIcon from "@/assets/icons/StarIcon";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "../ui/dialog";
+import { Button } from "../ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "../ui/form";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Label } from "../ui/label";
+import { Textarea } from "../ui/textarea";
+import { StarRating } from "../star-rating/StarRating";
 interface Block {
   id: string;
   type: string;
@@ -101,6 +122,25 @@ function renderEditorBlocks(editorJson: EditorData, fullImages: string[]) {
 export function ProductDescription({ product }: ProductDescriptionProps) {
   const [activeTab, setActiveTab] = useState("description");
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen2, setIsOpen2] = useState(false);
+  const [rating, setRating] = useState(0);
+  const formSchema = z.object({
+    text: z.string(),
+  });
+
+  const formMethods = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: { text: "" },
+  });
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = formMethods;
+
+  const handleOpen = () => setIsOpen(!isOpen);
+  const handleOpen2 = () => setIsOpen2(!isOpen2);
 
   let fullImages: string[] = [];
   if (typeof product.fullDescriptionImages === "string") {
@@ -173,168 +213,304 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
       });
     }
   };
+  const onSubmit = async (data: { text: string }) => {
+    console.log(data);
+  };
   return (
-    <div>
-      <div className="sticky top-[130px] z-[5] bg-white  flex border-b shadow-sectionShadow">
-        {sections.map(({ id, label }) => {
-          if (id === "description" && !editorContent) return null;
-          if (
-            id === "specs" &&
-            (!product.characteristics || product.characteristics.length === 0)
-          )
-            return null;
-          return (
-            <button
-              key={id}
-              className={`px-5 py-3.5 text-center border-b-2 transition-all relative inline-block ${
-                activeTab === id
-                  ? "text-cerulean title_gradient"
-                  : "border-transparent"
-              }`}
-              onClick={() => handleTabClick(id)}
-            >
-              {label}
-            </button>
-          );
-        })}
-      </div>
+    <>
+      <div>
+        <div className="sticky top-[130px] z-[5] bg-white  flex border-b shadow-sectionShadow">
+          {sections.map(({ id, label }) => {
+            if (id === "description" && !editorContent) return null;
+            if (
+              id === "specs" &&
+              (!product.characteristics || product.characteristics.length === 0)
+            )
+              return null;
+            return (
+              <button
+                key={id}
+                className={`px-5 py-3.5 text-center border-b-2 transition-all relative inline-block ${
+                  activeTab === id
+                    ? "text-cerulean title_gradient"
+                    : "border-transparent"
+                }`}
+                onClick={() => handleTabClick(id)}
+              >
+                {label}
+              </button>
+            );
+          })}
+        </div>
 
-      <div className="bg-whiteOut shadow-sectionShadow p-[23px] ">
-        {editorContent && (
+        <div className="bg-whiteOut shadow-sectionShadow p-[23px] ">
+          {editorContent && (
+            <section
+              id="description"
+              ref={(el) => {
+                if (el) sectionRefs.current.description = el;
+              }}
+              className="py-[53px]"
+            >
+              <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
+                <h2 className="text-xl font-semibold mb-4 flex items-center">
+                  Описание
+                </h2>
+              </div>
+              <div className="prose max-w-none pl-[31px]">{editorContent}</div>
+            </section>
+          )}
+
+          {product.characteristics && product.characteristics.length > 0 && (
+            <section
+              id="specs"
+              ref={(el) => {
+                if (el) sectionRefs.current.specs = el;
+              }}
+              className="py-[53px]"
+            >
+              <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
+                <h2 className="text-xl font-semibold mb-6">Характеристики</h2>
+              </div>
+              <div>
+                {product.characteristics.map((group, index) => (
+                  <div key={index} className="overflow-auto bg-white">
+                    <table className="w-full text-left border">
+                      <thead>
+                        <tr className="bg-superSilver border-b-2 border-cerulean">
+                          <th
+                            colSpan={2}
+                            className="py-[6px] font-semibold text-sm text-textColor text-center"
+                          >
+                            {group.title}
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {group.options.map((option, optIndex) => (
+                          <tr key={optIndex} className="border-b">
+                            <td className="p-2 w-1/2 font-normal text-sm text-textColor leading-[21px]">
+                              {option.name}
+                            </td>
+                            <td className="p-2 w-1/2 font-normal text-sm text-textColor leading-[21px] border-l">
+                              {option.value}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
           <section
-            id="description"
-            ref={(el) => {
-              if (el) sectionRefs.current.description = el;
+            id="reviews"
+            ref={(el: HTMLElement | null): void => {
+              sectionRefs.current.reviews = el;
             }}
-            className="py-[53px]"
+            className="py-[53px] bg-whiteOut"
+            style={{ scrollMarginTop: "100px" }}
           >
             <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
               <h2 className="text-xl font-semibold mb-4 flex items-center">
-                Описание
+                Отзывы о товаре
               </h2>
             </div>
-            <div className="prose max-w-none pl-[31px]">{editorContent}</div>
-          </section>
-        )}
-
-        {product.characteristics && product.characteristics.length > 0 && (
-          <section
-            id="specs"
-            ref={(el) => {
-              if (el) sectionRefs.current.specs = el;
-            }}
-            className="py-[53px]"
-          >
-            <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
-              <h2 className="text-xl font-semibold mb-6">Характеристики</h2>
-            </div>
-            <div>
-              {product.characteristics.map((group, index) => (
-                <div key={index} className="overflow-auto bg-white">
-                  <table className="w-full text-left border">
-                    <thead>
-                      <tr className="bg-superSilver border-b-2 border-cerulean">
-                        <th
-                          colSpan={2}
-                          className="py-[6px] font-semibold text-sm text-textColor text-center"
-                        >
-                          {group.title}
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {group.options.map((option, optIndex) => (
-                        <tr key={optIndex} className="border-b">
-                          <td className="p-2 w-1/2 font-normal text-sm text-textColor leading-[21px]">
-                            {option.name}
-                          </td>
-                          <td className="p-2 w-1/2 font-normal text-sm text-textColor leading-[21px] border-l">
-                            {option.value}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+            <div className="max-w-none pl-[31px]">
+              <p className="text-base font-normal text-textColor mb-6">
+                Пока нет ни одного отзыва
+              </p>
+              <div className="flex gap-5 items-center">
+                <button
+                  onClick={handleOpen}
+                  className="bg-cerulean hover:opacity-90 transition-opacity px-6 py-[10px] text-base font-semibold text-white inline-flex items-center justify-center gap-2"
+                >
+                  <CirclePlus className="text-white w-5 h-5" />
+                  <span>Добавить отзыв</span>
+                </button>
+                <div className="flex gap-2 items-center">
+                  <StarIcon className="text-white w-[25px] h-[22px]" />
+                  <span className="text-[26px] font-normal text-textColor leading-[39px]">
+                    0
+                  </span>
                 </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        <section
-          id="reviews"
-          ref={(el: HTMLElement | null): void => {
-            sectionRefs.current.reviews = el;
-          }}
-          className="py-[53px] bg-whiteOut"
-          style={{ scrollMarginTop: "100px" }}
-        >
-          <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
-            <h2 className="text-xl font-semibold mb-4 flex items-center">
-              Отзывы о товаре
-            </h2>
-          </div>
-          <div className="max-w-none pl-[31px]">
-            <p className="text-base font-normal text-textColor mb-6">
-              Пока нет ни одного отзыва
-            </p>
-            <div className="flex gap-5 items-center">
-              <button className="bg-cerulean hover:opacity-90 transition-opacity px-6 py-[10px] text-base font-semibold text-white inline-flex items-center justify-center gap-2">
-                <CirclePlus className="text-white w-5 h-5" />
-                <span>Добавить отзыв</span>
-              </button>
-              <div className="flex gap-2 items-center">
-                <StarIcon className="text-white w-[25px] h-[22px]" />
-                <span className="text-[26px] font-normal text-textColor leading-[39px]">
-                  0
-                </span>
               </div>
             </div>
-          </div>
-        </section>
-        <section
-          id="questions"
-          ref={(el: HTMLElement | null): void => {
-            sectionRefs.current.questions = el;
-          }}
-          className="py-[53px] mb-10"
-          style={{ scrollMarginTop: "100px" }}
-        >
-          <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
-            <h2 className="text-xl font-semibold mb-4 flex items-center">
-              Вопросы о товаре
-            </h2>
-          </div>
-          <div className="max-w-none pl-[31px]">
-            <p className="text-base font-normal text-textColor mb-6">
-              Пока нет ни одного вопроса.
-            </p>
-            <button className="bg-cerulean hover:opacity-90 transition-opacity px-6 py-[10px] text-base font-semibold text-white inline-flex items-center justify-center gap-2">
-              <CirclePlus className="text-white w-5 h-5" />
-              <span>Задать вопрос</span>
-            </button>
-          </div>
-        </section>
-        <div className="">
-          <div className="flex items-center gap-4 border rounded-[10px] border-cerulean p-3.5">
-            <CircleAlert className="w-5 h-5 text-cerulean" />
-            <div className="flex flex-col gap-5 flex-1">
-              <p className="text-cerulean text-xs font-normal">
-                Уважаемые покупатели. <br />
-                Обращаем Ваше внимание, что размещенная на данном сайте
-                справочная информация о товарах не является офертой, наличие и
-                стоимость оборудования необходимо уточнить у менеджеров  "НАГ
-                Узбекистан", которые с удовольствием помогут Вам в выборе
-                оборудования и оформлении на него заказа.
+          </section>
+          <section
+            id="questions"
+            ref={(el: HTMLElement | null): void => {
+              sectionRefs.current.questions = el;
+            }}
+            className="py-[53px] mb-10"
+            style={{ scrollMarginTop: "100px" }}
+          >
+            <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
+              <h2 className="text-xl font-semibold mb-4 flex items-center">
+                Вопросы о товаре
+              </h2>
+            </div>
+            <div className="max-w-none pl-[31px]">
+              <p className="text-base font-normal text-textColor mb-6">
+                Пока нет ни одного вопроса.
               </p>
-              <p className="text-cerulean text-xs font-normal">
-                Производитель оставляет за собой право изменять внешний вид,
-                технические характеристики и комплектацию без уведомления.
-              </p>
+              <button
+                onClick={handleOpen2}
+                className="bg-cerulean hover:opacity-90 transition-opacity px-6 py-[10px] text-base font-semibold text-white inline-flex items-center justify-center gap-2"
+              >
+                <CirclePlus className="text-white w-5 h-5" />
+                <span>Задать вопрос</span>
+              </button>
+            </div>
+          </section>
+          <div className="">
+            <div className="flex items-center gap-4 border rounded-[10px] border-cerulean p-3.5">
+              <CircleAlert className="w-5 h-5 text-cerulean" />
+              <div className="flex flex-col gap-5 flex-1">
+                <p className="text-cerulean text-xs font-normal">
+                  Уважаемые покупатели. <br />
+                  Обращаем Ваше внимание, что размещенная на данном сайте
+                  справочная информация о товарах не является офертой, наличие и
+                  стоимость оборудования необходимо уточнить у менеджеров  "НАГ
+                  Узбекистан", которые с удовольствием помогут Вам в выборе
+                  оборудования и оформлении на него заказа.
+                </p>
+                <p className="text-cerulean text-xs font-normal">
+                  Производитель оставляет за собой право изменять внешний вид,
+                  технические характеристики и комплектацию без уведомления.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <Dialog open={isOpen} onOpenChange={handleOpen}>
+        <DialogContent className="sm:max-w-[800px] rounded-none sm:rounded-none p-0">
+          <DialogHeader>
+            <DialogTitle className="px-6 pt-5 pb-0 text-textColor text-2xl font-normal">
+              Модуль SFP+ WDM, дальность до 3км (5dB), 1330нм
+            </DialogTitle>
+            <button onClick={handleOpen} className="absolute right-4 top-4">
+              <X className="w-6 h-6 text-wasabiColor" />
+            </button>
+          </DialogHeader>
+          <DialogDescription className="hidden">asdsad</DialogDescription>
+          <div className="px-6">
+            <Form {...formMethods}>
+              <form
+                noValidate
+                onSubmit={handleSubmit(onSubmit)}
+                className="pb-5 flex flex-col gap-2"
+              >
+                <p className="text-xl font-normal text-textColor mb-5">
+                  Нет отзывов
+                </p>
+                <div className="flex items-center gap-2 mb-2">
+                  <p className="text-xl font-normal text-textColor">
+                    Общая оценка:
+                  </p>
+                  <StarRating
+                    value={rating}
+                    onChange={(val) => setRating(val)}
+                  />
+                </div>
+                <FormField
+                  control={control}
+                  name="text"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <div className="relative w-full flex flex-col gap-2">
+                          <Label
+                            htmlFor="text"
+                            className="text-textColor font-normal text-xl"
+                          >
+                            Напишите, почему вы так считаете *
+                          </Label>
+                          <Textarea
+                            {...field}
+                            id="text"
+                            className="!text-xl resize-none outline-none rounded-[10px] h-[222px] text-textColor border-[#ccc]"
+                          />
+                        </div>
+                      </FormControl>
+                      <FormMessage>{errors.text?.message}</FormMessage>
+                    </FormItem>
+                  )}
+                />
+
+                <Button
+                  type="submit"
+                  disabled={!isValid}
+                  className={`mt-6 ml-auto h-12 bg-cerulean text-white py-2 px-16 font-semibold text-sm leading-[18px] rounded-[9px] hover:bg-cerulean/90 hoverEffect
+                ${!isValid ? " bg-darkSoul " : ""}`}
+                >
+                  Сохранить
+                </Button>
+              </form>
+            </Form>
+          </div>
+        </DialogContent>
+      </Dialog>
+      <Dialog open={isOpen2} onOpenChange={handleOpen2}>
+        <DialogContent className="sm:max-w-[800px] rounded-none sm:rounded-none p-0">
+          <DialogHeader>
+            <DialogTitle className="px-6 py-5 text-textColor text-2xl font-normal">
+              Задать вопрос
+            </DialogTitle>
+            <button onClick={handleOpen2} className="absolute right-4 top-4">
+              <X className="w-6 h-6 text-wasabiColor" />
+            </button>
+          </DialogHeader>
+          <DialogDescription className="hidden">asdsad</DialogDescription>
+          <div className="px-6">
+            <Form {...formMethods}>
+              <form
+                noValidate
+                onSubmit={handleSubmit(onSubmit)}
+                className="pb-5 flex flex-col gap-4"
+              >
+                <FormField
+                  control={control}
+                  name="text"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                      <div className="relative w-full flex flex-col gap-2">
+                          <Label
+                            htmlFor="text"
+                            className="text-textColor font-normal text-xl"
+                          >
+                            Задайте вопрос по товару. После проверки вопрос
+                            будет опубликован *
+                          </Label>
+                          <Textarea
+                            {...field}
+                            id="text"
+                            className="!text-xl resize-none outline-none rounded-[10px] h-[222px] text-textColor border-[#ccc]"
+                          />
+                        </div>
+                      </FormControl>
+                      <FormMessage>{errors.text?.message}</FormMessage>
+                    </FormItem>
+                  )}
+                />
+
+                <Button
+                  type="submit"
+                  disabled={!isValid}
+                  className={`mt-6 ml-auto h-12 bg-cerulean text-white py-2 px-16 font-semibold text-sm leading-[18px] rounded-[9px] hover:bg-cerulean/90 hoverEffect
+                ${!isValid ? " bg-darkSoul " : ""}`}
+                >
+                  Отправлять
+                </Button>
+              </form>
+            </Form>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
