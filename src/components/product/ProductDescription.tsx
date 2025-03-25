@@ -86,13 +86,8 @@ function renderEditorBlocks(editorJson: EditorData, fullImages: string[]) {
         }
         const caption = block.data.caption || "";
         return (
-          <div key={block.id} className="relative w-full h-64 my-4">
-            <Image
-              src={imageUrl}
-              alt={caption}
-              fill
-              style={{ objectFit: "contain" }}
-            />
+          <div key={block.id} className="relative w-1/2 h-64 my-4">
+            <Image src={imageUrl} alt={caption} fill className="" />
             {caption && <p className="text-center text-sm mt-2">{caption}</p>}
           </div>
         );
@@ -134,14 +129,24 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveTab(entry.target.id);
-          }
-        });
+        // Filter out only entries that are intersecting.
+        const visibleEntries = entries.filter((entry) => entry.isIntersecting);
+        if (visibleEntries.length) {
+          // Sort by the distance from the top of the viewport.
+          visibleEntries.sort(
+            (a, b) => a.boundingClientRect.top - b.boundingClientRect.top
+          );
+          // The section closest to the top becomes active.
+          setActiveTab(visibleEntries[0].target.id);
+        }
       },
-      { threshold: 0.3 }
+      {
+        rootMargin: "-100px 0px 0px 0px",
+        threshold: 0.5,
+      }
     );
+
+    // Observe each section.
     const currentRefs = sectionRefs.current;
     sections.forEach(({ id }) => {
       if (currentRefs[id]) {
@@ -157,9 +162,20 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
     };
   }, []);
 
+  const handleTabClick = (id: string) => {
+    const section = document.getElementById(id);
+    if (section) {
+      const headerHeight = 138;
+      const sectionTop = section.offsetTop - headerHeight;
+      window.scrollTo({
+        top: sectionTop,
+        behavior: "smooth",
+      });
+    }
+  };
   return (
     <div>
-      <div className="sticky top-[8.12rem] z-[5] bg-white shadow-md flex border-b">
+      <div className="sticky top-[130px] z-[5] bg-white  flex border-b shadow-sectionShadow">
         {sections.map(({ id, label }) => {
           if (id === "description" && !editorContent) return null;
           if (
@@ -175,11 +191,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
                   ? "text-cerulean title_gradient"
                   : "border-transparent"
               }`}
-              onClick={() =>
-                document
-                  .getElementById(id)
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
+              onClick={() => handleTabClick(id)}
             >
               {label}
             </button>
@@ -187,15 +199,14 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
         })}
       </div>
 
-      <div className="py-[23px] space-y-12 bg-white">
+      <div className="bg-whiteOut shadow-sectionShadow p-[23px] ">
         {editorContent && (
           <section
             id="description"
-            ref={(el: HTMLElement | null): void => {
-              sectionRefs.current.description = el;
+            ref={(el) => {
+              if (el) sectionRefs.current.description = el;
             }}
-            className="pt-8 px-[23px]"
-            style={{ scrollMarginTop: "180px" }}
+            className="py-[53px]"
           >
             <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
               <h2 className="text-xl font-semibold mb-4 flex items-center">
@@ -209,24 +220,23 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
         {product.characteristics && product.characteristics.length > 0 && (
           <section
             id="specs"
-            ref={(el: HTMLElement | null): void => {
-              sectionRefs.current.specs = el;
+            ref={(el) => {
+              if (el) sectionRefs.current.specs = el;
             }}
-            className="py-16 px-[23px] bg-whiteOut"
-            style={{ scrollMarginTop: "100px" }}
+            className="py-[53px]"
           >
             <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
               <h2 className="text-xl font-semibold mb-6">Характеристики</h2>
             </div>
             <div>
               {product.characteristics.map((group, index) => (
-                <div key={index} className="overflow-auto bg-white shadow">
-                  <table className="w-full text-left border-collapse">
+                <div key={index} className="overflow-auto bg-white">
+                  <table className="w-full text-left border">
                     <thead>
-                      <tr className="bg-superSilver border-b">
+                      <tr className="bg-superSilver border-b-2 border-cerulean">
                         <th
                           colSpan={2}
-                          className="py-2.5 font-semibold text-sm text-textColor text-center"
+                          className="py-[6px] font-semibold text-sm text-textColor text-center"
                         >
                           {group.title}
                         </th>
@@ -234,14 +244,11 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
                     </thead>
                     <tbody>
                       {group.options.map((option, optIndex) => (
-                        <tr
-                          key={optIndex}
-                          className="border-b text-sm text-textColor"
-                        >
-                          <td className="p-3 w-1/2 font-medium text-gray-600">
+                        <tr key={optIndex} className="border-b">
+                          <td className="p-2 w-1/2 font-normal text-sm text-textColor leading-[21px]">
                             {option.name}
                           </td>
-                          <td className="p-3 w-1/2 text-gray-900 border-l border-superSilver">
+                          <td className="p-2 w-1/2 font-normal text-sm text-textColor leading-[21px] border-l">
                             {option.value}
                           </td>
                         </tr>
@@ -254,29 +261,12 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
           </section>
         )}
 
-        {/* {["related", "reviews", "questions"].map((id) => {
-          const label = sections.find((section) => section.id === id)?.label || "";
-          return (
-            <section
-              key={id}
-              id={id}
-              ref={(el: HTMLElement | null): void => {
-                sectionRefs.current[id] = el;
-              }}
-              className="pt-8"
-              style={{ scrollMarginTop: "180px" }}
-            >
-              <h2 className="text-2xl font-bold mb-4">{label}</h2>
-              <p>Контент для раздела {label}...</p>
-            </section>
-          );
-        })} */}
         <section
           id="reviews"
           ref={(el: HTMLElement | null): void => {
             sectionRefs.current.reviews = el;
           }}
-          className="py-12 bg-whiteOut px-[23px]"
+          className="py-[53px] bg-whiteOut"
           style={{ scrollMarginTop: "100px" }}
         >
           <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
@@ -307,7 +297,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
           ref={(el: HTMLElement | null): void => {
             sectionRefs.current.questions = el;
           }}
-          className="py-12 px-[23px]"
+          className="py-[53px] mb-10"
           style={{ scrollMarginTop: "100px" }}
         >
           <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
@@ -325,7 +315,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
             </button>
           </div>
         </section>
-        <div className="px-[23px]">
+        <div className="">
           <div className="flex items-center gap-4 border rounded-[10px] border-cerulean p-3.5">
             <CircleAlert className="w-5 h-5 text-cerulean" />
             <div className="flex flex-col gap-5 flex-1">
