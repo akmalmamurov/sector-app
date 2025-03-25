@@ -187,14 +187,14 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
         })}
       </div>
 
-      <div className="p-[23px] space-y-12 bg-white">
+      <div className="py-[23px] space-y-12 bg-white">
         {editorContent && (
           <section
             id="description"
             ref={(el: HTMLElement | null): void => {
               sectionRefs.current.description = el;
             }}
-            className="pt-8"
+            className="pt-8 px-[23px]"
             style={{ scrollMarginTop: "180px" }}
           >
             <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
@@ -202,7 +202,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
                 Описание
               </h2>
             </div>
-            <div className="prose max-w-none">{editorContent}</div>
+            <div className="prose max-w-none pl-[31px]">{editorContent}</div>
           </section>
         )}
 
@@ -212,7 +212,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
             ref={(el: HTMLElement | null): void => {
               sectionRefs.current.specs = el;
             }}
-            className="pt-8"
+            className="py-16 px-[23px] bg-whiteOut"
             style={{ scrollMarginTop: "100px" }}
           >
             <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
@@ -276,7 +276,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
           ref={(el: HTMLElement | null): void => {
             sectionRefs.current.reviews = el;
           }}
-          className="py-12 bg-whiteOut"
+          className="py-12 bg-whiteOut px-[23px]"
           style={{ scrollMarginTop: "100px" }}
         >
           <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
@@ -307,7 +307,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
           ref={(el: HTMLElement | null): void => {
             sectionRefs.current.questions = el;
           }}
-          className="py-12"
+          className="py-12 px-[23px]"
           style={{ scrollMarginTop: "100px" }}
         >
           <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
@@ -325,18 +325,23 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
             </button>
           </div>
         </section>
-        <div className="flex items-center gap-4 border rounded-[10px] border-cerulean p-3.5">
-          <CircleAlert className="w-5 h-5 text-cerulean" />
-          <div className="flex flex-col gap-5 flex-1">
-          <p className="text-cerulean text-xs font-normal">
-            Уважаемые покупатели. <br />
-             Обращаем Ваше внимание, что размещенная на
-            данном сайте справочная информация о товарах не является офертой,
-            наличие и стоимость оборудования необходимо уточнить у менеджеров
-             "НАГ Узбекистан", которые с удовольствием помогут Вам в выборе
-            оборудования и оформлении на него заказа.
-          </p>
-          <p className="text-cerulean text-xs font-normal">Производитель оставляет за собой право изменять внешний вид, технические характеристики и комплектацию без уведомления.</p>
+        <div className="px-[23px]">
+          <div className="flex items-center gap-4 border rounded-[10px] border-cerulean p-3.5">
+            <CircleAlert className="w-5 h-5 text-cerulean" />
+            <div className="flex flex-col gap-5 flex-1">
+              <p className="text-cerulean text-xs font-normal">
+                Уважаемые покупатели. <br />
+                Обращаем Ваше внимание, что размещенная на данном сайте
+                справочная информация о товарах не является офертой, наличие и
+                стоимость оборудования необходимо уточнить у менеджеров  "НАГ
+                Узбекистан", которые с удовольствием помогут Вам в выборе
+                оборудования и оформлении на него заказа.
+              </p>
+              <p className="text-cerulean text-xs font-normal">
+                Производитель оставляет за собой право изменять внешний вид,
+                технические характеристики и комплектацию без уведомления.
+              </p>
+            </div>
           </div>
         </div>
       </div>
