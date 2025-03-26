@@ -28,3 +28,4 @@ export const getBrandSingle = async (id: string) => {
     console.log(error);
   }
 };
+

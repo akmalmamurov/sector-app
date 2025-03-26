@@ -101,3 +101,29 @@ export interface CategoryProducts {
   total: number;
   products: ProductData[];
 }
+
+export interface CommentProduct {
+  id: string;
+  body: string;
+  star: number;
+  productId: string;
+  userId: string;
+  reply: string[];
+  createdAt: string;
+  updatedAt?: string | null;
+  deletedAt?: string | null;
+}
+export interface QuestionProduct {
+  error: string | null;
+  status: number;
+  data: {
+    body: string;
+    productId: string;
+    userId: string;
+    id: string;
+    reply: string[];
+    createdAt: string;
+    deletedAt?: string | null;
+    updatedAt?: string | null;
+  };
+}
