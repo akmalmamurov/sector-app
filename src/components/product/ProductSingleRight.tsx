@@ -16,8 +16,6 @@ interface ProductSingleRightProps {
   product: ProductData;
 }
 const ProductSingleRight: React.FC<ProductSingleRightProps> = ({ product }) => {
-  console.log(product);
-
   return (
     <div className="w-full h-full">
       <div className="flex gap-3 mb-[15px]">

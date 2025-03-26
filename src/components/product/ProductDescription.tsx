@@ -2,9 +2,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { DOMAIN } from "@/constants";
-import { ProductData } from "@/types";
-import { CircleAlert, CirclePlus, X } from "lucide-react";
-import StarIcon from "@/assets/icons/StarIcon";
+import { CommentProduct, ProductData } from "@/types";
+import { CircleAlert, CirclePlus, Star, X } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -21,11 +20,13 @@ import {
   FormMessage,
 } from "../ui/form";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { StarRating } from "../star-rating/StarRating";
+import { useCreateComment } from "@/api/product-comment";
+import { usePostQuestion } from "@/api/product-question";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 interface Block {
   id: string;
   type: string;
@@ -54,6 +55,9 @@ const sections = [
 
 interface ProductDescriptionProps {
   product: ProductData;
+}
+interface AdditionalProductProp {
+  body: string;
 }
 
 function renderEditorBlocks(editorJson: EditorData, fullImages: string[]) {
@@ -125,20 +129,24 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
   const [rating, setRating] = useState(0);
+  const [comments, setComments] = useState<CommentProduct | null>(null);
+
   const formSchema = z.object({
-    text: z.string(),
+    body: z.string().min(3, "Текст должен содержать не менее 3 символов"),
   });
 
-  const formMethods = useForm({
+  const formMethods = useForm<AdditionalProductProp>({
     resolver: zodResolver(formSchema),
-    defaultValues: { text: "" },
+    defaultValues: { body: "" },
   });
   const {
     control,
     handleSubmit,
-    formState: { errors, isValid },
+    reset,
+    formState: { errors },
   } = formMethods;
-
+  const { mutate: createComment } = useCreateComment();
+  const { mutate: postQuestion } = usePostQuestion();
   const handleOpen = () => setIsOpen(!isOpen);
   const handleOpen2 = () => setIsOpen2(!isOpen2);
 
@@ -213,8 +221,36 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
       });
     }
   };
-  const onSubmit = async (data: { text: string }) => {
-    console.log(data);
+  const onSubmit = async (data: AdditionalProductProp) => {
+    createComment(
+      {
+        body: data.body,
+        productId: product.id,
+        star: rating,
+      },
+      {
+        onSuccess: (responseData) => {
+          handleOpen();
+          reset();
+          setRating(0);
+          setComments(responseData);
+        },
+      }
+    );
+  };
+  const onSubmit2 = async (data: AdditionalProductProp) => {
+    postQuestion(
+      {
+        body: data.body,
+        productId: product.id,
+      },
+      {
+        onSuccess: () => {
+          handleOpen2();
+          reset();
+        },
+      }
+    );
   };
   return (
     <>
@@ -272,7 +308,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
               <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
                 <h2 className="text-xl font-semibold mb-6">Характеристики</h2>
               </div>
-              <div>
+              <div className="pl-[31px]">
                 {product.characteristics.map((group, index) => (
                   <div key={index} className="overflow-auto bg-white">
                     <table className="w-full text-left border">
@@ -331,9 +367,17 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
                   <span>Добавить отзыв</span>
                 </button>
                 <div className="flex gap-2 items-center">
-                  <StarIcon className="text-white w-[25px] h-[22px]" />
+                  {comments?.star && comments?.star > 0 ? (
+                    <Star
+                      className={`w-[25px] h-[22px]} text-[#FBCE13] fill-[#FBCE13]`}
+                    />
+                  ) : (
+                    <Star
+                      className={`w-[25px] h-[22px]} text-[#A3A3A3] fill-[#A3A3A3]`}
+                    />
+                  )}
                   <span className="text-[26px] font-normal text-textColor leading-[39px]">
-                    0
+                    {comments?.star ? comments?.star : 0}
                   </span>
                 </div>
               </div>
@@ -344,7 +388,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
             ref={(el: HTMLElement | null): void => {
               sectionRefs.current.questions = el;
             }}
-            className="py-[53px] mb-10"
+            className="pt-[53px] pb-[30px] mb-10"
             style={{ scrollMarginTop: "100px" }}
           >
             <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
@@ -388,9 +432,9 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
       </div>
       <Dialog open={isOpen} onOpenChange={handleOpen}>
         <DialogContent className="sm:max-w-[800px] rounded-none sm:rounded-none p-0">
-          <DialogHeader>
-            <DialogTitle className="px-6 pt-5 pb-0 text-textColor text-2xl font-normal">
-              Модуль SFP+ WDM, дальность до 3км (5dB), 1330нм
+          <DialogHeader className="px-6 pr-8">
+            <DialogTitle className=" pt-5 pb-0 text-textColor text-2xl font-normal">
+              {product.title}
             </DialogTitle>
             <button onClick={handleOpen} className="absolute right-4 top-4">
               <X className="w-6 h-6 text-wasabiColor" />
@@ -418,34 +462,35 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
                 </div>
                 <FormField
                   control={control}
-                  name="text"
+                  name="body"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
                         <div className="relative w-full flex flex-col gap-2">
                           <Label
-                            htmlFor="text"
+                            htmlFor="body"
                             className="text-textColor font-normal text-xl"
                           >
                             Напишите, почему вы так считаете *
                           </Label>
                           <Textarea
                             {...field}
-                            id="text"
+                            id="body"
                             className="!text-xl resize-none outline-none rounded-[10px] h-[222px] text-textColor border-[#ccc]"
                           />
                         </div>
                       </FormControl>
-                      <FormMessage>{errors.text?.message}</FormMessage>
+                      <FormMessage className="font-normal text-xl text-red-500">
+                        {errors.body?.message}
+                      </FormMessage>
                     </FormItem>
                   )}
                 />
 
                 <Button
                   type="submit"
-                  disabled={!isValid}
                   className={`mt-6 ml-auto h-12 bg-cerulean text-white py-2 px-16 font-semibold text-sm leading-[18px] rounded-[9px] hover:bg-cerulean/90 hoverEffect
-                ${!isValid ? " bg-darkSoul " : ""}`}
+              `}
                 >
                   Сохранить
                 </Button>
@@ -469,16 +514,16 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
             <Form {...formMethods}>
               <form
                 noValidate
-                onSubmit={handleSubmit(onSubmit)}
+                onSubmit={handleSubmit(onSubmit2)}
                 className="pb-5 flex flex-col gap-4"
               >
                 <FormField
                   control={control}
-                  name="text"
+                  name="body"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                      <div className="relative w-full flex flex-col gap-2">
+                        <div className="relative w-full flex flex-col gap-2">
                           <Label
                             htmlFor="text"
                             className="text-textColor font-normal text-xl"
@@ -493,16 +538,17 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
                           />
                         </div>
                       </FormControl>
-                      <FormMessage>{errors.text?.message}</FormMessage>
+                      <FormMessage className="font-normal text-xl text-red-500">
+                        {errors.body?.message}
+                      </FormMessage>
                     </FormItem>
                   )}
                 />
 
                 <Button
                   type="submit"
-                  disabled={!isValid}
                   className={`mt-6 ml-auto h-12 bg-cerulean text-white py-2 px-16 font-semibold text-sm leading-[18px] rounded-[9px] hover:bg-cerulean/90 hoverEffect
-                ${!isValid ? " bg-darkSoul " : ""}`}
+                `}
                 >
                   Отправлять
                 </Button>
