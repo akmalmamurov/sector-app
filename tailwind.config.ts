@@ -60,6 +60,7 @@ export default {
         merlin: "#408ed4",
         dove: "#8a8a8a",
         hoverBg: "rgb(251, 251, 251)",
+        bannerBg: "rgb(255, 255, 255,0.314)",
         explosiveGrey: "#C4C4C4",
         foreground: "hsl(var(--foreground))",
         card: {

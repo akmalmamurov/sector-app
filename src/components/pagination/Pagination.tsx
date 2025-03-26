@@ -33,7 +33,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       <button
         onClick={() => onPageChange(page - 1)}
         disabled={page <= 1}
-        className="px-[23px]  border border-cerulean text-cerulean disabled:opacity-50 flex items-center hover:bg-cerulean hover:text-white duration-200 ease-in-out disabled:hover:bg-transparent disabled:hover:text-cerulean text-sm"
+        className="px-[23px]  border border-cerulean text-cerulean disabled:opacity-50 flex items-center hover:bg-cerulean hover:text-white duration-200 ease-in-out disabled:hover:bg-transparent disabled:hover:text-cerulean text-sm h-[42px]"
       >
         <span className="mr-2">
           <ArrowRightIcon className="rotate-180" />
@@ -44,7 +44,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       {pages.map((p, index) => {
         if (p === "...") {
           return (
-            <span key={index} className="px-2 py-1">
+            <span key={index} className="w-[42px] h-[42px] flex items-center justify-center border border-superSilver">
               ...
             </span>
           );
@@ -66,7 +66,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       <button
         onClick={() => onPageChange(page + 1)}
         disabled={page >= totalPages}
-        className="px-[23px]  border border-cerulean text-cerulean disabled:opacity-50 flex items-center hover:bg-cerulean hover:text-white duration-200 ease-in-out disabled:hover:bg-transparent disabled:hover:text-cerulean text-sm"
+        className="px-[23px]  border border-cerulean text-cerulean disabled:opacity-50 flex items-center hover:bg-cerulean hover:text-white duration-200 ease-in-out disabled:hover:bg-transparent disabled:hover:text-cerulean text-sm h-[42px]"
       >
         Дальше
         <span className="ml-2 ">

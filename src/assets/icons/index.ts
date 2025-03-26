@@ -42,3 +42,4 @@ export * from "./FlexColIcon";
 export * from "./GoToSectionIcon";
 export * from "./SortIconDesc";
 export * from "./SortChevronIcon";
+export * from "./BannerIcon";
