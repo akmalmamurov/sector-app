@@ -11,6 +11,7 @@ import {
   DialogTitle,
 } from "../ui/dialog";
 import { X } from "lucide-react";
+import { DialogDescription } from "@radix-ui/react-dialog";
 
 interface ProductSingleImagesProps {
   product: ProductData;
@@ -27,7 +28,10 @@ export const ProductSingleImages: React.FC<ProductSingleImagesProps> = ({
     <>
       <div className="w-full max-w-[570px] pb-[23px]">
         <div className="flex gap-[13px]">
-          <div className="flex flex-col gap-[15px] h-[500px] overflow-y-auto" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
+          <div
+            className="flex flex-col gap-[15px] h-[500px] overflow-y-auto"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
             {product?.mainImage && (
               <div className="">
                 <Image
@@ -67,6 +71,7 @@ export const ProductSingleImages: React.FC<ProductSingleImagesProps> = ({
               alt="product"
               width={400}
               height={400}
+              priority
               className="w-[500px] h-[500px]"
             />
           </button>
@@ -85,6 +90,7 @@ export const ProductSingleImages: React.FC<ProductSingleImagesProps> = ({
               </button>
             </div>
           </DialogHeader>
+          <DialogDescription className="hidden">asdsad</DialogDescription>
           <div className="px-6">
             <div>
               <div className="flex gap-[13px]">
@@ -135,6 +141,7 @@ export const ProductSingleImages: React.FC<ProductSingleImagesProps> = ({
                     width={400}
                     height={400}
                     className="w-[542px] h-auto"
+                    priority
                   />
                 </div>
               </div>
