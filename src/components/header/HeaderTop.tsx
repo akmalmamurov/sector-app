@@ -2,17 +2,26 @@
 
 import { Container } from "../container";
 import { ArrowRightIcon } from "@/assets/icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import LoginModal from "../modal/LoginModal";
 import useStore from "@/context/store";
 
 const HeaderTop = () => {
   const className = "font-normal text-sm leading-[21px] text-whiteOut";
   const [isOpen, setIsOpen] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
   const handleOpen = () => setIsOpen(!isOpen);
   const { auth } = useStore();
+  
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+  
+  if (!isHydrated) return null;
+  
   if (auth) return null;
-  return auth === false ? (
+  
+  return (
     <div className="w-full bg-cerulean md:h-10 h-16 hidden sm:block">
       <Container className="flex justify-center items-center h-full">
         <div onClick={handleOpen} className="flex flex-wrap cursor-pointer">
@@ -29,7 +38,7 @@ const HeaderTop = () => {
       </Container>
       <LoginModal isOpen={isOpen} handleOpen={handleOpen} />
     </div>
-  ) : null;
+  );
 };
 
 export default HeaderTop;

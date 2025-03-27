@@ -127,6 +127,15 @@ export default {
         "home-gradient": "linear-gradient(hsla(0, 0%, 100%, 0), #fff 98%) ",
       },
     },
+    animation: {
+      'loading-bar': 'loading 1s ease-in-out infinite',
+    },
+    keyframes: {
+      loading: {
+        '0%': { transform: 'translateX(-100%)' },
+        '100%': { transform: 'translateX(100%)' }
+      },
+    },
   },
   plugins: [plugin],
 } satisfies Config;

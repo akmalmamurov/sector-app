@@ -37,10 +37,7 @@ interface StoreState {
 const useStore = create<StoreState>()(
   persist(
     (set, get) => ({
-      auth:
-        typeof window !== "undefined"
-          ? !!localStorage.getItem("sector-token")
-          : false,
+      auth: false,
       contact: "",
       favorites: [],
       cart: [],
@@ -157,3 +154,11 @@ const useStore = create<StoreState>()(
 );
 
 export default useStore;
+
+export const hydrateStore = () => {
+  useStore.persist.rehydrate();
+  
+  if (typeof window !== "undefined" && localStorage.getItem("sector-token")) {
+    useStore.setState({ auth: true });
+  }
+};
