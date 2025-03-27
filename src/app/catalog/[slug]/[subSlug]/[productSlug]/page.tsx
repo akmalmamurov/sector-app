@@ -13,7 +13,7 @@ export async function generateMetadata({
 }: {
   params: { slug: string; subSlug: string; productSlug: string };
 }): Promise<Metadata> {
-  const { productSlug } = params;
+  const { productSlug } =  params;
   const product = await getProductSingle(productSlug);
   return {
     title: `${product.title} купить в интернет-магазине Сектор: товаро ${product.title.toLocaleLowerCase()}`,
@@ -24,9 +24,9 @@ export async function generateMetadata({
 const SingleProductPage = async ({
   params,
 }: {
-  params: Promise<{ slug?: string; subSlug?: string , productSlug?: string}>;
+  params: { slug: string; subSlug: string; productSlug: string };
 }) => {
-  const { slug, subSlug, productSlug } = await params;
+  const { slug, subSlug, productSlug } = params;
   const catalogData = await getCatalog();
   const product = await getProductSingle(productSlug || "");
   const breadcrumbPaths = getCategoryBreadcrumbPaths(catalogData, slug, subSlug, true);
