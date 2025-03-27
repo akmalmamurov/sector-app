@@ -9,6 +9,7 @@ import { Section } from "@/components/section";
 import { InfoTitle } from "@/components/title";
 import { CatalogData } from "@/types";
 
+
 const CatalogPage = async () => {
   const catalogData = await getCatalog();
 

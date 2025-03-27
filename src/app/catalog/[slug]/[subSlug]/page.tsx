@@ -6,7 +6,20 @@ import { CategoryCrumb } from "@/components/bread-crumb";
 import { getCategoryBreadcrumbPaths, getTitleBySlug } from "@/utils";
 import CategoryLeft from "@/components/category/CategoryLeft";
 import { CategoryRight } from "@/components/category";
-
+import { Metadata } from "next";
+export async function generateMetadata({
+  params,
+}: {
+  params: { subSlug: string };
+}): Promise<Metadata> {
+  const { subSlug } = params;
+  const catalogData = await getCatalog();
+  const categoryTitle = getTitleBySlug(catalogData, subSlug);
+  return {
+    title: `${categoryTitle} купить в интернет-магазине Сектор: каталог ${categoryTitle?.toLocaleLowerCase()} товаров`,
+    description: `${categoryTitle} купить в интернет-магазине Сектор: каталог ${categoryTitle?.toLocaleLowerCase()} товаров`,
+  };
+}
 const CategoryPage = async ({
   params,
 }: {

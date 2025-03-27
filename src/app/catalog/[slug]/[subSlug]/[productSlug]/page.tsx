@@ -6,8 +6,20 @@ import { CategoryCrumb } from "@/components/bread-crumb";
 import { getProductSingle } from "@/api/product";
 import { getCategoryBreadcrumbPaths } from "@/utils";
 import { ProductSingle } from "@/components/product";
+import { Metadata } from "next";
 
-
+export async function generateMetadata({
+  params,
+}: {
+  params: { productSlug: string };
+}): Promise<Metadata> {
+  const { productSlug } = params;
+  const product = await getProductSingle(productSlug);
+  return {
+    title: `${product.title} купить в интернет-магазине Сектор: товаро ${product?.title?.toLocaleLowerCase()} `,
+    description: `${product.title} купить в интернет-магазине Сектор: товар ${product?.title?.toLocaleLowerCase()} `,
+  };
+}
  const SingleProductPage = async({params}: {params: Promise<{slug: string; subSlug: string; productSlug: string}>})=> {
   const { slug, subSlug, productSlug } = await params;
   const catalogData = await getCatalog();

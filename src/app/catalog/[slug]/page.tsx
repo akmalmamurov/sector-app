@@ -3,18 +3,33 @@ import { Container } from "@/components/container";
 import { HomeIcon } from "@/assets/icons";
 import Link from "next/link";
 import { CategoryData } from "@/types";
-import { findCatalogItem, getTitleBySlug,  } from "@/utils/catalog-slug";
+import { findCatalogItem, getTitleBySlug } from "@/utils/catalog-slug";
 import BreadcrumbHoverLink from "@/components/bread-crumb/CatalogCrumb";
 import { ChevronRightIcon } from "lucide-react";
 import { getBreadcrumbPaths, getSlugString } from "@/utils";
 import { CategoryLeft, CategoryRight } from "@/components/category";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const { slug } = params;
+  const catalogData = await getCatalog();
+  const categoryTitle = getTitleBySlug(catalogData, slug);
+  return {
+    title: `${categoryTitle} купить в интернет-магазине Сектор: каталог ${categoryTitle?.toLocaleLowerCase()} товаров`,
+    description: `${categoryTitle} купить в интернет-магазине Сектор: каталог ${categoryTitle?.toLocaleLowerCase()} товаров`,
+  };
+}
 
 const SingleCatalogPage = async ({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) => {
-  const { slug } = await params;
+  const { slug } = params;
   const catalogData = await getCatalog();
 
   const slugString = getSlugString(slug);
@@ -31,7 +46,7 @@ const SingleCatalogPage = async ({
         </Link>
         <ChevronRightIcon className="text-weekColor" size={14} />
         <Link
-          href={"/catalog"}
+          href="/catalog"
           className="font-normal text-xs text-weekColor hover:underline"
         >
           <span>Каталог</span>
@@ -56,9 +71,7 @@ const SingleCatalogPage = async ({
                 href={`/catalog/${sub.slug}`}
                 className="relative border p-2 m-2 text-textColor bg-whiteOut hover:text-cerulean hover:bg-white hover:shadow-lg before:hidden hover:before:block before:w-full before:h-[2px] before:bg-cerulean before:absolute before:bottom-0 before:left-0 duration-200 ease-in-out"
               >
-                <span>
-                  {sub.title}
-                </span>
+                <span>{sub.title}</span>
               </Link>
             ))
           ) : catalogItem?.categories?.length ? (
@@ -66,7 +79,7 @@ const SingleCatalogPage = async ({
               <Link
                 key={category?.id}
                 href={`/catalog/${catalogItem.slug}/${category.slug}`}
-                    className="relative border p-2 m-2 text-textColor bg-whiteOut hover:text-cerulean hover:bg-white hover:shadow-lg before:hidden hover:before:block before:w-full before:h-[2px] before:bg-cerulean before:absolute before:bottom-0 before:left-0 duration-200 ease-in-out"
+                className="relative border p-2 m-2 text-textColor bg-whiteOut hover:text-cerulean hover:bg-white hover:shadow-lg before:hidden hover:before:block before:w-full before:h-[2px] before:bg-cerulean before:absolute before:bottom-0 before:left-0 duration-200 ease-in-out"
               >
                 {category.title}
               </Link>
@@ -76,11 +89,12 @@ const SingleCatalogPage = async ({
           )}
         </div>
       </div>
-          {/* filter product */}
-          <div className="grid grid-cols-12 gap-6">
-        {/* filters */}
+
+      {/* Filter product */}
+      <div className="grid grid-cols-12 gap-6">
+        {/* Filters */}
         <CategoryLeft />
-        {/* products */}
+        {/* Products */}
         <CategoryRight slug={slug} title={categoryTitle} paramKey="catalogSlug" />
       </div>
     </Container>

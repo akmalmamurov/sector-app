@@ -21,7 +21,7 @@ const HeaderMenuLink = () => {
 
   return (
     <div className="lg:flex items-center gap-[7px] xl:gap-0">
-      <Link href={"/discounts"} className="header-menu-item">
+      <Link href={"/action"} className="header-menu-item">
         <span>
           <DiscountIcon className="w-5 h-5 xl:w-6 xl:h-6" />
         </span>
