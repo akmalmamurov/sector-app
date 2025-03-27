@@ -24,11 +24,11 @@ export async function generateMetadata({
 const SingleProductPage = async ({
   params,
 }: {
-  params: { slug: string; subSlug: string; productSlug: string };
+  params: Promise<{ slug?: string; subSlug?: string , productSlug?: string}>;
 }) => {
-  const { slug, subSlug, productSlug } = params;
+  const { slug, subSlug, productSlug } = await params;
   const catalogData = await getCatalog();
-  const product = await getProductSingle(productSlug);
+  const product = await getProductSingle(productSlug || "");
   const breadcrumbPaths = getCategoryBreadcrumbPaths(catalogData, slug, subSlug, true);
 
   return (
