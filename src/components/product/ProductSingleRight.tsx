@@ -2,33 +2,55 @@ import Image from "next/image";
 import StarIcon from "@/assets/icons/StarIcon";
 import CommentsIcon from "@/assets/icons/CommentsIcon";
 import QuestionCommentIcon from "@/assets/icons/QuestionCommentIcon";
-import { copyToClipboard } from "@/utils";
+import { copyToClipboard, isProductInList } from "@/utils";
 import { CartIcon, CopyIcon } from "@/assets/icons";
 import Link from "next/link";
 import { AddToCompare, AddToFavorites } from "../add-storage";
-import { BadgeCheck, CircleAlert, Download, Share2, Truck } from "lucide-react";
+import { BadgeCheck, CircleAlert, Truck } from "lucide-react";
 import PriceFormatter from "../format-price/PriceFormatter";
 import FreePickUpIcon from "@/assets/icons/FreePickUpIcon";
 import InStockIcon from "@/assets/icons/InStockIcon";
 import { ProductData } from "@/types";
+import ShareButtons from "../share-buttons/ShareButtons";
+import useStore from "@/context/store";
+import { showSuccess } from "../toast/Toast";
+import { useRouter } from "next/navigation";
 
 interface ProductSingleRightProps {
   product: ProductData;
 }
 const ProductSingleRight: React.FC<ProductSingleRightProps> = ({ product }) => {
+  const currentUrl = typeof window !== "undefined" ? window.location.href : "";
+  const { addToCart, cart } = useStore();
+  const router = useRouter();
+  const isAddedToCart = isProductInList(cart, product);
+
+  const handleToCart = () => {
+    if (!isAddedToCart) {
+      addToCart(product);
+      router.push("/cart");
+      showSuccess(`Товар ${product?.articul} Добавлен в корзину`);
+    } else {
+      router.push("/cart");
+      showSuccess(`Товар ${product?.articul} Уже в корзине`);
+    }
+  };
+
   return (
     <div className="w-full h-full">
       <div className="flex gap-3 mb-[15px]">
         <h2 className="font-normal text-2xl leading-9 text-textColor">
           {product.title}
         </h2>
-        <Image
-          width={86}
-          height={31}
-          className="w-[86px] h-[36px]"
-          src={`${process.env.NEXT_PUBLIC_API_URL}/${product.brand?.path}`}
-          alt="product.title"
-        />
+        <Link href={`/brands/${product.brand?.slug}`}>
+          <Image
+            width={86}
+            height={31}
+            className="w-[86px] h-[36px]"
+            src={`${process.env.NEXT_PUBLIC_API_URL}/${product.brand?.path}`}
+            alt="product.title"
+          />
+        </Link>
       </div>
       <div className="grid grid-cols-2 gap-[23px] h-full">
         <div className="pt-6">
@@ -93,15 +115,17 @@ const ProductSingleRight: React.FC<ProductSingleRightProps> = ({ product }) => {
               <div className="flex gap-2">
                 <AddToFavorites className="w-6 h-6" product={product} />
                 <AddToCompare className="w-6 h-6" product={product} />
-                <Download className="text-darkSoul w-6 h-6 cursor-pointer" />
-                <Share2 className="text-darkSoul w-6 h-6 cursor-pointer" />
+                <ShareButtons url={currentUrl} />
               </div>
             </div>
             <PriceFormatter
               amount={product.price}
               className="text-textColor font-extrabold text-[29px] leading-[44px] mb-6"
             />
-            <button className="bg-cerulean w-full hover:opacity-90 transition-opacity px-6 py-[13px] text-base font-semibold text-white flex items-center justify-center gap-2 mb-[29px]">
+            <button
+              onClick={handleToCart}
+              className="bg-cerulean w-full hover:opacity-90 transition-opacity px-6 py-[13px] text-base font-semibold text-white flex items-center justify-center gap-2 mb-[29px]"
+            >
               <CartIcon color="#fff" className="w-5 h-5" />В корзину
             </button>
             <div className="flex flex-col gap-[18px]">
@@ -119,9 +143,7 @@ const ProductSingleRight: React.FC<ProductSingleRightProps> = ({ product }) => {
               </div>
               <div className="flex gap-2 items-center">
                 <InStockIcon className="w-6 h-6" />
-                <Link className="text-style text-cerulean" href={"#"}>
-                  В наличии: {product.inStock} шт
-                </Link>
+                <p className="text-style">В наличии: {product.inStock} шт</p>
               </div>
             </div>
           </div>
@@ -130,11 +152,11 @@ const ProductSingleRight: React.FC<ProductSingleRightProps> = ({ product }) => {
             <CircleAlert className="w-6 h-6" />
             <p className="text-style">
               Информация о{" "}
-              <Link className="text-cerulean" href={"#"}>
+              <Link className="text-cerulean" href={"/delivery"}>
                 доставке
               </Link>{" "}
               и{" "}
-              <Link className="text-cerulean" href={"#"}>
+              <Link className="text-cerulean" href={"/payment"}>
                 оплате
               </Link>
             </p>
