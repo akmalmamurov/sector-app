@@ -38,7 +38,8 @@ export const CategoryCard = ({ category, catalogData }: CategoryCardProps) => {
           alt={category.title}
           width={150}
           height={100}
-          className="w-full h-full object-cover group-hover:scale-105 duration-300 ease-in-out"
+          style={{ transition: "transform 0.3s ease-out" }}
+          className="w-full h-full object-cover group-hover:scale-110"
         />
       </div>
       <div className="px-4 ">
