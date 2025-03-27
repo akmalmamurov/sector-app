@@ -1,38 +1,20 @@
 import Link from "next/link";
 import { getCatalog } from "@/api/catalog";
 import { Container } from "@/components/container";
-import { HomeIcon } from "@/assets/icons";
+import {HomeIcon } from "@/assets/icons";
 import { CategoryCrumb } from "@/components/bread-crumb";
 import { getProductSingle } from "@/api/product";
 import { getCategoryBreadcrumbPaths } from "@/utils";
 import { ProductSingle } from "@/components/product";
-import { Metadata } from "next";
 
-interface PageProps {
-  params: {
-    slug: string;
-    subSlug: string;
-    productSlug: string;
-  };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const { productSlug } = params;
-  const product = await getProductSingle(productSlug);
-  return {
-    title: `${product.title} купить в интернет-магазине Сектор: товаро ${product.title.toLocaleLowerCase()}`,
-    description: `${product.title} купить в интернет-магазине Сектор: товар ${product.title.toLocaleLowerCase()}`,
-  };
-}
-
-const SingleProductPage = async ({ params }: PageProps) => {
-  const { slug, subSlug, productSlug } = params;
+ const SingleProductPage = async({params}: {params: Promise<{slug: string; subSlug: string; productSlug: string}>})=> {
+  const { slug, subSlug, productSlug } = await params;
   const catalogData = await getCatalog();
   const product = await getProductSingle(productSlug);
-  const breadcrumbPaths = getCategoryBreadcrumbPaths(catalogData, slug, subSlug, true);
+
+
+  const breadcrumbPaths = getCategoryBreadcrumbPaths( catalogData, slug, subSlug, true );
 
   return (
     <Container className="pb-[58px]">
@@ -54,6 +36,6 @@ const SingleProductPage = async ({ params }: PageProps) => {
       <ProductSingle product={product} />
     </Container>
   );
-};
+}
 
 export default SingleProductPage;
