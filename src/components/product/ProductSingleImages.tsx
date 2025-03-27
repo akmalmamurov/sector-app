@@ -27,7 +27,7 @@ export const ProductSingleImages: React.FC<ProductSingleImagesProps> = ({
     <>
       <div className="w-full max-w-[570px] pb-[23px]">
         <div className="flex gap-[13px]">
-          <div className="flex flex-col gap-[15px]">
+          <div className="flex flex-col gap-[15px] h-[500px] overflow-y-auto" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
             {product?.mainImage && (
               <div className="">
                 <Image
