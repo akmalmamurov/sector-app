@@ -7,13 +7,17 @@ import { getProductSingle } from "@/api/product";
 import { getCategoryBreadcrumbPaths } from "@/utils";
 import { ProductSingle } from "@/components/product";
 import { Metadata } from "next";
-
+type PageProps = {
+  params: {
+    slug: string;
+    subSlug: string;
+    productSlug: string;
+  };
+};
 export async function generateMetadata({
   params,
-}: {
-  params: { slug: string; subSlug: string; productSlug: string };
-}): Promise<Metadata> {
-  const { productSlug } =  params;
+}: PageProps): Promise<Metadata> {
+  const { productSlug } = params;
   const product = await getProductSingle(productSlug);
   return {
     title: `${product.title} купить в интернет-магазине Сектор: товаро ${product.title.toLocaleLowerCase()}`,
@@ -21,14 +25,10 @@ export async function generateMetadata({
   };
 }
 
-const SingleProductPage = async ({
-  params,
-}: {
-  params: { slug: string; subSlug: string; productSlug: string };
-}) => {
+const SingleProductPage = async ({ params }: PageProps) => {
   const { slug, subSlug, productSlug } = params;
   const catalogData = await getCatalog();
-  const product = await getProductSingle(productSlug || "");
+  const product = await getProductSingle(productSlug);
   const breadcrumbPaths = getCategoryBreadcrumbPaths(catalogData, slug, subSlug, true);
 
   return (
