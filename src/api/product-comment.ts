@@ -20,6 +20,7 @@ export const useCreateComment = () => {
 
   return useMutation<CommentProduct, AxiosError, CommentPayload>({
     mutationFn: createComment,
+
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["comment"] });
       showSuccess(`Created successfully!`);

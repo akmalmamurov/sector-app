@@ -189,8 +189,8 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
         }
       },
       {
-        rootMargin: "-100px 0px 0px 0px",
-        threshold: 0.5,
+        rootMargin: "0px 0px -50% 0px",
+        threshold: 0.3,
       }
     );
 
@@ -252,6 +252,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
       }
     );
   };
+
   return (
     <>
       <div>
@@ -341,6 +342,25 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
             </section>
           )}
 
+          <section
+            id="related"
+            ref={(el: HTMLElement | null): void => {
+              sectionRefs.current.reviews = el;
+            }}
+            className="py-[53px] bg-whiteOut"
+            style={{ scrollMarginTop: "100px" }}
+          >
+            <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
+              <h2 className="text-xl font-semibold mb-4 flex items-center">
+                Сопутствующие товары
+              </h2>
+            </div>
+            <div className="max-w-none pl-[31px]">
+              <p className="text-base font-normal text-textColor mb-6">
+                API hali tayyor emas
+              </p>
+            </div>
+          </section>
           <section
             id="reviews"
             ref={(el: HTMLElement | null): void => {

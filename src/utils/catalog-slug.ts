@@ -32,6 +32,7 @@ export const getTitleBySlug = (
   catalogData: CatalogData[],
   slug: string
 ): string | undefined => {
+
   const searchInItems = (items: (CatalogData | CategoryData)[]): string | undefined => {
     for (const item of items) {
       if (item.slug === slug) {
