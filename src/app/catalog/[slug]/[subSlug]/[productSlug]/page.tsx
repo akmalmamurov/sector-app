@@ -11,7 +11,7 @@ import { Metadata } from "next";
 export async function generateMetadata({
   params,
 }: {
-  params: { productSlug: string };
+  params: { slug: string; subSlug: string; productSlug: string };
 }): Promise<Metadata> {
   const { productSlug } = params;
   const product = await getProductSingle(productSlug);
