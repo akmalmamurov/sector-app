@@ -7,13 +7,16 @@ import { getProductSingle } from "@/api/product";
 import { getCategoryBreadcrumbPaths } from "@/utils";
 import { ProductSingle } from "@/components/product";
 import { Metadata } from "next";
-type PageProps = {
+
+interface PageProps {
   params: {
     slug: string;
     subSlug: string;
     productSlug: string;
   };
-};
+  searchParams?: { [key: string]: string | string[] | undefined };
+}
+
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {

@@ -37,7 +37,7 @@ const ProductSingleRight: React.FC<ProductSingleRightProps> = ({ product }) => {
   };
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full pl-2">
       <div className="flex gap-3 mb-[15px]">
         <h2 className="font-normal text-2xl leading-9 text-textColor">
           {product.title}
