@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Link from "next/link";
 import { getCatalog } from "@/api/catalog";
 import { Container } from "@/components/container";
@@ -8,11 +9,16 @@ import CategoryLeft from "@/components/category/CategoryLeft";
 import { CategoryRight } from "@/components/category";
 import { Metadata } from "next";
 
+// Sahifa parametrlarini to'liq aniqlash: params bilan birga searchParams ham kiritiladi
+type PageProps = {
+  params: { slug: string; subSlug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
 export async function generateMetadata({
   params,
-}: {
-  params: { slug?: string; subSlug: string };
-}): Promise<Metadata> {
+  searchParams,
+}: PageProps): Promise<Metadata> {
   const { subSlug } = params;
   const catalogData = await getCatalog();
   const categoryTitle = getTitleBySlug(catalogData, subSlug);
@@ -24,14 +30,12 @@ export async function generateMetadata({
 
 const CategoryPage = async ({
   params,
-}: {
-  params: Promise<{ slug: string; subSlug: string }>
-}) => {
-  const { slug, subSlug } = await params;
+  searchParams,
+}: PageProps) => {
+  const { slug, subSlug } = params;
   const catalogData = await getCatalog();
-
   const breadcrumbPaths = getCategoryBreadcrumbPaths(catalogData, slug, subSlug);
-  const categoryTitle = getTitleBySlug(catalogData, subSlug || "");
+  const categoryTitle = getTitleBySlug(catalogData, subSlug);
 
   return (
     <Container className="pb-[58px]">
@@ -50,11 +54,11 @@ const CategoryPage = async ({
           />
         ))}
       </div>
-      {/* products filters */}
+      {/* Products filters */}
       <div className="grid grid-cols-12 gap-6">
-        {/* filters */}
+        {/* Filters */}
         <CategoryLeft />
-        {/* products */}
+        {/* Products */}
         <CategoryRight slug={subSlug} title={categoryTitle} paramKey="categorySlug" />
       </div>
     </Container>
