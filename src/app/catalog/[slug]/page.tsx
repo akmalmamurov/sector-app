@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import type { Metadata, ResolvingMetadata } from 'next';
 import Link from "next/link";
 import { getCatalog } from "@/api/catalog";
 import { Container } from "@/components/container";
@@ -8,20 +10,17 @@ import BreadcrumbHoverLink from "@/components/bread-crumb/CatalogCrumb";
 import { ChevronRightIcon } from "lucide-react";
 import { getBreadcrumbPaths, getSlugString } from "@/utils";
 import { CategoryLeft, CategoryRight } from "@/components/category";
-import { Metadata } from "next";
 
-// Standart sahifa parametrlarining tipini belgilaymiz
-type PageProps = {
-  params: {
-    slug: string;
-  };
-  searchParams: { [key: string]: string | string[] | undefined };
+type Props = {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const { slug } = params;
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { slug } = await params;
   const catalogData = await getCatalog();
   const categoryTitle = getTitleBySlug(catalogData, slug);
   return {
@@ -30,8 +29,11 @@ export async function generateMetadata({
   };
 }
 
-const SingleCatalogPage = async ({ params }: PageProps) => {
-  const { slug } = params;
+export default async function SingleCatalogPage({
+  params,
+  searchParams,
+}: Props) {
+  const { slug } = await params;
   const catalogData = await getCatalog();
 
   const slugString = getSlugString(slug);
@@ -44,7 +46,7 @@ const SingleCatalogPage = async ({ params }: PageProps) => {
   return (
     <Container className="pb-[58px]">
       <div className="flex items-center pl-2 gap-[15px] text-weekColor h-[58px]">
-        <Link href="/" className="flex items-center text-weekColor ">
+        <Link href="/" className="flex items-center text-weekColor">
           <HomeIcon />
         </Link>
         <ChevronRightIcon className="text-weekColor" size={14} />
@@ -55,7 +57,6 @@ const SingleCatalogPage = async ({ params }: PageProps) => {
           <span>Каталог</span>
         </Link>
         <ChevronRightIcon className="text-weekColor" size={14} />
-
         {breadcrumbPaths.map((item, index) => (
           <BreadcrumbHoverLink
             key={index}
@@ -80,7 +81,7 @@ const SingleCatalogPage = async ({ params }: PageProps) => {
           ) : catalogItem?.categories?.length ? (
             (catalogItem.categories as CategoryData[]).map((category) => (
               <Link
-                key={category?.id}
+                key={category.id}
                 href={`/catalog/${catalogItem.slug}/${category.slug}`}
                 className="relative border p-2 m-2 text-textColor bg-whiteOut hover:text-cerulean hover:bg-white hover:shadow-lg before:hidden hover:before:block before:w-full before:h-[2px] before:bg-cerulean before:absolute before:bottom-0 before:left-0 duration-200 ease-in-out"
               >
@@ -102,6 +103,4 @@ const SingleCatalogPage = async ({ params }: PageProps) => {
       </div>
     </Container>
   );
-};
-
-export default SingleCatalogPage;
+}

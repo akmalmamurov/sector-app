@@ -9,13 +9,11 @@ import { getCategoryBreadcrumbPaths, getTitleBySlug } from "@/utils";
 import CategoryLeft from "@/components/category/CategoryLeft";
 import { CategoryRight } from "@/components/category";
 
-// Sahifa parametrlarini Promise sifatida aniqlaymiz
 type Props = {
   params: Promise<{ slug: string; subSlug: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-// generateMetadata funksiya: 
 export async function generateMetadata(
   { params, }: Props,
   parent: ResolvingMetadata
