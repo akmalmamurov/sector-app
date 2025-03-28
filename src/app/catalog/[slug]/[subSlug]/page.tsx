@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import type { Metadata, ResolvingMetadata } from 'next';
+import type { Metadata } from 'next';
 import Link from "next/link";
 import { getCatalog } from "@/api/catalog";
 import { Container } from "@/components/container";
@@ -11,12 +10,10 @@ import { CategoryRight } from "@/components/category";
 
 type Props = {
   params: Promise<{ slug: string; subSlug: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export async function generateMetadata(
   { params, }: Props,
-  parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { subSlug } = await params;
   const catalogData = await getCatalog();
@@ -30,7 +27,6 @@ export async function generateMetadata(
 
 export default async function CategoryPage({
   params,
-  searchParams,
 }: Props) {
   const { slug, subSlug } = await params;
   const catalogData = await getCatalog();
