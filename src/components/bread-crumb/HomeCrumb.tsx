@@ -37,7 +37,7 @@ export const HomeCrumb = ({ paths }: BreadcrumbProps) => {
               {item.name}
             </Link>
           ) : (
-            <p className="text-celBlue font-normal text-xs cursor-text">
+            <p className="text-celBlue font-normal text-xs ">
               {item.name}
             </p>
           )}
