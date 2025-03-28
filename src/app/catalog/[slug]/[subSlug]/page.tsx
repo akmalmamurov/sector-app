@@ -25,9 +25,9 @@ export async function generateMetadata({
 const CategoryPage = async ({
   params,
 }: {
-  params: { slug: string; subSlug: string };
+  params: Promise<{ slug: string; subSlug: string }>
 }) => {
-  const { slug, subSlug } = params;
+  const { slug, subSlug } = await params;
   const catalogData = await getCatalog();
 
   const breadcrumbPaths = getCategoryBreadcrumbPaths(catalogData, slug, subSlug);
