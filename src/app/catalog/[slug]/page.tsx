@@ -1,7 +1,7 @@
+import Link from "next/link";
 import { getCatalog } from "@/api/catalog";
 import { Container } from "@/components/container";
 import { HomeIcon } from "@/assets/icons";
-import Link from "next/link";
 import { CategoryData } from "@/types";
 import { findCatalogItem, getTitleBySlug } from "@/utils/catalog-slug";
 import BreadcrumbHoverLink from "@/components/bread-crumb/CatalogCrumb";
@@ -10,11 +10,17 @@ import { getBreadcrumbPaths, getSlugString } from "@/utils";
 import { CategoryLeft, CategoryRight } from "@/components/category";
 import { Metadata } from "next";
 
+// Standart sahifa parametrlarining tipini belgilaymiz
+type PageProps = {
+  params: {
+    slug: string;
+  };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
 export async function generateMetadata({
   params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
+}: PageProps): Promise<Metadata> {
   const { slug } = params;
   const catalogData = await getCatalog();
   const categoryTitle = getTitleBySlug(catalogData, slug);
@@ -24,11 +30,7 @@ export async function generateMetadata({
   };
 }
 
-const SingleCatalogPage = async ({
-  params,
-}: {
-  params: { slug: string };
-}) => {
+const SingleCatalogPage = async ({ params }: PageProps) => {
   const { slug } = params;
   const catalogData = await getCatalog();
 
@@ -38,6 +40,7 @@ const SingleCatalogPage = async ({
     : undefined;
   const breadcrumbPaths = getBreadcrumbPaths(catalogData, slugString);
   const categoryTitle = getTitleBySlug(catalogData, slug);
+
   return (
     <Container className="pb-[58px]">
       <div className="flex items-center pl-2 gap-[15px] text-weekColor h-[58px]">

@@ -7,10 +7,11 @@ import { getCategoryBreadcrumbPaths, getTitleBySlug } from "@/utils";
 import CategoryLeft from "@/components/category/CategoryLeft";
 import { CategoryRight } from "@/components/category";
 import { Metadata } from "next";
+
 export async function generateMetadata({
   params,
 }: {
-  params: { subSlug: string };
+  params: { slug?: string; subSlug: string };
 }): Promise<Metadata> {
   const { subSlug } = params;
   const catalogData = await getCatalog();
@@ -20,16 +21,18 @@ export async function generateMetadata({
     description: `${categoryTitle} купить в интернет-магазине Сектор: каталог ${categoryTitle?.toLocaleLowerCase()} товаров`,
   };
 }
+
 const CategoryPage = async ({
   params,
 }: {
-  params: Promise<{ slug?: string; subSlug?: string }>;
+  params: { slug?: string; subSlug?: string };
 }) => {
-  const { slug, subSlug } = await params;
+  const { slug, subSlug } = params;
   const catalogData = await getCatalog();
 
-  const breadcrumbPaths = getCategoryBreadcrumbPaths( catalogData, slug, subSlug );
-  const categoryTitle = getTitleBySlug(catalogData,  subSlug || "");
+  const breadcrumbPaths = getCategoryBreadcrumbPaths(catalogData, slug, subSlug);
+  const categoryTitle = getTitleBySlug(catalogData, subSlug || "");
+
   return (
     <Container className="pb-[58px]">
       <div className="flex items-center pl-2 sm:pl-1 gap-[15px] text-gray-600 h-[60px]">
@@ -52,7 +55,7 @@ const CategoryPage = async ({
         {/* filters */}
         <CategoryLeft />
         {/* products */}
-        <CategoryRight slug={subSlug} title={categoryTitle} paramKey="categorySlug"/>
+        <CategoryRight slug={subSlug} title={categoryTitle} paramKey="categorySlug" />
       </div>
     </Container>
   );
