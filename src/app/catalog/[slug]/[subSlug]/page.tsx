@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Metadata, ResolvingMetadata } from 'next';
 import Link from "next/link";
 import { getCatalog } from "@/api/catalog";
@@ -16,7 +17,7 @@ type Props = {
 
 // generateMetadata funksiya: 
 export async function generateMetadata(
-  { params, searchParams }: Props,
+  { params, }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { subSlug } = await params;
