@@ -25,7 +25,7 @@ export async function generateMetadata({
 const CategoryPage = async ({
   params,
 }: {
-  params: { slug?: string; subSlug?: string };
+  params: { slug: string; subSlug: string };
 }) => {
   const { slug, subSlug } = params;
   const catalogData = await getCatalog();
