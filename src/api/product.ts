@@ -22,7 +22,7 @@ export const getProducts = async (
     else queryStr = GET_PRODUCTS;
 
     const res = await request.get(queryStr);
-    return res.data.data;
+    return res.data.data || [];
   } catch (error) {
     console.log(error);
     return [];
@@ -32,9 +32,10 @@ export const getProducts = async (
 export const getProductSingle = async (slug: string) => {
   try {
     const res = await request(`${GET_PRODUCT_SINGLE}/${slug}`);
-    return res.data.data;
+    return res.data.data || [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 export const getProductCategory = async (
@@ -58,9 +59,10 @@ export const getProductCategory = async (
       ...(nameSort && {name:nameSort }),
     };
     const res = await request(GET_PRODUCT_CATEGORY, { params });
-    return res.data.data;
+    return res.data.data || [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 

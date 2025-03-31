@@ -1,8 +1,9 @@
 "use client";
+import { useEffect, useState } from "react";
 import useStore from "@/context/store";
 import { getProductSingle } from "@/api/product";
 import { useSuspenseQueries } from "@tanstack/react-query";
-import { ProductCard } from "../card";
+import { CompareCard, ProductCard } from "../card";
 
 interface CharacteristicOption {
   name?: string;
@@ -19,8 +20,18 @@ interface MergedGroup {
   options: string[];
 }
 
-export const CompareProducs = () => {
+export const CompareProducts = () => {
   const { compares = [] } = useStore();
+  const [isScroll, setIsScroll] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScroll(window.scrollY > 150);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const productQueries = useSuspenseQueries({
     queries: compares.map((el) => ({
@@ -60,19 +71,29 @@ export const CompareProducs = () => {
   };
 
   return (
-    <div >
-      <div className="py-[15px] border-b border-superSilver px-6">
-        <h3 className="relative text-base font-normal text-cerulean w-[140px] text-center before:absolute before:-bottom-[15px] before:left-0 before:w-full before:h-[5px] before:bg-gradient-to-r before:from-blue-400 before:to-cerulean">
-        Все товары ({products.length})
-        </h3>
+    <div>
+      <div className={`sticky top-[130px] z-[3] bg-white ${isScroll && "shadow-md"}`}>
+        <div className="border-b py-[15px]   border-superSilver px-6">
+          <h3 className="relative text-base font-normal text-cerulean w-[140px] text-center before:absolute before:-bottom-[15px] before:left-0 before:w-full before:h-[5px] before:bg-gradient-to-r before:from-blue-400 before:to-cerulean ">
+            Все товары ({products.length})
+          </h3>
+        </div>
+        {isScroll && (
+          <div className="px-6">
+            <div className="bg-white mt-5 grid grid-cols-5 gap-2 h-[64px] p-2">
+              {compares.map((product, idx) => (
+                <CompareCard product={product} key={idx} />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
-      {/* products */}
-      <div className="grid grid-cols-4 gap-[21px] px-6">
+      <div className="grid grid-cols-4 gap-[21px] px-6 pt-6">
         {compares.map((product, idx) => (
-            <ProductCard product={product} key={idx} className="mt-6" />
+          <ProductCard product={product} key={idx} />
         ))}
       </div>
-    {/* comparison table */}
+      {/* Comparison table */}
       <div className="mt-6 overflow-x-auto p-6">
         <table className="min-w-full border-collapse">
           <colgroup>
@@ -95,7 +116,6 @@ export const CompareProducs = () => {
               {group.options.map((optionName, optIndex) => (
                 <tr key={optIndex} className="border-b">
                   {products.map((product, prodIndex) => {
-                    // Find the matching group in this product
                     const productGroup = product.characteristics?.find(
                       (g: CharacteristicGroup) => g.title === group.title
                     );
@@ -105,9 +125,11 @@ export const CompareProducs = () => {
 
                     const cellContent =
                       prodIndex === 0 ? (
-                        <div className="flex  flex-col">
+                        <div className="flex flex-col">
                           <span className="py-2">{optionName}</span>
-                          <span className="py-2 px-[15px]">{optionValue || "-"}</span>
+                          <span className="py-2 px-[15px]">
+                            {optionValue || "-"}
+                          </span>
                         </div>
                       ) : (
                         optionValue || "-"
@@ -132,4 +154,4 @@ export const CompareProducs = () => {
   );
 };
 
-export default CompareProducs;
+export default CompareProducts;

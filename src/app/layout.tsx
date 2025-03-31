@@ -6,6 +6,7 @@ import { Footer } from "@/components/footer";
 import { Toaster } from "react-hot-toast";
 import BottomNavbar from "@/components/bottom-navbar/BottomNavbar";
 import { Providers } from "@/components/providers";
+import { ScrollTop } from "@/components/scroll-top";
 
 export const metadata: Metadata = {
   title: "Sector App",
@@ -23,6 +24,7 @@ export default function RootLayout({
         <link rel="icon" type="image/svg+xml" href="/logo.svg" />
       </head>
       <body>
+        <ScrollTop/>
         <Providers>
           <Header />
         {children}

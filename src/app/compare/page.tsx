@@ -1,5 +1,5 @@
 import { HomeCrumb } from "@/components/bread-crumb";
-import { CompareProducs } from "@/components/compare-products";
+import { CompareProducts } from "@/components/compare-products";
 import { Container } from "@/components/container";
 import { InfoHeader } from "@/components/div";
 import { Section } from "@/components/section";
@@ -18,7 +18,7 @@ const ComparePage = () => {
         <InfoHeader>
           <InfoTitle>Сравнение товаров</InfoTitle>
         </InfoHeader>
-        <CompareProducs />
+        <CompareProducts/>
       </Section>
     </Container>
   );

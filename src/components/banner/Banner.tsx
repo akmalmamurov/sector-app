@@ -33,13 +33,13 @@ export const Banner = ({ banner }: { banner: BannerData[] }) => {
             }}
             className="w-full h-[413px] overflow-hidden"
           >
-            {banner.map((item) => (
-              <SwiperSlide key={item.id}>
-                <Link href={item.redirectUrl}>
+            {banner?.map((item) => (
+              <SwiperSlide key={item?.id}>
+                <Link href={item?.redirectUrl}>
                   <div className="relative w-full h-[413px]">
                     <Image
-                      src={`${process.env.NEXT_PUBLIC_API_URL}/${item.imagePath}`}
-                      alt={`Banner ${item.id}`}
+                      src={`${process.env.NEXT_PUBLIC_API_URL}/${item?.imagePath}`}
+                      alt={`Banner ${item?.id}`}
                       fill
                       style={{ objectFit: "cover" }}
                       priority
