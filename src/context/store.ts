@@ -14,6 +14,8 @@ interface StoreState {
   compares: StoreItem[];
   selected: StoreItem[];
   rowCol: boolean;
+  user: string | null;
+  setUser: (user: string | null) => void;
   setAuth: () => void;
   setContact: (info: string) => void;
   toggleFavorites: (product: ProductData) => void;
@@ -44,6 +46,8 @@ const useStore = create<StoreState>()(
       rowCol: false,
       compares: [],
       selected: [],
+      user: null,
+      setUser: (user) => set({ user }),
       setAuth: () => set({ auth: true }),
      toggleRowCol: () => set((state)=> ({rowCol: !state.rowCol})),
 

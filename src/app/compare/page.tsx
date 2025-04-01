@@ -15,10 +15,11 @@ const ComparePage = () => {
     <Container className="pb-[58px]">
       <HomeCrumb paths={[{ name: "Сравнение товаров" }]} />
       <Section className="px-0  shadow-sectionShadow">
-        <InfoHeader>
-          <InfoTitle>Сравнение товаров</InfoTitle>
+        <InfoHeader className="mb-[1px]">
+          <InfoTitle >Сравнение товаров</InfoTitle>
         </InfoHeader>
-        <CompareProducts/>
+
+        <CompareProducts />
       </Section>
     </Container>
   );
