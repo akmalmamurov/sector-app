@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { PromotionData } from "@/types";
-import { formatDate } from "@/utils/format-date";
+import { formatDate } from "@/utils";
 
 export const DiscountCard = ({ promotion }: { promotion: PromotionData }) => {
   return (
