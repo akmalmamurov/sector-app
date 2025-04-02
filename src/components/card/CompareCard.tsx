@@ -22,7 +22,7 @@ export const CompareCard: React.FC<CompareCardProps> = ({ product }) => {
             height={50}
             className="object-cover w-[29px] h-[29px] mr-[15px]"
           />
-            <span className="text-xs text-titleColor break-words whitespace-normal mr-[5px] line-clamp-2">
+            <span className="text-xs text-titleColor break-words whitespace-normal mr-[5px] line-clamp-2 hover:text-cerulean hoverEffect">
               {product?.articul}
             </span>
         </Link>

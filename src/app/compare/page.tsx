@@ -4,6 +4,7 @@ import { Container } from "@/components/container";
 import { InfoHeader } from "@/components/div";
 import { Section } from "@/components/section";
 import { InfoTitle } from "@/components/title";
+import { WarningSector } from "@/components/warning-sector";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -20,6 +21,7 @@ const ComparePage = () => {
         </InfoHeader>
 
         <CompareProducts />
+        <WarningSector/>
       </Section>
     </Container>
   );

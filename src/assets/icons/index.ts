@@ -43,3 +43,4 @@ export * from "./GoToSectionIcon";
 export * from "./SortIconDesc";
 export * from "./SortChevronIcon";
 export * from "./BannerIcon";
+export * from "./SectorWarning";
