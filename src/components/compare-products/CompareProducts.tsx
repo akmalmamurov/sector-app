@@ -11,6 +11,7 @@ import "swiper/css/navigation";
 import { Swiper as SwiperClass } from "swiper/types";
 import { ArrowRightIcon } from "@/assets/icons";
 import { WarningSector } from "../warning-sector";
+import { Loading } from "../loader";
 
 interface CharacteristicOption {
   name?: string;
@@ -59,7 +60,7 @@ export const CompareProducts = () => {
   const isError = productQueries.some((q) => q.error);
   const products = productQueries.map((q) => q.data);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading/>;
   if (isError) return <div>Error fetching products.</div>;
 
   const visibleProducts = products.slice(currentIndex, currentIndex + 5);

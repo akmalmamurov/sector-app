@@ -27,11 +27,15 @@ const CartStepper = () => {
   }, []);
 
   useEffect(() => {
-    if (auth === false && !authErrorShown.current) {
-      showError("Вы не авторизованы, рекомендуем авторизоваться");
-      authErrorShown.current = true;
-    }
+    const timer = setTimeout(() => {
+      if (auth === false && !authErrorShown.current) {
+        showError("Вы не авторизованы, рекомендуем авторизоваться");
+        authErrorShown.current = true;
+      }
+    }, 500);
+    return () => clearTimeout(timer);
   }, [auth]);
+  
 
   const steps = stepsData || [];
   const isLastStep = activeStep === steps.length - 1;
