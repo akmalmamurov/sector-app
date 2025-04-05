@@ -3,6 +3,8 @@ import useStore, { StoreItem } from "@/context/store";
 import { ConfirmModal } from "../modal";
 import { useConfirmModal } from "@/hooks";
 import CartProducts from "./CartProducts";
+import { useQuery } from "@tanstack/react-query";
+import { getRegion } from "@/api";
 
 interface Props {
   city: string;
@@ -17,21 +19,16 @@ interface Props {
   resetCart: () => void;
 }
 
-const MyCartLeft = ({
-  city,
-  setCity,
-  isAllChecked,
-  toggleAllItems,
-  setQuantity,
-  cart,
-  toggleSingleItem,
-  selectedItems,
-  deleteCart,
-  resetCart,
-}: Props) => {
+const MyCartLeft = ({ city, setCity, isAllChecked, toggleAllItems, setQuantity, cart, toggleSingleItem, selectedItems, deleteCart, resetCart }: Props) => {
   const { favorites } = useStore();
   const { isOpen: isConfirmOpen, message, openModal, closeModal, onConfirm, } = useConfirmModal();
-
+  const { data: regionData = [] } = useQuery({
+    queryKey: ["region"],
+    queryFn: getRegion,
+    
+  });
+  console.log(regionData);
+  
   const handleDeleteAll = () => {
     openModal("Вы уверены, что хотите удалить все товары из корзины?", () => {
       resetCart();
