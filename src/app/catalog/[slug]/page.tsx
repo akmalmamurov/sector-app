@@ -95,7 +95,7 @@ export default async function SingleCatalogPage({
         {/* Filters */}
         <CategoryLeft />
         {/* Products */}
-        <CategoryRight slug={slug} title={categoryTitle} paramKey="catalogSlug" />
+        <CategoryRight slug={slug} title={categoryTitle} paramKey="slug" />
       </div>
     </Container>
   );
