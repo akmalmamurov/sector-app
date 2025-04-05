@@ -39,7 +39,7 @@ interface StoreState {
 const useStore = create<StoreState>()(
   persist(
     (set, get) => ({
-      auth: false,
+      auth: localStorage.getItem("sector-token") ? true : false,
       contact: "",
       favorites: [],
       cart: [],
@@ -49,13 +49,13 @@ const useStore = create<StoreState>()(
       user: null,
       setUser: (user) => set({ user }),
       setAuth: () => set({ auth: true }),
-     toggleRowCol: () => set((state)=> ({rowCol: !state.rowCol})),
-
+      toggleRowCol: () => set((state) => ({ rowCol: !state.rowCol })),
       selectedCardsList: (products) => {
         set(() => ({
           selected: products,
         }));
       },
+
       setContact: (info) => set({ contact: info }),
       toggleFavorites: (product) => {
         set((state) => {
@@ -74,18 +74,26 @@ const useStore = create<StoreState>()(
       resetFavorites: () => set({ favorites: [] }),
       addToCart: (product: ProductData) =>
         set((state) => {
-          const existingProduct = state.cart.find(item => item.id === product.id);
+          const existingProduct = state.cart.find(
+            (item) => item.id === product.id
+          );
           if (existingProduct) {
             return {
-              cart: state.cart.map(item =>
+              cart: state.cart.map((item) =>
                 item.id === product.id
-                  ? { ...item, quantity: (item.quantity || 1) + (product.quantity || 1) }
+                  ? {
+                      ...item,
+                      quantity: (item.quantity || 1) + (product.quantity || 1),
+                    }
                   : item
-              )
+              ),
             };
           }
           return {
-            cart: [...state.cart, { ...product, quantity: product.quantity || 1 }]
+            cart: [
+              ...state.cart,
+              { ...product, quantity: product.quantity || 1 },
+            ],
           };
         }),
       setQuantity: (id, quantity) => {
@@ -161,7 +169,7 @@ export default useStore;
 
 export const hydrateStore = () => {
   useStore.persist.rehydrate();
-  
+
   if (typeof window !== "undefined" && localStorage.getItem("sector-token")) {
     useStore.setState({ auth: true });
   }

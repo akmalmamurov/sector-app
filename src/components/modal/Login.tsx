@@ -15,8 +15,9 @@ import {
 import LoginBrowser from "./LoginBrowser";
 import { Button } from "../ui/button";
 import useStore from "@/context/store";
-import axios from "axios";
 import { showError } from "../toast/Toast";
+import request from "@/services";
+import { DOMAIN } from "@/constants";
 
 interface Props {
   handleClose: (newStep?: number) => void;
@@ -42,8 +43,8 @@ const Login = ({ handleClose, formMethods, fullClose }: Props) => {
     setContact(data.contact);
 
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/user/auth/send-otp`,
+      const response = await request.post(
+        `${DOMAIN}/user/auth/send-otp`,
         { email: data.contact },
         {
           headers: {

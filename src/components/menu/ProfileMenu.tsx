@@ -5,11 +5,18 @@ import { X } from "lucide-react";
 import { UserIcon } from "@/assets/icons";
 import { profileMenuData } from "@/data";
 import useStore from "@/context/store";
+import { useQuery } from "@tanstack/react-query";
+import { getUser } from "@/api";
 
 export const ProfileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const { logOut } = useStore();
+  const { data: userData = [] } = useQuery({
+    queryKey: ["user"],
+    queryFn: getUser,
+  });
+  
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -53,7 +60,7 @@ export const ProfileMenu = () => {
         >
           {/* header */}
           <div className="p-[15px] flex justify-between items-center border-b">
-            <h3 className="text-base text-textColor">UserName</h3>
+            <h3 className="text-base text-textColor">{userData?.name}</h3>
             <button onClick={() => setIsOpen(false)}>
               <X className="w-5 h-5" />
             </button>
