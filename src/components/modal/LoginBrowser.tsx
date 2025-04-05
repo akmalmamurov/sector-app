@@ -2,25 +2,23 @@
 import { GoogleIcon, LinkedinIcon, YandexIcon } from "@/assets/icons";
 import Link from "next/link";
 import useStore from "@/context/store";
-import { useEffect } from "react"; 
+import { useEffect } from "react";
 
 type loginProp = "google" | "linkedin" | "facebook" | "yandex";
 
 const LoginBrowser = ({ fullClose }: { fullClose: () => void }) => {
-  const { setAuth, } = useStore();
-
+  const { setAuth } = useStore();
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const token = params.get("token");
-    
+
     if (token) {
       localStorage.setItem("sector-token", token);
-      setAuth();
+      setAuth(true);
       window.history.replaceState({}, document.title, window.location.pathname);
     }
   }, [setAuth]);
-  
 
   const handleOAuthLogin = (provider: loginProp) => {
     const urls = {

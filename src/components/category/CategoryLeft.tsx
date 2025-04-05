@@ -31,9 +31,8 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
 }) => {
   const { data, isLoading, isError } = useQuery<FilterItem[]>({
     queryKey: ["filter", slug],
-    queryFn: () => getFilter(paramKey || "", slug || ""),
+    queryFn: () => getFilter(slug || "", paramKey || ""),
   });
-  console.log(data);
 
   if (isLoading) {
     return <div>Loading filters...</div>;

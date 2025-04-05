@@ -53,7 +53,7 @@ export default async function CategoryPage({
       {/* Products filters */}
       <div className="grid grid-cols-12 gap-6">
         {/* Filters */}
-        <CategoryLeft />
+        <CategoryLeft slug={subSlug} paramKey="categorySlug"/>
         {/* Products */}
         <CategoryRight slug={subSlug} title={categoryTitle} paramKey="categorySlug" />
       </div>
