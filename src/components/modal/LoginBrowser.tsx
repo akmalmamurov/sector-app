@@ -20,6 +20,7 @@ const LoginBrowser = ({ fullClose }: { fullClose: () => void }) => {
       window.history.replaceState({}, document.title, window.location.pathname);
     }
   }, [setAuth]);
+  
 
   const handleOAuthLogin = (provider: loginProp) => {
     const urls = {
