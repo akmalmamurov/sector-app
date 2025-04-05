@@ -20,14 +20,15 @@ interface FilterItem {
 }
 
 interface CategoryLeftProps {
-  slug: string;
-  paramKey: string;
+  slug?: string;
+  paramKey?: string;
 }
+
 
 export const CategoryLeft: React.FC<CategoryLeftProps> = ({ slug, paramKey }) => {
   const { data, isLoading, isError } = useQuery<FilterItem[]>({
     queryKey: ["filter", slug],
-    queryFn: () => getFilter(paramKey, slug),
+    queryFn: () => getFilter(paramKey || "", slug || ""),
   });
 
   if (isLoading) {
