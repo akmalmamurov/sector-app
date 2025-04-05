@@ -27,6 +27,7 @@ const MyCartLeft = ({ city, setCity, isAllChecked, toggleAllItems, setQuantity, 
     queryFn: getRegion,
     
   });
+  console.log(regionData);
   
   const handleDeleteAll = () => {
     openModal("Вы уверены, что хотите удалить все товары из корзины?", () => {
