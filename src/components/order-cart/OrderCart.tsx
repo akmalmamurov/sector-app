@@ -19,14 +19,14 @@ const OrderCart = ({
     0
   );
 
-  const  orderHandle = () => {
+  const orderHandle = () => {
     if (onNextStep) {
       onNextStep();
       selectedCardsList(selectedCards);
     }
-  }
+  };
   return (
-    <div className="bg-white border shadow-sectionShadow p-[23px] sticky top-[185px]">
+    <div className="bg-white border border-superSilver shadow-sectionShadow p-[23px] sticky top-[140px]">
       <div className="flex justify-between items-center mb-5">
         <p className="text-[18px] leading-[27px] font-normal text-stoneCold">
           Моя корзина <span>({selectedCards.length})</span>
@@ -44,7 +44,10 @@ const OrderCart = ({
         </span>
       </div>
       {step === 2 && (
-        <button className="bg-white border text-xs font-normal flex items-center gap-3 px-2 border-cerulean hover:opacity-90 transition-opacity text-cerulean w-full py-3">
+        <button
+          type="button"
+          className="bg-white border text-xs font-normal flex items-center gap-3 px-2 border-cerulean hover:opacity-90 transition-opacity text-cerulean w-full py-3"
+        >
           <CircleAlert className="w-6 h-6" />
           Доставка будет включена в счёт
         </button>
@@ -64,8 +67,10 @@ const OrderCart = ({
       {step === 0 && (
         <>
           <button
+            type="submit"
+            disabled={!selectedCards.length}
             onClick={orderHandle}
-            className="bg-cerulean hover:opacity-90 transition-opacity text-white w-full py-3 mb-3"
+            className="bg-cerulean hover:opacity-90 transition-opacity text-white w-full py-[13px] mb-3 disabled:opacity-50 font-semibold"
           >
             Оформить заказ
           </button>

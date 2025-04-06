@@ -1,59 +1,39 @@
+"use client";
+
 import useStore from "@/context/store";
-import OrderCart from "../order-cart/OrderCart";
 import ArrowLeftLongIcon from "@/assets/icons/ArrowLeftLongIcon";
 import { Check, CirclePlus } from "lucide-react";
 import { Input } from "../ui/input";
-import * as z from "zod";
 import {
-  Form,
-  FormControl,
   FormField,
   FormItem,
+  FormControl,
   FormMessage,
 } from "../ui/form";
 import { Label } from "../ui/label";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import SmileIcon from "@/assets/icons/SmileIcon";
 import { CartIcon, SearchIcon } from "@/assets/icons";
+import OrderCart from "../order-cart/OrderCart";
+import { OrderRequest } from "@/types";
+import { Control, FieldErrors } from "react-hook-form";
 
 interface Props {
   onNextStep: () => void;
   onPrevStep: () => void;
   step: number;
+  errors: FieldErrors<OrderRequest>;
+  control: Control<OrderRequest>;
 }
 
-export const CartContact = ({ onNextStep, step, onPrevStep }: Props) => {
+export const CartContact = ({
+  onNextStep,
+  onPrevStep,
+  step,
+  control,
+  errors,
+}: Props) => {
   const { selected } = useStore();
-  const formSchema = z.object({
-    firstname: z.string().min(2, ""),
-    lastname: z.string().min(2, ""),
-    email: z.string().email("Введите корректный E-mail"),
-  });
-  const formMethods = useForm({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      fullname: "",
-      firstname: "",
-      lastname: "",
-      email: "",
-      phone: "",
-    },
-  });
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = formMethods;
-  const onSubmitStep = async (data: {
-    fullname: string;
-    firstname: string;
-    lastname: string;
-    email: string;
-    phone: string | number;
-  }) => {
-    console.log(data);
-  };
+
   return (
     <div className="grid grid-cols-4 gap-[23px]">
       <div className="col-span-3 bg-white border shadow-sectionShadow py-[23px] px-[20px]">
@@ -78,7 +58,7 @@ export const CartContact = ({ onNextStep, step, onPrevStep }: Props) => {
           <Input
             type="text"
             placeholder="Поиск контрагента"
-            className="pr-10 text-base h-[41px] rounded-none  "
+            className="pr-10 text-base h-[41px] rounded-none"
           />
           <SearchIcon
             color="#333333"
@@ -100,171 +80,164 @@ export const CartContact = ({ onNextStep, step, onPrevStep }: Props) => {
               <Check className="text-white" strokeWidth={5} size={8} />
             </div>
           </div>
-          <Form {...formMethods}>
-            <form
-              noValidate
-              onSubmit={handleSubmit(onSubmitStep)}
+          {/* Form maydonlari – yagona form (CartStepper) kontekstidan foydalanamiz */}
+          <div className="grid grid-cols-3 gap-3 mb-10">
+            <FormField
+              control={control}
+              name="lastname"
+              render={({ field }) => (
+                <FormItem className="col-span-1">
+                  <FormControl>
+                    <div className="relative w-full">
+                      <Label
+                        htmlFor="lastname"
+                        className="text-textColor font-normal text-sm flex gap-1 pb-2"
+                      >
+                        Фамилия
+                        <span className="text-cerulean text-sm font-normal">
+                          *
+                        </span>
+                      </Label>
+                      <Input
+                        {...field}
+                        type="text"
+                        id="lastname"
+                        className="text-base rounded-none h-[41px] text-[#000000DE] border-superSilver"
+                      />
+                    </div>
+                  </FormControl>
+                  <FormMessage>{errors.lastname?.message}</FormMessage>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={control}
+              name="firstname"
+              render={({ field }) => (
+                <FormItem className="col-span-1">
+                  <FormControl>
+                    <div className="relative w-full">
+                      <Label
+                        htmlFor="firstname"
+                        className="text-textColor font-normal text-sm flex gap-1 pb-2"
+                      >
+                        Имя
+                        <span className="text-cerulean text-sm font-normal">
+                          *
+                        </span>
+                      </Label>
+                      <Input
+                        {...field}
+                        type="text"
+                        id="firstname"
+                        className="text-base rounded-none h-[41px] text-[#000000DE] border-superSilver"
+                      />
+                    </div>
+                  </FormControl>
+                  <FormMessage>{errors.firstname?.message}</FormMessage>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={control}
+              name="fullname"
+              render={({ field }) => (
+                <FormItem className="col-span-1">
+                  <FormControl>
+                    <div className="relative w-full">
+                      <Label
+                        htmlFor="fullname"
+                        className="text-textColor font-normal text-sm flex gap-1 pb-2"
+                      >
+                        Отчество
+                      </Label>
+                      <Input
+                        {...field}
+                        type="text"
+                        id="fullname"
+                        className="text-base rounded-none h-[41px] text-[#000000DE] border-superSilver"
+                      />
+                    </div>
+                  </FormControl>
+                  <FormMessage>{errors.fullname?.message}</FormMessage>
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="flex items-center gap-4 border border-cerulean p-3.5 mb-6">
+            <SmileIcon className="w-[20px] h-[20px]" />
+            <p className="text-cerulean text-xs font-normal">
+              Пожалуйста, укажите полное имя получателя, чтобы не возникло трудностей при получении заказа.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 gap-3 pb-10 mb-6 border-b border-superSilver">
+            <FormField
+              control={control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem className="col-span-1">
+                  <FormControl>
+                    <div className="relative w-full">
+                      <Label
+                        htmlFor="phone"
+                        className="text-textColor font-normal text-sm flex gap-1 pb-2"
+                      >
+                        Контактный телефон
+                        <span className="text-cerulean text-sm font-normal">
+                          *
+                        </span>
+                      </Label>
+                      <Input
+                        {...field}
+                        type="text"
+                        id="phone"
+                        className="text-base rounded-none h-[41px] text-[#000000DE] border-superSilver"
+                      />
+                    </div>
+                  </FormControl>
+                  <FormMessage>{errors.phone?.message}</FormMessage>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={control}
+              name="email"
+              render={({ field }) => (
+                <FormItem className="col-span-1">
+                  <FormControl>
+                    <div className="relative w-full">
+                      <Label
+                        htmlFor="email"
+                        className="text-textColor font-normal text-sm flex gap-1 pb-2"
+                      >
+                        Email
+                        <span className="text-cerulean text-sm font-normal">
+                          *
+                        </span>
+                      </Label>
+                      <Input
+                        {...field}
+                        type="text"
+                        id="email"
+                        className="text-base rounded-none h-[41px] text-[#000000DE] border-superSilver"
+                      />
+                    </div>
+                  </FormControl>
+                  <FormMessage>{errors.email?.message}</FormMessage>
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="col-span-2">
+            <button
+              type="button"
+              onClick={onNextStep}
+              className="bg-cerulean hover:opacity-90 transition-opacity px-6 py-2 text-base font-semibold text-white flex items-center justify-center gap-2"
             >
-              <div className="grid grid-cols-3 gap-3 mb-10">
-                <FormField
-                  control={control}
-                  name="lastname"
-                  render={({ field }) => (
-                    <FormItem className="col-span-1">
-                      <FormControl>
-                        <div className="relative w-full">
-                          <Label
-                            htmlFor="lastname"
-                            className="text-textColor font-normal text-sm flex gap-1 pb-2"
-                          >
-                            Фамилия
-                            <span className="text-cerulean text-sm font-normal">
-                              *
-                            </span>
-                          </Label>
-                          <Input
-                            {...field}
-                            type="text"
-                            id="lastname"
-                            className="text-base rounded-none h-[41px] text-[#000000DE] border-superSilver"
-                          />
-                        </div>
-                      </FormControl>
-                      <FormMessage>{errors.lastname?.message}</FormMessage>
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={control}
-                  name="firstname"
-                  render={({ field }) => (
-                    <FormItem className="col-span-1">
-                      <FormControl>
-                        <div className="relative w-full">
-                          <Label
-                            htmlFor="firstname"
-                            className="text-textColor font-normal text-sm flex gap-1 pb-2"
-                          >
-                            Имя
-                            <span className="text-cerulean text-sm font-normal">
-                              *
-                            </span>
-                          </Label>
-                          <Input
-                            {...field}
-                            type="text"
-                            id="firstname"
-                            className="text-base rounded-none h-[41px] text-[#000000DE] border-superSilver"
-                          />
-                        </div>
-                      </FormControl>
-                      <FormMessage>{errors.firstname?.message}</FormMessage>
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={control}
-                  name="fullname"
-                  render={({ field }) => (
-                    <FormItem className="col-span-1">
-                      <FormControl>
-                        <div className="relative w-full">
-                          <Label
-                            htmlFor="fullname"
-                            className="text-textColor font-normal text-sm flex gap-1 pb-2"
-                          >
-                            Отчество
-                          </Label>
-                          <Input
-                            {...field}
-                            type="text"
-                            id="fullname"
-                            className="text-base rounded-none h-[41px] text-[#000000DE] border-superSilver"
-                          />
-                        </div>
-                      </FormControl>
-                      <FormMessage>{errors.fullname?.message}</FormMessage>
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="flex items-center gap-4 border border-cerulean p-3.5 mb-6">
-                <SmileIcon className="w-[20px] h-[20px]" />
-                <p className="text-cerulean text-xs font-normal">
-                  Пожалуйста, укажите полное имя получателя, чтобы не возникло
-                  трудностей при получении заказа.
-                </p>
-              </div>
-              <div className="grid grid-cols-2 gap-3 pb-10 mb-6 border-b border-superSilver">
-                <FormField
-                  control={control}
-                  name="phone"
-                  render={({ field }) => (
-                    <FormItem className="col-span-1">
-                      <FormControl>
-                        <div className="relative w-full">
-                          <Label
-                            htmlFor="phone"
-                            className="text-textColor font-normal text-sm flex gap-1 pb-2"
-                          >
-                            Контактный телефон
-                            <span className="text-cerulean text-sm font-normal">
-                              *
-                            </span>
-                          </Label>
-                          <Input
-                            {...field}
-                            type="text"
-                            id="phone"
-                            className="text-base rounded-none h-[41px] text-[#000000DE] border-superSilver"
-                          />
-                        </div>
-                      </FormControl>
-                      <FormMessage>{errors.phone?.message}</FormMessage>
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem className="col-span-1">
-                      <FormControl>
-                        <div className="relative w-full">
-                          <Label
-                            htmlFor="email"
-                            className="text-textColor font-normal text-sm flex gap-1 pb-2"
-                          >
-                            Email
-                            <span className="text-cerulean text-sm font-normal">
-                              *
-                            </span>
-                          </Label>
-                          <Input
-                            {...field}
-                            type="text"
-                            id="email"
-                            className="text-base rounded-none h-[41px] text-[#000000DE] border-superSilver"
-                          />
-                        </div>
-                      </FormControl>
-                      <FormMessage>{errors.email?.message}</FormMessage>
-                    </FormItem>
-                  )}
-                />
-              </div>
-
-              <div className="col-span-2">
-                <button
-                  onClick={onNextStep}
-                  className="bg-cerulean  hover:opacity-90 transition-opacity px-6 py-2 text-base font-semibold text-white flex items-center justify-center gap-2"
-                >
-                  <CartIcon color="#fff" className="w-5 h-5" />
-                  Перейти к доставке
-                </button>
-              </div>
-            </form>
-          </Form>
+              <CartIcon color="#fff" className="w-5 h-5" />
+              Перейти к доставке
+            </button>
+          </div>
         </div>
       </div>
       <div className="col-span-1">

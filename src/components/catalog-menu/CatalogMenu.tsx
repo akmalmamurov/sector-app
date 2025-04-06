@@ -45,6 +45,7 @@ const CatalogMenu = ({
     }, 300); 
     return () => clearTimeout(timer);
   }, [hoveredParentIndex]);
+console.log(catalogData);
 
   return (
     <div
