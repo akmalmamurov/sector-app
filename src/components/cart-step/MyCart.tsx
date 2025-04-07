@@ -1,37 +1,45 @@
+"use client";
 import useStore from "@/context/store";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PageLoader } from "../loader";
 import MyCartLeft from "./MyCartLeft";
 import OrderCart from "../order-cart/OrderCart";
-import { Control, FieldErrors, UseFormSetValue, UseFormWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { OrderRequest } from "@/types";
-interface Props {
-  onNextStep: () => void;
-  step: number;
-  errors: FieldErrors<OrderRequest>;
-  control: Control<OrderRequest>;
-  watch: UseFormWatch<OrderRequest>;
-  setValue: UseFormSetValue<OrderRequest>;
-}
+import { showError } from "../toast/Toast";
+import { useRouter } from "next/navigation";
 
-export const MyCart = ({
-  onNextStep,
-  step,
-  errors,
-  control,
-  setValue,
-  watch,
-}: Props) => {
+export const MyCart = () => {
   const [city, setCity] = useState<string>("");
   const [isClient, setIsClient] = useState(false);
-  const { cart, setQuantity, deleteCart, resetCart } = useStore();
-  const [selectedItems, setSelectedItems] = useState<string[]>(
-    cart.map((item) => item.id)
-  );
+  const { cart, setQuantity, deleteCart, resetCart,auth,clearDataAfterTimeout } = useStore();
+  const [selectedItems, setSelectedItems] = useState<string[]>( cart.map((item) => item.id) );
+   const { handleSubmit,control, setValue, watch, formState: { errors }, } = useForm<OrderRequest>();
   const [prevCartLength, setPrevCartLength] = useState(cart.length);
 
   const isAllChecked = cart.length > 0 && selectedItems.length === cart.length;
   const selectedCards = cart.filter((item) => selectedItems.includes(item.id));
+  const authErrorShown = useRef(false);
+const router = useRouter();
+  useEffect(() => {
+    if (!auth) {
+      clearDataAfterTimeout();
+    }
+  }, [auth, clearDataAfterTimeout]);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (auth === false && !authErrorShown.current) {
+        showError("Вы не авторизованы, рекомендуем авторизоваться");
+        authErrorShown.current = true;
+      }
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [auth]);
   useEffect(() => {
     if (cart.length !== prevCartLength) {
       setSelectedItems(cart.map((item) => item.id));
@@ -42,7 +50,11 @@ export const MyCart = ({
   if (!isClient) {
     return <PageLoader />;
   }
-
+  const onSubmit = (data: OrderRequest) => {
+    console.log(data);
+      router.push("/cart/contacts");
+    
+  };
   const toggleAllItems = () => {
     if (isAllChecked) {
       setSelectedItems([]);
@@ -75,16 +87,16 @@ export const MyCart = ({
   };
 
   return (
-    <div className="block lg:grid grid-cols-4 gap-[23px]">
-      <MyCartLeft {...props} />
-      <div className="col-span-1">
-        <OrderCart
-          onNextStep={onNextStep}
-          step={step}
-          selectedCards={selectedCards}
-        />
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="grid grid-cols-4 gap-[23px]">
+        <div className="col-span-3">
+          <MyCartLeft {...props} />
+        </div>
+        <div className="col-span-1">
+          <OrderCart selectedCards={selectedCards} />
+        </div>
       </div>
-    </div>
+    </form>
   );
 };
 

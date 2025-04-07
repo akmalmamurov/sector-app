@@ -1,16 +1,9 @@
 "use client";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import React from "react";
-import { Container } from "@/components/container";
 
-const tabs = [
-  { name: "Мои заказы", href: "/cart" },
-  { name: "Мои обращения", href: "/cart/contact" },
-  { name: "Контрагенты", href: "/cart/delivery" },
-  { name: "Избранное", href: "/cart/favorites" },
-  { name: "Настройки", href: "/profile/settings" },
-];
+import { usePathname } from "next/navigation";
+import { Container } from "@/components/container";
+import { StepperIcon, StepperOtherIcon } from "@/assets/icons";
+import Link from "next/link";
 
 export default function CartLayout({
   children,
@@ -19,47 +12,53 @@ export default function CartLayout({
 }) {
   const pathname = usePathname();
 
-  return (
-    <div className="py-[58px]">
-      <Container>
-        <div className="bg-white shadow-sectionShadow border rounded-[10px] ">
-          {/* Scroll Bar */}
-          <div
-            style={{
-              scrollbarWidth: "none",
-              msOverflowStyle: "none",
-            }}
-            className="overflow-x-auto whitespace-nowrap border-b-[0.5px] border-superSilver"
-          >
-            <div className="grid grid-flow-col auto-cols-max">
-              {tabs.map((tab) => {
-                const isActive = pathname === tab.href;
-                return (
-                  <Link
-                    key={tab.name}
-                    href={tab.href}
-                    className="group relative p-6 transition-all flex justify-center duration-150 ease-out
-              text-text-color hover:bg-hoverBg"
-                  >
-                    {tab.name}
-                    <span
-                      className={`
-              absolute -bottom-0 left-0 w-full h-[5px] transition-opacity
-              ${
-                isActive
-                  ? "bg-gradient-to-r from-cerulean to-blue-400 opacity-100"
-                  : "bg-superSilver opacity-0 group-hover:opacity-100 "
-              }
-            `}
-                    />
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
+  const activeStep = (() => {
+    if (pathname === "/cart") return 0;
+    if (pathname === "/cart/contacts") return 1;
+    if (pathname === "/cart/delivery") return 2;
+    if (pathname === "/cart/final") return 3;
+    return 0;
+  })();
 
-          <div className="p-6">{children}</div>
+  const routes = ["/cart", "/cart/contacts", "/cart/delivery", "/cart/final"];
+
+  const renderStep = (index: number, label: string) => {
+    const isVisitedOrCurrent = index <= activeStep;
+    const colorClass = isVisitedOrCurrent ? "text-cerulean" : "text-gray-400";
+    const IconComponent = index === 0 ? StepperIcon : StepperOtherIcon;
+
+    const content = (
+      <div className="relative flex items-center justify-center">
+        <IconComponent className={colorClass} />
+        <div className="absolute">
+          <p className={`text-sm font-medium ${colorClass}`}>
+            {index === 0 ? label : `${index}. ${label}`}
+          </p>
         </div>
+      </div>
+    );
+
+    if (index < activeStep) {
+      return (
+        <Link href={routes[index]} className="block">
+          {content}
+        </Link>
+      );
+    }
+
+    return content;
+  };
+
+  return (
+    <div className="pt-[37px] pb-[108px]">
+      <Container>
+        <div className="grid grid-cols-4 gap-4">
+          {renderStep(0, "Моя корзина")}
+          {renderStep(1, "Контактная информация")}
+          {renderStep(2, "Способ доставки")}
+          {renderStep(3, "Завершить заказ")}
+        </div>
+        <div className="pt-[23px]">{children}</div>
       </Container>
     </div>
   );
