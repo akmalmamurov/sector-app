@@ -246,7 +246,7 @@ export const CartOrder = ({
           </div>
         </div>
       ) : (
-        <OrderFinish />
+        <OrderFinish/>
       )}
     </>
   );
