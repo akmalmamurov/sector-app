@@ -64,7 +64,7 @@ console.log(catalogData);
           className="w-full bg-white h-screen overflow-y-auto shadow-lg transition-all duration-300 transform"
         >
           <div className="flex h-full w-full">
-            <div className="w-[450px] xl:w-[537px] bg-cottonBall h-full py-6">
+            <div className="w-[450px] xl:w-[537px] bg-cottonBall h-full py-[10px]">
               <ul className="flex flex-col">
                 {catalogData?.map((item, parentIndex) => (
                   <Link

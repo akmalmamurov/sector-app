@@ -33,23 +33,23 @@ export const SortProducts: React.FC<SortProductsProps> = (props) => {
   const { toggleRowCol, rowCol } = useStore();
   const [open, setOpen] = useState(false);
   const [openLimit, setOpenLimit] = useState(false);
-  const handleToggleRowCol = () => {
-    toggleRowCol();
+  const handleToggleRowCol = (row: boolean) => {
+    toggleRowCol(row);
   };
   return (
     <div className="p-[15px] flex justify-between items-center border-b border-superSilver">
       <div className="flex gap-2">
         <button
-          onClick={handleToggleRowCol}
-          className="w-[42px] h-[42px] flex items-center justify-center border border-superSilver rounded-[10px]"
+          onClick={()=>handleToggleRowCol(false)}
+          className="w-[42px] h-[42px] flex items-center justify-center border border-superSilver"
         >
           <FlexIcon
             className={`${!rowCol ? "text-merlin" : "text-dove"} w-6 h-6`}
           />
         </button>
         <button
-          onClick={handleToggleRowCol}
-          className="w-[42px] h-[42px] flex items-center justify-center border border-superSilver rounded-[10px]"
+          onClick={()=>handleToggleRowCol(true)}
+          className="w-[42px] h-[42px] flex items-center justify-center border border-superSilver"
         >
           <FlexColIcon
             className={`${rowCol ? "text-merlin" : "text-dove"} w-6 h-6 `}

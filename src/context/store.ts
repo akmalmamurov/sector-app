@@ -33,7 +33,7 @@ interface StoreState {
   getGroupedItems: () => StoreItem[];
   logOut: () => void;
   clearDataAfterTimeout: () => void;
-  toggleRowCol: () => void;
+  toggleRowCol: (value?: boolean) => void;
 }
 
 const useStore = create<StoreState>()(
@@ -49,7 +49,11 @@ const useStore = create<StoreState>()(
       user: null,
       setUser: (user) => set({ user }),
       setAuth: (value) => set({ auth: value }),
-      toggleRowCol: () => set((state) => ({ rowCol: !state.rowCol })),
+      toggleRowCol: (value?: boolean) =>
+        set((state) => ({
+          rowCol: typeof value === "boolean" ? value : !state.rowCol,
+        })),
+      
       selectedCardsList: (products) => {
         set(() => ({
           selected: products,

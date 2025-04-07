@@ -5,6 +5,7 @@ import { getFilter } from "@/api";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import FilterIcon from "@/assets/icons/FilterIcon";
+import { Section } from "../section";
 
 interface FilterOption {
   title: string;
@@ -44,7 +45,7 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
 
   return (
     <div className="col-span-3">
-      <div className="bg-white shadow-sectionShadow border border-superSilver rounded-[10px]">
+      <Section className="rounded-none p-0">
         <div className="flex items-center gap-4 bg-white px-5 py-6 rounded-[10px]">
           <FilterIcon />
           <h3 className="text-base font-normal text-textColor">Фильтры</h3>
@@ -101,7 +102,7 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
               </div>
             )
         )}
-      </div>
+      </Section>
     </div>
   );
 };
