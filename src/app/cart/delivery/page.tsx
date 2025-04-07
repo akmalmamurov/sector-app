@@ -5,7 +5,7 @@ import OrderCart from "@/components/order-cart/OrderCart";
 import useStore from "@/context/store";
 import Link from "next/link";
 
-export const CartDeliveryPage = () => {
+ const CartDeliveryPage = () => {
   const { selected } = useStore();
   return (
     <div className="grid grid-cols-4 gap-[23px]">

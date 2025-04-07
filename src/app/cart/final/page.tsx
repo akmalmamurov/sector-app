@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import useStore from "@/context/store";
 import { Check, Share2 } from "lucide-react";
 import Link from "next/link";
@@ -16,7 +16,7 @@ import PriceFormatter from "@/components/format-price/PriceFormatter";
 import { copyToClipboard } from "@/utils";
 import OrderListIcon from "@/assets/icons/OrderListIcon";
 
-export const CartFinalPage = () => {
+const CartFinalPage = () => {
   const { selected } = useStore();
 
   return (
@@ -214,14 +214,22 @@ export const CartFinalPage = () => {
           Остались вопросы?
         </h3>
         <p className="text-textColor text-sm font-normal mb-6">
-          По телефону <Link className="text-cerulean font-semibold" href={"#"}>+998 55 508 0660</Link> или{" "}
-          <Link className="text-cerulean font-semibold" href={"#"}>@NagSalesBot</Link>
+          По телефону{" "}
+          <Link className="text-cerulean font-semibold" href={"#"}>
+            +998 55 508 0660
+          </Link>{" "}
+          или{" "}
+          <Link className="text-cerulean font-semibold" href={"#"}>
+            @NagSalesBot
+          </Link>
         </p>
         <p className="text-textColor text-sm font-normal">
           Менеджер свяжется с вами, чтобы уточнить стоимость, состав и детали
           заказа, согласовать и подтвердить его.
         </p>
-        <p className="text-textColor text-sm font-normal mb-6">Статус Вашего заказа вы можете отслеживать в личном кабинете.</p>
+        <p className="text-textColor text-sm font-normal mb-6">
+          Статус Вашего заказа вы можете отслеживать в личном кабинете.
+        </p>
         <p className="flex items-center justify-center gap-2 text-textColor text-sm font-normal">
           <OrderListIcon className="w-6 h-6" />
           Cчёт после формирования заказа будет выгружен в личный кабинет!

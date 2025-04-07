@@ -20,7 +20,7 @@ import { CartIcon, SearchIcon } from "@/assets/icons";
 import OrderCart from "@/components/order-cart/OrderCart";
 import { useRouter } from "next/navigation";
 
-export const CartContactPage = () => {
+ const CartContactPage = () => {
   const { selected } = useStore();
   const router = useRouter();
   const formSchema = z.object({
