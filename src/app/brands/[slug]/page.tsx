@@ -1,5 +1,5 @@
 import { getBrandSingle } from "@/api";
-import BrandFilter from "@/components/brand-filter/BrandFilter";
+import {BrandFilter} from "@/components/brand-filter";
 import { HomeCrumb } from "@/components/bread-crumb";
 import { Container } from "@/components/container";
 import { InfoHeader } from "@/components/div";
