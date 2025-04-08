@@ -1,21 +1,15 @@
 import { Check, CircleAlert, X } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { Controller, Control, FieldErrors, UseFormSetValue, UseFormWatch, } from "react-hook-form";
+
 import useStore, { StoreItem } from "@/context/store";
 import { ConfirmModal } from "../modal";
-import { useConfirmModal } from "@/hooks";
+import { useCartLeft } from "@/hooks";
 import CartProducts from "./CartProducts";
-import { useQuery } from "@tanstack/react-query";
 import { getRegion } from "@/api";
-import {
-  Controller,
-  Control,
-  FieldErrors,
-  UseFormSetValue,
-  UseFormWatch,
-} from "react-hook-form";
 import { OrderRequest } from "@/types";
-import { useEffect } from "react";
-
-interface Props {
+import { CartState } from "@/context/form-store";
+interface CartLeftProps {
   isAllChecked: boolean;
   toggleAllItems: () => void;
   cart: StoreItem[];
@@ -28,68 +22,21 @@ interface Props {
   control: Control<OrderRequest>;
   watch: UseFormWatch<OrderRequest>;
   setValue: UseFormSetValue<OrderRequest>;
+  cartForm: CartState | null;
 }
 
-const MyCartLeft = ({
-  isAllChecked,
-  toggleAllItems,
-  setQuantity,
-  cart,
-  toggleSingleItem,
-  selectedItems,
-  deleteCart,
-  resetCart,
-  errors,
-  control,
-  setValue,
-  watch,
-}: Props) => {
+const MyCartLeft: React.FC<CartLeftProps> = (props) => {
+  const {isAllChecked, toggleAllItems, setQuantity, cart, toggleSingleItem, selectedItems, 
+    deleteCart, resetCart, errors, control, setValue, watch, cartForm,} = props 
   const { favorites } = useStore();
-  const {
-    isOpen: isConfirmOpen,
-    message,
-    openModal,
-    closeModal,
-    onConfirm,
-  } = useConfirmModal();
-  const { data: regionData = [] } = useQuery({
-    queryKey: ["region"],
-    queryFn: getRegion,
-  });
+  const { data: regionData = [] } = useQuery({ queryKey: ["region"], queryFn: getRegion, });
   console.log(regionData);
+  const { isConfirmOpen, message, onConfirm, closeModal, handleDeleteAll, handleDeleteClick, } = useCartLeft({
+     cart, selectedItems, setValue, cartForm, resetCart, deleteCart, });
 
-  useEffect(() => {
-    const selectedProducts = cart.filter((item: StoreItem) =>
-      selectedItems.includes(item.id)
-    );
-    const total = selectedProducts.reduce(
-      (sum, item) => sum + (item.price || 0) * (item.quantity || 1),
-      0
-    );
-    setValue("products", selectedItems);
-    setValue("total", total);
-  }, [selectedItems, cart, setValue]);
-
-  const handleDeleteAll = () => {
-    openModal("Вы уверены, что хотите удалить все товары из корзины?", () => {
-      resetCart();
-    });
-  };
-
-  const handleDeleteClick = (id: string) => {
-    openModal("Вы уверены, что хотите удалить товар из корзины?", () => {
-      deleteCart(id);
-    });
-  };
   const cityValue = watch("city");
-  const props = {
-    cart,
-    handleDeleteClick,
-    setQuantity,
-    selectedItems,
-    toggleSingleItem,
-    favorites,
-  };
+  const productProps = { cart, handleDeleteClick, setQuantity, selectedItems, toggleSingleItem, favorites};
+  
   return (
     <div className="col-span-3">
       <div className="bg-white border border-superSilver shadow-sectionShadow py-[23px] px-[20px]">
@@ -179,7 +126,7 @@ const MyCartLeft = ({
         </div>
       </div>
       {/* cart products */}
-      <CartProducts {...props} />
+      <CartProducts {...productProps} />
       <ConfirmModal
         isOpen={isConfirmOpen}
         message={message}

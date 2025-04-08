@@ -3,6 +3,8 @@ import PriceFormatter from "../format-price/PriceFormatter";
 import Link from "next/link";
 import { ProductData } from "@/types";
 import useStore from "@/context/store";
+import { usePathname } from "next/navigation";
+import { Fragment } from "react";
 
 const OrderCart = ({ selectedCards }: { selectedCards: ProductData[] }) => {
   const { selectedCardsList } = useStore();
@@ -10,7 +12,9 @@ const OrderCart = ({ selectedCards }: { selectedCards: ProductData[] }) => {
     (sum, item) => sum + (item.price || 0) * (item.quantity || 1),
     0
   );
-
+  const pathname = usePathname();
+  const showDelivery = pathname === "/cart/delivery";
+  const showCart = pathname === "/cart";
   const orderHandle = () => {
     selectedCardsList(selectedCards);
   };
@@ -32,14 +36,16 @@ const OrderCart = ({ selectedCards }: { selectedCards: ProductData[] }) => {
           0.0348 м<sup>3</sup>
         </span>
       </div>
-
-      <button
-        type="button"
-        className="bg-white border text-xs font-normal flex items-center gap-3 px-2 border-cerulean hover:opacity-90 transition-opacity text-cerulean w-full py-3"
-      >
-        <CircleAlert className="w-6 h-6" />
-        Доставка будет включена в счёт
-      </button>
+      {showDelivery && (
+        <button
+          type="button"
+          className="bg-white border text-xs font-normal flex items-center gap-3 px-2 border-cerulean hover:opacity-90 transition-opacity
+           text-cerulean w-full py-[14.5px]"
+        >
+          <CircleAlert className="w-6 h-6" />
+          Доставка будет включена в счёт
+        </button>
+      )}
 
       <div
         className={`flex justify-between items-center py-3 border-t border-superSilver`}
@@ -52,8 +58,9 @@ const OrderCart = ({ selectedCards }: { selectedCards: ProductData[] }) => {
           amount={selectedTotal}
         />
       </div>
-   
-        <>
+
+      {showCart && (
+        <Fragment>
           <button
             type="submit"
             disabled={!selectedCards.length}
@@ -68,7 +75,8 @@ const OrderCart = ({ selectedCards }: { selectedCards: ProductData[] }) => {
               условиями пользовательского соглашения.
             </Link>
           </p>
-        </>
+        </Fragment>
+      )}
     </div>
   );
 };

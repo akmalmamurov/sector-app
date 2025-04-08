@@ -62,6 +62,7 @@ export interface ProductData {
   characteristics?: CharacteristicsData[];
   fullDescription?: string;
   fullDescriptionImages?: string[] | string;
+  garanteeIds?: string[];
 }
 
 export interface BrandData {
