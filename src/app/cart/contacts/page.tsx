@@ -19,8 +19,9 @@ import SmileIcon from "@/assets/icons/SmileIcon";
 import { CartIcon, SearchIcon } from "@/assets/icons";
 import OrderCart from "@/components/order-cart/OrderCart";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
- const CartContactPage = () => {
+const CartContactPage = () => {
   const { selected } = useStore();
   const router = useRouter();
   const formSchema = z.object({
@@ -61,10 +62,13 @@ import { useRouter } from "next/navigation";
         <div className="grid grid-cols-4 gap-[23px]">
           <div className="col-span-3 bg-white border shadow-sectionShadow py-[23px] px-[20px]">
             <div className="mb-4">
-              <button className="flex items-center gap-2 text-stoneCold text-xs">
+              <Link
+                href={"/cart"}
+                className="flex items-center gap-2 text-stoneCold text-xs"
+              >
                 Назад к корзине
                 <ArrowLeftLongIcon width={15} height={11} />
-              </button>
+              </Link>
             </div>
             <div className="flex items-center gap-3 pb-7">
               <h3 className="font-normal text-textColor text-[17px] leading-[20.5px]">
