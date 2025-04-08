@@ -1,30 +1,29 @@
-import useStore from "@/context/store";
-import OrderCart from "../order-cart/OrderCart";
-import ArrowLeftLongIcon from "@/assets/icons/ArrowLeftLongIcon";
-import { Check, CirclePlus } from "lucide-react";
-import { Input } from "../ui/input";
+"use client";
+
 import * as z from "zod";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "../ui/form";
-import { Label } from "../ui/label";
+import { Check, CirclePlus } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import useStore from "@/context/store";
+import ArrowLeftLongIcon from "@/assets/icons/ArrowLeftLongIcon";
+import { Input } from "@/components/ui/input";
+import {
+  FormField,
+  FormItem,
+  FormControl,
+  FormMessage,
+  Form,
+} from "@/components/ui/form";
+import { Label } from "@/components/ui/label";
 import SmileIcon from "@/assets/icons/SmileIcon";
 import { CartIcon, SearchIcon } from "@/assets/icons";
+import OrderCart from "@/components/order-cart/OrderCart";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
-interface Props {
-  onNextStep: () => void;
-  onPrevStep: () => void;
-  step: number;
-}
-
-export const CartContact = ({ onNextStep, step, onPrevStep }: Props) => {
+const CartContactPage = () => {
   const { selected } = useStore();
+  const router = useRouter();
   const formSchema = z.object({
     firstname: z.string().min(2, ""),
     lastname: z.string().min(2, ""),
@@ -45,7 +44,8 @@ export const CartContact = ({ onNextStep, step, onPrevStep }: Props) => {
     handleSubmit,
     formState: { errors },
   } = formMethods;
-  const onSubmitStep = async (data: {
+
+  const onSubmit = async (data: {
     fullname: string;
     firstname: string;
     lastname: string;
@@ -53,58 +53,58 @@ export const CartContact = ({ onNextStep, step, onPrevStep }: Props) => {
     phone: string | number;
   }) => {
     console.log(data);
+    router.push("/cart/delivery");
   };
+
   return (
-    <div className="grid grid-cols-4 gap-[23px]">
-      <div className="col-span-3 bg-white border shadow-sectionShadow py-[23px] px-[20px]">
-        <div className="mb-4">
-          <button
-            className="flex items-center gap-2 text-stoneCold text-xs"
-            onClick={onPrevStep}
-          >
-            Назад к корзине
-            <ArrowLeftLongIcon width={15} height={11} />
-          </button>
-        </div>
-        <div className="flex items-center gap-3 pb-7">
-          <h3 className="font-normal text-textColor text-[17px] leading-[20.5px]">
-            Выберите контрагента
-          </h3>
-          <div className="bg-greenLight w-[18px] h-[18px] rounded-full flex items-center justify-center">
-            <Check className="text-white" strokeWidth={5} size={8} />
-          </div>
-        </div>
-        <div className="relative w-full mb-6">
-          <Input
-            type="text"
-            placeholder="Поиск контрагента"
-            className="pr-10 text-base h-[41px] rounded-none  "
-          />
-          <SearchIcon
-            color="#333333"
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-darkSoul"
-          />
-        </div>
-        <div className="grid grid-cols-2 border-b border-superSilver pb-8">
-          <div className="min-h-[225px] cursor-pointer h-full bg-custom min-w-[315px] border-darkSoul border border-dashed flex justify-center items-center flex-col gap-2">
-            <CirclePlus className="text-weekColor w-10 h-10" />
-            <p className="text-weekColor mt-2">Добавить контрагенты</p>
-          </div>
-        </div>
-        <div>
-          <div className="flex items-center gap-3 pb-5 mt-8">
-            <h3 className="font-normal text-textColor text-[17px] leading-[20.5px]">
-              Получатель
-            </h3>
-            <div className="bg-greenLight w-[18px] h-[18px] rounded-full flex items-center justify-center">
-              <Check className="text-white" strokeWidth={5} size={8} />
+    <Form {...formMethods}>
+      <form noValidate onSubmit={handleSubmit(onSubmit)}>
+        <div className="grid grid-cols-4 gap-[23px]">
+          <div className="col-span-3 bg-white border shadow-sectionShadow py-[23px] px-[20px]">
+            <div className="mb-4">
+              <Link
+                href={"/cart"}
+                className="flex items-center gap-2 text-stoneCold text-xs"
+              >
+                Назад к корзине
+                <ArrowLeftLongIcon width={15} height={11} />
+              </Link>
             </div>
-          </div>
-          <Form {...formMethods}>
-            <form
-              noValidate
-              onSubmit={handleSubmit(onSubmitStep)}
-            >
+            <div className="flex items-center gap-3 pb-7">
+              <h3 className="font-normal text-textColor text-[17px] leading-[20.5px]">
+                Выберите контрагента
+              </h3>
+              <div className="bg-greenLight w-[18px] h-[18px] rounded-full flex items-center justify-center">
+                <Check className="text-white" strokeWidth={5} size={8} />
+              </div>
+            </div>
+            <div className="relative w-full mb-6">
+              <Input
+                type="text"
+                placeholder="Поиск контрагента"
+                className="pr-10 text-base h-[41px] rounded-none"
+              />
+              <SearchIcon
+                color="#333333"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-darkSoul"
+              />
+            </div>
+            <div className="grid grid-cols-2 border-b border-superSilver pb-8">
+              <div className="min-h-[225px] cursor-pointer h-full bg-custom min-w-[315px] border-darkSoul border border-dashed flex justify-center items-center flex-col gap-2">
+                <CirclePlus className="text-weekColor w-10 h-10" />
+                <p className="text-weekColor mt-2">Добавить контрагенты</p>
+              </div>
+            </div>
+            <div>
+              <div className="flex items-center gap-3 pb-5 mt-8">
+                <h3 className="font-normal text-textColor text-[17px] leading-[20.5px]">
+                  Получатель
+                </h3>
+                <div className="bg-greenLight w-[18px] h-[18px] rounded-full flex items-center justify-center">
+                  <Check className="text-white" strokeWidth={5} size={8} />
+                </div>
+              </div>
+              {/* Form maydonlari – yagona form (CartStepper) kontekstidan foydalanamiz */}
               <div className="grid grid-cols-3 gap-3 mb-10">
                 <FormField
                   control={control}
@@ -253,25 +253,24 @@ export const CartContact = ({ onNextStep, step, onPrevStep }: Props) => {
                   )}
                 />
               </div>
-
               <div className="col-span-2">
                 <button
-                  onClick={onNextStep}
-                  className="bg-cerulean  hover:opacity-90 transition-opacity px-6 py-2 text-base font-semibold text-white flex items-center justify-center gap-2"
+                  type="submit"
+                  className="bg-cerulean hover:opacity-90 transition-opacity px-6 py-2 text-base font-semibold text-white flex items-center justify-center gap-2"
                 >
                   <CartIcon color="#fff" className="w-5 h-5" />
                   Перейти к доставке
                 </button>
               </div>
-            </form>
-          </Form>
+            </div>
+          </div>
+          <div className="col-span-1">
+            <OrderCart selectedCards={selected} />
+          </div>
         </div>
-      </div>
-      <div className="col-span-1">
-        <OrderCart step={step} selectedCards={selected} />
-      </div>
-    </div>
+      </form>
+    </Form>
   );
 };
 
-export default CartContact;
+export default CartContactPage;

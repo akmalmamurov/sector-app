@@ -71,7 +71,7 @@ const LoginConfirmPassword = ({
         console.log(response);
         
         fullClose();
-        setAuth();
+        setAuth(true);
         localStorage.setItem("sector-token", response.data.token);
         showSuccess("Вы успешно зарегистрировались!!");
       } catch (error) {

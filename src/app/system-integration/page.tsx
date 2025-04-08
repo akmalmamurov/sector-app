@@ -92,7 +92,7 @@ const SystemIntegration = () => {
               </strong>
               <br />
               <strong>
-                Контакты и телефоны наших офисов {" "}
+                Контакты и телефоны наших офисов 
                 <Link href="/contact" className="text-cerulean">
                   здесь
                 </Link>

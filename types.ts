@@ -127,3 +127,13 @@ export interface QuestionProduct {
     updatedAt?: string | null;
   };
 }
+export interface OrderRequest {
+  city: string;
+  products: string[];
+  total: number;
+  lastname?: string;
+  firstname?: string;
+  phone?: string;
+  email?: string;
+  fullname?: string;
+}

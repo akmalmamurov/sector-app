@@ -10,15 +10,22 @@ import {
   UserIcon,
 } from "@/assets/icons";
 import useStore from "@/context/store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoginModal from "../modal/LoginModal";
 import { ProfileMenu } from "../menu";
 
 const HeaderMenuLink = () => {
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => setIsOpen(!isOpen);
-  const { favorites, cart, compares, auth } = useStore();
+  const { favorites, cart, compares, auth,setAuth } = useStore();
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+    const token = localStorage.getItem("sector-token");
+    setAuth(!!token);
+  }, [setAuth]);
 
+  if (!isMounted) return null;
   return (
     <div className="lg:flex items-center gap-[7px] xl:gap-0">
       <Link href={"/action"} className="header-menu-item">

@@ -16,7 +16,7 @@ interface StoreState {
   rowCol: boolean;
   user: string | null;
   setUser: (user: string | null) => void;
-  setAuth: () => void;
+  setAuth: (value: boolean) => void;
   setContact: (info: string) => void;
   toggleFavorites: (product: ProductData) => void;
   addToCart: (product: ProductData) => void;
@@ -33,13 +33,13 @@ interface StoreState {
   getGroupedItems: () => StoreItem[];
   logOut: () => void;
   clearDataAfterTimeout: () => void;
-  toggleRowCol: () => void;
+  toggleRowCol: (value?: boolean) => void;
 }
 
 const useStore = create<StoreState>()(
   persist(
     (set, get) => ({
-      auth: typeof window !== 'undefined' && localStorage.getItem("sector-token") ? true : false,
+      auth: false,
       contact: "",
       favorites: [],
       cart: [],
@@ -48,8 +48,12 @@ const useStore = create<StoreState>()(
       selected: [],
       user: null,
       setUser: (user) => set({ user }),
-      setAuth: () => set({ auth: true }),
-      toggleRowCol: () => set((state) => ({ rowCol: !state.rowCol })),
+      setAuth: (value) => set({ auth: value }),
+      toggleRowCol: (value?: boolean) =>
+        set((state) => ({
+          rowCol: typeof value === "boolean" ? value : !state.rowCol,
+        })),
+      
       selectedCardsList: (products) => {
         set(() => ({
           selected: products,

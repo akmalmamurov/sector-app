@@ -35,13 +35,13 @@ const CartProducts: React.FC<CartProductsProps> = (props) => {
     toggleFavorites(product);
   };
   return (
-    <div>
+    <div className="flex flex-col gap-[23px]">
       {cart?.map((product) => {
         const isFavorite = isProductInList(favorites, product);
         return (
           <div
             key={product.id}
-            className="p-[15px] bg-white border shadow-sectionShadow text-textColor"
+            className="p-[15px] bg-white border border-superSilver shadow-sectionShadow text-textColor spacy-4"
           >
             {/* Header */}
             <div className="flex justify-between">
