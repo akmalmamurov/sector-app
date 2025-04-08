@@ -20,6 +20,7 @@ const LoginBrowser = ({ fullClose }: { fullClose: () => void }) => {
     }
   }, [setAuth]);
 
+
   const handleOAuthLogin = (provider: loginProp) => {
     const urls = {
       google: `${process.env.NEXT_PUBLIC_API_URL}/user/auth/google/login`,
