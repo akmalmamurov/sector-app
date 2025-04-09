@@ -1,23 +1,20 @@
 "use client";
-import useStore from "@/context/store";
+import Image from "next/image";
 import { Check, Share2 } from "lucide-react";
 import Link from "next/link";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import Image from "next/image";
-import { ArrowRightIcon, CopyIcon } from "@/assets/icons";
+
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table";
 import PriceFormatter from "@/components/format-price/PriceFormatter";
+import useStore from "@/context/store";
+import { ArrowRightIcon, CopyIcon } from "@/assets/icons";
 import { copyToClipboard } from "@/utils";
 import OrderListIcon from "@/assets/icons/OrderListIcon";
+import { useRequireAuth } from "@/hooks";
 
 const CartFinalPage = () => {
   const { selected } = useStore();
+  const auth = useRequireAuth();
+  if (!auth) return null;
 
   return (
     <div>

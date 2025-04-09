@@ -11,12 +11,19 @@ import OrderCart from "@/components/order-cart/OrderCart";
 import { OrderRequest } from "@/types";
 import { useCartPage } from "@/hooks";
 
+
 export default function CartPage() {
-  const { cart, setQuantity, deleteCart, resetCart } = useStore();
+  const { cart, setQuantity, deleteCart, resetCart,} = useStore();
   const { addCartForm, cartForm } = formStore();
 
-  const { handleSubmit, control, setValue, watch, formState: { errors }, } = useForm<OrderRequest>(
-    { defaultValues: { city: cartForm?.city || "" } });
+
+  const {
+    handleSubmit,
+    control,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm<OrderRequest>({ defaultValues: { city: cartForm?.city || "" } });
 
   const router = useRouter();
 
@@ -25,7 +32,14 @@ export default function CartPage() {
     router.push("/cart/contacts");
   };
 
-  const { isClient, selectedItems, toggleAllItems, toggleSingleItem, isAllChecked, selectedCards} = useCartPage(cart);
+  const {
+    isClient,
+    selectedItems,
+    toggleAllItems,
+    toggleSingleItem,
+    isAllChecked,
+    selectedCards,
+  } = useCartPage(cart);
 
   if (!isClient) {
     return <PageLoader />;

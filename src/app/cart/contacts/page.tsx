@@ -16,16 +16,18 @@ import { OrderRequest } from "@/types";
 import { useState } from "react";
 import { PhoneInput } from "@/components/phone-input";
 import { ErrorMessage, FormInput } from "@/components/form";
+import { useRequireAuth } from "@/hooks";
 const CartContactPage = () => {
   const { selected } = useStore();
   const [phone, setPhone] = useState("+998 __ ___ ____");
   const router = useRouter();
+  const auth = useRequireAuth();
   const {
     handleSubmit,
     register,
     formState: { errors, submitCount, isValid },
   } = useForm<OrderRequest>();
-
+  if (!auth) return null;
   const onSubmit = (data: OrderRequest) => {
     const phoneFormat = phone.replace(/[^0-9]/g, "");
     const payload = { ...data, phone: phoneFormat };

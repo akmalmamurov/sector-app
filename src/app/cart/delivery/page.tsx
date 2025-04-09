@@ -1,12 +1,15 @@
 "use client"
+import Link from "next/link";
 import ArrowLeftLongIcon from "@/assets/icons/ArrowLeftLongIcon";
 import CartTabs from "@/components/cart-tabs/CartTabs";
 import OrderCart from "@/components/order-cart/OrderCart";
 import useStore from "@/context/store";
-import Link from "next/link";
+import { useRequireAuth } from "@/hooks";
 
  const CartDeliveryPage = () => {
   const { selected } = useStore();
+  const auth = useRequireAuth();
+  if(!auth) return null
   return (
     <div className="grid grid-cols-4 gap-[23px]">
       <div className="col-span-3 bg-white border shadow-sectionShadow py-[23px] px-[20px]">

@@ -11,7 +11,7 @@ import LoginConfirmPassword from "./LoginConfirmPassword";
 
 interface Props {
   isOpen: boolean;
-  handleOpen: () => void;
+  toggleModal: () => void;
 }
 
 const formSchemaStep1 = z.object({
@@ -38,7 +38,7 @@ const formSchemaStep4 = z.object({
   optCode: z.string().min(4, "Пароль должен содержать минимум 4 символов"),
 });
 
-const LoginModal = ({ isOpen, handleOpen }: Props) => {
+export const LoginModal = ({ isOpen, toggleModal }: Props) => {
   
   const [step, setStep] = useState(1);
 
@@ -78,7 +78,7 @@ const LoginModal = ({ isOpen, handleOpen }: Props) => {
   };
 
   const fullClose = () => {
-    handleOpen();
+    toggleModal();
     resetForm();
   };
   useEffect(() => {
@@ -89,7 +89,7 @@ const LoginModal = ({ isOpen, handleOpen }: Props) => {
   }, [isOpen]);
 
   return (
-    <Dialog open={isOpen} onOpenChange={handleOpen}>
+    <Dialog open={isOpen} onOpenChange={toggleModal}>
       <DialogContent className="sm:max-w-[500px] rounded-none sm:rounded-none p-0">
         {step === 1 && (
           <Login

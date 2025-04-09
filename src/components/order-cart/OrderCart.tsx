@@ -4,14 +4,17 @@ import Link from "next/link";
 import { ProductData } from "@/types";
 import useStore from "@/context/store";
 import { usePathname } from "next/navigation";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
+import { LoginModal } from "../modal";
 
 const OrderCart = ({ selectedCards }: { selectedCards: ProductData[] }) => {
-  const { selectedCardsList } = useStore();
+  const { selectedCardsList, auth } = useStore();
   const selectedTotal = selectedCards.reduce(
     (sum, item) => sum + (item.price || 0) * (item.quantity || 1),
     0
   );
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleOpen = () => setIsOpen(!isOpen);
   const pathname = usePathname();
   const showDelivery = pathname === "/cart/delivery";
   const showCart = pathname === "/cart";
@@ -62,9 +65,9 @@ const OrderCart = ({ selectedCards }: { selectedCards: ProductData[] }) => {
       {showCart && (
         <Fragment>
           <button
-            type="submit"
+            type={auth ? "submit" : "button"}
             disabled={!selectedCards.length}
-            onClick={orderHandle}
+            onClick={auth ? orderHandle : toggleOpen}
             className="bg-cerulean hover:opacity-90 transition-opacity text-white w-full py-[13px] mb-3 disabled:opacity-50 font-semibold"
           >
             Оформить заказ
@@ -77,6 +80,7 @@ const OrderCart = ({ selectedCards }: { selectedCards: ProductData[] }) => {
           </p>
         </Fragment>
       )}
+      <LoginModal isOpen={isOpen} toggleModal={toggleOpen} />
     </div>
   );
 };
