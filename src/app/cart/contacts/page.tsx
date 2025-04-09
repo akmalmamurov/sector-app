@@ -15,6 +15,7 @@ import { Check, CirclePlus } from "lucide-react";
 import { OrderRequest } from "@/types";
 import { useState } from "react";
 import { PhoneInput } from "@/components/phone-input";
+import { ErrorMessage, FormInput } from "@/components/form";
 const CartContactPage = () => {
   const { selected } = useStore();
   const [phone, setPhone] = useState("+998 __ ___ ____");
@@ -22,7 +23,7 @@ const CartContactPage = () => {
   const {
     handleSubmit,
     register,
-    formState: { errors, submitCount },
+    formState: { errors, submitCount, isValid },
   } = useForm<OrderRequest>();
 
   const onSubmit = (data: OrderRequest) => {
@@ -33,6 +34,8 @@ const CartContactPage = () => {
   };
   const showPhoneError =
     submitCount > 0 && (!phone || phone.includes("_") || phone.length < 13);
+  const isSucess = isValid && !showPhoneError;
+
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)}>
       <div className="grid grid-cols-4 gap-[23px]">
@@ -76,13 +79,14 @@ const CartContactPage = () => {
               <h3 className="font-normal text-textColor text-[17px] leading-[20.5px]">
                 Получатель
               </h3>
-              <div className="bg-greenLight w-[18px] h-[18px] rounded-full flex items-center justify-center">
-                <Check className="text-white" strokeWidth={5} size={8} />
-              </div>
+              {isSucess && (
+                <div className="bg-greenLight w-[18px] h-[18px] rounded-full flex items-center justify-center">
+                  <Check className="text-white" strokeWidth={5} size={8} />
+                </div>
+              )}
             </div>
-            {/* Form maydonlari – yagona form (CartStepper) kontekstidan foydalanamiz */}
             <div className="grid grid-cols-3 gap-3 mb-10">
-              <div className="relative w-full">
+              <div className="w-full">
                 <Label
                   htmlFor="lastname"
                   className="text-textColor font-normal text-sm flex gap-1 pb-2"
@@ -90,16 +94,14 @@ const CartContactPage = () => {
                   Фамилия
                   <span className="text-cerulean text-sm font-normal">*</span>
                 </Label>
-                <Input
-                  type="text"
-                  id="lastname"
-                  {...register("lastname", { required: true })}
-                  className="text-base rounded-none h-[41px] text-[#000000DE] border-superSilver"
+                <FormInput
+                  name="lastname"
+                  register={register}
+                  error={errors?.lastname}
                 />
-                {errors.lastname && (
-                  <p className="text-red-500 text-xs font-normal">
-                    Укажите контактные данные
-                  </p>
+
+                {errors?.lastname && (
+                  <ErrorMessage>Укажите контактные данные</ErrorMessage>
                 )}
               </div>
 
@@ -111,12 +113,12 @@ const CartContactPage = () => {
                   Имя
                   <span className="text-cerulean text-sm font-normal">*</span>
                 </Label>
-                <Input
-                  type="text"
-                  id="firstname"
-                  {...register("firstname", { required: true })}
-                  className="text-base rounded-none h-[41px] text-[#000000DE] border-superSilver"
+                <FormInput
+                  name="firstname"
+                  register={register}
+                  error={errors?.firstname}
                 />
+
                 {errors.firstname && (
                   <p className="text-red-500 text-xs font-normal">
                     Укажите контактные данные
@@ -131,11 +133,10 @@ const CartContactPage = () => {
                 >
                   Отчество
                 </Label>
-                <Input
-                  type="text"
-                  id="fullname"
-                  {...register("fullname")}
-                  className="text-base rounded-none h-[41px] text-[#000000DE] border-superSilver"
+                <FormInput
+                  name="fullname"
+                  register={register}
+                  required={false}
                 />
               </div>
             </div>
@@ -159,7 +160,11 @@ const CartContactPage = () => {
                   id="phoneNumber"
                   value={phone}
                   onChange={setPhone}
-                  className="text-base rounded-none h-[41px] text-[#000000DE] border-superSilver w-full border focus:outline-none px-4"
+                  className={`border ${
+                    showPhoneError
+                      ? "border-dangerColor hover:border-dangerColor/50"
+                      : "border-superSilver hover:border-cerulean/50"
+                  } py-2 px-[15px] w-full focus:outline-none focus:border-cerulean`}
                 />
                 {showPhoneError && (
                   <p className="text-red-500 text-xs font-normal">
@@ -176,12 +181,21 @@ const CartContactPage = () => {
                   Email
                   <span className="text-cerulean text-sm font-normal">*</span>
                 </Label>
-                <Input
+                <FormInput
+                  name="email"
+                  register={register}
+                  error={errors.email}
+                  type="email"
+                />
+                {/* <input
                   type="email"
                   id="email"
-                  {...register("email", { required: true })}
-                  className="text-base rounded-none h-[41px] text-[#000000DE] border-superSilver"
-                />
+                  {...register("email", {
+                    required: true,
+                    pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                  })}
+                  className="border border-superSilver py-[10px] px-[15px]"
+                /> */}
                 {errors.email && (
                   <p className="text-red-500 text-xs font-normal">
                     Укажите контактные данные
