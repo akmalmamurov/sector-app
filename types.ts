@@ -134,7 +134,7 @@ export interface OrderRequest {
   total: number;
   lastname?: string;
   firstname?: string;
-  phone?: string;
+  phoneNumber?: number | string;
   email?: string;
   fullname?: string;
 }
