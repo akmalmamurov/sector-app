@@ -10,7 +10,7 @@ const HeaderTop = () => {
   const className = "font-normal text-sm leading-[21px] text-whiteOut";
   const [isOpen, setIsOpen] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
-  const handleOpen = () => setIsOpen(!isOpen);
+  const toggleModal = () => setIsOpen(!isOpen);
   const { auth } = useStore();
   
   useEffect(() => {
@@ -24,7 +24,7 @@ const HeaderTop = () => {
   return (
     <div className="w-full bg-cerulean md:h-10 h-16 hidden sm:block">
       <Container className="flex justify-center items-center h-full">
-        <div onClick={handleOpen} className="flex flex-wrap cursor-pointer">
+        <div onClick={toggleModal} className="flex flex-wrap cursor-pointer">
           <p className={className}>
             Корзина неавторизованных пользователей хранится 7 дней. Пожалуйста,
           </p>
@@ -36,7 +36,7 @@ const HeaderTop = () => {
           </div>
         </div>
       </Container>
-      <LoginModal isOpen={isOpen} handleOpen={handleOpen} />
+      <LoginModal isOpen={isOpen} toggleModal={toggleModal} />
     </div>
   );
 };
