@@ -93,7 +93,7 @@ export default async function SingleCatalogPage({
       {/* Filter product */}
       <div className="grid grid-cols-12 gap-6">
         {/* Filters */}
-        <CategoryLeft slug={slug} paramKey="subcatalogSlug"/>
+        <CategoryLeft slug={slug} paramKey="subcatalogSlug" catalogItem={catalogItem} />
         {/* Products */}
         <CategoryRight slug={slug} title={categoryTitle} paramKey="slug" />
       </div>

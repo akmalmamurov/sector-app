@@ -33,7 +33,7 @@ export const BrandFilter = () => {
           return (
             <ul className="list-disc flex flex-col gap-2" key={sub.text}>
               <Link href={sub.link} className="text-xs font-normal text-textColor transition-colors hover:text-linkColor">
-                <li className="marker:text-textColor ">{sub.text}</li>
+                <li className="marker:text-textColor">{sub.text}</li>
               </Link>
               <ul className="list-disc pl-4 flex flex-col gap-2 pb-2">
                 {sub.subItem.map((item) => (
