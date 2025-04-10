@@ -14,7 +14,7 @@ const OrderCart = ({ selectedCards }: { selectedCards: ProductData[] }) => {
     0
   );
   const [isOpen, setIsOpen] = useState(false);
-  const toggleOpen = () => setIsOpen(!isOpen);
+  const handleOpen = () => setIsOpen(!isOpen);
   const pathname = usePathname();
   const showDelivery = pathname === "/cart/delivery";
   const showCart = pathname === "/cart";
@@ -67,7 +67,7 @@ const OrderCart = ({ selectedCards }: { selectedCards: ProductData[] }) => {
           <button
             type={auth ? "submit" : "button"}
             disabled={!selectedCards.length}
-            onClick={auth ? orderHandle : toggleOpen}
+            onClick={auth ? orderHandle : handleOpen}
             className="bg-cerulean hover:opacity-90 transition-opacity text-white w-full py-[13px] mb-3 disabled:opacity-50 font-semibold"
           >
             Оформить заказ
@@ -80,7 +80,7 @@ const OrderCart = ({ selectedCards }: { selectedCards: ProductData[] }) => {
           </p>
         </Fragment>
       )}
-      <LoginModal isOpen={isOpen} toggleModal={toggleOpen} />
+      <LoginModal isOpen={isOpen} handleOpen={handleOpen} />
     </div>
   );
 };
