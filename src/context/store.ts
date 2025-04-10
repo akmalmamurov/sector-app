@@ -53,7 +53,7 @@ const useStore = create<StoreState>()(
         set((state) => ({
           rowCol: typeof value === "boolean" ? value : !state.rowCol,
         })),
-      
+
       selectedCardsList: (products) => {
         set(() => ({
           selected: products,
@@ -165,6 +165,10 @@ const useStore = create<StoreState>()(
     {
       name: "sector-app",
       storage: createJSONStorage(() => localStorage),
+      onRehydrateStorage: () => (state) => {
+        const token = localStorage.getItem("sector-token");
+        if (token) state?.setAuth(true);
+      },
     }
   )
 );

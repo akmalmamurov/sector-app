@@ -189,15 +189,6 @@ const CartContactPage = () => {
                   error={errors.email}
                   type="email"
                 />
-                {/* <input
-                  type="email"
-                  id="email"
-                  {...register("email", {
-                    required: true,
-                    pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                  })}
-                  className="border border-superSilver py-[10px] px-[15px]"
-                /> */}
                 {errors.email && (
                   <p className="text-red-500 text-xs font-normal">
                     Укажите контактные данные
