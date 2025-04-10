@@ -22,23 +22,24 @@ const CartHeader = () => {
     const IconComponent = index === 0 ? StepperIcon : StepperOtherIcon;
 
     const content = (
-      <div className="relative flex items-center justify-center">
+      <div className="relative flex items-center justify-center group">
         <IconComponent className={colorClass} />
         <div className="absolute">
-          <p className={`text-sm font-medium ${colorClass}`}>
-            {index === 0 ? label : `${index}. ${label}`}
-          </p>
+          {activeStep <= index ? (
+            <p className={`text-sm font-medium ${colorClass}`}>
+              {index === 0 ? label : `${index}. ${label}`}
+            </p>
+          ) : (
+            <Link
+              href={routes[index]}
+              className={`text-sm font-medium ${colorClass} group-hover:underline hoverEffect`}
+            >
+              {index === 0 ? label : `${index}. ${label}`}
+            </Link>
+          )}
         </div>
       </div>
     );
-
-    if (index < activeStep) {
-      return (
-        <Link href={routes[index]} className="block">
-          {content}
-        </Link>
-      );
-    }
 
     return content;
   };

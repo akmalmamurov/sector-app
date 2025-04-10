@@ -1,11 +1,11 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-interface CartState {
+export interface CartState {
   city: string;
   products: string[];
   total: number;
 }
-interface FormState {
+export interface FormState {
   cartForm: CartState | null;
   addCartForm: (form: CartState) => void;
 }

@@ -62,6 +62,7 @@ export interface ProductData {
   characteristics?: CharacteristicsData[];
   fullDescription?: string;
   fullDescriptionImages?: string[] | string;
+  garanteeIds?: string[];
 }
 
 export interface BrandData {
@@ -133,7 +134,7 @@ export interface OrderRequest {
   total: number;
   lastname?: string;
   firstname?: string;
-  phone?: string;
+  phoneNumber?: number | string;
   email?: string;
   fullname?: string;
 }

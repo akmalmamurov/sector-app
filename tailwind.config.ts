@@ -130,15 +130,20 @@ export default {
       },
     },
     animation: {
-      'loading-bar': 'loading 1s ease-in-out infinite',
+      "loading-bar": "loading 1s ease-in-out infinite",
+      "cart-loading": "cartLoading 1s ease-in-out infinite",
     },
     keyframes: {
       loading: {
-        '0%': { transform: 'translateX(-100%)' },
-        '100%': { transform: 'translateX(100%)' }
+        "0%": { transform: "translateX(-100%)" },
+        "100%": { transform: "translateX(100%)" },
+      },
+      cartLoading: {
+        '0%': {width: '0%'},
+        '50%': {width: '50%'},
+        '100%': {width: '100%'}
       },
     },
-    
   },
   plugins: [plugin],
 } satisfies Config;

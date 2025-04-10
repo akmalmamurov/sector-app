@@ -106,7 +106,7 @@ const BottomNavbar = () => {
           <span className="text-[9px] pt-1">Профиль</span>
         </button>
       )}
-      <LoginModal isOpen={isOpen} handleOpen={() => setIsOpen(!isOpen)} />
+      <LoginModal isOpen={isOpen} toggleModal={() => setIsOpen(!isOpen)} />
     </div>
   );
 };

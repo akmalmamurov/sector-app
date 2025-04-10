@@ -1,105 +1,84 @@
 "use client";
+import { Fragment } from "react";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 import useStore from "@/context/store";
-import { useEffect, useRef, useState } from "react";
+import formStore from "@/context/form-store";
 import { PageLoader } from "@/components/loader";
-import OrderCart from "@/components/order-cart/OrderCart";
-import { useForm } from "react-hook-form";
-import { OrderRequest } from "@/types";
-import { showError } from "@/components/toast/Toast";
-import { useRouter } from "next/navigation";
 import MyCartLeft from "@/components/cart-step/MyCartLeft";
+import OrderCart from "@/components/order-cart/OrderCart";
+import { OrderRequest } from "@/types";
+import { useCartPage } from "@/hooks";
 
- const CartPage = () => {
-  const [city, setCity] = useState<string>("");
-  const [isClient, setIsClient] = useState(false);
-  const { cart, setQuantity, deleteCart, resetCart,auth,clearDataAfterTimeout } = useStore();
-  const [selectedItems, setSelectedItems] = useState<string[]>( cart.map((item) => item.id) );
-   const { handleSubmit,control, setValue, watch, formState: { errors }, } = useForm<OrderRequest>();
-  const [prevCartLength, setPrevCartLength] = useState(cart.length);
 
-  const isAllChecked = cart.length > 0 && selectedItems.length === cart.length;
-  const selectedCards = cart.filter((item) => selectedItems.includes(item.id));
-  const authErrorShown = useRef(false);
-const router = useRouter();
-  useEffect(() => {
-    if (!auth) {
-      clearDataAfterTimeout();
-    }
-  }, [auth, clearDataAfterTimeout]);
+export default function CartPage() {
+  const { cart, setQuantity, deleteCart, resetCart,} = useStore();
+  const { addCartForm, cartForm } = formStore();
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (auth === false && !authErrorShown.current) {
-        showError("Вы не авторизованы, рекомендуем авторизоваться");
-        authErrorShown.current = true;
-      }
-    }, 500);
-    return () => clearTimeout(timer);
-  }, [auth]);
-  useEffect(() => {
-    if (cart.length !== prevCartLength) {
-      setSelectedItems(cart.map((item) => item.id));
-      setPrevCartLength(cart.length);
-    }
-  }, [cart, prevCartLength]);
-  useEffect(() => setIsClient(true), []);
-  if (!isClient) {
-    return <PageLoader />;
-  }
-  const onSubmit = (data: OrderRequest) => {
-    console.log(data);
-      router.push("/cart/contacts");
-    
-  };
-  const toggleAllItems = () => {
-    if (isAllChecked) {
-      setSelectedItems([]);
-    } else {
-      setSelectedItems(cart.map((item) => item.id));
-    }
-  };
-
-  const toggleSingleItem = (id: string) => {
-    setSelectedItems((prev) =>
-      prev.includes(id) ? prev.filter((itemId) => itemId !== id) : [...prev, id]
-    );
-  };
-
-  const props = {
-    toggleSingleItem,
-    toggleAllItems,
-    isAllChecked,
-    setQuantity,
-    city,
-    setCity,
-    cart,
-    selectedItems,
-    deleteCart,
-    resetCart,
-    errors,
+  const {
+    handleSubmit,
     control,
     setValue,
     watch,
+    formState: { errors },
+  } = useForm<OrderRequest>({ defaultValues: { city: cartForm?.city || "" } });
+
+  const router = useRouter();
+
+  const onSubmit = (data: OrderRequest) => {
+    addCartForm(data);
+    router.push("/cart/contacts");
   };
 
+  const {
+    isClient,
+    selectedItems,
+    toggleAllItems,
+    toggleSingleItem,
+    isAllChecked,
+    selectedCards,
+  } = useCartPage(cart);
+
+  if (!isClient) {
+    return <PageLoader />;
+  }
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="grid grid-cols-4 gap-[23px]">
-        <div className="col-span-3">
-          <MyCartLeft{...props} />
+    <Fragment>
+      {cart?.length > 0 ? (
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="grid grid-cols-4 gap-[23px]">
+            <div className="col-span-3">
+              <MyCartLeft
+                control={control}
+                errors={errors}
+                setValue={setValue}
+                watch={watch}
+                cart={cart}
+                selectedItems={selectedItems}
+                toggleAllItems={toggleAllItems}
+                toggleSingleItem={toggleSingleItem}
+                isAllChecked={isAllChecked}
+                setQuantity={setQuantity}
+                deleteCart={deleteCart}
+                resetCart={resetCart}
+                cartForm={cartForm}
+              />
+            </div>
+            <div className="col-span-1">
+              <OrderCart selectedCards={selectedCards} />
+            </div>
+          </div>
+        </form>
+      ) : (
+        <div className="">
+          <h1 className="text-2xl font-semibold text-stoneCold">
+            Корзина пуста
+          </h1>
         </div>
-        <div className="col-span-1">
-          <OrderCart selectedCards={selectedCards} />
-        </div>
-      </div>
-    </form>
+      )}
+    </Fragment>
   );
-};
-
-export default CartPage;
-
+}

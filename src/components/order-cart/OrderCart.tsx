@@ -3,14 +3,21 @@ import PriceFormatter from "../format-price/PriceFormatter";
 import Link from "next/link";
 import { ProductData } from "@/types";
 import useStore from "@/context/store";
+import { usePathname } from "next/navigation";
+import { Fragment, useState } from "react";
+import { LoginModal } from "../modal";
 
 const OrderCart = ({ selectedCards }: { selectedCards: ProductData[] }) => {
-  const { selectedCardsList } = useStore();
+  const { selectedCardsList, auth } = useStore();
   const selectedTotal = selectedCards.reduce(
     (sum, item) => sum + (item.price || 0) * (item.quantity || 1),
     0
   );
-
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleOpen = () => setIsOpen(!isOpen);
+  const pathname = usePathname();
+  const showDelivery = pathname === "/cart/delivery";
+  const showCart = pathname === "/cart";
   const orderHandle = () => {
     selectedCardsList(selectedCards);
   };
@@ -32,14 +39,16 @@ const OrderCart = ({ selectedCards }: { selectedCards: ProductData[] }) => {
           0.0348 м<sup>3</sup>
         </span>
       </div>
-
-      <button
-        type="button"
-        className="bg-white border text-xs font-normal flex items-center gap-3 px-2 border-cerulean hover:opacity-90 transition-opacity text-cerulean w-full py-3"
-      >
-        <CircleAlert className="w-6 h-6" />
-        Доставка будет включена в счёт
-      </button>
+      {showDelivery && (
+        <button
+          type="button"
+          className="bg-white border text-xs font-normal flex items-center gap-3 px-2 border-cerulean hover:opacity-90 transition-opacity
+           text-cerulean w-full py-[14.5px]"
+        >
+          <CircleAlert className="w-6 h-6" />
+          Доставка будет включена в счёт
+        </button>
+      )}
 
       <div
         className={`flex justify-between items-center py-3 border-t border-superSilver`}
@@ -52,12 +61,13 @@ const OrderCart = ({ selectedCards }: { selectedCards: ProductData[] }) => {
           amount={selectedTotal}
         />
       </div>
-   
-        <>
+
+      {showCart && (
+        <Fragment>
           <button
-            type="submit"
+            type={auth ? "submit" : "button"}
             disabled={!selectedCards.length}
-            onClick={orderHandle}
+            onClick={auth ? orderHandle : toggleOpen}
             className="bg-cerulean hover:opacity-90 transition-opacity text-white w-full py-[13px] mb-3 disabled:opacity-50 font-semibold"
           >
             Оформить заказ
@@ -68,7 +78,9 @@ const OrderCart = ({ selectedCards }: { selectedCards: ProductData[] }) => {
               условиями пользовательского соглашения.
             </Link>
           </p>
-        </>
+        </Fragment>
+      )}
+      <LoginModal isOpen={isOpen} toggleModal={toggleOpen} />
     </div>
   );
 };
