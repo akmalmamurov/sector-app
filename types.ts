@@ -30,10 +30,10 @@ export interface PopularCategory {
 type Options = {
   name: string;
   value: string;
-}
+};
 export interface CharacteristicsData {
   title?: string;
-  options: Options[]
+  options: Options[];
 }
 export interface ProductData {
   id: string;
@@ -137,4 +137,13 @@ export interface OrderRequest {
   phoneNumber?: number | string;
   email?: string;
   fullname?: string;
+}
+export interface ContrAgentRequest {
+  ownershipForm: string;
+  inn: string;
+  pnfl: string;
+  oked: string;
+  name: string;
+  legalAdress: string;
+  isFavorite: boolean;
 }

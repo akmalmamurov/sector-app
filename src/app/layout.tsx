@@ -1,9 +1,9 @@
+import { Toaster } from "react-hot-toast";
 import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "@/components/header";
 import { Sidebar } from "@/components/sidebar";
 import { Footer } from "@/components/footer";
-import { Toaster } from "react-hot-toast";
 import BottomNavbar from "@/components/bottom-navbar/BottomNavbar";
 import { Providers } from "@/components/providers";
 import { ScrollTop } from "@/components/scroll-top";

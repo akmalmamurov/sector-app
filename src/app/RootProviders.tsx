@@ -5,10 +5,7 @@ import useStore, { hydrateStore } from "@/context/store";
 
 export function RootProviders({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    // ① Rehydrate Zustand + bootstrap auth if token already in localStorage
     hydrateStore();
-
-    // ② Handle fresh redirects with ?token=…
     const params = new URLSearchParams(window.location.search);
     const token = params.get("token");
     if (token) {
