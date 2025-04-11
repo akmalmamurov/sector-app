@@ -16,9 +16,9 @@ interface Props {
 export const ContrAgentModal: React.FC<Props> = ({ isOpen, toggleOpen }) => {
   const {
     handleSubmit,
-    register,
+    // register,
     control,
-    formState: { errors },
+    // formState: { errors },
   } = useForm<ContrAgentRequest>();
   const onSubmit = (data: ContrAgentRequest) => {
     console.log(data);
