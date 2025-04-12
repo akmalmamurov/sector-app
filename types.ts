@@ -144,6 +144,22 @@ export interface ContrAgentRequest {
   pnfl: string;
   oked: string;
   name: string;
-  legalAdress: string;
+  legalAddress: string;
   isFavorite: boolean;
+}
+export interface ContrAgentData {
+  id: string;
+  inn: string;
+  isFavorite: boolean;
+  legalAddress: string;
+  name: string;
+  oked: string;
+  ownershipForm: string;
+  pnfl: string;
+  user: {
+    email: string;
+    id: string;
+    name: string;
+    phone: string;
+  };
 }

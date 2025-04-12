@@ -31,6 +31,7 @@ import mailContact from "./mailContact.png";
 import noteContact from "./noteContact.png";
 import officeContact from "./officeContact.png";
 import warehouseContact from "./officeContact.png";
+import contactBox from "./agent-box.png";
 
 // Integration page images
 import testImageIntegration from "./testImageIntegratiom.jpg";
@@ -112,4 +113,5 @@ export {
   korzinaNavBottom,
   profileNavBottom,
   partnersLogo,
+  contactBox,
 };

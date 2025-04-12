@@ -5,4 +5,5 @@ export * from "./faq-data";
 export * from "./payment-data";
 export * from "./step-data";
 export * from "./integration-table-data"
-export * from "./profile-menu-data"
+export * from "./profile-menu-data";
+export * from "./contr-data";

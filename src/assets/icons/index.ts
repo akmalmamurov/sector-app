@@ -44,4 +44,6 @@ export * from "./SortIconDesc";
 export * from "./SortChevronIcon";
 export * from "./BannerIcon";
 export * from "./SectorWarning";
-export * from "./DeleteIcon"
+export * from "./DeleteIcon";
+export * from "./EditIcon";
+export * from "./CheckIcon"

@@ -1,26 +1,36 @@
 "use client";
 
+import { useForm } from "react-hook-form";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Check, CirclePlus } from "lucide-react";
+import { Fragment, useState } from "react";
 import useStore from "@/context/store";
+import OrderCart from "@/components/order-cart/OrderCart";
 import ArrowLeftLongIcon from "@/assets/icons/ArrowLeftLongIcon";
 import { Input } from "@/components/ui/input";
 
 import { Label } from "@/components/ui/label";
 import SmileIcon from "@/assets/icons/SmileIcon";
 import { CartIcon, SearchIcon } from "@/assets/icons";
-import OrderCart from "@/components/order-cart/OrderCart";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { useForm } from "react-hook-form";
-import { Check, CirclePlus } from "lucide-react";
 import { OrderRequest } from "@/types";
-import { Fragment, useState } from "react";
 import { PhoneInput } from "@/components/phone-input";
 import { ErrorMessage, FormInput } from "@/components/form";
 import { useRequireAuth } from "@/hooks";
 import { ContrAgentModal } from "@/components/modal";
+import { useQuery } from "@tanstack/react-query";
+import { getAgent } from "@/api";
+import { ContrAgent } from "@/components/contr-agent";
+
 const CartContactPage = () => {
   const { selected } = useStore();
   const [phone, setPhone] = useState("+998 __ ___ ____");
+  const { data: contrAgents = [] } = useQuery({
+    queryKey: ["contragents"],
+    queryFn: getAgent,
+  });
+  console.log(contrAgents);
+
   const router = useRouter();
   const auth = useRequireAuth();
   const [isOpen, setIsOpen] = useState(false);
@@ -74,15 +84,16 @@ const CartContactPage = () => {
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-darkSoul"
               />
             </div>
-            <div className="grid grid-cols-3 overflow-x-auto border-b border-superSilver pb-8">
+            <div className="flex flex-nowrap overflow-x-auto border-b border-superSilver pb-8 gap-[22px] w-full ">
               <button
                 type="button"
                 onClick={toggleOpen}
-                className="min-h-[225px] cursor-pointer h-full bg-custom min-w-[315px] border-darkSoul border border-dashed flex justify-center items-center flex-col gap-2"
+                className="flex-shrink-0 min-h-[229px] min-w-[315px] cursor-pointer bg-custom border border-dashed border-darkSoul flex justify-center items-center flex-col gap-2"
               >
                 <CirclePlus className="text-weekColor w-10 h-10" />
                 <p className="text-weekColor mt-2">Добавить контрагенты</p>
               </button>
+              <ContrAgent contrAgents={contrAgents} />
             </div>
             <div>
               <div className="flex items-center gap-3 pb-5 mt-8">
