@@ -40,7 +40,6 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
     queryFn: () => getFilter(slug || "", paramKey || ""),
   });
 
-
   if (isLoading) {
     return <div>Loading filters...</div>;
   }
@@ -56,35 +55,40 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
           <FilterIcon className="w-6 h-6" />
           <h3 className="text-base font-normal text-textColor">Фильтры</h3>
         </div>
-        <div className="mb-4">
-          <div className="flex items-center mb-2 bg-background px-5 py-3">
-            <Image
-              src={"/subcategories.svg"}
-              width={25}
-              height={25}
-              alt={"subcategories"}
-              className="w-6 h-6 mr-3"
-            />
-            <h3 className="text-sm font-normal text-textColor">Подкатегории</h3>
+        {catalogItem?.categories?.length && (
+          <div className="mb-4">
+            <div className="flex items-center mb-2 bg-background px-5 py-3">
+              <Image
+                src={"/subcategories.svg"}
+                width={25}
+                height={25}
+                alt={"subcategories"}
+                className="w-6 h-6 mr-3"
+              />
+              <h3 className="text-sm font-normal text-textColor">
+                Подкатегории
+              </h3>
+            </div>
+            <div className="px-5 pt-3">
+              <ul className="list-disc pl-5 pb-2">
+                {(catalogItem?.categories as CategoryData[])?.map(
+                  (category, idx) => (
+                    <li key={idx} className="mb-1 marker:text-textColor">
+                      <Link
+                        href={`/catalog/${catalogItem?.slug}/${category.slug}`}
+                        className="hover:text-blue-500 transition-colors duration-200 text-xs font-normal text-textColor"
+                      >
+                        {category.title}
+                      </Link>
+                    </li>
+                  )
+                )}
+              </ul>
+            </div>
           </div>
-          <div className="px-5 pt-3">
-            <ul className="list-disc pl-4">
-              {(catalogItem?.categories as CategoryData[]).map(
-                (category, idx) => (
-                  <li key={idx} className="mb-1 marker:text-textColor">
-                    <Link
-                      href={`/catalog/${catalogItem?.slug}/${category.slug}`}
-                      className="hover:text-blue-500 transition-colors duration-200 text-xs font-normal text-textColor"
-                    >
-                      {category.title}
-                    </Link>
-                  </li>
-                )
-              )}
-            </ul>
-          </div>
-        </div>
-        {data.map(
+        )}
+
+        {data?.map(
           (filter, index) =>
             filter.options?.length > 0 && (
               <div key={index} className="mb-4">
@@ -104,7 +108,7 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
                   {(filter.type === "checkbox" ||
                     filter.type === "import-checkbox") && (
                     <ul>
-                      {filter.options.map((option, idx) => (
+                      {filter.options?.map((option, idx) => (
                         <li key={idx} className="mb-2.5 text-xs font-normal">
                           <label className="cursor-pointer flex items-center text-xs font-normal text-textColor">
                             <Checkbox
@@ -118,7 +122,6 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
                       ))}
                     </ul>
                   )}
-                  {/* Link turi */}
                   {filter.type === "link" && (
                     <div>
                       <div className="flex items-center gap-2 relative mb-5">
@@ -133,7 +136,7 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
                         />
                       </div>
                       <ul className="overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 max-h-[225px]">
-                        {filter.options.map((option, idx) => (
+                        {filter.options?.map((option, idx) => (
                           <li key={idx} className="mb-1">
                             <Link
                               href={option.url ?? "#"}

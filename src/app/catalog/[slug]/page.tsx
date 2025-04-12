@@ -53,7 +53,7 @@ export default async function SingleCatalogPage({
           <span>Каталог</span>
         </Link>
         <ChevronRightIcon className="text-weekColor" size={14} />
-        {breadcrumbPaths.map((item, index) => (
+        {(breadcrumbPaths || []).map((item, index) => (
           <BreadcrumbHoverLink
             key={index}
             item={item}
