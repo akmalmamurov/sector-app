@@ -38,6 +38,17 @@ body {
   background: var(--accent);
 }
 
+/* for Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none;  
+  scrollbar-width: none;    
+}
+
+/* for WebKit browsers */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

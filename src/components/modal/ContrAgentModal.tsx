@@ -21,7 +21,8 @@ import { useEffect } from "react";
 import { Checkbox } from "../ui/checkbox";
 import request from "@/services";
 import { CREATE_AGENT } from "@/constants";
-import { showError } from "../toast/Toast";
+import { showError, showSuccess } from "../toast/Toast";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface Props {
   isOpen: boolean;
@@ -38,14 +39,15 @@ export const ContrAgentModal: React.FC<Props> = ({ isOpen, toggleOpen }) => {
   } = useForm<ContrAgentRequest>({
     mode: "onChange",
   });
-
+  const queryClient = useQueryClient()
   const onSubmit = async (data: ContrAgentRequest) => {
     try {
       const res = await request.post(CREATE_AGENT, data);
       console.log(res);
+      queryClient.invalidateQueries({ queryKey: ["contragents"] });
       toggleOpen();
       reset();
-      showError("Контрагент успешно добавлен");
+      showSuccess("Контрагент успешно добавлен");
     } catch (error) {
       console.log(error);
       showError("Ошибка добавления контрагента");
@@ -179,18 +181,25 @@ export const ContrAgentModal: React.FC<Props> = ({ isOpen, toggleOpen }) => {
                   <span className="text-cerulean text-sm font-normal">*</span>
                 </Label>
                 <AgentInput
-                  name="legalAdress"
+                  name="legalAddress"
                   register={register}
-                  error={errors.legalAdress}
+                  error={errors.legalAddress}
                 />
               </div>
             </div>
             <div className="mt-[30px] mb-[15px] flex gap-[7px] items-center">
-              <Checkbox
-                id="isFavorite"
-                defaultChecked
-                {...register("isFavorite")}
-                className="w-[18px] h-[18px] rounded-none data-[state=checked]:bg-greenLight data-[state=checked]:border-greenLight data-[state=checked]:text-white "
+              <Controller
+                name="isFavorite"
+                control={control}
+                defaultValue={true}
+                render={({ field: { onChange, value } }) => (
+                  <Checkbox
+                    id="isFavorite"
+                    checked={value}
+                    onCheckedChange={onChange}
+                    className="w-[18px] h-[18px] rounded-none data-[state=checked]:bg-greenLight data-[state=checked]:border-greenLight data-[state=checked]:text-white"
+                  />
+                )}
               />
               <label
                 htmlFor="isFavorite"
