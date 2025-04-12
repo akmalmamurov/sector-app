@@ -137,6 +137,8 @@ export interface OrderRequest {
   phoneNumber?: number | string;
   email?: string;
   fullname?: string;
+  contrAgentId: string;
+
 }
 export interface ContrAgentRequest {
   ownershipForm: string;

@@ -1,10 +1,11 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { Fragment, useState } from "react";
 import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { Check, CirclePlus } from "lucide-react";
-import { Fragment, useState } from "react";
 import useStore from "@/context/store";
 import OrderCart from "@/components/order-cart/OrderCart";
 import ArrowLeftLongIcon from "@/assets/icons/ArrowLeftLongIcon";
@@ -18,7 +19,6 @@ import { PhoneInput } from "@/components/phone-input";
 import { ErrorMessage, FormInput } from "@/components/form";
 import { useRequireAuth } from "@/hooks";
 import { ContrAgentModal } from "@/components/modal";
-import { useQuery } from "@tanstack/react-query";
 import { getAgent } from "@/api";
 import { ContrAgent } from "@/components/contr-agent";
 
@@ -29,7 +29,6 @@ const CartContactPage = () => {
     queryKey: ["contragents"],
     queryFn: getAgent,
   });
-  console.log(contrAgents);
 
   const router = useRouter();
   const auth = useRequireAuth();
@@ -38,6 +37,7 @@ const CartContactPage = () => {
   const {
     handleSubmit,
     register,
+    setValue,
     formState: { errors, submitCount, isValid },
   } = useForm<OrderRequest>();
   if (!auth) return null;
@@ -84,16 +84,21 @@ const CartContactPage = () => {
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-darkSoul"
               />
             </div>
+            {/* create contragent */}
             <div className="flex flex-nowrap overflow-x-auto border-b border-superSilver pb-8 gap-[22px] w-full ">
               <button
                 type="button"
                 onClick={toggleOpen}
-                className="flex-shrink-0 min-h-[229px] min-w-[315px] cursor-pointer bg-custom border border-dashed border-darkSoul flex justify-center items-center flex-col gap-2"
+                className={`flex-shrink-0 min-h-[229px] min-w-[315px] cursor-pointer bg-custom border border-dashed ${errors?.contrAgentId ? "border-dangerColor" : "border-superSilver"} flex justify-center items-center flex-col gap-2`}
               >
                 <CirclePlus className="text-weekColor w-10 h-10" />
                 <p className="text-weekColor mt-2">Добавить контрагенты</p>
               </button>
-              <ContrAgent contrAgents={contrAgents} />
+              {errors?.contrAgentId && (
+                <ErrorMessage>Пожалуйста, выберите контрагента</ErrorMessage>
+              )}
+              {/* get contragents */}
+              <ContrAgent contrAgents={contrAgents} setValue={setValue} />
             </div>
             <div>
               <div className="flex items-center gap-3 pb-5 mt-8">
