@@ -15,6 +15,8 @@ interface StoreState {
   selected: StoreItem[];
   rowCol: boolean;
   user: string | null;
+  isHydrated: boolean;
+  setHydrated: (value: boolean) => void;
   setUser: (user: string | null) => void;
   setAuth: (value: boolean) => void;
   setContact: (info: string) => void;
@@ -40,6 +42,7 @@ const useStore = create<StoreState>()(
   persist(
     (set, get) => ({
       auth: false,
+      isHydrated: false,
       contact: "",
       favorites: [],
       cart: [],
@@ -47,13 +50,14 @@ const useStore = create<StoreState>()(
       compares: [],
       selected: [],
       user: null,
+      setHydrated: (value) => set({ isHydrated: value }),
       setUser: (user) => set({ user }),
       setAuth: (value) => set({ auth: value }),
       toggleRowCol: (value?: boolean) =>
         set((state) => ({
           rowCol: typeof value === "boolean" ? value : !state.rowCol,
         })),
-      
+
       selectedCardsList: (products) => {
         set(() => ({
           selected: products,
@@ -165,6 +169,12 @@ const useStore = create<StoreState>()(
     {
       name: "sector-app",
       storage: createJSONStorage(() => localStorage),
+
+      onRehydrateStorage: () => (state) => {
+        const token = localStorage.getItem("sector-token");
+        if (token) state?.setAuth(true);
+        state?.setHydrated(true);
+      },
     }
   )
 );

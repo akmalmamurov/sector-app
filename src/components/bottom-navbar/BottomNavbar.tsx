@@ -36,6 +36,7 @@ const BottomNavbar = () => {
   const handleLogout = () => {
     logOut();
     setMenuOpen(false);
+    setIsOpen(false);
   };
 
   return (
@@ -106,7 +107,7 @@ const BottomNavbar = () => {
           <span className="text-[9px] pt-1">Профиль</span>
         </button>
       )}
-      <LoginModal isOpen={isOpen} toggleModal={() => setIsOpen(!isOpen)} />
+      <LoginModal isOpen={isOpen} handleOpen={() => setIsOpen(!isOpen)} />
     </div>
   );
 };

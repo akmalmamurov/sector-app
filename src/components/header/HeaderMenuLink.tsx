@@ -1,22 +1,14 @@
 "use client";
-import Link from "next/link";
-import {
-  CartIcon,
-  CompareIcon,
-  CompareSucessIcon,
-  DiscountIcon,
-  HeartActiveIcon,
-  HeartIcon,
-  UserIcon,
-} from "@/assets/icons";
-import useStore from "@/context/store";
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { CartIcon, CompareIcon, CompareSucessIcon, DiscountIcon, HeartActiveIcon, HeartIcon, UserIcon, } from "@/assets/icons";
+import useStore from "@/context/store";
 import LoginModal from "../modal/LoginModal";
 import { ProfileMenu } from "../menu";
 
 const HeaderMenuLink = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const toggleModal = () => setIsOpen(!isOpen);
+  const handleOpen = () => setIsOpen(!isOpen);
   const { favorites, cart, compares, auth,setAuth } = useStore();
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
@@ -66,7 +58,7 @@ const HeaderMenuLink = () => {
       {auth ? (
         <ProfileMenu />
       ) : (
-        <button onClick={toggleModal} className="header-menu-item">
+        <button onClick={handleOpen} className="header-menu-item">
           <span>
             <UserIcon className="w-5 h-5 xl:w-6 xl:h-6" />
           </span>
@@ -88,7 +80,7 @@ const HeaderMenuLink = () => {
         <span className="header-menu-link">Корзина</span>
       </Link>
 
-      <LoginModal isOpen={isOpen} toggleModal={toggleModal} />
+      <LoginModal isOpen={isOpen} handleOpen={handleOpen} />
     </div>
   );
 };

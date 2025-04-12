@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, memo } from "react";
 import { Container } from "../container";
 import Link from "next/link";
 import { CloseIcon } from "@/assets/icons";
@@ -18,9 +18,11 @@ const CatalogMenu = ({
   catalogData,
 }: Props) => {
   const [hoveredParentIndex, setHoveredParentIndex] = useState<number>(0);
-  const [delayedHoveredParentIndex, setDelayedHoveredParentIndex] = useState<number>(0);
+  const [delayedHoveredParentIndex, setDelayedHoveredParentIndex] =
+    useState<number>(0);
   const menuRef = useRef<HTMLDivElement>(null);
 
+  
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
       if (
@@ -42,10 +44,9 @@ const CatalogMenu = ({
   useEffect(() => {
     const timer = setTimeout(() => {
       setDelayedHoveredParentIndex(hoveredParentIndex);
-    }, 300); 
+    }, 300);
     return () => clearTimeout(timer);
   }, [hoveredParentIndex]);
-console.log(catalogData);
 
   return (
     <div
@@ -96,7 +97,9 @@ console.log(catalogData);
                     <ul className="grid grid-cols-3 gap-8">
                       {catalogData[delayedHoveredParentIndex]?.subcatalogs?.map(
                         (subCatalog, subIndex) => (
-                          <li key={`sub-${delayedHoveredParentIndex}-${subIndex}`}>
+                          <li
+                            key={`sub-${delayedHoveredParentIndex}-${subIndex}`}
+                          >
                             <Link
                               onClick={() => setMenuOpen(false)}
                               href={`/catalog/${subCatalog.slug}`}
@@ -142,4 +145,4 @@ console.log(catalogData);
   );
 };
 
-export default CatalogMenu;
+export default memo(CatalogMenu);

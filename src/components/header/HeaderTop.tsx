@@ -12,15 +12,15 @@ const HeaderTop = () => {
   const [isHydrated, setIsHydrated] = useState(false);
   const toggleModal = () => setIsOpen(!isOpen);
   const { auth } = useStore();
-  
+
   useEffect(() => {
     setIsHydrated(true);
   }, []);
-  
+
   if (!isHydrated) return null;
-  
+
   if (auth) return null;
-  
+
   return (
     <div className="w-full bg-cerulean md:h-10 h-16 hidden sm:block">
       <Container className="flex justify-center items-center h-full">
@@ -36,7 +36,7 @@ const HeaderTop = () => {
           </div>
         </div>
       </Container>
-      <LoginModal isOpen={isOpen} toggleModal={toggleModal} />
+      <LoginModal isOpen={isOpen} handleOpen={toggleModal} />
     </div>
   );
 };
