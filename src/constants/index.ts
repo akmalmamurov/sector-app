@@ -16,3 +16,4 @@ export const GET_PRODUCT_FILTER = "/user/filter";
 export const CREATE_AGENT = "/user/kontragent/create"
 export const GET_AGENT = "/user/kontragent/all"
 export const UPDATE_AGENT = "/user/kontragent/update"
+export const DELETE_AGENT = "/user/kontragent/delete"

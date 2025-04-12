@@ -2,11 +2,14 @@
 
 import { useEffect } from "react";
 import { updateAgent } from "@/api";
-import { CheckIcon, EditIcon } from "@/assets/icons";
+import { CheckIcon, DeleteIcon, EditIcon } from "@/assets/icons";
 import { ContrAgentData, OrderRequest } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
-import { showError } from "../toast/Toast";
+import { showError, showSuccess } from "../toast/Toast";
 import { UseFormSetValue } from "react-hook-form";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import request from "@/services";
+import { DELETE_AGENT } from "@/constants";
 
 export const ContrAgent = ({
   contrAgents,
@@ -34,6 +37,16 @@ export const ContrAgent = ({
       showError("Ошибка обновления контрагента");
     }
   };
+  const handleDelete = async (id: string) => {
+    try {
+      await request.delete(`${DELETE_AGENT}/${id}`);
+      queryClient.invalidateQueries({ queryKey: ["contragents"] });
+      showSuccess("Контрагент удален");
+    } catch (error) {
+      console.error(error);
+      showError("Ошибка обновления контрагента");
+    }
+  };
 
   return (
     <>
@@ -43,7 +56,7 @@ export const ContrAgent = ({
         .map((item) => (
           <div
             key={item.id}
-            className={`flex-shrink-0 min-w-[315px] border ${
+            className={`border ${
               item.isFavorite ? "border-cerulean" : "border-superSilver"
             } relative pt-12 px-4 overflow-hidden bg-custom min-h-[229px]`}
           >
@@ -70,10 +83,33 @@ export const ContrAgent = ({
               <CheckIcon />
               {item.isFavorite ? "Выбрано" : "Выбрать"}
             </button>
-
-            <span className="absolute top-4 right-2 cursor-pointer">
-              <EditIcon className="w-6 h-6 text-darkSoul hover:text-textColor" />
-            </span>
+            <Popover>
+              <PopoverTrigger asChild>
+                <button
+                  type="button"
+                  className="absolute top-4 right-2 cursor-pointer w-fit"
+                >
+                  <EditIcon className="w-6 h-6 text-darkSoul hover:text-textColor" />
+                </button>
+              </PopoverTrigger>
+              <PopoverContent className="w-[200px] p-0 rounded-none flex flex-col right-5 absolute">
+                <span className="cursor-pointer py-[6px] px-4 bg-white text-xs text-textColor hover:bg-superSilver hoverEffect flex items-center gap-2">
+                  Адреса отгрузки: 0
+                </span>
+                <span className="cursor-pointer py-[6px] px-4 bg-white text-xs text-textColor hover:bg-superSilver hoverEffect flex items-center gap-2">
+                  Адреса отгрузки: 0
+                </span>
+                <span
+                  onClick={() => handleDelete(item.id)}
+                  className="cursor-pointer py-[6px] px-4 bg-white text-xs text-textColor hover:bg-superSilver hoverEffect flex items-center gap-2"
+                >
+                  <span className="w-4 h-4">
+                    <DeleteIcon className="w-4 h-4" />
+                  </span>
+                  Удалить
+                </span>
+              </PopoverContent>
+            </Popover>
           </div>
         ))}
     </>

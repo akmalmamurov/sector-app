@@ -39,7 +39,11 @@ const CartContactPage = () => {
     register,
     setValue,
     formState: { errors, submitCount, isValid },
-  } = useForm<OrderRequest>();
+  } = useForm<OrderRequest>({
+    defaultValues: {
+      contrAgentId: "",
+    },
+  });
   if (!auth) return null;
   const onSubmit = (data: OrderRequest) => {
     const phoneFormat = phone.replace(/[^0-9]/g, "");
@@ -54,6 +58,12 @@ const CartContactPage = () => {
   return (
     <Fragment>
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
+        <input
+          type="hidden"
+          {...register("contrAgentId", {
+            required: "Пожалуйста, выберите контрагента",
+          })}
+        />
         <div className="grid grid-cols-4 gap-[23px]">
           <div className="col-span-3 bg-white border shadow-sectionShadow py-[23px] px-[20px]">
             <div className="mb-4">
@@ -85,18 +95,20 @@ const CartContactPage = () => {
               />
             </div>
             {/* create contragent */}
-            <div className="flex flex-nowrap overflow-x-auto border-b border-superSilver pb-8 gap-[22px] w-full ">
-              <button
-                type="button"
-                onClick={toggleOpen}
-                className={`flex-shrink-0 min-h-[229px] min-w-[315px] cursor-pointer bg-custom border border-dashed ${errors?.contrAgentId ? "border-dangerColor" : "border-superSilver"} flex justify-center items-center flex-col gap-2`}
-              >
-                <CirclePlus className="text-weekColor w-10 h-10" />
-                <p className="text-weekColor mt-2">Добавить контрагенты</p>
-              </button>
-              {errors?.contrAgentId && (
-                <ErrorMessage>Пожалуйста, выберите контрагента</ErrorMessage>
-              )}
+            <div className="grid grid-cols-3 border-b border-superSilver pb-8 gap-[22px] w-full ">
+              <div className="flex flex-col">
+                <button
+                  type="button"
+                  onClick={toggleOpen}
+                  className={` min-h-[229px]  cursor-pointer bg-custom border border-dashed ${errors?.contrAgentId ? "border-dangerColor" : "border-superSilver"} flex justify-center items-center flex-col gap-2`}
+                >
+                  <CirclePlus className="text-weekColor w-10 h-10" />
+                  <p className="text-weekColor mt-2">Добавить контрагенты</p>
+                </button>
+                {errors?.contrAgentId && (
+                  <ErrorMessage>Пожалуйста, выберите контрагента</ErrorMessage>
+                )}
+              </div>
               {/* get contragents */}
               <ContrAgent contrAgents={contrAgents} setValue={setValue} />
             </div>
