@@ -2,7 +2,7 @@ import { OrderRequest } from "@/types";
 import { FieldError, UseFormRegister } from "react-hook-form";
 
 interface Props {
-  name: keyof OrderRequest;
+  name: keyof OrderRequest ;
   register: UseFormRegister<OrderRequest>;
   error?: FieldError; 
   required?: boolean;
