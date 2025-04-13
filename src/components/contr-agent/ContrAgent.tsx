@@ -1,8 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { updateAgent } from "@/api";
-import { CheckIcon, DeleteIcon, EditIcon } from "@/assets/icons";
+import {
+  CheckIcon,
+  DeleteSmIcon,
+  EditIcon,
+  ShippingIcon,
+} from "@/assets/icons";
 import { ContrAgentData, OrderRequest } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { showError, showSuccess } from "../toast/Toast";
@@ -10,6 +15,7 @@ import { UseFormSetValue } from "react-hook-form";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import request from "@/services";
 import { DELETE_AGENT } from "@/constants";
+import { AgentAdressModal } from "../modal";
 
 export const ContrAgent = ({
   contrAgents,
@@ -18,6 +24,8 @@ export const ContrAgent = ({
   contrAgents: ContrAgentData[];
   setValue: UseFormSetValue<OrderRequest>;
 }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleOpen = () => setIsOpen(!isOpen);
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -69,7 +77,10 @@ export const ContrAgent = ({
               <span className="border-b border-dashed pb-[2px] text-xs text-cerulean border-cerulean">
                 Розничная цена
               </span>
-              <span className="border-b border-dashed pb-[2px] text-xs text-cerulean border-cerulean">
+              <span
+                onClick={toggleOpen}
+                className="border-b border-dashed pb-[2px] text-xs text-cerulean border-cerulean cursor-pointer"
+              >
                 Адреса отгрузки: 0
               </span>
             </div>
@@ -93,23 +104,32 @@ export const ContrAgent = ({
                 </button>
               </PopoverTrigger>
               <PopoverContent className="w-[200px] p-0 rounded-none flex flex-col right-5 absolute">
-                <span className="cursor-pointer py-[6px] px-4 bg-white text-xs text-textColor hover:bg-superSilver hoverEffect flex items-center gap-2">
+                <span
+                  onClick={toggleOpen}
+                  className="cursor-pointer py-[6px] px-4 bg-white text-xs text-textColor hover:bg-superSilver hoverEffect flex items-center gap-2"
+                >
+                  <span>
+                    <ShippingIcon />
+                  </span>
                   Адреса отгрузки: 0
                 </span>
-                <span className="cursor-pointer py-[6px] px-4 bg-white text-xs text-textColor hover:bg-superSilver hoverEffect flex items-center gap-2">
-                  Адреса отгрузки: 0
-                </span>
+
                 <span
                   onClick={() => handleDelete(item.id)}
                   className="cursor-pointer py-[6px] px-4 bg-white text-xs text-textColor hover:bg-superSilver hoverEffect flex items-center gap-2"
                 >
                   <span className="w-4 h-4">
-                    <DeleteIcon className="w-4 h-4" />
+                    <DeleteSmIcon className="w-4 h-4" />
                   </span>
                   Удалить
                 </span>
               </PopoverContent>
             </Popover>
+            <AgentAdressModal
+              isOpen={isOpen}
+              toggleOpen={toggleOpen}
+              name={item?.name}
+            />
           </div>
         ))}
     </>

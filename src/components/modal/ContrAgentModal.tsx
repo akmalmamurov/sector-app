@@ -39,11 +39,10 @@ export const ContrAgentModal: React.FC<Props> = ({ isOpen, toggleOpen }) => {
   } = useForm<ContrAgentRequest>({
     mode: "onChange",
   });
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
   const onSubmit = async (data: ContrAgentRequest) => {
     try {
-      const res = await request.post(CREATE_AGENT, data);
-      console.log(res);
+      await request.post(CREATE_AGENT, data);
       queryClient.invalidateQueries({ queryKey: ["contragents"] });
       toggleOpen();
       reset();

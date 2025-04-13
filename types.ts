@@ -165,3 +165,16 @@ export interface ContrAgentData {
     phone: string;
   };
 }
+export interface AgentAdressRequest {
+  fullAddress: string;
+  country: string;
+  region: string;
+  cityTown: string;
+  street: string;
+  house: string;
+  flat?: string;
+  index?: string;
+  comment?: string;
+  settings: boolean;
+
+}

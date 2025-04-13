@@ -1,10 +1,10 @@
 import { cn } from "@/lib/utils";
-import { OrderRequest } from "@/types";
+import { AgentAdressRequest } from "@/types";
 import { FieldError, UseFormRegister } from "react-hook-form";
 
 interface Props {
-  name: keyof OrderRequest;
-  register: UseFormRegister<OrderRequest>;
+  name: keyof AgentAdressRequest;
+  register: UseFormRegister<AgentAdressRequest>;
   error?: FieldError;
   required?: boolean;
   type?: string;
@@ -12,34 +12,26 @@ interface Props {
   className?: string;
 }
 
-export const FormInput = ({
+export const AgentAdressInput = ({
   name,
   register,
-  className,
   error,
+  className,
   required = true,
   type = "text",
   ...props
 }: Props) => {
-  const validationRules = {
-    required,
-    ...(type === "email" && {
-      pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-    }),
-  };
-
   return (
     <input
-      type={type || "text"}
+      type={type}
       id={String(name)}
-      {...register(name, validationRules)}
+      {...register(name, { required })}
       className={cn(
         `border ${
           error
             ? "border-dangerColor hover:border-dangerColor/50"
             : "border-superSilver hover:border-cerulean/50"
-        } py-2 px-[15px] w-full focus:outline-none focus:border-cerulean`,
-        className
+        } py-2 px-[15px] w-full focus:outline-none focus:border-cerulean`,className
       )}
       {...props}
       placeholder={props.placeholder}
@@ -47,4 +39,4 @@ export const FormInput = ({
   );
 };
 
-export default FormInput;
+export default AgentAdressInput;

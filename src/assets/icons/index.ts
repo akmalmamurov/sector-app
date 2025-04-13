@@ -46,4 +46,6 @@ export * from "./BannerIcon";
 export * from "./SectorWarning";
 export * from "./DeleteIcon";
 export * from "./EditIcon";
-export * from "./CheckIcon"
+export * from "./CheckIcon";
+export * from "./DeleteSmIcon";
+export * from "./ShippingIcon"

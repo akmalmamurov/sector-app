@@ -21,6 +21,7 @@ import { useRequireAuth } from "@/hooks";
 import { ContrAgentModal } from "@/components/modal";
 import { getAgent } from "@/api";
 import { ContrAgent } from "@/components/contr-agent";
+import formStore from "@/context/form-store";
 
 const CartContactPage = () => {
   const { selected } = useStore();
@@ -29,7 +30,7 @@ const CartContactPage = () => {
     queryKey: ["contragents"],
     queryFn: getAgent,
   });
-
+const {addContactForm} = formStore();
   const router = useRouter();
   const auth = useRequireAuth();
   const [isOpen, setIsOpen] = useState(false);
@@ -44,11 +45,12 @@ const CartContactPage = () => {
       contrAgentId: "",
     },
   });
+
   if (!auth) return null;
   const onSubmit = (data: OrderRequest) => {
     const phoneFormat = phone.replace(/[^0-9]/g, "");
     const payload = { ...data, phone: phoneFormat };
-    console.log(payload);
+    addContactForm(payload);
     router.push("/cart/delivery");
   };
   const showPhoneError =
@@ -100,12 +102,12 @@ const CartContactPage = () => {
                 <button
                   type="button"
                   onClick={toggleOpen}
-                  className={` min-h-[229px]  cursor-pointer bg-custom border border-dashed ${errors?.contrAgentId ? "border-dangerColor" : "border-superSilver"} flex justify-center items-center flex-col gap-2`}
+                  className={` min-h-[229px]  cursor-pointer bg-custom border border-dashed ${!contrAgents.length && errors?.contrAgentId ? "border-dangerColor" : "border-superSilver"} flex justify-center items-center flex-col gap-2`}
                 >
                   <CirclePlus className="text-weekColor w-10 h-10" />
                   <p className="text-weekColor mt-2">Добавить контрагенты</p>
                 </button>
-                {errors?.contrAgentId && (
+                {!contrAgents.length && errors?.contrAgentId && (
                   <ErrorMessage>Пожалуйста, выберите контрагента</ErrorMessage>
                 )}
               </div>
