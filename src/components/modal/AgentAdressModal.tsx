@@ -17,12 +17,14 @@ interface Props {
   isOpen: boolean;
   toggleOpen: () => void;
   name: string;
+  contrAgentId: string;
 }
 
 export const AgentAdressModal: React.FC<Props> = ({
   isOpen,
   toggleOpen,
   name,
+  contrAgentId,
 }) => {
   const {
     handleSubmit,
@@ -34,7 +36,8 @@ export const AgentAdressModal: React.FC<Props> = ({
     mode: "onChange",
   });
   const onSubmit = async (data: AgentAdressRequest) => {
-    console.log(data);
+    const payload = { ...data, contrAgentId };
+    console.log(payload);
   };
 
   useEffect(() => {
@@ -71,7 +74,9 @@ export const AgentAdressModal: React.FC<Props> = ({
                 placeholder="г. Ташкент, Мирабадский район, Инокоабад МФЙ, ул. Инокобод, пр. 5, д. 22, кв. 1"
               />
               {errors.fullAddress && (
-                <ErrorMessage>Поле обязательно</ErrorMessage>
+                <ErrorMessage>
+                  Введите полный адрес с точностью до дома
+                </ErrorMessage>
               )}
             </div>
             <div className="pt-8 space-y-5">

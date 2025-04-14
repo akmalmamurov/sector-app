@@ -26,11 +26,12 @@ import formStore from "@/context/form-store";
 const CartContactPage = () => {
   const { selected } = useStore();
   const [phone, setPhone] = useState("+998 __ ___ ____");
-  const { data: contrAgents = [] } = useQuery({
+  const { data: agentsData = [] } = useQuery({
     queryKey: ["contragents"],
     queryFn: getAgent,
   });
-const {addContactForm} = formStore();
+  const contrAgents = agentsData?.kontragents || [];
+  const { addContactForm } = formStore();
   const router = useRouter();
   const auth = useRequireAuth();
   const [isOpen, setIsOpen] = useState(false);
@@ -102,12 +103,12 @@ const {addContactForm} = formStore();
                 <button
                   type="button"
                   onClick={toggleOpen}
-                  className={` min-h-[229px]  cursor-pointer bg-custom border border-dashed ${!contrAgents.length && errors?.contrAgentId ? "border-dangerColor" : "border-superSilver"} flex justify-center items-center flex-col gap-2`}
+                  className={` min-h-[229px]  cursor-pointer bg-custom border border-dashed ${!contrAgents?.length && errors?.contrAgentId ? "border-dangerColor" : "border-superSilver"} flex justify-center items-center flex-col gap-2`}
                 >
                   <CirclePlus className="text-weekColor w-10 h-10" />
                   <p className="text-weekColor mt-2">Добавить контрагенты</p>
                 </button>
-                {!contrAgents.length && errors?.contrAgentId && (
+                {!contrAgents?.length && errors?.contrAgentId && (
                   <ErrorMessage>Пожалуйста, выберите контрагента</ErrorMessage>
                 )}
               </div>
