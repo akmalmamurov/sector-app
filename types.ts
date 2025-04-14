@@ -178,3 +178,6 @@ export interface AgentAdressRequest {
   settings: boolean;
 
 }
+export interface DeliveryRequest{
+  deliveryMethod: string;
+}

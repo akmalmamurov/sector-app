@@ -1,20 +1,30 @@
-"use client"
+"use client";
 import Link from "next/link";
 import ArrowLeftLongIcon from "@/assets/icons/ArrowLeftLongIcon";
 import CartTabs from "@/components/cart-tabs/CartTabs";
 import OrderCart from "@/components/order-cart/OrderCart";
 import useStore from "@/context/store";
 import { useRequireAuth } from "@/hooks";
+import { useForm } from "react-hook-form";
+import { DeliveryRequest } from "@/types";
 
- const CartDeliveryPage = () => {
+const CartDeliveryPage = () => {
   const { selected } = useStore();
   const auth = useRequireAuth();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+    setValue,
+  } = useForm<DeliveryRequest>();
+  const onSubmit = (data: DeliveryRequest) => {
+    console.log(data);
+  };
 
-  
-  if(!auth) return null
+  if (!auth) return null;
   return (
     <div className="grid grid-cols-4 gap-[23px]">
-      <div className="col-span-3 bg-white border shadow-sectionShadow py-[23px] px-[20px]">
+      <div className="col-span-3 bg-white border shadow-sectionShadow p-[23px]">
         <div className="mb-4">
           <Link
             href={"/cart/contacts"}
@@ -27,15 +37,17 @@ import { useRequireAuth } from "@/hooks";
         <h3 className="font-normal text-stoneCold text-[17px] leading-[20.5px]">
           Тип доставки
         </h3>
-        <CartTabs/>
-        <div className="pt-5 pb-1 border-t border-superSilver">
-          <Link
-            href={"/cart/final"}
-            className="bg-cerulean hover:opacity-90 transition-opacity px-6 py-2 text-base font-semibold text-white text-center"
-          >
-            Далее
-          </Link>
-        </div>
+        <form noValidate onSubmit={handleSubmit(onSubmit)}>
+          <CartTabs setValue={setValue} />
+          <div className="pt-5 pb-1 border-t border-superSilver">
+            <button
+              type="submit"
+              className="bg-cerulean hover:opacity-90 transition-opacity px-6 py-2 text-base font-semibold text-white text-center"
+            >
+              Далее
+            </button>
+          </div>
+        </form>
       </div>
       <div className="col-span-1">
         <OrderCart selectedCards={selected} />

@@ -1,10 +1,13 @@
+import { ReactNode, useEffect } from "react";
+import { UseFormSetValue } from "react-hook-form";
+import { Check, CircleAlert, CirclePlus, TerminalIcon } from "lucide-react";
+
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import PickUpIcon from "@/assets/icons/PickUpIcon";
 import AddressIcon from "@/assets/icons/AddressIcon";
 import PickUpPointIcon from "@/assets/icons/PickUpPointIcon";
-import { Check, CircleAlert, CirclePlus, TerminalIcon } from "lucide-react";
-import { ReactNode } from "react";
-import DeliveryIcon from "@/assets/icons/DeliveryIcon";
+import { DeliveryRequest } from "@/types";
+import YandexMap from "../map/YandexMap";
 
 type dataProp = {
   name: string;
@@ -17,17 +20,7 @@ const data: dataProp[] = [
     name: "Самовывоз",
     type: "1",
     icon: <PickUpIcon />,
-    content: (
-      <>
-        <div className="flex items-center justify-center flex-col gap-1 pt-8 pb-8">
-          <DeliveryIcon className="w-[208px]" />
-          <p className="w-[405px] text-center text-base text-textColor">
-            Самовывоз недоступен, так как в выбранном населенном пункте
-            "Ташкент" на складе нет одного или нескольких товаров.
-          </p>
-        </div>
-      </>
-    ),
+    content: <YandexMap />,
   },
   {
     name: "До адреса",
@@ -101,10 +94,29 @@ const data: dataProp[] = [
     ),
   },
 ];
-const CartTabs = () => {
+const CartTabs = ({
+  setValue,
+}: {
+  setValue: UseFormSetValue<DeliveryRequest>;
+}) => {
+  const defaultTab = "1";
+  const handleTabChange = (value: string) => {
+    const active = data.find((item) => item.type === value);
+    if (active) {
+      setValue("deliveryMethod", active.name);
+    }
+  };
+  useEffect(() => {
+    handleTabChange(defaultTab);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
-    <Tabs defaultValue={"1"} className="bg-white">
-      <TabsList className="flex gap-4 mb-4 border-b rounded-none h-[54px] justify-between bg-white p-0">
+    <Tabs
+      defaultValue={defaultTab}
+      className="bg-white"
+      onValueChange={handleTabChange}
+    >
+      <TabsList className="flex gap-4 border-b rounded-none h-[54px] justify-between bg-white p-0">
         {data.map((item) => (
           <TabsTrigger
             key={item.name}
@@ -118,7 +130,7 @@ const CartTabs = () => {
       </TabsList>
 
       {data.map((item) => (
-        <TabsContent key={item.name} value={item.type} className="">
+        <TabsContent key={item.name} value={item.type} className="py-[23px]">
           {item.content}
         </TabsContent>
       ))}
