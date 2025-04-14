@@ -48,4 +48,5 @@ export * from "./DeleteIcon";
 export * from "./EditIcon";
 export * from "./CheckIcon";
 export * from "./DeleteSmIcon";
-export * from "./ShippingIcon"
+export * from "./ShippingIcon";
+export * from "./SkladIcon";

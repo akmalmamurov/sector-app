@@ -13,8 +13,6 @@ const CartDeliveryPage = () => {
   const auth = useRequireAuth();
   const {
     handleSubmit,
-    register,
-    formState: { errors },
     setValue,
   } = useForm<DeliveryRequest>();
   const onSubmit = (data: DeliveryRequest) => {
