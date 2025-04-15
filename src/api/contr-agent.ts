@@ -4,7 +4,7 @@ import request from "@/services";
 export const getAgent = async (search?: string) => {
   try {
     const params = {
-      ...(search && { name: search }),
+      ...(search && { inn: search }),
     };
     const res = await request.get(GET_AGENT, { params });
     return res.data.data || [];

@@ -22,7 +22,7 @@ export const HomeBrands = ({ brands }: Props) => {
             <Link
               href={`/brands/${el.slug}`}
               key={index}
-              className="bg-white py-[5px] px-[35px] flex justify-center items-center opacity-80 hover:opacity-100 hoverEffect shadow-cardShadow rounded-[10px] min-w-[150px] lg:min-w-0 mb-4"
+              className="bg-white py-[5px] px-[35px] flex justify-center items-center opacity-80 hover:opacity-100 hoverEffect shadow-md rounded-[10px] min-w-[150px] lg:min-w-0 mb-4"
             >
               <Image
                 src={`${process.env.NEXT_PUBLIC_API_URL}/${el.path}`}
