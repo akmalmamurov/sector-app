@@ -25,6 +25,7 @@ const HeaderMenu = () => {
   const { data: catalogData = [] } = useQuery({
     queryKey: ["catalog"],
     queryFn: getCatalog,
+    
   });
 
   return (

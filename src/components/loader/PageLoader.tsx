@@ -1,16 +1,8 @@
-import { LoaderIcon } from "@/assets/icons";
 
 export const PageLoader = () => {
   return (
-    <div className="fixed top-0 left-0 w-full min-h-screen z-50 bg-white p-10 flex  items-center justify-center">
-      {/* Spinner */}
-      <div className="flex flex-col items-center">
-        <LoaderIcon className="animate-spin w-14 h-14" />
-
-        <p className="mt-4 text-black text-xl">Загрузка</p>
-      </div>
-
-      {/* Loading text */}
+    <div className="fixed top-0 left-0 w-full h-1 z-50">
+      <div className="w-full h-full bg-gradient-to-r from-blue-500 via-purple-600 to-purple-500 animate-loading-bar" />
     </div>
   );
 };

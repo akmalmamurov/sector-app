@@ -8,18 +8,25 @@ import FavoritCartIcon from "@/assets/icons/FavoritCartIcon";
 
 export const AddToCart = ({
   product,
+  quantity,
   saved,
 }: {
   product: ProductData;
+  quantity?: number;
   saved?: boolean;
 }) => {
   const { addToCart, cart } = useStore();
   const isAddedToCart = isProductInList(cart, product);
 
   const handleToCart = () => {
-    addToCart(product);
+    if (quantity) {
+      addToCart({ ...product, quantity });
+    } else {
+      addToCart(product);
+    }
     showSuccess(`Товар ${product?.articul} Добавлен в корзину`);
   };
+
   return (
     <>
       <button
@@ -27,7 +34,7 @@ export const AddToCart = ({
         className={`w-[42px] h-[42px] bg-lightBg rounded-full flex items-center justify-center ${saved ? "hover:bg-cerulean hover:text-white hoverEffect text-cerulean" : ""}`}
       >
         {isAddedToCart ? (
-          <Check className="w-5 h-5" />
+          <Check className="w-5 h-5 text-cerulean" strokeWidth={2.65} />
         ) : saved ? (
           <FavoritCartIcon />
         ) : (

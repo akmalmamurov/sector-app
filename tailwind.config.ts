@@ -57,9 +57,12 @@ export default {
         orangeSun: "#EE8202",
         christmas: "#E0E0E0",
         weekColor: "#8C8C8C",
+        lobster: "#0054AE1F",
+        iconBox: "rgb(249, 249, 249)",
         merlin: "#408ed4",
         dove: "#8a8a8a",
         hoverBg: "rgb(251, 251, 251)",
+        bannerBg: "rgb(255, 255, 255,0.314)",
         explosiveGrey: "#C4C4C4",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -121,9 +124,25 @@ export default {
           "0 12px 24px rgba(44, 39, 56, .02), 0 24px 48px rgba(44, 39, 56, .04)",
         toastShadow:
           "rgba(0,0,0,0.4) 0px 2px 4px -1px,rgba(0,0,0,0.05) 0px 4px 5px 0px,rgba(0,0,0,0.07) 0px 1px 10px 0px",
+     
       },
       backgroundImage: {
         "home-gradient": "linear-gradient(hsla(0, 0%, 100%, 0), #fff 98%) ",
+      },
+    },
+    animation: {
+      "loading-bar": "loading 1s ease-in-out infinite",
+      "cart-loading": "cartLoading 1s ease-in-out infinite",
+    },
+    keyframes: {
+      loading: {
+        "0%": { transform: "translateX(-100%)" },
+        "100%": { transform: "translateX(100%)" },
+      },
+      cartLoading: {
+        '0%': {width: '0%'},
+        '50%': {width: '50%'},
+        '100%': {width: '100%'}
       },
     },
   },

@@ -1,4 +1,5 @@
 import { HomeCrumb } from "@/components/bread-crumb";
+import { CompareClear, CompareProducts } from "@/components/compare-products";
 import { Container } from "@/components/container";
 import { InfoHeader } from "@/components/div";
 import { Section } from "@/components/section";
@@ -11,16 +12,14 @@ export const metadata: Metadata = {
 };
 const ComparePage = () => {
   return (
-    <Container>
+    <Container className="pb-[58px]">
       <HomeCrumb paths={[{ name: "Сравнение товаров" }]} />
-      <Section className="mb-14 px-0 shadow-sectionShadow">
-        <InfoHeader className="mb-5">
+      <Section className="px-0  shadow-sectionShadow">
+        <InfoHeader className="mb-[1px] flex justify-between items-center">
           <InfoTitle>Сравнение товаров</InfoTitle>
+          <CompareClear />
         </InfoHeader>
-
-        <section className="p-6">
-          <h4 className="info-text mb-5">Добавьте товары для сравнения</h4>
-        </section>
+        <CompareProducts />
       </Section>
     </Container>
   );

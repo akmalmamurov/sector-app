@@ -28,17 +28,29 @@ export function getCatalogPath(
   }
   return [];
 }
-export const getCategoryTitle = (
+export const getTitleBySlug = (
   catalogData: CatalogData[],
-  slug?: string,
-  subSlug?: string
+  slug: string
 ): string | undefined => {
-  const subcatalogItem = slug ? findCatalogItem(catalogData, slug) : undefined;
-  const categoryItem =
-    subcatalogItem && subcatalogItem.categories && subSlug
-      ? (subcatalogItem.categories as CategoryData[]).find(
-          (cat) => cat.slug === subSlug
-        )
-      : undefined;
-  return categoryItem?.title;
+
+  const searchInItems = (items: (CatalogData | CategoryData)[]): string | undefined => {
+    for (const item of items) {
+      if (item.slug === slug) {
+        return item.title;
+      }
+      if ('subcatalogs' in item && Array.isArray(item.subcatalogs)) {
+        const found = searchInItems(item.subcatalogs);
+        if (found) return found;
+      }
+      if ('categories' in item && Array.isArray(item.categories)) {
+        const found = searchInItems(item.categories);
+        if (found) return found;
+      }
+    }
+    return undefined;
+  };
+
+  return searchInItems(catalogData);
 };
+
+

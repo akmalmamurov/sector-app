@@ -6,6 +6,7 @@ interface CategoryCardProps {
   category: PopularCategory;
 }
 export const CategoryCard = ({ category, catalogData }: CategoryCardProps) => {
+  
   const getSubcatalogSlug = (
     data: CatalogData[],
     targetSlug: string
@@ -38,7 +39,8 @@ export const CategoryCard = ({ category, catalogData }: CategoryCardProps) => {
           alt={category.title}
           width={150}
           height={100}
-          className="w-full h-full object-cover group-hover:scale-105 duration-300 ease-in-out"
+          style={{ transition: "transform 0.3s ease-out" }}
+          className="w-full h-full object-cover group-hover:scale-110"
         />
       </div>
       <div className="px-4 ">
@@ -47,7 +49,7 @@ export const CategoryCard = ({ category, catalogData }: CategoryCardProps) => {
         </p>
       </div>
       <div className="px-4">
-        <p className="text-sm font-normal text-darkSoul">100 товаров</p>
+        <p className="text-sm font-normal text-darkSoul">{category?.productCount} товаров</p>
       </div>
       <div className="bg-[#0054AE1F] w-[150px] h-[150px] rounded-full absolute -top-[38px] -left-[28px]"></div>
     </Link>

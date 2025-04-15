@@ -1,18 +1,15 @@
-import Image from "next/image";
-import { Check, ChevronUp, CircleAlert, Trash2Icon, X } from "lucide-react";
-import PriceFormatter from "../format-price/PriceFormatter";
-import { CopyIcon, HeartActiveIcon, HeartIcon } from "@/assets/icons";
-import { copyToClipboard } from "@/utils";
-import { Separator } from "../ui/separator";
-import useStore, { StoreItem } from "@/context/store";
-import { DOMAIN } from "@/constants";
-import { ConfirmModal } from "../modal";
-import { useConfirmModal } from "@/hooks";
-import { showSuccess } from "../toast/Toast";
+import { Check, CircleAlert, X } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { Controller, Control, FieldErrors, UseFormSetValue, UseFormWatch, } from "react-hook-form";
 
-interface Props {
-  city: string;
-  setCity: (city: string) => void;
+import useStore, { StoreItem } from "@/context/store";
+import { ConfirmModal } from "../modal";
+import { useCartLeft } from "@/hooks";
+import CartProducts from "./CartProducts";
+import { getRegion } from "@/api";
+import { OrderRequest } from "@/types";
+import { CartState } from "@/context/form-store";
+interface CartLeftProps {
   isAllChecked: boolean;
   toggleAllItems: () => void;
   cart: StoreItem[];
@@ -21,287 +18,115 @@ interface Props {
   selectedItems: string[];
   deleteCart: (id: string) => void;
   resetCart: () => void;
+  errors: FieldErrors<OrderRequest>;
+  control: Control<OrderRequest>;
+  watch: UseFormWatch<OrderRequest>;
+  setValue: UseFormSetValue<OrderRequest>;
+  cartForm: CartState | null;
 }
 
-const MyCartLeft = ({
-  city,
-  setCity,
-  isAllChecked,
-  toggleAllItems,
-  setQuantity,
-  cart,
-  toggleSingleItem,
-  selectedItems,
-  deleteCart,
-  resetCart,
-}: Props) => {
-  const { toggleFavorites, favorites } = useStore();
-  const {
-    isOpen: isConfirmOpen,
-    message,
-    openModal,
-    closeModal,
-    onConfirm,
-  } = useConfirmModal();
+const MyCartLeft: React.FC<CartLeftProps> = (props) => {
+  const {isAllChecked, toggleAllItems, setQuantity, cart, toggleSingleItem, selectedItems, 
+    deleteCart, resetCart, errors, control, setValue, watch, cartForm,} = props 
+  const { favorites } = useStore();
+  const { data: regionData = [] } = useQuery({ queryKey: ["region"], queryFn: getRegion, });
+  console.log(regionData);
+  const { isConfirmOpen, message, onConfirm, closeModal, handleDeleteAll, handleDeleteClick, } = useCartLeft({
+     cart, selectedItems, setValue, cartForm, resetCart, deleteCart, });
 
-  const handleDeleteAll = () => {
-    openModal("Вы уверены, что хотите удалить все товары из корзины?", () => {
-      resetCart();
-    });
-  };
-
-  const handleDeleteClick = (id: string) => {
-    openModal("Вы уверены, что хотите удалить товар из корзины?", () => {
-      deleteCart(id);
-    });
-  };
-
-  const isProductInList = (list: StoreItem[], product: StoreItem) =>
-    list.some((item) => item.id === product.id);
-
-  const handleToFavorites = (product: StoreItem) => {
-    if (isProductInList(favorites, product)) {
-      showSuccess("Удалено из избранного");
-    } else {
-      showSuccess("Добавлено в избранное");
-    }
-    toggleFavorites(product);
-  };
-
+  const cityValue = watch("city");
+  const productProps = { cart, handleDeleteClick, setQuantity, selectedItems, toggleSingleItem, favorites};
+  
   return (
     <div className="col-span-3">
-      <div className="space-y-6">
-        <div className="bg-white border shadow-sectionShadow py-[23px] px-[20px]">
-          <div className="flex items-center gap-2">
-            <h5 className="text-textColor text-base">
-              Выберите город доставки
-            </h5>
-            {city === "Ташкент" ? (
-              <div className="w-5 h-5 bg-green-600 rounded-full flex items-center justify-center">
-                <Check className="w-3 h-3 text-white" />
-              </div>
-            ) : (
-              <div className="flex items-center gap-2">
-                <span>
-                  <CircleAlert className="w-4 h-4 text-orangeSun" />
-                </span>
-                <p className="text-xs">
-                  Уточните ваш город, это необходимо для корректных расчётов
-                  способов доставки или самовывоза.
-                </p>
-              </div>
-            )}
-          </div>
-          <div className="mt-4 mb-2">
-            <input
-              type="text"
-              className="inputs py-2.5"
-              placeholder="Начните вводить название города"
-              value={city || ""}
-              onChange={(e) => setCity(e.target.value)}
-            />
-          </div>
-          <button
-            className={`px-[15px] h-[30px] flex items-center justify-center rounded-full text-xs ${
-              !city ? "bg-superSilver text-textColor" : "bg-cerulean text-white"
-            }`}
-            onClick={() => setCity("Ташкент")}
-          >
-            Ташкент
-            {city && (
-              <span
-                className="ml-1"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setCity("");
-                }}
-              >
-                <X className="w-4 h-4" />
-              </span>
-            )}
-          </button>
-        </div>
-        <div className="bg-white border shadow-sectionShadow py-[23px] px-[20px] text-textColor">
-          <div className="flex items-center justify-between">
+      <div className="bg-white border border-superSilver shadow-sectionShadow py-[23px] px-[20px]">
+        <div className="flex items-center gap-2">
+          <h5 className="text-textColor text-base">Выберите город доставки</h5>
+          {cityValue === "Ташкент" ? (
+            <div className="w-5 h-5 bg-green-600 rounded-full flex items-center justify-center">
+              <Check className="w-3 h-3 text-white" />
+            </div>
+          ) : (
             <div className="flex items-center gap-2">
-              <input
-                id="all-check"
-                type="checkbox"
-                checked={isAllChecked}
-                onChange={toggleAllItems}
-                className="bg-green-600 cursor-pointer w-[18px] h-[18px] checked:bg-green-600"
-              />
-              <label htmlFor="all-check" className="cursor-pointer">
-                выбрать все
-              </label>
-            </div>
-            <div>
-              <span
-                onClick={handleDeleteAll}
-                className="text-sm font-normal text-textColor cursor-pointer"
-              >
-                Очистить корзину
+              <span>
+                <CircleAlert className="w-4 h-4 text-orangeSun" />
               </span>
+              <p className="text-xs">
+                Уточните ваш город, это необходимо для корректных расчётов
+                способов доставки или самовывоза.
+              </p>
             </div>
+          )}
+        </div>
+        <div className="mt-4 mb-2 relative">
+          <Controller
+            name="city"
+            control={control}
+            rules={{ required: "Выберите город из предложенного списка" }}
+            render={({ field }) => (
+              <input
+                type="text"
+                className="inputs py-2.5 capitalize"
+                placeholder="Начните вводить название города "
+                value={field.value || ""}
+                onChange={field.onChange}
+              />
+            )}
+          />
+          {!cityValue?.length && errors.city && (
+            <p className="text-red-500 text-sm mt-1">{errors.city.message}</p>
+          )}
+        </div>
+        <button
+          type="button"
+          className={`px-[15px] h-[30px] flex items-center justify-center rounded-full text-xs ${
+            cityValue === "ташкент"
+              ? "bg-cerulean text-white"
+              : "bg-superSilver text-textColor"
+          }`}
+          onClick={() => setValue("city", "ташкент")}
+        >
+          Ташкент
+          {cityValue === "ташкент" && (
+            <span
+              className="ml-1"
+              onClick={(e) => {
+                e.stopPropagation();
+                setValue("city", "");
+              }}
+            >
+              <X className="w-4 h-4" />
+            </span>
+          )}
+        </button>
+      </div>
+
+      <div className="bg-white border-superSilver border shadow-sectionShadow py-[23px] px-[20px] text-textColor my-[23px]">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <input
+              id="all-check"
+              type="checkbox"
+              checked={isAllChecked}
+              onChange={toggleAllItems}
+              className="bg-green-600 cursor-pointer w-[18px] h-[18px] checked:bg-green-600"
+            />
+            <label htmlFor="all-check" className="cursor-pointer">
+              выбрать все
+            </label>
+          </div>
+          <div>
+            <span
+              onClick={handleDeleteAll}
+              className="text-sm font-normal text-textColor cursor-pointer"
+            >
+              Очистить корзину
+            </span>
           </div>
         </div>
-        {/* Cart map */}
-        {cart?.map((product) => {
-          const isFavorite = isProductInList(favorites, product);
-          return (
-            <div
-              key={product.id}
-              className="p-[15px] bg-white border shadow-sectionShadow text-textColor"
-            >
-              {/* Header */}
-              <div className="flex justify-between">
-                <input
-                  type="checkbox"
-                  checked={selectedItems.includes(product.id)}
-                  onChange={() => toggleSingleItem(product.id)}
-                />
-                <div className="flex h-[26px] items-center">
-                  <button
-                    onClick={() => handleToFavorites(product)}
-                    className="flex items-center gap-2 group"
-                  >
-                    <span className="text-xs group-hover:opacity-70 duration-200 ease-in-out">
-                      перенести в избранное
-                    </span>
-                    {isFavorite ? (
-                      <HeartActiveIcon className="text-dangerColor text-sm w-[18px] h-[18px] group-hover:opacity-70 duration-200 ease-in-out" />
-                    ) : (
-                      <HeartIcon className="text-textColor text-sm w-[18px] h-[18px] group-hover:opacity-70 duration-200 ease-in-out" />
-                    )}
-                  </button>
-                  <div className="w-[2px] h-full bg-superSilver mx-[15px]"></div>
-                  <button
-                    className="flex items-center gap-2 group"
-                    onClick={() => handleDeleteClick(product.id)}
-                  >
-                    <span className="text-xs group-hover:opacity-70 duration-200 ease-in-out">
-                      удалить из корзины
-                    </span>
-                    <span>
-                      <Trash2Icon className="w-[18px] h-[18px] group-hover:opacity-70 duration-200 ease-in-out" />
-                    </span>
-                  </button>
-                </div>
-              </div>
-              <Separator className="my-2" />
-              <div className="flex gap-2">
-                {/* Image */}
-                <div className="border w-[130px] h-[130px] border-superSilver">
-                  <Image
-                    src={`${DOMAIN}/${product.mainImage}`}
-                    alt={product.title}
-                    width={100}
-                    height={100}
-                    className="p-2 w-full h-full"
-                  />
-                </div>
-                <div className="w-full">
-                  <div className="flex flex-col gap-2">
-                    <div className="flex h-fit gap-[15px]">
-                      <p className="text-xs text-wasabiColor">
-                        {product.articul}
-                      </p>
-                      <span
-                        className="cursor-pointer text-explosiveGrey hover:text-cerulean hoverEffect"
-                        onClick={() =>
-                          copyToClipboard(
-                            product.articul,
-                            `Артикул ${product.articul} скопирован в буфер обмена`
-                          )
-                        }
-                      >
-                        <CopyIcon />
-                      </span>
-                    </div>
-                    <div className="flex h-fit gap-10 items-start justify-between w-full">
-                      <p className="text-base text-textColor">
-                        {product.title}
-                      </p>
-                      <span
-                        className="cursor-pointer text-explosiveGrey hover:text-cerulean hoverEffect"
-                        onClick={() =>
-                          copyToClipboard(
-                            product.title,
-                            "Наименование скопировано в буфер обмена"
-                          )
-                        }
-                      >
-                        <CopyIcon />
-                      </span>
-                    </div>
-                  </div>
-                  <div className="mt-[15px]">
-                    <div className="flex flex-col gap-2">
-                      <div className="flex justify-between">
-                        <div className="w-[90px] h-[42px] relative">
-                          <input
-                            type="number"
-                            value={product.quantity}
-                            className="w-[90px] h-[42px] text-center pr-3 border focus:outline-none text-textColor"
-                            onChange={(e) => {
-                              let value = Number(e.target.value);
-                              if (value > 9999) {
-                                value = 9999;
-                              }
-                              setQuantity(product.id, value);
-                            }}
-                          />
-                          <div className="absolute top-0 h-full right-[10px] flex flex-col justify-center">
-                            <span
-                              className="cursor-pointer"
-                              onClick={() =>
-                                setQuantity(
-                                  product.id,
-                                  Number(product.quantity) + 1
-                                )
-                              }
-                            >
-                              <ChevronUp strokeWidth={2.75} size={16} />
-                            </span>
-                            <span
-                              className="cursor-pointer"
-                              onClick={() =>
-                                setQuantity(
-                                  product.id,
-                                  Number(product.quantity) - 1
-                                )
-                              }
-                            >
-                              <ChevronUp
-                                size={16}
-                                strokeWidth={2.75}
-                                className="rotate-180"
-                              />
-                            </span>
-                          </div>
-                        </div>
-                        <div>
-                          <PriceFormatter
-                            amount={product.price}
-                            className="text-2xl text-textColor font-normal"
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        {product.inStock === "0" ? (
-                          <span>Под заказ</span>
-                        ) : (
-                          <p>{product.inStock} шт в наличии</p>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        })}
       </div>
+      {/* cart products */}
+      <CartProducts {...productProps} />
       <ConfirmModal
         isOpen={isConfirmOpen}
         message={message}

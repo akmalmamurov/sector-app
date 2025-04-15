@@ -67,7 +67,6 @@ export default function BrandList(props: BrandsClientProps) {
             })}
           </div>
         </div>
-        {/* Kirill belgilar */}
         <div>
           <div className="flex justify-center md:justify-start flex-wrap gap-2">
             {displayCyrillicLetters.map((letter) => {

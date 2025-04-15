@@ -36,6 +36,7 @@ const BottomNavbar = () => {
   const handleLogout = () => {
     logOut();
     setMenuOpen(false);
+    setIsOpen(false);
   };
 
   // Bg does not scroll when profile opened

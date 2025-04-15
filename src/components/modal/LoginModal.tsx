@@ -38,7 +38,9 @@ const formSchemaStep4 = z.object({
   optCode: z.string().min(4, "Пароль должен содержать минимум 4 символов"),
 });
 
-const LoginModal = ({ isOpen, handleOpen }: Props) => {
+
+export const LoginModal = ({ isOpen, handleOpen }: Props) => {
+  
   const [step, setStep] = useState(1);
 
   const formStep1 = useForm({

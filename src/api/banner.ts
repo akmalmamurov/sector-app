@@ -6,7 +6,7 @@ export const getBanner = async (queryParams: Record<string, string>) => {
     const res = await request.get(GET_BANNER, {
       params: queryParams
     });
-    return res.data.data;
+    return res.data.data || [];
   } catch (error) {
     console.log(error);
   }

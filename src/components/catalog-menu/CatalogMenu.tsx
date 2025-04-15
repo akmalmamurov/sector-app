@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, memo } from "react";
 import { Container } from "../container";
 import Link from "next/link";
 import { CloseIcon } from "@/assets/icons";
@@ -18,9 +18,11 @@ const CatalogMenu = ({
   catalogData,
 }: Props) => {
   const [hoveredParentIndex, setHoveredParentIndex] = useState<number>(0);
-  const [delayedHoveredParentIndex, setDelayedHoveredParentIndex] = useState<number>(0);
+  const [delayedHoveredParentIndex, setDelayedHoveredParentIndex] =
+    useState<number>(0);
   const menuRef = useRef<HTMLDivElement>(null);
 
+  
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
       if (
@@ -42,7 +44,7 @@ const CatalogMenu = ({
   useEffect(() => {
     const timer = setTimeout(() => {
       setDelayedHoveredParentIndex(hoveredParentIndex);
-    }, 300); 
+    }, 300);
     return () => clearTimeout(timer);
   }, [hoveredParentIndex]);
 
@@ -63,7 +65,7 @@ const CatalogMenu = ({
           className="w-full bg-white h-screen overflow-y-auto shadow-lg transition-all duration-300 transform"
         >
           <div className="flex h-full w-full">
-            <div className="w-[450px] xl:w-[537px] bg-cottonBall h-full py-6">
+            <div className="w-[450px] xl:w-[537px] bg-cottonBall h-full py-[10px]">
               <ul className="flex flex-col">
                 {catalogData?.map((item, parentIndex) => (
                   <Link
@@ -95,7 +97,9 @@ const CatalogMenu = ({
                     <ul className="grid grid-cols-3 gap-8">
                       {catalogData[delayedHoveredParentIndex]?.subcatalogs?.map(
                         (subCatalog, subIndex) => (
-                          <li key={`sub-${delayedHoveredParentIndex}-${subIndex}`}>
+                          <li
+                            key={`sub-${delayedHoveredParentIndex}-${subIndex}`}
+                          >
                             <Link
                               onClick={() => setMenuOpen(false)}
                               href={`/catalog/${subCatalog.slug}`}
@@ -141,4 +145,4 @@ const CatalogMenu = ({
   );
 };
 
-export default CatalogMenu;
+export default memo(CatalogMenu);

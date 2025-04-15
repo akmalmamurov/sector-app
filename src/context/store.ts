@@ -13,7 +13,12 @@ interface StoreState {
   cart: StoreItem[];
   compares: StoreItem[];
   selected: StoreItem[];
-  setAuth: () => void;
+  rowCol: boolean;
+  user: string | null;
+  isHydrated: boolean;
+  setHydrated: (value: boolean) => void;
+  setUser: (user: string | null) => void;
+  setAuth: (value: boolean) => void;
   setContact: (info: string) => void;
   toggleFavorites: (product: ProductData) => void;
   addToCart: (product: ProductData) => void;
@@ -30,26 +35,35 @@ interface StoreState {
   getGroupedItems: () => StoreItem[];
   logOut: () => void;
   clearDataAfterTimeout: () => void;
+  toggleRowCol: (value?: boolean) => void;
 }
 
 const useStore = create<StoreState>()(
   persist(
     (set, get) => ({
-      auth:
-        typeof window !== "undefined"
-          ? !!localStorage.getItem("sector-token")
-          : false,
+      auth: false,
+      isHydrated: false,
       contact: "",
       favorites: [],
       cart: [],
+      rowCol: false,
       compares: [],
       selected: [],
-      setAuth: () => set({ auth: true }),
+      user: null,
+      setHydrated: (value) => set({ isHydrated: value }),
+      setUser: (user) => set({ user }),
+      setAuth: (value) => set({ auth: value }),
+      toggleRowCol: (value?: boolean) =>
+        set((state) => ({
+          rowCol: typeof value === "boolean" ? value : !state.rowCol,
+        })),
+
       selectedCardsList: (products) => {
         set(() => ({
           selected: products,
         }));
       },
+
       setContact: (info) => set({ contact: info }),
       toggleFavorites: (product) => {
         set((state) => {
@@ -66,21 +80,30 @@ const useStore = create<StoreState>()(
         });
       },
       resetFavorites: () => set({ favorites: [] }),
-      addToCart: (product) => {
-        set((state) => ({
-          cart: state.cart
-            .map((item) =>
-              item.id === product.id
-                ? { ...item, quantity: (item.quantity || 1) + 1 }
-                : item
-            )
-            .concat(
-              state.cart.some((item) => item.id === product.id)
-                ? []
-                : [{ ...product, quantity: 1 }]
-            ),
-        }));
-      },
+      addToCart: (product: ProductData) =>
+        set((state) => {
+          const existingProduct = state.cart.find(
+            (item) => item.id === product.id
+          );
+          if (existingProduct) {
+            return {
+              cart: state.cart.map((item) =>
+                item.id === product.id
+                  ? {
+                      ...item,
+                      quantity: (item.quantity || 1) + (product.quantity || 1),
+                    }
+                  : item
+              ),
+            };
+          }
+          return {
+            cart: [
+              ...state.cart,
+              { ...product, quantity: product.quantity || 1 },
+            ],
+          };
+        }),
       setQuantity: (id, quantity) => {
         set((state) => ({
           cart: state.cart.map((item) =>
@@ -146,8 +169,22 @@ const useStore = create<StoreState>()(
     {
       name: "sector-app",
       storage: createJSONStorage(() => localStorage),
+
+      onRehydrateStorage: () => (state) => {
+        const token = localStorage.getItem("sector-token");
+        if (token) state?.setAuth(true);
+        state?.setHydrated(true);
+      },
     }
   )
 );
 
 export default useStore;
+
+export const hydrateStore = () => {
+  useStore.persist.rehydrate();
+
+  if (typeof window !== "undefined" && localStorage.getItem("sector-token")) {
+    useStore.setState({ auth: true });
+  }
+};

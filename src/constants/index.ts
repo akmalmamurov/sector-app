@@ -9,4 +9,11 @@ export const GET_PRODUCTS = "/user/product/all"
 export const GET_PROMOTION = "/user/promotion/all";
 export const GET_PRODUCT_CATEGORY = "/user/product/by-slug"
 export const GET_PRODUCT_SINGLE = "/user/product/by-slug" 
-
+export const GET_PROMOTION_SINGLE = "/user/promotion";
+export const GET_REGION = "/user/region/all"
+export const GET_ME = "/user/auth/me"
+export const GET_PRODUCT_FILTER = "/user/filter";
+export const CREATE_AGENT = "/user/kontragent/create"
+export const GET_AGENT = "/user/kontragent/all"
+export const UPDATE_AGENT = "/user/kontragent/update"
+export const DELETE_AGENT = "/user/kontragent/delete"

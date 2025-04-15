@@ -6,5 +6,6 @@ export const getPopular = async () => {
     return res.data;
   } catch (error) {
     console.log(error);
+    return [];
   }
 };

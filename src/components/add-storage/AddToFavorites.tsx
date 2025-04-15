@@ -19,7 +19,7 @@ export const AddToFavorites = ({
     if (isFavorite) {
       showSuccess(`Удалено из избранного`);
     } else {
-   showSuccess(`Добавлено в избранное`);
+      showSuccess(`Добавлено в избранное`);
     }
     toggleFavorites(product);
   };

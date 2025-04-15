@@ -41,7 +41,7 @@ const LoginPassword = ({ handleClose, formMethods, fullClose }: Props) => {
       );
       if (response.statusText === "OK") {
         fullClose();
-        setAuth();
+        setAuth(true);
         localStorage.setItem("sector-token", response.data.token);
         showSuccess("Вы успешно вошли в систему!");
       }

@@ -34,13 +34,13 @@ export const ConfirmModal = ({
                 if (onConfirm) onConfirm();
                 closeModal();
               }}
-              className="w-[108px] py-5 bg-dangerColor hover:bg-dangerColor text-white flex justify-center items-center font-semibold hover:opacity-80 duration-200 ease-in-out rounded-none"
+              className="w-[108px] h-10  bg-dangerColor hover:bg-dangerColor text-white flex justify-center items-center font-semibold hover:opacity-80 duration-200 ease-in-out rounded-none"
             >
               Удалить
             </Button>
             <Button
               onClick={closeModal}
-              className="w-[108px] py-5 border border-wasabiColor bg-white text-wasabiColor flex justify-center items-center font-semibold hover:border-cerulean hover:text-cerulean duration-200 ease-in-out rounded-none hover:bg-white"
+              className="w-[108px] h-10 border border-wasabiColor bg-white text-wasabiColor flex justify-center items-center font-semibold hover:border-cerulean hover:text-cerulean duration-200 ease-in-out rounded-none hover:bg-white"
             >
               Отмена
             </Button>

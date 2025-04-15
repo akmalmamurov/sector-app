@@ -45,13 +45,13 @@ const ProductTabs = () => {
     >
       <TabsList
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        className="flex gap-4 border-b h-[54px] justify-between bg-white p-0 overflow-x-auto whitespace-nowrap "
+        className="flex gap-4 border-b h-[54px] justify-between bg-white p-0 overflow-x-auto whitespace-nowrap rounded-none"
       >
         {tabs.map((tab) => (
           <TabsTrigger
             key={tab.key}
             value={tab.key}
-            className="relative font-medium text-base data-[state=active]:bg-white w-[208px] text-gray-600 rounded-none data-[state=active]:text-cerulean data-[state=active]:shadow-none transition-all before:absolute before:-bottom-[15px] before:left-0 before:w-full before:h-[5px] before:bg-gradient-to-r before:from-blue-400 before:to-cerulean before:opacity-0 data-[state=active]:before:opacity-100 mb-[9px]"
+            className="relative font-medium text-base data-[state=active]:bg-white w-[208px] text-gray-600 rounded-none data-[state=active]:text-cerulean data-[state=active]:shadow-none transition-all before:absolute before:-bottom-[15px]  before:w-full before:block before:h-[5px] before:bg-gradient-to-r before:from-blue-400 before:to-cerulean before:opacity-0 data-[state=active]:before:opacity-100 mb-[9px]"
           >
             {tab.label}
           </TabsTrigger>

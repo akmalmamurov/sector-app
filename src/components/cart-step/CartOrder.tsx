@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import ArrowLeftLongIcon from "@/assets/icons/ArrowLeftLongIcon";
 import useStore from "@/context/store";
 import OrderCart from "../order-cart/OrderCart";
@@ -23,7 +23,6 @@ import { useState } from "react";
 import OrderFinish from "./OrderFinish";
 
 export const CartOrder = ({
-  step,
   onPrevStep,
 }: {
   step: number;
@@ -32,7 +31,7 @@ export const CartOrder = ({
   const { selected } = useStore();
   const [isFinish, setIsFinish] = useState<boolean>(false);
   console.log(isFinish);
-  
+
   return (
     <>
       {!isFinish ? (
@@ -243,11 +242,11 @@ export const CartOrder = ({
           </div>
 
           <div className="col-span-1">
-            <OrderCart step={step} selectedCards={selected} />
+            <OrderCart selectedCards={selected} />
           </div>
         </div>
       ) : (
-        <OrderFinish />
+        <OrderFinish/>
       )}
     </>
   );
