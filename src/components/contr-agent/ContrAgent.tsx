@@ -2,7 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { updateAgent } from "@/api";
-import { CheckIcon, DeleteSmIcon, EditIcon, ShippingIcon, } from "@/assets/icons";
+import {
+  CheckIcon,
+  DeleteSmIcon,
+  EditIcon,
+  ShippingIcon,
+} from "@/assets/icons";
 import { ContrAgentData, OrderRequest } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { showError, showSuccess } from "../toast/Toast";
@@ -12,14 +17,21 @@ import request from "@/services";
 import { DELETE_AGENT } from "@/constants";
 import { AgentAdressModal } from "../modal";
 
-export const ContrAgent = ({ contrAgents, setValue, }: { contrAgents: ContrAgentData[]; setValue: UseFormSetValue<OrderRequest>; }) => {
+export const ContrAgent = ({
+  contrAgents,
+  setValue,
+}: {
+  contrAgents: ContrAgentData[];
+  setValue?: UseFormSetValue<OrderRequest>;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
   const queryClient = useQueryClient();
+console.log(contrAgents);
 
   useEffect(() => {
     const fav = contrAgents.find((c) => c.isFavorite);
-    if (fav) {
+    if (fav && setValue) {
       setValue("contrAgentId", fav.id);
     }
   }, [contrAgents, setValue]);
@@ -28,7 +40,9 @@ export const ContrAgent = ({ contrAgents, setValue, }: { contrAgents: ContrAgent
     try {
       await updateAgent(id);
       queryClient.invalidateQueries({ queryKey: ["contragents"] });
-      setValue("contrAgentId", id);
+      if (setValue) {
+        setValue("contrAgentId", id);
+      }
     } catch (error) {
       console.error(error);
       showError("Ошибка обновления контрагента");
