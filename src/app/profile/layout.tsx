@@ -31,7 +31,7 @@ export default function ProfileLayout({
             }}
             className="overflow-x-auto whitespace-nowrap border-b-[0.5px] border-superSilver"
           >
-            <div className="grid grid-flow-col auto-cols-max">
+            <div className="grid grid-cols-5">
               {tabs.map((tab) => {
                 const isActive = pathname === tab.href;
                 return (
