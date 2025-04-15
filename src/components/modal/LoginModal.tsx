@@ -39,7 +39,6 @@ const formSchemaStep4 = z.object({
 });
 
 const LoginModal = ({ isOpen, handleOpen }: Props) => {
-  
   const [step, setStep] = useState(1);
 
   const formStep1 = useForm({
@@ -90,7 +89,7 @@ const LoginModal = ({ isOpen, handleOpen }: Props) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpen}>
-      <DialogContent className="sm:max-w-[500px] rounded-none sm:rounded-none p-0">
+      <DialogContent className="w-[100%] h-[100vh] sm:h-auto sm:max-w-[500px] rounded-none sm:rounded-none p-0">
         {step === 1 && (
           <Login
             handleClose={handleClose}
