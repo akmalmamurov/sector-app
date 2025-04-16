@@ -15,7 +15,7 @@ import LoginModal from "../modal/LoginModal";
 import { X } from "lucide-react";
 import { profileMenuData } from "@/data";
 import { usePathname } from "next/navigation";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getUser } from "@/api";
 import { ContrAgentModal } from "../modal";
 
@@ -49,7 +49,6 @@ const BottomNavbar = () => {
     setMenuOpen(false);
   };
 
-  // Bg does not scroll when profile opened
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = "hidden";
