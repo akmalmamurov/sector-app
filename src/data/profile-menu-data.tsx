@@ -26,6 +26,9 @@ export const profileMenuData = [
     link: "/profile/favorites",
     icon: <HeartIcon className="w-[17px] h-[17px]" />,
   },
-
- 
+  // {
+  //   name: "Покупайте как юрлицо",
+  //   link: "/profile/favorites",
+  //   icon: <HeartIcon className="w-[17px] h-[17px]" />,
+  // },
 ];

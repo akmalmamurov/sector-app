@@ -30,13 +30,14 @@ export default function RootLayout({
           <Providers>
             <Header />
             {children}
+            <div className="lg:hidden flex">
+              <BottomNavbar />
+            </div>
           </Providers>
           <div className="lg:block hidden">
             <Sidebar />
           </div>
-          <div className="lg:hidden flex">
-            <BottomNavbar />
-          </div>
+
           <Toaster
             position="top-right"
             containerStyle={{

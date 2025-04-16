@@ -10,16 +10,27 @@ import {
   korzinaNavBottom,
 } from "@/assets/images";
 import useStore from "@/context/store";
-import { UserIcon } from "@/assets/icons";
+import { MenuLegalIcon, UserIcon } from "@/assets/icons";
 import LoginModal from "../modal/LoginModal";
 import { X } from "lucide-react";
 import { profileMenuData } from "@/data";
+import { usePathname } from "next/navigation";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { getUser } from "@/api";
+import { ContrAgentModal } from "../modal";
 
 const BottomNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const { auth, logOut } = useStore();
+  const [modalOpen, setModalOpen] = useState(false);
+  const pathName = usePathname();
+  const addModal = pathName === "/profile/contractors";
+  const { data: userData = [] } = useQuery({
+    queryKey: ["user"],
+    queryFn: getUser,
+  });
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -36,7 +47,6 @@ const BottomNavbar = () => {
   const handleLogout = () => {
     logOut();
     setMenuOpen(false);
-    setIsOpen(false);
   };
 
   // Bg does not scroll when profile opened
@@ -82,9 +92,9 @@ const BottomNavbar = () => {
                     </button>
                   </div>
                   <div className="flex flex-col justify-center items-center pt-7 mb-2">
-                    <h4 className="text-textColor text-lg">Ali Valiyev</h4>
+                    <h4 className="text-textColor text-lg">{userData?.name}</h4>
                     <p className="text-textColor text-sm opacity-70">
-                      alivaliyev@gmail.com
+                      {userData?.email}
                     </p>
                   </div>
 
@@ -92,7 +102,7 @@ const BottomNavbar = () => {
                   <div className="mt-[15px] mb-5 border-t mx-[10%] ">
                     <div className="bg-[#f8f8f8] border flex justify-between items-center py-4 px-2 mt-3">
                       <Link className="text-sm pl-4 text-merlin" href="/">
-                        Aliyev Vali
+                        {userData?.name}
                       </Link>
                       <svg
                         fill="none"
@@ -127,6 +137,35 @@ const BottomNavbar = () => {
                             </div>
                           </Link>
                         ))}
+                        {!addModal ? (
+                          <Link
+                            href={"/profile/contractors#add_contractor"}
+                            className="bg-white hover:bg-superSilver h-10 w-full flex items-center duration-200 ease-in-out"
+                          >
+                            <div className="flex items-center gap-[15px] text-xs px-[15px]">
+                              <span className="w-[17px] h-[17px] text-merlin">
+                                <MenuLegalIcon />
+                              </span>
+                              <span className="header-menu-link text-merlin">
+                                Покупайте как юрлицо
+                              </span>
+                            </div>
+                          </Link>
+                        ) : (
+                          <button
+                            onClick={() => setModalOpen(true)}
+                            className="bg-white w-full hover:bg-superSilver h-10 flex items-center duration-200 ease-in-out"
+                          >
+                            <div className="flex items-center gap-[15px] text-xs px-[15px]">
+                              <span className="w-[17px] h-[17px] text-merlin">
+                                <MenuLegalIcon />
+                              </span>
+                              <span className="header-menu-link text-merlin">
+                                Покупайте как юрлицо
+                              </span>
+                            </div>
+                          </button>
+                        )}
                       </ul>
                     </div>
 
@@ -154,6 +193,10 @@ const BottomNavbar = () => {
         </button>
       )}
       <LoginModal isOpen={isOpen} handleOpen={() => setIsOpen(!isOpen)} />
+      <ContrAgentModal
+        isOpen={modalOpen}
+        toggleOpen={() => setModalOpen(!modalOpen)}
+      />
     </div>
   );
 };
