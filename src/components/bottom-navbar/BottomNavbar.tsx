@@ -16,8 +16,20 @@ import { X } from "lucide-react";
 import { profileMenuData } from "@/data";
 import { usePathname } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import { getUser } from "@/api";
+import { getAgent, getUser } from "@/api";
 import { ContrAgentModal } from "../modal";
+
+type ContrAgentData = {
+  id: string;
+  name: string;
+  inn: string;
+  oked: string;
+  isFavorite: boolean;
+  legalAddress: string;
+  address: any[]; // (you can define this too later)
+  ownershipForm: string;
+  [key: string]: any; // optional catch-all
+};
 
 const BottomNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,6 +43,25 @@ const BottomNavbar = () => {
     queryKey: ["user"],
     queryFn: getUser,
   });
+
+  // ContorAgents
+  const { data: contrAgents = [] } = useQuery<ContrAgentData[]>({
+    queryKey: ["contragents"],
+    queryFn: async () => {
+      const res = await getAgent();
+      return Array.isArray(res) ? res : [];
+    },
+  });
+
+  const favoriteAgent = contrAgents.find((agent) => agent.isFavorite === true);
+
+  useEffect(() => {
+    console.log("✅ contrAgents:", contrAgents);
+    console.log(
+      "✅ favoriteAgent:",
+      contrAgents.find((a) => a.isFavorite)
+    );
+  }, [contrAgents]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -100,9 +131,17 @@ const BottomNavbar = () => {
                   {/* content */}
                   <div className="mt-[15px] mb-5 border-t mx-[10%] ">
                     <div className="bg-[#f8f8f8] border flex justify-between items-center py-4 px-2 mt-3">
-                      <Link className="text-sm pl-4 text-merlin" href="/">
-                        {userData?.name}
-                      </Link>
+                      {}
+                      <div>
+                        <Link className="text-sm pl-4 text-merlin" href="/">
+                          {favoriteAgent?.name ?? userData?.name}
+                        </Link>
+                        {favoriteAgent?.inn && (
+                          <p className="text-xs pl-4 opacity-70">
+                            ИНН {favoriteAgent.inn}
+                          </p>
+                        )}
+                      </div>
                       <svg
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -172,7 +211,7 @@ const BottomNavbar = () => {
                     <div className="pt-[5px] py-[5px] px-[15px] flex justify-center items-center">
                       <button
                         onClick={handleLogout}
-                        className="text-dangerColor hover:opacity-70 duration-100 ease-in-out w-full"
+                        className="text-merlin hover:opacity-70 duration-100 ease-in-out "
                       >
                         Выход
                       </button>
