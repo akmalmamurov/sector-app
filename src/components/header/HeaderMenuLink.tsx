@@ -1,7 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { CartIcon, CompareIcon, CompareSucessIcon, DiscountIcon, HeartActiveIcon, HeartIcon, UserIcon, } from "@/assets/icons";
+import {
+  CartIcon,
+  CompareIcon,
+  CompareSucessIcon,
+  DiscountIcon,
+  HeartActiveIcon,
+  HeartIcon,
+  UserIcon,
+} from "@/assets/icons";
 import useStore from "@/context/store";
 import LoginModal from "../modal/LoginModal";
 import { ProfileMenu } from "../menu";
@@ -9,8 +17,9 @@ import { ProfileMenu } from "../menu";
 const HeaderMenuLink = () => {
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => setIsOpen(!isOpen);
-  const { favorites, cart, compares, auth,setAuth } = useStore();
+  const { favorites, cart, compares, auth, setAuth } = useStore();
   const [isMounted, setIsMounted] = useState(false);
+
   useEffect(() => {
     setIsMounted(true);
     const token = localStorage.getItem("sector-token");

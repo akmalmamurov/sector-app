@@ -1,4 +1,3 @@
-// components/YandexMap.tsx
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -10,18 +9,15 @@ import Link from "next/link";
 export default function YandexMap() {
   const center: [number, number] = [41.271782, 69.197833];
 
-  // Ish kunlari va soatlari
-  const workDays = [1, 2, 3, 4, 5]; // 1=Mon … 5=Fri
+  const workDays = [1, 2, 3, 4, 5];
   const openingHour = 9;
   const closingHour = 18;
 
-  // Holatni saqlash uchun state
   const [nowUz, setNowUz] = useState<Date>(() => {
     const now = new Date();
     return new Date(now.getTime() + 5 * 60 * 60 * 1000);
   });
 
-  // Har 1 daqiqada yangilab turamiz
   useEffect(() => {
     const timer = setInterval(() => {
       const now = new Date();
@@ -89,7 +85,7 @@ export default function YandexMap() {
               </span>
             </div>
             <div>
-                <p className="text-sm text-weekColor">Открыто ещё</p>
+              <p className="text-sm text-weekColor">Открыто ещё</p>
               <span
                 className={`text-sm font-medium ${
                   isOpen ? "text-greenLight" : "text-red-500"
@@ -106,7 +102,11 @@ export default function YandexMap() {
 
       {/* Правая колонка с картой */}
       <div className="col-span-2 h-[400px]">
-        <YMaps>
+        <YMaps
+          query={{
+            apikey: process.env.NEXT_PUBLIC_YANDEX_API_KEY,
+          }}
+        >
           <Map
             defaultState={{ center, zoom: 16 }}
             width="100%"

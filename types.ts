@@ -23,6 +23,7 @@ export interface PopularCategory {
   path: string | StaticImageData;
   slug: string;
   title: string;
+  productCount: number;
   popularCategory: {
     id: string;
   };

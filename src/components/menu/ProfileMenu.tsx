@@ -2,22 +2,25 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { X } from "lucide-react";
 
-import { UserIcon } from "@/assets/icons";
+import { MenuLegalIcon, UserIcon } from "@/assets/icons";
 import { profileMenuData } from "@/data";
 import useStore from "@/context/store";
 import { useQuery } from "@tanstack/react-query";
 import { getUser } from "@/api";
+import { usePathname } from "next/navigation";
+import { ContrAgentModal } from "../modal";
 
 export const ProfileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const { logOut } = useStore();
   const { data: userData = [] } = useQuery({
     queryKey: ["user"],
     queryFn: getUser,
   });
-  
-
+  const pathName = usePathname();
+  const addModal = pathName === "/profile/contractors";
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -82,6 +85,35 @@ export const ProfileMenu = () => {
                     </div>
                   </Link>
                 ))}
+                {!addModal ? (
+                  <Link
+                    href={"/profile/contractors#add_contractor"}
+                    className="bg-white hover:bg-superSilver h-10 flex items-center duration-200 ease-in-out"
+                  >
+                    <div className="flex items-center gap-[15px] text-xs px-[15px]">
+                      <span className="w-[17px] h-[17px]">
+                        <MenuLegalIcon />
+                      </span>
+                      <span className="header-menu-link">
+                        Покупайте как юрлицо
+                      </span>
+                    </div>
+                  </Link>
+                ) : (
+                  <button
+                    onClick={() => setModalOpen(true)}
+                    className="bg-white hover:bg-superSilver h-10 flex items-center duration-200 ease-in-out"
+                  >
+                    <div className="flex items-center gap-[15px] text-xs px-[15px]">
+                      <span className="w-[17px] h-[17px]">
+                        <MenuLegalIcon />
+                      </span>
+                      <span className="header-menu-link">
+                        Покупайте как юрлицо
+                      </span>
+                    </div>
+                  </button>
+                )}
               </ul>
             </div>
             {/* logout */}
@@ -96,6 +128,7 @@ export const ProfileMenu = () => {
           </div>
         </div>
       )}
+      <ContrAgentModal isOpen={modalOpen} toggleOpen={() => setModalOpen(!modalOpen)}/>
     </div>
   );
 };

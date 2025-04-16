@@ -2,7 +2,6 @@ import {
   HeartIcon,
   MenuContractorsIcon,
   MenuIssuesIcon,
-  MenuLegalIcon,
   MenuOrderIcon,
 } from "@/assets/icons";
 
@@ -27,10 +26,9 @@ export const profileMenuData = [
     link: "/profile/favorites",
     icon: <HeartIcon className="w-[17px] h-[17px]" />,
   },
-  {
-    name: "Покупайте как юрлицо",
-    link: "/profile/contractors#add_contractor",
-    icon: <MenuLegalIcon />,
-  },
- 
+  // {
+  //   name: "Покупайте как юрлицо",
+  //   link: "/profile/favorites",
+  //   icon: <HeartIcon className="w-[17px] h-[17px]" />,
+  // },
 ];

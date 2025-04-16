@@ -26,9 +26,10 @@ import formStore from "@/context/form-store";
 const CartContactPage = () => {
   const { selected } = useStore();
   const [phone, setPhone] = useState("+998 __ ___ ____");
+  const [search, setSearch] = useState("");
   const { data: agentsData = [] } = useQuery({
-    queryKey: ["contragents"],
-    queryFn: getAgent,
+    queryKey: ["contragents",search],
+    queryFn: ()=> getAgent(search),
   });
   const contrAgents = agentsData?.kontragents || [];
   const { addContactForm } = formStore();
@@ -91,6 +92,8 @@ const CartContactPage = () => {
                 type="text"
                 placeholder="Поиск контрагента"
                 className="pr-10 text-base h-[41px] rounded-none"
+                onChange={(e) => setSearch(e.target.value)}
+                value={search}
               />
               <SearchIcon
                 color="#333333"
