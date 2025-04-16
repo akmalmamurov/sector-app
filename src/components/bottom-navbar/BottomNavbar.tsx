@@ -18,18 +18,9 @@ import { usePathname } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { getAgent, getUser } from "@/api";
 import { ContrAgentModal } from "../modal";
+import { ContrAgentData } from "@/types";
 
-type ContrAgentData = {
-  id: string;
-  name: string;
-  inn: string;
-  oked: string;
-  isFavorite: boolean;
-  legalAddress: string;
-  address: any[]; // (you can define this too later)
-  ownershipForm: string;
-  [key: string]: any; // optional catch-all
-};
+
 
 const BottomNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
