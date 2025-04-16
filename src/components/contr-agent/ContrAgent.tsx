@@ -44,7 +44,8 @@ export const ContrAgent = ({ contrAgents, setValue, }: { contrAgents: ContrAgent
       showError("Ошибка обновления контрагента");
     }
   };
-
+  console.log(contrAgents);
+  
   return (
     <>
       {contrAgents?.map((item) => (
@@ -67,7 +68,7 @@ export const ContrAgent = ({ contrAgents, setValue, }: { contrAgents: ContrAgent
               onClick={toggleOpen}
               className="border-b border-dashed pb-[2px] text-xs text-cerulean border-cerulean cursor-pointer"
             >
-              Адреса отгрузки: 0
+              Адреса отгрузки: {item.address.length}
             </span>
           </div>
 
