@@ -187,10 +187,10 @@ export interface AgentAdressRequest {
   district: string;
   street: string;
   house: string;
-  flat?: string;
+  apartment?: string;
   index?: string;
   comment?: string;
-  settings: boolean;
+  isMain: boolean;
 
 }
 export interface DeliveryRequest{

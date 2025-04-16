@@ -30,6 +30,7 @@ export const ContrAgent = ({
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
   const queryClient = useQueryClient();
+console.log(contrAgents);
 
   useEffect(() => {
     const fav = contrAgents.find((c) => c.isFavorite);

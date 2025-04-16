@@ -89,6 +89,8 @@ export const AgentAdressModal: React.FC<Props> = ({
         },
       });
       const { data } = response.data;
+      console.log(data);
+
       if (step === 1 && data.results.length > 1) {
         setResults(data.results);
       } else {
@@ -111,13 +113,13 @@ export const AgentAdressModal: React.FC<Props> = ({
 
   const handleClick = (value: Result) => {
     setStep(2);
-    setValue("fullAddress", value.formatted_address);
-    setValue("country", value.country);
-    setValue("region", value.region);
-    setValue("district", value.district ? value.district : "-");
-    setValue("street", value.street ? value.street : "-");
+    setValue("fullAddress", value.formatted_address,{shouldValidate: true});
+    setValue("country", value.country,{shouldValidate: true});
+    setValue("region", value.region,{shouldValidate: true});
+    setValue("district", value?.description?.split(",")[0]?.trim() || "-",{shouldValidate: true});
+    setValue("street", value.street ? value.street : "-",{shouldValidate: true});
     setValue("index", value.postal_code);
-    setValue("house", value.apartment ? value.apartment : "-");
+    setValue("house", value.apartment ? value.apartment : "-",{shouldValidate: true});
     setResults([]);
   };
 
@@ -221,7 +223,7 @@ export const AgentAdressModal: React.FC<Props> = ({
               <div className="grid grid-cols-2 gap-[30px]">
                 <div>
                   <Label
-                    htmlFor="cityTown"
+                    htmlFor="district"
                     className="text-textColor font-normal text-sm flex gap-1 pb-2"
                   >
                     Город / Населенный пункт
@@ -281,13 +283,13 @@ export const AgentAdressModal: React.FC<Props> = ({
                 </div>
                 <div>
                   <Label
-                    htmlFor="flat"
+                    htmlFor="apartment"
                     className="text-textColor font-normal text-sm flex gap-1 pb-2"
                   >
                     Квартира/Офис
                   </Label>
                   <AgentAdressInput
-                    name="flat"
+                    name="apartment"
                     register={register}
                     required={false}
                   />
@@ -323,12 +325,12 @@ export const AgentAdressModal: React.FC<Props> = ({
             </div>
             <div className="mt-[30px] mb-[15px] flex gap-[7px] items-center">
               <Controller
-                name="settings"
+                name="isMain"
                 control={control}
                 defaultValue={true}
                 render={({ field: { onChange, value } }) => (
                   <Checkbox
-                    id="settings"
+                    id="isMain"
                     checked={value}
                     onCheckedChange={onChange}
                     className="w-[18px] h-[18px] rounded-none data-[state=checked]:bg-greenLight data-[state=checked]:border-greenLight data-[state=checked]:text-white"
@@ -336,7 +338,7 @@ export const AgentAdressModal: React.FC<Props> = ({
                 )}
               />
               <label
-                htmlFor="settings"
+                htmlFor="isMain"
                 className="leading-[18px] flex flex-col text-xs text-textColor"
               >
                 По умолчанию
