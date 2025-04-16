@@ -59,7 +59,7 @@ export const ContrAgentModal: React.FC<Props> = ({ isOpen, toggleOpen }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={toggleOpen}>
-      <DialogContent className="p-0 sm:rounded-none border-none max-w-[900px]">
+      <DialogContent className="p-0 sm:rounded-none border-none max-w-[900px] overflow-y-scroll max-h-[95vh]">
         <div className="flex justify-between p-6 border-b border-superSilver">
           <DialogTitle className="w-fit text-textColor text-lg leading-[27px] font-normal">
             Добавление контрагента

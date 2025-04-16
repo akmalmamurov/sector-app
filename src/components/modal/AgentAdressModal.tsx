@@ -10,14 +10,31 @@ import { AgentAdressRequest } from "@/types";
 import { Label } from "../ui/label";
 
 import { AgentAdressInput, ErrorMessage } from "../form";
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Checkbox } from "../ui/checkbox";
+import request from "@/services";
+import { CREATE_AGENT_ADDRESS, GET_ADDRESS } from "@/constants";
+import { showError } from "../toast/Toast";
+import { useQueryClient } from "@tanstack/react-query";
+import { showSuccess } from "../toast/Toast";
 
 interface Props {
   isOpen: boolean;
   toggleOpen: () => void;
   name: string;
   contrAgentId: string;
+}
+
+interface Result {
+  city: string;
+  country: string;
+  description: string;
+  district: string;
+  formatted_address: string;
+  region: string;
+  street: string;
+  postal_code: string;
+  apartment: string;
 }
 
 export const AgentAdressModal: React.FC<Props> = ({
@@ -31,22 +48,82 @@ export const AgentAdressModal: React.FC<Props> = ({
     register,
     control,
     reset,
+    setValue,
+    watch,
     formState: { errors, isValid },
   } = useForm<AgentAdressRequest>({
     mode: "onChange",
+    defaultValues: {
+      fullAddress: "",
+      country: "",
+      region: "",
+      district: "",
+      street: "",
+      index: "",
+    },
   });
+  const [results, setResults] = useState<Result[]>([]);
+  const [step, setStep] = useState(1);
+  const queryClient = useQueryClient();
   const onSubmit = async (data: AgentAdressRequest) => {
-    const payload = { ...data, contrAgentId };
-    console.log(payload);
+    console.log(data);
+    try {
+      await request.post(`${CREATE_AGENT_ADDRESS}/${contrAgentId}`, data);
+      queryClient.invalidateQueries({ queryKey: ["contragents"] });
+      toggleOpen();
+      reset();
+      showSuccess("Адрес успешно добавлен");
+    } catch (error) {
+      console.log(error);
+      showError("Ошибка добавления адреса");
+    }
   };
 
+  const fullAddressWatch = watch("fullAddress");
+
+  const getAddress = useCallback(async () => {
+    try {
+      const response = await request.get(GET_ADDRESS, {
+        params: {
+          name: fullAddressWatch,
+        },
+      });
+      const { data } = response.data;
+      if (step === 1 && data.results.length > 1) {
+        setResults(data.results);
+      } else {
+        setResults([]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [fullAddressWatch, step]);
+
+  useEffect(() => {
+    if (fullAddressWatch && fullAddressWatch.trim() !== "") {
+      setStep(1);
+      getAddress();
+    }
+  }, [fullAddressWatch, getAddress]);
   useEffect(() => {
     reset();
   }, [isOpen, reset]);
 
+  const handleClick = (value: Result) => {
+    setStep(2);
+    setValue("fullAddress", value.formatted_address);
+    setValue("country", value.country);
+    setValue("region", value.region);
+    setValue("district", value.district ? value.district : "-");
+    setValue("street", value.street ? value.street : "-");
+    setValue("index", value.postal_code);
+    setValue("house", value.apartment ? value.apartment : "-");
+    setResults([]);
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={toggleOpen}>
-      <DialogContent className="p-0 sm:rounded-none border-none max-w-[900px]">
+      <DialogContent className="p-0 sm:rounded-none border-none max-w-[900px] bg-white overflow-y-scroll max-h-[95vh]">
         <div className="flex justify-between p-6 border-b border-superSilver">
           <DialogTitle className="w-fit text-textColor text-lg leading-[27px] font-normal">
             Адреса {name}
@@ -69,6 +146,7 @@ export const AgentAdressModal: React.FC<Props> = ({
               <AgentAdressInput
                 name="fullAddress"
                 required
+                autoComplete="off"
                 register={register}
                 error={errors.fullAddress}
                 placeholder="г. Ташкент, Мирабадский район, Инокоабад МФЙ, ул. Инокобод, пр. 5, д. 22, кв. 1"
@@ -77,6 +155,19 @@ export const AgentAdressModal: React.FC<Props> = ({
                 <ErrorMessage>
                   Введите полный адрес с точностью до дома
                 </ErrorMessage>
+              )}
+              {results.length > 0 && (
+                <ul className="border-superSilver border bg-white">
+                  {results.map((result, index) => (
+                    <li
+                      className="cursor-pointer hover:bg-background px-6 py-4 text-sm text-textColor"
+                      onClick={() => handleClick(result)}
+                      key={index}
+                    >
+                      {result.formatted_address}
+                    </li>
+                  ))}
+                </ul>
               )}
             </div>
             <div className="pt-8 space-y-5">
@@ -91,12 +182,14 @@ export const AgentAdressModal: React.FC<Props> = ({
                     <span className="text-cerulean text-sm font-normal">*</span>
                   </Label>
                   <AgentAdressInput
+                    autoComplete="off"
+                    disabled={true}
                     name="country"
                     required
                     register={register}
                     error={errors.country}
                     placeholder="Узбекистан"
-                    className="bg-superSilver"
+                    className="bg-superSilver text-darkSoul cursor-not-allowed hover:border-superSilver"
                   />
                   {errors.country && (
                     <ErrorMessage>Поле обязательно</ErrorMessage>
@@ -111,11 +204,13 @@ export const AgentAdressModal: React.FC<Props> = ({
                     <span className="text-cerulean text-sm font-normal">*</span>
                   </Label>
                   <AgentAdressInput
+                    autoComplete="off"
+                    disabled={true}
                     name="region"
                     required
                     register={register}
                     error={errors.region}
-                    className="bg-superSilver"
+                    className="bg-superSilver text-darkSoul cursor-not-allowed hover:border-superSilver"
                   />
                   {errors.region && (
                     <ErrorMessage>Поле обязательно</ErrorMessage>
@@ -133,13 +228,15 @@ export const AgentAdressModal: React.FC<Props> = ({
                     <span className="text-cerulean text-sm font-normal">*</span>
                   </Label>
                   <AgentAdressInput
-                    name="cityTown"
+                    autoComplete="off"
+                    disabled={true}
+                    name="district"
                     required
                     register={register}
-                    error={errors.cityTown}
-                    className="bg-superSilver"
+                    error={errors.district}
+                    className="bg-superSilver text-darkSoul cursor-not-allowed hover:border-superSilver"
                   />
-                  {errors.cityTown && (
+                  {errors.district && (
                     <ErrorMessage>Поле обязательно</ErrorMessage>
                   )}
                 </div>
@@ -203,7 +300,7 @@ export const AgentAdressModal: React.FC<Props> = ({
                     Индекс
                   </Label>
                   <AgentAdressInput
-                    name="street"
+                    name="index"
                     register={register}
                     required={false}
                   />

@@ -165,12 +165,26 @@ export interface ContrAgentData {
     name: string;
     phone: string;
   };
+  address: {
+    id: string;
+    fullAddress: string;
+    apartment: string;
+    country: string;
+    house: string;
+    region: string;
+    isMain: boolean;
+    district: string;
+    street: string;
+    index: string;
+    comment: string;
+    createdAt: string;
+  }[];
 }
 export interface AgentAdressRequest {
   fullAddress: string;
   country: string;
   region: string;
-  cityTown: string;
+  district: string;
   street: string;
   house: string;
   flat?: string;
