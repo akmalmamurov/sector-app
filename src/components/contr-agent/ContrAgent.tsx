@@ -61,40 +61,21 @@ export const ContrAgent = ({
     }
   };
   console.log(contrAgents);
-  
+
   return (
     <>
-
-      {contrAgents?.map((item) => (
-        <div
-          key={item.id}
-          className={`border ${
-            item.isFavorite ? "border-cerulean" : "border-superSilver"
-          } relative pt-12 px-4 overflow-hidden bg-custom min-h-[229px]`}
-        >
-          <div className="mb-[15px]">
-            <h5 className="text-textColor text-sm mb-2">{item.name}</h5>
-            <p className="text-weekColor text-xs">ИНН {item.inn}</p>
-          </div>
-
-          <div className="gap-2 flex mb-2">
-            <span className="border-b border-dashed pb-[2px] text-xs text-cerulean border-cerulean">
-              Розничная цена
-            </span>
-            <span
-              onClick={toggleOpen}
-              className="border-b border-dashed pb-[2px] text-xs text-cerulean border-cerulean cursor-pointer"
-            >
-              Адреса отгрузки: {item.address.length}
-            </span>
-          </div>
-
-          <button
-            type="button"
-            onClick={() => handleUpdate(item.id)}
-            disabled={item.isFavorite}
-            className="mt-[31px] flex gap-3 items-center px-[23px] text-weekColor h-[42px] border disabled:bg-cerulean disabled:text-white disabled:border-none"
-
+      {contrAgents
+        ?.slice()
+        .sort((a, b) => (b.isFavorite ? 1 : 0) - (a.isFavorite ? 1 : 0))
+        .map((item) => (
+          <div
+            key={item.id}
+            className={cn(
+              `border ${
+                item.isFavorite ? "border-cerulean" : "border-superSilver"
+              } relative pt-12 px-4 overflow-hidden bg-custom min-h-[229px]`,
+              className
+            )}
           >
             <div className="mb-[15px]">
               <h5 className="text-textColor text-sm mb-2">{item.name}</h5>
@@ -109,7 +90,7 @@ export const ContrAgent = ({
                 onClick={toggleOpen}
                 className="border-b border-dashed pb-[2px] text-xs text-cerulean border-cerulean cursor-pointer"
               >
-                Адреса отгрузки: 0
+                Адреса отгрузки: {item.address.length}
               </span>
             </div>
 
