@@ -17,6 +17,7 @@ import request from "@/services";
 import { DELETE_AGENT } from "@/constants";
 import { AgentAdressModal } from "../modal";
 import { cn } from "@/lib/utils";
+import useStore from "@/context/store";
 
 export const ContrAgent = ({
   contrAgents,
@@ -29,7 +30,7 @@ export const ContrAgent = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
-  // Allow selected to be an array, so we can pass all addresses even if empty
+  const { setAgent } = useStore();
   const [selected, setSelected] = useState<AddressData[] | null>(null);
   const queryClient = useQueryClient();
 
@@ -45,6 +46,7 @@ export const ContrAgent = ({
       await updateAgent(id);
       queryClient.invalidateQueries({ queryKey: ["contragents"] });
       if (setValue) setValue("contrAgentId", id);
+      setAgent(id);
     } catch (error) {
       console.error(error);
       showError("Ошибка обновления контрагента");
@@ -62,7 +64,6 @@ export const ContrAgent = ({
     }
   };
 
-  // Always pass full array (might be empty) to modal
   const handleSelect = (addresses: AddressData[]) => {
     setSelected(addresses);
     setIsOpen(true);

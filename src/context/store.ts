@@ -16,6 +16,8 @@ interface StoreState {
   rowCol: boolean;
   user: string | null;
   isHydrated: boolean;
+  agentId: null | string;
+  setAgent: (id: string) => void;
   setHydrated: (value: boolean) => void;
   setUser: (user: string | null) => void;
   setAuth: (value: boolean) => void;
@@ -50,6 +52,8 @@ const useStore = create<StoreState>()(
       compares: [],
       selected: [],
       user: null,
+      agentId: null,
+      setAgent: (id: string) => set({ agentId: id }),
       setHydrated: (value) => set({ isHydrated: value }),
       setUser: (user) => set({ user }),
       setAuth: (value) => set({ auth: value }),
@@ -153,6 +157,9 @@ const useStore = create<StoreState>()(
         set({
           auth: false,
           contact: "",
+          agentId: null,
+          rowCol: false,
+          user: null,
         });
         localStorage.removeItem("sector-token");
       },
