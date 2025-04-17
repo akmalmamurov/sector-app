@@ -9,12 +9,9 @@ import { useForm } from "react-hook-form";
 import { DeliveryRequest } from "@/types";
 
 const CartDeliveryPage = () => {
-  const { selected } = useStore();
+  const selected = useStore((state) => state.selected);
   const auth = useRequireAuth();
-  const {
-    handleSubmit,
-    setValue,
-  } = useForm<DeliveryRequest>();
+  const { handleSubmit, setValue } = useForm<DeliveryRequest>();
   const onSubmit = (data: DeliveryRequest) => {
     console.log(data);
   };

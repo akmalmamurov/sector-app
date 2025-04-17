@@ -30,7 +30,7 @@ export const CategoryRight: React.FC<CategoryRightProps> = ({ title, slug, param
     queryFn: () =>
       getProductCategory(slug || "", page, limit, paramKey || "", inStock,popular,priceSort,nameSort),
   });
-  const { rowCol} = useStore();
+  const  rowCol = useStore(state => state.rowCol);
   const productData: ProductData[] = data?.products;
 
 const props = {

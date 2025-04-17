@@ -1,6 +1,6 @@
 import { ReactNode, useEffect } from "react";
 import { UseFormSetValue } from "react-hook-form";
-import { Check, CircleAlert, CirclePlus, TerminalIcon } from "lucide-react";
+import { Check, CircleAlert, TerminalIcon } from "lucide-react";
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import PickUpIcon from "@/assets/icons/PickUpIcon";
@@ -8,6 +8,7 @@ import AddressIcon from "@/assets/icons/AddressIcon";
 import PickUpPointIcon from "@/assets/icons/PickUpPointIcon";
 import { DeliveryRequest } from "@/types";
 import YandexMap from "../map/YandexMap";
+import DeliveryAdress from "./DeliveryAdress";
 
 type dataProp = {
   name: string;
@@ -26,24 +27,7 @@ const data: dataProp[] = [
     name: "До адреса",
     type: "2",
     icon: <AddressIcon />,
-    content: (
-      <>
-        <div className="flex items-center gap-3 pb-7 pt-1">
-          <h3 className="font-normal text-textColor text-[17px] leading-[20.5px]">
-            Сначала нужно выбрать адрес
-          </h3>
-          <div className="bg-greenLight w-[18px] h-[18px] rounded-full flex items-center justify-center">
-            <Check className="text-white" strokeWidth={5} size={8} />
-          </div>
-        </div>
-        <div className="flex justify-start pb-6">
-          <div className="min-h-[190px] px-20 cursor-pointer h-full border-darkSoul border border-dashed flex justify-center items-center flex-col gap-2">
-            <CirclePlus className="text-weekColor w-5 h-5" />
-            <p className="text-weekColor text-sm mt-2">Добавить адрес</p>
-          </div>
-        </div>
-      </>
-    ),
+    content: <DeliveryAdress />,
   },
   {
     name: "До терминала",

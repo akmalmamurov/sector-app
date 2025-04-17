@@ -13,8 +13,7 @@ const ContractorsPage = () => {
   const [search, setSearch] = useState("");
   const { data: agentsData = [] } = useQuery({
     queryKey: ["contragents", search],
-    queryFn: ()=>
-      getAgent(search),
+    queryFn: () => getAgent(search),
   });
 
   useEffect(() => {
@@ -52,7 +51,7 @@ const ContractorsPage = () => {
           onChange={(e) => setSearch(e.target.value)}
         />
         <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
-          <SearchIcon/>
+          <SearchIcon />
         </span>
       </div>
       <div className="grid grid-cols-4 border-b border-superSilver pb-8 gap-[22px] w-full ">

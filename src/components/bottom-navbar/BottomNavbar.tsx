@@ -26,7 +26,8 @@ const BottomNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-  const { auth, logOut } = useStore();
+  const auth = useStore(state => state.auth);
+  const logOut = useStore(state => state.logOut);
   const [modalOpen, setModalOpen] = useState(false);
   const pathName = usePathname();
   const addModal = pathName === "/profile/contractors";

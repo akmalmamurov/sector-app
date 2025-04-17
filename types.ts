@@ -195,7 +195,8 @@ export interface AddressData {
   comment: string;
   createdAt: string;
   postal_code: string;
-  
+  full_street?: string;
+  city?: string;
 }
 
 export interface ResultAgentAddress {
@@ -210,4 +211,5 @@ export interface ResultAgentAddress {
   apartment: string;
   index?: string;
   house?: string;
+  full_street?: string;
 }

@@ -27,9 +27,9 @@ import request from "@/services";
 interface Props {
   isOpen: boolean;
   toggleOpen: () => void;
-  name: string;
+  name?: string;
   contrAgentId: string;
-  element: AddressData[];
+  element?: AddressData[];
 }
 
 export const AgentAdressModal: React.FC<Props> = ({
@@ -106,13 +106,20 @@ export const AgentAdressModal: React.FC<Props> = ({
         : value.fullAddress;
     setValue("fullAddress", full, { shouldValidate: true });
     setValue("country", value.country, { shouldValidate: true });
-    setValue("region", value.region, { shouldValidate: true });
+    setValue("region", value.city || value.region, { shouldValidate: true });
+    const rawAddress =
+      "formatted_address" in value
+        ? value.formatted_address
+        : value.fullAddress;
     const district =
-      "description" in value
-        ? value.description.split(",")[0].trim()
-        : value.district;
-    setValue("district", district || "-", { shouldValidate: true });
-    setValue("street", value.street || "-", { shouldValidate: true });
+      value.district ??
+      rawAddress
+        .split(",")
+        .map((seg) => seg.trim())
+        .find((seg) => /tumani|туман/i.test(seg)) ??
+      "-";
+    setValue("district", district, { shouldValidate: true });
+    setValue("street", value.full_street || "-", { shouldValidate: true });
     setValue("index", value.postal_code ?? (value.index || ""));
     setValue("house", value.house ?? (value.house || "-"), {
       shouldValidate: true,
@@ -181,7 +188,7 @@ export const AgentAdressModal: React.FC<Props> = ({
           </button>
         </div>
         <DialogDescription className="hidden">asd</DialogDescription>
-        {element?.length > 0 && (
+        {element && element?.length > 0 && (
           <div className="p-6">
             <table className="border w-full table-auto">
               <thead className="border-b">
@@ -193,7 +200,7 @@ export const AgentAdressModal: React.FC<Props> = ({
                 </tr>
               </thead>
               <tbody>
-                {element.map((el) => (
+                {element?.map((el) => (
                   <tr key={el.id} className="border-b">
                     <td className="py-[7px] px-[10px] text-xs text-textColor font-normal border-r">
                       {el.fullAddress}, {el.street}, {el.house}

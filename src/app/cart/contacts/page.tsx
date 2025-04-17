@@ -32,7 +32,7 @@ const CartContactPage = () => {
     queryFn: ()=> getAgent(search),
   });
   const contrAgents = agentsData?.kontragents || [];
-  const { addContactForm } = formStore();
+  const  addContactForm  = formStore(state => state.addCartForm);
   const router = useRouter();
   const auth = useRequireAuth();
   const [isOpen, setIsOpen] = useState(false);
