@@ -46,13 +46,7 @@ const BottomNavbar = () => {
 
   const favoriteAgent = contrAgents.find((agent) => agent.isFavorite === true);
 
-  useEffect(() => {
-    console.log("✅ contrAgents:", contrAgents);
-    console.log(
-      "✅ favoriteAgent:",
-      contrAgents.find((a) => a.isFavorite)
-    );
-  }, [contrAgents]);
+
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -240,7 +234,7 @@ const NavItem = ({
   href: string;
 }) => {
   return (
-    <Link href={href} className="flex flex-col items-center gap-1">
+    <Link href={href} className="flex flex-c11ol items-center gap-1">
       <div className="relative w-[28px] h-[28px]">
         <Image src={src} alt={label} fill className="object-contain" />
       </div>

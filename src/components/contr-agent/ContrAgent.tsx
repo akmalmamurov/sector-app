@@ -8,7 +8,7 @@ import {
   EditIcon,
   ShippingIcon,
 } from "@/assets/icons";
-import { ContrAgentData, OrderRequest } from "@/types";
+import { AddressData, ContrAgentData, OrderRequest } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { showError, showSuccess } from "../toast/Toast";
 import { UseFormSetValue } from "react-hook-form";
@@ -29,8 +29,9 @@ export const ContrAgent = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
+  // Allow selected to be an array, so we can pass all addresses even if empty
+  const [selected, setSelected] = useState<AddressData[] | null>(null);
   const queryClient = useQueryClient();
-console.log(contrAgents);
 
   useEffect(() => {
     const fav = contrAgents.find((c) => c.isFavorite);
@@ -43,14 +44,13 @@ console.log(contrAgents);
     try {
       await updateAgent(id);
       queryClient.invalidateQueries({ queryKey: ["contragents"] });
-      if (setValue) {
-        setValue("contrAgentId", id);
-      }
+      if (setValue) setValue("contrAgentId", id);
     } catch (error) {
       console.error(error);
       showError("Ошибка обновления контрагента");
     }
   };
+
   const handleDelete = async (id: string) => {
     try {
       await request.delete(`${DELETE_AGENT}/${id}`);
@@ -58,10 +58,15 @@ console.log(contrAgents);
       showSuccess("Контрагент удален");
     } catch (error) {
       console.error(error);
-      showError("Ошибка обновления контрагента");
+      showError("Ошибка удаления контрагента");
     }
   };
-  console.log(contrAgents);
+
+  // Always pass full array (might be empty) to modal
+  const handleSelect = (addresses: AddressData[]) => {
+    setSelected(addresses);
+    setIsOpen(true);
+  };
 
   return (
     <>
@@ -88,7 +93,7 @@ console.log(contrAgents);
                 Розничная цена
               </span>
               <span
-                onClick={toggleOpen}
+                onClick={() => handleSelect(item.address)}
                 className="border-b border-dashed pb-[2px] text-xs text-cerulean border-cerulean cursor-pointer"
               >
                 Адреса отгрузки: {item.address.length}
@@ -104,6 +109,7 @@ console.log(contrAgents);
               <CheckIcon />
               {item.isFavorite ? "Выбрано" : "Выбрать"}
             </button>
+
             <Popover>
               <PopoverTrigger asChild>
                 <button
@@ -115,13 +121,13 @@ console.log(contrAgents);
               </PopoverTrigger>
               <PopoverContent className="w-[200px] p-0 rounded-none flex flex-col right-5 absolute">
                 <span
-                  onClick={toggleOpen}
+                  onClick={() => handleSelect(item.address)}
                   className="cursor-pointer py-[6px] px-4 bg-white text-xs text-textColor hover:bg-superSilver hoverEffect flex items-center gap-2"
                 >
                   <span>
                     <ShippingIcon />
                   </span>
-                  Адреса отгрузки: 0
+                  Адреса отгрузки: {item.address.length}
                 </span>
 
                 <span
@@ -135,11 +141,13 @@ console.log(contrAgents);
                 </span>
               </PopoverContent>
             </Popover>
+
             <AgentAdressModal
               isOpen={isOpen}
               toggleOpen={toggleOpen}
-              name={item?.name}
-              contrAgentId={item?.id}
+              name={item.name}
+              contrAgentId={item.id}
+              element={selected ?? []}
             />
           </div>
         ))}

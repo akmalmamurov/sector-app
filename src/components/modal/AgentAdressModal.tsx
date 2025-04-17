@@ -1,40 +1,35 @@
-import { X } from "lucide-react";
+import { Pencil, X } from "lucide-react";
+import { Controller, useForm } from "react-hook-form";
+import { useCallback, useEffect, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
 } from "../ui/dialog";
-import { Controller, useForm } from "react-hook-form";
-import { AgentAdressRequest } from "@/types";
-import { Label } from "../ui/label";
 
+import {
+  CREATE_AGENT_ADDRESS,
+  DELETE_AGENT_ADDRESS,
+  GET_ADDRESS,
+  UPDATE_AGENT_ADDRESS,
+} from "@/constants";
+import { AddressData, AgentAdressRequest, ResultAgentAddress } from "@/types";
 import { AgentAdressInput, ErrorMessage } from "../form";
-import { useCallback, useEffect, useState } from "react";
-import { Checkbox } from "../ui/checkbox";
-import request from "@/services";
-import { CREATE_AGENT_ADDRESS, GET_ADDRESS } from "@/constants";
-import { showError } from "../toast/Toast";
-import { useQueryClient } from "@tanstack/react-query";
 import { showSuccess } from "../toast/Toast";
+import { DeleteIcon } from "@/assets/icons";
+import { showError } from "../toast/Toast";
+import { Checkbox } from "../ui/checkbox";
+import { Label } from "../ui/label";
+import request from "@/services";
 
 interface Props {
   isOpen: boolean;
   toggleOpen: () => void;
   name: string;
   contrAgentId: string;
-}
-
-interface Result {
-  city: string;
-  country: string;
-  description: string;
-  district: string;
-  formatted_address: string;
-  region: string;
-  street: string;
-  postal_code: string;
-  apartment: string;
+  element: AddressData[];
 }
 
 export const AgentAdressModal: React.FC<Props> = ({
@@ -42,6 +37,7 @@ export const AgentAdressModal: React.FC<Props> = ({
   toggleOpen,
   name,
   contrAgentId,
+  element,
 }) => {
   const {
     handleSubmit,
@@ -62,22 +58,12 @@ export const AgentAdressModal: React.FC<Props> = ({
       index: "",
     },
   });
-  const [results, setResults] = useState<Result[]>([]);
+  const [results, setResults] = useState<ResultAgentAddress[]>([]);
   const [step, setStep] = useState(1);
+  const [editingAddress, setEditingAddress] = useState<AddressData | null>(
+    null
+  );
   const queryClient = useQueryClient();
-  const onSubmit = async (data: AgentAdressRequest) => {
-    console.log(data);
-    try {
-      await request.post(`${CREATE_AGENT_ADDRESS}/${contrAgentId}`, data);
-      queryClient.invalidateQueries({ queryKey: ["contragents"] });
-      toggleOpen();
-      reset();
-      showSuccess("Адрес успешно добавлен");
-    } catch (error) {
-      console.log(error);
-      showError("Ошибка добавления адреса");
-    }
-  };
 
   const fullAddressWatch = watch("fullAddress");
 
@@ -111,21 +97,81 @@ export const AgentAdressModal: React.FC<Props> = ({
     reset();
   }, [isOpen, reset]);
 
-  const handleClick = (value: Result) => {
+  const populateForm = (value: ResultAgentAddress | AddressData) => {
     setStep(2);
-    setValue("fullAddress", value.formatted_address,{shouldValidate: true});
-    setValue("country", value.country,{shouldValidate: true});
-    setValue("region", value.region,{shouldValidate: true});
-    setValue("district", value?.description?.split(",")[0]?.trim() || "-",{shouldValidate: true});
-    setValue("street", value.street ? value.street : "-",{shouldValidate: true});
-    setValue("index", value.postal_code);
-    setValue("house", value.apartment ? value.apartment : "-",{shouldValidate: true});
+    // normalize Result vs AddressData
+    const full =
+      "formatted_address" in value
+        ? value.formatted_address
+        : value.fullAddress;
+    setValue("fullAddress", full, { shouldValidate: true });
+    setValue("country", value.country, { shouldValidate: true });
+    setValue("region", value.region, { shouldValidate: true });
+    const district =
+      "description" in value
+        ? value.description.split(",")[0].trim()
+        : value.district;
+    setValue("district", district || "-", { shouldValidate: true });
+    setValue("street", value.street || "-", { shouldValidate: true });
+    setValue("index", value.postal_code ?? (value.index || ""));
+    setValue("house", value.house ?? (value.house || "-"), {
+      shouldValidate: true,
+    });
+    setValue("apartment", ("apartment" in value && value.apartment) || "");
+    setValue("comment", ("comment" in value && value.comment) || "");
+    setValue("isMain", "isMain" in value ? value.isMain : true);
+  };
+  const handleClickSelect = (res: ResultAgentAddress) => {
+    setEditingAddress(null);
+    populateForm(res);
     setResults([]);
   };
 
+  const handleEdit = (el: AddressData) => {
+    setEditingAddress(el);
+    populateForm(el);
+  };
+  const handleDeleteAddrss = async (id: string) => {
+    try {
+      await request.delete(`${DELETE_AGENT_ADDRESS}/${id}`);
+      showSuccess("Адрес успешно удален");
+      toggleOpen();
+      queryClient.invalidateQueries({ queryKey: ["contragents"] });
+    } catch (error) {
+      showError(`Ошибка удаления адреса ${error}`);
+    }
+  };
+  const onSubmit = async (data: AgentAdressRequest) => {
+    try {
+      if (editingAddress) {
+        await request.patch(
+          `${UPDATE_AGENT_ADDRESS}/${editingAddress.id}`,
+          data
+        );
+        showSuccess("Адрес успешно обновлен");
+        queryClient.invalidateQueries({ queryKey: ["contragents"] });
+        toggleOpen();
+        reset();
+      } else {
+        await request.post(`${CREATE_AGENT_ADDRESS}/${contrAgentId}`, data);
+        queryClient.invalidateQueries({ queryKey: ["contragents"] });
+        toggleOpen();
+        reset();
+        showSuccess("Адрес успешно добавлен");
+      }
+    } catch (error) {
+      console.log(error);
+      showError("Ошибка добавления адреса");
+    }
+  };
   return (
     <Dialog open={isOpen} onOpenChange={toggleOpen}>
-      <DialogContent className="p-0 sm:rounded-none border-none max-w-[900px] bg-white overflow-y-scroll max-h-[95vh]">
+      <DialogContent
+        className="p-0 sm:rounded-none border-none max-w-[900px] bg-white overflow-y-scroll max-h-[95vh] flex flex-col gap-0 "
+        style={{
+          scrollbarWidth: "none",
+        }}
+      >
         <div className="flex justify-between p-6 border-b border-superSilver">
           <DialogTitle className="w-fit text-textColor text-lg leading-[27px] font-normal">
             Адреса {name}
@@ -135,7 +181,44 @@ export const AgentAdressModal: React.FC<Props> = ({
           </button>
         </div>
         <DialogDescription className="hidden">asd</DialogDescription>
-        <div className="px-6 pb-4 pt-2">
+        {element?.length > 0 && (
+          <div className="p-6">
+            <table className="border w-full table-auto">
+              <thead className="border-b">
+                <tr>
+                  <th className="pt-[7.5px] pb-[10px] text-xs text-textColor font-normal">
+                    Адрес
+                  </th>
+                  <th className="border-l"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {element.map((el) => (
+                  <tr key={el.id} className="border-b">
+                    <td className="py-[7px] px-[10px] text-xs text-textColor font-normal border-r">
+                      {el.fullAddress}, {el.street}, {el.house}
+                    </td>
+                    <td className="flex items-center justify-center  py-[7px]">
+                      <span
+                        onClick={() => handleEdit(el)}
+                        className="cursor-pointer mr-2"
+                      >
+                        <Pencil className="w-[17px] h-[18px] hover:text-celBlue hoverEffect" />
+                      </span>
+                      <span
+                        onClick={() => handleDeleteAddrss(el.id)}
+                        className="cursor-pointer"
+                      >
+                        <DeleteIcon className="w-[18px] h-[18px]  hover:text-dangerColor hoverEffect" />
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+        <div className="px-6  pb-4 pt-6">
           <form noValidate onSubmit={handleSubmit(onSubmit)}>
             <div>
               <Label
@@ -163,7 +246,7 @@ export const AgentAdressModal: React.FC<Props> = ({
                   {results.map((result, index) => (
                     <li
                       className="cursor-pointer hover:bg-background px-6 py-4 text-sm text-textColor"
-                      onClick={() => handleClick(result)}
+                      onClick={() => handleClickSelect(result)}
                       key={index}
                     >
                       {result.formatted_address}
@@ -361,7 +444,7 @@ export const AgentAdressModal: React.FC<Props> = ({
                 disabled={!isValid}
                 className="px-[23px] h-[42px] border bg-cerulean text-white disabled:bg-superSilver disabled:text-darkSoul disabled:border-none"
               >
-                Добавить
+                {editingAddress ? "Редактировать" : "Добавить"}
               </button>
             </div>
           </form>

@@ -139,7 +139,6 @@ export interface OrderRequest {
   email?: string;
   fullname?: string;
   contrAgentId: string;
-
 }
 export interface ContrAgentRequest {
   ownershipForm: string;
@@ -165,20 +164,7 @@ export interface ContrAgentData {
     name: string;
     phone: string;
   };
-  address: {
-    id: string;
-    fullAddress: string;
-    apartment: string;
-    country: string;
-    house: string;
-    region: string;
-    isMain: boolean;
-    district: string;
-    street: string;
-    index: string;
-    comment: string;
-    createdAt: string;
-  }[];
+  address: AddressData[];
 }
 export interface AgentAdressRequest {
   fullAddress: string;
@@ -191,8 +177,37 @@ export interface AgentAdressRequest {
   index?: string;
   comment?: string;
   isMain: boolean;
-
 }
-export interface DeliveryRequest{
+export interface DeliveryRequest {
   deliveryMethod: string;
+}
+export interface AddressData {
+  id: string;
+  fullAddress: string;
+  apartment: string;
+  country: string;
+  house: string;
+  region: string;
+  isMain: boolean;
+  district: string;
+  street: string;
+  index: string;
+  comment: string;
+  createdAt: string;
+  postal_code: string;
+  
+}
+
+export interface ResultAgentAddress {
+  city: string;
+  country: string;
+  description: string;
+  district: string;
+  formatted_address: string;
+  region: string;
+  street: string;
+  postal_code: string;
+  apartment: string;
+  index?: string;
+  house?: string;
 }
