@@ -2,16 +2,21 @@ import { getAgentAdress, updateAgentAddress } from "@/api";
 import useStore from "@/context/store";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Check, CirclePlus } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AgentAdressModal } from "../modal";
-import { AddressData } from "@/types";
+import { AddressData, DeliveryRequest } from "@/types";
 import { CheckIcon, DeleteSmIcon, EditIcon } from "@/assets/icons";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import request from "@/services";
 import { showError, showSuccess } from "../toast/Toast";
 import { DELETE_AGENT_ADDRESS } from "@/constants";
+import { UseFormSetValue } from "react-hook-form";
 
-const DeliveryAdress = () => {
+const DeliveryAdress = ({
+  setValue,
+}: {
+  setValue: UseFormSetValue<DeliveryRequest>;
+}) => {
   const agentId = useStore((state) => state.agentId);
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
@@ -21,9 +26,14 @@ const DeliveryAdress = () => {
     enabled: !!agentId,
   });
   const address = agents?.address;
-  console.log(address);
-  
-  
+
+  useEffect(() => {
+    const fav = agents?.address.find((c: AddressData) => c.isMain);
+    if (fav) {
+      setValue("agentId", fav.id);
+      setValue("address", fav);
+    }
+  }, [agents?.address, setValue]);
   const queryClient = useQueryClient();
   const handleDelete = async (id: string) => {
     try {
@@ -80,7 +90,9 @@ const DeliveryAdress = () => {
                   {item.country}, {item.region} {item.district}, {item.street},{" "}
                   {item.house} {item.apartment && `, ${item.apartment}`}
                 </p>
-                <p className="text-textColor text-xs ">{item.index && `инд.${item.index}`}</p>
+                <p className="text-textColor text-xs ">
+                  {item.index && `инд.${item.index}`}
+                </p>
               </div>
 
               <button

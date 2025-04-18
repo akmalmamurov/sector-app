@@ -7,13 +7,18 @@ import useStore from "@/context/store";
 import { useRequireAuth } from "@/hooks";
 import { useForm } from "react-hook-form";
 import { DeliveryRequest } from "@/types";
+import formStore from "@/context/form-store";
+import { useRouter } from "next/navigation";
 
 const CartDeliveryPage = () => {
   const selected = useStore((state) => state.selected);
+  const addDelivery = formStore((state) => state.addDeliveryForm);
   const auth = useRequireAuth();
+  const router = useRouter();
   const { handleSubmit, setValue } = useForm<DeliveryRequest>();
   const onSubmit = (data: DeliveryRequest) => {
-    console.log(data);
+    addDelivery(data);
+    router.push("/cart/final");
   };
 
   if (!auth) return null;
@@ -23,10 +28,14 @@ const CartDeliveryPage = () => {
         <div className="mb-4">
           <Link
             href={"/cart/contacts"}
-            className="flex items-center gap-2 text-stoneCold text-xs"
+            className="flex items-center gap-[7px] text-stoneCold text-xs group"
           >
-            Назад ко вводу контактной информации
-            <ArrowLeftLongIcon width={15} height={11} />
+            <span className="group-hover:underline ">Назад ко вводу контактной информации</span>
+            <ArrowLeftLongIcon
+              width={15}
+              height={11}
+              className="text-textColor"
+            />
           </Link>
         </div>
         <h3 className="font-normal text-stoneCold text-[17px] leading-[20.5px]">

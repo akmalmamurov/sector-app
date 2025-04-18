@@ -14,68 +14,27 @@ type dataProp = {
   name: string;
   type: string;
   icon: ReactNode;
-  content: ReactNode;
 };
 const data: dataProp[] = [
   {
     name: "Самовывоз",
     type: "1",
     icon: <PickUpIcon />,
-    content: <YandexMap />,
   },
   {
     name: "До адреса",
     type: "2",
     icon: <AddressIcon />,
-    content: <DeliveryAdress />,
   },
   {
     name: "До терминала",
     type: "3",
     icon: <TerminalIcon />,
-    content: (
-      <div>
-        <div className="flex items-center gap-3 pb-7 pt-1">
-          <h3 className="font-normal text-textColor text-[17px] leading-[20.5px]">
-            Выбор транспортной компании
-          </h3>
-          <div className="bg-greenLight w-[18px] h-[18px] rounded-full flex items-center justify-center">
-            <Check className="text-white" strokeWidth={5} size={8} />
-          </div>
-        </div>
-        <div className="flex items-center gap-4 border border-cerulean p-3.5 mb-6">
-          <CircleAlert className="w-[20px] h-[20px] text-cerulean" />
-          <p className="text-cerulean text-xs font-normal">
-            Пожалуйста, укажите полное имя получателя, чтобы не возникло
-            трудностей при получении заказа.
-          </p>
-        </div>
-      </div>
-    ),
   },
   {
     name: "До пункта выдачи",
     type: "4",
     icon: <PickUpPointIcon />,
-    content: (
-      <>
-        <div className="flex items-center gap-3 pb-7 pt-1">
-          <h3 className="font-normal text-textColor text-[17px] leading-[20.5px]">
-            Выбор транспортной компании
-          </h3>
-          <div className="bg-greenLight w-[18px] h-[18px] rounded-full flex items-center justify-center">
-            <Check className="text-white" strokeWidth={5} size={8} />
-          </div>
-        </div>
-        <div className="flex items-center gap-4 border border-cerulean p-3.5 mb-6">
-          <CircleAlert className="w-[20px] h-[20px] text-cerulean" />
-          <p className="text-cerulean text-xs font-normal">
-            Пожалуйста, укажите полное имя получателя, чтобы не возникло
-            трудностей при получении заказа.
-          </p>
-        </div>
-      </>
-    ),
   },
 ];
 const CartTabs = ({
@@ -113,11 +72,48 @@ const CartTabs = ({
         ))}
       </TabsList>
 
-      {data.map((item) => (
-        <TabsContent key={item.name} value={item.type} className="py-[23px]">
-          {item.content}
-        </TabsContent>
-      ))}
+      <TabsContent value="1" className="py-[23px]">
+        <YandexMap />
+      </TabsContent>
+      <TabsContent value="2" className="py-[23px]">
+        <DeliveryAdress setValue={setValue}/>
+      </TabsContent>
+      <TabsContent value="3" className="py-[23px]">
+        <div>
+          <div className="flex items-center gap-3 pb-7 pt-1">
+            <h3 className="font-normal text-textColor text-[17px] leading-[20.5px]">
+              Выбор транспортной компании
+            </h3>
+            <div className="bg-greenLight w-[18px] h-[18px] rounded-full flex items-center justify-center">
+              <Check className="text-white" strokeWidth={5} size={8} />
+            </div>
+          </div>
+          <div className="flex items-center gap-4 border border-cerulean p-3.5 mb-6">
+            <CircleAlert className="w-[20px] h-[20px] text-cerulean" />
+            <p className="text-cerulean text-xs font-normal">
+              Пожалуйста, укажите полное имя получателя, чтобы не возникло
+              трудностей при получении заказа.
+            </p>
+          </div>
+        </div>
+      </TabsContent>
+      <TabsContent value="4" className="py-[23px]">
+        <div className="flex items-center gap-3 pb-7 pt-1">
+          <h3 className="font-normal text-textColor text-[17px] leading-[20.5px]">
+            Выбор транспортной компании
+          </h3>
+          <div className="bg-greenLight w-[18px] h-[18px] rounded-full flex items-center justify-center">
+            <Check className="text-white" strokeWidth={5} size={8} />
+          </div>
+        </div>
+        <div className="flex items-center gap-4 border border-cerulean p-3.5 mb-6">
+          <CircleAlert className="w-[20px] h-[20px] text-cerulean" />
+          <p className="text-cerulean text-xs font-normal">
+            Пожалуйста, укажите полное имя получателя, чтобы не возникло
+            трудностей при получении заказа.
+          </p>
+        </div>
+      </TabsContent>
     </Tabs>
   );
 };

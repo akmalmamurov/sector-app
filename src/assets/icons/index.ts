@@ -50,3 +50,4 @@ export * from "./CheckIcon";
 export * from "./DeleteSmIcon";
 export * from "./ShippingIcon";
 export * from "./SkladIcon";
+export * from "./CartFinalIcon";

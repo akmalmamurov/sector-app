@@ -133,12 +133,13 @@ export interface OrderRequest {
   city: string;
   products: string[];
   total: number;
-  lastname?: string;
-  firstname?: string;
-  phoneNumber?: number | string;
-  email?: string;
+  lastname: string;
+  firstname: string;
+  phone: number | string;
+  email: string;
   fullname?: string;
   contrAgentId: string;
+  deliveryMethod: string;
 }
 export interface ContrAgentRequest {
   ownershipForm: string;
@@ -180,6 +181,8 @@ export interface AgentAdressRequest {
 }
 export interface DeliveryRequest {
   deliveryMethod: string;
+  agentId?: string;
+  address?: AddressData;
 }
 export interface AddressData {
   id: string;

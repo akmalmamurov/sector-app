@@ -8,3 +8,4 @@ export * from "./catalog-slug-crumb";
 export * from "./catalog-slug";
 export * from "./create-pagination";
 export * from "./format-date";
+export * from "./phone-format"

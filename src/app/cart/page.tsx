@@ -29,6 +29,8 @@ export default function CartPage() {
 
   const onSubmit = (data: OrderRequest) => {
     addCartForm(data);
+    console.log(data);
+    
     router.push("/cart/contacts");
   };
 

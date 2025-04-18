@@ -28,11 +28,11 @@ const CartContactPage = () => {
   const [phone, setPhone] = useState("+998 __ ___ ____");
   const [search, setSearch] = useState("");
   const { data: agentsData = [] } = useQuery({
-    queryKey: ["contragents",search],
-    queryFn: ()=> getAgent(search),
+    queryKey: ["contragents", search],
+    queryFn: () => getAgent(search),
   });
   const contrAgents = agentsData?.kontragents || [];
-  const  addContactForm  = formStore(state => state.addCartForm);
+  const addContactForm = formStore((state) => state.addContactForm);
   const router = useRouter();
   const auth = useRequireAuth();
   const [isOpen, setIsOpen] = useState(false);
@@ -51,7 +51,13 @@ const CartContactPage = () => {
   if (!auth) return null;
   const onSubmit = (data: OrderRequest) => {
     const phoneFormat = phone.replace(/[^0-9]/g, "");
-    const payload = { ...data, phone: phoneFormat };
+    const payload = {
+      ...data,
+      phone: phoneFormat,
+      ...(data.fullname &&
+        data.fullname?.length > 0 && { fullname: data.fullname }),
+    };
+    console.log(payload);
     addContactForm(payload);
     router.push("/cart/delivery");
   };
@@ -73,10 +79,14 @@ const CartContactPage = () => {
             <div className="mb-4">
               <Link
                 href={"/cart"}
-                className="flex items-center gap-2 text-stoneCold text-xs"
+                className="flex items-center gap-2 text-stoneCold text-xs group"
               >
-                Назад к корзине
-                <ArrowLeftLongIcon width={15} height={11} />
+                <span className="group-hover:underline">Назад к корзине</span>
+                <ArrowLeftLongIcon
+                  width={15}
+                  height={11}
+                  className="text-textColor"
+                />
               </Link>
             </div>
             <div className="flex items-center gap-3 pb-7">
