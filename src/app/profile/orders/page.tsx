@@ -41,8 +41,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useRequireAuth } from "@/hooks";
 
 const OrdersPage = () => {
+  useRequireAuth();
   const formSchema = z.object({
     // search: z.string().min(1, ""),
   });

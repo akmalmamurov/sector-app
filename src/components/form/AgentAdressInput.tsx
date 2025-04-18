@@ -1,6 +1,6 @@
+import { FieldError, UseFormRegister } from "react-hook-form";
 import { cn } from "@/lib/utils";
 import { AgentAdressRequest } from "@/types";
-import { FieldError, UseFormRegister } from "react-hook-form";
 
 interface Props {
   name: keyof AgentAdressRequest;

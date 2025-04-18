@@ -22,7 +22,9 @@ import { Search } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { useRef, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
+import { useRequireAuth } from "@/hooks";
 const IssuesPage = () => {
+  useRequireAuth();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [fileName, setFileName] = useState<string>("This is empty");
   const formSchema = z.object({

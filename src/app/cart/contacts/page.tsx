@@ -27,14 +27,15 @@ const CartContactPage = () => {
   const { selected } = useStore();
   const [phone, setPhone] = useState("+998 __ ___ ____");
   const [search, setSearch] = useState("");
+  const auth = useRequireAuth();
   const { data: agentsData = [] } = useQuery({
     queryKey: ["contragents", search],
     queryFn: () => getAgent(search),
+    enabled: auth,
   });
   const contrAgents = agentsData?.kontragents || [];
   const addContactForm = formStore((state) => state.addContactForm);
   const router = useRouter();
-  const auth = useRequireAuth();
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
   const {

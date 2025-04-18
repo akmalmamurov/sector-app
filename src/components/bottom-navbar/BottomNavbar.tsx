@@ -20,34 +20,31 @@ import { getAgent, getUser } from "@/api";
 import { ContrAgentModal } from "../modal";
 import { ContrAgentData } from "@/types";
 
-
-
 const BottomNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-  const auth = useStore(state => state.auth);
-  const logOut = useStore(state => state.logOut);
+  const auth = useStore((state) => state.auth);
+  const logOut = useStore((state) => state.logOut);
   const [modalOpen, setModalOpen] = useState(false);
   const pathName = usePathname();
   const addModal = pathName === "/profile/contractors";
   const { data: userData = [] } = useQuery({
     queryKey: ["user"],
     queryFn: getUser,
+    enabled: auth,
   });
 
-  // ContorAgents
   const { data: contrAgents = [] } = useQuery<ContrAgentData[]>({
     queryKey: ["contragents"],
     queryFn: async () => {
       const res = await getAgent();
       return Array.isArray(res) ? res : [];
     },
+    enabled: auth,
   });
 
   const favoriteAgent = contrAgents.find((agent) => agent.isFavorite === true);
-
-
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

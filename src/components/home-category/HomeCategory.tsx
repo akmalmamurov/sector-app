@@ -9,7 +9,6 @@ import { getCatalog } from "@/api";
 export const HomeCategory = async () => {
   const popularData = await getPopular();
   const catalogData = await getCatalog();
-  console.log(popularData);
   
   return (
     <section className="xl:py-12 pt-[23px] ">

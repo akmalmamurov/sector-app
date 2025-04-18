@@ -1,22 +1,18 @@
 "use client";
 import { TelegramBlueIcon } from "@/assets/icons";
 import Link from "next/link";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
-import { Label } from "@/components/ui/label";
 import { Check, Eye, Pencil, TriangleAlert } from "lucide-react";
+import { Form, FormControl, FormField, FormItem, FormMessage, } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import { useRequireAuth } from "@/hooks";
 
 const SettingsPage = () => {
+  useRequireAuth();
   const formSchema = z.object({
     search: z.string().min(1, ""),
   });

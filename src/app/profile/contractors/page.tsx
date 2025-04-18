@@ -3,6 +3,7 @@ import { getAgent } from "@/api";
 import { SearchIcon } from "@/assets/icons";
 import { ContrAgent } from "@/components/contr-agent";
 import { ContrAgentModal } from "@/components/modal";
+import { useRequireAuth } from "@/hooks";
 import { useQuery } from "@tanstack/react-query";
 import { CirclePlus } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -10,10 +11,13 @@ import { useState, useEffect } from "react";
 const ContractorsPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen((prev) => !prev);
+  const auth = useRequireAuth();
+
   const [search, setSearch] = useState("");
   const { data: agentsData = [] } = useQuery({
     queryKey: ["contragents", search],
     queryFn: () => getAgent(search),
+    enabled: auth,
   });
 
   useEffect(() => {

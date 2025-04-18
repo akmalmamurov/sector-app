@@ -1,23 +1,25 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { X } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { usePathname } from "next/navigation";
 
 import { MenuLegalIcon, UserIcon } from "@/assets/icons";
 import { profileMenuData } from "@/data";
 import useStore from "@/context/store";
-import { useQuery } from "@tanstack/react-query";
 import { getUser } from "@/api";
-import { usePathname } from "next/navigation";
 import { ContrAgentModal } from "../modal";
 
 export const ProfileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const auth = useStore((state) => state.auth);
+  const logOut = useStore((state) => state.logOut);
   const menuRef = useRef<HTMLDivElement>(null);
-  const { logOut } = useStore();
   const { data: userData = [] } = useQuery({
     queryKey: ["user"],
     queryFn: getUser,
+    enabled: auth,
   });
   const pathName = usePathname();
   const addModal = pathName === "/profile/contractors";
@@ -128,7 +130,10 @@ export const ProfileMenu = () => {
           </div>
         </div>
       )}
-      <ContrAgentModal isOpen={modalOpen} toggleOpen={() => setModalOpen(!modalOpen)}/>
+      <ContrAgentModal
+        isOpen={modalOpen}
+        toggleOpen={() => setModalOpen(!modalOpen)}
+      />
     </div>
   );
 };
