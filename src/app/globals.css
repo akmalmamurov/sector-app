@@ -40,8 +40,8 @@ body {
 
 /* for Firefox */
 .hide-scrollbar {
-  -ms-overflow-style: none;  
-  scrollbar-width: none;    
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* for WebKit browsers */
@@ -238,4 +238,7 @@ strong {
   bottom: 0;
   left: 0;
   right: 0;
+}
+.container__fDUh1.__bottom__x1eNT {
+  display: none !important;
 }

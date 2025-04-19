@@ -48,6 +48,7 @@ export default function RootLayout({
 
           <Footer />
         </RootProviders>
+        <script src="//code.jivosite.com/widget/UP0xqFFMzr" async></script>
       </body>
     </html>
   );

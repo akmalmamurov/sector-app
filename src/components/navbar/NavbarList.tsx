@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -11,6 +12,11 @@ const NavbarList = () => {
 
   const handleClose = () => setOpenPopover(null);
   
+  const openChat = () => {
+    if ((window as any).jivo_api) {
+      (window as any).jivo_api.open({ start: "chat" });
+    }
+  };
   return (
     <div>
       <div className="flex gap-1">
@@ -41,7 +47,10 @@ const NavbarList = () => {
           </Popover>
         ))}
         <div className="py-1 px-4 xl:px-[23px]">
-          <button className="font-medium text-xs xl:text-sm text-textColor leading-[18px]">
+          <button
+            onClick={openChat}
+            className="font-medium text-xs xl:text-sm text-textColor leading-[18px]"
+          >
             Онлайн чат
           </button>
         </div>
