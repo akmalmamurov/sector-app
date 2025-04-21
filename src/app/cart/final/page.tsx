@@ -215,7 +215,7 @@ const CartFinalPage = () => {
                   </TableCell>
                   <TableCell className="p-[14px] text-xs font-normal text-textColor border-r">
                     <p className="text-xs text-textColor font-normal text-center">
-                      {product.quantity}
+                      {product.count}
                     </p>
                   </TableCell>
                   <TableCell className="p-[14px] text-xs font-normal text-textColor border-r text-end">
