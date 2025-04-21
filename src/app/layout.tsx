@@ -8,6 +8,7 @@ import BottomNavbar from "@/components/bottom-navbar/BottomNavbar";
 import { Providers } from "@/components/providers";
 import { ScrollTop } from "@/components/scroll-top";
 import { RootProviders } from "./RootProviders";
+import CartSync from "@/components/store-sync/CartSync";
 
 export const metadata: Metadata = {
   title: "Sector App",
@@ -29,6 +30,7 @@ export default function RootLayout({
           <ScrollTop />
           <Providers>
             <Header />
+            <CartSync />
             {children}
             <div className="lg:hidden flex">
               <BottomNavbar />

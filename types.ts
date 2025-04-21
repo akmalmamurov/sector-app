@@ -44,7 +44,7 @@ export interface ProductData {
   inStock?: string;
   mainImage: string;
   slug: string;
-  quantity?: number;
+  count?: number;
   catalog: {
     slug: string;
     title: string;

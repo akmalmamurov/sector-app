@@ -136,7 +136,7 @@ export const ProductColCard = ({ product, className }: ProductColCardProps) => {
         {/* Cart */}
         <div className="col-span-1">
           <div className="flex justify-center">
-            <AddToCart product={product} quantity={qty} />
+            <AddToCart product={product} count={qty} />
           </div>
         </div>
       </div>

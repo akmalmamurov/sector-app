@@ -1,47 +1,74 @@
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { Check } from "lucide-react";
 import { CartAddIcon } from "@/assets/icons";
 import useStore from "@/context/store";
-import { ProductData } from "@/types";
 import { isProductInList } from "@/utils";
-import { Check } from "lucide-react";
-import { showSuccess } from "../toast/Toast";
+import { ProductData } from "@/types";
+import { showError, showSuccess } from "../toast/Toast";
 import FavoritCartIcon from "@/assets/icons/FavoritCartIcon";
+import request from "@/services";
+import { TOGGLE_CART } from "@/constants";
+import { getCart } from "@/api/cart";
 
 export const AddToCart = ({
   product,
-  quantity,
+  count,
   saved,
 }: {
   product: ProductData;
-  quantity?: number;
+  count?: number;
   saved?: boolean;
 }) => {
-  const { addToCart, cart } = useStore();
-  const isAddedToCart = isProductInList(cart, product);
+  const { addToCart, cart, auth } = useStore();
+  const queryClient = useQueryClient();
 
-  const handleToCart = () => {
-    if (quantity) {
-      addToCart({ ...product, quantity });
-    } else {
-      addToCart(product);
+  const { data: serverCart = [] } = useQuery({
+    queryKey: ["cart"],
+    queryFn: getCart,
+    enabled: auth && cart.length === 0,
+  });
+
+  const cartList = auth ? serverCart : cart;
+
+  const isAddedToCart = isProductInList(cartList, product);
+
+  const handleToCart = async () => {
+    try {
+      if (auth) {
+        await request.post(
+          TOGGLE_CART,
+          { productId: product.id },
+          { params: { count } }
+        );
+        queryClient.invalidateQueries({ queryKey: ["cart"] });
+      } else {
+        addToCart({ ...product, count: count || 1 });
+      }
+      showSuccess(`Товар ${product.articul} добавлен в корзину`);
+    } catch (error) {
+      showError("Не удалось добавить товар в корзину");
+      console.error(error);
     }
-    showSuccess(`Товар ${product?.articul} Добавлен в корзину`);
   };
 
   return (
-    <>
-      <button
-        onClick={handleToCart}
-        className={`w-[42px] h-[42px] bg-lightBg rounded-full flex items-center justify-center ${saved ? "hover:bg-cerulean hover:text-white hoverEffect text-cerulean" : ""}`}
-      >
-        {isAddedToCart ? (
-          <Check className="w-5 h-5 text-cerulean" strokeWidth={2.65} />
-        ) : saved ? (
-          <FavoritCartIcon />
-        ) : (
-          <CartAddIcon />
-        )}
-      </button>
-    </>
+    <button
+      onClick={handleToCart}
+      disabled={isAddedToCart}
+      className={`w-[42px] h-[42px] bg-lightBg rounded-full flex items-center justify-center ${
+        saved
+          ? "hover:bg-cerulean hover:text-white hoverEffect text-cerulean"
+          : ""
+      }`}
+    >
+      {isAddedToCart ? (
+        <Check className="w-5 h-5 text-cerulean" strokeWidth={2.65} />
+      ) : saved ? (
+        <FavoritCartIcon />
+      ) : (
+        <CartAddIcon />
+      )}
+    </button>
   );
 };
 

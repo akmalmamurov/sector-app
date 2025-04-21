@@ -1,38 +1,64 @@
 import Image from "next/image";
+import Link from "next/link";
+import { BadgeCheck, CircleAlert, Truck } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import StarIcon from "@/assets/icons/StarIcon";
 import CommentsIcon from "@/assets/icons/CommentsIcon";
 import QuestionCommentIcon from "@/assets/icons/QuestionCommentIcon";
 import { copyToClipboard, isProductInList } from "@/utils";
 import { CartIcon, CopyIcon } from "@/assets/icons";
-import Link from "next/link";
 import { AddToCompare, AddToFavorites } from "../add-storage";
-import { BadgeCheck, CircleAlert, Truck } from "lucide-react";
 import PriceFormatter from "../format-price/PriceFormatter";
 import FreePickUpIcon from "@/assets/icons/FreePickUpIcon";
 import InStockIcon from "@/assets/icons/InStockIcon";
 import { ProductData } from "@/types";
 import ShareButtons from "../share-buttons/ShareButtons";
 import useStore from "@/context/store";
-import { showSuccess } from "../toast/Toast";
-import { useRouter } from "next/navigation";
+import { showError, showSuccess } from "../toast/Toast";
+import { getCart } from "@/api/cart";
+import request from "@/services";
+import { TOGGLE_CART } from "@/constants";
 
 interface ProductSingleRightProps {
   product: ProductData;
 }
 const ProductSingleRight: React.FC<ProductSingleRightProps> = ({ product }) => {
   const currentUrl = typeof window !== "undefined" ? window.location.href : "";
-  const { addToCart, cart } = useStore();
+  const { addToCart, cart, auth } = useStore();
   const router = useRouter();
-  const isAddedToCart = isProductInList(cart, product);
+  const { data: serverCart = [] } = useQuery({
+    queryKey: ["cart"],
+    queryFn: getCart,
+    enabled: auth && cart.length === 0,
+  });
+  const queryClient = useQueryClient();
+  const cartList = auth ? serverCart : cart;
+  const isAddedToCart = isProductInList(cartList, product);
 
-  const handleToCart = () => {
-    if (!isAddedToCart) {
-      addToCart(product);
-      router.push("/cart");
-      showSuccess(`Товар ${product?.articul} Добавлен в корзину`);
-    } else {
-      router.push("/cart");
-      showSuccess(`Товар ${product?.articul} Уже в корзине`);
+  const handleToCart = async () => {
+    try {
+      if (auth) {
+        if (!isAddedToCart) {
+          await request.post(TOGGLE_CART, { productId: product.id });
+          queryClient.invalidateQueries({ queryKey: ["cart"] });
+          showSuccess(`Товар ${product.articul} добавлен в корзину`);
+        } else {
+          router.push("/cart");
+        }
+      } else {
+        if (!isAddedToCart) {
+          addToCart({ ...product });
+          showSuccess(`Товар ${product.articul} добавлен в корзину`);
+        } else {
+          showSuccess(`Товар ${product.articul} уже в корзине`);
+          router.push("/cart");
+        }
+      }
+
+    } catch (error) {
+      console.error("Cart error:", error);
+      showError("Не удалось добавить товар в корзину");
     }
   };
 
@@ -126,7 +152,8 @@ const ProductSingleRight: React.FC<ProductSingleRightProps> = ({ product }) => {
               onClick={handleToCart}
               className="bg-cerulean w-full hover:opacity-90 transition-opacity px-6 py-[13px] text-base font-semibold text-white flex items-center justify-center gap-2 mb-[29px]"
             >
-              <CartIcon color="#fff" className="w-5 h-5" />В корзину
+              <CartIcon color="#fff" className="w-5 h-5" />
+              {isAddedToCart ? "Перейти в корзине" : "В корзине"}
             </button>
             <div className="flex flex-col gap-[18px]">
               <div className="flex gap-2 items-center">

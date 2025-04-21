@@ -13,6 +13,8 @@ import {
 import useStore from "@/context/store";
 import LoginModal from "../modal/LoginModal";
 import { ProfileMenu } from "../menu";
+import { useQuery } from "@tanstack/react-query";
+import { getCart } from "@/api/cart";
 
 const HeaderMenuLink = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,6 +22,11 @@ const HeaderMenuLink = () => {
   const { favorites, cart, compares, auth, setAuth } = useStore();
   const [isMounted, setIsMounted] = useState(false);
 
+  const { data: product = [] } = useQuery({
+    queryKey: ["cart"],
+    queryFn: () => getCart(),
+    enabled: auth,
+  });
   useEffect(() => {
     setIsMounted(true);
     const token = localStorage.getItem("sector-token");
@@ -27,6 +34,7 @@ const HeaderMenuLink = () => {
   }, [setAuth]);
 
   if (!isMounted) return null;
+  const cartProduct = auth ? product : cart;
   return (
     <div className="lg:flex items-center gap-[7px] xl:gap-0">
       <Link href={"/action"} className="header-menu-item">
@@ -75,10 +83,10 @@ const HeaderMenuLink = () => {
         </button>
       )}
       <Link href={"/cart"} className="header-menu-item">
-        {cart?.length > 0 ? (
+        { cartProduct?.length > 0 ? (
           <span className="relative">
             <CartIcon className="w-5 h-5 xl:w-6 xl:h-6" />
-            <span className="header-menu-badge">{cart?.length}</span>
+            <span className="header-menu-badge">{cartProduct?.length}</span>
           </span>
         ) : (
           <span>

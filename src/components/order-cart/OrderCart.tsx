@@ -10,7 +10,7 @@ import { LoginModal } from "../modal";
 const OrderCart = ({ selectedCards }: { selectedCards: ProductData[] }) => {
   const { selectedCardsList, auth } = useStore();
   const selectedTotal = selectedCards.reduce(
-    (sum, item) => sum + (item.price || 0) * (item.quantity || 1),
+    (sum, item) => sum + (item.price || 0) * (item.count || 1),
     0
   );
   const [isOpen, setIsOpen] = useState(false);

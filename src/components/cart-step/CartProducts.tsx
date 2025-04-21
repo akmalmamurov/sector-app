@@ -12,7 +12,7 @@ interface CartProductsProps {
   handleDeleteClick: (id: string) => void;
   toggleSingleItem: (id: string) => void;
   selectedItems: string[];
-  setQuantity: (id: string, quantity: number) => void;
+  setQuantity: (id: string, count: number) => void;
 }
 const CartProducts: React.FC<CartProductsProps> = (props) => {
   const {
@@ -47,11 +47,12 @@ const CartProducts: React.FC<CartProductsProps> = (props) => {
             <div className="flex justify-between">
               <input
                 type="checkbox"
-                checked={selectedItems.includes(product.id)}
+                checked={selectedItems?.includes(product.id)}
                 onChange={() => toggleSingleItem(product.id)}
               />
               <div className="flex h-[26px] items-center">
                 <button
+                  type="button"
                   onClick={() => handleToFavorites(product)}
                   className="flex items-center gap-2 group"
                 >
@@ -66,6 +67,7 @@ const CartProducts: React.FC<CartProductsProps> = (props) => {
                 </button>
                 <div className="w-[2px] h-full bg-superSilver mx-[15px]"></div>
                 <button
+                  type="button"
                   className="flex items-center gap-2 group"
                   onClick={() => handleDeleteClick(product.id)}
                 >
@@ -129,37 +131,35 @@ const CartProducts: React.FC<CartProductsProps> = (props) => {
                       <div className="w-[90px] h-[42px] relative">
                         <input
                           type="number"
-                          value={product.quantity}
+                          value={product.count}
                           className="w-[90px] h-[42px] text-center pr-3 border focus:outline-none text-textColor"
                           onChange={(e) => {
                             let value = Number(e.target.value);
-                            if (value > 9999) {
+                            if (value < 1) {
+                              value = 1;
+                            } else if (value > 9999) {
                               value = 9999;
                             }
                             setQuantity(product.id, value);
                           }}
                         />
+
                         <div className="absolute top-0 h-full right-[10px] flex flex-col justify-center">
                           <span
                             className="cursor-pointer"
                             onClick={() =>
-                              setQuantity(
-                                product.id,
-                                Number(product.quantity) + 1
-                              )
+                              setQuantity(product.id, Number(product.count) + 1)
                             }
                           >
                             <ChevronUp strokeWidth={2.75} size={16} />
                           </span>
                           <button
-                            className="cursor-pointer disabled:opacity-60"
+                            type="button"
+                            className="cursor-pointer disabled:opacity-60 disabled:cursor-default"
                             onClick={() =>
-                              setQuantity(
-                                product.id,
-                                Number(product.quantity) - 1
-                              )
+                              setQuantity(product.id, Number(product.count) - 1)
                             }
-                            disabled={product.quantity === 1}
+                            disabled={product.count === 1}
                           >
                             <ChevronUp
                               size={16}

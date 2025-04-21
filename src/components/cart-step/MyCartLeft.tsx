@@ -1,12 +1,6 @@
+import { Controller, Control, FieldErrors, UseFormSetValue, UseFormWatch, } from "react-hook-form";
 import { Check, CircleAlert, X } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import {
-  Controller,
-  Control,
-  FieldErrors,
-  UseFormSetValue,
-  UseFormWatch,
-} from "react-hook-form";
 
 import useStore, { StoreItem } from "@/context/store";
 import { ConfirmModal } from "../modal";
@@ -98,6 +92,8 @@ const MyCartLeft: React.FC<CartLeftProps> = ({
     toggleSingleItem,
     favorites,
   };
+  console.log(cart);
+  
 
   return (
     <div className="col-span-3">

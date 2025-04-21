@@ -3,7 +3,7 @@ import { createJSONStorage, persist } from "zustand/middleware";
 import { ProductData } from "@/types";
 
 export interface StoreItem extends ProductData {
-  quantity?: number;
+  count?: number;
 }
 
 interface StoreState {
@@ -26,7 +26,7 @@ interface StoreState {
   addToCart: (product: ProductData) => void;
   selectedCardsList: (products: ProductData[]) => void;
   toggleCompare: (product: ProductData) => void;
-  setQuantity: (id: string, quantity: number) => void;
+  setQuantity: (id: string, count: number) => void;
   deleteFavorites: (id: string) => void;
   deleteCart: (id: string) => void;
   removeFromCompares: (id: string) => void;
@@ -95,7 +95,7 @@ const useStore = create<StoreState>()(
                 item.id === product.id
                   ? {
                       ...item,
-                      quantity: (item.quantity || 1) + (product.quantity || 1),
+                      count: (item.count || 1) + (product.count || 1),
                     }
                   : item
               ),
@@ -104,14 +104,14 @@ const useStore = create<StoreState>()(
           return {
             cart: [
               ...state.cart,
-              { ...product, quantity: product.quantity || 1 },
+              { ...product, count: product.count || 1 },
             ],
           };
         }),
-      setQuantity: (id, quantity) => {
+      setQuantity: (id, count) => {
         set((state) => ({
           cart: state.cart.map((item) =>
-            item.id === id ? { ...item, quantity: Math.max(quantity, 1) } : item
+            item.id === id ? { ...item, count: Math.max(count, 1) } : item
           ),
         }));
       },
@@ -148,7 +148,7 @@ const useStore = create<StoreState>()(
       resetCompares: () => set({ compares: [] }),
       getTotalPrice: () => {
         return get().cart.reduce(
-          (total, item) => total + (item.price ?? 0) * (item.quantity ?? 1),
+          (total, item) => total + (item.price ?? 0) * (item.count ?? 1),
           0
         );
       },

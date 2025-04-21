@@ -4,11 +4,12 @@ import { showError } from "@/components/toast/Toast";
 import useStore from "@/context/store";
 import { ProductData } from "@/types";
 
-
-export function useCartPage(initialCart:ProductData[]) {    
+export function useCartPage(initialCart: ProductData[]) {
   const [isClient, setIsClient] = useState(false);
-  const [selectedItems, setSelectedItems] = useState<string[]>(() => initialCart.map((item) => item.id) );
-  const [prevCartLength, setPrevCartLength] = useState(initialCart.length);
+  const [selectedItems, setSelectedItems] = useState<string[]>(() =>
+    initialCart?.map((item) => item.id)
+  );
+  const [prevCartLength, setPrevCartLength] = useState(initialCart?.length);
 
   const { auth, clearDataAfterTimeout } = useStore();
   const authErrorShown = useRef(false);
@@ -34,31 +35,30 @@ export function useCartPage(initialCart:ProductData[]) {
   }, [auth]);
 
   useEffect(() => {
-    if (initialCart.length !== prevCartLength) {
-      setSelectedItems(initialCart.map((i) => i.id));
-      setPrevCartLength(initialCart.length);
+    if (initialCart?.length !== prevCartLength) {
+      setSelectedItems(initialCart?.map((i) => i.id));
+      setPrevCartLength(initialCart?.length);
     }
   }, [initialCart, prevCartLength]);
 
   const toggleAllItems = () => {
     setSelectedItems((prev) =>
-      prev.length === initialCart.length
-        ? []
-        : initialCart.map((i) => i.id)
+      prev?.length === initialCart?.length ? [] : initialCart?.map((i) => i.id)
     );
   };
 
   const toggleSingleItem = (id: string) => {
     setSelectedItems((prev) =>
-      prev.includes(id)
-        ? prev.filter((x) => x !== id)
-        : [...prev, id]
+      prev?.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
     );
   };
 
-  const isAllChecked = initialCart.length > 0 && selectedItems.length === initialCart.length;
+  const isAllChecked =
+    initialCart?.length > 0 && selectedItems?.length === initialCart?.length;
 
-  const selectedCards = initialCart.filter((item) => selectedItems.includes(item.id));
+  const selectedCards = initialCart?.filter((item) =>
+    selectedItems?.includes(item.id)
+  );
 
   return {
     isClient,
