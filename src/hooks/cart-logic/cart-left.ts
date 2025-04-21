@@ -28,7 +28,7 @@ export function useCartLeft({ cart, selectedItems, setValue, cartForm, resetCart
       selectedItems.includes(item.id)
     );
     const total = selectedProducts.reduce(
-      (sum, item) => sum + (item.price || 0) * (item.quantity || 1),
+      (sum, item) => sum + (item.price || 0) * (item.count || 1),
       0
     );
     setValue("products", selectedItems);
