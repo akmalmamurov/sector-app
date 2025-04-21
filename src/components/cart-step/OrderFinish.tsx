@@ -162,7 +162,7 @@ export const OrderFinish = () => {
                   </TableCell>
                   <TableCell className="px-4 py-6 text-xs font-normal text-textColor border-r">
                     <p className="text-xs text-textColor font-normal text-center">
-                      {product.quantity}
+                      {product.count}
                     </p>
                   </TableCell>
                   <TableCell className="px-4 py-6 text-xs font-normal text-textColor border-r text-end">
