@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { CatalogData } from "@/types";
 import { CrumbChevronDownIcon } from "@/assets/icons";
 import { ChevronRight, ChevronRightIcon } from "lucide-react";
+import { CatalogData } from "@/types";
 
 interface BreadcrumbItem {
   name: string;

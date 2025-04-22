@@ -1,4 +1,4 @@
-import { PopularCategory, CatalogData } from "@/types";
+import { CatalogData, PopularCategory } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 interface CategoryCardProps {

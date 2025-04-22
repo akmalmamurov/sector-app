@@ -1,14 +1,15 @@
 "use client";
-import { Container } from "../container";
-import { Button } from "../ui/button";
-import CatalogMenu from "../catalog-menu/CatalogMenu";
-import { useRef, useState } from "react";
 import Image from "next/image";
-import { flagUz } from "@/assets/images";
 import Link from "next/link";
-import NavbarList from "./NavbarList";
+import { useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+
+import CatalogMenu from "../catalog-menu/CatalogMenu";
 import { getCatalog } from "@/api/catalog";
+import { Container } from "../container";
+import { flagUz } from "@/assets/images";
+import { Button } from "../ui/button";
+import NavbarList from "./NavbarList";
 
 const Navbar = () => {
   const { data: catalogData = [] } = useQuery({

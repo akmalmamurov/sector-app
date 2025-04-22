@@ -1,22 +1,20 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 import Link from "next/link";
 import { getCatalog } from "@/api/catalog";
 import { Container } from "@/components/container";
 import { HomeIcon } from "@/assets/icons";
-import { CategoryData } from "@/types";
 import { findCatalogItem, getTitleBySlug } from "@/utils/catalog-slug";
 import BreadcrumbHoverLink from "@/components/bread-crumb/CatalogCrumb";
 import { ChevronRightIcon } from "lucide-react";
 import { getBreadcrumbPaths, getSlugString } from "@/utils";
 import { CategoryLeft, CategoryRight } from "@/components/category";
+import { CategoryData, SubcatalogData } from "@/types";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateMetadata(
-  { params }: Props,
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const catalogData = await getCatalog();
   const categoryTitle = getTitleBySlug(catalogData, slug);
@@ -26,9 +24,7 @@ export async function generateMetadata(
   };
 }
 
-export default async function SingleCatalogPage({
-  params,
-}: Props) {
+export default async function SingleCatalogPage({ params }: Props) {
   const { slug } = await params;
   const catalogData = await getCatalog();
 
@@ -65,7 +61,7 @@ export default async function SingleCatalogPage({
       <div className="bg-white border p-[23px] shadow-sectionShadow mb-[23px]">
         <div className="flex flex-wrap items-start">
           {catalogItem?.subcatalogs?.length ? (
-            catalogItem.subcatalogs.map((sub) => (
+            catalogItem.subcatalogs.map((sub: SubcatalogData) => (
               <Link
                 key={sub.id}
                 href={`/catalog/${sub.slug}`}
@@ -93,7 +89,11 @@ export default async function SingleCatalogPage({
       {/* Filter product */}
       <div className="grid grid-cols-12 gap-6">
         {/* Filters */}
-        <CategoryLeft slug={slug} paramKey="subcatalogSlug" catalogItem={catalogItem} />
+        <CategoryLeft
+          slug={slug}
+          paramKey="subcatalogSlug"
+          catalogItem={catalogItem}
+        />
         {/* Products */}
         <CategoryRight slug={slug} title={categoryTitle} paramKey="slug" />
       </div>

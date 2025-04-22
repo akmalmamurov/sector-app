@@ -8,8 +8,8 @@ import FilterIcon from "@/assets/icons/FilterIcon";
 import { Section } from "../section";
 import { SearchIcon } from "@/assets/icons";
 import { Checkbox } from "@/components/ui/checkbox";
-import { CatalogData, CategoryData } from "@/types";
 import { Button } from "@/components/ui/button";
+import { CatalogData, CategoryData } from "@/types";
 
 interface FilterOption {
   title: string;
