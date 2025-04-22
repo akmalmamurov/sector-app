@@ -15,6 +15,7 @@ import LoginModal from "../modal/LoginModal";
 import { ProfileMenu } from "../menu";
 import { useQuery } from "@tanstack/react-query";
 import { getCart } from "@/api/cart";
+import { getSaved } from "@/api";
 
 const HeaderMenuLink = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,6 +28,11 @@ const HeaderMenuLink = () => {
     queryFn: () => getCart(),
     enabled: auth,
   });
+  const { data: saved = [] } = useQuery({
+    queryKey: ["saved"],
+    queryFn: () => getSaved(),
+    enabled: auth,
+  });
   useEffect(() => {
     setIsMounted(true);
     const token = localStorage.getItem("sector-token");
@@ -35,6 +41,7 @@ const HeaderMenuLink = () => {
 
   if (!isMounted) return null;
   const cartProduct = auth ? product : cart;
+  const savedProduct = auth ? saved : favorites;
   return (
     <div className="lg:flex items-center gap-[7px] xl:gap-0">
       <Link href={"/action"} className="header-menu-item">
@@ -44,11 +51,11 @@ const HeaderMenuLink = () => {
         <span className="header-menu-link">Аксии</span>
       </Link>
       <Link href={"/profile/favorites"} className="header-menu-item">
-        {favorites?.length > 0 ? (
+        {savedProduct?.length > 0 ? (
           <>
             <span className="relative">
               <HeartActiveIcon className="text-dangerColor w-5 h-5 xl:w-6 xl:h-6" />
-              <span className="header-menu-badge">{favorites?.length}</span>
+              <span className="header-menu-badge">{savedProduct?.length}</span>
             </span>
           </>
         ) : (

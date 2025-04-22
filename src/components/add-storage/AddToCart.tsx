@@ -27,6 +27,7 @@ export const AddToCart = ({
     queryFn: getCart,
     enabled: auth && cart.length === 0,
   });
+  
 
   const cartList = auth ? serverCart : cart;
 

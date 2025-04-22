@@ -4,6 +4,10 @@ import { cn } from "@/lib/utils";
 import { ProductData } from "@/types";
 import { isProductInList } from "@/utils";
 import { showSuccess } from "../toast/Toast";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { getSaved } from "@/api";
+import request from "@/services";
+import { TOGGLE_FAVORITES } from "@/constants";
 
 export const AddToFavorites = ({
   product,
@@ -12,16 +16,35 @@ export const AddToFavorites = ({
   product: ProductData;
   className?: string;
 }) => {
-  const { toggleFavorites, favorites } = useStore();
+  const { toggleFavorites, favorites, auth } = useStore();
+  const queryClient = useQueryClient();
+  const { data: saved = [] } = useQuery({
+    queryKey: ["saved"],
+    queryFn: () => getSaved(),
+    enabled: auth,
+  });
+  console.log(saved);
 
-  const isFavorite = isProductInList(favorites, product);
-  const handleToFavorites = () => {
-    if (isFavorite) {
-      showSuccess(`Удалено из избранного`);
+  const savedList = auth ? saved : favorites;
+  const isFavorite = isProductInList(savedList, product);
+
+  const handleToFavorites = async () => {
+    if (auth) {
+      await request.post(TOGGLE_FAVORITES, { productId: product.id });
+      queryClient.invalidateQueries({ queryKey: ["saved"] });
+      if (isFavorite) {
+        showSuccess(`Удалено из избранного`);
+      } else {
+        showSuccess(`Добавлено в избранное`);
+      }
     } else {
-      showSuccess(`Добавлено в избранное`);
+      if (isFavorite) {
+        showSuccess(`Удалено из избранного`);
+      } else {
+        showSuccess(`Добавлено в избранное`);
+      }
+      toggleFavorites(product);
     }
-    toggleFavorites(product);
   };
   return (
     <button onClick={handleToFavorites} className="text-darkSoul">

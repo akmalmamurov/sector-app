@@ -34,9 +34,10 @@ const HeaderMenu = () => {
         {/* logo */}
         <Link href="/" className=" overflow-hidden hidden sm:flex pr-4 lg:pr-0">
           <Image
-            priority={true}
             src={logo}
             alt="logo"
+            width={155}
+            height={50}
             className="xl:w-auto xl:h-auto w-[150px] h-[48px]"
           />
         </Link>
