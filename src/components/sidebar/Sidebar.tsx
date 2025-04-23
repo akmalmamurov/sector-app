@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useEffect, useState, useCallback } from "react";
 import {
@@ -17,11 +18,23 @@ import Link from "next/link";
 import { Tooltip } from "../tolltip";
 import { Volume2Icon } from "lucide-react";
 import useStore from "@/context/store";
-
+import { getSaved } from "@/api";
+import { useQuery } from "@tanstack/react-query";
 export const Sidebar = () => {
   const [open, setOpen] = useState(true);
   const [isActive, setIsActive] = useState(false);
-  const { favorites, compares } = useStore();
+  const { favorites, compares, auth } = useStore();
+  const { data: saved = [] } = useQuery({
+    queryKey: ["saved"],
+    queryFn: () => getSaved(),
+    enabled: auth,
+  });
+  const savedProduct = auth ? saved : favorites;
+  const openChat = () => {
+    if ((window as any).jivo_api) {
+      (window as any).jivo_api.open({ start: "chat" });
+    }
+  };
   const handleMouseOver = useCallback(
     (event: Event) => {
       if (!isActive) return;
@@ -96,11 +109,11 @@ export const Sidebar = () => {
                 href="/profile/favorites"
                 className="w-[34px] h-[34px] rounded-full bg-transparent hover:bg-superSilver flex items-center justify-center"
               >
-                {favorites?.length > 0 ? (
+                {savedProduct?.length > 0 ? (
                   <span className="h-6 w-6 relative">
                     <HeartActiveIcon className="text-dangerColor" />
                     <span className="absolute -top-[4px] border -right-[4px] w-[18px] h-[18px] rounded-full text-white bg-dangerColor flex items-center justify-center text-xs font-medium">
-                      {favorites?.length}
+                      {savedProduct?.length}
                     </span>
                   </span>
                 ) : (
@@ -142,6 +155,7 @@ export const Sidebar = () => {
             <Tooltip text="Открыть чат">
               <button
                 type="button"
+                onClick={openChat}
                 className="w-[34px] h-[34px] rounded-full bg-transparent hover:bg-superSilver flex items-center justify-center"
               >
                 <SidebarChatIcon />

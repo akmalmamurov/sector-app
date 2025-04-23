@@ -9,7 +9,7 @@ import { getSaved } from "@/api";
 import request from "@/services";
 import { TOGGLE_FAVORITES } from "@/constants";
 
-export const AddToFavorites = ({
+export const CartFavorites = ({
   product,
   className,
 }: {
@@ -46,14 +46,21 @@ export const AddToFavorites = ({
     }
   };
   return (
-    <button type="button" onClick={handleToFavorites} className="text-darkSoul">
+    <button
+      type="button"
+      onClick={handleToFavorites}
+      className={cn("flex items-center gap-2 group", className)}
+    >
+      <span className="text-xs group-hover:opacity-70 duration-200 ease-in-out">
+        перенести в избранное
+      </span>
       {isFavorite ? (
-        <HeartActiveIcon className={cn(className, "text-dangerColor")} />
+        <HeartActiveIcon className="text-dangerColor text-sm w-[18px] h-[18px] group-hover:opacity-70 duration-200 ease-in-out" />
       ) : (
-        <HeartIcon className={cn(className)} />
+        <HeartIcon className="text-textColor text-sm w-[18px] h-[18px] group-hover:opacity-70 duration-200 ease-in-out" />
       )}
     </button>
   );
 };
 
-export default AddToFavorites;
+export default CartFavorites;

@@ -18,7 +18,7 @@ export const AddToCompare = ({ product, className }: { product: ProductData, cla
     }
   };
   return (
-    <button onClick={handleToCompare}>
+    <button type="button" onClick={handleToCompare}>
       {isCompare ? (
         <CompareSucessIcon className={cn(className)} />
 

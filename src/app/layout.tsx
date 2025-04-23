@@ -35,10 +35,10 @@ export default function RootLayout({
             <div className="lg:hidden flex">
               <BottomNavbar />
             </div>
-          </Providers>
           <div className="lg:block hidden">
             <Sidebar />
           </div>
+          </Providers>
 
           <Toaster
             position="top-right"

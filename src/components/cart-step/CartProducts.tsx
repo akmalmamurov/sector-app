@@ -1,12 +1,13 @@
 import { ChevronUp, Trash2Icon } from "lucide-react";
 import PriceFormatter from "../format-price/PriceFormatter";
-import { CopyIcon, HeartActiveIcon, HeartIcon } from "@/assets/icons";
+import { CopyIcon } from "@/assets/icons";
 import { copyToClipboard } from "@/utils";
 import Image from "next/image";
 import { DOMAIN } from "@/constants";
 import { Separator } from "../ui/separator";
-import useStore, { StoreItem } from "@/context/store";
-import { showSuccess } from "../toast/Toast";
+import { StoreItem } from "@/context/store";
+import Link from "next/link";
+import { CartFavorites } from "../add-storage";
 interface CartProductsProps {
   cart: StoreItem[];
   handleDeleteClick: (id: string) => void;
@@ -22,22 +23,10 @@ const CartProducts: React.FC<CartProductsProps> = (props) => {
     toggleSingleItem,
     setQuantity,
   } = props;
-  const { favorites, toggleFavorites } = useStore();
-  const isProductInList = (list: StoreItem[], product: StoreItem) =>
-    list.some((item) => item.id === product.id);
 
-  const handleToFavorites = (product: StoreItem) => {
-    if (isProductInList(favorites, product)) {
-      showSuccess("Удалено из избранного");
-    } else {
-      showSuccess("Добавлено в избранное");
-    }
-    toggleFavorites(product);
-  };
   return (
     <div className="flex flex-col gap-[23px]">
       {cart?.map((product) => {
-        const isFavorite = isProductInList(favorites, product);
         return (
           <div
             key={product.id}
@@ -51,20 +40,7 @@ const CartProducts: React.FC<CartProductsProps> = (props) => {
                 onChange={() => toggleSingleItem(product.id)}
               />
               <div className="flex h-[26px] items-center">
-                <button
-                  type="button"
-                  onClick={() => handleToFavorites(product)}
-                  className="flex items-center gap-2 group"
-                >
-                  <span className="text-xs group-hover:opacity-70 duration-200 ease-in-out">
-                    перенести в избранное
-                  </span>
-                  {isFavorite ? (
-                    <HeartActiveIcon className="text-dangerColor text-sm w-[18px] h-[18px] group-hover:opacity-70 duration-200 ease-in-out" />
-                  ) : (
-                    <HeartIcon className="text-textColor text-sm w-[18px] h-[18px] group-hover:opacity-70 duration-200 ease-in-out" />
-                  )}
-                </button>
+                <CartFavorites product={product} />
                 <div className="w-[2px] h-full bg-superSilver mx-[15px]"></div>
                 <button
                   type="button"
@@ -111,7 +87,12 @@ const CartProducts: React.FC<CartProductsProps> = (props) => {
                     </span>
                   </div>
                   <div className="flex h-fit gap-10 items-start justify-between w-full">
-                    <p className="text-base text-textColor">{product.title}</p>
+                    <Link
+                      href={`/catalog/${product.subcatalog.slug}/${product.category.slug}/${product.slug}`}
+                      className="text-base text-textColor hover:text-cerulean hoverEffect "
+                    >
+                      {product.title}
+                    </Link>
                     <span
                       className="cursor-pointer text-explosiveGrey hover:text-cerulean hoverEffect"
                       onClick={() =>
