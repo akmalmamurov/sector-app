@@ -159,7 +159,7 @@ const FavoritesPage = () => {
                         {product.inStock > "10" ? "10+" : product.inStock} шт
                       </span>
                     ) : (
-                      <span className="text-dangerColor">Нет в наличии</span>
+                      <span className="text-dangerColor">Нет в наличии</span> 
                     )}
                   </TableCell>
                   <TableCell className="px-4 py-[14.5px] text-xs font-normal text-textColor border-r">

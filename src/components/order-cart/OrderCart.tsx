@@ -1,10 +1,10 @@
 import { CircleAlert, Share2 } from "lucide-react";
-import PriceFormatter from "../format-price/PriceFormatter";
 import Link from "next/link";
-import { ProductData } from "@/types";
-import useStore from "@/context/store";
 import { usePathname } from "next/navigation";
 import { Fragment, useState } from "react";
+import PriceFormatter from "../format-price/PriceFormatter";
+import { ProductData } from "@/types";
+import useStore from "@/context/store";
 import { LoginModal } from "../modal";
 
 const OrderCart = ({ selectedCards }: { selectedCards: ProductData[] }) => {
@@ -23,63 +23,65 @@ const OrderCart = ({ selectedCards }: { selectedCards: ProductData[] }) => {
   };
   return (
     <div className="bg-white border border-superSilver shadow-sectionShadow p-[23px] sticky top-[140px]">
-      <div className="flex justify-between items-center mb-5">
-        <p className="text-[18px] leading-[27px] font-normal text-stoneCold">
-          Моя корзина <span>({selectedCards.length})</span>
-        </p>
-        <Share2 className="text-[#0054AEFF] w-[24px] h-[24px]" />
-      </div>
-      <div className="font-normal text-xs text-textColor flex justify-between items-center mb-3">
-        <p>Вес</p>
-        <span>8.56 кг</span>
-      </div>
-      <div className="font-normal text-xs text-textColor flex justify-between items-center mb-3">
-        <p>Объём</p>
-        <span>
-          0.0348 м<sup>3</sup>
-        </span>
-      </div>
-      {showDelivery && (
-        <button
-          type="button"
-          className="bg-white border text-xs font-normal flex items-center gap-3 px-2 border-cerulean hover:opacity-90 transition-opacity
-           text-cerulean w-full py-[14.5px]"
-        >
-          <CircleAlert className="w-6 h-6" />
-          Доставка будет включена в счёт
-        </button>
-      )}
-
-      <div
-        className={`flex justify-between items-center py-3 border-t border-superSilver`}
-      >
-        <p className="text-textColor font-normal text-[18px] leading-[27px]">
-          Итого
-        </p>
-        <PriceFormatter
-          className="text-cerulean font-normal text-[18px] leading-[27px]"
-          amount={selectedTotal}
-        />
-      </div>
-
-      {showCart && (
-        <Fragment>
-          <button
-            type={auth ? "submit" : "button"}
-            disabled={!selectedCards.length}
-            onClick={auth ? orderHandle : handleOpen}
-            className="bg-cerulean hover:opacity-90 transition-opacity text-white w-full py-[13px] mb-3 disabled:opacity-50 font-semibold"
-          >
-            Оформить заказ
-          </button>
-          <p className="text-xs font-normal text-textColor">
-            Прочитал и согласен с {" "}
-            <Link className="text-cerulean hover:underline" href={"/"}>
-              условиями пользовательского соглашения.
-            </Link>
+      <div>
+        <div className="flex justify-between items-center mb-5">
+          <p className="text-[18px] leading-[27px] font-normal text-stoneCold">
+            Моя корзина <span>({selectedCards.length})</span>
           </p>
-        </Fragment>
-      )}
+          <Share2 className="text-[#0054AEFF] w-[24px] h-[24px]" />
+        </div>
+        <div className="font-normal text-xs text-textColor flex justify-between items-center mb-3">
+          <p>Вес</p>
+          <span>8.56 кг</span>
+        </div>
+        <div className="font-normal text-xs text-textColor flex justify-between items-center mb-3">
+          <p>Объём</p>
+          <span>
+            0.0348 м<sup>3</sup>
+          </span>
+        </div>
+        {showDelivery && (
+          <button
+            type="button"
+            className="bg-white border text-xs font-normal flex items-center gap-3 px-2 border-cerulean hover:opacity-90 transition-opacity
+           text-cerulean w-full py-[14.5px]"
+          >
+            <CircleAlert className="w-6 h-6" />
+            Доставка будет включена в счёт
+          </button>
+        )}
+
+        <div
+          className={`flex justify-between items-center py-3 border-t border-superSilver`}
+        >
+          <p className="text-textColor font-normal text-[18px] leading-[27px]">
+            Итого
+          </p>
+          <PriceFormatter
+            className="text-cerulean font-normal text-[18px] leading-[27px]"
+            amount={selectedTotal}
+          />
+        </div>
+
+        {showCart && (
+          <Fragment>
+            <button
+              type={auth ? "submit" : "button"}
+              disabled={!selectedCards.length}
+              onClick={auth ? orderHandle : handleOpen}
+              className="bg-cerulean hover:opacity-90 transition-opacity text-white w-full py-[13px] mb-3 disabled:opacity-50 font-semibold"
+            >
+              Оформить заказ
+            </button>
+            <p className="text-xs font-normal text-textColor">
+              Прочитал и согласен с {" "}
+              <Link className="text-cerulean hover:underline" href={"/"}>
+                условиями пользовательского соглашения.
+              </Link>
+            </p>
+          </Fragment>
+        )}
+      </div>
       <LoginModal isOpen={isOpen} handleOpen={handleOpen} />
     </div>
   );

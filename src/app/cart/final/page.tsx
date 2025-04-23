@@ -38,17 +38,16 @@ const CartFinalPage = () => {
   if (!auth) return null;
   const handleFinal = () => {
     const { address: _, ...deliveryWithoutAddress } = deliveryForm || {};
-  
+
     const payload = {
       ...cartForm,
       ...deliveryWithoutAddress,
       ...contactForm,
       ...(comment.length > 0 && { comment }),
     };
-  
+
     console.log(payload);
   };
-  
 
   return (
     <div className="space-y-6">

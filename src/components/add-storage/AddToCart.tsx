@@ -64,7 +64,7 @@ export const AddToCart = ({
       }`}
     >
       {isAddedToCart ? (
-        <Check className="w-5 h-5 text-cerulean group-hover:text-white" strokeWidth={2.65} />
+        <Check className={`w-5 h-5 text-cerulean ${saved && "group-hover:text-white"}`} strokeWidth={2.65} />
       ) : saved ? (
         <FavoritCartIcon />
       ) : (

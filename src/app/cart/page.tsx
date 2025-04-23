@@ -32,6 +32,7 @@ export default function CartPage() {
     queryFn: () => getCart(),
     enabled: auth,
   });
+  
 
   const cartProduct = auth ? product : cart;
   const router = useRouter();
