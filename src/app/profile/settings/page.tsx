@@ -5,12 +5,11 @@ import { Pencil } from "lucide-react";
 
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { useRequireAuth } from "@/hooks"; 
+import { useRequireAuth } from "@/hooks";
 import { AccountMe, AccountPassword } from "@/components/profile";
 
 const SettingsPage = () => {
   useRequireAuth();
-
   return (
     <div>
       <div className="flex items-center gap-3 border border-cerulean h-[51px] px-4 mb-4">
