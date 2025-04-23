@@ -22,7 +22,6 @@ const CatalogMenu = ({
     useState<number>(0);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
       if (
@@ -120,6 +119,7 @@ const CatalogMenu = ({
                                   </Link>
                                 )
                               )}
+                              
                             </div>
                           </li>
                         )

@@ -9,13 +9,15 @@ import { Section } from "../section";
 import { SearchIcon } from "@/assets/icons";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { CatalogData, CategoryData } from "@/types";
+import { CatalogData, CategoryData, SubcatalogData } from "@/types";
+import CustomRangeSlider from "../slider/CustomRangeSlider";
 
 interface FilterOption {
   title: string;
   value: string;
   url?: string;
   productCount?: number;
+  name?: string;
 }
 
 interface FilterItem {
@@ -30,18 +32,28 @@ interface CategoryLeftProps {
   slug?: string;
   paramKey?: string;
   catalogItem?: CatalogData;
+  mainSlug?: string;
+}
+interface FilterOptionRequest {
+  name: string;
+  options: { name: string | undefined }[];
 }
 
 export const CategoryLeft: React.FC<CategoryLeftProps> = ({
   slug,
   paramKey,
   catalogItem,
+  mainSlug,
 }) => {
   const { data, isLoading, isError } = useQuery<FilterItem[]>({
     queryKey: ["filter", slug, paramKey],
     queryFn: () => getFilter(slug || "", paramKey || ""),
   });
   const [isShow, setIsShow] = useState(false);
+
+  const [filterCheckedData, setFilterCheckedData] = useState<
+    FilterOptionRequest[]
+  >([]);
 
   if (isLoading) {
     return <div>Loading filters...</div>;
@@ -50,8 +62,58 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
   if (isError || !data) {
     return <div>Error loading filters.</div>;
   }
+  function handleLinkClick(filterName: string, url: string) {
+    console.log(url);
+    console.log(filterName);
+    console.log(mainSlug);
+    console.log(slug);
+  }
 
-  console.log(data);
+  const handleFilterChecked = (filter: FilterOption, name: string) => {
+    if (
+      filterCheckedData.some(
+        (item) =>
+          item.name === name &&
+          item.options.some((option) => option.name === filter.name)
+      )
+    ) {
+      if (
+        filterCheckedData.some(
+          (item) => item.name === name && item.options.length === 1
+        )
+      ) {
+        setFilterCheckedData(
+          filterCheckedData.filter((item) => item.name !== name)
+        );
+      } else {
+        setFilterCheckedData(
+          filterCheckedData.map((item) =>
+            item.name === name
+              ? {
+                  ...item,
+                  options: item.options.filter(
+                    (option) => option.name !== filter.name
+                  ),
+                }
+              : item
+          )
+        );
+      }
+    } else if (filterCheckedData.some((item) => item.name === name)) {
+      setFilterCheckedData(
+        filterCheckedData.map((item) =>
+          item.name === name
+            ? { ...item, options: [...item.options, { name: filter.name }] }
+            : item
+        )
+      );
+    } else {
+      setFilterCheckedData((prev) => [
+        ...prev,
+        { name: name, options: [{ name: filter.name }] },
+      ]);
+    }
+  };
 
   return (
     <div className="col-span-3">
@@ -60,38 +122,36 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
           <FilterIcon className="w-6 h-6" />
           <h3 className="text-base font-normal text-textColor">Фильтры</h3>
         </div>
-        {catalogItem?.categories?.length && (
-          <div className="mb-4">
-            <div className="flex items-center mb-2 bg-background px-5 py-3">
-              <Image
-                src={"/subcategories.svg"}
-                width={25}
-                height={25}
-                alt={"categories"}
-                className="w-6 h-6 mr-3"
-              />
-              <h3 className="text-sm font-normal text-textColor">
-                Подкатегории
-              </h3>
-            </div>
-            <div className="px-5 pt-3">
-              <ul className="list-disc pl-5 pb-2">
-                {(catalogItem?.categories as CategoryData[])?.map(
-                  (category, idx) => (
-                    <li key={idx} className="mb-1 marker:text-textColor">
-                      <Link
-                        href={`/catalog/${catalogItem?.slug}/${category.slug}`}
-                        className="hover:text-blue-500 transition-colors duration-200 text-xs font-normal text-textColor"
-                      >
-                        {category.title}
-                      </Link>
-                    </li>
-                  )
-                )}
-              </ul>
-            </div>
+
+        <div className="mb-4">
+          <div className="flex items-center mb-2 bg-background px-5 py-3">
+            <Image
+              src={"/subcategories.svg"}
+              width={25}
+              height={25}
+              alt={"categories"}
+              className="w-6 h-6 mr-3"
+            />
+            <h3 className="text-sm font-normal text-textColor">Подкатегории</h3>
           </div>
-        )}
+          <div className="px-5 pt-3">
+            <ul className="list-disc pl-5 pb-2">
+              {(
+                (catalogItem?.categories as CategoryData[]) ||
+                (catalogItem?.subcatalogs as SubcatalogData[])
+              )?.map((category, idx) => (
+                <li key={idx} className="mb-1 marker:text-textColor">
+                  <Link
+                    href={`/catalog/${catalogItem?.slug}/${category.slug}`}
+                    className="hover:text-blue-500 transition-colors duration-200 text-xs font-normal text-textColor"
+                  >
+                    {category.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
 
         {data?.slice(0, isShow ? data.length : 5).map((filter, index) => (
           <div key={index} className="mb-4">
@@ -107,6 +167,7 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
                 {filter.title}
               </h3>
             </div>
+
             <div className="px-5 pt-3">
               {(filter.type === "checkbox" ||
                 filter.type === "import-checkbox") && (
@@ -116,7 +177,9 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
                       <label className="cursor-pointer flex items-center text-xs font-normal text-textColor">
                         <Checkbox
                           value={option.value}
-                          onCheckedChange={() => {}}
+                          onCheckedChange={() =>
+                            handleFilterChecked(option, filter.name)
+                          }
                           className="mr-2.5 w-[18px] h-[18px] border rounded-[3px] border-[#E1E1E1]"
                         />
                         {option.title} ({option.productCount})
@@ -126,10 +189,9 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
                 </ul>
               )}
               {filter.name === "tsena" && (
-                <div>
-                  <p>Диапазон (34 605 сум - 378 841 445 сум)</p>
-                  
-                </div>
+                <>
+                  <CustomRangeSlider />
+                </>
               )}
               {filter.type === "link" && (
                 <div>
@@ -148,10 +210,13 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
                     {filter.options?.map((option, idx) => (
                       <li key={idx} className="mb-1">
                         <Link
-                          href={option.url ?? "#"}
+                          onClick={() =>
+                            handleLinkClick(filter.name, option.name || "")
+                          }
+                          href={option.name || ""}
                           className="hover:text-blue-500 transition-colors duration-200 text-xs font-normal text-textColor"
                         >
-                          {option.title} ({option.productCount})
+                          {option.title}
                         </Link>
                       </li>
                     ))}
