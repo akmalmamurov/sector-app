@@ -12,7 +12,6 @@ interface ProductCardProps {
   className?: string;
 }
 export const ProductCard = ({ product, className }: ProductCardProps) => {
-  
   return (
     <div
       className={cn(
