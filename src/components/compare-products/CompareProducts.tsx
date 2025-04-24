@@ -91,63 +91,80 @@ export const CompareProducts = () => {
     setIsBeginning(swiper.isBeginning);
     setIsEnd(swiper.isEnd);
   };
+  console.log(isScroll);
 
   return (
     <div>
       {compares?.length > 0 ? (
         <div>
-          <div>
-            <div className="border-b py-[15px] border-superSilver px-6">
+          <div
+            className={`sticky top-[78px] lg:top-[130px] md:z-[3] bg-white ${isScroll ? "shadow-md" : ""}`}
+          >
+            <div
+              className={`border-b py-[15px] border-superSilver px-6 ${isScroll && "hidden md:block"}`}
+            >
               <h3 className="relative text-base font-normal text-cerulean w-[140px] text-center before:absolute before:-bottom-[15px] before:left-0 before:w-full before:h-[5px] before:bg-gradient-to-r before:from-blue-400 before:to-cerulean">
                 Все товары ({products.length})
               </h3>
             </div>
-            {isScroll && (
-              <div className="px-6">
-                <div className="relative group">
-                  <Swiper
-                    slidesPerView={5}
-                    spaceBetween={2}
-                    slidesPerGroup={1}
-                    navigation={{
-                      nextEl: ".swiper-button-next",
-                      prevEl: ".swiper-button-prev",
-                    }}
-                    modules={[Navigation]}
-                    onSlideChange={(swiper) => {
-                      setCurrentIndex(swiper.activeIndex);
-                      updateNavigationState(swiper);
-                    }}
-                    onSwiper={(swiper) => {
-                      swiperRef.current = swiper;
-                      updateNavigationState(swiper);
-                    }}
-                  >
-                    {compares.map((product, idx) => (
-                      <SwiperSlide key={idx}>
-                        <CompareCard product={product} />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                  {!isBeginning && (
-                    <div
-                      className="absolute left-0 top-2 border border-superSilver z-[1] w-[42px] h-[42px] rounded-full bg-iconBox/70 flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out opacity-0 group-hover:opacity-100 group-hover:scale-110"
-                      onClick={() => swiperRef.current?.slidePrev()}
+            <div  className={`sticky md:sticky-none top-[78px] lg:top-[130px] md:z-[3] bg-white ${isScroll ? "shadow-md" : ""}`}>
+              {isScroll && (
+                <div className="px-0 md:px-6 ">
+                  <div className="relative group">
+                    <Swiper
+                      slidesPerView={2}
+                      spaceBetween={2}
+                      slidesPerGroup={1}
+                      navigation={{
+                        nextEl: ".swiper-button-next",
+                        prevEl: ".swiper-button-prev",
+                      }}
+                      modules={[Navigation]}
+                      onSlideChange={(swiper) => {
+                        setCurrentIndex(swiper.activeIndex);
+                        updateNavigationState(swiper);
+                      }}
+                      onSwiper={(swiper) => {
+                        swiperRef.current = swiper;
+                        updateNavigationState(swiper);
+                      }}
+                      breakpoints={{
+                        768: {
+                          slidesPerView: 3,
+                          spaceBetween: 2,
+                        },
+                        1024: {
+                          slidesPerView: 5,
+                          spaceBetween: 2,
+                        },
+                      }}
                     >
-                      <ArrowRightIcon className="w-[22px] h-[20px] rotate-180 text-titleColor" />
-                    </div>
-                  )}
-                  {!isEnd && (
-                    <div
-                      className="absolute right-0 top-2 border border-superSilver z-[1] w-[42px] h-[42px] rounded-full bg-iconBox/70 flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out opacity-0 group-hover:opacity-100 group-hover:scale-110"
-                      onClick={() => swiperRef.current?.slideNext()}
-                    >
-                      <ArrowRightIcon className="w-[22px] h-[20px] text-titleColor" />
-                    </div>
-                  )}
+                      {compares.map((product, idx) => (
+                        <SwiperSlide key={idx}>
+                          <CompareCard product={product} />
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                    {!isBeginning && (
+                      <div
+                        className="absolute left-0 top-2 border border-superSilver z-[1] w-[42px] h-[42px] rounded-full bg-iconBox/70 flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out opacity-0 group-hover:opacity-100 group-hover:scale-110"
+                        onClick={() => swiperRef.current?.slidePrev()}
+                      >
+                        <ArrowRightIcon className="w-[22px] h-[20px] rotate-180 text-titleColor" />
+                      </div>
+                    )}
+                    {!isEnd && (
+                      <div
+                        className="absolute right-0 top-2 border border-superSilver z-[1] w-[42px] h-[42px] rounded-full bg-iconBox/70 flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out opacity-0 group-hover:opacity-100 group-hover:scale-110"
+                        onClick={() => swiperRef.current?.slideNext()}
+                      >
+                        <ArrowRightIcon className="w-[22px] h-[20px] text-titleColor" />
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[21px] px-6 pt-6">
             {compares.map((product, idx) => (

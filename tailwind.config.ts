@@ -25,7 +25,10 @@ export default {
       },
       container: {
         center: true,
-        padding: "4px",
+        padding: {
+          default: "4px",
+          xs: "0px",
+        },
         screens: {
           xs: "389px",
           sm: "476px",
@@ -124,7 +127,6 @@ export default {
           "0 12px 24px rgba(44, 39, 56, .02), 0 24px 48px rgba(44, 39, 56, .04)",
         toastShadow:
           "rgba(0,0,0,0.4) 0px 2px 4px -1px,rgba(0,0,0,0.05) 0px 4px 5px 0px,rgba(0,0,0,0.07) 0px 1px 10px 0px",
-     
       },
       backgroundImage: {
         "home-gradient": "linear-gradient(hsla(0, 0%, 100%, 0), #fff 98%) ",
@@ -140,9 +142,9 @@ export default {
         "100%": { transform: "translateX(100%)" },
       },
       cartLoading: {
-        '0%': {width: '0%'},
-        '50%': {width: '50%'},
-        '100%': {width: '100%'}
+        "0%": { width: "0%" },
+        "50%": { width: "50%" },
+        "100%": { width: "100%" },
       },
     },
   },
