@@ -2,18 +2,18 @@
 import { Fragment } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-import useStore from "@/context/store";
-import formStore from "@/context/form-store";
-import { PageLoader } from "@/components/loader";
+import { DELETE_CART, TOGGLE_CART, UPDATE_CART } from "@/constants";
 import MyCartLeft from "@/components/cart-step/MyCartLeft";
 import OrderCart from "@/components/order-cart/OrderCart";
+import { PageLoader } from "@/components/loader";
+import formStore, { CartState } from "@/context/form-store";
+import useStore from "@/context/store";
 import { OrderRequest } from "@/types";
 import { useCartPage } from "@/hooks";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getCart } from "@/api/cart";
 import request from "@/services";
-import { DELETE_CART, TOGGLE_CART, UPDATE_CART } from "@/constants";
 
 export default function CartPage() {
   const { cart, setQuantity, deleteCart, resetCart, auth } = useStore();
@@ -32,7 +32,6 @@ export default function CartPage() {
     queryFn: () => getCart(),
     enabled: auth,
   });
-  
 
   const cartProduct = auth ? product : cart;
   const router = useRouter();
@@ -67,8 +66,23 @@ export default function CartPage() {
     }
   };
   const onSubmit = (data: OrderRequest) => {
-    addCartForm(data);
-    console.log(data);
+    const total = selectedCards.reduce(
+      (sum, item) => sum + (item.price ?? 0) * (item.count ?? 1),
+      0
+    );
+
+    const products = selectedCards.map((item) => ({
+      productId: item.id,
+      count: item.count ?? 1,
+    }));
+
+    const cart: CartState = {
+      city: data.city,
+      products,
+      total,
+    };
+    addCartForm(cart);
+    console.log(cart);
     router.push("/cart/contacts");
   };
 

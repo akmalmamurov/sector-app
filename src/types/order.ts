@@ -1,6 +1,9 @@
 export interface OrderRequest {
   city: string;
-  products: string[];
+  products: {
+    productId: string;
+    count: number;
+  };
   total: number;
   lastname: string;
   firstname: string;

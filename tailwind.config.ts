@@ -117,6 +117,7 @@ export default {
         sectionShadow: "rgba(0, 0, 0, 0.07) 0px 7px 10px",
         discountWadow: "0 10px 36px rgba(0,0,0,.1)",
         promotionShadow: "0 3px 31.5px 0 rgba(0, 0, 0, 0.1)",
+        cartMenuShadow: "rgba(0, 0, 0, 0.1) 0px 2px 10px",
         navListShadow:
           "0 2px 4px -1px rgba(0,0,0,.04),0 4px 5px 0 rgba(0,0,0,.05),0 1px 10px 0 rgba(0,0,0,.07)",
         sidebarWadow: "0 10px 36px rgba(0, 0, 0, .1);",
