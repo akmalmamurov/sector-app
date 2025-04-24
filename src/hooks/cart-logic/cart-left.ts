@@ -16,7 +16,14 @@ interface Params {
   deleteCart: (id: string) => void;
 }
 
-export function useCartLeft({ cart, selectedItems, setValue, cartForm, resetCart, deleteCart, }: Params) {
+export function useCartLeft({
+  cart,
+  selectedItems,
+  setValue,
+  cartForm,
+  resetCart,
+  deleteCart,
+}: Params) {
   useEffect(() => {
     if (cartForm?.city) {
       setValue("city", cartForm.city);
@@ -31,7 +38,13 @@ export function useCartLeft({ cart, selectedItems, setValue, cartForm, resetCart
       (sum, item) => sum + (item.price || 0) * (item.count || 1),
       0
     );
-    setValue("products", selectedItems);
+    setValue(
+      "productDetails",
+      selectedProducts.map((item) => ({
+        productId: item.id,
+        count: item.count ?? 0,
+      }))
+    );
     setValue("total", total);
   }, [selectedItems, cart, setValue]);
 
@@ -44,16 +57,14 @@ export function useCartLeft({ cart, selectedItems, setValue, cartForm, resetCart
   } = useConfirmModal();
 
   const handleDeleteAll = () => {
-    openModal(
-      "Вы уверены, что хотите удалить все товары из корзины?",
-      () => resetCart()
+    openModal("Вы уверены, что хотите удалить все товары из корзины?", () =>
+      resetCart()
     );
   };
 
   const handleDeleteClick = (id: string) => {
-    openModal(
-      "Вы уверены, что хотите удалить товар из корзины?",
-      () => deleteCart(id)
+    openModal("Вы уверены, что хотите удалить товар из корзины?", () =>
+      deleteCart(id)
     );
   };
 

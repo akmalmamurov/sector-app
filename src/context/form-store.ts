@@ -7,7 +7,7 @@ export interface CartProduct {
 }
 export interface CartState {
   city: string;
-  products: CartProduct[];
+  productDetails: CartProduct[];
   total: number;
 }
 export interface FormState {

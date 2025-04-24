@@ -8,7 +8,7 @@ import { DELETE_CART, TOGGLE_CART, UPDATE_CART } from "@/constants";
 import MyCartLeft from "@/components/cart-step/MyCartLeft";
 import OrderCart from "@/components/order-cart/OrderCart";
 import { PageLoader } from "@/components/loader";
-import formStore, { CartState } from "@/context/form-store";
+import formStore from "@/context/form-store";
 import useStore from "@/context/store";
 import { OrderRequest } from "@/types";
 import { useCartPage } from "@/hooks";
@@ -66,23 +66,8 @@ export default function CartPage() {
     }
   };
   const onSubmit = (data: OrderRequest) => {
-    const total = selectedCards.reduce(
-      (sum, item) => sum + (item.price ?? 0) * (item.count ?? 1),
-      0
-    );
-
-    const products = selectedCards.map((item) => ({
-      productId: item.id,
-      count: item.count ?? 1,
-    }));
-
-    const cart: CartState = {
-      city: data.city,
-      products,
-      total,
-    };
-    addCartForm(cart);
-    console.log(cart);
+    addCartForm(data);
+    console.log(data);
     router.push("/cart/contacts");
   };
 
