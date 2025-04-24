@@ -29,7 +29,7 @@ export const AddToCompare = ({
         <CompareSucessIcon
           className={cn(
             className,
-            "w-[20px] h-[20px] sm:w-[24px] sm:h-[24px] lg:w-[28px] lg:h-[28px] "
+            "w-[20px] h-[20px] sm:w-[24px] sm:h-[24px] lg:w-[28px] lg:h-[28px]"
           )}
         />
       ) : (

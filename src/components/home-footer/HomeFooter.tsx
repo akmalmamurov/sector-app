@@ -25,7 +25,7 @@ export const HomeFooter = () => {
           <div>
             <div className="px-6 border-b border-superSilver pb-6">
               <ul
-                className={`list-disc pl-10 flex flex-col relative marker:text-cerulean text-justify`}
+                className={`list-disc pl-4 sm:pl-10 flex flex-col relative marker:text-cerulean text-justify`}
               >
                 <li className="font-normal text-base text-textColor">
                   На нашем официальном сайте мы продаём оборудование, как под
@@ -58,7 +58,7 @@ export const HomeFooter = () => {
                     Наши преимущества
                   </h2>
                   <ul
-                    className={`list-disc pl-10 flex flex-col marker:text-cerulean text-justify mb-[30px]`}
+                    className={`list-disc pl-4 sm:pl-10 flex flex-col marker:text-cerulean text-justify mb-[30px]`}
                   >
                     <li className="font-normal text-base text-textColor">
                       <b>Гибкие решения.</b> Мы учитываем особенности задач,

@@ -35,9 +35,9 @@ export default function RootLayout({
             <div className="lg:hidden flex">
               <BottomNavbar />
             </div>
-          <div className="lg:block hidden">
-            <Sidebar />
-          </div>
+            <div className="lg:block hidden">
+              <Sidebar />
+            </div>
           </Providers>
 
           <Toaster

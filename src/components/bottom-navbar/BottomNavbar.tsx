@@ -1,16 +1,11 @@
 "use client";
 
+import React from "react";
 import Link from "next/link";
 import Image, { StaticImageData } from "next/image";
 import { useState, useRef, useEffect } from "react";
-import {
-  catalogNavBottom,
-  homeNavBottom,
-  infoNavBottom,
-  korzinaNavBottom,
-} from "@/assets/images";
 import useStore from "@/context/store";
-import { MenuLegalIcon, UserIcon } from "@/assets/icons";
+import { MenuLegalIcon, NavBottomCart, UserIcon } from "@/assets/icons";
 import LoginModal from "../modal/LoginModal";
 import { X } from "lucide-react";
 import { profileMenuData } from "@/data";
@@ -19,6 +14,10 @@ import { useQuery } from "@tanstack/react-query";
 import { getAgent, getUser } from "@/api";
 import { ContrAgentModal } from "../modal";
 import { ContrAgentData } from "@/types";
+import NavBottomCatalog from "@/assets/icons/NavBottomCatalog";
+import NavBottomInfo from "@/assets/icons/NavBottomInfo";
+import NavBottomHome from "@/assets/icons/NavBottomHome";
+import NavBottomUser from "@/assets/icons/NavBottomUser";
 
 const BottomNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -76,10 +75,10 @@ const BottomNavbar = () => {
 
   return (
     <div className="fixed bottom-0 left-0 w-full z-50 bg-white shadow-md border-t flex justify-around py-2">
-      <NavItem src={homeNavBottom} label="Главная" href="/" />
-      <NavItem src={infoNavBottom} label="Информация" href="/about" />
-      <NavItem src={catalogNavBottom} label="Каталог" href="/catalog" />
-      <NavItem src={korzinaNavBottom} label="Корзина" href="/cart" />
+      <NavItem src={NavBottomHome} label="Главная" href="/" />
+      <NavItem src={NavBottomInfo} label="Информация" href="/about" />
+      <NavItem src={NavBottomCatalog} label="Каталог" href="/catalog" />
+      <NavItem src={NavBottomCart} label="Корзина" href="/cart" />
       {/* Profile */}
       {auth ? (
         <div ref={menuRef} className="relative">
@@ -88,7 +87,7 @@ const BottomNavbar = () => {
             className="header-menu-item"
           >
             <span>
-              <UserIcon className="w-7 h-7" />
+              <NavBottomUser className="w-7 h-7" />
             </span>
             <span className="text-[9px] pt-1">Профиль</span>
           </button>
@@ -208,7 +207,7 @@ const BottomNavbar = () => {
       ) : (
         <button onClick={() => setIsOpen(!isOpen)} className="header-menu-item">
           <span>
-            <UserIcon className="w-7 h-7" />
+            <NavBottomUser className="w-7 h-7" />
           </span>
           <span className="text-[9px] pt-1">Профиль</span>
         </button>
@@ -221,20 +220,23 @@ const BottomNavbar = () => {
     </div>
   );
 };
-
 const NavItem = ({
   src,
   label,
   href,
 }: {
-  src: StaticImageData;
+  src: StaticImageData | React.FC<{ className?: string }>;
   label: string;
   href: string;
 }) => {
   return (
-    <Link href={href} className="flex flex-c11ol items-center gap-1">
+    <Link href={href} className="flex flex-col items-center gap-1">
       <div className="relative w-[28px] h-[28px]">
-        <Image src={src} alt={label} fill className="object-contain" />
+        {typeof src === "function" ? (
+          React.createElement(src, { className: "w-full h-full" })
+        ) : (
+          <Image src={src} alt={label} fill className="object-contain" />
+        )}
       </div>
       <span className="text-[9px] text-textColor">{label}</span>
     </Link>
