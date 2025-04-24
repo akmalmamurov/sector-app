@@ -1,4 +1,4 @@
-import { CompareIcon, GoToSectionIcon, HeartActiveIcon, HeartIcon } from "@/assets/icons";
+import { CompareIcon, CompareSucessIcon, GoToSectionIcon, HeartActiveIcon, HeartIcon } from "@/assets/icons";
 import useStore from "@/context/store";
 import { CatalogData } from "@/types";
 import Link from "next/link";
@@ -37,7 +37,7 @@ const MobileGoSection = ({
         <div className="flex items-center">
           <span>
             {compares?.length > 0 ? (
-              <CompareIcon className="text-cerulean" />
+              <CompareSucessIcon className="text-cerulean" />
             ) : (
               <CompareIcon className="text-darkSoul" />
             )}
