@@ -1,11 +1,10 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
 import Image, { StaticImageData } from "next/image";
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import useStore from "@/context/store";
-import { MenuLegalIcon, NavBottomCart, UserIcon } from "@/assets/icons";
+import { MenuLegalIcon, NavBottomCart, } from "@/assets/icons";
 import LoginModal from "../modal/LoginModal";
 import { X } from "lucide-react";
 import { profileMenuData } from "@/data";
