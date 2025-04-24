@@ -46,7 +46,7 @@ const SettingsPage = () => {
             </span>
           </button>
         </div>
-        <div className="border-b border-superSilver pt-5 pb-2">
+        <div className="border-b border-superSilver pt-5 pb-2 hidden">
           <div className="block lg:grid grid-cols-11 gap-6 items-center mb-3">
             <p className="text-[#000000DE] text-sm col-span-2">Уведомления</p>
             <div className="col-span-9 -ml-3 sm:-ml-0 place-self-start">

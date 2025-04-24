@@ -31,11 +31,10 @@ export const AccountMe = () => {
 
   const onSubmit = async (data: { name: string; email: string }) => {
     try {
-      const res =  await request.put(UPDATE_ME, data);
+      const res = await request.patch(UPDATE_ME, data);
       queryClient.invalidateQueries({ queryKey: ["user"] });
       showSuccess("Данные успешно обновлены");
-      console.log(res);
-      
+
       localStorage.setItem("sector-token", res.data.token);
     } catch (error) {
       console.log(error);

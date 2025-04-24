@@ -38,6 +38,7 @@ export const AccountPassword = () => {
   const [showOld, setShowOld] = useState(false);
   const [showNew, setShowNew] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+console.log(userData);
 
   const onSubmit = async (data: {
     oldPassword: string;
@@ -83,7 +84,7 @@ export const AccountPassword = () => {
                       type={showOld ? "text" : "password"}
                       autoComplete="off"
                       {...register("oldPassword", {
-                        required: "Введите старый пароль",
+                        required: false,
                       })}
                       className="border w-full border-superSilver h-10 px-[15px] focus:outline-none hover:border-cerulean/80 focus:border-cerulean"
                     />

@@ -1,18 +1,13 @@
 import { X } from "lucide-react";
-import { DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "../ui/form";
-import LoginBrowser from "./LoginBrowser";
 import { UseFormReturn } from "react-hook-form";
-import { Button } from "../ui/button";
-import axios from "axios";
+import { Form, FormControl, FormField, FormItem, FormMessage, } from "../ui/form";
+import { DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { showError, showSuccess } from "../toast/Toast";
+import { LOGIN_PASSWORD } from "@/constants";
+import LoginBrowser from "./LoginBrowser";
 import useStore from "@/context/store";
+import { Button } from "../ui/button";
+import request from "@/services";
 
 interface Props {
   handleClose: (newStep?: number) => void;
@@ -30,26 +25,18 @@ const LoginPassword = ({ handleClose, formMethods, fullClose }: Props) => {
 
   const onSubmitStep2 = async (data: { email: string; password: string }) => {
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/user/auth/login`,
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await request.post(LOGIN_PASSWORD, data);
       if (response.statusText === "OK") {
         fullClose();
         setAuth(true);
         localStorage.setItem("sector-token", response.data.token);
         showSuccess("Вы успешно вошли в систему!");
       }
-
-      return response.data;
-    } catch (error) {
-      console.error("Login error:", error);
-      showError("Ошибка входа");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      if (error.status === 400) {
+        showError("Парол или E-mail неверны");
+      }
     }
   };
 

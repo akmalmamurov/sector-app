@@ -11,7 +11,6 @@ export default function ProfileLayout({
       <Container>
         <div className="bg-white shadow-sectionShadow border overflow-hidden">
           <ProfileHeader />
-
           <div className="p-6">{children}</div>
         </div>
       </Container>

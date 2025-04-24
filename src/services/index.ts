@@ -1,5 +1,8 @@
+import useStore from '@/context/store';
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
-
+interface ErrorResponse {
+  message: string;
+}
 const request = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL, 
   headers: {
@@ -18,6 +21,22 @@ request.interceptors.request.use(
     return config;
   },
   (error: AxiosError) => Promise.reject(error)
+);
+request.interceptors.response.use(
+  response => response,
+  (error: AxiosError<ErrorResponse>) => {
+    if (
+      error.response?.status === 401 &&
+      error.response.data?.message  === 'Invalid or expired token'
+    ) {
+      useStore.getState().logOut();            
+
+      if (typeof window !== 'undefined') {
+        window.location.href = '/';           
+      }
+    }
+    return Promise.reject(error);
+  }
 );
 
 export default request;
