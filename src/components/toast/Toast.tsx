@@ -1,3 +1,4 @@
+import Link from "next/link";
 import toast, { Toast } from "react-hot-toast";
 
 type ToastType = "success" | "warning" | "info" | "error";
@@ -5,6 +6,8 @@ type ToastType = "success" | "warning" | "info" | "error";
 interface ToastProps {
   message: string;
   type: ToastType;
+  href?: string;
+  hrefName?: string;
 }
 
 const toastStyles: Record<ToastType, { bg: string; text: string }> = {
@@ -14,7 +17,7 @@ const toastStyles: Record<ToastType, { bg: string; text: string }> = {
   error: { bg: "#FF3333", text: "#FFFFFF" },
 };
 
-const showToast = ({ message, type }: ToastProps) => {
+export const showToast = ({ message, type, href, hrefName }: ToastProps) => {
   toast.custom((t: Toast) => {
     const { bg, text } = toastStyles[type];
 
@@ -23,12 +26,23 @@ const showToast = ({ message, type }: ToastProps) => {
         className="toastStyle max-w-[500px] w-full py-[15px] pl-[30px] pr-[23px] shadow-toastShadow"
         style={{ backgroundColor: bg }}
       >
-        <div className="h-full w-full flex items-center gap-2 sm:gap-4 justify-between">
+        <div className="h-full w-full flex flex-col ">
           <p className="font-normal text-sm " style={{ color: text }}>
             {message}
           </p>
-          <button
-            className="cursor-pointer text-white"
+          <div className="flex w-full justify-end mt-[15px]">
+            {href && (
+              <Link
+                href={href}
+                onClick={() => toast.remove(t.id)}
+                className="font-normal text-sm text-white underline "
+              >
+                {hrefName}
+              </Link>
+            )}
+          </div>
+          <span
+            className="cursor-pointer text-white absolute top-[18px] right-5"
             onClick={() => toast.remove(t.id)}
           >
             <svg
@@ -46,16 +60,18 @@ const showToast = ({ message, type }: ToastProps) => {
               <path d="M18 6 6 18" />
               <path d="m6 6 12 12" />
             </svg>
-          </button>
-          
+          </span>
         </div>
       </div>
     );
   });
 };
 
-export const showSuccess = (message: string) =>
-  showToast({ message, type: "success" });
+export const showSuccess = (
+  message: string,
+  href?: string,
+  hrefName?: string
+) => showToast({ message, type: "success", href, hrefName });
 export const showWarning = (message: string) =>
   showToast({ message, type: "warning" });
 export const showInfo = (message: string) =>

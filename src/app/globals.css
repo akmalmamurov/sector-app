@@ -174,7 +174,7 @@ input[type="number"]::-webkit-inner-spin-button {
     @apply list-decimal;
   }
   .prose img {
-    @apply rounded-lg shadow-lg;
+    @apply rounded-lg shadow-md;
   }
 }
 .faq-section {
@@ -239,7 +239,7 @@ strong {
   left: 0;
   right: 0;
 }
-.container__fDUh1.__bottom__x1eNT,
-.container__Jrqgx.__bottom__OkLN6 {
+
+#jvLabelWrap{
   display: none !important;
 }
