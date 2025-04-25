@@ -33,3 +33,4 @@ export const UPDATE_CART = "/user/cart/update-amount";
 export const TOGGLE_FAVORITES = "/user/product/toggle-saved";
 export const GET_SAVED = "/user/product/saved-products";
 export const DELETE_FAVORITES = "/user/product/delete-saved";
+export const THRESHOLD = 500;
