@@ -48,7 +48,7 @@ export const AddToCart = ({
         message: `Товар ${product.articul} добавлен в корзину`,
         type: "success",
         href: "/cart",
-        hrefName: "в корзине",
+        hrefName: "Перейти в корзине",
       });
     } catch (error) {
       showError("Не удалось добавить товар в корзину");

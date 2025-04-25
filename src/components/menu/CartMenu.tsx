@@ -14,7 +14,6 @@ import PriceFormatter from "../format-price/PriceFormatter";
 import request from "@/services";
 import { useConfirmModal } from "@/hooks";
 import { ConfirmModal } from "../modal";
-
 export const CartMenu = () => {
   const cart = useStore((s) => s.cart);
   const auth = useStore((s) => s.auth);
@@ -28,6 +27,7 @@ export const CartMenu = () => {
   const { isOpen, message, openModal, closeModal, onConfirm } =
     useConfirmModal();
   const cartProduct = auth ? product : cart;
+  const containerHeight = cartProduct?.length > 10;
   const queryClient = useQueryClient();
   const handleDelete = (id: string) => {
     openModal("Вы уверены, что хотите удалить товар из корзины?", async () => {
@@ -73,14 +73,14 @@ export const CartMenu = () => {
             <X />
           </button>
         </div>
-        <div className="py-[15px]">
+        <div className={`py-[15px] ${containerHeight ? "h-[580px]" : ""} overflow-y-auto`}>
           {cartProduct?.map((product: ProductData) => (
             <div
               key={product.id}
               className="px-[15px] h-[58px] flex items-center justify-between border-b border-superSilver group"
             >
               {/* product image */}
-              <div className="mr-[10px]">
+              <div className="mr-2">
                 <Image
                   src={`${DOMAIN}/${product.mainImage}`}
                   alt="product-image"
@@ -90,7 +90,7 @@ export const CartMenu = () => {
                 />
               </div>
               {/* product title */}
-              <div className="max-w-[276px]">
+              <div className="max-w-[272px]">
                 <Link
                   href={`/catalog/${product.subcatalog.slug}/${product.category.slug}/${product.slug}`}
                   className="text-sm font-semibold h-[42px] line-clamp-2 text-textColor w-full"
@@ -99,7 +99,7 @@ export const CartMenu = () => {
                 </Link>
               </div>
               {/* product price */}
-              <div className="h-[21px] min-w-[54px] relative flex items-center text-sm text-textColor gap-1 ">
+              <div className="h-[21px] min-w-[54px] relative flex items-center text-sm text-textColor gap-[3px] ">
                 <span className="font-semibold group-hover:opacity-0">
                   1 шт
                 </span>
@@ -118,6 +118,27 @@ export const CartMenu = () => {
               </div>
             </div>
           ))}
+        </div>
+        <div>
+          <div className="m-[15px] flex justify-end">
+            <div className="text-sm text-cerulean flex gap-2">
+              <p>Итого:</p>
+              <PriceFormatter
+                amount={cartProduct?.reduce(
+                  (acc: number, item: ProductData) => acc + item.price,
+                  0
+                )}
+              />
+            </div>
+          </div>
+          <div className="m-[15px] flex">
+            <Link
+              href={"/cart"}
+              className="w-full bg-cerulean text-white py-[11px] text-sm font-medium flex items-center justify-center"
+            >
+              Перейти в корзину
+            </Link>
+          </div>
         </div>
         <span className="bg-white w-[13px] h-[13px] z-[3] rotate-45 absolute -top-[7px] right-[23px] border-l border-t border-superSilver"></span>
       </PopoverContent>
