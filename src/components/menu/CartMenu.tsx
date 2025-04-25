@@ -73,7 +73,9 @@ export const CartMenu = () => {
             <X />
           </button>
         </div>
-        <div className={`py-[15px] ${containerHeight ? "h-[580px]" : ""} overflow-y-auto`}>
+        <div
+          className={`py-[15px] ${containerHeight ? "h-[580px]" : ""} overflow-y-auto`}
+        >
           {cartProduct?.map((product: ProductData) => (
             <div
               key={product.id}
@@ -92,6 +94,7 @@ export const CartMenu = () => {
               {/* product title */}
               <div className="max-w-[272px]">
                 <Link
+                  onClick={() => setOpen(false)}
                   href={`/catalog/${product.subcatalog.slug}/${product.category.slug}/${product.slug}`}
                   className="text-sm font-semibold h-[42px] line-clamp-2 text-textColor w-full"
                 >

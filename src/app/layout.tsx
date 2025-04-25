@@ -47,7 +47,6 @@ export default function RootLayout({
               top: "20px",
             }}
           />
-
           <Footer />
         </RootProviders>
         <script src="//code.jivosite.com/widget/UP0xqFFMzr" async></script>

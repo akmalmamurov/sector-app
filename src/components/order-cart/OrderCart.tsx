@@ -6,14 +6,17 @@ import PriceFormatter from "../format-price/PriceFormatter";
 import { ProductData } from "@/types";
 import useStore from "@/context/store";
 import { LoginModal } from "../modal";
+import { useScrollDirection } from "@/hooks";
 
 const OrderCart = ({ selectedCards }: { selectedCards: ProductData[] }) => {
+  const scrollDir = useScrollDirection();
+  const isScroll = scrollDir === "up" ? true : false;
   const { selectedCardsList, auth } = useStore();
   const selectedTotal = selectedCards.reduce(
     (sum, item) => sum + (item.price || 0) * (item.count || 1),
     0
   );
-  
+
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => setIsOpen(!isOpen);
   const pathname = usePathname();
@@ -23,7 +26,9 @@ const OrderCart = ({ selectedCards }: { selectedCards: ProductData[] }) => {
     selectedCardsList(selectedCards);
   };
   return (
-    <div className="bg-white border border-superSilver shadow-sectionShadow p-[23px] sticky top-[140px]">
+    <div
+      className={`bg-white border border-superSilver shadow-sectionShadow p-[23px] sticky ${isScroll ? "top-[140px]" : "top-2"}`}
+    >
       <div>
         <div className="flex justify-between items-center mb-5">
           <p className="text-[18px] leading-[27px] font-normal text-stoneCold">
