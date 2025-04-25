@@ -133,6 +133,7 @@ export const CartMenu = () => {
           </div>
           <div className="m-[15px] flex">
             <Link
+              onClick={() => setOpen(false)}
               href={"/cart"}
               className="w-full bg-cerulean text-white py-[11px] text-sm font-medium flex items-center justify-center"
             >
