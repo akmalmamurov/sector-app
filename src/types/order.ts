@@ -1,6 +1,10 @@
+export interface ProductDetails {
+  productId: string;
+  count: number;
+}
 export interface OrderRequest {
   city: string;
-  products: string[];
+  productDetails: ProductDetails[];
   total: number;
   lastname: string;
   firstname: string;

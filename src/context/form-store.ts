@@ -1,9 +1,13 @@
 import { DeliveryRequest, OrderRequest } from "@/types";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+export interface CartProduct {
+  productId: string;
+  count: number;
+}
 export interface CartState {
   city: string;
-  products: string[];
+  productDetails: CartProduct[];
   total: number;
 }
 export interface FormState {

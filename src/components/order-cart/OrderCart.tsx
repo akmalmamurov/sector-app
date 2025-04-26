@@ -13,6 +13,7 @@ const OrderCart = ({ selectedCards }: { selectedCards: ProductData[] }) => {
     (sum, item) => sum + (item.price || 0) * (item.count || 1),
     0
   );
+  
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => setIsOpen(!isOpen);
   const pathname = usePathname();

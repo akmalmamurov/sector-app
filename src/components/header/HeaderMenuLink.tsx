@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
-  CartIcon,
   CompareIcon,
   CompareSucessIcon,
   DiscountIcon,
@@ -12,22 +11,16 @@ import {
 } from "@/assets/icons";
 import useStore from "@/context/store";
 import LoginModal from "../modal/LoginModal";
-import { ProfileMenu } from "../menu";
+import { CartMenu, ProfileMenu } from "../menu";
 import { useQuery } from "@tanstack/react-query";
-import { getCart } from "@/api/cart";
 import { getSaved } from "@/api";
 
 const HeaderMenuLink = () => {
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => setIsOpen(!isOpen);
-  const { favorites, cart, compares, auth, setAuth } = useStore();
+  const { favorites, compares, auth, setAuth } = useStore();
   const [isMounted, setIsMounted] = useState(false);
 
-  const { data: product = [] } = useQuery({
-    queryKey: ["cart"],
-    queryFn: () => getCart(),
-    enabled: auth,
-  });
   const { data: saved = [] } = useQuery({
     queryKey: ["saved"],
     queryFn: () => getSaved(),
@@ -40,7 +33,7 @@ const HeaderMenuLink = () => {
   }, [setAuth]);
 
   if (!isMounted) return null;
-  const cartProduct = auth ? product : cart;
+
   const savedProduct = auth ? saved : favorites;
   return (
     <div className="lg:flex items-center gap-[7px] xl:gap-0">
@@ -78,6 +71,7 @@ const HeaderMenuLink = () => {
         )}
         <span className="header-menu-link">Сравнить</span>
       </Link>
+
       {/* Profile */}
       {auth ? (
         <ProfileMenu />
@@ -89,21 +83,8 @@ const HeaderMenuLink = () => {
           <span className="header-menu-link"> Войти</span>
         </button>
       )}
-      <Link href={"/cart"} className="header-menu-item">
-        { cartProduct?.length > 0 ? (
-          <span className="relative">
-            <CartIcon className="w-5 h-5 xl:w-6 xl:h-6" />
-            <span className="header-menu-badge">{cartProduct?.length}</span>
-          </span>
-        ) : (
-          <span>
-            <CartIcon className="w-5 h-5 xl:w-6 xl:h-6" />
-          </span>
-        )}
-
-        <span className="header-menu-link">Корзина</span>
-      </Link>
-
+      {/* cart menu */}
+      <CartMenu />
       <LoginModal isOpen={isOpen} handleOpen={handleOpen} />
     </div>
   );

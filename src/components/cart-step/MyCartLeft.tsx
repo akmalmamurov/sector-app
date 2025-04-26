@@ -92,7 +92,6 @@ const MyCartLeft: React.FC<CartLeftProps> = ({
     toggleSingleItem,
     favorites,
   };
-  console.log(cart);
   
 
   return (
