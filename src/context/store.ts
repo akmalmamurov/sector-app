@@ -25,6 +25,7 @@ interface StoreState {
   toggleFavorites: (product: ProductData) => void;
   addToCart: (product: ProductData) => void;
   selectedCardsList: (products: ProductData[]) => void;
+  removeSelectedCardsList: () => void;
   toggleCompare: (product: ProductData) => void;
   setQuantity: (id: string, count: number) => void;
   deleteFavorites: (id: string) => void;
@@ -67,7 +68,11 @@ const useStore = create<StoreState>()(
           selected: products,
         }));
       },
-
+      removeSelectedCardsList: () => {
+        set(() => ({
+          selected: [],
+        }));
+      },
       setContact: (info) => set({ contact: info }),
       toggleFavorites: (product) => {
         set((state) => {

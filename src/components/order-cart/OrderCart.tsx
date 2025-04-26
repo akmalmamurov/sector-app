@@ -1,22 +1,37 @@
 import { CircleAlert, Share2 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import PriceFormatter from "../format-price/PriceFormatter";
-import { ProductData } from "@/types";
+import { OrderRequest, ProductData } from "@/types";
 import useStore from "@/context/store";
 import { LoginModal } from "../modal";
 import { useScrollDirection } from "@/hooks";
+import formStore from "@/context/form-store";
+import { UseFormSetValue } from "react-hook-form";
 
-const OrderCart = ({ selectedCards }: { selectedCards: ProductData[] }) => {
+const OrderCart = ({
+  selectedCards,
+  setValue,
+}: {
+  selectedCards: ProductData[];
+  setValue?: UseFormSetValue<OrderRequest>;
+}) => {
   const scrollDir = useScrollDirection();
   const isScroll = scrollDir === "up" ? true : false;
   const { selectedCardsList, auth } = useStore();
+  const garanteePrice = formStore((s) => s.garanteePrice);
+
   const selectedTotal = selectedCards.reduce(
     (sum, item) => sum + (item.price || 0) * (item.count || 1),
     0
   );
-
+  const total = selectedTotal + (garanteePrice || 0);
+  useEffect(() => {
+    if (setValue) {
+      setValue("total", total);
+    }
+  }, [total, setValue]);
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => setIsOpen(!isOpen);
   const pathname = usePathname();
@@ -65,7 +80,7 @@ const OrderCart = ({ selectedCards }: { selectedCards: ProductData[] }) => {
           </p>
           <PriceFormatter
             className="text-cerulean font-normal text-[18px] leading-[27px]"
-            amount={selectedTotal}
+            amount={selectedCards.length ? total : 0}
           />
         </div>
 

@@ -45,7 +45,7 @@ const CartContactPage = () => {
     formState: { errors, submitCount, isValid },
   } = useForm<OrderRequest>({
     defaultValues: {
-      contrAgentId: "",
+      kontragentId: "",
     },
   });
 
@@ -71,7 +71,7 @@ const CartContactPage = () => {
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <input
           type="hidden"
-          {...register("contrAgentId", {
+          {...register("kontragentId", {
             required: "Пожалуйста, выберите контрагента",
           })}
         />
@@ -117,12 +117,12 @@ const CartContactPage = () => {
                 <button
                   type="button"
                   onClick={toggleOpen}
-                  className={` min-h-[229px]  cursor-pointer bg-custom border border-dashed ${!contrAgents?.length && errors?.contrAgentId ? "border-dangerColor" : "border-superSilver"} flex justify-center items-center flex-col gap-2`}
+                  className={` min-h-[229px]  cursor-pointer bg-custom border border-dashed ${!contrAgents?.length && errors?.kontragentId ? "border-dangerColor" : "border-superSilver"} flex justify-center items-center flex-col gap-2`}
                 >
                   <CirclePlus className="text-weekColor w-10 h-10" />
                   <p className="text-weekColor mt-2">Добавить контрагенты</p>
                 </button>
-                {!contrAgents?.length && errors?.contrAgentId && (
+                {!contrAgents?.length && errors?.kontragentId && (
                   <ErrorMessage>Пожалуйста, выберите контрагента</ErrorMessage>
                 )}
               </div>

@@ -1,6 +1,6 @@
 "use client";
-import { Fragment } from "react";
 import { useForm } from "react-hook-form";
+import { Fragment } from "react";
 import { useRouter } from "next/navigation";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
@@ -17,15 +17,19 @@ import request from "@/services";
 
 export default function CartPage() {
   const { cart, setQuantity, deleteCart, resetCart, auth } = useStore();
-  const { addCartForm, cartForm } = formStore();
+  const addCartForm = formStore((s) => s.addCartForm);
+  const cartForm = formStore((s) => s.cartForm);
   const queryClient = useQueryClient();
   const {
     handleSubmit,
     control,
     setValue,
     watch,
+    getValues,
     formState: { errors },
-  } = useForm<OrderRequest>({ defaultValues: { city: cartForm?.city || "" } });
+  } = useForm<OrderRequest>({
+    defaultValues: { city: cartForm?.city || "", total: 0, productDetails: [] },
+  });
 
   const { data: product = [] } = useQuery({
     queryKey: ["cart"],
@@ -34,6 +38,7 @@ export default function CartPage() {
   });
 
   const cartProduct = auth ? product : cart;
+
   const router = useRouter();
   const handeDeleteAll = async () => {
     if (auth) {
@@ -66,10 +71,26 @@ export default function CartPage() {
     }
   };
   const onSubmit = (data: OrderRequest) => {
-    addCartForm(data);
-    console.log(data);
+    const { productDetails, ...rest } = data;
+  
+    // build a new details array:
+    const normalizedDetails = productDetails.map((item) => {
+      const { garanteeId, ...detailWithoutGuarantee } = item;
+      return garanteeId && garanteeId !== "0"
+        ? { ...detailWithoutGuarantee, garanteeId }
+        : detailWithoutGuarantee;
+    });
+  
+    const payload: OrderRequest = {
+      ...rest,
+      productDetails: normalizedDetails,
+    };
+  
+    addCartForm(payload);
+    console.log(payload);
     router.push("/cart/contacts");
   };
+  
 
   const {
     isClient,
@@ -103,10 +124,11 @@ export default function CartPage() {
                 deleteCart={handleDelete}
                 resetCart={handeDeleteAll}
                 cartForm={cartForm}
+                getValues={() => getValues('productDetails')}
               />
             </div>
             <div className="col-span-1">
-              <OrderCart selectedCards={selectedCards} />
+              <OrderCart selectedCards={selectedCards} setValue={setValue}/>
             </div>
           </div>
         </form>

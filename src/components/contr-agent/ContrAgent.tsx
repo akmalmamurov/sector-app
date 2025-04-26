@@ -42,7 +42,7 @@ export const ContrAgent = memo(
     useEffect(() => {
       const fav = contrAgents.find((c) => c.isFavorite);
       if (fav && setValue) {
-        setValue("contrAgentId", fav.id);
+        setValue("kontragentId", fav.id);
       }
       if (fav) {
         setAgent(fav.id);
@@ -53,7 +53,7 @@ export const ContrAgent = memo(
       try {
         await updateAgent(id);
         queryClient.invalidateQueries({ queryKey: ["contragents"] });
-        if (setValue) setValue("contrAgentId", id);
+        if (setValue) setValue("kontragentId", id);
         setAgent(id);
       } catch (error) {
         console.error(error);

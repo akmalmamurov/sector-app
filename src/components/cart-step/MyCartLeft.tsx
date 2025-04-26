@@ -1,4 +1,10 @@
-import { Controller, Control, FieldErrors, UseFormSetValue, UseFormWatch, } from "react-hook-form";
+import {
+  Controller,
+  Control,
+  FieldErrors,
+  UseFormSetValue,
+  UseFormWatch,
+} from "react-hook-form";
 import { Check, CircleAlert, X } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 
@@ -25,6 +31,7 @@ interface CartLeftProps {
   watch: UseFormWatch<OrderRequest>;
   setValue: UseFormSetValue<OrderRequest>;
   cartForm: CartState | null;
+  getValues: () => OrderRequest["productDetails"] | undefined;
 }
 type regionProps = {
   name: string;
@@ -45,6 +52,7 @@ const MyCartLeft: React.FC<CartLeftProps> = ({
   watch,
   setValue,
   cartForm,
+  getValues,
 }) => {
   const { favorites } = useStore();
   const [search, setSearch] = useState("");
@@ -91,8 +99,9 @@ const MyCartLeft: React.FC<CartLeftProps> = ({
     selectedItems,
     toggleSingleItem,
     favorites,
+    setValue,
+    getValues,
   };
-  
 
   return (
     <div className="col-span-3">

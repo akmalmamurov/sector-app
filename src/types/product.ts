@@ -1,5 +1,9 @@
 import { BrandData } from "./brand";
-
+export interface garanteesData {
+  id: string;
+  title: string;
+  price: string;
+}
 export interface ProductData {
   id: string;
   title: string;
@@ -28,6 +32,7 @@ export interface ProductData {
   fullDescription?: string;
   fullDescriptionImages?: string[] | string;
   garanteeIds?: string[];
+  garantees: garanteesData[];
 }
 type Options = {
   name: string;
