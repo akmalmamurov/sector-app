@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { getFilter } from "@/api";
+import { getFilter, getFilterSearch } from "@/api";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import FilterIcon from "@/assets/icons/FilterIcon";
@@ -9,8 +9,15 @@ import { Section } from "../section";
 import { SearchIcon } from "@/assets/icons";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { CatalogData, CategoryData, SubcatalogData } from "@/types";
+import {
+  CatalogData,
+  CategoryData,
+  ProductData,
+  SubcatalogData,
+} from "@/types";
 import CustomRangeSlider from "../slider/CustomRangeSlider";
+import { useSetOptionsQuery } from "@/hooks/useSetOptionsQuery";
+import { useGetOptionsQuery } from "@/hooks/useGetOptionsQuery";
 
 interface FilterOption {
   title: string;
@@ -26,6 +33,12 @@ interface FilterItem {
   type: string;
   title: string;
   options: FilterOption[];
+  withSearch?: boolean;
+}
+
+interface FilterSearchItem {
+  filteredCategoryFilter: FilterItem[];
+  filteredProducts: ProductData[];
 }
 
 interface CategoryLeftProps {
@@ -34,7 +47,7 @@ interface CategoryLeftProps {
   catalogItem?: CatalogData;
   mainSlug?: string;
 }
-interface FilterOptionRequest {
+export interface FilterOptionRequest {
   name: string;
   options: { name: string | undefined }[];
 }
@@ -45,15 +58,39 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
   catalogItem,
   mainSlug,
 }) => {
+  const { getOptions } = useGetOptionsQuery();
+  const [filterCheckedData, setFilterCheckedData] =
+    useState<FilterOptionRequest[]>(getOptions());
   const { data, isLoading, isError } = useQuery<FilterItem[]>({
     queryKey: ["filter", slug, paramKey],
     queryFn: () => getFilter(slug || "", paramKey || ""),
   });
-  const [isShow, setIsShow] = useState(false);
+  const { setOptions } = useSetOptionsQuery();
 
-  const [filterCheckedData, setFilterCheckedData] = useState<
-    FilterOptionRequest[]
-  >([]);
+  const { data: filterSearch } = useQuery<FilterSearchItem>({
+    queryKey: ["filterSearch", filterCheckedData, mainSlug, slug, paramKey],
+    queryFn: () =>
+      getFilterSearch({
+        subcatalogSlug: mainSlug ? null : slug,
+        categorySlug: mainSlug ? slug : null,
+        options: filterCheckedData.map((filter) => ({
+          name: filter.name,
+          options: filter.options.map((option) => ({
+            name: option.name || null,
+          })),
+        })),
+      }),
+  });
+
+  useEffect(() => {
+    setOptions(
+      filterCheckedData.map((filter) => ({
+        name: filter.name,
+        options: filter.options.map((option) => ({ name: option.name || "" })),
+      }))
+    );
+  }, [filterCheckedData]);
+  const [isShow, setIsShow] = useState(false);
 
   if (isLoading) {
     return <div>Loading filters...</div>;
@@ -62,6 +99,7 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
   if (isError || !data) {
     return <div>Error loading filters.</div>;
   }
+
   function handleLinkClick(filterName: string, url: string) {
     console.log(url);
     console.log(filterName);
@@ -123,37 +161,42 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
           <h3 className="text-base font-normal text-textColor">Фильтры</h3>
         </div>
 
-        <div className="mb-4">
-          <div className="flex items-center mb-2 bg-background px-5 py-3">
-            <Image
-              src={"/subcategories.svg"}
-              width={25}
-              height={25}
-              alt={"categories"}
-              className="w-6 h-6 mr-3"
-            />
-            <h3 className="text-sm font-normal text-textColor">Подкатегории</h3>
-          </div>
-          <div className="px-5 pt-3">
-            <ul className="list-disc pl-5 pb-2">
-              {(
-                (catalogItem?.categories as CategoryData[]) ||
-                (catalogItem?.subcatalogs as SubcatalogData[])
-              )?.map((category, idx) => (
-                <li key={idx} className="mb-1 marker:text-textColor">
-                  <Link
-                    href={`/catalog/${catalogItem?.slug}/${category.slug}`}
-                    className="hover:text-blue-500 transition-colors duration-200 text-xs font-normal text-textColor"
-                  >
-                    {category.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        {(catalogItem?.categories?.length || 0) > 0 ||
+          ((catalogItem?.subcatalogs?.length || 0) > 0 && (
+            <div className="mb-4">
+              <div className="flex items-center mb-2 bg-background px-5 py-3">
+                <Image
+                  src={"/subcategories.svg"}
+                  width={25}
+                  height={25}
+                  alt={"categories"}
+                  className="w-6 h-6 mr-3"
+                />
+                <h3 className="text-sm font-normal text-textColor">
+                  Подкатегории
+                </h3>
+              </div>
+              <div className="px-5 pt-3">
+                <ul className="list-disc pl-5 pb-2">
+                  {(
+                    (catalogItem?.categories as CategoryData[]) ||
+                    (catalogItem?.subcatalogs as SubcatalogData[])
+                  )?.map((category, idx) => (
+                    <li key={idx} className="mb-1 marker:text-textColor">
+                      <Link
+                        href={`/catalog/${catalogItem?.slug}/${category.slug}`}
+                        className="hover:text-blue-500 transition-colors duration-200 text-xs font-normal text-textColor"
+                      >
+                        {category.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
 
-        {data?.slice(0, isShow ? data.length : 5).map((filter, index) => (
+        {data.slice(0, isShow ? data?.length : 5).map((filter, index) => (
           <div key={index} className="mb-4">
             <div className="flex items-center mb-2 bg-background px-5 py-3">
               <Image
@@ -176,6 +219,13 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
                     <li key={idx} className="mb-2.5 text-xs font-normal">
                       <label className="cursor-pointer flex items-center text-xs font-normal text-textColor">
                         <Checkbox
+                          checked={filterCheckedData.some(
+                            (item) =>
+                              item.name === filter.name &&
+                              item.options.some(
+                                (itemOption) => itemOption.name === option.name
+                              )
+                          )}
                           value={option.value}
                           onCheckedChange={() =>
                             handleFilterChecked(option, filter.name)

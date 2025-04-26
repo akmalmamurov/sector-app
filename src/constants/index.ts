@@ -13,6 +13,7 @@ export const GET_PROMOTION_SINGLE = "/user/promotion";
 export const GET_REGION = "/user/region/all"
 export const GET_ME = "/user/auth/me"
 export const GET_PRODUCT_FILTER = "/user/filter";
+export const GET_PRODUCT_FILTER_SEARCH = "/user/filter/search";
 export const CREATE_AGENT = "/user/kontragent/create"
 export const CREATE_AGENT_ADDRESS = "/user/kontragent-address/create"
 export const UPDATE_AGENT_ADDRESS = "/user/kontragent-address/update"
