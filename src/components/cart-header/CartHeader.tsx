@@ -3,7 +3,11 @@ import { StepperIcon, StepperOtherIcon } from "@/assets/icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const CartHeader = () => {
+interface CartHeaderProps {
+  currentStep?: 1 | 2;
+}
+
+const CartHeader: React.FC<CartHeaderProps> = ({ currentStep }) => {
   const pathname = usePathname();
 
   const activeStep = (() => {
@@ -17,32 +21,32 @@ const CartHeader = () => {
   const routes = ["/cart", "/cart/contacts", "/cart/delivery", "/cart/final"];
 
   const renderStep = (index: number, label: string) => {
-    const isVisitedOrCurrent = index <= activeStep;
-    const colorClass = isVisitedOrCurrent ? "text-cerulean" : "text-gray-400";
-    const IconComponent = index === 0 ? StepperIcon : StepperOtherIcon;
+    const visited = index <= activeStep;
+    const colorClass = visited ? "text-cerulean" : "text-gray-400";
+    const Icon = index === 0 ? StepperIcon : StepperOtherIcon;
+    const displayText = index === 0 ? label : `${index}. ${label}`;
 
-    const content = (
-      <div className="relative flex items-center justify-center group">
-        <IconComponent className={colorClass} />
+    const allowLink = currentStep === 1 && index < currentStep;
+
+    return (
+      <div key={index} className="relative flex items-center justify-center group">
+        <Icon className={colorClass} />
         <div className="absolute">
-          {activeStep <= index ? (
-            <p className={`text-sm font-medium ${colorClass}`}>
-              {index === 0 ? label : `${index}. ${label}`}
-            </p>
-          ) : (
+          {allowLink ? (
             <Link
               href={routes[index]}
               className={`text-sm font-medium ${colorClass} group-hover:underline hoverEffect`}
             >
-              {index === 0 ? label : `${index}. ${label}`}
+              {displayText}
             </Link>
+          ) : (
+            <p className={`text-sm font-medium ${colorClass}`}>{displayText}</p>
           )}
         </div>
       </div>
     );
-
-    return content;
   };
+
   return (
     <div className="grid grid-cols-4 gap-4">
       {renderStep(0, "Моя корзина")}

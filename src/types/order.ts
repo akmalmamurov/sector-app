@@ -1,9 +1,11 @@
+import { AddressData } from "./address";
+import { ContrAgentData } from "./agent-delivery";
+
 export interface ProductDetails {
   productId: string;
   count: number;
-  garanteeId?: string;   
+  garanteeId?: string;
 }
-
 
 export interface OrderRequest {
   productDetails: ProductDetails[];
@@ -14,9 +16,58 @@ export interface OrderRequest {
   total: number;
   lastname: string;
   firstname: string;
-  phone: number | string;
+  phone: string;
   email: string;
   fullname?: string;
   agentId?: string;
-  
+}
+
+export interface ContactData {
+  fullname: string;
+  email: string;
+  phone: string;
+  firstName: string;
+  lastName: string;
+}
+export interface OrderProductData {
+  id: string;
+  mainImage: string;
+  price: number;
+  productCode: string;
+  slug: string;
+  title: string;
+}
+export interface OrderProducts {
+  count: number;
+  price: number;
+  product: OrderProductData;
+  productId: string;
+  productLink: string;
+}
+export interface OrderResponse {
+  agent: AddressData;
+  agentId: string;
+  city: string;
+  comment: string | null;
+  contrAgentId: string;
+  deliveryMethod: string;
+  email: string;
+  fullname: string;
+  id: string;
+  kontragent: ContrAgentData;
+  orderNumber: string;
+  orderPriceStatus: string;
+  orderType: string;
+  paymentMethod: string | null;
+  phone: string;
+  products: OrderProducts[];
+  total: string;
+  user: {
+    email: string;
+    id: string;
+    name: string;
+    phone: string;
+  };
+  validEndDate: string;
+  validStartDate: string;
 }

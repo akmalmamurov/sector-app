@@ -22,13 +22,13 @@ const PriceFormatter = ({ amount, className }: Props) => {
   const [integerPart, fractionPart] = formattedWithoutCurrency.split(",");
 
   return (
-    <p className={cn("font-semibold", className)}>
+    <span className={cn("font-semibold", className)}>
       {integerPart}
       {fractionPart && fractionPart !== "00" && (
         <span className="text-xs text-darkSoul">,{fractionPart}</span>
       )}{" "}
       {currency}
-    </p>
+    </span>
   );
 };
 

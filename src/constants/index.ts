@@ -34,3 +34,6 @@ export const TOGGLE_FAVORITES = "/user/product/toggle-saved";
 export const GET_SAVED = "/user/product/saved-products";
 export const DELETE_FAVORITES = "/user/product/delete-saved";
 export const THRESHOLD = 500;
+export const CART_ORDER_CREATE = "/user/orders/create";
+export const GET_CART_ORDER = "/user/orders/get-all";
+export const GET_LAST_ORDER = "/user/orders/get-all?last=true";

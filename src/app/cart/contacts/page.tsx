@@ -25,7 +25,8 @@ import formStore from "@/context/form-store";
 
 const CartContactPage = () => {
   const { selected } = useStore();
-  const [phone, setPhone] = useState("+998 __ ___ ____");
+  const contactForm = formStore((state) => state.contactForm);
+  const [phone, setPhone] = useState<string>(contactForm?.phone.toString() || "+998 __ ___ ____");
   const [search, setSearch] = useState("");
   const auth = useRequireAuth();
   const { data: agentsData = [] } = useQuery({
@@ -46,6 +47,11 @@ const CartContactPage = () => {
   } = useForm<OrderRequest>({
     defaultValues: {
       kontragentId: "",
+      firstname: contactForm?.firstname || "",
+      lastname: contactForm?.lastname || "",
+      fullname: contactForm?.fullname || "",
+      email: contactForm?.email || "",
+      phone: contactForm?.phone || "",
     },
   });
 
