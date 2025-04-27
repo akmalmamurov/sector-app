@@ -31,22 +31,31 @@ const CartFinalPage = () => {
   const auth = useRequireAuth();
   const [comment, setComment] = useState("");
   const { data: contrAgent } = useQuery({
-    queryKey: ["contragents", contactForm?.contrAgentId],
-    queryFn: () => getAgentAdress(contactForm?.contrAgentId || ""),
-    enabled: !!contactForm?.contrAgentId,
+    queryKey: ["contragents", contactForm?.kontragentId],
+    queryFn: () => getAgentAdress(contactForm?.kontragentId || ""),
+    enabled: !!contactForm?.kontragentId,
   });
   if (!auth) return null;
   const handleFinal = () => {
-    const { address: _, ...deliveryWithoutAddress } = deliveryForm || {};
-
     const payload = {
-      ...cartForm,
-      ...deliveryWithoutAddress,
-      ...contactForm,
-      ...(comment.length > 0 && { comment }),
+      receiverInfo: {
+        fullname:
+          `${contactForm?.firstname || ""} ${contactForm?.lastname || ""} ${contactForm?.fullname || ""}`.trim(),
+        email: contactForm?.email,
+        phone: contactForm?.phone,
+      },
+      productDetails: cartForm?.productDetails,
+      orderInfo: {
+        deliveryMethod: deliveryForm?.deliveryMethod,
+        kontragentId: contactForm?.kontragentId,
+        ...(deliveryForm?.agentId && { agentId: deliveryForm?.agentId }),
+        city: cartForm?.city,
+        ...(comment.length > 0 && { comment }),
+        total: cartForm?.total,
+      },
     };
 
-    console.log(payload);
+    console.log("payload", payload);
   };
 
   return (

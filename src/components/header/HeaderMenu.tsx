@@ -38,6 +38,7 @@ const HeaderMenu = () => {
             alt="logo"
             width={155}
             height={50}
+            priority={false}
             className="xl:w-auto xl:h-auto w-[150px] h-[48px]"
           />
         </Link>

@@ -4,7 +4,7 @@ import { CartAddIcon } from "@/assets/icons";
 import useStore from "@/context/store";
 import { isProductInList } from "@/utils";
 import { ProductData } from "@/types";
-import { showError, showSuccess } from "../toast/Toast";
+import { showError, showToast } from "../toast/Toast";
 import FavoritCartIcon from "@/assets/icons/FavoritCartIcon";
 import request from "@/services";
 import { TOGGLE_CART } from "@/constants";
@@ -27,7 +27,6 @@ export const AddToCart = ({
     queryFn: getCart,
     enabled: auth && cart.length === 0,
   });
-  
 
   const cartList = auth ? serverCart : cart;
 
@@ -45,7 +44,12 @@ export const AddToCart = ({
       } else {
         addToCart({ ...product, count: count || 1 });
       }
-      showSuccess(`Товар ${product.articul} добавлен в корзину`);
+      showToast({
+        message: `Товар ${product.articul} добавлен в корзину`,
+        type: "success",
+        href: "/cart",
+        hrefName: "Перейти в корзине",
+      });
     } catch (error) {
       showError("Не удалось добавить товар в корзину");
       console.error(error);
@@ -54,7 +58,7 @@ export const AddToCart = ({
 
   return (
     <button
-    type="button"
+      type="button"
       onClick={handleToCart}
       disabled={isAddedToCart}
       className={`w-[42px] h-[42px] bg-lightBg rounded-full flex items-center justify-center ${
@@ -64,7 +68,10 @@ export const AddToCart = ({
       }`}
     >
       {isAddedToCart ? (
-        <Check className={`w-5 h-5 text-cerulean ${saved && "group-hover:text-white"}`} strokeWidth={2.65} />
+        <Check
+          className={`w-5 h-5 text-cerulean ${saved && "group-hover:text-white"}`}
+          strokeWidth={2.65}
+        />
       ) : saved ? (
         <FavoritCartIcon />
       ) : (

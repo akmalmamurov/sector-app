@@ -27,6 +27,7 @@ import { useCreateComment } from "@/api/product-comment";
 import { usePostQuestion } from "@/api/product-question";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useScrollDirection } from "@/hooks";
 interface Block {
   id: string;
   type: string;
@@ -124,6 +125,7 @@ function renderEditorBlocks(editorJson: EditorData, fullImages: string[]) {
 }
 
 export function ProductDescription({ product }: ProductDescriptionProps) {
+  const scrollDir = useScrollDirection();
   const [activeTab, setActiveTab] = useState("description");
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
   const [isOpen, setIsOpen] = useState(false);
@@ -149,7 +151,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
   const { mutate: postQuestion } = usePostQuestion();
   const handleOpen = () => setIsOpen(!isOpen);
   const handleOpen2 = () => setIsOpen2(!isOpen2);
-
+  const isScroll = scrollDir === "up" ? true : false;
   let fullImages: string[] = [];
   if (typeof product.fullDescriptionImages === "string") {
     try {
@@ -256,7 +258,9 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
   return (
     <>
       <div>
-        <div className="sticky top-[130px] z-[5] bg-white  flex border-b shadow-sectionShadow">
+        <div
+          className={`sticky ${isScroll ? "top-[130px]" : "top-0"} z-[5] bg-white  flex border-b shadow-sectionShadow`}
+        >
           {sections.map(({ id, label }) => {
             if (id === "description" && !editorContent) return null;
             if (

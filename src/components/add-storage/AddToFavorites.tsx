@@ -3,7 +3,7 @@ import useStore from "@/context/store";
 import { cn } from "@/lib/utils";
 import { ProductData } from "@/types";
 import { isProductInList } from "@/utils";
-import { showSuccess } from "../toast/Toast";
+import { showSuccess, showToast } from "../toast/Toast";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getSaved } from "@/api";
 import request from "@/services";
@@ -32,15 +32,25 @@ export const AddToFavorites = ({
       await request.post(TOGGLE_FAVORITES, { productId: product.id });
       queryClient.invalidateQueries({ queryKey: ["saved"] });
       if (isFavorite) {
-        showSuccess(`Удалено из избранного`);
+        showSuccess(`Товар ${product.articul} удален из избранного`);
       } else {
-        showSuccess(`Добавлено в избранное`);
+        showToast({
+          message: `Товар ${product.articul} добавлен в избранное`,
+          type: "success",
+          href: "/profile/favorites",
+          hrefName: "Перейти в избранное",
+        });
       }
     } else {
       if (isFavorite) {
-        showSuccess(`Удалено из избранного`);
+        showSuccess(`Товар ${product.articul} удален из избранного`);
       } else {
-        showSuccess(`Добавлено в избранное`);
+        showToast({
+          message: `Товар ${product.articul} добавлен в избранное`,
+          type: "success",
+          href: "/profile/favorites",
+          hrefName: "Перейти в избранное",
+        });
       }
       toggleFavorites(product);
     }

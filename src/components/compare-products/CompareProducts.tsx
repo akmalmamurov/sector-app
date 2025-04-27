@@ -12,6 +12,7 @@ import { Swiper as SwiperClass } from "swiper/types";
 import { ArrowRightIcon } from "@/assets/icons";
 import { WarningSector } from "../warning-sector";
 import { Loading } from "../loader";
+import { useScrollDirection } from "@/hooks";
 
 interface CharacteristicOption {
   name?: string;
@@ -36,7 +37,8 @@ export const CompareProducts = () => {
   const [isEnd, setIsEnd] = useState(false);
   const tableRef = useRef<HTMLTableElement>(null);
   const swiperRef = useRef<SwiperClass | null>(null);
-
+  const scrollDir = useScrollDirection();
+  const checkScroll = scrollDir === "up" ? true : false;
   useEffect(() => {
     const handleScroll = () => {
       if (tableRef.current) {
@@ -98,7 +100,7 @@ export const CompareProducts = () => {
       {compares?.length > 0 ? (
         <div>
           <div
-            className={`sticky top-[78px] lg:top-[130px] md:z-[3] bg-white ${isScroll ? "shadow-md" : ""}`}
+            className={`sticky ${checkScroll ? "top-[78px] lg:top-[130px]" : "top-0"}  md:z-[3] bg-white ${isScroll ? "shadow-md" : ""}`}
           >
             <div
               className={`border-b py-[15px] border-superSilver px-6 ${isScroll && "hidden md:block"}`}
@@ -107,7 +109,9 @@ export const CompareProducts = () => {
                 Все товары ({products.length})
               </h3>
             </div>
-            <div  className={`sticky md:sticky-none top-[78px] lg:top-[130px] md:z-[3] bg-white ${isScroll ? "shadow-md" : ""}`}>
+            <div
+              className={`sticky md:sticky-none ${checkScroll ? "top-[78px] lg:top-[130px]" : "top-0"} md:z-[3] bg-white ${isScroll ? "shadow-md" : ""}`}
+            >
               {isScroll && (
                 <div className="px-0 md:px-6 ">
                   <div className="relative group">

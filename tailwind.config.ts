@@ -44,6 +44,7 @@ export default {
         greenLight: "#6AB04C",
         background: "#FAFAFA",
         superSilver: "#EEEEEE",
+        bleachedSilk: "#F3F3F3",
         textColor: "#333333",
         cottonBall: "#F2F6FB",
         whisperBlue: "#E5EAF1",

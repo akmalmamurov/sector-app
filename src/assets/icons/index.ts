@@ -57,3 +57,4 @@ export * from "./NavBottomHome";
 export * from "./NavBottomInfo";
 export * from "./NavBottomUser";
 export * from "./NavBottomCatalog";
+export * from "./GaranteeAddIcon"
