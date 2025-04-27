@@ -18,15 +18,14 @@ export const CounterInput = ({
   onDecrease,
 }: CounterInputProps) => {
   return (
-    <div className="flex flex-col gap-2">
-      <Label className="text-[14px]">{label}</Label>
-      <div className="relative border border-gray-300 rounded-lg px-4 py-2 flex items-center justify-between">
+    <div className="flex items-center md:gap-8 gap-4 ">
+      <div className="relative border border-gray-300 rounded-lg px-4 py-1 flex items-center justify-between min-w-[125px] min-h-[45px]">
         <span className="text-lg font-semibold">{value}</span>
-        <div className="flex flex-col items-center gap-1">
+        <div className="flex flex-col items-center ">
           <button
             type="button"
             onClick={onIncrease}
-            className="hover:bg-gray-100 p-1 rounded"
+            className="hover:bg-gray-100 p-1 rounded "
           >
             <ChevronUp size={18} />
           </button>
@@ -34,7 +33,7 @@ export const CounterInput = ({
             type="button"
             onClick={onDecrease}
             className={cn(
-              "hover:bg-gray-100 p-1 rounded",
+              "hover:bg-gray-100 rounded",
               value === 1 && "opacity-50 pointer-events-none"
             )}
           >
@@ -42,6 +41,7 @@ export const CounterInput = ({
           </button>
         </div>
       </div>
+      <Label className="text-[14px]">{label}</Label>
     </div>
   );
 };

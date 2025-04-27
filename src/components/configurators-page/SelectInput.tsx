@@ -9,34 +9,40 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-interface SelectInputProps {
+interface SelectNumberInputProps {
   label: string;
-  options: { label: string; value: string }[];
+  maxNumber: number; // maximum number (for example 10 or 30)
   value: string;
   onChange: (value: string) => void;
 }
 
-export const SelectInput = ({
+export const SelectNumberInput = ({
   label,
-  options,
+  maxNumber,
   value,
   onChange,
-}: SelectInputProps) => {
+}: SelectNumberInputProps) => {
   return (
-    <div className="flex flex-col gap-2">
-      <Label className="text-[14px]">{label}</Label>
-      <Select onValueChange={onChange} value={value}>
-        <SelectTrigger className="border border-gray-300 rounded-lg px-4 py-2">
-          <SelectValue placeholder="Выберите" />
-        </SelectTrigger>
-        <SelectContent>
-          {options.map((option) => (
-            <SelectItem key={option.value} value={option.value}>
-              {option.label}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+    <div className="flex gap-4 md:gap-8 items-center">
+      <div className="">
+        <Select onValueChange={onChange} value={value}>
+          <SelectTrigger className="border text-lg font-semibold w-[125px] h-[45px] border-gray-300 rounded-lg px-4 py-2 outline-none">
+            <SelectValue className="text-5" placeholder="Выберите" />
+          </SelectTrigger>
+          <SelectContent className="text-5">
+            {Array.from({ length: maxNumber }, (_, i) => (
+              <SelectItem
+                className="text-5 "
+                key={i + 1}
+                value={(i + 1).toString()}
+              >
+                {i + 1}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      <Label className="text-[14px] text-wrap">{label}</Label>
     </div>
   );
 };
