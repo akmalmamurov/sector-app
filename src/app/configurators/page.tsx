@@ -15,6 +15,7 @@ import Image from "next/image";
 import { InfoHeader } from "@/components/div";
 import { InfoTitle } from "@/components/title";
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Конфигураторы оборудования | Sector App",
@@ -92,7 +93,11 @@ const Configurators = () => {
                 вашу задачу и нагрузку, действуют спец. цены и предложения.
               </p>
 
-              <button className="group mt-[17px] text-center flex justify-center items-center text-white bg-[#6AB04C] w-[261px] h-[42px] rounded-[10px] hover:bg-[#5a9e40] transition-all duration-300 mb-4">
+              {/* Link to calc_servers page */}
+              <Link
+                href="/configurators/calc_servers"
+                className="group mt-[17px] text-center flex justify-center items-center text-white bg-[#6AB04C] w-[261px] h-[42px] rounded-[10px] hover:bg-[#5a9e40] transition-all duration-300 mb-4"
+              >
                 <p className="relative flex items-center">
                   <Image
                     src={rightVector}
@@ -103,7 +108,7 @@ const Configurators = () => {
                 <p className="pl-[13px] flex justify-center items-center">
                   Открыть конфигуратор
                 </p>
-              </button>
+              </Link>
             </div>
           </div>
         </section>
@@ -129,7 +134,10 @@ const Configurators = () => {
                 сигнала.
               </p>
 
-              <button className="group mt-[17px] text-center flex justify-center items-center text-white bg-[#6AB04C] w-[261px] h-[42px] rounded-[10px] hover:bg-[#5a9e40] transition-all duration-300">
+              <Link
+                href="/configurators/calc_videos"
+                className="group mt-[17px] text-center flex justify-center items-center text-white bg-[#6AB04C] w-[261px] h-[42px] rounded-[10px] hover:bg-[#5a9e40] transition-all duration-300"
+              >
                 <p className="relative flex items-center">
                   <Image
                     src={rightVector}
@@ -140,7 +148,7 @@ const Configurators = () => {
                 <p className="pl-[13px] flex justify-center items-center">
                   Открыть конфигуратор
                 </p>
-              </button>
+              </Link>
             </div>
             <div className="pt-[40px] px-[30px] lgl:px-0 lgl:pl-[95px] lgl:pr-[115px]">
               <Image src={thirdSectionPic} alt="pic" />
