@@ -67,7 +67,6 @@ import korzinaNavBottom from "./korzina_nav_bottom.png";
 import profileNavBottom from "./profile_nav_bottom.png";
 
 import partnersLogo from "./partners_page.png";
-import { addQuarters } from "date-fns";
 
 export {
   logo,
