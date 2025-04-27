@@ -10,13 +10,10 @@ import { Container } from "@/components/container";
 import { InfoHeader } from "@/components/div";
 import { Section } from "@/components/section";
 import { InfoTitle } from "@/components/title";
-import { ChevronDown, ChevronUp } from "lucide-react";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
 const CalculatorVideos = () => {
   const [selectedRadio, setSelectedRadio] = useState("1");
-
   // States for inputs
   const [cameraCount, setCameraCount] = useState(1);
   const [bitrate, setBitrate] = useState("1");
