@@ -198,13 +198,13 @@ export const OrderFinish = ({ orders }: { orders: OrderResponse[] }) => {
                 </div>
               </div>
               <div className="flex items-center gap-2 my-4">
-                <button
+                <Link href={`/profile/orders/${order.id}`}
                   onClick={() => console.log("Clicked")}
                   className="bg-white  hover:opacity-90 transition-opacity py-2 px-6 text-base font-semibold text-cerulean border border-cerulean flex items-center justify-center gap-2"
                 >
                   <ArrowRightIcon />
                   Перейти к заказу
-                </button>
+                </Link>
               </div>
             </div>
           </div>
