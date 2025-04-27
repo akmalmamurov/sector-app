@@ -5,8 +5,6 @@ import { Container } from "@/components/container";
 import { InfoHeader } from "@/components/div";
 import { Section } from "@/components/section";
 import { InfoTitle } from "@/components/title";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import Image from "next/image";
 import { useState } from "react";
@@ -31,7 +29,6 @@ const CalculatorServers = () => {
 
   const [selectedCpuType, setSelectedCpuType] = useState("1CPU");
   const [showAllCores, setShowAllCores] = useState(false);
-  const [cores, setCores] = useState(8);
 
   // RAM
   const MIN = 1;
@@ -403,7 +400,9 @@ const CalculatorServers = () => {
             {/* Active buttons */}
             <button className="flex items-center gap-3 p-3 bg-gray-50 rounded-md shadow-sm text-celBlue font-semibold">
               <div className="w-5 h-5">
-                <img
+                <Image
+                  width={19}
+                  height={19}
                   src="/icons/tag-icon.svg"
                   alt="SNR"
                   className="w-full h-full object-contain"
@@ -413,7 +412,9 @@ const CalculatorServers = () => {
             </button>
             <button className="flex items-center gap-3 p-3 bg-gray-50 rounded-md shadow-sm text-celBlue font-semibold">
               <div className="w-5 h-5">
-                <img
+                <Image
+                  width={19}
+                  height={19}
                   src="/icons/harddisk-icon.svg"
                   alt="1U"
                   className="w-full h-full object-contain"
@@ -423,7 +424,9 @@ const CalculatorServers = () => {
             </button>
             <button className="flex items-center gap-3 p-3 bg-gray-50 rounded-md shadow-sm text-celBlue font-semibold">
               <div className="w-5 h-5">
-                <img
+                <Image
+                  width={19}
+                  height={19}
                   src="/icons/server-icon.svg"
                   alt="SNR 1U"
                   className="w-full h-full object-contain"
@@ -436,7 +439,9 @@ const CalculatorServers = () => {
             <div className="flex flex-col gap-2 mt-4">
               <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-md text-gray-400 font-medium">
                 <div className="w-5 h-5">
-                  <img
+                  <Image
+                    width={19}
+                    height={19}
                     src="/icons/cpu-icon.svg"
                     alt="Процессор"
                     className="w-full h-full object-contain"
@@ -446,7 +451,9 @@ const CalculatorServers = () => {
               </div>
               <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-md text-gray-400 font-medium">
                 <div className="w-5 h-5">
-                  <img
+                  <Image
+                    width={19}
+                    height={19}
                     src="/icons/ram-icon.svg"
                     alt="Оперативная память"
                     className="w-full h-full object-contain"
@@ -456,7 +463,9 @@ const CalculatorServers = () => {
               </div>
               <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-md text-gray-400 font-medium">
                 <div className="w-5 h-5">
-                  <img
+                  <Image
+                    width={19}
+                    height={19}
                     src="/icons/hdd-icon.svg"
                     alt="Диски"
                     className="w-full h-full object-contain"
@@ -466,7 +475,9 @@ const CalculatorServers = () => {
               </div>
               <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-md text-gray-400 font-medium">
                 <div className="w-5 h-5">
-                  <img
+                  <Image
+                    width={19}
+                    height={19}
                     src="/icons/pci-icon.svg"
                     alt="PCI"
                     className="w-full h-full object-contain"
