@@ -255,7 +255,6 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
     );
   };
 
-  // scrollbar-hide
   const buttonRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({});
 
   useEffect(() => {
@@ -272,7 +271,9 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
   return (
     <>
       <div>
-        <div className="sticky top-0 z-[5] bg-white border-b shadow-sectionShadow overflow-x-auto whitespace-nowrap scrollbar-hide">
+        <div
+          className={`sticky  ${isScroll ? "top-[130px]" : "top-0"} bg-white border-b shadow-sectionShadow overflow-x-auto whitespace-nowrap scrollbar-hide`}
+        >
           {sections.map(({ id, label }) => (
             <button
               key={id}
