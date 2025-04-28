@@ -52,6 +52,7 @@ export default {
         darkSoul: "#A3A3A3",
         titleColor: "#3B3B3B",
         wasabiColor: "#929292",
+        pelati: "#FF3333",
         dangerColor: "#EF403D",
         lightBg: "#F5F5F5",
         linkColor: "#3A92F0",

@@ -9,7 +9,7 @@ export interface ContrAgentRequest {
   legalAddress: string;
   isFavorite: boolean;
 }
-export interface ContrAgentData {
+export interface KontrAgents {
   id: string;
   inn: string;
   isFavorite: boolean;
@@ -18,13 +18,21 @@ export interface ContrAgentData {
   oked: string;
   ownershipForm: string;
   pnfl: string;
+  address: AddressData[];
   user: {
     email: string;
     id: string;
     name: string;
     phone: string;
   };
-  address: AddressData[];
+}
+export interface userKontrAgent {
+  inn: string;
+  name: string;
+}
+export interface ContrAgentData {
+  kontragents: KontrAgents[];
+  user_kontragents: userKontrAgent[];
 }
 
 export interface DeliveryRequest {

@@ -34,6 +34,8 @@ const CartContactPage = () => {
     queryFn: () => getAgent(search),
     enabled: auth,
   });
+  console.log(agentsData);
+  
   const contrAgents = agentsData?.kontragents || [];
   const addContactForm = formStore((state) => state.addContactForm);
   const router = useRouter();

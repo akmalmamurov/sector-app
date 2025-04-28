@@ -132,6 +132,10 @@ input[type="number"]::-webkit-inner-spin-button {
   .hoverEffect {
     @apply duration-200 ease-in-out;
   }
+  .seperate {
+    @apply border-separate;
+    border-spacing: 0 8px;
+  }
   .info-bold {
     @apply font-bold text-base leading-[24px] text-textColor;
   }

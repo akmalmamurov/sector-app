@@ -19,7 +19,7 @@ import { copyToClipboard, formatUzbekNumber } from "@/utils";
 import { Button } from "../ui/button";
 import { Section } from "../section";
 import { DOMAIN } from "@/constants";
-import { ContrAgentData, DeliveryRequest, OrderRequest } from "@/types";
+import { DeliveryRequest, KontrAgents, OrderRequest } from "@/types";
 import { CartState } from "@/context/form-store";
 import { StoreItem } from "@/context/store";
 interface CartOrderProps {
@@ -29,7 +29,7 @@ interface CartOrderProps {
   deliveryForm: DeliveryRequest | null;
   contactForm: OrderRequest | null;
   selected: StoreItem[];
-  contrAgent: ContrAgentData;
+  contrAgent: KontrAgents;
 }
 export const CartOrder = ({
   handleFinal,

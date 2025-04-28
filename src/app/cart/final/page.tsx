@@ -17,6 +17,7 @@ import CartHeader from "@/components/cart-header/CartHeader";
 
 const CartFinalPage = () => {
   const selected = useStore((state) => state.selected);
+  const removeSelected = useStore((state) => state.removeSelectedCardsList);
   const { cartForm, deliveryForm, contactForm } = formStore();
   const [step, setStep] = useState<1 | 2 | null>(null);
   const auth = useRequireAuth();
@@ -32,7 +33,6 @@ const CartFinalPage = () => {
     queryFn: () => getLastOrder(),
     enabled: auth,
   });
-  console.log(orders);
   useEffect(() => {
     if (ordersLoading) return;
     if (!orders || !cartForm?.productDetails) return;
@@ -107,7 +107,7 @@ const CartFinalPage = () => {
           contrAgent={contrAgent}
         />
       )}
-      {step === 2 && <OrderFinish orders={orders} />}
+      {step === 2 && <OrderFinish orders={orders} removeSelected={removeSelected} />}
       <div className="hidden">
         <CartHeader currentStep={step} />
       </div>

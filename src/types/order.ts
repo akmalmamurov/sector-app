@@ -1,5 +1,5 @@
 import { AddressData } from "./address";
-import { ContrAgentData } from "./agent-delivery";
+import { KontrAgents } from "./agent-delivery";
 
 export interface ProductDetails {
   productId: string;
@@ -54,7 +54,7 @@ export interface OrderResponse {
   email: string;
   fullname: string;
   id: string;
-  kontragent: ContrAgentData;
+  kontragent: KontrAgents;
   orderNumber: string;
   orderPriceStatus: string;
   orderType: string;

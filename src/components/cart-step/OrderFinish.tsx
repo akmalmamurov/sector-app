@@ -16,7 +16,8 @@ import OrderListIcon from "@/assets/icons/OrderListIcon";
 import { OrderResponse } from "@/types";
 import { DOMAIN } from "@/constants";
 
-export const OrderFinish = ({ orders }: { orders: OrderResponse[] }) => {
+export const OrderFinish = ({ orders,removeSelected }: { orders: OrderResponse[];removeSelected: () => void }) => {
+  const handleGoBack = () => removeSelected();
   return (
     <div>
       {orders?.map((order, orderIndex) => (
@@ -199,7 +200,7 @@ export const OrderFinish = ({ orders }: { orders: OrderResponse[] }) => {
               </div>
               <div className="flex items-center gap-2 my-4">
                 <Link href={`/profile/orders/${order.id}`}
-                  onClick={() => console.log("Clicked")}
+                  onClick={handleGoBack}
                   className="bg-white  hover:opacity-90 transition-opacity py-2 px-6 text-base font-semibold text-cerulean border border-cerulean flex items-center justify-center gap-2"
                 >
                   <ArrowRightIcon />

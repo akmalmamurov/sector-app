@@ -10,7 +10,7 @@ import {
   EditIcon,
   ShippingIcon,
 } from "@/assets/icons";
-import { AddressData, ContrAgentData, OrderRequest } from "@/types";
+import { AddressData, KontrAgents, OrderRequest } from "@/types";
 import { showError, showSuccess } from "../toast/Toast";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import request from "@/services";
@@ -25,7 +25,7 @@ export const ContrAgent = memo(
     setValue,
     className,
   }: {
-    contrAgents: ContrAgentData[];
+    contrAgents: KontrAgents[];
     setValue?: UseFormSetValue<OrderRequest>;
     className?: string;
   }) => {

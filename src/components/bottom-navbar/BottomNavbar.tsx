@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image, { StaticImageData } from "next/image";
 import React, { useState, useRef, useEffect } from "react";
 import useStore from "@/context/store";
-import { MenuLegalIcon, NavBottomCart, } from "@/assets/icons";
+import { MenuLegalIcon, NavBottomCart } from "@/assets/icons";
 import LoginModal from "../modal/LoginModal";
 import { X } from "lucide-react";
 import { profileMenuData } from "@/data";
@@ -12,7 +12,7 @@ import { usePathname } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { getAgent, getUser } from "@/api";
 import { ContrAgentModal } from "../modal";
-import { ContrAgentData } from "@/types";
+import { KontrAgents } from "@/types";
 import NavBottomCatalog from "@/assets/icons/NavBottomCatalog";
 import NavBottomInfo from "@/assets/icons/NavBottomInfo";
 import NavBottomHome from "@/assets/icons/NavBottomHome";
@@ -33,16 +33,15 @@ const BottomNavbar = () => {
     enabled: auth,
   });
 
-  const { data: contrAgents = [] } = useQuery<ContrAgentData[]>({
+  const { data: agentsData = [] } = useQuery({
     queryKey: ["contragents"],
-    queryFn: async () => {
-      const res = await getAgent();
-      return Array.isArray(res) ? res : [];
-    },
+    queryFn: () => getAgent(),
     enabled: auth,
   });
-
-  const favoriteAgent = contrAgents.find((agent) => agent.isFavorite === true);
+  const contrAgents = agentsData?.kontragents || [];
+  const favoriteAgent = contrAgents?.find(
+    (agent: KontrAgents) => agent.isFavorite === true
+  );
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
