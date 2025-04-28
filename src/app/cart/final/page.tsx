@@ -33,6 +33,7 @@ const CartFinalPage = () => {
     queryFn: () => getLastOrder(),
     enabled: auth,
   });
+  
   useEffect(() => {
     if (ordersLoading) return;
     if (!orders || !cartForm?.productDetails) return;

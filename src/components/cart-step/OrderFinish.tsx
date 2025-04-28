@@ -13,10 +13,16 @@ import { ArrowRightIcon, CopyIcon } from "@/assets/icons";
 import PriceFormatter from "../format-price/PriceFormatter";
 import { copyToClipboard, formatUzbekNumber } from "@/utils";
 import OrderListIcon from "@/assets/icons/OrderListIcon";
-import { OrderResponse } from "@/types";
+import { OrdersData } from "@/types";
 import { DOMAIN } from "@/constants";
 
-export const OrderFinish = ({ orders,removeSelected }: { orders: OrderResponse[];removeSelected: () => void }) => {
+export const OrderFinish = ({
+  orders,
+  removeSelected,
+}: {
+  orders: OrdersData[];
+  removeSelected: () => void;
+}) => {
   const handleGoBack = () => removeSelected();
   return (
     <div>
@@ -199,7 +205,8 @@ export const OrderFinish = ({ orders,removeSelected }: { orders: OrderResponse[]
                 </div>
               </div>
               <div className="flex items-center gap-2 my-4">
-                <Link href={`/profile/orders/${order.id}`}
+                <Link
+                  href={`/profile/orders/${order.id}`}
                   onClick={handleGoBack}
                   className="bg-white  hover:opacity-90 transition-opacity py-2 px-6 text-base font-semibold text-cerulean border border-cerulean flex items-center justify-center gap-2"
                 >
