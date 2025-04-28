@@ -255,33 +255,40 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
     );
   };
 
+  // scrollbar-hide
+  const buttonRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({});
+
+  useEffect(() => {
+    const activeButton = buttonRefs.current[activeTab];
+    if (activeButton) {
+      activeButton.scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest",
+      });
+    }
+  }, [activeTab]);
+
   return (
     <>
       <div>
-        <div
-          className={`sticky ${isScroll ? "top-[130px]" : "top-0"} z-[5] bg-white  flex border-b shadow-sectionShadow`}
-        >
-          {sections.map(({ id, label }) => {
-            if (id === "description" && !editorContent) return null;
-            if (
-              id === "specs" &&
-              (!product.characteristics || product.characteristics.length === 0)
-            )
-              return null;
-            return (
-              <button
-                key={id}
-                className={`px-5 py-3.5 text-center border-b-2 transition-all relative inline-block ${
-                  activeTab === id
-                    ? "text-cerulean title_gradient"
-                    : "border-transparent"
-                }`}
-                onClick={() => handleTabClick(id)}
-              >
-                {label}
-              </button>
-            );
-          })}
+        <div className="sticky top-0 z-[5] bg-white border-b shadow-sectionShadow overflow-x-auto whitespace-nowrap scrollbar-hide">
+          {sections.map(({ id, label }) => (
+            <button
+              key={id}
+              ref={(el) => {
+                buttonRefs.current[id] = el;
+              }}
+              className={`px-5 py-3.5 text-center border-b-2 transition-all relative inline-block ${
+                activeTab === id
+                  ? "text-cerulean title_gradient"
+                  : "border-transparent"
+              }`}
+              onClick={() => handleTabClick(id)}
+            >
+              {label}
+            </button>
+          ))}
         </div>
 
         <div className="bg-whiteOut shadow-sectionShadow p-[23px] ">

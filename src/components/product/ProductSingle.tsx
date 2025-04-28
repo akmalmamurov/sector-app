@@ -9,7 +9,7 @@ export const ProductSingle = ({ product }: { product: ProductData }) => {
   return (
     <div>
       <div className="bg-white border p-[23px] pb-0 shadow-sectionShadow rounded-[10px] overflow-hidden">
-        <div className="flex">
+        <div className="flex flex-col 2xl:flex-row">
           {/* left images */}
           <ProductSingleImages product={product} />
           {/* right */}

@@ -29,11 +29,11 @@ export const ProductSingleImages: React.FC<ProductSingleImagesProps> = ({
       <div className="w-full max-w-[570px] pb-[23px]">
         <div className="flex gap-[13px]">
           <div
-            className="flex flex-col gap-[15px] h-[500px] overflow-y-auto"
+            className=" flex-col gap-[15px] h-[500px] overflow-y-auto hidden md:flex"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {product?.mainImage && (
-              <div className="">
+              <div>
                 <Image
                   src={`${DOMAIN}/${product?.mainImage}`}
                   alt="product"
@@ -72,7 +72,7 @@ export const ProductSingleImages: React.FC<ProductSingleImagesProps> = ({
               width={400}
               height={400}
               priority
-              className="w-[500px] h-[500px]"
+              className="w-[500px] lg:w-full 2xl:w-[500px] h-[500px] flex justify-center items-center"
             />
           </button>
         </div>
