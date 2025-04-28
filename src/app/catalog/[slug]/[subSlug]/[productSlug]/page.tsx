@@ -1,4 +1,4 @@
-import type { Metadata,  } from 'next';
+import type { Metadata } from "next";
 import Link from "next/link";
 import { getCatalog } from "@/api/catalog";
 import { Container } from "@/components/container";
@@ -12,9 +12,7 @@ type Props = {
   params: Promise<{ slug: string; subSlug: string; productSlug: string }>;
 };
 
-export async function generateMetadata(
-  { params }: Props,
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { productSlug } = await params;
   const product = await getProductSingle(productSlug);
   return {
@@ -23,17 +21,20 @@ export async function generateMetadata(
   };
 }
 
-export default async function SingleProductPage({
-  params,
-}: Props) {
+export default async function SingleProductPage({ params }: Props) {
   const { slug, subSlug, productSlug } = await params;
   const catalogData = await getCatalog();
   const product = await getProductSingle(productSlug);
-  const breadcrumbPaths = getCategoryBreadcrumbPaths(catalogData, slug, subSlug, true);
+  const breadcrumbPaths = getCategoryBreadcrumbPaths(
+    catalogData,
+    slug,
+    subSlug,
+    true
+  );
 
   return (
     <Container className="pb-[58px]">
-      <div className="flex items-center pl-2 sm:pl-1 gap-[15px] text-gray-600 h-[58px]">
+      <div className="flex items-center pt-2 pb-2 pl-2 sm:pl-1 gap-[15px] text-gray-600 h-[58px] flex-wrap">
         <Link
           href="/"
           className="flex items-center gap-1 text-gray-500 hover:text-gray-700"
