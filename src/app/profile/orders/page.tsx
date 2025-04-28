@@ -26,38 +26,49 @@ import { useQuery } from "@tanstack/react-query";
 import { getAgent, getOrders } from "@/api";
 import useStore from "@/context/store";
 import { ProfileOrderTable } from "@/components/table";
-import {  userKontrAgent } from "@/types";
+import { KontrAgents } from "@/types";
 
 const ProfileOrdersPage = () => {
   const auth = useStore((s) => s.auth);
+  const [kontragentName, setKontragentName] = useState<string | null>(null);
   useRequireAuth();
+
   const { data: orders } = useQuery({
-    queryKey: ["order"],
-    queryFn: () => getOrders(),
-    enabled: auth,
+    queryKey: ["orders", kontragentName],
+    queryFn: () => getOrders(kontragentName),
   });
+
   const { data: agentsData = [] } = useQuery({
     queryKey: ["contragents"],
     queryFn: () => getAgent(""),
     enabled: auth,
   });
   const contrAgents = agentsData?.user_kontragents || [];
-  console.log(agentsData);
 
   const [date, setDate] = useState<Date>();
 
   return (
     <div className="pt-5 pb-10">
       <div className="pb-5 grid grid-cols-1 sm:grid-cols-2 lgl:grid-cols-4 gap-6 mb-10">
-        <Select>
-          <SelectTrigger className="w-full text-[14px] leading-[25px] h-[41px]">
-            <SelectValue placeholder="Выберите контрагенты" />
+        <Select
+          onValueChange={(value) =>
+            setKontragentName(value === "null" ? null : value)
+          }
+        >
+          <SelectTrigger className="w-full text-[14px] leading-[25px] h-[41px] rounded-none border-superSilver focus:ring-cerulean">
+            <SelectValue placeholder="Выберите контрагента" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectItem value="apple">Apple</SelectItem>
-              {contrAgents.map((agent: userKontrAgent, index: number) => (
-                <SelectItem key={index} value={agent.name}>
+              <SelectItem value="null" className="cursor-pointer">
+                Любой
+              </SelectItem>
+              {contrAgents.map((agent: KontrAgents, index: number) => (
+                <SelectItem
+                  key={index}
+                  value={agent.name}
+                  className="cursor-pointer"
+                >
                   {agent.name}
                 </SelectItem>
               ))}
