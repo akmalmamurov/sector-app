@@ -6,13 +6,13 @@ import useStore from "@/context/store";
 
 import { useRequireAuth } from "@/hooks";
 import formStore from "@/context/form-store";
-import { getAgentAdress, getLastOrder,  } from "@/api";
+import { getAgentAdress, getLastOrder } from "@/api";
 import { CART_ORDER_CREATE, TOGGLE_CART } from "@/constants";
 import { useEffect, useState } from "react";
 import { showError, showSuccess } from "@/components/toast/Toast";
 import request from "@/services";
 import { CartOrder, OrderFinish } from "@/components/cart-step";
-import { OrderResponse } from "@/types";
+import { OrdersData } from "@/types";
 import CartHeader from "@/components/cart-header/CartHeader";
 
 const CartFinalPage = () => {
@@ -39,7 +39,7 @@ const CartFinalPage = () => {
 
     const currentIds = cartForm.productDetails.map((d) => d.productId);
 
-    const matchesCurrentCart = (order: OrderResponse) => {
+    const matchesCurrentCart = (order: OrdersData) => {
       const orderIds = order.products.map((p) => p.productId);
       const allMatch = currentIds.every((id) => orderIds.includes(id));
       return (
@@ -107,7 +107,9 @@ const CartFinalPage = () => {
           contrAgent={contrAgent}
         />
       )}
-      {step === 2 && <OrderFinish orders={orders} removeSelected={removeSelected} />}
+      {step === 2 && (
+        <OrderFinish orders={orders} removeSelected={removeSelected} />
+      )}
       <div className="hidden">
         <CartHeader currentStep={step} />
       </div>

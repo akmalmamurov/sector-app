@@ -18,8 +18,7 @@ import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 import { useState } from "react";
-import { CalendarDays, Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { CalendarDays } from "lucide-react";
 
 import { useRequireAuth } from "@/hooks";
 import { useQuery } from "@tanstack/react-query";
@@ -27,6 +26,8 @@ import { getAgent, getOrders } from "@/api";
 import useStore from "@/context/store";
 import { ProfileOrderTable } from "@/components/table";
 import { KontrAgents } from "@/types";
+import { ProfileSearchIcon } from "@/assets/icons";
+import CartLoader from "@/components/loader/CartLoader";
 
 const ProfileOrdersPage = () => {
   const auth = useStore((s) => s.auth);
@@ -41,8 +42,9 @@ const ProfileOrdersPage = () => {
   useRequireAuth();
   const [periodStart, setPeriodStart] = useState<Date | undefined>(undefined);
   const [periodEnd, setPeriodEnd] = useState<Date | undefined>(undefined);
-  
-  const { data: orders } = useQuery({
+  const [orderNumber, setOrderNumber] = useState<string>("");
+
+  const { data: orderData, isLoading } = useQuery({
     queryKey: [
       "orders",
       kontragentName,
@@ -51,11 +53,19 @@ const ProfileOrdersPage = () => {
       orderType,
       periodStart,
       periodEnd,
+      orderNumber,
     ],
     queryFn: () =>
-      getOrders(kontragentName, orderPriceStatus, orderDeleveryType, orderType,
-        periodStart, periodEnd),
-        enabled: auth,
+      getOrders(
+        kontragentName,
+        orderPriceStatus,
+        orderDeleveryType,
+        orderType,
+        periodStart,
+        periodEnd,
+        orderNumber,
+      ),
+    enabled: auth,
   });
 
   const { data: agentsData = [] } = useQuery({
@@ -64,7 +74,6 @@ const ProfileOrdersPage = () => {
     enabled: auth,
   });
   const contrAgents = agentsData?.user_kontragents || [];
-
   return (
     <div className="pt-5 pb-10">
       <div className="pb-5 grid grid-cols-1 sm:grid-cols-2 lgl:grid-cols-4 gap-6 mb-10">
@@ -174,7 +183,7 @@ const ProfileOrdersPage = () => {
             <Button
               variant={"outline"}
               className={cn(
-                "bg-white w-full justify-between text-left font-normal",
+                "bg-white w-full justify-between text-left font-normal rounded-none",
                 !periodStart && "text-muted-foreground"
               )}
             >
@@ -201,7 +210,7 @@ const ProfileOrdersPage = () => {
             <Button
               variant={"outline"}
               className={cn(
-                "bg-white w-full justify-between text-left font-normal",
+                "bg-white w-full justify-between text-left font-normal rounded-none",
                 !periodEnd && "text-muted-foreground"
               )}
             >
@@ -225,15 +234,16 @@ const ProfileOrdersPage = () => {
         </Popover>
 
         <div className="relative w-full">
-          <Input
+          <input
             type="text"
             placeholder="Заказ, серийный номер, название"
-            className="pr-10 text-[14px] leading-[25px] h-[41px]"
+            className="pl-[15px] pr-10 w-full text-[14px] leading-[25px] h-[41px] border border-superSilver hover:border-cerulean/70 focus:border-cerulean focus:outline-none rounded-none"
+            onChange={(e) => {
+              e.preventDefault();
+              setOrderNumber(e.target.value);
+            }}
           />
-          <Search
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-darkSoul"
-            size={20}
-          />
+          <ProfileSearchIcon className="absolute right-3 top-1/2 -translate-y-1/2 " />
         </div>
       </div>
 
@@ -244,7 +254,15 @@ const ProfileOrdersPage = () => {
         }}
         className="w-full overflow-x-auto"
       >
-        <ProfileOrderTable orders={orders} />
+        {isLoading ? (
+          <div className="fixed top-[189px] left-0 right-0 w-screen z-50">
+          <div className="container mx-auto relative">
+            <CartLoader className="h-1 w-full" />
+          </div>
+        </div>
+        ) : (
+          <ProfileOrderTable orders={orderData?.orders}  />
+        )}
       </div>
     </div>
   );

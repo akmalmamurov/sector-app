@@ -57,4 +57,7 @@ export * from "./NavBottomHome";
 export * from "./NavBottomInfo";
 export * from "./NavBottomUser";
 export * from "./NavBottomCatalog";
-export * from "./GaranteeAddIcon"
+export * from "./GaranteeAddIcon";
+export * from "./profile-icon/ProfileUpIcon";
+export * from "./profile-icon/ProfileDownIcon";
+export * from "./profile-icon/ProfileSearchIcon";
