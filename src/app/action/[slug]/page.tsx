@@ -32,19 +32,19 @@ const SingleDiscount = async ({ params }: Props) => {
           </InfoTitle>
         </InfoHeader>
         <div className="p-[23px]">
-          <div className="flex flex-col">
+          <div className="flex flex-col ">
             <Image
               src={`${DOMAIN}/${discount?.bannerImage}`}
               alt="bannerImage"
               width={600}
               height={200}
-              className="w-full h-[221px] object-cover"
+              className="w-full h-[221px] md:h-[421px] object-cover"
             />
-            <div className="bg-white shadow-md flex justify-between p-[23px]">
+            <div className="bg-white shadow-md flex flex-col gap-4 md:flex-row justify-between p-[23px]">
               <p>Сезонная распродажа грозозащиты</p>
-                <p className="text-[#FF3333] text-xs font-normal mt-auto">
-                  Действует до <span>{formatDate(discount.expireDate)}</span>
-                </p>
+              <p className="text-[#FF3333] text-xs font-normal mt-auto flex justify-end">
+                Действует до <span>{formatDate(discount.expireDate)}</span>
+              </p>
             </div>
           </div>
         </div>
