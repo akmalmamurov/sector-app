@@ -1,10 +1,23 @@
 import { GET_CART_ORDER, GET_LAST_ORDER } from "@/constants";
 import request from "@/services";
+import { format } from "date-fns";
 
-export const getOrders = async (kontragentName: string | null) => {
+export const getOrders = async (
+  kontragentName: string | null,
+  orderPriceStatus: string | null,
+  orderDeleveryType: string | null,
+  orderType: string | null,
+  periodStart: Date | undefined,
+  periodEnd: Date | undefined
+) => {
   try {
     const params = {
       kontragentName,
+      ...(orderPriceStatus && { orderPriceStatus }),
+      ...(orderDeleveryType && { orderDeleveryType }),
+      ...(orderType && { orderType }),
+      ...(periodStart && { periodStart: format(periodStart, "yyyy-MM-dd") }),
+      ...(periodEnd && { periodEnd: format(periodEnd, "yyyy-MM-dd") }),
     };
     const res = await request(GET_CART_ORDER, { params });
     return res.data.data || [];
