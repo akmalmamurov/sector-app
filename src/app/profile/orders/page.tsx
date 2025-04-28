@@ -30,12 +30,32 @@ import { KontrAgents } from "@/types";
 
 const ProfileOrdersPage = () => {
   const auth = useStore((s) => s.auth);
+  const [calOpen, setCalOpen] = useState(false);
+  const [calEndOpen, setCalEndOpen] = useState(false);
   const [kontragentName, setKontragentName] = useState<string | null>(null);
+  const [orderPriceStatus, setOrderPriceStatus] = useState<string | null>(null);
+  const [orderDeleveryType, setOrderDeleveryType] = useState<string | null>(
+    null
+  );
+  const [orderType, setOrderType] = useState<string | null>(null);
   useRequireAuth();
-
+  const [periodStart, setPeriodStart] = useState<Date | undefined>(undefined);
+  const [periodEnd, setPeriodEnd] = useState<Date | undefined>(undefined);
+  
   const { data: orders } = useQuery({
-    queryKey: ["orders", kontragentName],
-    queryFn: () => getOrders(kontragentName),
+    queryKey: [
+      "orders",
+      kontragentName,
+      orderPriceStatus,
+      orderDeleveryType,
+      orderType,
+      periodStart,
+      periodEnd,
+    ],
+    queryFn: () =>
+      getOrders(kontragentName, orderPriceStatus, orderDeleveryType, orderType,
+        periodStart, periodEnd),
+        enabled: auth,
   });
 
   const { data: agentsData = [] } = useQuery({
@@ -44,8 +64,6 @@ const ProfileOrdersPage = () => {
     enabled: auth,
   });
   const contrAgents = agentsData?.user_kontragents || [];
-
-  const [date, setDate] = useState<Date>();
 
   return (
     <div className="pt-5 pb-10">
@@ -58,7 +76,7 @@ const ProfileOrdersPage = () => {
           <SelectTrigger className="w-full text-[14px] leading-[25px] h-[41px] rounded-none border-superSilver focus:ring-cerulean">
             <SelectValue placeholder="Выберите контрагента" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="rounded-none">
             <SelectGroup>
               <SelectItem value="null" className="cursor-pointer">
                 Любой
@@ -76,52 +94,79 @@ const ProfileOrdersPage = () => {
           </SelectContent>
         </Select>
 
-        <Select>
-          <SelectTrigger className="w-full text-[14px] leading-[25px] h-[41px]">
+        <Select
+          onValueChange={(value) =>
+            setOrderPriceStatus(value === "null" ? null : value)
+          }
+        >
+          <SelectTrigger className="w-full text-[14px] leading-[25px] h-[41px] rounded-none border-superSilver focus:ring-cerulean">
             <SelectValue placeholder="Статус оплаты" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="rounded-none">
             <SelectGroup>
-              <SelectItem value="apple">Apple</SelectItem>
-              <SelectItem value="banana">Banana</SelectItem>
-              <SelectItem value="blueberry">Blueberry</SelectItem>
-              <SelectItem value="grapes">Grapes</SelectItem>
-              <SelectItem value="pineapple">Pineapple</SelectItem>
+              <SelectItem value="null" className="cursor-pointer">
+                Любой
+              </SelectItem>
+              <SelectItem value="Оплачен" className="cursor-pointer">
+                Оплачен
+              </SelectItem>
+              <SelectItem value="Не оплачен" className="cursor-pointer">
+                Не оплачен
+              </SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
 
-        <Select>
-          <SelectTrigger className="w-full text-[14px] leading-[25px] h-[41px]">
+        <Select
+          onValueChange={(value) =>
+            setOrderDeleveryType(value === "null" ? null : value)
+          }
+        >
+          <SelectTrigger className="w-full text-[14px] leading-[25px] h-[41px] rounded-none border-superSilver focus:ring-cerulean">
             <SelectValue placeholder="Статус отгрузки" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="rounded-none">
             <SelectGroup>
-              <SelectItem value="apple">Apple</SelectItem>
-              <SelectItem value="banana">Banana</SelectItem>
-              <SelectItem value="blueberry">Blueberry</SelectItem>
-              <SelectItem value="grapes">Grapes</SelectItem>
-              <SelectItem value="pineapple">Pineapple</SelectItem>
+              <SelectItem value="null" className="cursor-pointer">
+                Любой
+              </SelectItem>
+              <SelectItem value="Отгружен" className="cursor-pointer">
+                Отгружен
+              </SelectItem>
+              <SelectItem value="Не отгружен" className="cursor-pointer">
+                Не отгружен
+              </SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
 
-        <Select>
-          <SelectTrigger className="w-full text-[14px] leading-[25px] h-[41px]">
+        <Select
+          onValueChange={(value) =>
+            setOrderType(value === "null" ? null : value)
+          }
+        >
+          <SelectTrigger className="w-full text-[14px] leading-[25px] h-[41px] rounded-none border-superSilver focus:ring-cerulean">
             <SelectValue placeholder="Статус заказы" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="rounded-none">
             <SelectGroup>
-              <SelectItem value="apple">Apple</SelectItem>
-              <SelectItem value="banana">Banana</SelectItem>
-              <SelectItem value="blueberry">Blueberry</SelectItem>
-              <SelectItem value="grapes">Grapes</SelectItem>
-              <SelectItem value="pineapple">Pineapple</SelectItem>
+              <SelectItem value="null" className="cursor-pointer">
+                Любой
+              </SelectItem>
+              <SelectItem value="new" className="cursor-pointer">
+                Новые
+              </SelectItem>
+              <SelectItem value="old" className="cursor-pointer">
+                Старые
+              </SelectItem>
+              <SelectItem value="rejected" className="cursor-pointer">
+                Отменен
+              </SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
 
-        <Popover>
+        <Popover open={calOpen} onOpenChange={setCalOpen}>
           <PopoverTrigger
             className="text-[14px] leading-[25px] h-[41px]"
             asChild
@@ -130,24 +175,25 @@ const ProfileOrdersPage = () => {
               variant={"outline"}
               className={cn(
                 "bg-white w-full justify-between text-left font-normal",
-                !date && "text-muted-foreground"
+                !periodStart && "text-muted-foreground"
               )}
             >
-              {date ? format(date, "PPP") : <span>В период от дд.мм.гггг</span>}
+              {periodStart ? format(periodStart, "dd.MM.yyyy") : "Период от"}
               <CalendarDays className="h-4 w-4" />
             </Button>
           </PopoverTrigger>
           <PopoverContent align="start" className="w-full p-0">
             <Calendar
               mode="single"
-              selected={date}
-              onSelect={setDate}
+              selected={periodStart}
+              onSelect={(date) => setPeriodStart(date)}
+              onDayClick={() => setCalOpen(false)}
               initialFocus
             />
           </PopoverContent>
         </Popover>
 
-        <Popover>
+        <Popover open={calEndOpen} onOpenChange={setCalEndOpen}>
           <PopoverTrigger
             className="text-[14px] leading-[25px] h-[41px]"
             asChild
@@ -156,18 +202,23 @@ const ProfileOrdersPage = () => {
               variant={"outline"}
               className={cn(
                 "bg-white w-full justify-between text-left font-normal",
-                !date && "text-muted-foreground"
+                !periodEnd && "text-muted-foreground"
               )}
             >
-              {date ? format(date, "PPP") : <span>В период до дд.мм.гггг</span>}
+              {periodEnd ? (
+                format(periodEnd, "dd.MM.yyyy")
+              ) : (
+                <span>В период до дд.мм.гггг</span>
+              )}
               <CalendarDays className="h-4 w-4" />
             </Button>
           </PopoverTrigger>
           <PopoverContent align="start" className="w-full p-0">
             <Calendar
               mode="single"
-              selected={date}
-              onSelect={setDate}
+              selected={periodEnd}
+              onSelect={(date) => setPeriodEnd(date)}
+              onDayClick={() => setCalEndOpen(false)}
               initialFocus
             />
           </PopoverContent>
