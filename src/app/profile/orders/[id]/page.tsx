@@ -1,15 +1,11 @@
-"use client";
 import { getSingleOrder } from "@/api";
 import { SingleOrderLeft, SingleOrderRight } from "@/components/single-order";
-import { useQuery } from "@tanstack/react-query";
-import { useParams } from "next/navigation";
-
-const SingleOrder = () => {
-  const { id } = useParams();
-  const { data: order } = useQuery({
-    queryKey: ["order", id],
-    queryFn: () => getSingleOrder(id as string),
-  });
+type Props = {
+  params: Promise<{ id: string }>;
+};
+const SingleOrder = async ({ params }: Props) => {
+  const { id } = await params;
+  const order = await getSingleOrder(id);
   console.log(order);
 
   return (
