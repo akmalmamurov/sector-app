@@ -1,1 +1,2 @@
-export * from "./SortProducts"
+export * from "./SortProducts";
+export * from "./SortOrders";

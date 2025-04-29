@@ -27,17 +27,18 @@ const BottomNavbar = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const pathName = usePathname();
   const addModal = pathName === "/profile/contractors";
+  const { data: agentsData = [] } = useQuery({
+    queryKey: ["contragents"],
+    queryFn: () => getAgent(),
+    enabled: auth,
+  });
   const { data: userData = [] } = useQuery({
     queryKey: ["user"],
     queryFn: getUser,
     enabled: auth,
   });
 
-  const { data: agentsData = [] } = useQuery({
-    queryKey: ["contragents"],
-    queryFn: () => getAgent(),
-    enabled: auth,
-  });
+
   const contrAgents = agentsData?.kontragents || [];
   const favoriteAgent = contrAgents?.find(
     (agent: KontrAgents) => agent.isFavorite === true

@@ -1,6 +1,9 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import { z } from "zod";
 import Image from "next/image";
+import { useForm } from "react-hook-form";
+import React, { useState, useEffect, useRef } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { DOMAIN } from "@/constants";
 import { CommentProduct, ProductData } from "@/types";
 import { CircleAlert, CirclePlus, Star, X } from "lucide-react";
@@ -19,14 +22,11 @@ import {
   FormItem,
   FormMessage,
 } from "../ui/form";
-import { useForm } from "react-hook-form";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { StarRating } from "../star-rating/StarRating";
 import { useCreateComment } from "@/api/product-comment";
 import { usePostQuestion } from "@/api/product-question";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useScrollDirection } from "@/hooks";
 interface Block {
   id: string;
@@ -255,7 +255,6 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
     );
   };
 
-  // scrollbar-hide
   const buttonRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({});
 
   useEffect(() => {

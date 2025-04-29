@@ -44,7 +44,7 @@ export interface OrderProducts {
   productId: string;
   productLink: string;
 }
-export interface OrderResponse {
+export interface OrdersData {
   agent: AddressData;
   agentId: string;
   city: string;
@@ -59,6 +59,7 @@ export interface OrderResponse {
   orderPriceStatus: string;
   orderType: string;
   paymentMethod: string | null;
+  kontragentName: string;
   phone: string;
   products: OrderProducts[];
   total: string;
@@ -70,4 +71,9 @@ export interface OrderResponse {
   };
   validEndDate: string;
   validStartDate: string;
+}
+export interface OrderResponse {
+  page: number;
+  total: number;
+  orders: OrdersData[];
 }

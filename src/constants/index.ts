@@ -10,7 +10,7 @@ export const GET_PRODUCTS = "/user/product/all";
 export const GET_PROMOTION = "/user/promotion/all";
 export const GET_PRODUCT_CATEGORY = "/user/product/by-slug";
 export const GET_PRODUCT_SINGLE = "/user/product/by-slug";
-export const LOGIN_PASSWORD = "/user/auth/login"
+export const LOGIN_PASSWORD = "/user/auth/login";
 export const GET_PROMOTION_SINGLE = "/user/promotion";
 export const GET_REGION = "/user/region/all";
 export const GET_ME = "/user/auth/me";
@@ -37,3 +37,5 @@ export const THRESHOLD = 500;
 export const CART_ORDER_CREATE = "/user/orders/create";
 export const GET_CART_ORDER = "/user/orders/get-all";
 export const GET_LAST_ORDER = "/user/orders/get-all?last=true";
+export const CANCEL_ORDER = "/user/orders/cancel";
+export const GET_SINGLE_ORDER = "/user/orders/get-by-id";
