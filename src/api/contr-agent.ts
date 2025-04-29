@@ -1,4 +1,9 @@
-import { GET_AGENT, SINGLE_AGENT_ADDRESS, UPDATE_AGENT, UPDATE_AGENT_ADDRESS } from "@/constants";
+import {
+  GET_AGENT,
+  SINGLE_AGENT_ADDRESS,
+  UPDATE_AGENT,
+  UPDATE_AGENT_ADDRESS,
+} from "@/constants";
 import request from "@/services";
 
 export const getAgent = async (search?: string) => {
@@ -10,6 +15,7 @@ export const getAgent = async (search?: string) => {
     return res.data.data || [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 
@@ -21,6 +27,7 @@ export const updateAgent = async (id: string) => {
     return res.data.data || [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 
@@ -30,6 +37,7 @@ export const getAgentAdress = async (id: string) => {
     return res.data.data || [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 export const updateAgentAddress = async (id: string) => {
@@ -40,5 +48,6 @@ export const updateAgentAddress = async (id: string) => {
     return res.data.data || [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };

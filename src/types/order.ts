@@ -59,6 +59,7 @@ export interface OrdersData {
   orderPriceStatus: string;
   orderType: string;
   paymentMethod: string | null;
+  kontragentName: string;
   phone: string;
   products: OrderProducts[];
   total: string;

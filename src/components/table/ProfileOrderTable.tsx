@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { ChevronDown, Pencil } from "lucide-react";
 import ProfileWarIcon from "@/assets/icons/ProfileWarIcon";
 import {
   Table,
@@ -9,18 +11,26 @@ import {
 } from "@/components/ui/table";
 import { OrdersData } from "@/types";
 import { formatDate, formatPrice } from "@/utils";
-import { ChevronDown, Pencil } from "lucide-react";
-import Link from "next/link";
 import PriceFormatter from "../format-price/PriceFormatter";
-import { EditIcon, ProfileDownIcon, ProfileUpIcon } from "@/assets/icons";
+import {
+  DeleteIcon,
+  EditIcon,
+  ProfileDownIcon,
+  ProfileUpIcon,
+} from "@/assets/icons";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { useMemo, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { showError, showSuccess } from "../toast/Toast";
+import request from "@/services";
+import { CANCEL_ORDER } from "@/constants";
 interface Props {
   orders: OrdersData[];
 }
 export const ProfileOrderTable = ({ orders }: Props) => {
   const [price, setPrice] = useState<"asc" | "desc" | null>(null);
-  console.log(orders);
+  const [open, setOpen] = useState<number | null>(null);
+  const queryClient = useQueryClient();
   const sortedOrders = useMemo(() => {
     if (!price) return orders;
     return orders
@@ -31,6 +41,19 @@ export const ProfileOrderTable = ({ orders }: Props) => {
           : Number(b.total) - Number(a.total)
       );
   }, [orders, price]);
+  console.log(orders);
+
+  const handleCancel = async (id: string) => {
+    try {
+      await request.patch(`${CANCEL_ORDER}/${id}`, {orderType: "rejected"});
+      showSuccess("Заказ отменен");
+      setOpen(null);
+      queryClient.invalidateQueries({ queryKey: ["orders"] });
+    } catch (error) {
+      showError("При отмене заказа произошла ошибка");
+      console.log(error);
+    }
+  };
   return (
     <Table className="w-full table-auto bg-white border-separate border-spacing-y-2">
       <TableHeader>
@@ -65,7 +88,7 @@ export const ProfileOrderTable = ({ orders }: Props) => {
       </TableHeader>
       <TableBody>
         {sortedOrders && sortedOrders?.length > 0
-          ? sortedOrders?.map((order) => (
+          ? sortedOrders?.map((order, index) => (
               <TableRow key={order?.id} className="">
                 <TableCell className="py-[7px] px-[10px] border-l border-t border-b lg:w-[189px]">
                   <div>
@@ -88,7 +111,7 @@ export const ProfileOrderTable = ({ orders }: Props) => {
                       <ProfileWarIcon />
                     </span>
                     <div className="flex flex-col gap-2">
-                      <span>{order?.kontragent?.name}</span>
+                      <span>{order?.kontragentName}</span>
                       <span>ИНН {order?.kontragent?.inn}</span>
                     </div>
                   </div>
@@ -103,15 +126,9 @@ export const ProfileOrderTable = ({ orders }: Props) => {
                 </TableCell>
                 <TableCell className="py-[7px] px-[10px]  border-t border-b lg:w-[220px]">
                   <div className="flex flex-col items-center justify-center gap-2">
-                    {order?.orderPriceStatus === "Не оплачен" ? (
-                      <div className="border border-dangerColor w-full flex justify-center items-center h-[30px] rounded-[4px] text-dangerColor text-sm">
-                        Не оплачен
-                      </div>
-                    ) : (
-                      <div className="border border-cerulean w-full flex justify-center items-center h-[30px] rounded-[4px] text-cerulean text-sm">
-                        Оплачен
-                      </div>
-                    )}
+                    <div className="border border-dangerColor w-full flex justify-center items-center h-[30px] rounded-[4px] text-dangerColor text-sm">
+                      {order?.orderPriceStatus}
+                    </div>
                     <div>
                       <p>Оплатить до {formatDate(order?.validEndDate)}</p>
                     </div>
@@ -135,9 +152,12 @@ export const ProfileOrderTable = ({ orders }: Props) => {
                 </TableCell>
                 <TableCell className="py-[7px] px-[10px]  border-t border-b text-center border-r">
                   <div className="cursor-pointer flex justify-center">
-                    <Popover>
+                    <Popover
+                      open={open === index}
+                      onOpenChange={(isOpen) => setOpen(isOpen ? index : null)}
+                    >
                       <PopoverTrigger asChild>
-                        <button>
+                        <button type="button">
                           <EditIcon className="rotate-[90deg] text-darkSoul" />
                         </button>
                       </PopoverTrigger>
@@ -153,6 +173,20 @@ export const ProfileOrderTable = ({ orders }: Props) => {
                             Перейти в заказ
                           </Link>
                         </li>
+                        {order.orderType !== "rejected" && (
+                          <li className="py-[6px] px-4 bg-white hover:bg-superSilver duration-150 ease-in-out list-none">
+                            <button
+                              type="button"
+                              onClick={() => handleCancel(order?.id)}
+                              className="text-xs flex items-center gap-2 text-pelati"
+                            >
+                              <span>
+                                <DeleteIcon className="w-[13px] h-[13px] text-pelati" />
+                              </span>
+                              Отменить
+                            </button>
+                          </li>
+                        )}
                       </PopoverContent>
                     </Popover>
                   </div>

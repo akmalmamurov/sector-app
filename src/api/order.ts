@@ -1,4 +1,4 @@
-import { GET_CART_ORDER, GET_LAST_ORDER } from "@/constants";
+import { GET_CART_ORDER, GET_LAST_ORDER, GET_SINGLE_ORDER } from "@/constants";
 import request from "@/services";
 import { format } from "date-fns";
 
@@ -9,11 +9,11 @@ export const getOrders = async (
   orderType: string | null,
   periodStart: Date | undefined,
   periodEnd: Date | undefined,
-  orderNumber: string,
+  orderNumber: string
 ) => {
   try {
     const params = {
-      kontragentName,
+      ...(kontragentName && { kontragentName }),
       ...(orderPriceStatus && { orderPriceStatus }),
       ...(orderDeleveryType && { orderDeleveryType }),
       ...(orderType && { orderType }),
@@ -31,6 +31,15 @@ export const getOrders = async (
 export const getLastOrder = async () => {
   try {
     const res = await request(GET_LAST_ORDER);
+    return res.data.data || [];
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};
+export const getSingleOrder = async (id: string) => {
+  try {
+    const res = await request(`${GET_SINGLE_ORDER}/${id}`);
     return res.data.data || [];
   } catch (error) {
     console.log(error);

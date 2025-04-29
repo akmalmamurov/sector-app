@@ -58,7 +58,7 @@ export const OrderFinish = ({
                     Телефон
                   </span>
                   <p className="text-stoneCold text-sm font-normal">
-                    {formatUzbekNumber(order.phone)}
+                    {formatUzbekNumber(order?.phone)}
                   </p>
                 </div>
               </div>
@@ -68,7 +68,7 @@ export const OrderFinish = ({
                     Получатель
                   </span>
                   <p className="text-stoneCold text-sm font-normal">
-                    {order.fullname}
+                    {order?.fullname}
                   </p>
                 </div>
                 <div className="flex flex-col gap-1.5">
@@ -76,7 +76,7 @@ export const OrderFinish = ({
                     E-mail
                   </span>
                   <p className="text-stoneCold text-sm font-normal">
-                    {order.email}
+                    {order?.email}
                   </p>
                 </div>
               </div>
@@ -103,12 +103,12 @@ export const OrderFinish = ({
                   </span>
 
                   <span className="ml-1 border-b border-dashed w-fit border-cerulean text-cerulean">
-                    {order.agent.fullAddress
+                    {order?.agent?.fullAddress
                       .split(",")
                       .map((part) => part.trim())
                       .reverse()
                       .join(", ")}
-                    , {order.agent.house},
+                    , {order?.agent?.house},
                   </span>
                 </div>
                 <div className="flex flex-col gap-1.5">
@@ -126,7 +126,7 @@ export const OrderFinish = ({
             <div>
               <div className="border-b border-superSilver text-center mb-5">
                 <h3 className="relative text-textColor font-normal inline-block text-lg pb-4">
-                  {orderIndex + 1}. Заказ № {order.orderNumber} (НДС не
+                  {orderIndex + 1}. Заказ № {order?.orderNumber} (НДС не
                   облагается)
                   <span className="absolute bottom-0 left-0 w-full h-[4px] bg-gradient-to-r from-cerulean to-blue-500"></span>
                 </h3>
@@ -150,39 +150,39 @@ export const OrderFinish = ({
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {order.products.map((item) => (
-                    <TableRow key={item.productId}>
+                  {order?.products?.map((item) => (
+                    <TableRow key={item?.productId}>
                       <TableCell className="border-r p-2">
                         <div className="flex items-center gap-2">
                           <Image
-                            src={`${DOMAIN}/${item.product.mainImage}`}
-                            alt={item.product.title}
+                            src={`${DOMAIN}/${item?.product.mainImage}`}
+                            alt={item?.product.title}
                             width={60}
                             height={60}
                             className="aspect-square"
                           />
                           <p className="text-stoneCold text-sm">
-                            {item.product.title}
+                            {item?.product.title}
                           </p>
                         </div>
                       </TableCell>
                       <TableCell className="border-r px-3 py-6 text-xs flex items-center justify-between">
-                        {item.product.productCode}
+                        {item?.product.productCode}
                         <CopyIcon
                           className="cursor-pointer hover:text-cerulean"
                           onClick={() =>
                             copyToClipboard(
-                              item.product.productCode,
+                              item?.product.productCode,
                               "Артикул скопирован"
                             )
                           }
                         />
                       </TableCell>
                       <TableCell className="border-r px-4 py-6 text-center text-xs">
-                        {item.count}
+                        {item?.count}
                       </TableCell>
                       <TableCell className="px-4 py-6 text-end text-xs">
-                        <PriceFormatter amount={item.price} />
+                        <PriceFormatter amount={item?.price} />
                       </TableCell>
                     </TableRow>
                   ))}
@@ -200,13 +200,13 @@ export const OrderFinish = ({
                 <div className="flex items-center justify-between gap-2 px-3 py-4">
                   <p className="font-semibold text-sm text-textColor">Сумма</p>
                   <p className="font-semibold text-sm text-textColor">
-                    <PriceFormatter amount={Number(order.total)} />
+                    <PriceFormatter amount={Number(order?.total)} />
                   </p>
                 </div>
               </div>
               <div className="flex items-center gap-2 my-4">
                 <Link
-                  href={`/profile/orders/${order.id}`}
+                  href={`/profile/orders/${order?.id}`}
                   onClick={handleGoBack}
                   className="bg-white  hover:opacity-90 transition-opacity py-2 px-6 text-base font-semibold text-cerulean border border-cerulean flex items-center justify-center gap-2"
                 >

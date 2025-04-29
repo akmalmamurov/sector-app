@@ -1,32 +1,20 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import { z } from "zod";
 import Image from "next/image";
+import { useForm } from "react-hook-form";
+import React, { useState, useEffect, useRef } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { DOMAIN } from "@/constants";
 import { CommentProduct, ProductData } from "@/types";
 import { CircleAlert, CirclePlus, Star, X } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "../ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, } from "../ui/dialog";
 import { Button } from "../ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "../ui/form";
-import { useForm } from "react-hook-form";
+import { Form, FormControl, FormField, FormItem, FormMessage, } from "../ui/form";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { StarRating } from "../star-rating/StarRating";
 import { useCreateComment } from "@/api/product-comment";
 import { usePostQuestion } from "@/api/product-question";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useScrollDirection } from "@/hooks";
 interface Block {
   id: string;
