@@ -1,8 +1,10 @@
 import { OrdersData } from "@/types";
 import { Tabs, TabsList, TabsContent, TabsTrigger } from "../ui/tabs";
-import { formatDate } from "@/utils";
+import { formatDate, formatUzbekNumber } from "@/utils";
 import PriceFormatter from "../format-price/PriceFormatter";
 import { WalletIcon } from "@/assets/icons";
+import Image from "next/image";
+import { DOMAIN } from "@/constants";
 
 interface SingleOrderRightProps {
   order: OrdersData;
@@ -85,7 +87,139 @@ export const SingleOrderRight = ({ order }: SingleOrderRightProps) => {
                     <WalletIcon />
                   </span>
                 </div>
-                <div className="border border-superSilver p-[23px] bg-white mt-[23px]"></div>
+                <div className="border border-superSilver p-[23px] bg-white mt-[23px]">
+                  <div className="pb-[19px]">
+                    <div className="relative flex justify-center">
+                      <div className=" relative before:content-[''] before:absolute before:left-1/2 before:bottom-[-19px]  before:-translate-x-1/2 before:w-full before:h-[5px] before:bg-gradient-to-r before:from-cerulean before:to-linkColor before:opacity-100 text-lg text-lightBlack">
+                        Состав заказа
+                      </div>
+                    </div>
+                  </div>
+                  <hr className="border-superSilver mb-[23px]" />
+                  <table className="w-full table-auto border  border-superSilver">
+                    <thead className="border-b border-superSilver">
+                      <tr className="bg-whiteOut">
+                        <th className="pt-[10px] pb-[7.5px] font-normal text-xs text-lightBlack border-r text-center">
+                          Наименование товара
+                        </th>
+                        <th className="pt-[10px] pb-[7.5px] font-normal text-xs text-lightBlack w-[105px] text-center">
+                          Сумма
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {order?.products.map((item, productIndex) => (
+                        <tr key={productIndex} className="border-b">
+                          <td className="px-[10px] py-[7px] font-normal text-xs text-lightBlack border-r">
+                            <div className="flex items-center gap-[15px]">
+                              <div className="pl-[23px]">
+                                <Image
+                                  src={`${DOMAIN}/${item?.product?.mainImage}`}
+                                  alt="productImage"
+                                  width={60}
+                                  height={60}
+                                  className="w-[65px] h-[65px] object-cover"
+                                />
+                              </div>
+
+                              {item?.product?.title}
+                            </div>
+                          </td>
+                          <td className="px-[10px] py-[7px]">
+                            <PriceFormatter
+                              amount={item?.product?.price}
+                              className="text-xs font-normal text-lightBlack"
+                            />
+                          </td>
+                        </tr>
+                      ))}
+                      <tr>
+                        <td colSpan={2} className="px-[10px] py-[7px]">
+                          <div className="flex justify-between items-center">
+                            <span className="text-xs font-normal text-lightBlack">
+                              Сумма
+                            </span>
+                            <PriceFormatter
+                              amount={Number(order?.total)}
+                              className="text-sn font-normal text-lightBlack"
+                            />
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div className="col-span-4">
+                <div className="p-[23px] border border-superSilver bg-white">
+                  <div className="relative flex justify-center pb-[19px]">
+                    <div className=" relative before:content-[''] before:absolute before:left-1/2 before:bottom-[-19px]  before:-translate-x-1/2 before:w-full before:h-[5px] before:bg-gradient-to-r before:from-cerulean before:to-linkColor before:opacity-100 text-lg text-lightBlack">
+                      Заказ #{order?.orderNumber}
+                    </div>
+                  </div>
+                  <hr className="border-superSilver mb-[23px]" />
+                  <div className="px-[15px]">
+                    <div className="flex flex-col gap-2 pb-[15px] border-b border-superSilver">
+                      <p className="text-xs text-weekColor">Контрагент</p>
+                      <span className="text-sm text-stoneCold">
+                        {order?.kontragentName}
+                      </span>
+                    </div>
+                    <div className="flex flex-col gap-2 pt-2 pb-[15px] border-b border-superSilver">
+                      <p className="text-xs text-weekColor">Заказ оформил</p>
+                      <span className="text-sm text-stoneCold">
+                        {order?.user?.name}
+                      </span>
+                    </div>
+                    <div className="flex flex-col gap-2 pt-2">
+                      <p className="text-xs text-weekColor">Статус заказа</p>
+                      <div className="pl-2 flex items-center gap-2">
+                        <span
+                          className={`${order?.orderType !== "rejected" ? "bg-cerulean" : "bg-lightBlack"} w-[7px] h-[7px] rounded-full`}
+                        ></span>
+                        <span
+                          className={`${order?.orderType !== "rejected" ? "text-cerulean" : "text-lightBlack"} text-sm`}
+                        >
+                          {order?.orderType === "rejected"
+                            ? "Отменен"
+                            : order?.orderType === "new"
+                              ? "Новый"
+                              : order?.orderType === "old"
+                                ? "Старый"
+                                : ""}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-[23px] border border-superSilver bg-white mt-[23px]">
+                  <div className="relative flex justify-center pb-[19px]">
+                    <div className=" relative before:content-[''] before:absolute before:left-1/2 before:bottom-[-19px]  before:-translate-x-1/2 before:w-full before:h-[5px] before:bg-gradient-to-r before:from-cerulean before:to-linkColor before:opacity-100 text-lg text-lightBlack">
+                      Получатель
+                    </div>
+                  </div>
+                  <hr className="border-superSilver mb-[23px]" />
+                  <div className="px-[15px]">
+                    <div className="flex flex-col gap-2 pb-[15px] border-b border-superSilver">
+                      <p className="text-xs text-weekColor">ФИО</p>
+                      <span className="text-sm text-stoneCold">
+                        {order?.fullname}
+                      </span>
+                    </div>
+                    <div className="flex flex-col gap-2 pt-2 pb-[15px] border-b border-superSilver">
+                      <p className="text-xs text-weekColor">Почта</p>
+                      <span className="text-sm text-stoneCold">
+                        {order?.email}
+                      </span>
+                    </div>
+                    <div className="flex flex-col gap-2 pt-2">
+                      <p className="text-xs text-weekColor">Номер телефона</p>
+                      <span className="text-sm text-stoneCold">
+                        {formatUzbekNumber(order?.phone)}
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </TabsContent>

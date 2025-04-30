@@ -97,10 +97,8 @@ __turbopack_esm__({
     "default": (()=>__TURBOPACK__default__export__),
     "hydrateStore": (()=>hydrateStore)
 });
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$cookies$2d$next$2f$lib$2f$index$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/cookies-next/lib/index.js [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zustand$2f$esm$2f$react$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/zustand/esm/react.mjs [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zustand$2f$esm$2f$middleware$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/zustand/esm/middleware.mjs [app-rsc] (ecmascript)");
-;
 ;
 ;
 const useStore = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zustand$2f$esm$2f$react$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["create"])()((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zustand$2f$esm$2f$middleware$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["persist"])((set, get)=>({
@@ -232,7 +230,6 @@ const useStore = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_module
                 rowCol: false,
                 user: null
             });
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$cookies$2d$next$2f$lib$2f$index$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["deleteCookie"])("sector-token");
             localStorage.removeItem("sector-token");
         },
         clearDataAfterTimeout: ()=>{
@@ -248,7 +245,7 @@ const useStore = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_module
     name: "sector-app",
     storage: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zustand$2f$esm$2f$middleware$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["createJSONStorage"])(()=>localStorage),
     onRehydrateStorage: ()=>(state)=>{
-            const token = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$cookies$2d$next$2f$lib$2f$index$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getCookie"])("sector-token");
+            const token = localStorage.getItem("sector-token");
             if (token) state?.setAuth(true);
             state?.setHydrated(true);
         }
@@ -256,7 +253,7 @@ const useStore = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_module
 const __TURBOPACK__default__export__ = useStore;
 const hydrateStore = ()=>{
     useStore.persist.rehydrate();
-    if ("undefined" !== "undefined" && (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$cookies$2d$next$2f$lib$2f$index$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getCookie"])("sector-token")) {
+    if ("undefined" !== "undefined" && localStorage.getItem("sector-token")) {
         "TURBOPACK unreachable";
     }
 };
@@ -366,9 +363,7 @@ __turbopack_esm__({
     "default": (()=>__TURBOPACK__default__export__)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$store$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/context/store.ts [app-rsc] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$cookies$2d$next$2f$lib$2f$client$2f$index$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/cookies-next/lib/client/index.js [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/axios/lib/axios.js [app-rsc] (ecmascript)");
-;
 ;
 ;
 const request = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].create({

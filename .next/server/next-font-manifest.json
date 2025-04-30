@@ -2,7 +2,11 @@
   "app": {
     "[project]/src/app/profile/orders/[id]/page": [],
     "[project]/src/app/page": [],
-    "[project]/src/app/profile/orders/page": []
+    "[project]/src/app/profile/orders/page": [],
+    "[project]/src/app/catalog/[slug]/[subSlug]/[productSlug]/page": [],
+    "[project]/src/app/catalog/[slug]/page": [],
+    "[project]/src/app/profile/settings/page": [],
+    "[project]/src/app/brands/[slug]/page": []
   },
   "appUsingSizeAdjust": false,
   "pages": {},

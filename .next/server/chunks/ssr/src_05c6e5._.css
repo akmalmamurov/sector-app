@@ -1675,6 +1675,10 @@ body {
   height: 100vh;
 }
 
+.h-\[65px\] {
+  height: 65px;
+}
+
 .max-h-96 {
   max-height: 24rem;
 }
@@ -2065,6 +2069,10 @@ body {
 
 .w-screen {
   width: 100vw;
+}
+
+.w-\[105px\] {
+  width: 105px;
 }
 
 .min-w-0 {
@@ -3563,6 +3571,11 @@ body {
   padding-bottom: 8px;
 }
 
+.py-\[7\.5px\] {
+  padding-top: 7.5px;
+  padding-bottom: 7.5px;
+}
+
 .pb-0 {
   padding-bottom: 0;
 }
@@ -3957,6 +3970,14 @@ body {
 
 .pb-\[19px\] {
   padding-bottom: 19px;
+}
+
+.pb-\[7\.5px\] {
+  padding-bottom: 7.5px;
+}
+
+.pb-\[15px\] {
+  padding-bottom: 15px;
 }
 
 .text-left {
