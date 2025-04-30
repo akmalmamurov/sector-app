@@ -6,6 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
+    "start-server": "NODE_OPTIONS='--turbo-disable' next start",
     "lint": "next lint"
   },
   "dependencies": {
@@ -30,7 +31,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
     "lucide-react": "^0.474.0",
-    "next": "15.1.6",
+    "next": "^15.3.1",
     "next-auth": "^4.24.11",
     "react": "^18.3.1",
     "react-countdown": "^2.3.6",
@@ -41,6 +42,7 @@
     "react-hot-toast": "^2.5.1",
     "react-image-gallery": "^1.4.0",
     "react-imask": "^7.6.1",
+    "sharp": "^0.34.1",
     "swiper": "^11.2.1",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
