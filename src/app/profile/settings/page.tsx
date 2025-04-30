@@ -11,7 +11,7 @@ import { AccountMe, AccountPassword } from "@/components/profile";
 const SettingsPage = () => {
   useRequireAuth();
   return (
-    <div>
+    <section className="p-6 bg-white">
       <div className="flex items-center gap-3 border border-cerulean h-[51px] px-4 mb-4">
         <TelegramBlueIcon />
         <Link className="text-cerulean text-xs hover:underline" href={"#"}>
@@ -175,7 +175,7 @@ const SettingsPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

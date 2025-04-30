@@ -1,0 +1,9 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file://D%3A/project/sector-app/src/app/%28user%29/search/page.tsx"],"sourcesContent":["import { useSearchParams } from \"next/navigation\";\r\n\r\nconst SearchPage = () => {\r\n  const searchParams = useSearchParams(); // searchParams obyekti orqali URL'dan qiymatni olish\r\n  const query = searchParams.get(\"query\"); // \"query\" parametrining qiymatini olish\r\n\r\n  console.log(query);\r\n\r\n  return (\r\n    <div>\r\n      <h1 className=\"text-2xl font-bold text-center\">{query || \"No query provided\"}</h1>\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default SearchPage;\r\n"],"names":[],"mappings":";;;;AAAA;AAAA;;;AAEA,MAAM,aAAa;IACjB,MAAM,eAAe,CAAA,GAAA,qLAAA,CAAA,kBAAe,AAAD,KAAK,qDAAqD;IAC7F,MAAM,QAAQ,aAAa,GAAG,CAAC,UAAU,wCAAwC;IAEjF,QAAQ,GAAG,CAAC;IAEZ,qBACE,8OAAC;kBACC,cAAA,8OAAC;YAAG,WAAU;sBAAkC,SAAS;;;;;;;;;;;AAG/D;uCAEe"}},
+    {"offset": {"line": 35, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}},
+    {"offset": {"line": 46, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":""}},
+    {"offset": {"line": 46, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

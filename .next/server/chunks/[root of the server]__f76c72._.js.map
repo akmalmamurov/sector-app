@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 55, "column": 0}, "map": {"version":3,"sources":["file://D%3A/project/sector-app/src/app/api/auth/%5Bprovider%5D/login/route.ts"],"sourcesContent":["// app/api/auth/[provider]/login/route.ts\r\nimport { NextResponse } from \"next/server\";\r\n\r\nexport async function GET(\r\n  _req: Request,\r\n  { params }: { params: { provider: string } }\r\n) {\r\n  const redirectUrl = `${process.env.NEXT_PUBLIC_API_URL}/user/auth/${params.provider}/login`;\r\n  return NextResponse.redirect(redirectUrl);\r\n}\r\n\r\nexport const dynamic = \"force-dynamic\";\r\n"],"names":[],"mappings":"AAAA,yCAAyC;;;;;AACzC;;AAEO,eAAe,IACpB,IAAa,EACb,EAAE,MAAM,EAAoC;IAE5C,MAAM,cAAc,uEAAmC,WAAW,EAAE,OAAO,QAAQ,CAAC,MAAM,CAAC;IAC3F,OAAO,gIAAA,CAAA,eAAY,CAAC,QAAQ,CAAC;AAC/B;AAEO,MAAM,UAAU"}},
+    {"offset": {"line": 67, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

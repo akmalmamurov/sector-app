@@ -75,7 +75,7 @@ const FavoritesPage = () => {
   };
 
   return (
-    <>
+    <section className="p-6 bg-white">
       {savedProduct.length > 0 ? (
         <div>
           <div className="flex justify-end mb-6">
@@ -197,7 +197,7 @@ const FavoritesPage = () => {
         onConfirm={onConfirm}
         closeModal={closeModal}
       />
-    </>
+    </section>
   );
 };
 

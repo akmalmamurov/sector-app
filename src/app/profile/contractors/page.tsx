@@ -44,7 +44,7 @@ const ContractorsPage = () => {
   }, [isOpen]);
 
   return (
-    <div>
+    <section className="p-6 bg-white">
       <div className="relative mb-[33px]">
         <input
           type="text"
@@ -73,7 +73,7 @@ const ContractorsPage = () => {
         <ContrAgent contrAgents={agentsData?.kontragents || []} />
       </div>
       <ContrAgentModal isOpen={isOpen} toggleOpen={toggleOpen} />
-    </div>
+    </section>
   );
 };
 

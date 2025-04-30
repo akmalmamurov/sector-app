@@ -61,3 +61,4 @@ export * from "./GaranteeAddIcon";
 export * from "./profile-icon/ProfileUpIcon";
 export * from "./profile-icon/ProfileDownIcon";
 export * from "./profile-icon/ProfileSearchIcon";
+export * from "./profile-icon/WalletIcon";
