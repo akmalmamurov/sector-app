@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useState } from "react";
 import PriceFormatter from "../format-price/PriceFormatter";
 import { useDebounce } from "use-debounce";
-import { format } from "date-fns";
 import { formatDate } from "@/utils";
 
 interface SingleOrderLeftProps {
