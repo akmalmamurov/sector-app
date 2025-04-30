@@ -3531,6 +3531,7 @@ __turbopack_esm__({});
 ;
 ;
 ;
+;
 }}),
 "[project]/src/assets/icons/index.ts [app-ssr] (ecmascript) <module evaluation>": ((__turbopack_context__) => {
 "use strict";
@@ -3601,6 +3602,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$assets$2f$icons$2f$Ga
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$assets$2f$icons$2f$profile$2d$icon$2f$ProfileUpIcon$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/assets/icons/profile-icon/ProfileUpIcon.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$assets$2f$icons$2f$profile$2d$icon$2f$ProfileDownIcon$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/assets/icons/profile-icon/ProfileDownIcon.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$assets$2f$icons$2f$profile$2d$icon$2f$ProfileSearchIcon$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/assets/icons/profile-icon/ProfileSearchIcon.tsx [app-ssr] (ecmascript)");
+(()=>{
+    const e = new Error("Cannot find module './profile-icon'");
+    e.code = 'MODULE_NOT_FOUND';
+    throw e;
+})();
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$assets$2f$icons$2f$index$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_import__("[project]/src/assets/icons/index.ts [app-ssr] (ecmascript) <locals>");
 }}),
 "[project]/src/components/ui/dialog.tsx [app-ssr] (ecmascript)": ((__turbopack_context__) => {

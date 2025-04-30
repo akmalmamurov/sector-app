@@ -15,7 +15,6 @@ interface SingleOrderLeftProps {
 
 export const SingleOrderLeft = ({ orderSort }: SingleOrderLeftProps) => {
   const [orderNumber, setOrderNumber] = useState<string>("");
-  // Debounce the search input by 1s
   const [debouncedOrderNumber] = useDebounce(orderNumber, 600);
 
   const auth = useStore((s) => s.auth);
@@ -26,7 +25,7 @@ export const SingleOrderLeft = ({ orderSort }: SingleOrderLeftProps) => {
   });
 
   const orders = orderData?.orders;
-console.log(orders);
+  console.log(orders);
 
   return (
     <div className="col-span-3">
@@ -35,7 +34,7 @@ console.log(orders);
           <input
             type="text"
             placeholder="Заказ, серийный номер, название"
-            className="pl-[15px] pr-10 w-full text-[14px] leading-[25px] h-[41px] border border-superSilver hover:border-cerulean/70 focus:border-cerulean focus:outline-none rounded-none"
+            className="pl-[15px] pr-10 w-full text-base leading-[25px] h-[41px] border border-superSilver hover:border-cerulean/70 focus:border-cerulean focus:outline-none rounded-none"
             value={orderNumber}
             onChange={(e) => setOrderNumber(e.target.value)}
           />
@@ -49,7 +48,7 @@ console.log(orders);
               <Link
                 href={`/profile/orders/${item?.id}`}
                 key={item?.id}
-                className="pt-[15px] pr-2 border border-superSilver"
+                className={`pt-[15px] pr-2 border ${isActive ? "border-transparent shadow-infoShadow" : "border-superSilver"}  bg-white`}
               >
                 {/* header */}
                 <div
@@ -72,29 +71,31 @@ console.log(orders);
                   />
                 </div>
                 {/* separator */}
-                <div className="mt-2 mb-[15px] px-2">
+                <div className="mt-2 mb-[18px] px-2">
                   <hr className="border-superSilver" />
                 </div>
                 {/* footer */}
-                <div className="px-2 flex justify-between items-center">
+                <div className="px-2 flex justify-between items-center pb-[21px]">
                   <div className="pl-2 flex items-center gap-2">
-                    <span className={`${item.orderType !== "rejected" ? "bg-cerulean" : "bg-lightBlack"} w-[7px] h-[7px] rounded-full`}>
-
-                    </span>
                     <span
-                    className={`${item.orderType !== "rejected" ? "text-cerulean" : "text-lightBlack"} text-sm`}
-                  >
-                    {item.orderType === "rejected"
-                      ? "Отменен"
-                      : item.orderType === "new"
-                      ? "Новый"
-                      : item.orderType === "old"
-                      ? "Старый"
-                      : ""}
-                  </span>
+                      className={`${item.orderType !== "rejected" ? "bg-cerulean" : "bg-lightBlack"} w-[7px] h-[7px] rounded-full`}
+                    ></span>
+                    <span
+                      className={`${item.orderType !== "rejected" ? "text-cerulean" : "text-lightBlack"} text-sm`}
+                    >
+                      {item.orderType === "rejected"
+                        ? "Отменен"
+                        : item.orderType === "new"
+                          ? "Новый"
+                          : item.orderType === "old"
+                            ? "Старый"
+                            : ""}
+                    </span>
                   </div>
                   <div>
-                    <span className="text-sm text-lightBlack">от {formatDate(item?.validStartDate)}</span>
+                    <span className="text-sm text-lightBlack">
+                      от {formatDate(item?.validStartDate)}
+                    </span>
                   </div>
                 </div>
               </Link>
