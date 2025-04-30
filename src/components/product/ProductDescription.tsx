@@ -109,7 +109,7 @@ function renderEditorBlocks(editorJson: EditorData, fullImages: string[]) {
         imageIndex++;
         if (DOMAIN && !imageUrl.startsWith("http")) {
           imageUrl = DOMAIN + (imageUrl.startsWith("/") ? "" : "/") + imageUrl;
-        }
+        } 
         const caption = block.data.caption || "";
         return (
           <div className="flex gap-8 my-4">
