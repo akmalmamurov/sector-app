@@ -120,7 +120,7 @@ function renderEditorBlocks(editorJson: EditorData, fullImages: string[]) {
                 <p className="text-center text-sm mt-1 text-textColor">
                   {caption}
                 </p>
-              )}
+              )} 
               </div>
             </div>
           </div>
