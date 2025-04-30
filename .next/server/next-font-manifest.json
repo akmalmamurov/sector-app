@@ -1,5 +1,13 @@
 {
-  "app": {},
+  "app": {
+    "[project]/src/app/page": [],
+    "[project]/src/app/profile/orders/page": [],
+    "[project]/src/app/profile/issues/page": [],
+    "[project]/src/app/profile/orders/[id]/page": [],
+    "[project]/src/app/profile/contractors/page": [],
+    "[project]/src/app/profile/favorites/page": [],
+    "[project]/src/app/profile/settings/page": []
+  },
   "appUsingSizeAdjust": false,
   "pages": {},
   "pagesUsingSizeAdjust": false

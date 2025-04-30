@@ -1,1 +1,9 @@
-{}
+{
+  "/page": "app/page.js",
+  "/profile/orders/page": "app/profile/orders/page.js",
+  "/profile/issues/page": "app/profile/issues/page.js",
+  "/profile/orders/[id]/page": "app/profile/orders/[id]/page.js",
+  "/profile/contractors/page": "app/profile/contractors/page.js",
+  "/profile/favorites/page": "app/profile/favorites/page.js",
+  "/profile/settings/page": "app/profile/settings/page.js"
+}
