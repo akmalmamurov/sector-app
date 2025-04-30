@@ -50,7 +50,7 @@ export const SortProducts: React.FC<SortProductsProps> = (props) => {
     toggleRowCol(row);
   };
   return (
-    <div className="p-[15px] flex justify-between items-center border-b border-superSilver">
+    <div className="p-[15px] lgl:flex justify-between items-center border-b border-superSilver hidden">
       <div className="flex gap-2">
         <button
           onClick={() => handleToggleRowCol(false)}
@@ -70,7 +70,7 @@ export const SortProducts: React.FC<SortProductsProps> = (props) => {
         </button>
       </div>
 
-      <div className="flex">
+      <div className="hidden lgl:flex">
         <div className="flex mr-2">
           <button
             onClick={() => setInStock(false)}
@@ -94,7 +94,7 @@ export const SortProducts: React.FC<SortProductsProps> = (props) => {
           <div className="flex justify-between w-full items-center">
             <div className="flex items-center gap-2">
               <SortIconDesc />
-              <span className="select-none font-normal text-textColor text-base leading-6">
+              <span className="select-none font-normal flex lg:hidden xl:flex text-textColor text-base leading-6">
                 {selected || "Популярность"}
               </span>
             </div>

@@ -1423,7 +1423,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$assets$2f$icons$2f$Si
 const CatalogLink = ({ total })=>{
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
         href: "/catalog",
-        className: "bg-white relative shadow-md overflow-hidden pb-1 w-[175px] h-[165px] lg:w-[282px]   lg:min-h-[190px] rounded-[10px] cursor-pointer flex flex-col justify-between group",
+        className: "bg-white relative shadow-md overflow-hidden pb-1 w-[175px] h-[165px] lg:w-[282px] lg:min-h-[190px] rounded-[10px] cursor-pointer flex flex-col justify-between group",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "px-4 py-6",
@@ -2010,7 +2010,7 @@ const HomeBrands = ({ brands })=>{
                             }, this)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
                             href: "/brands",
-                            className: "bg-white text-cerulean font-medium text-sm leading-[21px] gap-3 items-center py-[5px] px-8 flex justify-center    opacity-80 hover:opacity-100 hoverEffect shadow-md rounded-[10px] min-w-[150px] lg:min-w-0 mb-4",
+                            className: "bg-white text-cerulean font-medium text-sm leading-[21px] gap-3 items-center py-[5px] px-8 flex justify-center  opacity-80 hover:opacity-100 hoverEffect shadow-md rounded-[10px] min-w-[150px] lg:min-w-0 mb-4",
                             children: [
                                 "Все бренды",
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {

@@ -112,9 +112,17 @@ function renderEditorBlocks(editorJson: EditorData, fullImages: string[]) {
         }
         const caption = block.data.caption || "";
         return (
-          <div key={block.id} className="relative w-1/2 h-64 my-4">
-            <Image src={imageUrl} alt={caption} fill className="" />
-            {caption && <p className="text-center text-sm mt-2">{caption}</p>}
+          <div className="flex gap-8 my-4">
+            <div key={block.id} className="w-20">
+              <div className="relative w-12 h-12">
+                <Image src={imageUrl} alt={caption} fill className="object-cover rounded" />
+              {caption && (
+                <p className="text-center text-sm mt-1 text-textColor">
+                  {caption}
+                </p>
+              )}
+              </div>
+            </div>
           </div>
         );
       }
@@ -449,7 +457,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
                   Уважаемые покупатели. <br />
                   Обращаем Ваше внимание, что размещенная на данном сайте
                   справочная информация о товарах не является офертой, наличие и
-                  стоимость оборудования необходимо уточнить у менеджеров  "НАГ
+                  стоимость оборудования необходимо уточнить у менеджеров  "НАГ
                   Узбекистан", которые с удовольствием помогут Вам в выборе
                   оборудования и оформлении на него заказа.
                 </p>
@@ -503,7 +511,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
                             htmlFor="body"
                             className="text-textColor font-normal text-xl"
                           >
-                            Напишите, почему вы так считаете *
+                            Напишите, почему вы так считаете *
                           </Label>
                           <Textarea
                             {...field}
@@ -561,7 +569,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
                             className="text-textColor font-normal text-xl"
                           >
                             Задайте вопрос по товару. После проверки вопрос
-                            будет опубликован *
+                            будет опубликован *
                           </Label>
                           <Textarea
                             {...field}

@@ -6,6 +6,8 @@ module.exports = {
 var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, x: __turbopack_external_require__, y: __turbopack_external_import__, z: __turbopack_require_stub__ } = __turbopack_context__;
 {
 __turbopack_esm__({
+    "CANCEL_ORDER": (()=>CANCEL_ORDER),
+    "CART_ORDER_CREATE": (()=>CART_ORDER_CREATE),
     "CREATE_AGENT": (()=>CREATE_AGENT),
     "CREATE_AGENT_ADDRESS": (()=>CREATE_AGENT_ADDRESS),
     "DELETE_AGENT": (()=>DELETE_AGENT),
@@ -20,7 +22,9 @@ __turbopack_esm__({
     "GET_BRAND_POPULAR": (()=>GET_BRAND_POPULAR),
     "GET_BRAND_SINGLE": (()=>GET_BRAND_SINGLE),
     "GET_CART": (()=>GET_CART),
+    "GET_CART_ORDER": (()=>GET_CART_ORDER),
     "GET_CATALOG": (()=>GET_CATALOG),
+    "GET_LAST_ORDER": (()=>GET_LAST_ORDER),
     "GET_ME": (()=>GET_ME),
     "GET_POPULAR": (()=>GET_POPULAR),
     "GET_PRODUCTS": (()=>GET_PRODUCTS),
@@ -31,8 +35,10 @@ __turbopack_esm__({
     "GET_PROMOTION_SINGLE": (()=>GET_PROMOTION_SINGLE),
     "GET_REGION": (()=>GET_REGION),
     "GET_SAVED": (()=>GET_SAVED),
+    "GET_SINGLE_ORDER": (()=>GET_SINGLE_ORDER),
     "LOGIN_PASSWORD": (()=>LOGIN_PASSWORD),
     "SINGLE_AGENT_ADDRESS": (()=>SINGLE_AGENT_ADDRESS),
+    "THRESHOLD": (()=>THRESHOLD),
     "TOGGLE_CART": (()=>TOGGLE_CART),
     "TOGGLE_FAVORITES": (()=>TOGGLE_FAVORITES),
     "UPDATE_AGENT": (()=>UPDATE_AGENT),
@@ -75,6 +81,12 @@ const UPDATE_CART = "/user/cart/update-amount";
 const TOGGLE_FAVORITES = "/user/product/toggle-saved";
 const GET_SAVED = "/user/product/saved-products";
 const DELETE_FAVORITES = "/user/product/delete-saved";
+const THRESHOLD = 500;
+const CART_ORDER_CREATE = "/user/orders/create";
+const GET_CART_ORDER = "/user/orders/get-all";
+const GET_LAST_ORDER = "/user/orders/get-all?last=true";
+const CANCEL_ORDER = "/user/orders/cancel";
+const GET_SINGLE_ORDER = "/user/orders/get-by-id";
 }}),
 "[project]/src/context/store.ts [app-rsc] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
@@ -118,6 +130,11 @@ const useStore = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_module
         selectedCardsList: (products)=>{
             set(()=>({
                     selected: products
+                }));
+        },
+        removeSelectedCardsList: ()=>{
+            set(()=>({
+                    selected: []
                 }));
         },
         setContact: (info)=>set({
@@ -352,7 +369,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib
 const request = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].create({
     baseURL: ("TURBOPACK compile-time value", "https://api.sectortechnology.uz"),
     headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
     }
 });
 request.interceptors.request.use((config)=>{
@@ -362,7 +379,7 @@ request.interceptors.request.use((config)=>{
     return config;
 }, (error)=>Promise.reject(error));
 request.interceptors.response.use((response)=>response, (error)=>{
-    if (error.response?.status === 401 && error.response.data?.message === 'Invalid or expired token') {
+    if (error.response?.status === 401 && error.response.data?.message === "Invalid or expired token") {
         __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$store$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].getState().logOut();
         if ("TURBOPACK compile-time falsy", 0) {
             "TURBOPACK unreachable";
@@ -431,10 +448,13 @@ __turbopack_esm__({
     "showError": (()=>showError),
     "showInfo": (()=>showInfo),
     "showSuccess": (()=>showSuccess),
+    "showToast": (()=>showToast),
     "showWarning": (()=>showWarning)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-jsx-dev-runtime.js [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/client/app-dir/link.js [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/react-hot-toast/dist/index.mjs [app-rsc] (ecmascript)");
+;
 ;
 ;
 const toastStyles = {
@@ -455,7 +475,7 @@ const toastStyles = {
         text: "#FFFFFF"
     }
 };
-const showToast = ({ message, type })=>{
+const showToast = ({ message, type, href, hrefName })=>{
     __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].custom((t)=>{
         const { bg, text } = toastStyles[type];
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -464,7 +484,7 @@ const showToast = ({ message, type })=>{
                 backgroundColor: bg
             },
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "h-full w-full flex items-center gap-2 sm:gap-4 justify-between",
+                className: "h-full w-full flex flex-col ",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "font-normal text-sm ",
@@ -474,11 +494,28 @@ const showToast = ({ message, type })=>{
                         children: message
                     }, void 0, false, {
                         fileName: "[project]/src/components/toast/Toast.tsx",
-                        lineNumber: 27,
+                        lineNumber: 30,
                         columnNumber: 11
                     }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                        className: "cursor-pointer text-white",
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "flex w-full justify-end mt-[15px]",
+                        children: href && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
+                            href: href,
+                            onClick: ()=>__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].remove(t.id),
+                            className: "font-normal text-sm text-white underline ",
+                            children: hrefName
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/toast/Toast.tsx",
+                            lineNumber: 35,
+                            columnNumber: 15
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/toast/Toast.tsx",
+                        lineNumber: 33,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        className: "cursor-pointer text-white absolute top-[18px] right-5",
                         onClick: ()=>__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].remove(t.id),
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
                             xmlns: "http://www.w3.org/2000/svg",
@@ -496,43 +533,45 @@ const showToast = ({ message, type })=>{
                                     d: "M18 6 6 18"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/toast/Toast.tsx",
-                                    lineNumber: 46,
+                                    lineNumber: 60,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                     d: "m6 6 12 12"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/toast/Toast.tsx",
-                                    lineNumber: 47,
+                                    lineNumber: 61,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/toast/Toast.tsx",
-                            lineNumber: 34,
+                            lineNumber: 48,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/toast/Toast.tsx",
-                        lineNumber: 30,
+                        lineNumber: 44,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/toast/Toast.tsx",
-                lineNumber: 26,
+                lineNumber: 29,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/toast/Toast.tsx",
-            lineNumber: 22,
+            lineNumber: 25,
             columnNumber: 7
         }, this);
     });
 };
-const showSuccess = (message)=>showToast({
+const showSuccess = (message, href, hrefName)=>showToast({
         message,
-        type: "success"
+        type: "success",
+        href,
+        hrefName
     });
 const showWarning = (message)=>showToast({
         message,
@@ -1035,7 +1074,7 @@ async function CategoryPage({ params }) {
         className: "pb-[58px]",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "flex items-center pl-2 sm:pl-1 gap-[15px] text-gray-600 h-[60px]",
+                className: "flex flex-wrap items-center pl-2 sm:pl-1 gap-2 lg:gap-[15px] text-gray-600 h-[60px] mt-1 mb-2",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
                         href: "/",
