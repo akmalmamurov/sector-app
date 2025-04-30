@@ -1,8 +1,5 @@
+export const SingleOrderRight = () => {
+  return <div className="col-span-9">SingleOrderRight</div>;
+};
 
-export  const SingleOrderRight = () => {
-  return (
-    <div>SingleOrderRight</div>
-  )
-}
-
-export default SingleOrderRight
+export default SingleOrderRight;

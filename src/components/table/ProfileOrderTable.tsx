@@ -120,7 +120,7 @@ export const ProfileOrderTable = ({ orders }: Props) => {
                   <div className="flex flex-col gap-2">
                     <p>Прочее</p>
                     <span className="border-b border-dashed border-cerulean text-cerulean w-fit">
-                      Статус: Не отгружен
+                      Статус: {order.orderDeleveryType}
                     </span>
                   </div>
                 </TableCell>
