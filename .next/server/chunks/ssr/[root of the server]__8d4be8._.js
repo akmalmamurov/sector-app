@@ -6,6 +6,7 @@ module.exports = {
 var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, x: __turbopack_external_require__, y: __turbopack_external_import__, z: __turbopack_require_stub__ } = __turbopack_context__;
 {
 __turbopack_esm__({
+    "CANCEL_ORDER": (()=>CANCEL_ORDER),
     "CART_ORDER_CREATE": (()=>CART_ORDER_CREATE),
     "CREATE_AGENT": (()=>CREATE_AGENT),
     "CREATE_AGENT_ADDRESS": (()=>CREATE_AGENT_ADDRESS),
@@ -34,6 +35,7 @@ __turbopack_esm__({
     "GET_PROMOTION_SINGLE": (()=>GET_PROMOTION_SINGLE),
     "GET_REGION": (()=>GET_REGION),
     "GET_SAVED": (()=>GET_SAVED),
+    "GET_SINGLE_ORDER": (()=>GET_SINGLE_ORDER),
     "LOGIN_PASSWORD": (()=>LOGIN_PASSWORD),
     "SINGLE_AGENT_ADDRESS": (()=>SINGLE_AGENT_ADDRESS),
     "THRESHOLD": (()=>THRESHOLD),
@@ -83,6 +85,8 @@ const THRESHOLD = 500;
 const CART_ORDER_CREATE = "/user/orders/create";
 const GET_CART_ORDER = "/user/orders/get-all";
 const GET_LAST_ORDER = "/user/orders/get-all?last=true";
+const CANCEL_ORDER = "/user/orders/cancel";
+const GET_SINGLE_ORDER = "/user/orders/get-by-id";
 }}),
 "[project]/src/context/store.ts [app-rsc] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
@@ -365,7 +369,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib
 const request = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].create({
     baseURL: ("TURBOPACK compile-time value", "https://api.sectortechnology.uz"),
     headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
     }
 });
 request.interceptors.request.use((config)=>{
@@ -375,7 +379,7 @@ request.interceptors.request.use((config)=>{
     return config;
 }, (error)=>Promise.reject(error));
 request.interceptors.response.use((response)=>response, (error)=>{
-    if (error.response?.status === 401 && error.response.data?.message === 'Invalid or expired token') {
+    if (error.response?.status === 401 && error.response.data?.message === "Invalid or expired token") {
         __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$store$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].getState().logOut();
         if ("TURBOPACK compile-time falsy", 0) {
             "TURBOPACK unreachable";
@@ -583,7 +587,11 @@ __turbopack_esm__({
     "isProductInList": (()=>isProductInList)
 });
 const isProductInList = (list, product)=>{
-    return list.some((item)=>item.id === product.id);
+    if (!product) {
+        console.warn("isProductInList: product is undefined or null");
+        return false;
+    }
+    return list.some((item)=>item?.id === product.id);
 };
 }}),
 "[project]/src/components/toast/Toast.tsx [app-rsc] (ecmascript)": ((__turbopack_context__) => {
@@ -1068,7 +1076,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$format$2d$da
 const DiscountCard = ({ promotion })=>{
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
         href: `/action/${promotion.id}`,
-        className: "pt-2 bg-white shadow-sidebarWadow overflow-hidden h-fit",
+        className: "pt-2 bg-white shadow-sidebarWadow overflow-hidden h-full",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "overflow-hidden px-2",
@@ -1396,7 +1404,7 @@ const DiscountPage = async ()=>{
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "p-[23px]",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "grid grid-cols-4 gap-[28px]",
+                            className: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[28px]",
                             children: discount.map((item)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$card$2f$DiscountCard$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["DiscountCard"], {
                                     promotion: item
                                 }, item.id, false, {

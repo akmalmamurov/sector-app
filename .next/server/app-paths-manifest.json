@@ -1,6 +1,9 @@
 {
-  "/catalog/[slug]/[subSlug]/page": "app/catalog/[slug]/[subSlug]/page.js",
-  "/_not-found/page": "app/_not-found/page.js",
   "/page": "app/page.js",
-  "/catalog/[slug]/[subSlug]/[productSlug]/page": "app/catalog/[slug]/[subSlug]/[productSlug]/page.js"
+  "/profile/favorites/page": "app/profile/favorites/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/cart/page": "app/cart/page.js",
+  "/catalog/[slug]/[subSlug]/page": "app/catalog/[slug]/[subSlug]/page.js",
+  "/compare/page": "app/compare/page.js",
+  "/action/page": "app/action/page.js"
 }

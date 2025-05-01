@@ -42,7 +42,7 @@ const OrderCart = ({
   };
   return (
     <div
-      className={`bg-white border border-superSilver shadow-sectionShadow p-[23px] sticky ${isScroll ? "top-[140px]" : "top-2"}`}
+      className={`hidden lgl:block bg-white border border-superSilver shadow-sectionShadow p-[23px] sticky ${isScroll ? "top-[140px]" : "top-2"}`}
     >
       <div>
         <div className="flex justify-between items-center mb-5">

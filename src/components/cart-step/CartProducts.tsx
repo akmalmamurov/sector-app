@@ -71,9 +71,11 @@ const CartProducts: React.FC<CartProductsProps> = (props) => {
                 </div>
               </div>
               <Separator className="my-2" />
-              <div className="flex gap-2">
+              <div className="flex flex-col lgl:flex-row gap-2">
                 {/* Image */}
-                <div className="border w-[130px] h-[130px] border-superSilver">
+                <div className="flex gap-2">
+
+                <div className="border w-[130px] h-[130px] border-superSilver ">
                   <Image
                     src={`${DOMAIN}/${product.mainImage}`}
                     alt={product.title}
@@ -121,8 +123,8 @@ const CartProducts: React.FC<CartProductsProps> = (props) => {
                     </div>
                   </div>
                   <div className="mt-[15px]">
-                    <div className="flex flex-col gap-2">
-                      <div className="flex justify-between">
+                    <div className="hidden lgl:flex flex-col-reverse gap-2">
+                      <div className="flex flex-row-reverse items-center justify-between gap-4">
                         <div className="w-[90px] h-[42px] relative">
                           <input
                             type="number"
@@ -173,11 +175,11 @@ const CartProducts: React.FC<CartProductsProps> = (props) => {
                         <div>
                           <PriceFormatter
                             amount={product.price}
-                            className="text-2xl text-textColor font-normal"
+                            className="text-base lgl:text-2xl text-textColor font-normal"
                           />
                         </div>
                       </div>
-                      <div className="flex justify-between items-center">
+                      <div   className=" justify-between items-center">
                         {product.inStock === "0" ? (
                           <span>Под заказ</span>
                         ) : (
@@ -197,6 +199,81 @@ const CartProducts: React.FC<CartProductsProps> = (props) => {
                     </div>
                   </div>
                 </div>
+                </div>
+                <div className="flex lgl:hidden flex-row-reverse justify-between gap-2">
+                      <div className="flex flex-row-reverse items-center lgl:flex-row justify-between gap-4">
+                        <div className="w-[90px] h-[42px] relative">
+                          <input
+                            type="number"
+                            value={product.count}
+                            className="w-[90px] h-[42px] text-center pr-3 border focus:outline-none text-textColor"
+                            onChange={(e) => {
+                              let value = Number(e.target.value);
+                              if (value < 1) {
+                                value = 1;
+                              } else if (value > 9999) {
+                                value = 9999;
+                              }
+                              setQuantity(product.id, value);
+                            }}
+                          />
+
+                          <div className="absolute top-0 h-full right-[10px] flex flex-col justify-center">
+                            <span
+                              className="cursor-pointer"
+                              onClick={() =>
+                                setQuantity(
+                                  product.id,
+                                  Number(product.count) + 1
+                                )
+                              }
+                            >
+                              <ChevronUp strokeWidth={2.75} size={16} />
+                            </span>
+                            <button
+                              type="button"
+                              className="cursor-pointer disabled:opacity-60 disabled:cursor-default"
+                              onClick={() =>
+                                setQuantity(
+                                  product.id,
+                                  Number(product.count) - 1
+                                )
+                              }
+                              disabled={product.count === 1}
+                            >
+                              <ChevronUp
+                                size={16}
+                                strokeWidth={2.75}
+                                className="rotate-180"
+                              />
+                            </button>
+                          </div>
+                        </div>
+                        <div>
+                          <PriceFormatter
+                            amount={product.price}
+                            className="text-base lgl:text-2xl text-textColor font-normal"
+                          />
+                        </div>
+                      </div>
+                      <div   className="flex justify-between items-center">
+                        {product.inStock === "0" ? (
+                          <span>Под заказ</span>
+                        ) : (
+                          <p>{product.inStock} шт в наличии</p>
+                        )}
+                        {product?.garantees?.length > 0 && (
+                          <button
+                            type="button"
+                            onClick={() => toggleModal(product.id)}
+                            className="w-[154px] h-[26px] flex items-center justify-center gap-1 bg-bleachedSilk text-xs font-semibold leading-[18px]"
+                          >
+                            <GaranteeAddIcon />
+                            Добавить гарантию
+                          </button>
+                        )}
+                      </div>
+                    </div>
               </div>
             </div>
             {openProductId === product.id && (

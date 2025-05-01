@@ -663,7 +663,11 @@ __turbopack_esm__({
     "isProductInList": (()=>isProductInList)
 });
 const isProductInList = (list, product)=>{
-    return list.some((item)=>item.id === product.id);
+    if (!product) {
+        console.warn("isProductInList: product is undefined or null");
+        return false;
+    }
+    return list.some((item)=>item?.id === product.id);
 };
 }}),
 "[project]/src/components/toast/Toast.tsx [app-rsc] (ecmascript)": ((__turbopack_context__) => {

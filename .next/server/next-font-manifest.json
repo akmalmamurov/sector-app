@@ -1,9 +1,12 @@
 {
   "app": {
-    "[project]/src/app/catalog/[slug]/[subSlug]/page": [],
-    "[project]/src/app/_not-found/page": [],
     "[project]/src/app/page": [],
-    "[project]/src/app/catalog/[slug]/[subSlug]/[productSlug]/page": []
+    "[project]/src/app/profile/favorites/page": [],
+    "[project]/src/app/_not-found/page": [],
+    "[project]/src/app/cart/page": [],
+    "[project]/src/app/catalog/[slug]/[subSlug]/page": [],
+    "[project]/src/app/compare/page": [],
+    "[project]/src/app/action/page": []
   },
   "appUsingSizeAdjust": false,
   "pages": {},
