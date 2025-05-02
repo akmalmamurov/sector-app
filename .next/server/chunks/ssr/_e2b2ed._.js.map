@@ -1,9 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file://D%3A/project/sector-app/src/components/loader/CartLoader.tsx"],"sourcesContent":["\"use client\";\r\n\r\nconst CartLoader = () => {\r\n  return (\r\n    <div className=\"absolute left-0 right-0 top-0 inset-x-0 h-1 z-50\">\r\n      <div className=\"w-full h-full bg-gradient-to-r from-blue-500 via-purple-600 to-purple-500 animate-cart-loading\" />\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default CartLoader;\r\n"],"names":[],"mappings":";;;;AAAA;;AAEA,MAAM,aAAa;IACjB,qBACE,8OAAC;QAAI,WAAU;kBACb,cAAA,8OAAC;YAAI,WAAU;;;;;;;;;;;AAGrB;uCAEe"}},
-    {"offset": {"line": 30, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}},
-    {"offset": {"line": 40, "column": 0}, "map": {"version":3,"sources":["file://D%3A/project/sector-app/node_modules/next/src/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.ts"],"sourcesContent":["module.exports = require('../../module.compiled').vendored[\n  'react-ssr'\n].ReactJsxDevRuntime\n"],"names":["module","exports","require","vendored","ReactJsxDevRuntime"],"mappings":";AAAAA,OAAOC,OAAO,GAAGC,QAAQ,0HAAyBC,QAAQ,CACxD,YACD,CAACC,kBAAkB","ignoreList":[0]}},
-    {"offset": {"line": 42, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}

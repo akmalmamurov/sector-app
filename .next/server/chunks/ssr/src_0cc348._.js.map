@@ -1,9 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file://D%3A/project/sector-app/src/components/loader/CartLoader.tsx"],"sourcesContent":["const CartLoader = () => {\r\n  return (\r\n    <div className=\"fixed top-[250px] left-0 w-full h-1 z-50\">\r\n      <div className=\"w-full h-full bg-gradient-to-r from-blue-500 via-purple-600 to-purple-500 animate-loading-bar\" />\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default CartLoader;\r\n"],"names":[],"mappings":";;;;;AAAA,MAAM,aAAa;IACjB,qBACE,8OAAC;QAAI,WAAU;kBACb,cAAA,8OAAC;YAAI,WAAU;;;;;;;;;;;AAGrB;uCAEe"}},
-    {"offset": {"line": 29, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}},
-    {"offset": {"line": 35, "column": 0}, "map": {"version":3,"sources":["file://D%3A/project/sector-app/src/app/cart/loading.tsx"],"sourcesContent":["import CartLoader from \"@/components/loader/CartLoader\";\r\n\r\nconst CartLoading = () => {\r\n  return <CartLoader />;\r\n};\r\n\r\nexport default CartLoading;\r\n"],"names":[],"mappings":";;;;AAAA;;;AAEA,MAAM,cAAc;IAClB,qBAAO,8OAAC,0IAAA,CAAA,UAAU;;;;;AACpB;uCAEe"}},
-    {"offset": {"line": 50, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}
