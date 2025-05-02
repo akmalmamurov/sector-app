@@ -6,7 +6,6 @@ interface StepperProps {
 
 
 export const OrderStepper: React.FC<StepperProps> = ({ orderDeleveryType }) => {
-console.log(orderDeleveryType);
 
   return (
     <div>

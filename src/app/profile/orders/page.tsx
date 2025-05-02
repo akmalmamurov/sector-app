@@ -16,10 +16,8 @@ const ProfileOrdersPage = () => {
 
   const [kontragentName, setKontragentName] = useState<string | null>(null);
   const [orderPriceStatus, setOrderPriceStatus] = useState<string | null>(null);
-  const [orderDeleveryType, setOrderDeleveryType] = useState<string | null>(
-    null
-  );
-  const [orderType, setOrderType] = useState<string | null>(null);
+  const [orderDeleveryType, setOrderDeleveryType] = useState<string | null>( null );
+   const [orderType, setOrderType] = useState<string | null>(null);
   useRequireAuth();
   const [periodStart, setPeriodStart] = useState<Date | undefined>(undefined);
   const [periodEnd, setPeriodEnd] = useState<Date | undefined>(undefined);

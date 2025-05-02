@@ -24,9 +24,9 @@ export const SingleOrderRight = ({ order }: SingleOrderRightProps) => {
   const formattedAddress = order?.agent
     ? `${order?.agent?.fullAddress
         ?.split(",")
-        ?.map((part) => part.trim())
+        ?.map((part) => part?.trim())
         ?.reverse()
-        ?.join(", ")}, ${order?.agent?.street}, ${order.agent.house}`
+        ?.join(", ")}, ${order?.agent?.street}, ${order?.agent?.house}`
     : "";
 
   const locationLabel =
@@ -144,7 +144,7 @@ export const SingleOrderRight = ({ order }: SingleOrderRightProps) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {order?.products.map((item, productIndex) => (
+                      {order?.products?.map((item, productIndex) => (
                         <tr key={productIndex} className="border-b">
                           <td className="px-[10px] py-[7px] font-normal text-xs text-lightBlack border-r">
                             <div className="flex items-center gap-[15px]">

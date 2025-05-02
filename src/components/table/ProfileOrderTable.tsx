@@ -93,16 +93,16 @@ export const ProfileOrderTable = ({ orders }: Props) => {
                 <TableCell className="py-[7px] px-[10px] border-l border-t border-b lg:w-[189px]">
                   <div className="flex flex-col gap-2 items-center">
                     <Link
-                      href={`/profile/orders/${order.id}`}
+                      href={`/profile/orders/${order?.id}`}
                       className={`py-[6px] px-[17px] border ${
-                        order.orderType === "rejected"
+                        order?.orderType === "rejected"
                           ? "border-superSilver"
                           : "border-cerulean"
                       }`}
                     >
-                      {order.orderNumber}
+                      {order?.orderNumber}
                     </Link>
-                    <p>от {formatDate(order.validStartDate)}</p>
+                    <p>от {formatDate(order?.validStartDate)}</p>
                   </div>
                 </TableCell>
                 <TableCell className="py-[7px] px-[10px]  border-t border-b lg:w-[328px]">
@@ -120,7 +120,7 @@ export const ProfileOrderTable = ({ orders }: Props) => {
                   <div className="flex flex-col gap-2">
                     <p>Прочее</p>
                     <span className="border-b border-dashed border-cerulean text-cerulean w-fit">
-                      Статус: {order.orderDeleveryType}
+                      Статус: {order?.orderDeleveryType}
                     </span>
                   </div>
                 </TableCell>
@@ -173,7 +173,7 @@ export const ProfileOrderTable = ({ orders }: Props) => {
                             Перейти в заказ
                           </Link>
                         </li>
-                        {order.orderType !== "rejected" && (
+                        {order?.orderType !== "rejected" && (
                           <li className="py-[6px] px-4 bg-white hover:bg-superSilver duration-150 ease-in-out list-none">
                             <button
                               type="button"
