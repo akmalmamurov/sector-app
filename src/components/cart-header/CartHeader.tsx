@@ -1,15 +1,12 @@
 "use client";
 import { StepperIcon, StepperOtherIcon } from "@/assets/icons";
+import useStepStore from "@/context/step";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-interface CartHeaderProps {
-  currentStep?: 1 | 2;
-}
-
-const CartHeader: React.FC<CartHeaderProps> = ({ currentStep }) => {
+const CartHeader = () => {
   const pathname = usePathname();
-
+  const currentStep = useStepStore((s) => s.currentStep);
   const activeStep = (() => {
     if (pathname === "/cart") return 0;
     if (pathname === "/cart/contacts") return 1;
@@ -26,10 +23,13 @@ const CartHeader: React.FC<CartHeaderProps> = ({ currentStep }) => {
     const Icon = index === 0 ? StepperIcon : StepperOtherIcon;
     const displayText = index === 0 ? label : `${index}. ${label}`;
 
-    const allowLink = currentStep === 1 && index < currentStep;
+    const allowLink = currentStep === 1;
 
     return (
-      <div key={index} className="relative flex items-center justify-center group">
+      <div
+        key={index}
+        className="relative flex items-center justify-center group"
+      >
         <Icon className={colorClass} />
         <div className="absolute">
           {allowLink ? (

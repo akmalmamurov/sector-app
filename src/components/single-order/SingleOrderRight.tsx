@@ -1,18 +1,31 @@
+import Image from "next/image";
 import { OrdersData } from "@/types";
 import { Tabs, TabsList, TabsContent, TabsTrigger } from "../ui/tabs";
 import { formatDate, formatUzbekNumber } from "@/utils";
 import PriceFormatter from "../format-price/PriceFormatter";
-import { WalletIcon } from "@/assets/icons";
-import Image from "next/image";
+import { DeliveyMethodIcon, LocationIcon, WalletIcon } from "@/assets/icons";
 import { DOMAIN } from "@/constants";
+import { OrderStepper } from "../order";
 
 interface SingleOrderRightProps {
   order: OrdersData;
 }
 
 export const SingleOrderRight = ({ order }: SingleOrderRightProps) => {
-  console.log(order);
+  const formattedAddress = order?.agent
+    ? `${order?.agent?.fullAddress
+        ?.split(",")
+        ?.map((part) => part.trim())
+        ?.reverse()
+        ?.join(", ")}, ${order?.agent?.street}, ${order.agent.house}`
+    : "";
 
+  const locationLabel =
+    order?.deliveryMethod === "Самовывоз"
+      ? "Ташкент, Чиланзарский район, массив Чиланзар, 17-й квартал, 6"
+      : order?.deliveryMethod === "До адреса"
+        ? formattedAddress
+        : "Ташкент";
   return (
     <div className="col-span-9">
       <div className="px-4 pt-4 pb-6 border border-superSilver">
@@ -228,6 +241,41 @@ export const SingleOrderRight = ({ order }: SingleOrderRightProps) => {
             {/* Render messages here */}asdasd
           </TabsContent>
         </Tabs>
+        {/* fotter */}
+        <div className="border border-superSilver p-[23px] bg-white mt-[23px]">
+          <div className="relative flex justify-center pb-[19px]">
+            <div className=" relative before:content-[''] before:absolute before:left-1/2 before:bottom-[-19px]  before:-translate-x-1/2 before:w-full before:h-[5px] before:bg-gradient-to-r before:from-cerulean before:to-linkColor before:opacity-100 text-lg text-lightBlack">
+              Доставка
+            </div>
+          </div>
+          <hr className="border-superSilver mb-8" />
+          <div className="flex gap-[77px] items-start pb-[15px] border-b border-superSilver">
+            <div className="flex gap-2 items-center text-sm text-lightBlack">
+              <DeliveyMethodIcon />
+              <span>Способ доставки</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-sm text-lightBlack">Прочее</span>
+              <span className="text-sm text-lightBlack mt-[15px]">
+                {locationLabel}
+              </span>
+            </div>
+          </div>
+          {/* steps */}
+          <div className="grid grid-cols-12">
+            <div className="col-span-3">
+              <div className="mt-[15px]">
+                <div className="flex gap-2 items-center text-sm text-lightBlack">
+                  <LocationIcon />
+                  <span>Статус заказа</span>
+                </div>
+              </div>
+            </div>
+            <div className="col-span-9">
+          <OrderStepper orderDeleveryType={order?.orderDeleveryType} />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

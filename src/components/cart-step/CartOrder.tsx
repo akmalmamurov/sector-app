@@ -40,6 +40,22 @@ export const CartOrder = ({
   setComment,
   contrAgent,
 }: CartOrderProps) => {
+  const formattedAddress = deliveryForm?.address
+    ? `${deliveryForm.address.fullAddress
+        .split(",")
+        .map((part) => part.trim())
+        .reverse()
+        .join(
+          ", "
+        )}, ${deliveryForm.address.street}, ${deliveryForm.address.house}`
+    : "";
+
+  const locationLabel =
+    deliveryForm?.deliveryMethod === "Самовывоз"
+      ? "Ташкент, Чиланзарский район, массив Чиланзар, 17-й квартал, 6"
+      : deliveryForm?.deliveryMethod === "До адреса"
+        ? formattedAddress
+        : "Ташкент";
   return (
     <>
       <div className="space-y-6">
@@ -139,19 +155,7 @@ export const CartOrder = ({
                 :
               </span>
               <span className="ml-1 underline underline-offset-2 text-cerulean">
-                {deliveryForm?.deliveryMethod === "До пункта выдачи" ? (
-                  "Ташкент"
-                ) : (
-                  <span>
-                    {deliveryForm?.address?.fullAddress
-                      .split(",")
-                      .map((part) => part.trim())
-                      .reverse()
-                      .join(", ")}
-                    , {deliveryForm?.address?.street} ,{" "}
-                    {deliveryForm?.address?.house}
-                  </span>
-                )}
+                {locationLabel}
               </span>
             </p>
             <Table className="border border-gray-300 rounded-none overflow-hidden w-full mt-6 ">

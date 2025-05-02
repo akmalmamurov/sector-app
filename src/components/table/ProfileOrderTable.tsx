@@ -45,7 +45,7 @@ export const ProfileOrderTable = ({ orders }: Props) => {
 
   const handleCancel = async (id: string) => {
     try {
-      await request.patch(`${CANCEL_ORDER}/${id}`, {orderType: "rejected"});
+      await request.patch(`${CANCEL_ORDER}/${id}`, { orderType: "rejected" });
       showSuccess("Заказ отменен");
       setOpen(null);
       queryClient.invalidateQueries({ queryKey: ["orders"] });
@@ -91,18 +91,18 @@ export const ProfileOrderTable = ({ orders }: Props) => {
           ? sortedOrders?.map((order, index) => (
               <TableRow key={order?.id} className="">
                 <TableCell className="py-[7px] px-[10px] border-l border-t border-b lg:w-[189px]">
-                  <div>
-                    <div className="flex flex-col gap-2 items-center">
-                      <Link
-                        href={`/profile/orders/${order?.id}`}
-                        className="py-[6px] px-[17px] border"
-                      >
-                        {order?.orderNumber}
-                      </Link>
-                      <div>
-                        <p>от {formatDate(order?.validStartDate)}</p>
-                      </div>
-                    </div>
+                  <div className="flex flex-col gap-2 items-center">
+                    <Link
+                      href={`/profile/orders/${order.id}`}
+                      className={`py-[6px] px-[17px] border ${
+                        order.orderType === "rejected"
+                          ? "border-superSilver"
+                          : "border-cerulean"
+                      }`}
+                    >
+                      {order.orderNumber}
+                    </Link>
+                    <p>от {formatDate(order.validStartDate)}</p>
                   </div>
                 </TableCell>
                 <TableCell className="py-[7px] px-[10px]  border-t border-b lg:w-[328px]">

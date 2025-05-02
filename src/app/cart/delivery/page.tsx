@@ -2,7 +2,7 @@
 import Link from "next/link";
 import ArrowLeftLongIcon from "@/assets/icons/ArrowLeftLongIcon";
 import CartTabs from "@/components/cart-tabs/CartTabs";
-import OrderCart from "@/components/order-cart/OrderCart";
+import OrderCart from "@/components/order/OrderCart";
 import useStore from "@/context/store";
 import { useRequireAuth } from "@/hooks";
 import { useForm } from "react-hook-form";
@@ -30,7 +30,9 @@ const CartDeliveryPage = () => {
             href={"/cart/contacts"}
             className="flex items-center gap-[7px] text-stoneCold text-xs group"
           >
-            <span className="group-hover:underline ">Назад ко вводу контактной информации</span>
+            <span className="group-hover:underline ">
+              Назад ко вводу контактной информации
+            </span>
             <ArrowLeftLongIcon
               width={15}
               height={11}

@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { Check, CirclePlus } from "lucide-react";
 import useStore from "@/context/store";
-import OrderCart from "@/components/order-cart/OrderCart";
+import OrderCart from "@/components/order/OrderCart";
 import ArrowLeftLongIcon from "@/assets/icons/ArrowLeftLongIcon";
 import { Input } from "@/components/ui/input";
 
@@ -26,7 +26,9 @@ import formStore from "@/context/form-store";
 const CartContactPage = () => {
   const { selected } = useStore();
   const contactForm = formStore((state) => state.contactForm);
-  const [phone, setPhone] = useState<string>(contactForm?.phone.toString() || "+998 __ ___ ____");
+  const [phone, setPhone] = useState<string>(
+    contactForm?.phone.toString() || "+998 __ ___ ____"
+  );
   const [search, setSearch] = useState("");
   const auth = useRequireAuth();
   const { data: agentsData = [] } = useQuery({
@@ -35,7 +37,7 @@ const CartContactPage = () => {
     enabled: auth,
   });
   console.log(agentsData);
-  
+
   const contrAgents = agentsData?.kontragents || [];
   const addContactForm = formStore((state) => state.addContactForm);
   const router = useRouter();

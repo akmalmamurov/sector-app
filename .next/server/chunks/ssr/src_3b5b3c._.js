@@ -39,7 +39,8 @@ const CartHeader = ({ currentStep })=>{
         const colorClass = visited ? "text-cerulean" : "text-gray-400";
         const Icon = index === 0 ? __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$assets$2f$icons$2f$StepperIcon$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["StepperIcon"] : __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$assets$2f$icons$2f$StepperOtherIcon$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["StepperOtherIcon"];
         const displayText = index === 0 ? label : `${index}. ${label}`;
-        const allowLink = currentStep === 1 && index < currentStep;
+        console.log(currentStep);
+        const allowLink = currentStep === 1;
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "relative flex items-center justify-center group",
             children: [
@@ -47,7 +48,7 @@ const CartHeader = ({ currentStep })=>{
                     className: colorClass
                 }, void 0, false, {
                     fileName: "[project]/src/components/cart-header/CartHeader.tsx",
-                    lineNumber: 33,
+                    lineNumber: 37,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -58,25 +59,25 @@ const CartHeader = ({ currentStep })=>{
                         children: displayText
                     }, void 0, false, {
                         fileName: "[project]/src/components/cart-header/CartHeader.tsx",
-                        lineNumber: 36,
+                        lineNumber: 40,
                         columnNumber: 13
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: `text-sm font-medium ${colorClass}`,
                         children: displayText
                     }, void 0, false, {
                         fileName: "[project]/src/components/cart-header/CartHeader.tsx",
-                        lineNumber: 43,
+                        lineNumber: 47,
                         columnNumber: 13
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/cart-header/CartHeader.tsx",
-                    lineNumber: 34,
+                    lineNumber: 38,
                     columnNumber: 9
                 }, this)
             ]
         }, index, true, {
             fileName: "[project]/src/components/cart-header/CartHeader.tsx",
-            lineNumber: 32,
+            lineNumber: 33,
             columnNumber: 7
         }, this);
     };
@@ -90,7 +91,7 @@ const CartHeader = ({ currentStep })=>{
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/cart-header/CartHeader.tsx",
-        lineNumber: 51,
+        lineNumber: 55,
         columnNumber: 5
     }, this);
 };
