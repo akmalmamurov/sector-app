@@ -9,7 +9,7 @@ import {
   OrderDuplicateIcon,
   WalletIcon,
 } from "@/assets/icons";
-import { CANCEL_ORDER, DOMAIN } from "@/constants";
+import { CANCEL_ORDER, DOMAIN, DUPLICATE_ORDER } from "@/constants";
 import { OrderStepper } from "../order";
 import { useQueryClient } from "@tanstack/react-query";
 import { showError, showSuccess } from "../toast/Toast";
@@ -35,7 +35,16 @@ export const SingleOrderRight = ({ order }: SingleOrderRightProps) => {
       : order?.deliveryMethod === "До адреса"
         ? formattedAddress
         : "Ташкент";
-  const finishOrder = (id: string) => {
+  const finishOrder = async (id: string) => {
+    try {
+      await request.post(`${DUPLICATE_ORDER}/${id}`);
+      showSuccess("Заказ завершен");
+      queryClient.invalidateQueries({ queryKey: ["order"] });
+      queryClient.invalidateQueries({ queryKey: ["orders"] });
+    } catch (error) {
+      console.log(error);
+      showError("При завершении заказа произошла ошибка");
+    }
     console.log("finish order", id);
   };
   const handleCancel = async (id: string) => {

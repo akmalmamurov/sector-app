@@ -39,3 +39,4 @@ export const GET_CART_ORDER = "/user/orders/get-all";
 export const GET_LAST_ORDER = "/user/orders/get-all?last=true";
 export const CANCEL_ORDER = "/user/orders/cancel";
 export const GET_SINGLE_ORDER = "/user/orders/get-by-id";
+export const DUPLICATE_ORDER = "/user/orders/dublicate";
