@@ -75,7 +75,7 @@ const FaqPage = ()=>{
                                 className: "mb-[29px] faq-top",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h5", {
-                                        className: "info-title mb-[53px]",
+                                        className: "info-title mb-[20px] md:mb-[53px] text-[18px] md:text-[31px]",
                                         children: "Часто задаваемые вопросы"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/faq/page.tsx",
@@ -124,7 +124,7 @@ const FaqPage = ()=>{
                                         className: "faq-section",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
-                                                className: "info-title mb-6",
+                                                className: "info-title mb-6 text-[18px] md:text-[24px]",
                                                 children: item.title
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/faq/page.tsx",
@@ -132,7 +132,7 @@ const FaqPage = ()=>{
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                className: "info-text mb-4",
+                                                className: "info-text mb-4 text-[14px] md:text-[16px]",
                                                 children: item.desc
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/faq/page.tsx",
@@ -140,7 +140,7 @@ const FaqPage = ()=>{
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                className: "info-text mb-4",
+                                                className: "info-text mb-4 text-[14px] md:text-[16px]",
                                                 children: item.text
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/faq/page.tsx",
@@ -148,7 +148,7 @@ const FaqPage = ()=>{
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                className: "info-text mb-5",
+                                                className: "info-text mb-5 text-[14px] md:text-[16px]",
                                                 children: item.text2
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/faq/page.tsx",

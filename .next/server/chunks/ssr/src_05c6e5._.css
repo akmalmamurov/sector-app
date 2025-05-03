@@ -1284,6 +1284,10 @@ body {
   margin-top: auto;
 }
 
+.mb-\[20px\] {
+  margin-bottom: 20px;
+}
+
 .line-clamp-2 {
   overflow: hidden;
   display: -webkit-box;
@@ -2439,10 +2443,6 @@ body {
 
 .grid-rows-2 {
   grid-template-rows: repeat(2, minmax(0, 1fr));
-}
-
-.flex-row {
-  flex-direction: row;
 }
 
 .flex-row-reverse {
@@ -6064,6 +6064,10 @@ strong {
     margin-top: 0;
   }
 
+  .md\:mb-\[53px\] {
+    margin-bottom: 53px;
+  }
+
   .md\:block {
     display: block;
   }
@@ -6303,6 +6307,47 @@ strong {
     font-size: .875rem;
     line-height: 1.25rem;
   }
+
+  .md\:text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  .md\:text-\[24px\] {
+    font-size: 24px;
+  }
+
+  .md\:text-\[32px\] {
+    font-size: 32px;
+  }
+
+  .md\:text-\[31px\] {
+    font-size: 31px;
+  }
+
+  .md\:text-\[16px\] {
+    font-size: 16px;
+  }
+
+  .md\:text-\[26px\] {
+    font-size: 26px;
+  }
+
+  .md\:text-\[\] {
+    color: ;
+  }
+
+  .md\:text-\[1\] {
+    color: 1;
+  }
+
+  .md\:text-\[32\] {
+    color: 32;
+  }
+
+  .md\:text-\[px\] {
+    color: px;
+  }
 }
 
 @media (width >= 992px) {
@@ -6332,10 +6377,6 @@ strong {
 
   .lg\:flex {
     display: flex;
-  }
-
-  .lg\:table {
-    display: table;
   }
 
   .lg\:grid {
@@ -6406,10 +6447,6 @@ strong {
     width: 100%;
   }
 
-  .lg\:w-\[42px\] {
-    width: 42px;
-  }
-
   .lg\:min-w-0 {
     min-width: 0;
   }
@@ -6440,10 +6477,6 @@ strong {
 
   .lg\:flex-row {
     flex-direction: row;
-  }
-
-  .lg\:flex-col {
-    flex-direction: column;
   }
 
   .lg\:flex-wrap {
@@ -6525,21 +6558,12 @@ strong {
     flex-direction: row;
   }
 
-  .lgl\:flex-col {
-    flex-direction: column;
-  }
-
   .lgl\:justify-between {
     justify-content: space-between;
   }
 
   .lgl\:gap-\[57px\] {
     gap: 57px;
-  }
-
-  .lgl\:bg-white {
-    --tw-bg-opacity: 1;
-    background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
   }
 
   .lgl\:px-0 {
@@ -6567,25 +6591,17 @@ strong {
     padding-right: 160px;
   }
 
-  .lgl\:text-\[32px\] {
-    font-size: 32px;
-  }
-
   .lgl\:text-2xl {
     font-size: 1.5rem;
     line-height: 2rem;
   }
 
-  .lgl\:text-\[24px\] {
-    font-size: 24px;
+  .lgl\:text-\[32px\] {
+    font-size: 32px;
   }
 
   .lgl\:font-semibold {
     font-weight: 600;
-  }
-
-  .lgl\:text-\[\] {
-    color: ;
   }
 }
 

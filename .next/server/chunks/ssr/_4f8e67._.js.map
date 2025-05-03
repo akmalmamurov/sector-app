@@ -1,9 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file://D%3A/project/sector-app/src/app/catalog/%5Bslug%5D/%5Bcategories-slug%5D/page.tsx"],"sourcesContent":["import { useParams } from \"next/navigation\";\r\n\r\nconst CategoryPage = () => {\r\n    const { slug, subslug } = useParams() as { slug: string; subslug: string };\r\n  return (\r\n    <div>\r\n      <h1>CategoryPage</h1> \r\n      <h3>{slug}</h3>\r\n      <h3>{subslug}</h3>\r\n    </div>\r\n  )\r\n}\r\n\r\nexport default CategoryPage"],"names":[],"mappings":";;;;AAAA;AAAA;;;AAEA,MAAM,eAAe;IACjB,MAAM,EAAE,IAAI,EAAE,OAAO,EAAE,GAAG,CAAA,GAAA,qLAAA,CAAA,YAAS,AAAD;IACpC,qBACE,8OAAC;;0BACC,8OAAC;0BAAG;;;;;;0BACJ,8OAAC;0BAAI;;;;;;0BACL,8OAAC;0BAAI;;;;;;;;;;;;AAGX;uCAEe"}},
-    {"offset": {"line": 48, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}},
-    {"offset": {"line": 59, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":""}},
-    {"offset": {"line": 59, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}

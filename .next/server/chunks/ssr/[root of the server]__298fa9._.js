@@ -530,7 +530,11 @@ __turbopack_esm__({
     "isProductInList": (()=>isProductInList)
 });
 const isProductInList = (list, product)=>{
-    return list.some((item)=>item.id === product.id);
+    if (!product) {
+        console.warn("isProductInList: product is undefined or null");
+        return false;
+    }
+    return list.some((item)=>item?.id === product.id);
 };
 }}),
 "[project]/src/components/toast/Toast.tsx [app-rsc] (ecmascript)": ((__turbopack_context__) => {
@@ -1219,7 +1223,7 @@ async function SingleCatalogPage({ params }) {
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "grid grid-cols-12 gap-6",
+                className: "lg:grid lg:grid-cols-12 lg:gap-6",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$category$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$exports$3e$__["CategoryLeft"], {
                         slug: slug,
@@ -1228,7 +1232,7 @@ async function SingleCatalogPage({ params }) {
                     }, void 0, false, {
                         fileName: "[project]/src/app/catalog/[slug]/page.tsx",
                         lineNumber: 92,
-                        columnNumber: 9
+                        columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$category$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$exports$3e$__["CategoryRight"], {
                         slug: slug,
