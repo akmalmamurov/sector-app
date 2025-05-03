@@ -25,7 +25,6 @@ export const SingleOrderLeft = ({ orderSort }: SingleOrderLeftProps) => {
   });
 
   const orders = orderData?.orders;
-  console.log(orders);
 
   return (
     <div className="col-span-3">
@@ -55,7 +54,7 @@ export const SingleOrderLeft = ({ orderSort }: SingleOrderLeftProps) => {
                   className={
                     `px-2 flex justify-between items-center ` +
                     (isActive
-                      ? item.orderType === "rejected"
+                      ? item?.orderType === "rejected"
                         ? "border-stoneCold border-l-8"
                         : "border-l-8 border-cerulean"
                       : "border-transparent border-l-0")

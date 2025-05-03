@@ -42,6 +42,7 @@ export default {
         cerulean: "#0054AE",
         whiteOut: "#FBFBFB",
         greenLight: "#6AB04C",
+        noghreiSilver:"#BDBDBD",
         background: "#FAFAFA",
         superSilver: "#EEEEEE",
         bleachedSilk: "#F3F3F3",

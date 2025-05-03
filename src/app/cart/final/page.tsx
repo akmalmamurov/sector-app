@@ -13,13 +13,14 @@ import { showError, showSuccess } from "@/components/toast/Toast";
 import request from "@/services";
 import { CartOrder, OrderFinish } from "@/components/cart-step";
 import { OrdersData } from "@/types";
-import CartHeader from "@/components/cart-header/CartHeader";
+import useStepStore from "@/context/step";
 
 const CartFinalPage = () => {
   const selected = useStore((state) => state.selected);
   const removeSelected = useStore((state) => state.removeSelectedCardsList);
   const { cartForm, deliveryForm, contactForm } = formStore();
-  const [step, setStep] = useState<1 | 2 | null>(null);
+  const currentStep = useStepStore((s) => s.currentStep);
+  const setStep = useStepStore((s) => s.setStep);
   const auth = useRequireAuth();
   const queryClient = useQueryClient();
   const [comment, setComment] = useState("");
@@ -33,7 +34,7 @@ const CartFinalPage = () => {
     queryFn: () => getLastOrder(),
     enabled: auth,
   });
-  
+
   useEffect(() => {
     if (ordersLoading) return;
     if (!orders || !cartForm?.productDetails) return;
@@ -54,10 +55,10 @@ const CartFinalPage = () => {
 
     const found = orders.some(matchesCurrentCart);
     setStep(found ? 2 : 1);
-  }, [orders, ordersLoading, cartForm, deliveryForm, contactForm]);
+  }, [orders, ordersLoading, cartForm, deliveryForm, contactForm, setStep]);
 
   if (!auth) return null;
-  if (step === null) return null;
+  if (currentStep === null) return null;
   if (!auth) return null;
   const handleDelete = async (id: string) => {
     await request.post(TOGGLE_CART, { productId: id });
@@ -97,7 +98,7 @@ const CartFinalPage = () => {
 
   return (
     <>
-      {step === 1 && (
+      {currentStep === 1 && (
         <CartOrder
           handleFinal={handleFinal}
           cartForm={cartForm}
@@ -108,12 +109,13 @@ const CartFinalPage = () => {
           contrAgent={contrAgent}
         />
       )}
-      {step === 2 && (
-        <OrderFinish orders={orders} removeSelected={removeSelected} />
+      {currentStep === 2 && (
+        <OrderFinish
+          orders={orders}
+          removeSelected={removeSelected}
+          agent={orders?.agent}
+        />
       )}
-      <div className="hidden">
-        <CartHeader currentStep={step} />
-      </div>
     </>
   );
 };
