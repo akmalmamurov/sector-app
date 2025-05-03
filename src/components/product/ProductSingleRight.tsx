@@ -71,7 +71,7 @@ const ProductSingleRight: React.FC<ProductSingleRightProps> = ({ product }) => {
           <Image
             width={86}
             height={31}
-            className="w-[86px] h-[36px]"
+            className="w-[86px] h-[36px] hidden xl:block"
             src={`${process.env.NEXT_PUBLIC_API_URL}/${product.brand?.path}`}
             alt="product.title"
           />
@@ -152,13 +152,29 @@ const ProductSingleRight: React.FC<ProductSingleRightProps> = ({ product }) => {
                 amount={product.price}
                 className="text-textColor font-extrabold text-[29px] leading-[44px] mb-6"
               />
+              {/* ADD TO CART */}
               <button
                 onClick={handleToCart}
-                className="bg-cerulean w-full hover:opacity-90 transition-opacity px-6 py-[13px] text-base font-semibold text-white flex items-center justify-center gap-2 mb-[29px]"
+                className="md:flex hidden bg-cerulean w-full hover:opacity-90 transition-opacity px-6 py-[13px] text-base font-semibold text-white  items-center justify-center gap-2 mb-[29px] md:bottom-0 bottom-5"
               >
                 <CartIcon color="#fff" className="w-5 h-5" />
                 {isAddedToCart ? "Перейти в корзине" : "В корзине"}
               </button>
+              <div className="bg-white flex md:hidden fixed bottom-[60px] left-0 right-0 z-20 px-3 py-2">
+                <button
+                  onClick={handleToCart}
+                  className={` w-full bg-cerulean hover:opacity-90 transition-opacity py-3 text-base font-semibold text-white items-center justify-center gap-4 flex`}
+                >
+                  {isAddedToCart ? (
+                    <>
+                      <CartIcon color="#fff" className="w-5 h-5" />
+                      <p>Перейти в корзине</p>
+                    </>
+                  ) : (
+                    <p>В корзине</p>
+                  )}
+                </button>
+              </div>
               <div className="flex flex-col gap-[18px]">
                 <div className="flex gap-2 items-center">
                   <BadgeCheck className="w-6 h-6" />

@@ -37,7 +37,7 @@ export const CategoryCrumb: React.FC<CategoryCrumbProps> = ({
   return (
     <div
       ref={containerRef}
-      className="flex items-center gap-[15px] relative"
+      className="flex items-center gap-[15px] relative "
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

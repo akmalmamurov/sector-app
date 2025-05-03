@@ -37,20 +37,20 @@ const props = {
  selected, inStock, popular,  setInStock, setPopular, setSelected, setPriceSort, setNameSort,limit,setLimit
 }
   return (
-    <div className="col-span-9">
+    <div className="col-span-12 lg:col-span-9">
       <Section className="px-0 py-6 shadow-sectionShadow rounded-none">
         <InfoHeader className="flex gap-[14px]">
           <InfoTitle>{title}</InfoTitle>
-          <span className="text-weekColor font-medium text-base leading-6">
+          <span className="text-weekColor font-medium text-base leading-6 hidden lg:block">
             {data?.total} товаров
           </span>
         </InfoHeader>
         {/* sorts*/}
-        <SortProducts {...props}/>
+        <SortProducts {...props} />
         {/* products */}
         <div className={!rowCol ? "p-5" : "p-0"}>
           {!rowCol ? (
-            <div className="grid grid-cols-4 gap-[21px]">
+            <div className="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-[21px]">
               {productData?.map((item, index) => (
                 <ProductCard key={index} product={item} />
               ))}

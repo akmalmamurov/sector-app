@@ -30,7 +30,7 @@ const News = () => {
                 2023
               </button>
             </div>
-            <div className="pl-[45px] pt-[37px] lg:pt-0">
+            <div className="pl-[45px] pt-[36px] lg:pt-0">
               <Link href="#" className="text-[21px] text-cerulean">
                 Новая серия сварочных аппаратов SNR-FS-60x уже на складе
               </Link>

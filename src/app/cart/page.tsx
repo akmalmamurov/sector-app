@@ -107,7 +107,7 @@ export default function CartPage() {
     <Fragment>
       {cartProduct?.length > 0 ? (
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="grid grid-cols-4 gap-[23px]">
+          <div className="grid grid-cols-1 lgl:grid-cols-4 gap-[23px]">
             <div className="col-span-3">
               <MyCartLeft
                 control={control}

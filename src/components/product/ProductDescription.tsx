@@ -7,9 +7,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { DOMAIN } from "@/constants";
 import { CommentProduct, ProductData } from "@/types";
 import { CircleAlert, CirclePlus, Star, X } from "lucide-react";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, } from "../ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "../ui/dialog";
 import { Button } from "../ui/button";
-import { Form, FormControl, FormField, FormItem, FormMessage, } from "../ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "../ui/form";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { StarRating } from "../star-rating/StarRating";
@@ -97,12 +109,20 @@ function renderEditorBlocks(editorJson: EditorData, fullImages: string[]) {
         imageIndex++;
         if (DOMAIN && !imageUrl.startsWith("http")) {
           imageUrl = DOMAIN + (imageUrl.startsWith("/") ? "" : "/") + imageUrl;
-        }
+        } 
         const caption = block.data.caption || "";
         return (
-          <div key={block.id} className="relative w-1/2 h-64 my-4">
-            <Image src={imageUrl} alt={caption} fill className="" />
-            {caption && <p className="text-center text-sm mt-2">{caption}</p>}
+          <div className="flex gap-8 my-4">
+            <div key={block.id} className="w-20">
+              <div className="relative w-12 h-12">
+                <Image src={imageUrl} alt={caption} fill className="object-cover rounded" />
+              {caption && (
+                <p className="text-center text-sm mt-1 text-textColor">
+                  {caption}
+                </p>
+              )} 
+              </div>
+            </div>
           </div>
         );
       }
@@ -260,7 +280,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
     <>
       <div>
         <div
-          className={`sticky  ${isScroll ? "top-[130px]" : "top-0"} bg-white border-b shadow-sectionShadow overflow-x-auto whitespace-nowrap scrollbar-hide`}
+          className={`hidden sm:block sticky ${isScroll ? "top-[78px] lg:top-[130px]" : "top-0"} bg-white border-b shadow-sectionShadow overflow-x-auto whitespace-nowrap scrollbar-hide`}
         >
           {sections.map(({ id, label }) => (
             <button
@@ -345,7 +365,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
           <section
             id="related"
             ref={(el: HTMLElement | null): void => {
-              sectionRefs.current.reviews = el;
+              sectionRefs.current.related = el;
             }}
             className="py-[53px] bg-whiteOut"
             style={{ scrollMarginTop: "100px" }}
@@ -437,7 +457,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
                   Уважаемые покупатели. <br />
                   Обращаем Ваше внимание, что размещенная на данном сайте
                   справочная информация о товарах не является офертой, наличие и
-                  стоимость оборудования необходимо уточнить у менеджеров  "НАГ
+                  стоимость оборудования необходимо уточнить у менеджеров  "НАГ
                   Узбекистан", которые с удовольствием помогут Вам в выборе
                   оборудования и оформлении на него заказа.
                 </p>
@@ -491,7 +511,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
                             htmlFor="body"
                             className="text-textColor font-normal text-xl"
                           >
-                            Напишите, почему вы так считаете *
+                            Напишите, почему вы так считаете *
                           </Label>
                           <Textarea
                             {...field}
@@ -549,7 +569,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
                             className="text-textColor font-normal text-xl"
                           >
                             Задайте вопрос по товару. После проверки вопрос
-                            будет опубликован *
+                            будет опубликован *
                           </Label>
                           <Textarea
                             {...field}

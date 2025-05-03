@@ -48,7 +48,7 @@ const CartHeader = () => {
   };
 
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="hidden lgl:grid grid-cols-4 gap-4">
       {renderStep(0, "Моя корзина")}
       {renderStep(1, "Контактная информация")}
       {renderStep(2, "Способ доставки")}

@@ -33,7 +33,7 @@ export default async function CategoryPage({ params }: Props) {
   const categoryTitle = getTitleBySlug(catalogData, subSlug);
   return (
     <Container className="pb-[58px]">
-      <div className="flex items-center pl-2 sm:pl-1 gap-[15px] text-gray-600 h-[60px]">
+      <div className="flex flex-wrap items-center pl-2 sm:pl-1 gap-2 lg:gap-[15px] text-gray-600 h-[60px] mt-1 mb-2">
         <Link
           href="/"
           className="flex items-center gap-1 text-gray-500 hover:text-gray-700"

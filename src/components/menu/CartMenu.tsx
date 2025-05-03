@@ -91,16 +91,21 @@ export const CartMenu = () => {
                   className="object-contain w-10 h-10"
                 />
               </div>
-              {/* product title */}
-              <div className="max-w-[272px]">
-                <Link
-                  onClick={() => setOpen(false)}
-                  href={`/catalog/${product.subcatalog.slug}/${product.category.slug}/${product.slug}`}
-                  className="text-sm font-semibold h-[42px] line-clamp-2 text-textColor w-full"
-                >
-                  {product.title.slice(0, 42)}
-                </Link>
-              </div>
+            {/* product title */}
+<div className="max-w-[272px]">
+  {product?.slug && product?.subcatalog?.slug && product?.category?.slug ? (
+    <Link
+      onClick={() => setOpen(false)}
+      href={`/catalog/${product.subcatalog.slug}/${product.category.slug}/${product.slug}`}
+      className="text-sm font-semibold h-[42px] line-clamp-2 text-textColor w-full"
+    >
+      {product.title?.slice(0, 42)}
+    </Link>
+  ) : (
+    <p className="text-sm font-semibold h-[42px] text-red-500">Product data missing</p>
+  )}
+</div>
+
               {/* product price */}
               <div className="h-[21px] min-w-[54px] relative flex items-center text-sm text-textColor gap-[3px] ">
                 <span className="font-semibold group-hover:opacity-0">
