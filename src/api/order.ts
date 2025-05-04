@@ -9,7 +9,9 @@ export const getOrders = async (
   orderType: string | null,
   periodStart: Date | undefined,
   periodEnd: Date | undefined,
-  orderNumber: string
+  orderNumber: string,
+  page: number,
+  ORDER_LIMIT: number
 ) => {
   try {
     const params = {
@@ -20,6 +22,8 @@ export const getOrders = async (
       ...(periodStart && { periodStart: format(periodStart, "yyyy-MM-dd") }),
       ...(periodEnd && { periodEnd: format(periodEnd, "yyyy-MM-dd") }),
       ...(orderNumber && { orderNumber }),
+      page,
+      limit: ORDER_LIMIT,
     };
     const res = await request(GET_CART_ORDER, { params });
     return res.data.data || [];

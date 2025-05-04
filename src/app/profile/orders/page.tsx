@@ -10,14 +10,19 @@ import { ProfileOrderTable } from "@/components/table";
 
 import CartLoader from "@/components/loader/CartLoader";
 import { SortOrders } from "@/components/sort";
+import { Pagination } from "@/components/pagination";
+import { ORDER_LIMIT } from "@/constants";
 
 const ProfileOrdersPage = () => {
   const auth = useStore((s) => s.auth);
 
   const [kontragentName, setKontragentName] = useState<string | null>(null);
   const [orderPriceStatus, setOrderPriceStatus] = useState<string | null>(null);
-  const [orderDeleveryType, setOrderDeleveryType] = useState<string | null>( null );
-   const [orderType, setOrderType] = useState<string | null>(null);
+  const [orderDeleveryType, setOrderDeleveryType] = useState<string | null>(
+    null
+  );
+  const [page, setPage] = useState(1);
+  const [orderType, setOrderType] = useState<string | null>(null);
   useRequireAuth();
   const [periodStart, setPeriodStart] = useState<Date | undefined>(undefined);
   const [periodEnd, setPeriodEnd] = useState<Date | undefined>(undefined);
@@ -27,12 +32,14 @@ const ProfileOrdersPage = () => {
     queryKey: [
       "orders",
       kontragentName,
+      page,
       orderPriceStatus,
       orderDeleveryType,
       orderType,
       periodStart,
       periodEnd,
       orderNumber,
+      ORDER_LIMIT,
     ],
     queryFn: () =>
       getOrders(
@@ -42,7 +49,9 @@ const ProfileOrdersPage = () => {
         orderType,
         periodStart,
         periodEnd,
-        orderNumber
+        orderNumber,
+        page,
+        ORDER_LIMIT
       ),
     enabled: auth,
   });
@@ -64,6 +73,7 @@ const ProfileOrdersPage = () => {
     periodStart,
     contrAgents,
   };
+  console.log(orderData);
 
   return (
     <section className="bg-white p-6 shadow-sectionShadow">
@@ -86,6 +96,12 @@ const ProfileOrdersPage = () => {
           ) : (
             <ProfileOrderTable orders={orderData?.orders} />
           )}
+          <Pagination
+            limit={ORDER_LIMIT}
+            total={orderData?.total || 0}
+            setPage={setPage}
+            page={page}
+          />
         </div>
       </div>
     </section>

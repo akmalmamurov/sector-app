@@ -85,6 +85,10 @@ const CartFinalPage = () => {
       };
       await request.post(CART_ORDER_CREATE, payload);
       queryClient.invalidateQueries({ queryKey: ["order"] });
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
       setStep(2);
       showSuccess("Заказ успешно оформлен");
       const idsToRemove =

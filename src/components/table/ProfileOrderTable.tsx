@@ -120,14 +120,24 @@ export const ProfileOrderTable = ({ orders }: Props) => {
                   <div className="flex flex-col gap-2">
                     <p>Прочее</p>
                     <span className="border-b border-dashed border-cerulean text-cerulean w-fit">
-                      Статус: {order?.orderDeleveryType}
+                      Статус:    {order?.orderDeleveryType === "not shipped"
+                        ? "Не отгружен"
+                        : order?.orderDeleveryType === "shipped"
+                          ? "Отгружен"
+                          : order?.orderDeleveryType === "in preparation"
+                            ? "Комплектуется"
+                            : ""}
                     </span>
                   </div>
                 </TableCell>
                 <TableCell className="py-[7px] px-[10px]  border-t border-b lg:w-[220px]">
                   <div className="flex flex-col items-center justify-center gap-2">
                     <div className="border border-dangerColor w-full flex justify-center items-center h-[30px] rounded-[4px] text-dangerColor text-sm">
-                      {order?.orderPriceStatus}
+                      {order?.orderPriceStatus === "not paid"
+                        ? "Не оплачен"
+                        : order?.orderPriceStatus === "paid"
+                          ? "Оплачен"
+                          : ""}
                     </div>
                     <div>
                       <p>Оплатить до {formatDate(order?.validEndDate)}</p>
