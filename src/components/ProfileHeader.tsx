@@ -1,5 +1,6 @@
 "use client";
 import useStore from "@/context/store";
+import { useScrollDirection } from "@/hooks";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -14,6 +15,8 @@ const allTabs = [
 const ProfileHeader = () => {
   const pathname = usePathname();
   const auth = useStore((state) => state.auth);
+  const scrollDir = useScrollDirection();
+  const isScroll = scrollDir === "up" ? true : false;
 
   const tabs = auth
     ? allTabs
@@ -25,9 +28,10 @@ const ProfileHeader = () => {
         scrollbarWidth: "none",
         msOverflowStyle: "none",
       }}
-      className="overflow-x-auto whitespace-nowrap border-b-[0.5px] border-superSilver"
+      className={`sticky z-10 bg-white border border-superSilver transition-top duration-150 ease-out 
+        ${isScroll ? "top-[126px]" : "top-0 "}`}
     >
-      <div className="grid grid-cols-5">
+      <div className={`grid grid-cols-5`}>
         {tabs.map((tab) => {
           const isActive =
             tab.href === "/profile/orders"

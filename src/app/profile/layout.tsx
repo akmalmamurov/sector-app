@@ -9,10 +9,9 @@ export default function ProfileLayout({
   return (
     <div className="py-[58px]">
       <Container>
-        <div className="border border-superSilver overflow-hidden shadow-sectionShadow">
-          <div className="bg-white">
-            <ProfileHeader />
-          </div>
+        <ProfileHeader />
+
+        <div className="border border-t-0 border-superSilver overflow-hidden shadow-sectionShadow">
           <div>{children}</div>
         </div>
       </Container>
