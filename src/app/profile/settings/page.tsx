@@ -2,14 +2,43 @@
 import { TelegramBlueIcon } from "@/assets/icons";
 import Link from "next/link";
 import { Pencil } from "lucide-react";
-
+import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { useRequireAuth } from "@/hooks";
 import { AccountMe, AccountPassword } from "@/components/profile";
+import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import InputMask from "react-input-mask-next";
+import React from "react";
+
+// import EditPhoneModal from "@/components/profile/EditPhoneModal ";
 
 const SettingsPage = () => {
   useRequireAuth();
+  // Edit Phone Modal
+  const [open, setOpen] = useState(false);
+  const [phone, setPhone] = useState("");
+  const [isValid, setIsValid] = useState(false);
+  const handleInputChange = (val: string) => {
+    setPhone(val);
+    const cleaned = val.replace(/[^0-9]/g, "");
+    setIsValid(cleaned.length === 12); // +998 XX XXX XX XX (12 raqam)
+  };
+
+  const handleSave = () => {
+    if (!isValid) return;
+    console.log("Saved number:", phone);
+    setOpen(false);
+  };
+
   return (
     <section className="p-6 bg-white">
       <div className="flex items-center gap-3 border border-cerulean h-[51px] px-4 mb-4">
@@ -27,25 +56,65 @@ const SettingsPage = () => {
         </div>
         <AccountMe />
         <AccountPassword />
+        {/* Изменить контакты */}
         <div className="border-b border-superSilver py-5">
-          <div className="block lg:grid lg:grid-cols-11 gap-6 items-center mb-3">
-            <p className="text-[#000000DE] col-span-2 text-sm pt-8 lg:pt-0">
-              Контакты
-            </p>
-            <div className="pb-8 lg:pb-12 col-span-3 pt-10 lg:pt-0">
-              <p className="text-sm text-[#000000DE] font-normal pb-5 lg:pt-0">
-                Телефон
-              </p>
-              <span className="text-base font-normal ">+998 99 861 6951</span>
+          <div className="p-6">
+            <h2 className="text-xl mb-4">Контакты</h2>
+            {/* Show Phone */}
+            <div className="flex items-center justify-between mb-6">
+              <span className="text-base">+998 99 861 6951</span>
+              <button
+                onClick={() => setOpen(true)}
+                className="border border-cerulean rounded-xl flex items-center gap-2 h-[42px] px-4"
+              >
+                <Pencil className="text-cerulean w-[20px] h-[20px]" />
+                <span className="text-cerulean text-base font-semibold">
+                  Изменить
+                </span>
+              </button>
             </div>
+
+            {/* Modal */}
+            <Dialog open={open} onOpenChange={setOpen}>
+              <DialogContent className="w-[90vw] max-w-md rounded-md">
+                <DialogHeader>
+                  <DialogTitle className="text-lg font-medium">
+                    Изменить номер
+                  </DialogTitle>
+                </DialogHeader>
+
+                <div className="mt-4">
+                  <label className="block text-sm mb-2 text-gray-700">
+                    Телефон
+                  </label>
+                  {/* <InputMask
+                    mask="+998 (99) 999-99-99"
+                    value={phone || "+998 (__) ___-__-__"} 
+                    onChange={(e) => handleInputChange(e.target.value)}
+                    className="w-full border border-gray-300 rounded-md px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="+998 (__) ___-__-__"
+                  /> */}
+                </div>
+
+                <DialogFooter className="mt-4">
+                  <Button variant="outline" onClick={() => setOpen(false)}>
+                    Отмена
+                  </Button>
+                  <Button onClick={handleSave} disabled={!isValid}>
+                    Сохранить
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
           </div>
-          <button className="border border-cerulean rounded-xl flex items-center gap-2 h-[42px] p-4 justify-self-end">
-            <Pencil className="text-cerulean w-[22px] h-[22px]" />
-            <span className="text-cerulean text-base font-semibold">
-              Изменить
-            </span>
-          </button>
+          {/* <EditPhoneModal
+            open={true}
+            onClose={() => {}}
+            initialPhone={"+998 99 861 6951"}
+            onSave={() => {}}
+          /> */}
         </div>
+        {/* /\/\/\/\/\/\/\/\/\ */}
         <div className="border-b border-superSilver pt-5 pb-2 hidden">
           <div className="block lg:grid grid-cols-11 gap-6 items-center mb-3">
             <p className="text-[#000000DE] text-sm col-span-2">Уведомления</p>
@@ -138,6 +207,7 @@ const SettingsPage = () => {
             </div>
           </div>
         </div>
+        {/* Дополнительные настройки */}
         <div className="pt-5 pb-2">
           <div className="block lg:grid grid-cols-11 gap-6 items-center mb-3">
             <p className="text-[#000000DE] text-sm col-span-2">
