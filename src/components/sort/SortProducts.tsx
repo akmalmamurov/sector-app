@@ -4,7 +4,7 @@ import {
   SortChevronIcon,
   SortIconDesc,
 } from "@/assets/icons";
-import useStore from "@/context/store";
+import sessionStore from "@/context/session-store";
 import { useEffect, useRef, useState } from "react";
 interface SortProductsProps {
   selected: string | null;
@@ -15,8 +15,11 @@ interface SortProductsProps {
   setPopular: (popular: boolean) => void;
   setPriceSort: (priceSort: "asc" | "desc" | null) => void;
   setNameSort: (nameSort: "asc" | "desc" | null) => void;
+  priceSort: "asc" | "desc" | null;
+  nameSort: "asc" | "desc" | null;
   limit: number;
   setLimit: (limit: number) => void;
+  searchTrue?: boolean;
 }
 export const SortProducts: React.FC<SortProductsProps> = (props) => {
   const {
@@ -25,30 +28,55 @@ export const SortProducts: React.FC<SortProductsProps> = (props) => {
     inStock,
     setInStock,
     setPopular,
+    nameSort,
+    priceSort,
     setPriceSort,
     setNameSort,
     limit,
     setLimit,
+    searchTrue,
   } = props;
-  const { toggleRowCol, rowCol } = useStore();
+  const toggleRowColProduct = sessionStore((s) => s.toggleRowColProduct);
+  const toggleRowColSearch = sessionStore((s) => s.toggleRowSearch);
+  const rowColProduct = sessionStore((s) => s.rowColProduct);
+  const rowColSearch = sessionStore((s) => s.rowSearch);
   const [open, setOpen] = useState(false);
   const [openLimit, setOpenLimit] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const limitRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (ref.current && !ref.current.contains(event.target as Node)) {
         setOpen(false);
       }
-      if ( limitRef.current && !limitRef.current.contains(event.target as Node)) {
+      if (
+        limitRef.current &&
+        !limitRef.current.contains(event.target as Node)
+      ) {
         setOpenLimit(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
   const handleToggleRowCol = (row: boolean) => {
-    toggleRowCol(row);
+    if (searchTrue) {
+      toggleRowColSearch(row);
+    } else {
+      toggleRowColProduct(row);
+    }
   };
+  const rowCol = searchTrue ? rowColSearch : rowColProduct;
+  const getCurrentSort = () => {
+    if (selected === "Цена") return priceSort;
+    if (selected === "Наименование") return nameSort;
+    return null;
+  };
+  const currentSort = getCurrentSort();
+
   return (
     <div className="p-[15px] lgl:flex justify-between items-center border-b border-superSilver hidden">
       <div className="flex gap-2">
@@ -93,7 +121,11 @@ export const SortProducts: React.FC<SortProductsProps> = (props) => {
         >
           <div className="flex justify-between w-full items-center">
             <div className="flex items-center gap-2">
-              <SortIconDesc />
+              {currentSort === "asc" ? (
+                <SortIconDesc className="rotate-180" />
+              ) : (
+                <SortIconDesc />
+              )}
               <span className="select-none font-normal flex lg:hidden xl:flex text-textColor text-base leading-6">
                 {selected || "Популярность"}
               </span>
@@ -124,7 +156,7 @@ export const SortProducts: React.FC<SortProductsProps> = (props) => {
                 }}
                 className="py-[15px] px-6  cursor-pointer flex items-center gap-2"
               >
-                <SortIconDesc />
+                <SortIconDesc className="rotate-180" />
                 <span>Цена</span>
               </li>
               <li
@@ -136,7 +168,7 @@ export const SortProducts: React.FC<SortProductsProps> = (props) => {
                 }}
                 className="py-[15px] px-6  cursor-pointer flex items-center gap-2"
               >
-                <SortIconDesc className="rotate-180" />
+                <SortIconDesc />
                 <span>Цена</span>
               </li>
               <li
@@ -148,7 +180,7 @@ export const SortProducts: React.FC<SortProductsProps> = (props) => {
                 }}
                 className="py-[15px] px-6  cursor-pointer flex items-center gap-2"
               >
-                <SortIconDesc />
+                <SortIconDesc className="rotate-180" />
                 <span>Наименование</span>
               </li>
               <li
@@ -160,7 +192,7 @@ export const SortProducts: React.FC<SortProductsProps> = (props) => {
                 }}
                 className="py-[15px] px-6  cursor-pointer flex items-center gap-2"
               >
-                <SortIconDesc className="rotate-180" />
+                <SortIconDesc />
                 <span>Наименование</span>
               </li>
             </ul>

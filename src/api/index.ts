@@ -6,3 +6,4 @@ export * from "./filter";
 export * from "./contr-agent";
 export * from "./saved";
 export * from "./order";
+export * from "./search-product";

@@ -1,11 +1,10 @@
 export const formatPrice = (amount?: number): string => {
-  if (amount === undefined || amount === null) return "0";
-  
+  if (amount == null || amount <= 0) return "";
+
   const floored = Math.floor(amount);
-  
-  return floored
-    .toLocaleString("ru-RU", {
-      useGrouping: true,
-    })
-    .replace(/\u00A0/g, " ") + " сум";
+  return (
+    floored
+      .toLocaleString("ru-RU", { useGrouping: true })
+      .replace(/\u00A0/g, " ") + " сум"
+  );
 };

@@ -7,7 +7,7 @@ interface Props {
 
 const PriceFormatter = ({ amount, className }: Props) => {
   if (amount === undefined || amount === null) {
-    return <p className={cn("font-semibold", className)}>0 сум</p>;
+    return null;
   }
 
   const currency = "сум";
