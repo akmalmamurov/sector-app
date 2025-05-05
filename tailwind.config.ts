@@ -42,6 +42,7 @@ export default {
         cerulean: "#0054AE",
         whiteOut: "#FBFBFB",
         greenLight: "#6AB04C",
+        noghreiSilver:"#BDBDBD",
         background: "#FAFAFA",
         superSilver: "#EEEEEE",
         bleachedSilk: "#F3F3F3",
@@ -69,6 +70,7 @@ export default {
         hoverBg: "rgb(251, 251, 251)",
         bannerBg: "rgb(255, 255, 255,0.314)",
         explosiveGrey: "#C4C4C4",
+        lightBlack: "rgba(0, 0, 0, 0.87)",
         foreground: "hsl(var(--foreground))",
         card: {
           DEFAULT: "hsl(var(--card))",

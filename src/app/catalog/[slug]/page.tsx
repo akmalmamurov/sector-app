@@ -87,13 +87,13 @@ export default async function SingleCatalogPage({ params }: Props) {
       </div>
 
       {/* Filter product */}
-      <div className="grid grid-cols-12 gap-6">
+      <div className="lg:grid lg:grid-cols-12 lg:gap-6">
         {/* Filters */}
-        <CategoryLeft
-          slug={slug}
-          paramKey="subcatalogSlug"
-          catalogItem={catalogItem}
-        />
+          <CategoryLeft
+            slug={slug}
+            paramKey="subcatalogSlug"
+            catalogItem={catalogItem}
+          />
         {/* Products */}
         <CategoryRight slug={slug} title={categoryTitle} paramKey="slug" />
       </div>

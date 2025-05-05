@@ -29,7 +29,7 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
             width={250}
             height={250}
             priority
-            className="w-full h-[230px] object-cover"
+            className="w-full h-[180px] sm:h-[230px] object-cover"
           />
         </Link>
       </div>

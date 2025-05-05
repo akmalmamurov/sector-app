@@ -13,17 +13,39 @@ import { ArrowRightIcon, CopyIcon } from "@/assets/icons";
 import PriceFormatter from "../format-price/PriceFormatter";
 import { copyToClipboard, formatUzbekNumber } from "@/utils";
 import OrderListIcon from "@/assets/icons/OrderListIcon";
-import { OrdersData } from "@/types";
+import { AddressData, OrdersData } from "@/types";
 import { DOMAIN } from "@/constants";
 
 export const OrderFinish = ({
   orders,
   removeSelected,
+  agent,
 }: {
   orders: OrdersData[];
   removeSelected: () => void;
+  agent: AddressData;
 }) => {
   const handleGoBack = () => removeSelected();
+  const formattedAddress = agent
+    ? `   ${agent?.fullAddress
+        .split(",")
+        .map((part) => part.trim())
+        .reverse()
+        .join(", ")},${agent?.house},`
+    : "";
+
+  const locationLabel =
+    orders && orders.length > 0
+      ? orders.map((order) => {
+          if (order.deliveryMethod === "Самовывоз") {
+            return "Ташкент, Чиланзарский район, массив Чиланзар, 17-й квартал, 6";
+          } else if (order.deliveryMethod === "До адреса") {
+            return formattedAddress;
+          } else {
+            return "Ташкент";
+          }
+        })[0]
+      : "";
   return (
     <div>
       {orders?.map((order, orderIndex) => (
@@ -103,12 +125,7 @@ export const OrderFinish = ({
                   </span>
 
                   <span className="ml-1 border-b border-dashed w-fit border-cerulean text-cerulean">
-                    {order?.agent?.fullAddress
-                      .split(",")
-                      .map((part) => part.trim())
-                      .reverse()
-                      .join(", ")}
-                    , {order?.agent?.house},
+                    {locationLabel}
                   </span>
                 </div>
                 <div className="flex flex-col gap-1.5">

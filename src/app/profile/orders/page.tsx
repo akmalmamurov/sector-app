@@ -16,10 +16,8 @@ const ProfileOrdersPage = () => {
 
   const [kontragentName, setKontragentName] = useState<string | null>(null);
   const [orderPriceStatus, setOrderPriceStatus] = useState<string | null>(null);
-  const [orderDeleveryType, setOrderDeleveryType] = useState<string | null>(
-    null
-  );
-  const [orderType, setOrderType] = useState<string | null>(null);
+  const [orderDeleveryType, setOrderDeleveryType] = useState<string | null>( null );
+   const [orderType, setOrderType] = useState<string | null>(null);
   useRequireAuth();
   const [periodStart, setPeriodStart] = useState<Date | undefined>(undefined);
   const [periodEnd, setPeriodEnd] = useState<Date | undefined>(undefined);
@@ -53,7 +51,7 @@ const ProfileOrdersPage = () => {
     queryFn: () => getAgent(),
     enabled: auth,
   });
-const contrAgents = agentsData?.user_kontragents || [];
+  const contrAgents = agentsData?.user_kontragents || [];
   const props = {
     setKontragentName,
     setOrderPriceStatus,
@@ -64,31 +62,33 @@ const contrAgents = agentsData?.user_kontragents || [];
     setPeriodEnd,
     periodEnd,
     periodStart,
-    contrAgents
+    contrAgents,
   };
-  
-  return (
-    <div className="pt-5 pb-10">
-      <SortOrders props={props} />
 
-      <div
-        style={{
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-        }}
-        className="w-full overflow-x-auto"
-      >
-        {isLoading ? (
-          <div className="fixed top-[189px] left-0 right-0 w-screen z-50">
-            <div className="container mx-auto relative">
-              <CartLoader className="h-1 w-full" />
+  return (
+    <section className="bg-white p-6 shadow-sectionShadow">
+      <div className="pt-5 pb-10">
+        <SortOrders props={props} />
+
+        <div
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+          }}
+          className="w-full overflow-x-auto"
+        >
+          {isLoading ? (
+            <div className="fixed top-[189px] left-0 right-0 w-screen z-50">
+              <div className="container mx-auto relative">
+                <CartLoader className="h-1 w-full" />
+              </div>
             </div>
-          </div>
-        ) : (
-          <ProfileOrderTable orders={orderData?.orders} />
-        )}
+          ) : (
+            <ProfileOrderTable orders={orderData?.orders} />
+          )}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

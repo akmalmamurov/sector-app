@@ -23,7 +23,7 @@ const Map = async () => {
         <InfoHeader className="mb-5">
           <InfoTitle>Карта сайта</InfoTitle>
         </InfoHeader>
-        <section className="grid grid-cols-2 sm:gap-2 gap-6 pb-6">
+        <section className="flex flex-col justify-center sm:grid grid-cols-2 sm:gap-2 gap-6 pb-6">
           <div className="sm:pl-6 pl-0  sm:col-span-1 col-span-2 flex flex-col gap-8">
             <div>
               <p className="text-[20px] font-bold leading-[30px] text-textColor">

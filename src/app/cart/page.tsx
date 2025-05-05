@@ -6,7 +6,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { DELETE_CART, TOGGLE_CART, UPDATE_CART } from "@/constants";
 import MyCartLeft from "@/components/cart-step/MyCartLeft";
-import OrderCart from "@/components/order-cart/OrderCart";
+import OrderCart from "@/components/order/OrderCart";
 import { PageLoader } from "@/components/loader";
 import formStore from "@/context/form-store";
 import useStore from "@/context/store";
@@ -72,7 +72,7 @@ export default function CartPage() {
   };
   const onSubmit = (data: OrderRequest) => {
     const { productDetails, ...rest } = data;
-  
+
     // build a new details array:
     const normalizedDetails = productDetails.map((item) => {
       const { garanteeId, ...detailWithoutGuarantee } = item;
@@ -80,17 +80,16 @@ export default function CartPage() {
         ? { ...detailWithoutGuarantee, garanteeId }
         : detailWithoutGuarantee;
     });
-  
+
     const payload: OrderRequest = {
       ...rest,
       productDetails: normalizedDetails,
     };
-  
+
     addCartForm(payload);
     console.log(payload);
     router.push("/cart/contacts");
   };
-  
 
   const {
     isClient,
@@ -108,7 +107,7 @@ export default function CartPage() {
     <Fragment>
       {cartProduct?.length > 0 ? (
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="grid grid-cols-4 gap-[23px]">
+          <div className="grid grid-cols-1 lgl:grid-cols-4 gap-[23px]">
             <div className="col-span-3">
               <MyCartLeft
                 control={control}
@@ -124,11 +123,11 @@ export default function CartPage() {
                 deleteCart={handleDelete}
                 resetCart={handeDeleteAll}
                 cartForm={cartForm}
-                getValues={() => getValues('productDetails')}
+                getValues={() => getValues("productDetails")}
               />
             </div>
             <div className="col-span-1">
-              <OrderCart selectedCards={selectedCards} setValue={setValue}/>
+              <OrderCart selectedCards={selectedCards} setValue={setValue} />
             </div>
           </div>
         </form>

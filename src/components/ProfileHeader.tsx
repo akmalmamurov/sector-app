@@ -38,7 +38,7 @@ const ProfileHeader = () => {
             <Link
               key={tab.name}
               href={tab.href}
-              className="group relative p-6 flex justify-center transition-all duration-150 ease-out text-text-color hover:bg-hoverBg"
+              className="group relative px-6 py-4 flex justify-center transition-all duration-150 ease-out text-text-color hover:bg-hoverBg"
             >
               {tab.name}
               <span

@@ -46,3 +46,15 @@ export const getSingleOrder = async (id: string) => {
     return [];
   }
 };
+
+export const getSearchOrder = async (orderNumber: string) => {
+  try {
+    const res = await request(`${GET_CART_ORDER}`, {
+      params: { orderNumber },
+    });
+    return res.data.data || [];
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};

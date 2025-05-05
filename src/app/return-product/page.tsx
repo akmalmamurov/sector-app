@@ -24,7 +24,7 @@ const ReturnProductPage = () => {
         </InfoHeader>
         {/* content */}
         <div className="p-6 ">
-          <h3 className="info-title mb-6">
+          <h3 className="info-title mb-6 text-[18px] md:text-[31px]">
             Описание возврата товара или услуги
           </h3>
           <p className="info-text mb-4">
