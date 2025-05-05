@@ -34,7 +34,7 @@ export default async function SingleProductPage({ params }: Props) {
 
   return (
     <Container className="pb-[58px]">
-      <div className="flex items-center pt-2 pb-2 pl-2 sm:pl-1 gap-2 sm:gap-[15px] text-gray-600 flex-wrap mb-1">
+      <div className="flex items-center sm:pt-4 md:pt-6 sm:pb-4 pt-3 pb-2 pl-2 sm:pl-1 gap-2 sm:gap-[15px] text-gray-600 flex-wrap mb-1">
         <Link
           href="/"
           className="flex items-center gap-1 text-gray-500 hover:text-gray-700"
