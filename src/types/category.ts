@@ -26,3 +26,14 @@ export interface PopularCategory {
     id: string;
   };
 }
+
+export interface SearchCatalog {
+  catalogName: string;
+  catalogSlug: string;
+  categories: SearchCategories[];
+}
+export interface SearchCategories {
+  categoryName: string;
+  categorySlug: string;
+  productCodes: string[];
+}

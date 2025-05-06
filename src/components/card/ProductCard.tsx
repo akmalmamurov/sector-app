@@ -68,12 +68,14 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
           <CopyIcon className="text-explosiveGrey" />
         </span>
       </div>
-      {product?.inStock ? (
+      {product?.inStock === "Под заказ" ? (
         <p className="text-cerulean text-xs leading-[18px]">
-          В наличии {product?.inStock}
+         {product?.inStock}
         </p>
       ) : (
-        <p className="text-wasabiColor text-xs leading-[18px]">Подзаказ</p>
+        <p className="text-cerulean text-xs leading-[18px]">
+        В наличии {product?.inStock}
+      </p>
       )}
 
       <p className="text-titleColor font-semibold text-end">
