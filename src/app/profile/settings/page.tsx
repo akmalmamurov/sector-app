@@ -14,7 +14,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import InputMask from "react-input-mask-next";
 import React from "react";
@@ -87,13 +86,13 @@ const SettingsPage = () => {
                   <label className="block text-sm mb-2 text-gray-700">
                     Телефон
                   </label>
-                  {/* <InputMask
+                  <InputMask
                     mask="+998 (99) 999-99-99"
                     value={phone || "+998 (__) ___-__-__"} 
                     onChange={(e) => handleInputChange(e.target.value)}
                     className="w-full border border-gray-300 rounded-md px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="+998 (__) ___-__-__"
-                  /> */}
+                  />
                 </div>
 
                 <DialogFooter className="mt-4">
