@@ -237,6 +237,9 @@ strong {
 #jvLabelWrap {
   display: none !important;
 }
+.wrap__YHOId{
+  display: none !important;
+}
 
 /* Calculator videos */
 .clip-path-custom {
