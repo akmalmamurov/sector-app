@@ -33,7 +33,7 @@ const HeaderMenu = () => {
     queryFn: () => getSearchProduct(),
     enabled: search.length > 0,
   });
-  // console.log(searchData);
+  console.log(searchData);
 
   return (
     <div className="py-[14px] xl:py-2  border-b border-b-superSilver">
