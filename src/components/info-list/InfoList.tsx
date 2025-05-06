@@ -10,10 +10,10 @@ const items = [
   { text: "Конфигураторы", link: "/configurators" },
 ];
 const projects = [
-  {
-    text: "snr.systems",
-    link: "/",
-  },
+  // {
+  //   text: "snr.systems",
+  //   link: "/",
+  // },
   {
     text: "Конфигураторы",
     link: "/configurators",
