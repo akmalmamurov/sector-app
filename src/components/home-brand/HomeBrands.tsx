@@ -14,10 +14,7 @@ export const HomeBrands = ({ brands }: Props) => {
     <div className="lgl:pb-[61px] py-[30px]">
       <Container>
         <Title className="mb-5">Популярные бренды</Title>
-        <div
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          className="flex  lg:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 overflow-x-auto whitespace-nowrap lg:whitespace-normal "
-        >
+        <div className="flex  lg:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 overflow-x-auto whitespace-nowrap lg:whitespace-normal scrollbar-hide">
           {brands?.slice(0, 5)?.map((el, index) => (
             <Link
               href={`/brands/${el.slug}`}

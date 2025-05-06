@@ -30,7 +30,7 @@ export default {
           xs: "0px",
         },
         screens: {
-          xs: "389px",
+          xs: "388px",
           sm: "476px",
           md: "668px",
           lg: "892px",
