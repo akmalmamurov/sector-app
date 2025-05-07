@@ -119,7 +119,7 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
 
   const toggleShowOptions = (filterName: string) => {
     console.log(isShowOptionsMap);
-    
+
     setIsShowOptionsMap((prev) => ({
       ...prev,
       [filterName]: !prev[filterName],
