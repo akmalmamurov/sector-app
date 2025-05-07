@@ -25,7 +25,7 @@ const IssuesPage = () => {
     queryFn: () => getIssues(),
   });
   console.log(issuesData);
-  
+
   return (
     <section className="bg-white p-6">
       <div className="pt-5 pb-10 flex gap-[30px]">
@@ -65,7 +65,7 @@ const IssuesPage = () => {
         </button>
       </div>
       {isOpen && <CreateIssues setOpen={setIsOpen} />}
-      <ProfileIssueTable />
+      <ProfileIssueTable issues={issuesData?.requests} />
     </section>
   );
 };
