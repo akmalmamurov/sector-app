@@ -1,5 +1,7 @@
-"use client";
-
+import { getIssues } from "@/api";
+import useStore from "@/context/store";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import {
   Select,
   SelectContent,
@@ -8,29 +10,29 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-import { useRequireAuth } from "@/hooks";
-import { useState } from "react";
-import { CreateIssues } from "@/components/issues";
-import { ProfileIssueTable } from "@/components/table";
-import { useQuery } from "@tanstack/react-query";
-import { getIssues } from "@/api";
-import useStore from "@/context/store";
-const IssuesPage = () => {
-  useRequireAuth();
+import { Input } from "../ui/input";
+import { CreateIssues } from "../issues";
+import { ProfileIssueTable } from "../table";
+interface TabOrderRightProps {
+  orderNumber: string;
+  orderId: string;
+}
+export const TabOrderRight = ({ orderNumber, orderId }: TabOrderRightProps) => {
   const auth = useStore((s) => s.auth);
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("");
   const { data: issuesData = [] } = useQuery({
-    queryKey: ["issues", search, status ],
+    queryKey: ["issues", search, status],
     queryFn: () => getIssues(search, status === "all" ? "" : status),
     enabled: auth,
   });
+  console.log(issuesData);
+  console.log( orderId);
 
   return (
-    <section className="bg-white p-6">
+    <div>
       <div className="pt-5 pb-10 flex gap-[30px]">
         <Select value={status} onValueChange={setStatus}>
           <SelectTrigger className="w-[300px] text-[14px] leading-[25px] h-[41px] focus:ring-cerulean">
@@ -67,10 +69,10 @@ const IssuesPage = () => {
           <span>Подать заявку</span>
         </button>
       </div>
-      {isOpen && <CreateIssues setOpen={setIsOpen} />}
+      {isOpen && <CreateIssues setOpen={setIsOpen} orderNumber={orderNumber} />}
       <ProfileIssueTable issues={issuesData?.requests} />
-    </section>
+    </div>
   );
 };
 
-export default IssuesPage;
+export default TabOrderRight;

@@ -69,8 +69,6 @@ export const CreateIssues: React.FC<{
     },
   });
 
-  console.log(userData);
-
   const {
     control,
     handleSubmit,
@@ -102,7 +100,6 @@ export const CreateIssues: React.FC<{
 
       showError("Что то пошло не так");
     }
-    console.log(data);
   };
 
   const handleFileSelect = () => fileInputRef.current?.click();

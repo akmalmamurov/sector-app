@@ -25,7 +25,6 @@ export const SingleOrderLeft = ({ orderSort }: SingleOrderLeftProps) => {
   });
 
   const orders = orderData?.orders;
-  console.log(orders);
 
   return (
     <div className="col-span-3">
