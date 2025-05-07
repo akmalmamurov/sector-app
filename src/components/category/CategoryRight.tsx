@@ -72,7 +72,7 @@ export const CategoryRight: React.FC<CategoryRightProps> = ({
   };
   return (
     <div className="col-span-12 lg:col-span-9">
-      <Section className="px-0 py-6 shadow-sectionShadow rounded-none">
+      <Section className="px-0 py-6 shadow-sectionShadow rounded-[10px]">
         <InfoHeader className="flex gap-[14px]">
           <InfoTitle>{title}</InfoTitle>
           <span className="text-weekColor font-medium text-base leading-6 hidden lg:block">
