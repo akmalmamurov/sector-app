@@ -32,7 +32,7 @@ export const CompareClear = () => {
               <span>
                 <DeleteIcon className="w-[18px] h-[18px] group-hover:text-cerulean duration-200 ease-in-out" />
               </span>
-              <span className="group-hover:text-cerulean duration-200 ease-in-out">
+              <span className="group-hover:text-cerulean duration-200 ease-in-out hidden sm:block">
                 Очистить список
               </span>
             </button>

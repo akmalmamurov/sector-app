@@ -8,7 +8,7 @@ export const DiscountCard = ({ promotion }: { promotion: PromotionData }) => {
   return (
     <Link
       href={`/action/${promotion.id}`}
-      className="pt-2 bg-white shadow-sidebarWadow overflow-hidden h-fit"
+      className="pt-2 bg-white shadow-sidebarWadow overflow-hidden h-full"
     >
       <div className="overflow-hidden px-2">
         <Image

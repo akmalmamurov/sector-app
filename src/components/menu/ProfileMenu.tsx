@@ -60,7 +60,7 @@ export const ProfileMenu = () => {
         <div
           className={`
             w-[343px] bg-white absolute top-[57px] -right-[82px] border shadow-navListShadow
-            animate-in slide-in-from-bottom-2 duration-200 overflow-hidden
+            animate-in slide-in-from-bottom-2 duration-200 overflow-hidden z-10
           `}
         >
           {/* header */}

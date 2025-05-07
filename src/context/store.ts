@@ -13,7 +13,6 @@ interface StoreState {
   cart: StoreItem[];
   compares: StoreItem[];
   selected: StoreItem[];
-  rowCol: boolean;
   user: string | null;
   isHydrated: boolean;
   agentId: null | string;
@@ -25,6 +24,7 @@ interface StoreState {
   toggleFavorites: (product: ProductData) => void;
   addToCart: (product: ProductData) => void;
   selectedCardsList: (products: ProductData[]) => void;
+  removeSelectedCardsList: () => void;
   toggleCompare: (product: ProductData) => void;
   setQuantity: (id: string, count: number) => void;
   deleteFavorites: (id: string) => void;
@@ -37,7 +37,6 @@ interface StoreState {
   getGroupedItems: () => StoreItem[];
   logOut: () => void;
   clearDataAfterTimeout: () => void;
-  toggleRowCol: (value?: boolean) => void;
 }
 
 const useStore = create<StoreState>()(
@@ -48,7 +47,6 @@ const useStore = create<StoreState>()(
       contact: "",
       favorites: [],
       cart: [],
-      rowCol: false,
       compares: [],
       selected: [],
       user: null,
@@ -57,17 +55,16 @@ const useStore = create<StoreState>()(
       setHydrated: (value) => set({ isHydrated: value }),
       setUser: (user) => set({ user }),
       setAuth: (value) => set({ auth: value }),
-      toggleRowCol: (value?: boolean) =>
-        set((state) => ({
-          rowCol: typeof value === "boolean" ? value : !state.rowCol,
-        })),
-
       selectedCardsList: (products) => {
         set(() => ({
           selected: products,
         }));
       },
-
+      removeSelectedCardsList: () => {
+        set(() => ({
+          selected: [],
+        }));
+      },
       setContact: (info) => set({ contact: info }),
       toggleFavorites: (product) => {
         set((state) => {
@@ -102,10 +99,7 @@ const useStore = create<StoreState>()(
             };
           }
           return {
-            cart: [
-              ...state.cart,
-              { ...product, count: product.count || 1 },
-            ],
+            cart: [...state.cart, { ...product, count: product.count || 1 }],
           };
         }),
       setQuantity: (id, count) => {
@@ -158,7 +152,6 @@ const useStore = create<StoreState>()(
           auth: false,
           contact: "",
           agentId: null,
-          rowCol: false,
           user: null,
         });
         localStorage.removeItem("sector-token");

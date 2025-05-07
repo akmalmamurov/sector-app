@@ -13,7 +13,11 @@ import firstSectionPic from "./first-pic-confg.png";
 import secondSectionPic from "./second-pic-confg.png";
 import thirdSectionPic from "./third-pic-confg.png";
 import rightVector from "./right_vector.png";
-
+import hpIcon from "./hp_icon.png";
+import dellIcon from "./dell_icon.png";
+import pikopIcon from "./pikop_icon.png";
+import snrIcon from "./snr_icon.png";
+import aquariusIcon from "./aquarius_icon.png";
 // Wifi page images
 import firstPicWifi from "./first-pic-wifi.png";
 import secondPicWifi from "./second-pic-wifi.png";
@@ -114,4 +118,9 @@ export {
   profileNavBottom,
   partnersLogo,
   contactBox,
+  hpIcon,
+  dellIcon,
+  pikopIcon,
+  snrIcon,
+  aquariusIcon,
 };

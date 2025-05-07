@@ -1,31 +1,35 @@
 "use client";
-import { Fragment } from "react";
 import { useForm } from "react-hook-form";
+import { Fragment } from "react";
 import { useRouter } from "next/navigation";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-import useStore from "@/context/store";
-import formStore from "@/context/form-store";
-import { PageLoader } from "@/components/loader";
+import { DELETE_CART, TOGGLE_CART, UPDATE_CART } from "@/constants";
 import MyCartLeft from "@/components/cart-step/MyCartLeft";
-import OrderCart from "@/components/order-cart/OrderCart";
+import OrderCart from "@/components/order/OrderCart";
+import { PageLoader } from "@/components/loader";
+import formStore from "@/context/form-store";
+import useStore from "@/context/store";
 import { OrderRequest } from "@/types";
 import { useCartPage } from "@/hooks";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getCart } from "@/api/cart";
 import request from "@/services";
-import { DELETE_CART, TOGGLE_CART, UPDATE_CART } from "@/constants";
 
 export default function CartPage() {
   const { cart, setQuantity, deleteCart, resetCart, auth } = useStore();
-  const { addCartForm, cartForm } = formStore();
+  const addCartForm = formStore((s) => s.addCartForm);
+  const cartForm = formStore((s) => s.cartForm);
   const queryClient = useQueryClient();
   const {
     handleSubmit,
     control,
     setValue,
     watch,
+    getValues,
     formState: { errors },
-  } = useForm<OrderRequest>({ defaultValues: { city: cartForm?.city || "" } });
+  } = useForm<OrderRequest>({
+    defaultValues: { city: cartForm?.city || "", total: 0, productDetails: [] },
+  });
 
   const { data: product = [] } = useQuery({
     queryKey: ["cart"],
@@ -34,6 +38,7 @@ export default function CartPage() {
   });
 
   const cartProduct = auth ? product : cart;
+
   const router = useRouter();
   const handeDeleteAll = async () => {
     if (auth) {
@@ -66,8 +71,23 @@ export default function CartPage() {
     }
   };
   const onSubmit = (data: OrderRequest) => {
-    addCartForm(data);
-    console.log(data);
+    const { productDetails, ...rest } = data;
+
+    // build a new details array:
+    const normalizedDetails = productDetails.map((item) => {
+      const { garanteeId, ...detailWithoutGuarantee } = item;
+      return garanteeId && garanteeId !== "0"
+        ? { ...detailWithoutGuarantee, garanteeId }
+        : detailWithoutGuarantee;
+    });
+
+    const payload: OrderRequest = {
+      ...rest,
+      productDetails: normalizedDetails,
+    };
+
+    addCartForm(payload);
+    console.log(payload);
     router.push("/cart/contacts");
   };
 
@@ -87,7 +107,7 @@ export default function CartPage() {
     <Fragment>
       {cartProduct?.length > 0 ? (
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="grid grid-cols-4 gap-[23px]">
+          <div className="grid grid-cols-1 lgl:grid-cols-4 gap-[23px]">
             <div className="col-span-3">
               <MyCartLeft
                 control={control}
@@ -103,10 +123,11 @@ export default function CartPage() {
                 deleteCart={handleDelete}
                 resetCart={handeDeleteAll}
                 cartForm={cartForm}
+                getValues={() => getValues("productDetails")}
               />
             </div>
             <div className="col-span-1">
-              <OrderCart selectedCards={selectedCards} />
+              <OrderCart selectedCards={selectedCards} setValue={setValue} />
             </div>
           </div>
         </form>

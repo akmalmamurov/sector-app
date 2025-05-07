@@ -26,10 +26,7 @@ export const navbarList = [
         name: "Техническая поддержка",
         link: "/support",
       },
-      {
-        name: "База знаний",
-        link: "/article/knowledge-base",
-      },
+ 
       {
         name: "Конфигураторы",
         link: "/configurators",

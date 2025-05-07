@@ -29,6 +29,7 @@ export interface ResultAgentAddress {
   index?: string;
   house?: string;
   full_street?: string;
+  
 }
 export interface AgentAdressRequest {
   fullAddress: string;

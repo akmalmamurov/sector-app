@@ -3,5 +3,8 @@ export * from "./brand";
 export * from "./region";
 export * from "./user";
 export * from "./filter";
-export * from "./contr-agent"
-export * from "./saved"
+export * from "./contr-agent";
+export * from "./saved";
+export * from "./order";
+export * from "./search-product";
+export * from "./issues"

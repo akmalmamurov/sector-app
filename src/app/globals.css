@@ -23,28 +23,21 @@ body {
 }
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--background);
+  scrollbar-color: hwb(0 64% 36% / 0.322) #eeeeee;
 }
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 8px;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--background);
+::-webkit-scrollbar-button {
+  display: none;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent);
-}
-
-/* for Firefox */
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-
-/* for WebKit browsers */
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -106,17 +99,14 @@ body {
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
   body {
     @apply bg-background text-foreground;
   }
   ::-webkit-scrollbar {
-    @apply w-[6px] h-[6px];
+    @apply w-[5px] h-[8px];
   }
   ::-webkit-scrollbar-track {
-    @apply bg-white;
+    @apply bg-red-600;
   }
   ::-webkit-scrollbar-thumb {
     @apply bg-white;
@@ -141,6 +131,10 @@ input[type="number"]::-webkit-inner-spin-button {
 @layer components {
   .hoverEffect {
     @apply duration-200 ease-in-out;
+  }
+  .seperate {
+    @apply border-separate;
+    border-spacing: 0 8px;
   }
   .info-bold {
     @apply font-bold text-base leading-[24px] text-textColor;
@@ -174,7 +168,7 @@ input[type="number"]::-webkit-inner-spin-button {
     @apply list-decimal;
   }
   .prose img {
-    @apply rounded-lg shadow-lg;
+    @apply rounded-lg shadow-md;
   }
 }
 .faq-section {
@@ -239,7 +233,35 @@ strong {
   left: 0;
   right: 0;
 }
-.container__fDUh1.__bottom__x1eNT,
-.container__Jrqgx.__bottom__OkLN6 {
+
+#jvLabelWrap {
+  display: none !important;
+}
+.wrap__YHOId{
+  display: none !important;
+}
+
+/* Calculator videos */
+.clip-path-custom {
+  clip-path: polygon(
+    25px 0%,
+    calc(100% - 25px) 0%,
+    100% 50%,
+    calc(100% - 25px) 100%,
+    25px 100%,
+    0% 50%
+  );
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; 
+}
+#jivo-container,
+.jivo-container {
   display: none !important;
 }

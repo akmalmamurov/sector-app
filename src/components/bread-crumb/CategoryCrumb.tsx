@@ -11,7 +11,10 @@ interface CategoryCrumbProps {
   item: { name: string; href?: string; catalogItem?: CatalogData };
   isLast: boolean;
 }
-export const CategoryCrumb : React.FC<CategoryCrumbProps> = ({ item, isLast, }) => {
+export const CategoryCrumb: React.FC<CategoryCrumbProps> = ({
+  item,
+  isLast,
+}) => {
   const [isHovered, setIsHovered] = useState(false);
   const [dropdownStyle, setDropdownStyle] = useState({ top: 0, left: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
@@ -25,19 +28,26 @@ export const CategoryCrumb : React.FC<CategoryCrumbProps> = ({ item, isLast, }) 
 
   const childSubcatalogs = item.catalogItem?.subcatalogs || [];
   const childCategories = item.catalogItem?.categories || [];
-  const showDropdown = !isLast && item.href !== undefined && item.catalogItem && (childSubcatalogs.length > 0 || childCategories.length > 0);
+  const showDropdown =
+    !isLast &&
+    item.href !== undefined &&
+    item.catalogItem &&
+    (childSubcatalogs.length > 0 || childCategories.length > 0);
 
   return (
     <div
       ref={containerRef}
-      className="flex items-center gap-[15px] relative"
+      className="flex items-center gap-[15px] relative "
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="flex items-center">
         {showDropdown && <CrumbChevronDownIcon className="mr-2" />}
         {item.href ? (
-          <Link href={item.href} className="font-normal text-xs text-weekColor hover:underline" >
+          <Link
+            href={item.href}
+            className="font-normal text-xs text-weekColor hover:underline"
+          >
             {item.name}
           </Link>
         ) : (

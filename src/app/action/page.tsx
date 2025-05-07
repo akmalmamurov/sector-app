@@ -22,7 +22,7 @@ const DiscountPage = async () => {
           <InfoTitle className="font-wix text-[21px]">Акции</InfoTitle>
         </InfoHeader>
         <div className="p-[23px]">
-          <div className="grid grid-cols-4 gap-[28px]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[28px]">
             {discount.map((item: PromotionData) => (
               <DiscountCard promotion={item} key={item.id} />
             ))}

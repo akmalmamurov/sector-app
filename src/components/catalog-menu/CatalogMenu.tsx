@@ -50,7 +50,7 @@ const CatalogMenu = ({
   return (
     <div
       data-state={open ? "open" : "closed"}
-      className={`fixed z-50 bg-gray-500/50 flex justify-center transition-all ease-in-out w-full
+      className={`fixed z-[101] bg-gray-500/50 flex justify-center transition-all ease-in-out w-full
         ${
           open
             ? "animate-in fade-in opacity-100 duration-300"

@@ -7,7 +7,6 @@ const items = [
   { text: "Возврат товара", link: "/return-product" },
   { text: "Вопросы и ответы", link: "/faq" },
   { text: "Техническая поддержка", link: "/support" },
-  { text: "База знаний", link: "/knowledge-base" },
   { text: "Конфигураторы", link: "/configurators" },
 ];
 const projects = [

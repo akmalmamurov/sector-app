@@ -35,9 +35,9 @@ export default function RootLayout({
             <div className="lg:hidden flex">
               <BottomNavbar />
             </div>
-          <div className="lg:block hidden">
-            <Sidebar />
-          </div>
+            <div className="lg:block hidden">
+              <Sidebar />
+            </div>
           </Providers>
 
           <Toaster
@@ -47,7 +47,6 @@ export default function RootLayout({
               top: "20px",
             }}
           />
-
           <Footer />
         </RootProviders>
         <script src="//code.jivosite.com/widget/UP0xqFFMzr" async></script>

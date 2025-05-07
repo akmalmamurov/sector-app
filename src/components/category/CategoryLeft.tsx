@@ -154,7 +154,7 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
   };
 
   return (
-    <div className="col-span-3">
+    <div className="col-span-3 hidden lg:flex" >
       <Section className="rounded-[10px] p-0 shadow-sectionShadow">
         <div className="flex items-center gap-4 bg-white p-5 rounded-[10px]">
           <FilterIcon className="w-6 h-6" />

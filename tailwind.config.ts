@@ -25,9 +25,12 @@ export default {
       },
       container: {
         center: true,
-        padding: "4px",
+        padding: {
+          default: "4px",
+          xs: "0px",
+        },
         screens: {
-          xs: "389px",
+          xs: "388px",
           sm: "476px",
           md: "668px",
           lg: "892px",
@@ -39,8 +42,10 @@ export default {
         cerulean: "#0054AE",
         whiteOut: "#FBFBFB",
         greenLight: "#6AB04C",
+        noghreiSilver:"#BDBDBD",
         background: "#FAFAFA",
         superSilver: "#EEEEEE",
+        bleachedSilk: "#F3F3F3",
         textColor: "#333333",
         cottonBall: "#F2F6FB",
         whisperBlue: "#E5EAF1",
@@ -48,6 +53,7 @@ export default {
         darkSoul: "#A3A3A3",
         titleColor: "#3B3B3B",
         wasabiColor: "#929292",
+        pelati: "#FF3333",
         dangerColor: "#EF403D",
         lightBg: "#F5F5F5",
         linkColor: "#3A92F0",
@@ -64,6 +70,7 @@ export default {
         hoverBg: "rgb(251, 251, 251)",
         bannerBg: "rgb(255, 255, 255,0.314)",
         explosiveGrey: "#C4C4C4",
+        lightBlack: "rgba(0, 0, 0, 0.87)",
         foreground: "hsl(var(--foreground))",
         card: {
           DEFAULT: "hsl(var(--card))",
@@ -114,6 +121,7 @@ export default {
         sectionShadow: "rgba(0, 0, 0, 0.07) 0px 7px 10px",
         discountWadow: "0 10px 36px rgba(0,0,0,.1)",
         promotionShadow: "0 3px 31.5px 0 rgba(0, 0, 0, 0.1)",
+        cartMenuShadow: "rgba(0, 0, 0, 0.1) 0px 2px 10px",
         navListShadow:
           "0 2px 4px -1px rgba(0,0,0,.04),0 4px 5px 0 rgba(0,0,0,.05),0 1px 10px 0 rgba(0,0,0,.07)",
         sidebarWadow: "0 10px 36px rgba(0, 0, 0, .1);",
@@ -124,7 +132,6 @@ export default {
           "0 12px 24px rgba(44, 39, 56, .02), 0 24px 48px rgba(44, 39, 56, .04)",
         toastShadow:
           "rgba(0,0,0,0.4) 0px 2px 4px -1px,rgba(0,0,0,0.05) 0px 4px 5px 0px,rgba(0,0,0,0.07) 0px 1px 10px 0px",
-     
       },
       backgroundImage: {
         "home-gradient": "linear-gradient(hsla(0, 0%, 100%, 0), #fff 98%) ",
@@ -140,9 +147,9 @@ export default {
         "100%": { transform: "translateX(100%)" },
       },
       cartLoading: {
-        '0%': {width: '0%'},
-        '50%': {width: '50%'},
-        '100%': {width: '100%'}
+        "0%": { width: "0%" },
+        "50%": { width: "50%" },
+        "100%": { width: "100%" },
       },
     },
   },

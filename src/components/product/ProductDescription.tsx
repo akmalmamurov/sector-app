@@ -1,6 +1,9 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import { z } from "zod";
 import Image from "next/image";
+import { useForm } from "react-hook-form";
+import React, { useState, useEffect, useRef } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { DOMAIN } from "@/constants";
 import { CommentProduct, ProductData } from "@/types";
 import { CircleAlert, CirclePlus, Star, X } from "lucide-react";
@@ -19,14 +22,12 @@ import {
   FormItem,
   FormMessage,
 } from "../ui/form";
-import { useForm } from "react-hook-form";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { StarRating } from "../star-rating/StarRating";
 import { useCreateComment } from "@/api/product-comment";
 import { usePostQuestion } from "@/api/product-question";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useScrollDirection } from "@/hooks";
 interface Block {
   id: string;
   type: string;
@@ -108,12 +109,20 @@ function renderEditorBlocks(editorJson: EditorData, fullImages: string[]) {
         imageIndex++;
         if (DOMAIN && !imageUrl.startsWith("http")) {
           imageUrl = DOMAIN + (imageUrl.startsWith("/") ? "" : "/") + imageUrl;
-        }
+        } 
         const caption = block.data.caption || "";
         return (
-          <div key={block.id} className="relative w-1/2 h-64 my-4">
-            <Image src={imageUrl} alt={caption} fill className="" />
-            {caption && <p className="text-center text-sm mt-2">{caption}</p>}
+          <div className="flex gap-8 my-4">
+            <div key={block.id} className="w-20">
+              <div className="relative w-12 h-12">
+                <Image src={imageUrl} alt={caption} fill className="object-cover rounded" />
+              {caption && (
+                <p className="text-center text-sm mt-1 text-textColor">
+                  {caption}
+                </p>
+              )} 
+              </div>
+            </div>
           </div>
         );
       }
@@ -124,6 +133,7 @@ function renderEditorBlocks(editorJson: EditorData, fullImages: string[]) {
 }
 
 export function ProductDescription({ product }: ProductDescriptionProps) {
+  const scrollDir = useScrollDirection();
   const [activeTab, setActiveTab] = useState("description");
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
   const [isOpen, setIsOpen] = useState(false);
@@ -149,7 +159,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
   const { mutate: postQuestion } = usePostQuestion();
   const handleOpen = () => setIsOpen(!isOpen);
   const handleOpen2 = () => setIsOpen2(!isOpen2);
-
+  const isScroll = scrollDir === "up" ? true : false;
   let fullImages: string[] = [];
   if (typeof product.fullDescriptionImages === "string") {
     try {
@@ -253,31 +263,41 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
     );
   };
 
+  const buttonRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({});
+
+  useEffect(() => {
+    const activeButton = buttonRefs.current[activeTab];
+    if (activeButton) {
+      activeButton.scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest",
+      });
+    }
+  }, [activeTab]);
+
   return (
     <>
       <div>
-        <div className="sticky top-[130px] z-[5] bg-white  flex border-b shadow-sectionShadow">
-          {sections.map(({ id, label }) => {
-            if (id === "description" && !editorContent) return null;
-            if (
-              id === "specs" &&
-              (!product.characteristics || product.characteristics.length === 0)
-            )
-              return null;
-            return (
-              <button
-                key={id}
-                className={`px-5 py-3.5 text-center border-b-2 transition-all relative inline-block ${
-                  activeTab === id
-                    ? "text-cerulean title_gradient"
-                    : "border-transparent"
-                }`}
-                onClick={() => handleTabClick(id)}
-              >
-                {label}
-              </button>
-            );
-          })}
+        <div
+          className={`hidden sm:block sticky ${isScroll ? "top-[78px] lg:top-[130px]" : "top-0"} bg-white border-b shadow-sectionShadow overflow-x-auto whitespace-nowrap scrollbar-hide`}
+        >
+          {sections.map(({ id, label}, index) => (
+            <button
+              key={index}
+              ref={(el) => {
+                buttonRefs.current[id] = el;
+              }}
+              className={`px-5 py-3.5 text-center border-b-2 transition-all relative inline-block ${
+                activeTab === id
+                  ? "text-cerulean title_gradient"
+                  : "border-transparent"
+              }`}
+              onClick={() => handleTabClick(id)}
+            >
+              {label}
+            </button>
+          ))}
         </div>
 
         <div className="bg-whiteOut shadow-sectionShadow p-[23px] ">
@@ -345,7 +365,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
           <section
             id="related"
             ref={(el: HTMLElement | null): void => {
-              sectionRefs.current.reviews = el;
+              sectionRefs.current.related = el;
             }}
             className="py-[53px] bg-whiteOut"
             style={{ scrollMarginTop: "100px" }}
@@ -437,7 +457,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
                   Уважаемые покупатели. <br />
                   Обращаем Ваше внимание, что размещенная на данном сайте
                   справочная информация о товарах не является офертой, наличие и
-                  стоимость оборудования необходимо уточнить у менеджеров  "НАГ
+                  стоимость оборудования необходимо уточнить у менеджеров  "НАГ
                   Узбекистан", которые с удовольствием помогут Вам в выборе
                   оборудования и оформлении на него заказа.
                 </p>
@@ -491,7 +511,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
                             htmlFor="body"
                             className="text-textColor font-normal text-xl"
                           >
-                            Напишите, почему вы так считаете *
+                            Напишите, почему вы так считаете *
                           </Label>
                           <Textarea
                             {...field}
@@ -549,7 +569,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
                             className="text-textColor font-normal text-xl"
                           >
                             Задайте вопрос по товару. После проверки вопрос
-                            будет опубликован *
+                            будет опубликован *
                           </Label>
                           <Textarea
                             {...field}

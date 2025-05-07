@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { Check, CirclePlus } from "lucide-react";
 import useStore from "@/context/store";
-import OrderCart from "@/components/order-cart/OrderCart";
+import OrderCart from "@/components/order/OrderCart";
 import ArrowLeftLongIcon from "@/assets/icons/ArrowLeftLongIcon";
 import { Input } from "@/components/ui/input";
 
@@ -25,7 +25,10 @@ import formStore from "@/context/form-store";
 
 const CartContactPage = () => {
   const { selected } = useStore();
-  const [phone, setPhone] = useState("+998 __ ___ ____");
+  const contactForm = formStore((state) => state.contactForm);
+  const [phone, setPhone] = useState<string>(
+    contactForm?.phone.toString() || "+998 __ ___ ____"
+  );
   const [search, setSearch] = useState("");
   const auth = useRequireAuth();
   const { data: agentsData = [] } = useQuery({
@@ -33,6 +36,8 @@ const CartContactPage = () => {
     queryFn: () => getAgent(search),
     enabled: auth,
   });
+  console.log(agentsData);
+
   const contrAgents = agentsData?.kontragents || [];
   const addContactForm = formStore((state) => state.addContactForm);
   const router = useRouter();
@@ -45,7 +50,12 @@ const CartContactPage = () => {
     formState: { errors, submitCount, isValid },
   } = useForm<OrderRequest>({
     defaultValues: {
-      contrAgentId: "",
+      kontragentId: "",
+      firstname: contactForm?.firstname || "",
+      lastname: contactForm?.lastname || "",
+      fullname: contactForm?.fullname || "",
+      email: contactForm?.email || "",
+      phone: contactForm?.phone || "",
     },
   });
 
@@ -71,7 +81,7 @@ const CartContactPage = () => {
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <input
           type="hidden"
-          {...register("contrAgentId", {
+          {...register("kontragentId", {
             required: "Пожалуйста, выберите контрагента",
           })}
         />
@@ -117,12 +127,12 @@ const CartContactPage = () => {
                 <button
                   type="button"
                   onClick={toggleOpen}
-                  className={` min-h-[229px]  cursor-pointer bg-custom border border-dashed ${!contrAgents?.length && errors?.contrAgentId ? "border-dangerColor" : "border-superSilver"} flex justify-center items-center flex-col gap-2`}
+                  className={` min-h-[229px]  cursor-pointer bg-custom border border-dashed ${!contrAgents?.length && errors?.kontragentId ? "border-dangerColor" : "border-superSilver"} flex justify-center items-center flex-col gap-2`}
                 >
                   <CirclePlus className="text-weekColor w-10 h-10" />
                   <p className="text-weekColor mt-2">Добавить контрагенты</p>
                 </button>
-                {!contrAgents?.length && errors?.contrAgentId && (
+                {!contrAgents?.length && errors?.kontragentId && (
                   <ErrorMessage>Пожалуйста, выберите контрагента</ErrorMessage>
                 )}
               </div>
