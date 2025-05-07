@@ -32,10 +32,10 @@ const FooterTop = () => {
             Ташкент
           </p>
           <Link
-            href={"tel:+998883431313"}
+            href={"tel:+998953731313"}
             className="font-normal text-sm leading-[21px] text-linkColor sm:text-white hover:text-white/80 hoverEffect"
           >
-            +998 88 343 13 13
+            +998 95 373 13 13
           </Link>
           <Link
             href={"mailto:sales@nag.uz"}

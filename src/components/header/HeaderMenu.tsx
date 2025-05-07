@@ -15,14 +15,14 @@ import { getCatalog } from "@/api/catalog";
 import HeaderMobile from "./HeaderMobile";
 import { usePathname } from "next/navigation";
 import { getSearchProduct } from "@/api";
+import { useMobileMenuStore } from "@/stores/mobileMenuStore";
 const HeaderMenu = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
+  const isOpen = useMobileMenuStore((state) => state.isOpen);
+  const toggleMenu = useMobileMenuStore((state) => state.toggleMenu);
+  const closeMenu = useMobileMenuStore((state) => state.closeMenu);
 
   const { data: catalogData = [] } = useQuery({
     queryKey: ["catalog"],
@@ -35,11 +35,16 @@ const HeaderMenu = () => {
   });
   console.log(searchData);
 
+  // Menu closed when page changes
+  useEffect(() => {
+    closeMenu();
+  }, [pathname, closeMenu]);
+
   return (
     <div className="py-[14px] xl:py-2  border-b border-b-superSilver">
       <Container className="flex justify-between items-center lg:gap-[18px] xl:gap-[42px]">
         {/* logo */}
-        <Link href="/" className=" overflow-hidden hidden sm:flex pr-4 lg:pr-0">
+        <Link href="/" className="overflow-hidden hidden sm:flex pr-4 lg:pr-0">
           <Image
             src={logo}
             alt="logo"
@@ -49,6 +54,7 @@ const HeaderMenu = () => {
             className="xl:w-auto xl:h-[56px] w-[150px] h-[48px]"
           />
         </Link>
+
         {/* search */}
         <Form action="/catalog/search" className="flex-1 relative ">
           <div className="relative w-full">
@@ -71,21 +77,20 @@ const HeaderMenu = () => {
             <HeaderMenuLink />
           </div>
 
-          <div className="flex lg:hidden ">
-            <div className="relative lg:hidden">
+          <div className="flex lg:hidden">
+              <div className="relative lg:hidden">
               <button
-                onClick={() => setIsOpen(!isOpen)}
+                onClick={toggleMenu}
                 className="p-2 rounded-md text-cerulean flex items-center justify-center z-50"
               >
-                {isOpen ? (
-                  <X className="w-8 h-8" />
-                ) : (
-                  <Menu className="w-8 h-8" />
-                )}
+                {isOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
               </button>
               <HeaderMobile
                 isOpen={isOpen}
-                setIsOpen={setIsOpen}
+                setIsOpen={(val: boolean) => {
+                  if (val) useMobileMenuStore.getState().openMenu();
+                  else useMobileMenuStore.getState().closeMenu();
+                }}
                 data={catalogData}
               />
             </div>

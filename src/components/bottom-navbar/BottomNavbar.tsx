@@ -17,6 +17,8 @@ import NavBottomCatalog from "@/assets/icons/NavBottomCatalog";
 import NavBottomInfo from "@/assets/icons/NavBottomInfo";
 import NavBottomHome from "@/assets/icons/NavBottomHome";
 import NavBottomUser from "@/assets/icons/NavBottomUser";
+import NavCatalogItem from "./NavCatalogItem";
+import { useMobileMenuStore } from "@/stores/mobileMenuStore";
 
 const BottomNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,7 +40,7 @@ const BottomNavbar = () => {
     enabled: auth,
   });
 
-
+  const { openMenu } = useMobileMenuStore();
   const contrAgents = agentsData?.kontragents || [];
   const favoriteAgent = contrAgents?.find(
     (agent: KontrAgents) => agent.isFavorite === true
@@ -72,12 +74,23 @@ const BottomNavbar = () => {
     };
   }, [menuOpen]);
 
+
+  
   return (
-    <div className="fixed bottom-0 left-0 w-full z-50 bg-white shadow-md border-t flex justify-around py-2">
-      <NavItem src={NavBottomHome} label="Главная" href="/" />
+<div className="fixed bottom-0 left-0 w-full z-[20] bg-white shadow-md border-t flex justify-around py-2 will-change-transform">
+<NavItem src={NavBottomHome} label="Главная" href="/" />
       <NavItem src={NavBottomInfo} label="Информация" href="/about" />
-      <NavItem src={NavBottomCatalog} label="Каталог" href="/catalog" />
-      <NavItem src={NavBottomCart} label="Корзина" href="/cart" />
+      <NavCatalogItem
+  src={NavBottomCatalog}
+  label="Каталог"
+  href="#"
+  onClick={(e) => {
+    e.preventDefault();
+    openMenu(); // headerdagi mobile menyuni ochadi
+  }}
+/>
+     <NavItem src={NavBottomCart} label="Корзина" href="/cart" />
+
       {/* Profile */}
       {auth ? (
         <div ref={menuRef} className="relative">
@@ -217,6 +230,7 @@ const BottomNavbar = () => {
         toggleOpen={() => setModalOpen(!modalOpen)}
       />
     </div>
+    
   );
 };
 const NavItem = ({
