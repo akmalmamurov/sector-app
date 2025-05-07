@@ -44,3 +44,4 @@ export const USER_PRODUCT_SEARCH = "/user/product/search";
 export const ORDER_LIMIT = 10;
 export const CREATE_ISSUE = "/user/request/create";
 export const GET_ISSUES = "/user/request/all";
+export const UPDATE_ISSUES = "/user/request";

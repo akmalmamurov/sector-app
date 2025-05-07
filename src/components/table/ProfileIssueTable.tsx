@@ -13,7 +13,6 @@ import { useState } from "react";
 import { IssueModal } from "../modal";
 
 export const ProfileIssueTable = ({ issues }: { issues: IssuesData[] }) => {
-  console.log(issues);
   const [open, setOpen] = useState(false);
   const [element, setElement] = useState({});
 
@@ -33,7 +32,7 @@ export const ProfileIssueTable = ({ issues }: { issues: IssuesData[] }) => {
             </div>
           </TableHead>
           <TableHead className="px-[10px] py-[7px] text-center border border-superSilver text-sm leading-[25px] h-[50px] text-textColor ">
-            <span>Заказы</span>
+            <span>Заказ</span>
           </TableHead>
           <TableHead className="px-[10px] py-[7px] text-center border border-superSilver text-sm leading-[25px] h-[50px] text-textColor ">
             <span>Тема</span>
@@ -65,11 +64,11 @@ export const ProfileIssueTable = ({ issues }: { issues: IssuesData[] }) => {
                     }}
                     className="border border-superSilver py-[6px] px-[17px] text-textColor"
                   >
-                    {item?.orderNumber}
+                    {item?.requestNumber}
                   </button>
                 </TableCell>
                 <TableCell className="py-[7px] px-[10px] border-l border-t border-b text-center text-textColor">
-                  {item?.requestNumber}
+                  {item?.orderNumber || "-"}
                 </TableCell>
                 <TableCell className="py-[7px] px-[10px] border-l border-t border-b text-center text-textColor">
                   {item?.topic}

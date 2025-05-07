@@ -16,30 +16,31 @@ import { CreateIssues } from "@/components/issues";
 import { ProfileIssueTable } from "@/components/table";
 import { useQuery } from "@tanstack/react-query";
 import { getIssues } from "@/api";
+import useStore from "@/context/store";
 const IssuesPage = () => {
   useRequireAuth();
-
+const auth = useStore((s) => s.auth);
   const [isOpen, setIsOpen] = useState(false);
+  const [search, setSearch] = useState("");
+  const [status, setStatus] = useState("");
   const { data: issuesData = [] } = useQuery({
-    queryKey: ["issues"],
-    queryFn: () => getIssues(),
+    queryKey: ["issues",search,status],
+    queryFn: () => getIssues(search,status),
+    enabled: auth,
   });
-  console.log(issuesData);
+  console.log(status);
 
   return (
     <section className="bg-white p-6">
       <div className="pt-5 pb-10 flex gap-[30px]">
-        <Select>
-          <SelectTrigger className="w-[300px] text-[14px] leading-[25px] h-[41px]">
+        <Select value={status} onValueChange={setStatus}>
+          <SelectTrigger className="w-[300px] text-[14px] leading-[25px] h-[41px] focus:ring-cerulean">
             <SelectValue placeholder="Выберите статус" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectItem value="apple">Apple</SelectItem>
-              <SelectItem value="banana">Banana</SelectItem>
-              <SelectItem value="blueberry">Blueberry</SelectItem>
-              <SelectItem value="grapes">Grapes</SelectItem>
-              <SelectItem value="pineapple">Pineapple</SelectItem>
+              <SelectItem value="new">Новые</SelectItem>
+              <SelectItem value="closed">Закрыто</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -49,6 +50,8 @@ const IssuesPage = () => {
             type="text"
             placeholder="Введите поисковый запрос"
             className="pr-10 text-[14px] leading-[25px] h-[41px]"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
           <Search
             className="absolute right-3 top-1/2 -translate-y-1/2 text-darkSoul"

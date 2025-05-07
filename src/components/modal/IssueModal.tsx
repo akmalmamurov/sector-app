@@ -10,12 +10,18 @@ import { Separator } from "../ui/separator";
 import { X } from "lucide-react";
 import { format } from "date-fns";
 import { formatDate } from "@/utils";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { showError, showSuccess } from "../toast/Toast";
+import request from "@/services";
+import { UPDATE_ISSUES } from "@/constants";
+import { useQueryClient } from "@tanstack/react-query";
+import { useConfirmModal } from "@/hooks";
+import ConfirmModal from "./ConfirmModal";
 
 interface Props {
   open: boolean;
@@ -26,19 +32,62 @@ interface Props {
 export const IssueModal = ({ open, toggleModal, issues }: Props) => {
   const [fileName, setFileName] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement>(null);
-  console.log(issues);
+  const queryClient = useQueryClient();
   const {
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors, isValid },
   } = useForm();
-  const onSubmit = (data: FieldValues) => {
+  const {
+    isOpen: isConfirmOpen,
+    message,
+    openModal,
+    closeModal,
+    onConfirm,
+  } = useConfirmModal();
+  useEffect(() => {
+    if (open) {
+      reset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+  const onSubmit = async (data: FieldValues) => {
     const formData = new FormData();
-    formData.append("imageRequset", data.imageRequset[0]);
-    formData.append("description", data.description);
-    console.log(data);
+    if (data.file && data.file.length > 0) {
+      formData.append("imageRequest", data.file[0]);
+    }
+    formData.append("message", data.description);
+    try {
+      await request.patch(`${UPDATE_ISSUES}/${issues?.id}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      queryClient.invalidateQueries({ queryKey: ["issues"] });
+      toggleModal();
+      showSuccess("Заявка отправлена");
+    } catch (error) {
+      showError("Что то пошло не так");
+      console.log(error);
+    }
   };
+
+  const handleDeleteClick = () => {
+    openModal("Вы уверены, что хотите закрыть заявку?", async () => {
+      try {
+        await request.delete(`${UPDATE_ISSUES}/${issues?.id}`);
+        queryClient.invalidateQueries({ queryKey: ["issues"] });
+        showSuccess("Заявка удалена");
+        toggleModal();
+      } catch (error) {
+        showError("Что-то пошло не так");
+        console.error(error);
+      }
+    });
+  };
+
   const handleFileSelect = () => fileInputRef.current?.click();
   const handleFileChange = () => {
     const files = fileInputRef.current?.files;
@@ -47,6 +96,7 @@ export const IssueModal = ({ open, toggleModal, issues }: Props) => {
       setValue("file", files);
     }
   };
+
   return (
     <Dialog open={open} onOpenChange={toggleModal}>
       <DialogContent className="max-w-[900px] sm:rounded-none p-0 border-none h-[740px] overflow-y-scroll scrollbar-hide ">
@@ -163,18 +213,32 @@ export const IssueModal = ({ open, toggleModal, issues }: Props) => {
               </div>
               <hr className="border-superSilver mb-5 mt-10" />
               <div className="flex justify-center gap-5">
-                <button disabled={!isValid} type="submit" className="flex w-[200px] disabled:bg-superSilver disabled:text-darkSoul font-semibold h-[42px] bg-cerulean text-white  justify-center items-center ">
-                Ответить
+                <button
+                  disabled={!isValid}
+                  type="submit"
+                  className="flex w-[200px] disabled:bg-superSilver disabled:text-darkSoul font-semibold h-[42px] bg-cerulean text-white  justify-center items-center "
+                >
+                  Ответить
                 </button>
-                <button type="button" className="flex w-[200px] h-[42px] bg-dangerColor text-white  justify-center items-center gap-1 font-semibold">
-                    <X className="text-white"/>
-                Закрыть заявку
+                <button
+                  type="button"
+                  onClick={handleDeleteClick}
+                  className="flex w-[200px] h-[42px] bg-dangerColor text-white  justify-center items-center gap-1 font-semibold"
+                >
+                  <X className="text-white" />
+                  Закрыть заявку
                 </button>
               </div>
             </form>
           </div>
         </div>
       </DialogContent>
+      <ConfirmModal
+        isOpen={isConfirmOpen}
+        message={message}
+        onConfirm={onConfirm}
+        closeModal={closeModal}
+      />
     </Dialog>
   );
 };
