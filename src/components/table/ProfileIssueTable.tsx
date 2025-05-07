@@ -9,9 +9,13 @@ import {
 } from "../ui/table";
 import { ProfileDownIcon, ProfileUpIcon } from "@/assets/icons";
 import { format } from "date-fns";
+import { useState } from "react";
+import { IssueModal } from "../modal";
 
 export const ProfileIssueTable = ({ issues }: { issues: IssuesData[] }) => {
   console.log(issues);
+  const [open, setOpen] = useState(false);
+  const [element, setElement] = useState({});
 
   return (
     <Table className="w-full table-auto bg-white border-separate border-spacing-y-2">
@@ -53,7 +57,14 @@ export const ProfileIssueTable = ({ issues }: { issues: IssuesData[] }) => {
           ? issues?.map((item) => (
               <TableRow key={item?.id}>
                 <TableCell className="py-[7px] px-[10px] border-l border-t border-b text-center lg:w-[191px]">
-                  <button className="border border-superSilver py-[6px] px-[17px] text-textColor">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setElement(item);
+                      setOpen(true);
+                    }}
+                    className="border border-superSilver py-[6px] px-[17px] text-textColor"
+                  >
                     {item?.orderNumber}
                   </button>
                 </TableCell>
@@ -61,7 +72,7 @@ export const ProfileIssueTable = ({ issues }: { issues: IssuesData[] }) => {
                   {item?.requestNumber}
                 </TableCell>
                 <TableCell className="py-[7px] px-[10px] border-l border-t border-b text-center text-textColor">
-                  {item?.topicCategory}
+                  {item?.topic}
                 </TableCell>
                 <TableCell className="py-[7px] px-[10px] border-l border-t border-b text-center text-textColor">
                   <span
@@ -79,11 +90,7 @@ export const ProfileIssueTable = ({ issues }: { issues: IssuesData[] }) => {
                 </TableCell>
                 <TableCell className="py-[7px] px-[10px] border-l border-t border-b text-center text-textColor">
                   {item.createdAt
-                    ? format(
-                        new Date(item.createdAt),
-                        "dd.MM.yyyy HH:mm" /* yoki `"d MMM yyyy HH:mm"` */
-                        // , { locale: uz }
-                      )
+                    ? format(new Date(item.createdAt), "dd.MM.yyyy HH:mm")
                     : "-"}
                 </TableCell>
                 <TableCell className="py-[7px] px-[10px] border-l border-t border-b text-center text-textColor border-r">
@@ -100,6 +107,11 @@ export const ProfileIssueTable = ({ issues }: { issues: IssuesData[] }) => {
             ))
           : null}
       </TableBody>
+      <IssueModal
+        open={open}
+        toggleModal={() => setOpen(!open)}
+        issues={element}
+      />
     </Table>
   );
 };

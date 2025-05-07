@@ -43,7 +43,10 @@ const formSchema = z.object({
 
 type FormSchema = z.infer<typeof formSchema>;
 
-export const CreateIssues: React.FC<{setOpen: (open: boolean) => void, orderNumber?: string}> = ({setOpen,orderNumber}) => {
+export const CreateIssues: React.FC<{
+  setOpen: (open: boolean) => void;
+  orderNumber?: string;
+}> = ({ setOpen, orderNumber }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [fileName, setFileName] = useState<string>("");
   const auth = useStore((s) => s.auth);
@@ -67,7 +70,7 @@ export const CreateIssues: React.FC<{setOpen: (open: boolean) => void, orderNumb
   });
 
   console.log(userData);
-  
+
   const {
     control,
     handleSubmit,
@@ -86,7 +89,11 @@ export const CreateIssues: React.FC<{setOpen: (open: boolean) => void, orderNumb
     formData.append("imageRequest", data.file?.[0] ?? "");
     formData.append("description", data.description ?? "");
     try {
-      await request.post(CREATE_ISSUE, formData);
+      await request.post(CREATE_ISSUE, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       queryClient.invalidateQueries({ queryKey: ["issues"] });
       setOpen(false);
       showSuccess("Заявка отправлена");
@@ -301,6 +308,7 @@ export const CreateIssues: React.FC<{setOpen: (open: boolean) => void, orderNumb
                   className="text-textColor text-sm pb-2"
                 >
                   Описание
+                  <span className="text-cerulean ml-1">*</span>
                 </Label>
                 <FormControl>
                   <Textarea
