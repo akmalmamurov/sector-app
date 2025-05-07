@@ -21,6 +21,12 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { showError, showSuccess } from "../toast/Toast";
+import request from "@/services";
+import { CREATE_ISSUE } from "@/constants";
+import { getUser } from "@/api";
+import useStore from "@/context/store";
 
 const formSchema = z.object({
   topicCategory: z.string().min(1, "Выберите тему обращения"),
@@ -32,28 +38,36 @@ const formSchema = z.object({
     .any()
     .refine((files) => files?.length === 1, "Прикрепите файл")
     .optional(),
-  description: z.string().min(1,"Описание обязательно")
+  description: z.string().min(1, "Описание обязательно"),
 });
 
 type FormSchema = z.infer<typeof formSchema>;
 
-export const CreateIssues: React.FC = () => {
+export const CreateIssues: React.FC<{setOpen: (open: boolean) => void, orderNumber?: string}> = ({setOpen,orderNumber}) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [fileName, setFileName] = useState<string>("");
-
+  const auth = useStore((s) => s.auth);
+  const queryClient = useQueryClient();
+  const { data: userData = [] } = useQuery({
+    queryKey: ["user"],
+    queryFn: getUser,
+    enabled: auth,
+  });
   const formMethods = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       topicCategory: "",
       topic: "",
-      fullName: "",
-      email: "",
-      orderNumber: "",
+      fullName: userData?.name ?? "",
+      email: userData?.email ?? "",
+      orderNumber: orderNumber ?? "",
       file: undefined,
       description: "",
     },
   });
 
+  console.log(userData);
+  
   const {
     control,
     handleSubmit,
@@ -61,7 +75,7 @@ export const CreateIssues: React.FC = () => {
     formState: { errors, isValid },
   } = formMethods;
 
-  const onSubmit = (data: FormSchema) => {
+  const onSubmit = async (data: FormSchema) => {
     const formData = new FormData();
 
     formData.append("topicCategory", data.topicCategory);
@@ -71,6 +85,16 @@ export const CreateIssues: React.FC = () => {
     formData.append("orderNumber", data.orderNumber ?? "");
     formData.append("imageRequest", data.file?.[0] ?? "");
     formData.append("description", data.description ?? "");
+    try {
+      await request.post(CREATE_ISSUE, formData);
+      queryClient.invalidateQueries({ queryKey: ["issues"] });
+      setOpen(false);
+      showSuccess("Заявка отправлена");
+    } catch (error) {
+      console.log(error);
+
+      showError("Что то пошло не так");
+    }
     console.log(data);
   };
 
@@ -111,7 +135,7 @@ export const CreateIssues: React.FC = () => {
                 <FormControl>
                   <Select
                     {...field}
-                    value={field.value} 
+                    value={field.value}
                     onValueChange={field.onChange}
                   >
                     <SelectTrigger
@@ -150,7 +174,11 @@ export const CreateIssues: React.FC = () => {
                   Тема <span className="text-cerulean">*</span>
                 </Label>
                 <FormControl>
-                  <Input {...field} id="topic" className="h-[41px] rounded-none border border-superSilver focus-visible:ring-cerulean hover:border-cerulean/80 focus:border-none" />
+                  <Input
+                    {...field}
+                    id="topic"
+                    className="h-[41px] rounded-none border border-superSilver focus-visible:ring-cerulean hover:border-cerulean/80 focus:border-none"
+                  />
                 </FormControl>
                 <FormMessage>{errors.topic?.message}</FormMessage>
               </FormItem>
@@ -170,7 +198,11 @@ export const CreateIssues: React.FC = () => {
                   Ваше имя <span className="text-cerulean">*</span>
                 </Label>
                 <FormControl>
-                  <Input {...field} id="fullName" className="h-[41px] rounded-none border border-superSilver focus-visible:ring-cerulean hover:border-cerulean/80 focus:border-none" />
+                  <Input
+                    {...field}
+                    id="fullName"
+                    className="h-[41px] rounded-none border border-superSilver focus-visible:ring-cerulean hover:border-cerulean/80 focus:border-none"
+                  />
                 </FormControl>
                 <FormMessage>{errors.fullName?.message}</FormMessage>
               </FormItem>
@@ -190,7 +222,11 @@ export const CreateIssues: React.FC = () => {
                   Номер заказа
                 </Label>
                 <FormControl>
-                  <Input {...field} id="orderNumber" className="h-[41px] rounded-none border border-superSilver focus-visible:ring-cerulean hover:border-cerulean/80 focus:border-none" />
+                  <Input
+                    {...field}
+                    id="orderNumber"
+                    className="h-[41px] rounded-none border border-superSilver focus-visible:ring-cerulean hover:border-cerulean/80 focus:border-none"
+                  />
                 </FormControl>
                 <FormMessage>{errors.orderNumber?.message}</FormMessage>
               </FormItem>
@@ -207,7 +243,11 @@ export const CreateIssues: React.FC = () => {
                   Email <span className="text-cerulean">*</span>
                 </Label>
                 <FormControl>
-                  <Input {...field} id="email" className="h-[41px] rounded-none border border-superSilver focus-visible:ring-cerulean hover:border-cerulean/80 focus:border-none" />
+                  <Input
+                    {...field}
+                    id="email"
+                    className="h-[41px] rounded-none border border-superSilver focus-visible:ring-cerulean hover:border-cerulean/80 focus:border-none"
+                  />
                 </FormControl>
                 <FormMessage>{errors.email?.message}</FormMessage>
               </FormItem>
@@ -235,7 +275,11 @@ export const CreateIssues: React.FC = () => {
                 placeholder="Файл не выбран"
                 className="h-[41px] rounded-none border border-superSilver focus-visible:ring-cerulean"
               />
-              <Button type="button" onClick={handleFileSelect} className="bg-greenLight hover:bg-greenLight w-[122px] rounded-[8px] h-[42px] font-semibold text-white">
+              <Button
+                type="button"
+                onClick={handleFileSelect}
+                className="bg-greenLight hover:bg-greenLight w-[122px] rounded-[8px] h-[42px] font-semibold text-white"
+              >
                 Обзор
               </Button>
             </div>
@@ -259,7 +303,11 @@ export const CreateIssues: React.FC = () => {
                   Описание
                 </Label>
                 <FormControl>
-                  <Textarea {...field} id="description" className="h-[93px] resize-none rounded-none border border-superSilver focus-visible:ring-cerulean hover:border-cerulean/80 focus-visible:hover:border-transparent" />
+                  <Textarea
+                    {...field}
+                    id="description"
+                    className="h-[93px] resize-none rounded-none border border-superSilver focus-visible:ring-cerulean hover:border-cerulean/80 focus-visible:hover:border-transparent"
+                  />
                 </FormControl>
                 <FormMessage>{errors.description?.message}</FormMessage>
               </FormItem>
@@ -268,7 +316,13 @@ export const CreateIssues: React.FC = () => {
 
           {/* Кнопка подачи */}
           <div className="col-span-2">
-            <Button disabled={!isValid} type="submit" className="bg-cerulean w-[158px] hover:bg-celBlue text-white disabled:bg-superSilver disabled:text-darkSoul font-semibold disabled:opacity-100 rounded-[10px]">Подать заявку</Button>
+            <Button
+              disabled={!isValid}
+              type="submit"
+              className="bg-cerulean w-[158px] hover:bg-celBlue text-white disabled:bg-superSilver disabled:text-darkSoul font-semibold disabled:opacity-100 rounded-[10px]"
+            >
+              Подать заявку
+            </Button>
           </div>
         </form>
       </Form>

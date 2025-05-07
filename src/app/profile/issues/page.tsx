@@ -13,6 +13,7 @@ import { Search } from "lucide-react";
 import { useRequireAuth } from "@/hooks";
 import { useState } from "react";
 import { CreateIssues } from "@/components/issues";
+import { ProfileIssueTable } from "@/components/table";
 const IssuesPage = () => {
   useRequireAuth();
 
@@ -55,7 +56,8 @@ const IssuesPage = () => {
           <span>Подать заявку</span>
         </button>
       </div>
-      {isOpen && <CreateIssues />}
+      {isOpen && <CreateIssues setOpen={setIsOpen} />}
+      <ProfileIssueTable />
     </section>
   );
 };
