@@ -16,7 +16,8 @@ export interface CategoryData {
     title: string;
     subcatalogs: SubcatalogData[];
     categories: CategoryData[]; // qo‘shilgan
-}
+  
+  }
     
    export interface HeaderMobileProps {
         data: CatalogData[];

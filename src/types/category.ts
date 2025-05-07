@@ -31,5 +31,5 @@ export interface PopularCategory {
 export interface CatalogWithCategories {
   slug: string;
   title: string;
-  categories: CategoryData[]; // yoki nima bo'lsa
+  categories: CategoryData[]; // yoki nima bo‘lsa
 }

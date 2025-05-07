@@ -12,6 +12,7 @@ import { AlignJustify, ChevronLeft } from "lucide-react";
 import { ChevronRightIcon } from "@/assets/icons";
 import MobileGoSection from "./MobileGoSection";
 import { CatalogData, SubcatalogData } from "@/types/catalog";
+import { useMobileMenuStore } from "@/stores/mobileMenuStore";
 
 interface HeaderMobileProps {
   data: CatalogData[];
@@ -19,8 +20,11 @@ interface HeaderMobileProps {
   setIsOpen: (val: boolean) => void;
 }
 
-const HeaderMobile = ({ data, isOpen, setIsOpen }: HeaderMobileProps) => {
+const HeaderMobile = ({ data }: HeaderMobileProps) => {
   const router = useRouter();
+
+  const isOpen = useMobileMenuStore((state) => state.isOpen);
+  const closeMenu = useMobileMenuStore((state) => state.closeMenu);
 
   const [selectedCatalog, setSelectedCatalog] = useState<CatalogData | null>(
     null
@@ -29,7 +33,7 @@ const HeaderMobile = ({ data, isOpen, setIsOpen }: HeaderMobileProps) => {
     useState<SubcatalogData | null>(null);
 
   const onClose = () => {
-    setIsOpen(false);
+    closeMenu();
     setSelectedCatalog(null);
     setSelectedSubcatalog(null);
   };
@@ -81,10 +85,10 @@ const HeaderMobile = ({ data, isOpen, setIsOpen }: HeaderMobileProps) => {
         </div>
 
         <MobileGoSection
-          selectedCatalog={selectedCatalog} 
+          selectedCatalog={selectedCatalog}
           handleGoToSection={handleGoToSection}
           onClose={onClose}
-        />  
+        />
 
         {/* MAIN CONTENT */}
         {!selectedCatalog && (

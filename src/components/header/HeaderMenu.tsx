@@ -14,8 +14,9 @@ import { useQuery } from "@tanstack/react-query";
 import { getCatalog } from "@/api/catalog";
 import HeaderMobile from "./HeaderMobile";
 import { usePathname } from "next/navigation";
-import { getSearchProduct } from "@/api";
 import { useMobileMenuStore } from "@/stores/mobileMenuStore";
+import { getSearchProduct } from "@/api";
+
 const HeaderMenu = () => {
   const pathname = usePathname();
   const [search, setSearch] = useState("");
@@ -40,6 +41,11 @@ const HeaderMenu = () => {
     closeMenu();
   }, [pathname, closeMenu]);
 
+  // sahifa o‘zgarganda menyuni yopamiz
+  useEffect(() => {
+    closeMenu();
+  }, [pathname, closeMenu]);
+
   return (
     <div className="py-[14px] xl:py-2  border-b border-b-superSilver">
       <Container className="flex justify-between items-center lg:gap-[18px] xl:gap-[42px]">
@@ -56,7 +62,7 @@ const HeaderMenu = () => {
         </Link>
 
         {/* search */}
-        <Form action="/catalog/search" className="flex-1 relative ">
+        <Form action="/search" className="flex-1 relative">
           <div className="relative w-full">
             <input
               type="text"
@@ -78,7 +84,7 @@ const HeaderMenu = () => {
           </div>
 
           <div className="flex lg:hidden">
-              <div className="relative lg:hidden">
+            <div className="relative lg:hidden">
               <button
                 onClick={toggleMenu}
                 className="p-2 rounded-md text-cerulean flex items-center justify-center z-50"
