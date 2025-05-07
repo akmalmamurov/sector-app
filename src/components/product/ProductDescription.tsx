@@ -282,9 +282,9 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
         <div
           className={`hidden sm:block sticky ${isScroll ? "top-[78px] lg:top-[130px]" : "top-0"} bg-white border-b shadow-sectionShadow overflow-x-auto whitespace-nowrap scrollbar-hide`}
         >
-          {sections.map(({ id, label }) => (
+          {sections.map(({ id, label}, index) => (
             <button
-              key={id}
+              key={index}
               ref={(el) => {
                 buttonRefs.current[id] = el;
               }}

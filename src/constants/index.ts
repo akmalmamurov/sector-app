@@ -39,3 +39,8 @@ export const GET_CART_ORDER = "/user/orders/get-all";
 export const GET_LAST_ORDER = "/user/orders/get-all?last=true";
 export const CANCEL_ORDER = "/user/orders/cancel";
 export const GET_SINGLE_ORDER = "/user/orders/get-by-id";
+export const DUPLICATE_ORDER = "/user/orders/dublicate";
+export const USER_PRODUCT_SEARCH = "/user/product/search";
+export const ORDER_LIMIT = 10;
+export const CREATE_ISSUE = "/user/request/create";
+export const GET_ISSUES = "/user/request/all";

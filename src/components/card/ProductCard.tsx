@@ -21,7 +21,7 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
     >
       <div className="overflow-hidden">
         <Link
-          href={`/catalog/${product.subcatalog.slug}/${product.category.slug}/${product.slug}`}
+          href={`/catalog/${product.subcatalog.slug}/${product.category.slug}/${product?.slug}`}
         >
           <Image
             src={`${process.env.NEXT_PUBLIC_API_URL}/${product?.mainImage}`}
@@ -36,17 +36,17 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
 
       <div className="flex justify-between gap-2 mt-2 h-[72px] overflow-hidden">
         <Link
-          href={`/catalog/${product.subcatalog.slug}/${product.category.slug}/${product.slug}`}
+          href={`/catalog/${product?.subcatalog?.slug}/${product?.category?.slug}/${product?.slug}`}
           className="font-normal text-xs leading-[18px] text-titleColor text-left line-clamp-3 h-fit hover:text-cerulean hoverEffect"
         >
-          {product.title}
+          {product?.title}
         </Link>
         <span
           className="cursor-pointer"
           onClick={(e) => {
             e.stopPropagation();
             copyToClipboard(
-              product.title,
+              product?.title,
               "Наименование скопировано в буфер обмена"
             );
           }}
@@ -55,29 +55,31 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
         </span>
       </div>
       <div className="flex justify-between gap-2 mb-3">
-        <p className="text-xs text-wasabiColor">{product.articul}</p>
+        <p className="text-xs text-wasabiColor">{product?.articul}</p>
         <span
           className="cursor-pointer"
           onClick={() =>
             copyToClipboard(
-              product.articul,
-              `Артикул ${product.articul} скопирован в буфер обмена`
+              product?.articul,
+              `Артикул ${product?.articul} скопирован в буфер обмена`
             )
           }
         >
           <CopyIcon className="text-explosiveGrey" />
         </span>
       </div>
-      {product?.inStock ? (
+      {product?.inStock === "Под заказ" ? (
         <p className="text-cerulean text-xs leading-[18px]">
-          В наличии {product.inStock}
+         {product?.inStock}
         </p>
       ) : (
-        <p className="text-wasabiColor text-xs leading-[18px]">Подзаказ</p>
+        <p className="text-cerulean text-xs leading-[18px]">
+        В наличии {product?.inStock}
+      </p>
       )}
 
       <p className="text-titleColor font-semibold text-end">
-        {formatPrice(product.price)}
+        {formatPrice(product?.price)}
       </p>
       {/* footer */}
       <div className="flex justify-end gap-[15px] mt-[25px]">

@@ -3,39 +3,73 @@ import { InfoHeader } from "../div";
 import { Section } from "../section";
 import { InfoTitle } from "../title";
 import { ProductCard, ProductColCard } from "../card";
-import useStore from "@/context/store";
 import { Pagination } from "../pagination";
 import { useQuery } from "@tanstack/react-query";
 import { getProductCategory } from "@/api/product";
 import { useState } from "react";
 import { ProductData } from "@/types";
 import { SortProducts } from "../sort";
+import sessionStore from "@/context/session-store";
 
 interface CategoryRightProps {
   title?: string;
   slug?: string;
   paramKey?: string;
 }
-export const CategoryRight: React.FC<CategoryRightProps> = ({ title, slug, paramKey}) => {
+export const CategoryRight: React.FC<CategoryRightProps> = ({
+  title,
+  slug,
+  paramKey,
+}) => {
   const [limit, setLimit] = useState<number>(40);
   const [inStock, setInStock] = useState<boolean>(false);
   const [popular, setPopular] = useState<boolean>(true);
   const [selected, setSelected] = useState<string | null>(null);
   const [priceSort, setPriceSort] = useState<"asc" | "desc" | null>(null);
   const [nameSort, setNameSort] = useState<"asc" | "desc" | null>(null);
-  const [page, setPage] = useState(1);
+  const page = sessionStore((s) => s.pageCatalog);
+  const setPage = sessionStore((s) => s.setPageCatalog);
 
   const { data } = useQuery({
-    queryKey: ["products", slug, page, inStock,popular,priceSort,nameSort,limit],
+    queryKey: [
+      "products",
+      slug,
+      page,
+      inStock,
+      popular,
+      priceSort,
+      nameSort,
+      limit,
+    ],
     queryFn: () =>
-      getProductCategory(slug || "", page, limit, paramKey || "", inStock,popular,priceSort,nameSort),
+      getProductCategory(
+        slug || "",
+        page,
+        limit,
+        paramKey || "",
+        inStock,
+        popular,
+        priceSort,
+        nameSort
+      ),
   });
-  const  rowCol = useStore(state => state.rowCol);
+  const rowCol = sessionStore((state) => state.rowColProduct);
   const productData: ProductData[] = data?.products;
 
-const props = {
- selected, inStock, popular,  setInStock, setPopular, setSelected, setPriceSort, setNameSort,limit,setLimit
-}
+  const props = {
+    selected,
+    inStock,
+    popular,
+    setInStock,
+    setPopular,
+    setSelected,
+    setPriceSort,
+    setNameSort,
+    limit,
+    setLimit,
+    nameSort,
+    priceSort,
+  };
   return (
     <div className="col-span-12 lg:col-span-9">
       <Section className="px-0 py-6 shadow-sectionShadow rounded-none">

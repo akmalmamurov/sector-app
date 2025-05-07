@@ -25,6 +25,7 @@ export const SingleOrderLeft = ({ orderSort }: SingleOrderLeftProps) => {
   });
 
   const orders = orderData?.orders;
+  console.log(orders);
 
   return (
     <div className="col-span-3">
@@ -61,7 +62,15 @@ export const SingleOrderLeft = ({ orderSort }: SingleOrderLeftProps) => {
                   }
                 >
                   <div className="flex flex-col text-sm text-lightBlack">
-                    <span>{item?.orderDeleveryType}</span>
+                    <span>
+                      {item?.orderDeleveryType === "not shipped"
+                        ? "Не отгружен"
+                        : item?.orderDeleveryType === "shipped"
+                          ? "Отгружен"
+                          : item?.orderDeleveryType === "in preparation"
+                            ? "Комплектуется"
+                            : ""}
+                    </span>
                     <span className="text-xs">{item?.orderNumber}</span>
                   </div>
                   <PriceFormatter

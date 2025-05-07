@@ -14,12 +14,16 @@ import { OrderStepper } from "../order";
 import { useQueryClient } from "@tanstack/react-query";
 import { showError, showSuccess } from "../toast/Toast";
 import request from "@/services";
+import { useState } from "react";
+import { DuplicateModal } from "../modal";
 
 interface SingleOrderRightProps {
   order: OrdersData;
 }
 
 export const SingleOrderRight = ({ order }: SingleOrderRightProps) => {
+  const [open, setOpen] = useState(false);
+  const toggleOpen = () => setOpen(!open);
   const queryClient = useQueryClient();
   const formattedAddress = order?.agent
     ? `${order?.agent?.fullAddress
@@ -35,9 +39,7 @@ export const SingleOrderRight = ({ order }: SingleOrderRightProps) => {
       : order?.deliveryMethod === "До адреса"
         ? formattedAddress
         : "Ташкент";
-  const finishOrder = (id: string) => {
-    console.log("finish order", id);
-  };
+
   const handleCancel = async (id: string) => {
     try {
       await request.patch(`${CANCEL_ORDER}/${id}`, { orderType: "rejected" });
@@ -49,6 +51,8 @@ export const SingleOrderRight = ({ order }: SingleOrderRightProps) => {
       console.log(error);
     }
   };
+  console.log(order);
+  
   return (
     <div className="col-span-9">
       <div className="px-4 pt-4 pb-6 border border-superSilver">
@@ -83,7 +87,11 @@ export const SingleOrderRight = ({ order }: SingleOrderRightProps) => {
                       </div>
                       <div className="absolute top-1/2 -translate-y-1/2 right-0">
                         <div className="border border-dangerColor w-full flex justify-center items-center py-[6px] px-2 rounded-[4px] text-dangerColor text-lg">
-                          {order?.orderPriceStatus}
+                          {order?.orderPriceStatus === "not paid"
+                            ? "Не оплачен"
+                            : order?.orderPriceStatus === "paid"
+                              ? "Оплачен"
+                              : ""}
                         </div>
                       </div>
                     </div>
@@ -299,7 +307,7 @@ export const SingleOrderRight = ({ order }: SingleOrderRightProps) => {
             <div className="flex gap-2">
               <button
                 type="button"
-                onClick={() => finishOrder(order?.id)}
+                onClick={() => toggleOpen()}
                 className="w-[315px] h-[42px] border border-cerulean flex justify-center items-center gap-2 text-cerulean font-semibold hover:border-cerulean/60 hover:text-cerulean/80 hoverEffect"
               >
                 <OrderDuplicateIcon />
@@ -315,6 +323,11 @@ export const SingleOrderRight = ({ order }: SingleOrderRightProps) => {
                 </button>
               )}
             </div>
+            <DuplicateModal
+              open={open}
+              toggleModal={toggleOpen}
+              product={order?.products}
+            />
           </TabsContent>
           {/* messages content */}
           <TabsContent value="messages" className="mt-[23px]">

@@ -1,4 +1,5 @@
 import { AddressData } from "./address";
+import { UserData } from "./user";
 
 export interface ContrAgentRequest {
   ownershipForm: string;
@@ -19,12 +20,7 @@ export interface KontrAgents {
   ownershipForm: string;
   pnfl: string;
   address: AddressData[];
-  user: {
-    email: string;
-    id: string;
-    name: string;
-    phone: string;
-  };
+  user: UserData;
 }
 export interface userKontrAgent {
   inn: string;

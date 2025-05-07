@@ -15,13 +15,13 @@ export const OrderStepper: React.FC<StepperProps> = ({ orderDeleveryType }) => {
         </div>
         <div className="mx-[3px] h-[0.8px] bg-noghreiSilver w-[185px]"></div>
         <div
-          className={`flex justify-center ${orderDeleveryType === "Комплектуется" || orderDeleveryType === "Отгружен" ? "border-greenLight text-greenLight" : "border-darkSoul text-darkSoul"} items-center w-[33px] h-[33px] border  rounded-full text-sm `}
+          className={`flex justify-center ${orderDeleveryType === "in preparation" || orderDeleveryType === "shipped" ? "border-greenLight text-greenLight" : "border-darkSoul text-darkSoul"} items-center w-[33px] h-[33px] border  rounded-full text-sm `}
         >
           2
         </div>
         <div className="mx-[3px] h-[0.8px] bg-noghreiSilver w-[185px]"></div>
         <div
-          className={`flex justify-center ${orderDeleveryType === "Отгружен" ? "border-greenLight text-greenLight" : "border-darkSoul text-darkSoul"} items-center w-[33px] h-[33px] border  rounded-full text-sm `}
+          className={`flex justify-center ${orderDeleveryType === "shipped" ? "border-greenLight text-greenLight" : "border-darkSoul text-darkSoul"} items-center w-[33px] h-[33px] border  rounded-full text-sm `}
         >
           3
         </div>
@@ -32,13 +32,13 @@ export const OrderStepper: React.FC<StepperProps> = ({ orderDeleveryType }) => {
         </div>
         <div className="w-[208px]">
           <p className="text-sm font-normal text-lightBlack">
-            {orderDeleveryType === "Комплектуется"
+            {orderDeleveryType === "in preparation"
               ? "Комплектуется"
               : "Готов к отгрузке"}
           </p>
         </div>
         <div className="w-[138px] text-center">
-          <p className={`text-sm font-normal ${orderDeleveryType === "Отгружен" ? "text-lightBlack" : "text-darkSoul"}`}>Отгружен</p>
+          <p className={`text-sm font-normal ${orderDeleveryType === "shipped" ? "text-lightBlack" : "text-darkSoul"}`}>Отгружен</p>
         </div>
       </div>
     </div>
