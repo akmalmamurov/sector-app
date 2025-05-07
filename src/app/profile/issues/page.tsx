@@ -14,10 +14,18 @@ import { useRequireAuth } from "@/hooks";
 import { useState } from "react";
 import { CreateIssues } from "@/components/issues";
 import { ProfileIssueTable } from "@/components/table";
+import { useQuery } from "@tanstack/react-query";
+import { getIssues } from "@/api";
 const IssuesPage = () => {
   useRequireAuth();
 
   const [isOpen, setIsOpen] = useState(false);
+  const { data: issuesData = [] } = useQuery({
+    queryKey: ["issues"],
+    queryFn: () => getIssues(),
+  });
+  console.log(issuesData);
+  
   return (
     <section className="bg-white p-6">
       <div className="pt-5 pb-10 flex gap-[30px]">
