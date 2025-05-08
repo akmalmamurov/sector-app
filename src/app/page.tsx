@@ -13,9 +13,9 @@ export default async function Home() {
 
   return (
     <>
-      <Banner banner={banners} />
-      <HomeCategory  />
-      <HomeBrands brands={brandsData?.brands} />
+      <Banner banner={banners} loading={false} />
+      <HomeCategory />
+      <HomeBrands brands={brandsData?.brands} loading={false} />
       <ProductList />
       <HomeFooter />
     </>

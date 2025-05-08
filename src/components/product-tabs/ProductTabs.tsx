@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ProductCard } from "../card";
@@ -7,6 +8,7 @@ import { getProducts } from "@/api/product";
 import { getPromotion } from "@/api/promotion";
 import { ProductData, PromotionData } from "@/types";
 import { PromotionCard } from "../card/PromotionCard";
+import { Skeleton } from "../skeleton/skeleton";
 
 const tabs = [
   { key: "recommended", label: "Рекомендуем" },
@@ -36,6 +38,8 @@ const ProductTabs = () => {
     },
   });
 
+  const skeletonArray = Array.from({ length: activeTab === "promotion" ? 6 : 8 });
+
   return (
     <Tabs
       defaultValue={activeTab}
@@ -59,23 +63,37 @@ const ProductTabs = () => {
       </TabsList>
 
       <div className="py-[32px]">
+        {isLoading && (
+          <div className="flex flex-col gap-4">
+            {skeletonArray.map((_, idx) => (
+              <Skeleton key={idx} className="h-[300px] rounded-md skeleton-shimmer" />
+            ))}
+          </div>
+        )}
         <TabsContent
           value={activeTab}
-          className={`grid  px-5 mt-0 ${activeTab === "promotion" ? "grid-cols-2 lg:grid-cols-3 gap-7" : "grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"}`}
+          className={`grid px-5 mt-0 ${
+            activeTab === "promotion"
+              ? "grid-cols-2 lg:grid-cols-3 gap-7"
+              : "grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+          }`}
         >
-          {isLoading ? (
-            <div>Loading...</div>
-          ) : error ? (
-            <div>Error loading products.</div>
-          ) : activeTab === "promotion" ? (
-            data?.map((item: PromotionData) => (
-              <PromotionCard key={item.id} promotion={item} />
-            ))
-          ) : (
-            data?.map((product: ProductData) => (
-              <ProductCard key={product.id} product={product} />
-            ))
-          )}
+          {isLoading
+            ? skeletonArray.map((_, idx) => (
+                <Skeleton key={idx} className="h-[300px] rounded-md skeleton-shimmer" >
+                  <Skeleton className="w-[50%] mt-[5%] m-2 h-[50%] rounded-2xl skeleton-shimmer" />
+                  <Skeleton className="w-[80%] mt-[7%] mx-4 h-5 rounded-full skeleton-shimmer" />
+                </Skeleton>
+              ))
+            : error
+            ? <div className="col-span-full text-red-500">Xatolik yuz berdi.</div>
+            : activeTab === "promotion"
+            ? data?.map((item: PromotionData) => (
+                <PromotionCard key={item.id} promotion={item} />
+              ))
+            : data?.map((product: ProductData) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
         </TabsContent>
       </div>
     </Tabs>

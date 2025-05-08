@@ -43,6 +43,7 @@
     "react-image-gallery": "^1.4.0",
     "react-imask": "^7.6.1",
     "react-input-mask-next": "^3.0.0-alpha.12",
+    "react-transition-group": "^4.4.5",
     "sharp": "^0.34.1",
     "swiper": "^11.2.6",
     "tailwind-merge": "^2.6.0",

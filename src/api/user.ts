@@ -1,4 +1,4 @@
-import { GET_ME } from "@/constants";
+import { GET_ME, UPDATE_ME } from "@/constants";
 import request from "@/services";
 
 export const getUser = async () => {
@@ -10,3 +10,14 @@ export const getUser = async () => {
       return [];
     }
   };
+
+  export const updateUserPhone = async (phone: string) => {
+    try {
+      const res = await request.patch(UPDATE_ME, { phone });
+      return res.data.data || [];
+    } catch (error) {
+      console.log(error);
+      return [];
+    }
+  };
+
