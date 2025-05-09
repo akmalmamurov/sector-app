@@ -11,8 +11,8 @@ const items = [
 ];
 const projects = [
   {
-    text: "snr.systems",
-    link: "/",
+    text: "НИЦ НТ  (СКС)",
+    link: "/ni-nt-sks",
   },
   {
     text: "Конфигураторы",
