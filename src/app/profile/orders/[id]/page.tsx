@@ -11,6 +11,8 @@ const SingleOrder = () => {
     queryFn: () => getSingleOrder(id as string),
   });
 
+  console.log("SingleOrder", order);
+  
   return (
     <section className="p-6">
       <div className="grid grid-cols-12 gap-6">

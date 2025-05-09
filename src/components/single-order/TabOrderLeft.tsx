@@ -2,7 +2,12 @@ import Image from "next/image";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { DeliveyMethodIcon, LocationIcon, OrderDuplicateIcon, WalletIcon, } from "@/assets/icons";
+import {
+  DeliveyMethodIcon,
+  LocationIcon,
+  OrderDuplicateIcon,
+  WalletIcon,
+} from "@/assets/icons";
 import PriceFormatter from "../format-price/PriceFormatter";
 import { showError, showSuccess } from "../toast/Toast";
 import { CANCEL_ORDER, DOMAIN } from "@/constants";
@@ -11,6 +16,7 @@ import { DuplicateModal } from "../modal";
 import { OrderStepper } from "../order";
 import { OrdersData } from "@/types";
 import request from "@/services";
+import Link from "next/link";
 
 export const TabOrderLeft = ({ order }: { order: OrdersData }) => {
   const [open, setOpen] = useState(false);
@@ -133,8 +139,11 @@ export const TabOrderLeft = ({ order }: { order: OrdersData }) => {
                             className="w-[65px] h-[65px] object-cover"
                           />
                         </div>
-
-                        {item?.product?.title}
+                        <Link
+                          href={`/catalog/${item?.product?.subcatalog?.slug}/${item?.product?.category?.slug}/${item?.product?.slug}`}
+                        >
+                          {item?.product?.title}
+                        </Link>
                       </div>
                     </td>
                     <td className="px-[10px] py-[7px]">

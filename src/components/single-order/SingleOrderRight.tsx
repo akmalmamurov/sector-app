@@ -10,6 +10,8 @@ interface SingleOrderRightProps {
 }
 
 export const SingleOrderRight = ({ order }: SingleOrderRightProps) => {
+  console.log(order);
+
   return (
     <div className="col-span-9">
       <div className="px-4 pt-4 pb-6 border border-superSilver">
@@ -38,7 +40,10 @@ export const SingleOrderRight = ({ order }: SingleOrderRightProps) => {
           </TabsContent>
           {/* messages content */}
           <TabsContent value="messages" className="mt-[23px]">
-            <TabOrderRight orderNumber={order?.orderNumber} orderId={order?.id}/>
+            <TabOrderRight
+              orderNumber={order?.orderNumber}
+              orderId={order?.id}
+            />
           </TabsContent>
         </Tabs>
       </div>

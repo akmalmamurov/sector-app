@@ -88,10 +88,10 @@ export const SortOrders = ({ props }: { props: SortOrdersProps }) => {
             <SelectItem value="null" className="cursor-pointer">
               Любой
             </SelectItem>
-            <SelectItem value="Оплачен" className="cursor-pointer">
+            <SelectItem value="paid" className="cursor-pointer">
               Оплачен
             </SelectItem>
-            <SelectItem value="Не оплачен" className="cursor-pointer">
+            <SelectItem value="not paid" className="cursor-pointer">
               Не оплачен
             </SelectItem>
           </SelectGroup>
