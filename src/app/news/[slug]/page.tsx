@@ -40,12 +40,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 interface EditorData {
   blocks: Block[];
 }
-export default async function NewsDetailPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const { slug } = params;
+export default async function NewsDetailPage({ params }: Props) {
+  const { slug } = await params;
   const newData = await getNewsById(slug);
 
   let editorContent: React.ReactNode = null;
