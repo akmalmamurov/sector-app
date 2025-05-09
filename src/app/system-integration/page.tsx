@@ -16,10 +16,10 @@ export const metadata: Metadata = {
 const SystemIntegration = () => {
   return (
     <Container className="pb-[58px]">
-      <HomeCrumb paths={[{ name: "Системная интеграция от НАГ" }]} />
+      <HomeCrumb paths={[{ name: "Системная интеграция от SECTOR TECHNOLOGY" }]} />
       <Section className="px-0 py-6 shadow-sectionShadow">
         <InfoHeader className="mb-5">
-          <InfoTitle>Системная интеграция от НАГ</InfoTitle>
+          <InfoTitle>Системная интеграция от SECTOR TECHNOLOGY</InfoTitle>
         </InfoHeader>
         <section className="p-6">
           <Image

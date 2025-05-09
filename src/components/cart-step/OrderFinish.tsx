@@ -241,12 +241,12 @@ export const OrderFinish = ({
         </h3>
         <p className="text-textColor text-sm font-normal mb-6">
           По телефону{" "}
-          <Link className="text-cerulean font-semibold" href={"#"}>
-            +998 55 508 0660
+          <Link className="text-cerulean font-semibold" href={"tel:+998953731313"}>
+          +99895 373 13 13
           </Link>{" "}
           или{" "}
           <Link className="text-cerulean font-semibold" href={"#"}>
-            @NagSalesBot
+            @SectorSalesBot
           </Link>
         </p>
         <p className="text-textColor text-sm font-normal">

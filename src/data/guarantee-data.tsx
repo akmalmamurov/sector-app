@@ -21,11 +21,11 @@ export const guaranteeData: GuaranteeData[] = [
     content: [
       {
         id: "1.1",
-        text: "Поставщик - компания ООО NAGTECH (г. Ташкент, TIN 309565073, https://shop.nag.uz/)",
+        text: "Поставщик - компания ООО SECTOR TECHNOLOGY (г. Ташкент, TIN 123456789, https://sectortechnology.uz/)",
       },
       {
         id: "1.2",
-        text: "Покупатель - юридическое либо физическое лицо, являющееся приобретателям товара или услуги в компании ООО NAGTECH.",
+        text: "Покупатель - юридическое либо физическое лицо, являющееся приобретателям товара или услуги в компании ООО SECTOR TECHNOLOGY.",
       },
       {
         id: "1.3",
@@ -67,7 +67,7 @@ export const guaranteeData: GuaranteeData[] = [
           <>
             Техническая поддержка осуществляется дистанционно посредством{" "}
             <Link
-              href="https://www.nag.support/"
+              href="mailto:info@sectortechnology.uz"
               target="_blank"
               className="text-cerulean hover:underline hoverEffect"
             >
@@ -98,7 +98,7 @@ export const guaranteeData: GuaranteeData[] = [
           <>
             Описать проблему на странице технической поддержки{" "}
             <Link
-              href="https://www.nag.support/"
+              href="mailto:info@sectortechnology.uz"
               target="_blank"
               className="text-cerulean hover:underline hoverEffect"
             >
@@ -106,10 +106,10 @@ export const guaranteeData: GuaranteeData[] = [
             </Link>
             или отправить письмо с описанием проблемы на электронную почту{" "}
             <Link
-              href="mailto:service@nag.uz"
+              href="mailto:info@sectortechnology.uz"
               className="text-cerulean hover:underline hoverEffect"
             >
-              support@nag.uz
+              info@sectortechnology.uz
             </Link>{" "}
             (способыравнозначны).
           </>
@@ -147,7 +147,7 @@ export const guaranteeData: GuaranteeData[] = [
           <>
             Товар с заполненной{" "}
             <Link
-              href="/"
+              href="#"
               className="text-cerulean hover:underline hoverEffect"
             >
               сервисной картой (скачать бланк)
@@ -155,7 +155,7 @@ export const guaranteeData: GuaranteeData[] = [
             с указанием неисправности и номера обращения в службу технической
             поддержки{" "}
             <Link
-              href="https://www.nag.support/"
+              href="mailto:info@sectortechnology.uz"
               target="_blank"
               className="text-cerulean hover:underline hoverEffect"
             >

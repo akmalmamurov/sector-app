@@ -72,11 +72,11 @@ const DeliveryPage = () => {
                 </TableCell>
                 <TableCell className="px-3 py-6 border-r text-xs text-cerulean">
                   <p>
-                    Мирзо-Улугбекский р-н, ул. Сайрам 7-тор (бывш. Э.Мараимова),
-                    д.52
+                    Ташкент, Чиланзарский район, массив Чиланзар, 17-й квартал,
+                    6
                   </p>
-                  <Link href="tel:+998555080660" className="hover:underline">
-                    +998 55 508 0660 (доб. 924)
+                  <Link href="tel:+998953731313" className="hover:underline">
+                    +998 95 373 13 13
                   </Link>
                 </TableCell>
                 <TableCell className="px-4 py-6 text-xs font-normal text-textColor">
@@ -119,12 +119,14 @@ const DeliveryPage = () => {
             </p>
           </div>
           <div className="pl-5 mt-5">
-                <div className="py-6 px-[22px] rounded-[10px] bg-christmas">
-                        <p className="info-text">
-                        Если у Вас остались вопросы или нужна помощь  с выбором способа доставки, менеджер, который работает с Вашим заказом,  предложит лучшее решение по
-                        скорости, стоимости и надежности перевозки Вашего груза.
-                        </p>
-                </div>
+            <div className="py-6 px-[22px] rounded-[10px] bg-christmas">
+              <p className="info-text">
+                Если у Вас остались вопросы или нужна помощь  с выбором способа
+                доставки, менеджер, который работает с Вашим заказом,  предложит
+                лучшее решение по скорости, стоимости и надежности перевозки
+                Вашего груза.
+              </p>
+            </div>
           </div>
         </div>
       </Section>

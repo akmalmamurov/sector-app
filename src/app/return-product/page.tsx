@@ -73,16 +73,16 @@ const ReturnProductPage = () => {
               <ul className="flex flex-col pl-10 mb-8">
                 <li className="list-disc info-text">
                   Описать причину возврата на странице технической поддержки{" "}
-                  <Link href={"/"} target="_blank" className="text-cerulean">
+                  <Link href={"mailto:info@sectortechnology.uz"} target="_blank" className="text-cerulean">
                     Help Desk{" "}
                   </Link>{" "}
                   или отправить письмо с описанием причины возврата на
                   электронную почту{" "}
                   <Link
-                    href={"mailto:support@nag.uz"}
+                    href={"mailto:info@sectortechnology.uz"}
                     className="text-cerulean"
                   >
-                    support@nag.uz{" "}
+                    info@sectortechnology.uz{" "}
                   </Link>
                 </li>
                 <li className="info-text list-disc">
@@ -106,7 +106,7 @@ const ReturnProductPage = () => {
             <div className="pl-6 flex flex-col gap-4 mb-1">
               <p className="info-text">
                 3.1. После поступления и проверки качества товара в сервисном
-                центре ООО "NAGTECH" (далее Поставщик), необходимо подписать
+                центре ООО "SECTOR TECHNOLOGY" (далее Поставщик), необходимо подписать
                 подготовленные специалистами комплект документов, состоящий из
                 Претензии, Акта о несоответствии, Акта приемки-передачи
                 Оборудования.

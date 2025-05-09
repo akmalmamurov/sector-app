@@ -24,11 +24,11 @@ const Contact = () => {
   return (
     <Container>
       <HomeCrumb
-        paths={[{ name: "Офисы продаж и склады магазина НАГ в г. Ташкент   " }]}
+        paths={[{ name: "Офисы продаж и склады магазина Sector Technology в г. Ташкент" }]}
       />
       <Section className="mb-14 shadow-md">
         <InfoHeader className="mb-5">
-          <InfoTitle>Офисы продаж и склады магазина НАГ в г. Ташкент</InfoTitle>
+          <InfoTitle>Офисы продаж и склады магазина Sector Technology в г. Ташкент</InfoTitle>
         </InfoHeader>
         <Link href="#" className="text-cerulean text-[24px] pl-6">
           Ташкент
@@ -43,14 +43,16 @@ const Contact = () => {
                 </Link>
               </div>
               <p className="text-textColor text-[14px] pt-4">
-                Ташкент, Мирзо-Улугбекский р-н, ул. Сайрам 7-тор (бывш.
-                Э.Мараимова), д.52
+                Ташкент, Чиланзарский район, массив Чиланзар, 17-й квартал, 6
               </p>
               <p className="pt-5 pb-4 text-[#8C8C8C]">
-                Телефон: +998 55 508 0660
+                Телефон: +99895 373 13 13
               </p>
-              <Link href="#" className="text-cerulean">
-                sales@sector.uz
+              <Link
+                href="mailto:sales@sectortechnology.uz"
+                className="text-cerulean"
+              >
+                sales@sectortechnology.uz
               </Link>
               <div className="flex pt-4 gap-6">
                 <div>
@@ -63,35 +65,6 @@ const Contact = () => {
                 </div>
               </div>
             </div>
-            {/* Warehouse */}
-            {/* <div className="p-2 m-6">
-              <div className="flex">
-                <Image src={officeContact} alt="pic" />
-                <Link href="#" className="text-cerulean text-[21px] pl-4">
-                  Склад отгрузки
-                </Link>
-              </div>
-              <p className="text-textColor text-[14px] pt-4">
-                Ташкент, Мирзо-Улугбекский р-н, ул. Сайрам 7-тор (бывш.
-                Э.Мараимова), д.52
-              </p>
-              <p className="pt-5 pb-4 text-[#8C8C8C]">
-                Телефон: +998 55 508 0660
-              </p>
-              <Link href="#" className="text-cerulean">
-                sales@sector.uz
-              </Link>
-              <div className="flex pt-4 gap-6">
-                <div>
-                  <p className="text-[#8C8C8C]">Будни</p>
-                  <p className="text-textColor pt-2">9:00 - 18:00</p>
-                </div>
-                <div>
-                  <p className="text-[#8C8C8C]">Открыто ещё</p>
-                  <p className="pt-2 text-[#6AB04C]">5 часов</p>
-                </div>
-              </div>
-            </div> */}
           </div>
           <div className="map w-full h-[400px] pt-6">
             <iframe
@@ -113,22 +86,19 @@ const Contact = () => {
             <div className="text-textColor">
               <p className="text-[21px]">Юридический адрес</p>
               <p>
-                г. Ташкент, М.Улугбекский район, ул. Сайрам 7-тор (бывшая
-                Э.Мараимова), д. 52
+              Ташкент, Чиланзарский район, массив Чиланзар, 17-й квартал, 6
               </p>
             </div>
             <div className="text-textColor">
               <p className="text-[21px] ">Для возврата курьерскими службами</p>
               <p>
-                г. Ташкент, М.Улугбекский район, ул. Сайрам 7-тор (бывшая
-                Э.Мараимова), д. 52
+              Ташкент, Чиланзарский район, массив Чиланзар, 17-й квартал, 6
               </p>
             </div>
             <div className="text-textColor">
               <p className="text-[21px] ">Почтовый адрес</p>
               <p>
-                г. Ташкент, М.Улугбекский район, ул. Сайрам 7-тор (бывшая
-                Э.Мараимова), д. 52
+              Ташкент, Чиланзарский район, массив Чиланзар, 17-й квартал, 6
               </p>
             </div>
           </div>
@@ -138,8 +108,8 @@ const Contact = () => {
               <Image src={operatorContact} alt="pic" />
               <p className="text-textColor text-left pl-6 pt-6">
                 По вопросам приобретения товара обращайтесь в отдел продаж:{" "}
-                <Link href="#" className="text-cerulean">
-                  sales@sector.uz
+                <Link href="mailto:sales@sectortechnology.uz" className="text-cerulean">
+                  sales@sectortechnology.uz
                 </Link>
               </p>
             </div>
@@ -150,16 +120,16 @@ const Contact = () => {
               <p className="text-textColor text-left pl-4 pt-6">
                 По вопросам технической поддержки:
               </p>
-              <Link href="#" className="text-cerulean pl-4">
-                support@sector.uz
+              <Link href="mailto:info@sectortechnology.uz" className="text-cerulean pl-4">
+                info@sectortechnology.uz
               </Link>
             </div>
             <div className="border-[1px] w-[436px] h-[213px] pt-5 flex flex-col items-center justify-center text-center pb-6">
               <Image src={noteContact} alt="pic" />
               <p className="text-textColor text-left pl-6 pt-6">
                 Для отзывов и предложений:
-                <Link href="#" className="text-cerulean pl-1">
-                  fb@sector.uz
+                <Link href="mailto:info@sectortechnology.uz" className="text-cerulean pl-1">
+                  info@sectortechnology.uz
                 </Link>
               </p>
             </div>

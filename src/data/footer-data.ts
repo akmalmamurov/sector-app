@@ -1,6 +1,6 @@
 export const footerData = [
   {
-    name: "КОМПАНИЯ Sectors",
+    name: "КОМПАНИЯ Sector Technology",
     links: [
       {
         name: "О компании",

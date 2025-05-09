@@ -117,9 +117,9 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
     }
   };
 
-  const toggleShowOptions = (filterName: string) => {
-    console.log(isShowOptionsMap);
+  console.log(filterCheckedData);
 
+  const toggleShowOptions = (filterName: string) => {
     setIsShowOptionsMap((prev) => ({
       ...prev,
       [filterName]: !prev[filterName],
@@ -167,7 +167,7 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
             </div>
           </div>
         )}
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 pb-4">
           {data?.slice(0, isShow ? data.length : 5).map((filter, index) => {
             if (
               (filter.type === "checkbox" ||
@@ -235,7 +235,7 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
                         )}
                       </ul>
                     )}
-                    {filter.name === "tsena" && (
+                    {filter.name === "цена" && (
                       <>
                         <CustomRangeSlider />
                       </>
