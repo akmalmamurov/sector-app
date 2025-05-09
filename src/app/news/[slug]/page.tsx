@@ -8,6 +8,7 @@ import NewsCalendar from "@/assets/icons/NewsCalendar";
 import Image from "next/image";
 import { DOMAIN } from "@/constants";
 import React from "react";
+import { Metadata } from "next";
 
 interface Block {
   id: string;
@@ -23,14 +24,19 @@ interface Block {
   };
 }
 
+type Props = {
+  params: { slug: string };
+};
+
+export const metadata: Metadata = {
+  title: "Акции, распродажи и скидки | Sector App",
+  description: "Акции, распродажи и скидки",
+};
+
 interface EditorData {
   blocks: Block[];
 }
-export default async function NewsDetailPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function NewsDetailPage({ params }: Props) {
   const { slug } = params;
   const newData = await getNewsById(slug);
 
