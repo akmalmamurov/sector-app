@@ -10,59 +10,70 @@ import { Container } from "../container";
 import Link from "next/link";
 import { BannerData } from "@/types";
 import { BannerIcon } from "@/assets/icons";
-import { Swiper as SwiperType } from 'swiper';
+import { Swiper as SwiperType } from "swiper";
 
 export const Banner = ({ banner }: { banner: BannerData[] }) => {
   const swiperRef = useRef<SwiperType | null>(null);
-
+  
   return (
     <div className="slider-container pt-[51px] hidden lgl:block relative">
       <Container>
-        <div className="relative">
-          <Swiper
-            modules={[Autoplay, Navigation]}
-            slidesPerView={1}
-            spaceBetween={10}
-            loop={true}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-            }}
-            onSwiper={(swiper) => {
-              swiperRef.current = swiper;
-            }}
-            className="w-full h-[413px] overflow-hidden"
-          >
-            {banner?.map((item) => (
-              <SwiperSlide key={item?.id}>
-                <Link href={item?.redirectUrl}>
-                  <div className="relative w-full h-[413px]">
-                    <Image
-                      src={`${process.env.NEXT_PUBLIC_API_URL}/${item?.imagePath}`}
-                      alt={`Banner ${item?.id}`}
-                      fill
-                      style={{ objectFit: "cover" }}
-                      priority
-                    />
-                  </div>
-                </Link>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          <div
-            className="custom-swiper-button-prev cursor-pointer absolute left-0 top-0 h-full hover:bg-bannerBg px-[5px] 
-            flex items-center z-[1] duration-150 ease-in-out"
-            onClick={() => swiperRef.current?.slidePrev()}
-          >
-            <BannerIcon className="rotate-180" />
+        <div className="flex gap-5">
+          <div className="relative w-[77%]">
+            <Swiper
+              modules={[Autoplay, Navigation]}
+              slidesPerView={1}
+              spaceBetween={10}
+              loop={true}
+              autoplay={{
+                delay: 3000,
+                disableOnInteraction: false,
+              }}
+              onSwiper={(swiper) => {
+                swiperRef.current = swiper;
+              }}
+              className="h-[413px] overflow-hidden"
+            >
+              {banner?.map((item) => (
+                <SwiperSlide key={item?.id}>
+                  <Link href={item?.redirectUrl}>
+                    <div className="relative w-full h-[413px]">
+                      <Image
+                        src={`${process.env.NEXT_PUBLIC_API_URL}/${item?.imagePath}`}
+                        alt={`Banner ${item?.id}`}
+                        fill
+                        style={{ objectFit: "cover" }}
+                        priority
+                      />
+                    </div>
+                  </Link>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            <div
+              className="custom-swiper-button-prev cursor-pointer absolute left-0 top-0 h-full hover:bg-bannerBg px-[5px] 
+              flex items-center z-[1] duration-150 ease-in-out"
+              onClick={() => swiperRef.current?.slidePrev()}
+            >
+              <BannerIcon className="rotate-180" />
+            </div>
+            <div
+              className="custom-swiper-button-next cursor-pointer absolute right-0 top-0 h-full hover:bg-bannerBg duration-150 
+              ease-in-out px-[5px] flex items-center z-[1]"
+              onClick={() => swiperRef.current?.slideNext()}
+            >
+              <BannerIcon />
+            </div>
           </div>
-          <div
-            className="custom-swiper-button-next cursor-pointer absolute right-0 top-0 h-full hover:bg-bannerBg duration-150 
-            ease-in-out px-[5px] flex items-center z-[1]"
-            onClick={() => swiperRef.current?.slideNext()}
-          >
-            <BannerIcon />
-          </div>
+          <Link href={"/action"} className="w-[23%] h-[413px] rounded-none">
+            <Image
+              className="w-full h-full object-cover"
+              width={100}
+              height={413}
+              src="/banner.png"
+              alt="banner"
+            />
+          </Link>
         </div>
       </Container>
     </div>

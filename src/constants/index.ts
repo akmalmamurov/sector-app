@@ -46,3 +46,4 @@ export const CREATE_ISSUE = "/user/request/create";
 export const GET_ISSUES = "/user/request/all";
 export const UPDATE_ISSUES = "/user/request";
 export const GET_NEWS = "/user/news/all";
+export const GET_NEWS_BY_SLUG = (slug: string) => `/user/news/by-slug/${slug}`;

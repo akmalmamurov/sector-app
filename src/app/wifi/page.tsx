@@ -1,9 +1,9 @@
 import {
-  fifthPicWifi,
-  firstPicWifi,
-  fourthPicWifi,
-  secondPicWifi,
-  thirdPicWifi,
+  oneWifi,
+  twoWifi,
+  threeWifi,
+  fourWifi,
+  fiveWifi,
 } from "@/assets/images";
 import { HomeCrumb } from "@/components/bread-crumb";
 import { Container } from "@/components/container";
@@ -35,7 +35,7 @@ const Wifi = () => {
             рынка.
           </p>
           <div className="flex justify-center items-center pt-[16px]">
-            <Image src={firstPicWifi} alt="picture" />
+            <Image className="md:max-w-[500px] w-auto" src={oneWifi} alt="picture" />
           </div>
           <p className="pt-[22px] text-textColor font-semibold text-[18px] md:text-[26px] text-center text-w-md">
             Услуги по построению сети Wi-Fi
@@ -132,7 +132,7 @@ const Wifi = () => {
             </p>
 
             <div className="flex justify-center">
-              <Image src={secondPicWifi} alt="pic" />
+              <Image className="md:max-w-[500px] w-auto"  src={twoWifi} alt="pic" />
             </div>
             <div className="pt-4 pl-2 sm:pl-6 text-[#333]">
               <p className="pt-4">
@@ -155,7 +155,7 @@ const Wifi = () => {
             </p>
 
             <div className="flex justify-center">
-              <Image src={thirdPicWifi} alt="pic" />
+              <Image className="md:max-w-[500px] w-auto" src={threeWifi} alt="pic" />
             </div>
             <div className="pt-4 pl-6 text-[#333]">
               <p className="pt-4">
@@ -177,7 +177,7 @@ const Wifi = () => {
             </p>
 
             <div className="flex justify-center">
-              <Image src={fourthPicWifi} alt="pic" />
+              <Image className="md:max-w-[500px] w-auto" src={fourWifi} alt="pic" />
             </div>
             <div className="pt-4 pl-6 text-[#333]">
               <p className="pt-4">
@@ -199,7 +199,7 @@ const Wifi = () => {
             </p>
 
             <div className="flex justify-center">
-              <Image src={fifthPicWifi} alt="pic" />
+              <Image className="md:max-w-[500px] w-auto" src={fiveWifi} alt="pic" />
             </div>
             <div className="pt-4 pl-6 text-[#333]">
               <div className="pl-2 sm:pl-7">

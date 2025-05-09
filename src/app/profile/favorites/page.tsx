@@ -144,7 +144,7 @@ const FavoritesPage = () => {
                         />
                       </div>
                       <Link
-                        href={`/catalog/${product.subcatalog.slug}/${product.category.slug}/${product.slug}`}
+                        href={`/catalog/${product.subcatalog?.slug}/${product.category?.slug}/${product?.slug}`}
                         className="text-cerulean text-xs font-normal"
                       >
                         {product.title}
@@ -221,7 +221,7 @@ const FavoritesPage = () => {
           />
           <div className="flex flex-col justify-between flex-1">
             <Link
-              href={`/catalog/${product.subcatalog.slug}/${product.category.slug}/${product.slug}`}
+              href={`/catalog/${product.subcatalog?.slug}/${product.category?.slug}/${product?.slug}`}
               className="text-cerulean text-sm font-medium hover:underline"
             >
               {product.title}

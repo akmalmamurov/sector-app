@@ -1,4 +1,5 @@
 import { ChevronRightIcon, TimeIcon } from "@/assets/icons";
+import { NewsData } from "@/types/news";
 import Link from "next/link";
 const items = [
   { text: "Способы оплаты", link: "/payment" },
@@ -19,7 +20,7 @@ const projects = [
     link: "/configurators",
   },
 ];
-export const InfoList = () => {
+export const InfoList = ({ news }: { news: NewsData[] }) => {
   const className =
     "font-normal text-[26px] leading-[31px] text-stoneCold flex items-center hover:underline ease-in duration-100 w-fit";
   const borderClass =
@@ -27,9 +28,9 @@ export const InfoList = () => {
   return (
     <div className="flex flex-col gap-[36px] lgl:gap-[57px]">
       {/* novosti */}
-      <div className="flex flex-col shadow-infoShadow ">
+      <div className="flex flex-col shadow-infoShadow">
         {/* news */}
-        <div className="bg-white p-[23px] rounded-t-[10px] ">
+        <div className="bg-white p-[23px] rounded-t-[10px]">
           <Link href="/news" className={className}>
             <p>Новости</p>
             <span className="w-6 h-6 flex items-center justify-center mt-1">
@@ -37,37 +38,32 @@ export const InfoList = () => {
             </span>
           </Link>
         </div>
-        <div className="bg-transparent shadow-none px-[23px] py-5">
-          <Link
-            href={"/news"}
-            className="font-normal text-sm leading-[21px] text-textColor mb-3 hover:underline duration-100 ease-in"
-          >
-            Новая серия сварочных аппаратов SNR- FS-60x уже на складе
-          </Link>
-          <div className="flex items-center text-darkSoul gap-2">
-            <span className="pb-0.5">
-              <TimeIcon />
-            </span>
-            <p className="text-xs font-normal leading-[18px] ">
-              18 апреля 2024 г.
-            </p>
-          </div>
-        </div>
-        <div className="bg-white p-[23px] ">
-          <Link
-            href={"/news"}
-            className="font-normal text-sm leading-[21px] text-textColor mb-3 hover:underline duration-100 ease-in"
-          >
-            Читайте статью: Что такое PoE и для чего он нужен?
-          </Link>
-          <div className="flex items-center text-darkSoul gap-2">
-            <span className="pb-0.5">
-              <TimeIcon />
-            </span>
-            <p className="text-xs font-normal leading-[18px] ">
-              29 марта 2024 г.
-            </p>
-          </div>
+        <div className="">
+          {news.map((item, index) => (
+            <div
+              className={`${index % 2 === 0 ? "bg-transparent" : "bg-white"} shadow-none px-[23px] py-5`}
+              key={item.id}
+            >
+              <Link
+                href={`/news/${item.slug}`}
+                className="font-normal text-sm leading-[21px] text-textColor mb-3 hover:underline duration-100 ease-in"
+              >
+                {item.title}
+              </Link>
+              <div className="flex items-center text-darkSoul gap-2">
+                <span className="pb-0.5">
+                  <TimeIcon />
+                </span>
+                <p className="text-xs font-normal leading-[18px] ">
+                  {new Date(item.createdAt).toLocaleDateString("ru-RU", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                  })}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
         <div className={borderClass}></div>
       </div>

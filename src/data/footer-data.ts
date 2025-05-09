@@ -53,12 +53,8 @@ export const footerData = [
     name: "ПРОЕКТЫ",
     links: [
       {
-        name: "snr.systems",
-        link: "/",
-      },
-      {
-        name: "NAG.conference",
-        link: "/",
+        name: "НИЦ НТ (СКС)",
+        link: "/ni-nt-sks",
       },
       {
         name: "Конфигураторы",
