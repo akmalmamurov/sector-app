@@ -31,7 +31,7 @@ export default async function NewsDetailPage({
 }: {
   params: { slug: string };
 }) {
-  const { slug } = await params;
+  const { slug } = params;
   const newData = await getNewsById(slug);
 
   let editorContent: React.ReactNode = null;
