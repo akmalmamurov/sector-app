@@ -8,6 +8,7 @@ import NewsCalendar from "@/assets/icons/NewsCalendar";
 import Image from "next/image";
 import { DOMAIN } from "@/constants";
 import React from "react";
+import { Metadata } from "next";
 
 interface Block {
   id: string;
@@ -23,6 +24,19 @@ interface Block {
   };
 }
 
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const newData = await getNewsById(slug);
+  return {
+    title: `${newData?.title}`,
+    description: `${newData?.description}`,
+  };
+}
+
 interface EditorData {
   blocks: Block[];
 }
@@ -31,7 +45,7 @@ export default async function NewsDetailPage({
 }: {
   params: { slug: string };
 }) {
-  const { slug } = await params;
+  const { slug } = params;
   const newData = await getNewsById(slug);
 
   let editorContent: React.ReactNode = null;
