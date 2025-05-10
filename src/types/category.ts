@@ -26,8 +26,18 @@ export interface PopularCategory {
     id: string;
   };
 }
+export interface SearchCatalog {
+  catalogName: string;
+  catalogSlug: string;
+  categories: SearchCategories[];
+}
+export interface SearchCategories {
+  categoryName: string;
+  categorySlug: string;
+  productCodes: string[];
+}
 export interface CatalogWithCategories {
   slug: string;
   title: string;
-  categories: CategoryData[]; // yoki nima bo‘lsa
+  categories: CategoryData[]; 
 }

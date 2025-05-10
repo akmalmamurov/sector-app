@@ -53,7 +53,7 @@ const SearchProduct = () => {
       ),
   });
 
-  console.log(searchData);
+  console.log("Search data:", searchData);
 
   const props = {
     selected,
