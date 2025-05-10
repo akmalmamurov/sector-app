@@ -7,11 +7,8 @@ import Link from "next/link";
 import { ArrowRightIcon } from "@/assets/icons";
 import { BrandData } from "@/types";
 import { useEffect, useState } from "react";
-import { Skeleton } from "../skeleton/skeleton";
+import Skeleton from "../skeleton/skeleton";
 
-// interface Props {
-//   brands: BrandData[];
-// }
 
 export const HomeBrands = ({ brands }: {
   brands: BrandData[];
@@ -63,7 +60,7 @@ export const HomeBrands = ({ brands }: {
           </div>
         ) : (
           <div className="flex lg:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 overflow-x-auto whitespace-nowrap lg:whitespace-normal scrollbar-hide">
-            {brands?.slice(0, 5)?.map((el, index) => (
+            {(brands || []).slice(0, 5)?.map((el: BrandData, index: number) => (
               <Link
                 href={`/brands/${el.slug}`}
                 key={index}

@@ -9,10 +9,11 @@ import ClientSwiper from "./ClientSwiper";
 import { CategoryCard } from "../card/CategoryCard";
 import CatalogLink from "./CatalogLink";
 import { PopularCategory } from "@/types";
-import { Skeleton } from "../skeleton/skeleton";
+import Skeleton from "../skeleton/skeleton";
+import { useLoading } from "@/context/LoadingContext";
 
-export const HomeCategory = () => {
-  const [loading, setLoading] = useState(true);
+export const HomeCategory = ({ loading }: { loading: boolean }) => {
+  const { setLoading } = useLoading();
   const [popularData, setPopularData] = useState<{ categories: PopularCategory[], totalProductCount: number } | null>(null);
   const [catalogData, setCatalogData] = useState<[]>([]);
 
@@ -29,7 +30,7 @@ export const HomeCategory = () => {
     };
 
     fetchData();
-  }, []);
+  }, [setLoading]);
 
   return (
     <section className="xl:py-12 pt-[23px]">

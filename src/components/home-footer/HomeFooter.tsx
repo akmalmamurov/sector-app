@@ -1,15 +1,34 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container } from "../container";
 import { Section } from "../section";
+import Skeleton from "../skeleton/skeleton";
 
-export const HomeFooter = () => {
+export const HomeFooter = ({ loading }: { loading: boolean }) => {
   const [open, setOpen] = useState(false);
+  useEffect(() => {
+    setTimeout(() => {
+      setOpen(true);
+    }, 100);
+  }, []);
   return (
     <section className="pt-[86px] pb-[95px]">
       <Container>
-        <Section className="rounded-none shadow-sectionShadow border-none p-0">
-          <div className="px-6 pt-6">
+        {loading ? (
+          <Skeleton className="w-full h-full flex flex-col gap-4 my-4 py-8  px-6" >
+            <Skeleton className="w-[90%]  h-4 rounded-full skeleton-shimmer" />
+            <Skeleton className="w-[80%]  h-4 rounded-full skeleton-shimmer" />
+            <Skeleton className="w-[60%]  h-4 rounded-full skeleton-shimmer" />
+            <Skeleton className="w-[40%]  flex justify-center items-center text-center my-5 h-4 rounded-full skeleton-shimmer" />
+            <Skeleton className="w-[90%]  h-4 rounded-full skeleton-shimmer" />
+            <Skeleton className="w-[80%]  h-4 rounded-full skeleton-shimmer" />
+            <Skeleton className="w-[90%]  h-4 rounded-full skeleton-shimmer" />
+            <Skeleton className="w-[60%]  h-4 rounded-full skeleton-shimmer" />
+            <Skeleton className="w-[20%]  h-4 rounded-full skeleton-shimmer" />
+          </Skeleton>
+        ) : (
+          <Section className="rounded-none shadow-sectionShadow border-none p-0">
+            <div className="px-6 pt-6">
             <h4 className="font-normal text-lg text-textColor text-justify ">
               Компания SECTOR TECHNOLOGY – надёжный и честный партнёр,
               предлагающий компаниям телекоммуникационной отрасли,
@@ -96,6 +115,7 @@ export const HomeFooter = () => {
             </div>
           </div>
         </Section>
+        )}
       </Container>
     </section>
   );

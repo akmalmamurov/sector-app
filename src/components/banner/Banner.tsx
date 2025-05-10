@@ -11,7 +11,7 @@ import Link from "next/link";
 import { BannerData } from "@/types";
 import { BannerIcon } from "@/assets/icons";
 import { Swiper as SwiperType } from "swiper";
-import { Skeleton } from "../skeleton/skeleton";
+import Skeleton from "../skeleton/skeleton";
 
 export const Banner = ({
   banner,
@@ -31,11 +31,20 @@ export const Banner = ({
     return (
       <div className="slider-container pt-[51px] hidden lgl:block relative">
         <Container>
-          <div className="relative w-full h-[413px]">
-            <Skeleton className="w-full h-full rounded-lg bg-[#c7c7c7]" />
+          <div className=" w-full h-[413px] flex gap-4">
+           <div className="relative w-[80%] h-full rounded-lg bg-[#c7c7c7]">
+           <Skeleton className="w-[80%] h-full rounded-lg bg-[#c7c7c7]" >
             <Skeleton className="absolute top-1/2 left-5 w-[40%] h-8 rounded-full skeleton-shimmer" />
-            <Skeleton className="absolute top-1/2 mt-[7%] 2xl:mt-[4%] left-5 w-[50%] h-8 rounded-full skeleton-shimmer" />
-            <Skeleton className="absolute top-[20%] right-7 w-[40%] h-[70%] rounded-3xl skeleton-shimmer" />
+            <Skeleton className="absolute top-1/2 mt-[7%] 2xl:mt-[4%] left-3 w-[30%] h-8 rounded-full skeleton-shimmer" />
+            <Skeleton className=" absolute top-[20%] right-7 w-[40%] h-[70%] rounded-3xl skeleton-shimmer" />
+            </Skeleton>
+           </div>
+           <div className=" w-[20%] h-full rounded-lg ">
+            <Skeleton className="relative w-full h-full rounded-lg bg-[#c7c7c7] flex flex-col justify-center items-center gap-2" >
+            <Skeleton className="  mt-[20%] w-[60%] h-[50%] rounded-3xl skeleton-shimmer" />
+            <Skeleton className="  mt-[12%] 2xl:mt-[10%] left-3 w-[40%] h-5 rounded-full skeleton-shimmer" />
+            </Skeleton>
+           </div>
           </div>
         </Container>
       </div>
