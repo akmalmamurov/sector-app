@@ -1,12 +1,12 @@
 
 
-  // export interface CatalogData {
-  //   id: string;
-  //   slug: string;
-  //   title: string;
-  //   subcatalogs: SubcatalogData[];
-  //   categories: CategoryData[];
-  // }
+  export interface CatalogData {
+    id: string;
+    slug: string;
+    title: string;
+    subcatalogs: SubcatalogData[];
+    categories: CategoryData[];
+  }
 export interface SubcatalogData {
   id: string;
   slug: string;
