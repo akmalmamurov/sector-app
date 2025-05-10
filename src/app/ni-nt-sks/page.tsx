@@ -14,9 +14,17 @@ export default function NtScsPage() {
       <HomeCrumb paths={[{ name: "Наши проекти" }]} />
       <Section className="py-10 px-6 md:px-12 bg-white rounded-2xl shadow-md">
         <div className="pt-10 space-y-8">
-          <h1 className="text-2xl md:text-4xl font-bold text-titleColor">
-            НИЦ НТ (СКС)
-          </h1>
+        <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 md:justify-between">
+        <h1 className="text-2xl md:text-4xl font-bold text-titleColor">
+          НИЦ НТ (СКС)
+        </h1>
+        <div>
+          <span className="inline-block bg-blue-100 text-blue-800 text-xs md:text-sm font-semibold px-3 py-1 rounded-full w-auto">
+            Государственный проект
+          </span>
+        </div>
+      </div>
+
 
           <div className="space-y-4">
             <p className="text-base md:text-lg text-textColor font-light">
