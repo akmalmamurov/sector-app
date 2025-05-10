@@ -36,6 +36,12 @@ export interface OrderProductData {
   productCode: string;
   slug: string;
   title: string;
+  category: {
+    slug: string;
+  };
+  subcatalog: {
+    slug: string;
+  };
 }
 export interface OrderProducts {
   count: number;

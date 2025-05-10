@@ -57,7 +57,7 @@ export const ProfileOrderTable = ({ orders }: Props) => {
   return (
     <Table className="w-full table-auto bg-white border-separate border-spacing-y-2">
       <TableHeader>
-        <TableRow className="bg-whiteOut text-center border border-gray-200">
+        <TableRow className="bg-whiteOut text-center ">
           <TableHead className="px-[10px] py-[7px] text-center border border-superSilver text-sm leading-[21px] text-textColor relative">
             <span>Заказы</span>
             <ChevronDown className="w-[16px] h-[16px] absolute right-3 top-1/2 -translate-y-1/2" />

@@ -42,7 +42,7 @@ const FaqPage = () => {
                 <p className="info-text mb-4 text-[14px] md:text-[16px]">{item.desc}</p>
                 <p className="info-text mb-4 text-[14px] md:text-[16px]">{item.text}</p>
                 <p className="info-text mb-5 text-[14px] md:text-[16px]">{item.text2}</p>
-                <Link href={"#faq-top"} className="info-text text-cerulean">Вернуться к списку вопросов</Link>
+                <Link href={"#Top"} className="info-text text-cerulean">Вернуться к списку вопросов</Link>
               </div>
             ))}
           </div>

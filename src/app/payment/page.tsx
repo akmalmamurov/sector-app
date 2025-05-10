@@ -32,18 +32,17 @@ const PaymentPage = () => {
               Банковские реквизиты:
             </h3>
             <p className="info-text mb-[18px]">
-              100105, Узбекистан, г. Ташкент, Мирабадский район, Инокоабад МФЙ,
-              Инокобод, пр. 5 кучаси, 22-уй
+            Ташкент, Чиланзарский район, массив Чиланзар, 17-й квартал, 6
             </p>
             <div className="flex flex-col mb-7">
               <p className="info-text">
-                Общество с ограниченной ответственностью «NAGTECH»
+                Общество с ограниченной ответственностью «SECTOR TECHNOLOGY»
               </p>
-              <p className="info-text">ИНН – 309565073</p>
-              <p className="info-text">НДС – 326010191923</p>
-              <p className="info-text">РН – 1139645</p>
-              <p className="info-text">ОКЭД – 46520</p>
-              <p className="info-text">ОКПО – 31862669</p>
+              <p className="info-text">ИНН – 123456789</p>
+              <p className="info-text">НДС – 111111111111</p>
+              <p className="info-text">РН – 1234567</p>
+              <p className="info-text">ОКЭД – 12345</p>
+              <p className="info-text">ОКПО – 12345678</p>
             </div>
             {/* data */}
             {paymentData.map((item, index) => (
@@ -118,7 +117,7 @@ const PaymentPage = () => {
             </h5>
             <div className="flex flex-col">
               <p className="info-text">
-                Компания НАГ поставляет оборудование как новое, так и в статусе
+                Компания SECTOR TECHNOLOGY поставляет оборудование как новое, так и в статусе
                 Seller Refurbished.
               </p>
               <div className="flex items-center">

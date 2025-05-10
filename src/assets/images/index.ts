@@ -67,6 +67,12 @@ import korzinaNavBottom from "./korzina_nav_bottom.png";
 import profileNavBottom from "./profile_nav_bottom.png";
 
 import partnersLogo from "./partners_page.png";
+import oneWifi from "./oneWifi.png";
+import twoWifi from "./twoWifi.png";
+import threeWifi from "./threeWifi.png";
+import fourWifi from "./fourWifi.png";
+import fiveWifi from "./fiveWifi.png";
+
 
 export {
   logo,
@@ -123,4 +129,9 @@ export {
   pikopIcon,
   snrIcon,
   aquariusIcon,
+  oneWifi,
+  twoWifi,
+  threeWifi,
+  fourWifi,
+  fiveWifi,
 };

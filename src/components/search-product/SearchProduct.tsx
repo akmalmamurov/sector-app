@@ -99,7 +99,7 @@ const SearchProduct = () => {
                     <li className=" list:disc font-normal text-sm text-cerulean">
                       <Link
                         href={`/catalog/${catalogSlug}`}
-                        className="text-xs font-normal text-textColor"
+                        className="text-xs font-normal text-textColor hover:text-celBlue hoverEffect"
                       >
                         {catalogName} ({categories?.length})
                       </Link>
@@ -113,7 +113,7 @@ const SearchProduct = () => {
                           >
                             <Link
                               href={`/catalog/${catalogSlug}/${categorySlug}`}
-                              className="text-xs font-normal text-textColor"
+                              className="text-xs font-normal text-textColor hover:text-celBlue hoverEffect"
                             >
                               {categoryName} ({productCodes?.length})
                             </Link>

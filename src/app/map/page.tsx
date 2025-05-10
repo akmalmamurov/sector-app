@@ -269,27 +269,6 @@ const Map = async () => {
                 </div>
               </div>
             ))}
-
-            <div className="flex flex-col gap-4">
-              <Link
-                href={"#"}
-                className="text-[20px] font-bold leading-[30px] text-cerulean hover:underline"
-              >
-                Новые поступления
-              </Link>
-              <Link
-                href={"#"}
-                className="text-[20px] font-bold leading-[30px] text-cerulean hover:underline"
-              >
-                Распродажа
-              </Link>
-              <Link
-                href={"#"}
-                className="text-[20px] font-bold leading-[30px] text-cerulean hover:underline"
-              >
-                Снято с производства
-              </Link>
-            </div>
           </div>
         </section>
       </Section>

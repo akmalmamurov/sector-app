@@ -1,9 +1,9 @@
 import {
-  fifthPicWifi,
-  firstPicWifi,
-  fourthPicWifi,
-  secondPicWifi,
-  thirdPicWifi,
+  oneWifi,
+  twoWifi,
+  threeWifi,
+  fourWifi,
+  fiveWifi,
 } from "@/assets/images";
 import { HomeCrumb } from "@/components/bread-crumb";
 import { Container } from "@/components/container";
@@ -20,7 +20,6 @@ export const metadata: Metadata = {
   description: "O подключении Wi-Fi).",
 };
 
-
 const Wifi = () => {
   return (
     <Container>
@@ -31,12 +30,12 @@ const Wifi = () => {
         </InfoHeader>
         <section>
           <p className="text-center pl-[8px] pr-[8px] md:pr-[0px] md:pl-[0px]">
-            ООО "НАГ" занимается радиопланированием, поставкой, монтажом,
+            ООО "SECTOR TECHNOLOGY" занимается радиопланированием, поставкой, монтажом,
             пуско-наладкой и радиообследованием Wi-Fi сетей от лидеров мирового
             рынка.
           </p>
           <div className="flex justify-center items-center pt-[16px]">
-            <Image src={firstPicWifi} alt="picture" />
+            <Image className="md:max-w-[500px] w-auto" src={oneWifi} alt="picture" />
           </div>
           <p className="pt-[22px] text-textColor font-semibold text-[18px] md:text-[26px] text-center text-w-md">
             Услуги по построению сети Wi-Fi
@@ -102,11 +101,10 @@ const Wifi = () => {
         </section>
         <section>
           <p className="text-[18px] md:text-[26px] text-textColor font-semibold text-center pt-7">
-            Основные преимущества работы с компанией «НАГ», это:
+            Основные преимущества работы с компанией «SECTOR TECHNOLOGY», это:
           </p>
 
           <div className="pt-6 pl-2 sm:pl-6 text-[#333] ">
-
             <li className="pt-4">
               Возможность получить весь комплекс от одного поставщика –
               интегратора.
@@ -125,7 +123,7 @@ const Wifi = () => {
             </li>
           </div>
           <p className="pt-8 text-[18px] md:text-[26px] text-[#333] font-semibold text-center">
-            Вместе с НАГ вы сможете реализовать любой амбициозный проект в любой
+            Вместе с SECTOR TECHNOLOGY вы сможете реализовать любой амбициозный проект в любой
             из сфер:
           </p>
           <div>
@@ -134,7 +132,7 @@ const Wifi = () => {
             </p>
 
             <div className="flex justify-center">
-              <Image src={secondPicWifi} alt="pic" />
+              <Image className="md:max-w-[500px] w-auto"  src={twoWifi} alt="pic" />
             </div>
             <div className="pt-4 pl-2 sm:pl-6 text-[#333]">
               <p className="pt-4">
@@ -157,7 +155,7 @@ const Wifi = () => {
             </p>
 
             <div className="flex justify-center">
-              <Image src={thirdPicWifi} alt="pic" />
+              <Image className="md:max-w-[500px] w-auto" src={threeWifi} alt="pic" />
             </div>
             <div className="pt-4 pl-6 text-[#333]">
               <p className="pt-4">
@@ -179,7 +177,7 @@ const Wifi = () => {
             </p>
 
             <div className="flex justify-center">
-              <Image src={fourthPicWifi} alt="pic" />
+              <Image className="md:max-w-[500px] w-auto" src={fourWifi} alt="pic" />
             </div>
             <div className="pt-4 pl-6 text-[#333]">
               <p className="pt-4">
@@ -201,7 +199,7 @@ const Wifi = () => {
             </p>
 
             <div className="flex justify-center">
-              <Image src={fifthPicWifi} alt="pic" />
+              <Image className="md:max-w-[500px] w-auto" src={fiveWifi} alt="pic" />
             </div>
             <div className="pt-4 pl-6 text-[#333]">
               <div className="pl-2 sm:pl-7">
@@ -218,7 +216,6 @@ const Wifi = () => {
           </div>
           <div>
             <p className="font-semibold text-[#333] text-[18px] md:text-[26px] pt-7 text-center">
-
               Основные этапы проекта:
             </p>
             <div className="pt-4 pl-6 text-[#333]">
@@ -239,8 +236,8 @@ const Wifi = () => {
                   Если у вас возникла потребность в организации Wi-Fіили просто
                   есть вопросы по этой тематике, то свяжитесь с нами
                 </p>
-                <Link href="#" className=" text-cerulean pl-1">
-                  sales@nag.uz
+                <Link href="mailto:sales@sectortechnology.uz" className=" text-cerulean pl-1">
+                  sales@sectortechnology.uz
                 </Link>
                 .
               </div>

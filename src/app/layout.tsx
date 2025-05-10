@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <head>
-        <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+        <link rel="icon" type="image/png" href="/sector.png" />
       </head>
       <body>
         <RootProviders>

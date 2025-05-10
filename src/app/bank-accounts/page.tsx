@@ -23,16 +23,14 @@ const BankAccounts = () => {
         <div className="pt-6 pl-6 pb-10 sm:pb-14 md:pb-36 text-textColor">
           <p className="font-bold">Bank details:</p>
           <p className="pt-4">
-            100105, Uzbekistan, Tashkent, Mirzo-Ulugbek district, Sayram 7-tor,
-            52
+          Ташкент, Чиланзарский район, массив Чиланзар, 17-й квартал, 6
           </p>
-          <p className="pt-4">ООО NAGTECH </p>
-          <p className="pt-4">TAX IDENTIFICATION NUMBER 309565073</p>
+          <p className="pt-4">ООО SECTOR TECHNOLOGY </p>
+          <p className="pt-4">TAX IDENTIFICATION NUMBER 123456789</p>
           <p className="pt-4">TRANSIT CURRENCY ACCOUNT IN UZS</p>
-          <p className="pt-4">Bank account: 20208000505529326001</p>
+          <p className="pt-4">Bank account: 00000000000000000000</p>
           <p className="pt-4">
-            Beneficiary’s Bank: XATB «ORIENT FINANS» Uzbekistan, Tashkent,
-            M-Ulugbek district, Osiyo street 5.
+            Beneficiary’s Bank: XATB «TRANSBANK» Sodiq Azimov Street, Tashkent, Mirzo Ulugbek, Tashkent, Uzbekistan
           </p>
         </div>
       </Section>
