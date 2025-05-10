@@ -26,18 +26,26 @@ export interface PopularCategory {
     id: string;
   };
 }
+export interface SearchSubCatalog {
+  subcatalogName: string;
+  subcatalogSlug: string;
+  categories: SearchCategories[];
+}
 export interface SearchCatalog {
   catalogName: string;
   catalogSlug: string;
-  categories: SearchCategories[];
+  subcatalogs: SearchSubCatalog[];
+  url: string;
+  productsCount: number;
 }
 export interface SearchCategories {
   categoryName: string;
   categorySlug: string;
-  productCodes: string[];
+  productsCount: string[];
+  url: string;
 }
 export interface CatalogWithCategories {
   slug: string;
   title: string;
-  categories: CategoryData[]; 
+  categories: CategoryData[];
 }

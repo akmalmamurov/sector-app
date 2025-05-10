@@ -41,8 +41,7 @@ export const SingleOrderRight = ({ order }: SingleOrderRightProps) => {
           {/* messages content */}
           <TabsContent value="messages" className="mt-[23px]">
             <TabOrderRight
-              orderNumber={order?.orderNumber}
-              orderId={order?.id}
+              order={order}
             />
           </TabsContent>
         </Tabs>

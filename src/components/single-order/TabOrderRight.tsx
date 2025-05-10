@@ -1,6 +1,4 @@
-import { getIssues } from "@/api";
-import useStore from "@/context/store";
-import { useQuery } from "@tanstack/react-query";
+
 import { useState } from "react";
 import {
   Select,
@@ -14,22 +12,15 @@ import { Search } from "lucide-react";
 import { Input } from "../ui/input";
 import { CreateIssues } from "../issues";
 import { ProfileIssueTable } from "../table";
+import { OrdersData } from "@/types";
 interface TabOrderRightProps {
-  orderNumber: string;
-  orderId: string;
+  order: OrdersData;
 }
-export const TabOrderRight = ({ orderNumber, orderId }: TabOrderRightProps) => {
-  const auth = useStore((s) => s.auth);
+export const TabOrderRight = ({ order }: TabOrderRightProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("");
-  const { data: issuesData = [] } = useQuery({
-    queryKey: ["issues", search, status],
-    queryFn: () => getIssues(search, status === "all" ? "" : status),
-    enabled: auth,
-  });
-  console.log(issuesData);
-  console.log( orderId);
+
 
   return (
     <div>
@@ -69,8 +60,8 @@ export const TabOrderRight = ({ orderNumber, orderId }: TabOrderRightProps) => {
           <span>Подать заявку</span>
         </button>
       </div>
-      {isOpen && <CreateIssues setOpen={setIsOpen} orderNumber={orderNumber} />}
-      <ProfileIssueTable issues={issuesData?.requests} />
+      {isOpen && <CreateIssues setOpen={setIsOpen} orderNumber={order?.orderNumber} />}
+      <ProfileIssueTable issues={order?.requests} />
     </div>
   );
 };
