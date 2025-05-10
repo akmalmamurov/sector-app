@@ -13,7 +13,7 @@ export default async function Home() {
   const banners = await getBanner({ routePath: "/" });
   console.log(banners);
   
-  const news = await getNews({ page: "home" });
+  const news = await getNews({ page: "home", home: true });
   return (
     <>
       <Banner banner={banners} />
