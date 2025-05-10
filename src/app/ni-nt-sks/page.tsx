@@ -4,7 +4,7 @@ import { Section } from "@/components/section";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Наши проекти | Sector App",
+  title: "Наши проекти",
   description: "Вы можете увидеть о нашем проекти",
 };
 
