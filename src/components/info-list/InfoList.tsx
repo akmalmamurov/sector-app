@@ -3,7 +3,6 @@
 import { ChevronRightIcon, TimeIcon } from "@/assets/icons";
 import { NewsData } from "@/types/news";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import Skeleton from "../skeleton/skeleton";
 
 const items = [
@@ -26,14 +25,7 @@ const projects = [
 },
 ];
 
-export const InfoList = ({ news }: { news: NewsData[] }) => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => setLoading(false), 100); // 2 soniya
-    return () => clearTimeout(timeout);
-  }, []);
-
+export const InfoList = ({ news, loading }: { news: NewsData[], loading: boolean }) => {
   const className =
     "font-normal text-[26px] leading-[31px] text-stoneCold flex items-center hover:underline ease-in duration-100 w-fit";
   const borderClass =

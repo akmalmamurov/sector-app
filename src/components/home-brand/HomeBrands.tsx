@@ -6,47 +6,20 @@ import { Title } from "../title";
 import Link from "next/link";
 import { ArrowRightIcon } from "@/assets/icons";
 import { BrandData } from "@/types";
-import { useEffect, useState } from "react";
 import Skeleton from "../skeleton/skeleton";
 
-
-export const HomeBrands = ({ brands }: {
+export const HomeBrands = ({ brands, loading }: {
   brands: BrandData[];
   loading: boolean;
 }) => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setLoading(false);
-  }, []);
-
-  // if (!isClient || loading) {
-  //   return (
-  //     <div className="lgl:pb-[61px] py-[30px]">
-  //       <Container>
-  //         {
-  //           Array.from({ length: 5 }).map((_, idx) => (
-  //             <Skeleton
-  //                     key={idx}
-  //                     className="h-[120px] w-full rounded-md "
-  //                   >
-  //                     <Skeleton className="w-[50%] m-[5%] mx-4 h-[50%] rounded-2xl skeleton-shimmer" />
-  //                   </Skeleton>
-  //           ))
-  //         }
-
-  //       </Container>
-  //     </div>
-  //   )
-  // }
-    return (
-      <div className="lgl:pb-[61px] py-[30px]">
-        <Container>
-          {loading ? (
-            <Skeleton className="w-[40%] h-[30px] mb-[28px] rounded-full skeleton-shimmer" />
-          ) : (
-            <Title className="mb-5">Популярные бренды</Title>
-          )}
+  return (
+    <div className="lgl:pb-[61px] py-[30px]">
+      <Container>
+        {loading ? (
+          <Skeleton className="w-[40%] h-[30px] mb-[28px] rounded-full skeleton-shimmer" />
+        ) : (
+          <Title className="mb-5">Популярные бренды</Title>
+        )}
         {loading ? (
           <div className="flex lg:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 overflow-x-auto whitespace-nowrap lg:whitespace-normal scrollbar-hide">
             {Array.from({ length: 6 }).map((_, idx) => (
@@ -90,7 +63,5 @@ export const HomeBrands = ({ brands }: {
     </div>
   );
 };
-
-
 
 export default HomeBrands;

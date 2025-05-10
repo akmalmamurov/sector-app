@@ -9,7 +9,7 @@ import { getPromotion } from "@/api/promotion";
 import { ProductData, PromotionData } from "@/types";
 import { PromotionCard } from "../card/PromotionCard";
 import Skeleton from "../skeleton/skeleton";
-
+import { useLoading } from "@/context/LoadingContext";
 const tabs = [
   { key: "recommended", label: "Рекомендуем" },
   { key: "condition", label: "Новинки" },
@@ -19,10 +19,10 @@ const tabs = [
 
 const ProductTabs = () => {
   const [activeTab, setActiveTab] = useState("recommended");
+  const { loading } = useLoading();
 
   const {
     data: data = [],
-    isLoading,
     error,
   } = useQuery({
     queryKey:
@@ -51,7 +51,7 @@ const ProductTabs = () => {
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         className="flex gap-4 border-b h-[54px] justify-between bg-white p-0 overflow-x-auto whitespace-nowrap rounded-none"
       >
-        {isLoading ? (
+        {loading ? (
           <Skeleton className="w-full h-full flex justify-center items-center" >
             {Array.from({ length: 4 }).map((_, idx) => (
           <Skeleton key={idx} className="w-[70%]  mx-3 my-3 h-4 rounded-full skeleton-shimmer" />
@@ -70,7 +70,7 @@ const ProductTabs = () => {
       </TabsList>
 
       <div className="py-[32px]">
-        {isLoading && (
+        {loading && (
           <div className="flex flex-col gap-4">
 
           </div>
@@ -83,7 +83,7 @@ const ProductTabs = () => {
               : "grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
           }`}
         >
-          {isLoading
+          {loading
             ? skeletonArray.map((_, idx) => (
                 <Skeleton key={idx} className="h-[300px] w-[200px] rounded-md  " >
                   <Skeleton className="w-[80%] m-5 h-[50%] flex justify-center items-center rounded-2xl skeleton-shimmer" />

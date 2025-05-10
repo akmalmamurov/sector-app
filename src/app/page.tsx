@@ -10,31 +10,36 @@ import { HomeCategory } from "@/components/home-category";
 import { HomeBrands } from "@/components/home-brand";
 import { ProductList } from "@/components/product-list";
 import { HomeFooter } from "@/components/home-footer";
-import { BrandData, NewsData } from "@/types";
+import { BannerData, BrandData, NewsData } from "@/types";
+
+
 
 export default function HomePage() {
   const { loading, setLoading } = useLoading();
-  const [banners, setBanners] = useState([]);
-  const [brandsData, setBrandsData] = useState<{ brands: BrandData[] } | null>(null);
-  const [newsData, setNewsData] = useState<NewsData[] | null>(null);
+  const [banners, setBanners] = useState<BannerData[]>([]);
+  const [brandsData, setBrandsData] = useState<BrandData[]>([]);
+  const [newsData, setNewsData] = useState<NewsData[]>([]);
 
   useEffect(() => {
     async function fetchData() {
       try {
+        setLoading(true);
+
         const [bannersRes, brandsRes, newsRes] = await Promise.all([
           getBanner({ routePath: "/" }),
           getPopular(),
           getNews({ page: "home" }),
         ]);
 
-        setBanners(bannersRes);
-        setBrandsData(brandsRes);
-        setNewsData(newsRes);
+        setBanners(bannersRes ?? []); 
+        setBrandsData(brandsRes?.brands ?? []);
+        setNewsData(newsRes ?? []);
 
       } catch (error) {
-        console.error("Error loading:", error);
+        console.error("Error loading HomePage data:", error);
+
       } finally {
-        setLoading(false); // Global loading false bo'ladi
+        setLoading(false); 
       }
     }
 
@@ -45,8 +50,8 @@ export default function HomePage() {
     <>
       <Banner banner={banners} loading={loading} />
       <HomeCategory loading={loading} />
-      <HomeBrands brands={brandsData?.brands || []} loading={loading} />
-      <ProductList news={newsData || []} />
+      <HomeBrands brands={brandsData} loading={loading} />
+      <ProductList news={newsData} loading={loading} />
       <HomeFooter loading={loading} />
     </>
   );

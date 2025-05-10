@@ -1,16 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { Container } from "../container";
 import { Section } from "../section";
 import Skeleton from "../skeleton/skeleton";
 
 export const HomeFooter = ({ loading }: { loading: boolean }) => {
   const [open, setOpen] = useState(false);
-  useEffect(() => {
-    setTimeout(() => {
-      setOpen(true);
-    }, 100);
-  }, []);
+
   return (
     <section className="pt-[86px] pb-[95px]">
       <Container>
