@@ -16,9 +16,9 @@ export default async function Home() {
   const news = await getNews({ page: "home" });
   return (
     <>
-      <Banner banner={banners} />
-      <HomeCategory  />
-      <HomeBrands brands={brandsData?.brands} />
+      <Banner banner={banners} loading={false} />
+      <HomeCategory />
+      <HomeBrands brands={brandsData?.brands} loading={false} />
       <ProductList news={news} />
       <HomeFooter />
     </>

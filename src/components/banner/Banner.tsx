@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
@@ -11,10 +11,37 @@ import Link from "next/link";
 import { BannerData } from "@/types";
 import { BannerIcon } from "@/assets/icons";
 import { Swiper as SwiperType } from "swiper";
+import { Skeleton } from "../skeleton/skeleton";
 
-export const Banner = ({ banner }: { banner: BannerData[] }) => {
+export const Banner = ({
+  banner,
+  loading,
+}: {
+  banner: BannerData[];
+  loading: boolean;
+}) => {
   const swiperRef = useRef<SwiperType | null>(null);
-  
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient || loading) {
+    return (
+      <div className="slider-container pt-[51px] hidden lgl:block relative">
+        <Container>
+          <div className="relative w-full h-[413px]">
+            <Skeleton className="w-full h-full rounded-lg bg-[#c7c7c7]" />
+            <Skeleton className="absolute top-1/2 left-5 w-[40%] h-8 rounded-full skeleton-shimmer" />
+            <Skeleton className="absolute top-1/2 mt-[7%] 2xl:mt-[4%] left-5 w-[50%] h-8 rounded-full skeleton-shimmer" />
+            <Skeleton className="absolute top-[20%] right-7 w-[40%] h-[70%] rounded-3xl skeleton-shimmer" />
+          </div>
+        </Container>
+      </div>
+    );
+  }
+
   return (
     <div className="slider-container pt-[51px] hidden lgl:block relative">
       <Container>

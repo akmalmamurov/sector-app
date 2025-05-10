@@ -1,28 +1,39 @@
 "use client";
 
 import { useState } from "react";
-import { Sheet, SheetContent, SheetDescription, SheetTitle } from "@/components/ui/sheet";
-import { AlignJustify, ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { CatalogData, SubcatalogData } from "@/types";
-import MobileGoSection from "./MobileGoSection";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetTitle,
+} from "@/components/ui/sheet";
+import { AlignJustify, ChevronLeft } from "lucide-react";
 import { ChevronRightIcon } from "@/assets/icons";
+import MobileGoSection from "./MobileGoSection";
+import { CatalogData, SubcatalogData } from "@/types/catalog";
+import { useMobileMenuStore } from "@/stores/mobileMenuStore";
 
 interface HeaderMobileProps {
   data: CatalogData[];
   isOpen: boolean;
-  setIsOpen: (open: boolean) => void;
+  setIsOpen: (val: boolean) => void;
 }
 
-const HeaderMobile = ({ data, isOpen, setIsOpen }: HeaderMobileProps) => {
+const HeaderMobile = ({ data }: HeaderMobileProps) => {
   const router = useRouter();
+
+  const isOpen = useMobileMenuStore((state) => state.isOpen);
+  const closeMenu = useMobileMenuStore((state) => state.closeMenu);
+
   const [selectedCatalog, setSelectedCatalog] = useState<CatalogData | null>(
     null
   );
   const [selectedSubcatalog, setSelectedSubcatalog] =
     useState<SubcatalogData | null>(null);
+
   const onClose = () => {
-    setIsOpen(false);
+    closeMenu();
     setSelectedCatalog(null);
     setSelectedSubcatalog(null);
   };
@@ -30,7 +41,6 @@ const HeaderMobile = ({ data, isOpen, setIsOpen }: HeaderMobileProps) => {
   const handleGoToSection = () => {
     if (selectedCatalog && selectedSubcatalog) {
       router.push(`/catalog/${selectedSubcatalog.slug}`);
-      console.log(`Subcatalog slug: ${selectedSubcatalog.slug}`);
       onClose();
     } else if (selectedCatalog) {
       router.push(`/catalog/${selectedCatalog.slug}`);
@@ -44,9 +54,10 @@ const HeaderMobile = ({ data, isOpen, setIsOpen }: HeaderMobileProps) => {
         side="left"
         className="w-full max-h-screen overflow-y-auto p-0 scrollbar-hide"
       >
-        <SheetTitle className="hidden"></SheetTitle>
-        <SheetDescription className="hidden"></SheetDescription>
-        {/* header */}
+        <SheetTitle className="hidden" />
+        <SheetDescription className="hidden" />
+
+        {/* HEADER */}
         <div className="flex items-center p-[23px] border-b border-superSilver">
           {selectedCatalog ? (
             <button
@@ -73,10 +84,15 @@ const HeaderMobile = ({ data, isOpen, setIsOpen }: HeaderMobileProps) => {
           </h2>
         </div>
 
-        <MobileGoSection selectedCatalog={selectedCatalog} handleGoToSection={handleGoToSection} onClose={onClose}/>
+        <MobileGoSection
+          selectedCatalog={selectedCatalog}
+          handleGoToSection={handleGoToSection}
+          onClose={onClose}
+        />
 
+        {/* MAIN CONTENT */}
         {!selectedCatalog && (
-          <ul className="px-[23px] ">
+          <ul className="px-[23px]">
             {data.map((catalog) => (
               <li
                 key={catalog.slug}
@@ -84,9 +100,7 @@ const HeaderMobile = ({ data, isOpen, setIsOpen }: HeaderMobileProps) => {
                 onClick={() => setSelectedCatalog(catalog)}
               >
                 {catalog.title}
-                <span>
-                  <ChevronRightIcon/>
-                </span>
+                <ChevronRightIcon />
               </li>
             ))}
           </ul>
@@ -94,16 +108,14 @@ const HeaderMobile = ({ data, isOpen, setIsOpen }: HeaderMobileProps) => {
 
         {selectedCatalog && !selectedSubcatalog && (
           <ul className="px-[23px]">
-            {selectedCatalog.subcatalogs.map((subcatalog) => (
+            {selectedCatalog.subcatalogs.map((sub) => (
               <li
-                key={subcatalog.slug}
-                className="cursor-pointer  py-2 text-textColor border-b border-superSilver flex justify-between items-center"
-                onClick={() => setSelectedSubcatalog(subcatalog)}
+                key={sub.slug}
+                className="cursor-pointer py-2 text-textColor border-b border-superSilver flex justify-between items-center"
+                onClick={() => setSelectedSubcatalog(sub)}
               >
-                {subcatalog.title}
-                <span>
-                  <ChevronRightIcon/>
-                </span>
+                {sub.title}
+                <ChevronRightIcon />
               </li>
             ))}
           </ul>
@@ -123,9 +135,7 @@ const HeaderMobile = ({ data, isOpen, setIsOpen }: HeaderMobileProps) => {
                 }}
               >
                 {category.title}
-                <span>
-                  <ChevronRightIcon/>
-                </span>
+                <ChevronRightIcon />
               </li>
             ))}
           </ul>
