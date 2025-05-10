@@ -25,7 +25,7 @@ const ExtendedWarranty = () => {
         </InfoHeader>
         <div className="p-6">
           <p>
-            Компания “НАГ” уверена в качестве оборудования, которое предлагает
+            Компания “SECTOR TECHNOLOGY” уверена в качестве оборудования, которое предлагает
             своим клиентам.
           </p>
           <p className="pt-4 pb-4">

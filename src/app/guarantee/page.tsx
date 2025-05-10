@@ -44,22 +44,21 @@ const GuaranteePage = () => {
           </p>
           <div className="mb-4">
             <p className="info-text">
-              Адрес: г. Ташкент, Мирзо-Улугбекский район, улица Сайрам 7-тупик,
-              дом 52
+              Адрес: Ташкент, Чиланзарский район, массив Чиланзар, 17-й квартал, 6
             </p>
-            <p className="info-text">Грузополучатель: ООО NAGTECH</p>
+            <p className="info-text">Грузополучатель: ООО SECTOR TECHNOLOGY</p>
             <div className="flex items-center ">
               <p className="info-text">
-                Контактное лицо: Кузнецов Владимир, директор,{" "}
+                Контактное лицо: АБДУЛХОКИМОВ СИРОЖИДДИН, директор,{" "}
               </p>
               <Link
-                href="tel:+998 55 508 0660"
+                href="tel:+998953731313"
                 className="info-text text-cerulean hover:underline underline-offset-2 hoverEffect"
               >
-                +998 55 508 0660
+                +998 95 373 13 13
               </Link>
             </div>
-            <p className="info-text">График работы: ПН-ПТ: с 08:30 до 17:00.</p>
+            <p className="info-text">График работы: ПН-ПТ: с 09:00 до 17:00.</p>
           </div>
           <div className="flex mb-4">
             <p>
@@ -67,10 +66,10 @@ const GuaranteePage = () => {
               адресу:{" "}
             </p>
             <Link
-              href="mailto:service@nag.uz"
+              href="mailto:info@sectortechnology.uz"
               className="info-text ml-0.5 text-cerulean hover:underline underline-offset-4 hoverEffect"
             >
-              service@nag.uz
+              info@sectortechnology.uz
             </Link>
           </div>
           {/* bottom */}

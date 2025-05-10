@@ -43,7 +43,10 @@ const HeaderMenuLink = () => {
         </span>
         <span className="header-menu-link">Аксии</span>
       </Link>
-      <Link href={"/profile/favorites"} className="header-menu-item">
+      <Link
+        href={`${savedProduct?.length ? "/profile/favorites" : ""}`}
+        className={`header-menu-item ${!savedProduct?.length ? "cursor-auto opacity-60" : ""}`}
+      >
         {savedProduct?.length > 0 ? (
           <>
             <span className="relative">
@@ -58,7 +61,10 @@ const HeaderMenuLink = () => {
         )}
         <span className="header-menu-link">Избранное</span>
       </Link>
-      <Link href={"/compare"} className="header-menu-item">
+      <Link
+        href={`${compares?.length ? "/compare" : ""}`}
+        className={`header-menu-item ${!compares?.length ? "cursor-auto opacity-60" : ""}`}
+      >
         {compares?.length > 0 ? (
           <span className="relative">
             <CompareSucessIcon className="w-5 h-5 xl:w-6 xl:h-6" />

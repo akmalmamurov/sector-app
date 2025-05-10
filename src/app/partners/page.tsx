@@ -1,4 +1,3 @@
-import { partnersLogo } from "@/assets/images";
 import { HomeCrumb } from "@/components/bread-crumb";
 import { Container } from "@/components/container";
 import { InfoHeader } from "@/components/div";
@@ -24,42 +23,59 @@ const Partners = () => {
           <InfoTitle>Партнёры</InfoTitle>
         </InfoHeader>
         <div>
-          <p className="text-[#6AB04C] p-5">Ереван</p>
           <hr className="mx-4" />
           <div className="flex flex-wrap">
             <div className="flex justify-center sm:flex-wrap gap-4 sm:flex  pt-[24px] pl-[25px] md:pl-[79px]">
               <div className="w-[196px] flex justify-center items-center">
-                <Image src={partnersLogo} alt="image" />
+                <Image
+                  width={196}
+                  height={196}
+                  src={"/Hikvision-logo2.png"}
+                  alt="image"
+                />
               </div>
               <div className="sm:pl-[25px] md:pl-[71px] text-textColor">
-                <p className="text-[18px]">ООО «Нетворк Зон»</p>
-                <p className="">Адрес: Ереван</p>
+                <p className="text-[18px]">Hikvision</p>
+                <p className="">Адрес: Узбекистан, Ташкент</p>
                 <div className="flex gap-2 pb-[20px]">
                   <p>Телефон: </p>
-                  <Link href="#" className="text-cerulean">
-                    077/055 44 66 46
+                  <Link href="tel:+998998986000" className="text-cerulean">
+                    +998(99) 898-60-00
                   </Link>
                 </div>
-                <Link href="#" className="text-cerulean ">
-                  www.network-zone.am
+                <Link
+                  target="_blank"
+                  href="https://sts-hik.uz/"
+                  className="text-cerulean "
+                >
+                  www.sts-hik.uz
                 </Link>
               </div>
             </div>
             <div className="flex justify-center sm:flex-wrap gap-4 sm:flex  pt-[24px] pl-[25px] md:pl-[79px]">
               <div className="w-[196px] flex justify-center items-center">
-                <Image src={partnersLogo} alt="image" />
+                <Image
+                  width={196}
+                  height={196}
+                  src={"/Dahua_logo.png"}
+                  alt="image"
+                />
               </div>
               <div className="sm:pl-[25px] md:pl-[71px] text-textColor">
-                <p className="text-[18px]">ООО «Нетворк Зон»</p>
-                <p className="">Адрес: Ереван</p>
+                <p className="text-[18px]">Dahua</p>
+                <p className="">Адрес: Узбекистан, Ташкент</p>
                 <div className="flex gap-2 pb-[20px]">
                   <p>Телефон: </p>
-                  <Link href="#" className="text-cerulean">
-                    077/055 44 66 46
+                  <Link href="tel:+998773756562" className="text-cerulean">
+                    +998(77) 375-65-62
                   </Link>
                 </div>
-                <Link href="#" className="text-cerulean ">
-                  www.network-zone.am
+                <Link
+                  target="_blank"
+                  href="https://www.uzdahua.uz/ru/"
+                  className="text-cerulean "
+                >
+                  www.uzdahua.uz
                 </Link>
               </div>
             </div>

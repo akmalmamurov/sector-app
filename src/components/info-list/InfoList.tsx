@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronRightIcon, TimeIcon } from "@/assets/icons";
+import { NewsData } from "@/types/news";
 import Link from "next/link";
 import { Skeleton } from "../skeleton/skeleton"; // Skeleton komponenti kerak
 import { useEffect, useState } from "react";
@@ -15,15 +16,21 @@ const items = [
   { text: "Конфигураторы", link: "/configurators" },
 ];
 const projects = [
-  { text: "snr.systems", link: "/" },
-  { text: "Конфигураторы", link: "/configurators" },
+{
+  text: "НИЦ НТ  (СКС)",
+  link: "/ni-nt-sks",
+},
+{
+  text: "Конфигураторы",
+  link: "/configurators",
+},
 ];
 
-export const InfoList = () => {
+export const InfoList = ({ news }: { news: NewsData[] }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timeout = setTimeout(() => setLoading(false), 100); // 2 soniya
+    const timeout = setTimeout(() => setLoading(false), 3000); // 2 soniya
     return () => clearTimeout(timeout);
   }, []);
 
@@ -34,19 +41,66 @@ export const InfoList = () => {
 
   return (
     <div className="flex flex-col gap-[36px] lgl:gap-[57px]">
-      {/* Новости */}
+      {/* novosti */}
       <div className="flex flex-col shadow-infoShadow">
+        {/* news */}
         <div className="bg-white p-[23px] rounded-t-[10px]">
-          {loading ? (
-            <Skeleton className="w-[200px] h-7 rounded-full" />
-          ) : (
-            <Link href="/news" className={className}>
-              <p>Новости</p>
-              <span className="w-6 h-6 flex items-center justify-center mt-1">
+          <Link href="/news" className={className}>
+            <p>Новости</p>
+            <span className="w-6 h-6 flex items-center justify-center mt-1">
+              <ChevronRightIcon />
+            </span>
+          </Link>
+        </div>
+        <div className="">
+          {news.map((item, index) => (
+            <div
+              className={`${index % 2 === 0 ? "bg-transparent" : "bg-white"} shadow-none px-[23px] py-5`}
+              key={item.id}
+            >
+              <Link
+                href={`/news/${item.slug}`}
+                className="font-normal text-sm leading-[21px] text-textColor mb-3 hover:underline duration-100 ease-in"
+              >
+                {item.title}
+              </Link>
+              <div className="flex items-center text-darkSoul gap-2">
+                <span className="pb-0.5">
+                  <TimeIcon />
+                </span>
+                <p className="text-xs font-normal leading-[18px] ">
+                  {new Date(item.createdAt).toLocaleDateString("ru-RU", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                  })}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className={borderClass}></div>
+      </div>
+      {/* nashi proekti */}
+      {/* <div className="shadow-infoShadow ">
+        <div className="bg-white p-[23px] rounded-t-[10px] ">
+          <p className="font-normal text-[26px] leading-[31px] text-stoneCold w-fit">
+            Наши проекты
+          </p>
+        </div>
+        <div className="bg-transparent shadow-none px-[23px] py-5 flex flex-col gap-[15px]">
+          {projects.map((item, index) => (
+            <Link
+              key={index}
+              href={item.link}
+              className="w-fit font-normal text-sm leading-[21px] text-textColor  hover:underline duration-100 ease-in flex items-center gap-2 hover:text-blue-700"
+            >
+              <span>
                 <ChevronRightIcon />
               </span>
+              {item.text}
             </Link>
-          )}
+          ))}
         </div>
         {[1, 2].map((_, index) => (
           <div key={index} className="bg-transparent px-[23px] py-5">
@@ -78,7 +132,7 @@ export const InfoList = () => {
           </div>
         ))}
         <div className={borderClass}></div>
-      </div>
+      </div> */}
 
       {/* Наши проекты */}
       <div className="shadow-infoShadow">

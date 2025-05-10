@@ -67,7 +67,7 @@ const Navbar = () => {
                 href={"tel:+998953731313"}
                 className="font-bold text-xs text-textColor leading-[18px]"
               >
-                +998 95 373 13 13
+             +998 95 373 13 13
               </Link>
             </div>
           </div>
