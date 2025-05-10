@@ -42,7 +42,7 @@ const HeaderMobile = ({ data, isOpen, setIsOpen }: HeaderMobileProps) => {
     <Sheet open={isOpen} onOpenChange={onClose}>
       <SheetContent
         side="left"
-        className="w-full max-h-screen overflow-y-auto p-0"
+        className="w-full max-h-screen overflow-y-auto p-0 scrollbar-hide"
       >
         <SheetTitle className="hidden"></SheetTitle>
         <SheetDescription className="hidden"></SheetDescription>

@@ -237,6 +237,9 @@ strong {
 #jvLabelWrap {
   display: none !important;
 }
+.wrap__YHOId{
+  display: none !important;
+}
 
 /* Calculator videos */
 .clip-path-custom {
@@ -251,10 +254,14 @@ strong {
 }
 
 .scrollbar-hide {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
 }
 
 .scrollbar-hide::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none; 
+}
+#jivo-container,
+.jivo-container {
+  display: none !important;
 }

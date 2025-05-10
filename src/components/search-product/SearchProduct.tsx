@@ -1,7 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { getSearchProduct } from "@/api";
-import {  useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Section } from "../section";
 import { InfoHeader } from "../div";
 import { InfoTitle } from "../title";
@@ -9,9 +9,12 @@ import { useState } from "react";
 import sessionStore from "@/context/session-store";
 import { Pagination } from "../pagination";
 import { SortProducts } from "../sort";
-import { ProductData } from "@/types";
+import { ProductData, SearchCatalog } from "@/types";
 import { ProductCard, ProductColCard } from "../card";
 import { Loading } from "../loader";
+import FilterIcon from "@/assets/icons/FilterIcon";
+import Image from "next/image";
+import Link from "next/link";
 
 const SearchProduct = () => {
   const searchParams = useSearchParams();
@@ -69,9 +72,61 @@ const SearchProduct = () => {
   };
   return (
     <div>
-      <h3>Результаты по “{search}”</h3>
       <div className="grid grid-cols-12 gap-6">
-        <div className="col-span-3"></div>
+        <div className="col-span-3">
+          <Section className="bg-white p-0 shadow-sectionShadow rounded-none">
+            <div className="flex items-center gap-4 bg-white p-6 rounded-[10px]">
+              <FilterIcon className="w-6 h-6" />
+              <h3 className="text-base font-normal text-textColor">Фильтры</h3>
+            </div>
+            <div className="bg-background py-[10px] px-5 text-sm text-textColor flex items-center">
+              <Image
+                src={"/subcategories.svg"}
+                width={25}
+                height={25}
+                alt={"categories"}
+                className="w-6 h-6 mr-3"
+              />
+              Подкатегории
+            </div>
+            <div className="p-6">
+              {searchData?.groupedByCatalog?.map(
+                (
+                  { catalogName, catalogSlug, categories }: SearchCatalog,
+                  index: number
+                ) => (
+                  <div key={index}>
+                    <li className=" list:disc font-normal text-sm text-cerulean">
+                      <Link
+                        href={`/catalog/${catalogSlug}`}
+                        className="text-xs font-normal text-textColor"
+                      >
+                        {catalogName} ({categories?.length})
+                      </Link>
+                    </li>
+                    <div className="ml-[15px]">
+                      {categories?.map(
+                        ({ categoryName, categorySlug ,productCodes}, index: number) => (
+                          <li
+                            className=" list:disc text-sm text-cerulean"
+                            key={index}
+                          >
+                            <Link
+                              href={`/catalog/${catalogSlug}/${categorySlug}`}
+                              className="text-xs font-normal text-textColor"
+                            >
+                              {categoryName} ({productCodes?.length})
+                            </Link>
+                          </li>
+                        )
+                      )}
+                    </div>
+                  </div>
+                )
+              )}
+            </div>
+          </Section>
+        </div>
         <div className="col-span-9">
           <Section className="px-0 py-6 shadow-sectionShadow rounded-none">
             <InfoHeader>
@@ -106,7 +161,7 @@ const SearchProduct = () => {
           </Section>
           <div>
             <Pagination
-              total={searchData?.total || 0}
+              total={searchData?.totalPages || 0}
               page={page}
               limit={searchData?.limitNumber || 40}
               setPage={setPage}
