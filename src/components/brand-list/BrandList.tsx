@@ -10,7 +10,6 @@ import {
   getLatinLettersForDisplay,
   getCyrillicLettersForDisplay,
 } from "@/utils";
-import { getBrands } from "@/api";
 
 interface BrandsClientProps {
   groupedBrands: Record<string, BrandData[]>;
@@ -45,19 +44,9 @@ export default function BrandList(props: BrandsClientProps) {
     return !groupedBrands[letter] || groupedBrands[letter].length === 0;
   };
 
-  useEffect (() => {
-    async function fetchData() {
-      try {
-        await getBrands()
-      } catch (error) {
-        console.error("Error identified", error)
-      } finally{
-        setLoading(false)
-      }
-    }
-
-    fetchData()
-  }, [])
+  useEffect(() => {
+    setLoading(false);
+  }, []);
 
   if (loading) {
     return (

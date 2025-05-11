@@ -29,7 +29,7 @@ export default function HomePage() {
         const [bannersRes, brandsRes, newsRes] = await Promise.all([
           getBanner({ routePath: "/" }),
           getPopular(),
-          getNews({ page: "home" }),
+          getNews({ page: "home", home: true }),
         ]);
 
         setBanners(bannersRes ?? []); 
