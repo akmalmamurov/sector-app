@@ -1,12 +1,10 @@
-
-
-  // export interface CatalogData {
-  //   id: string;
-  //   slug: string;
-  //   title: string;
-  //   subcatalogs: SubcatalogData[];
-  //   categories: CategoryData[];
-  // }
+export interface CatalogData {
+  id: string;
+  slug: string;
+  title: string;
+  subcatalogs: SubcatalogData[];
+  categories: CategoryData[];
+}
 export interface SubcatalogData {
   id: string;
   slug: string;
@@ -28,8 +26,26 @@ export interface PopularCategory {
     id: string;
   };
 }
+export interface SearchSubCatalog {
+  subcatalogName: string;
+  subcatalogSlug: string;
+  categories: SearchCategories[];
+}
+export interface SearchCatalog {
+  catalogName: string;
+  catalogSlug: string;
+  subcatalogs: SearchSubCatalog[];
+  url: string;
+  productsCount: number;
+}
+export interface SearchCategories {
+  categoryName: string;
+  categorySlug: string;
+  productsCount: string[];
+  url: string;
+}
 export interface CatalogWithCategories {
   slug: string;
   title: string;
-  categories: CategoryData[]; // yoki nima bo‘lsa
+  categories: CategoryData[];
 }
