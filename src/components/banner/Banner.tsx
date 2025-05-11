@@ -3,9 +3,10 @@
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation } from "swiper/modules";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
 import { Container } from "../container";
 import Link from "next/link";
 import { BannerData } from "@/types";
@@ -22,7 +23,12 @@ export const Banner = ({
 }) => {
   const swiperRef = useRef<SwiperType | null>(null);
   const [isClient, setIsClient] = useState(false);
-
+  const pagination = {
+    clickable: true,
+    renderBullet: function (index: number, className: string) {
+      return '<span class="' + className + '"></span>';
+    },
+  };
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -48,7 +54,8 @@ export const Banner = ({
         <div className="flex gap-5">
           <div className="relative w-[77%]">
             <Swiper
-              modules={[Autoplay, Navigation]}
+              pagination={pagination}
+              modules={[Autoplay, Navigation, Pagination]}
               slidesPerView={1}
               spaceBetween={10}
               loop={true}

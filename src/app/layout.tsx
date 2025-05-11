@@ -24,6 +24,7 @@ export default function RootLayout({
     <html lang="ru">
       <head>
         <link rel="icon" type="image/png" href="/sector.png" />
+        <meta name="google-site-verification" content="cFIUZDc9u_J2IHNxtKQH7MywR2wb73by2EUA5huh7S4" />
       </head>
       <body>
         <RootProviders>
