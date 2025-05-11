@@ -4,57 +4,50 @@ import { Section } from "../section";
 import { InfoTitle } from "../title";
 import { ProductCard, ProductColCard } from "../card";
 import { Pagination } from "../pagination";
-import { useQuery } from "@tanstack/react-query";
-import { getProductCategory } from "@/api/product";
 import { useState } from "react";
 import { ProductData } from "@/types";
 import { SortProducts } from "../sort";
 import sessionStore from "@/context/session-store";
 
 interface CategoryRightProps {
-  title?: string;
+  title: string;
   slug?: string;
   paramKey?: string;
+  setLimit: (limit: number) => void;
+  setInStock: (inStock: boolean) => void;
+  setPopular: (popular: boolean) => void;
+  setPriceSort: (priceSort: "asc" | "desc" | null) => void;
+  setNameSort: (nameSort: "asc" | "desc" | null) => void;
+  inStock: boolean;
+  popular: boolean;
+  priceSort: "asc" | "desc" | null;
+  nameSort: "asc" | "desc" | null;
+  productData: ProductData[];
+  limit: number;
+  total: number;
+  page: number;
 }
 export const CategoryRight: React.FC<CategoryRightProps> = ({
   title,
-  slug,
-  paramKey,
+  productData,
+  setLimit,
+  setInStock,
+  setPopular,
+  setPriceSort,
+  setNameSort,
+  inStock,
+  popular,
+  priceSort,
+  nameSort,
+  limit,
+  total,
+  page,
 }) => {
-  const [limit, setLimit] = useState<number>(40);
-  const [inStock, setInStock] = useState<boolean>(false);
-  const [popular, setPopular] = useState<boolean>(true);
   const [selected, setSelected] = useState<string | null>(null);
-  const [priceSort, setPriceSort] = useState<"asc" | "desc" | null>(null);
-  const [nameSort, setNameSort] = useState<"asc" | "desc" | null>(null);
-  const page = sessionStore((s) => s.pageCatalog);
+
   const setPage = sessionStore((s) => s.setPageCatalog);
 
-  const { data } = useQuery({
-    queryKey: [
-      "products",
-      slug,
-      page,
-      inStock,
-      popular,
-      priceSort,
-      nameSort,
-      limit,
-    ],
-    queryFn: () =>
-      getProductCategory(
-        slug || "",
-        page,
-        limit,
-        paramKey || "",
-        inStock,
-        popular,
-        priceSort,
-        nameSort
-      ),
-  });
   const rowCol = sessionStore((state) => state.rowColProduct);
-  const productData: ProductData[] = data?.products;
 
   const props = {
     selected,
@@ -76,7 +69,7 @@ export const CategoryRight: React.FC<CategoryRightProps> = ({
         <InfoHeader className="flex gap-[14px]">
           <InfoTitle>{title}</InfoTitle>
           <span className="text-weekColor font-medium text-base leading-6 hidden lg:block">
-            {data?.total} товаров
+            {total} товаров
           </span>
         </InfoHeader>
         {/* sorts*/}
@@ -99,9 +92,9 @@ export const CategoryRight: React.FC<CategoryRightProps> = ({
         </div>
         <div>
           <Pagination
-            total={data?.total || 0}
+            total={total || 0}
             page={page}
-            limit={data?.limitNumber || 40}
+            limit={limit || 40}
             setPage={setPage}
           />
         </div>
