@@ -1,8 +1,9 @@
 import { GET_NEWS, GET_NEWS_BY_SLUG } from "@/constants";
 import request from "@/services";
 
-export const getNews = async ({ page }: { page: string }) => {
+export const getNews = async ({ page, home }: { page: string, home: boolean }) => {
   try {
+    console.log(home);
     const res = await request(page ? GET_NEWS + `?page=${page}` : GET_NEWS);
     return res.data.data || [];
   } catch (error) {
