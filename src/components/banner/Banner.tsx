@@ -1,11 +1,12 @@
 "use client";
 
-import { useRef} from "react";
+import {  useRef} from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation } from "swiper/modules";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
 import { Container } from "../container";
 import Link from "next/link";
 import { BannerData } from "@/types";
@@ -22,7 +23,12 @@ export const Banner = ({ banner}: BannerProps) => {
   const swiperRef = useRef<SwiperType | null>(null);
   const { loading } = useLoading();
 
- 
+  const pagination = {
+    clickable: true,
+    renderBullet: function (index: number, className: string) {
+      return '<span class="' + className + '"></span>';
+    },
+  };
 
   if (loading) {
     return (
@@ -54,7 +60,8 @@ export const Banner = ({ banner}: BannerProps) => {
           {/* Asosiy Banner */}
           <div className="relative w-[77%]">
             <Swiper
-              modules={[Autoplay, Navigation]}
+              pagination={pagination}
+              modules={[Autoplay, Navigation, Pagination]}
               slidesPerView={1}
               spaceBetween={10}
               loop={true}
