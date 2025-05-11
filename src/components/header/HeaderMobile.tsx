@@ -11,8 +11,8 @@ import {
 import { AlignJustify, ChevronLeft } from "lucide-react";
 import { ChevronRightIcon } from "@/assets/icons";
 import MobileGoSection from "./MobileGoSection";
-import { CatalogData, SubcatalogData } from "@/types/catalog";
 import { useMobileMenuStore } from "@/stores/mobileMenuStore";
+import { CatalogData, SubcatalogData } from "@/types";
 
 interface HeaderMobileProps {
   data: CatalogData[];
@@ -85,7 +85,7 @@ const HeaderMobile = ({ data }: HeaderMobileProps) => {
         </div>
 
         <MobileGoSection
-          selectedCatalog={selectedCatalog}
+          selectedCatalog={selectedCatalog }
           handleGoToSection={handleGoToSection}
           onClose={onClose}
         />

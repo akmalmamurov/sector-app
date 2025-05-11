@@ -93,6 +93,7 @@ export const CreateIssues: React.FC<{
         },
       });
       queryClient.invalidateQueries({ queryKey: ["issues"] });
+      queryClient.invalidateQueries({ queryKey: ["order"] });
       setOpen(false);
       showSuccess("Заявка отправлена");
     } catch (error) {

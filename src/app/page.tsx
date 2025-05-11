@@ -15,6 +15,7 @@ import { BannerData, BrandData, NewsData } from "@/types";
 
 
 export default function HomePage() {
+  // const news =  getNews({ page: "home", home: true });
   const { loading, setLoading } = useLoading();
   const [banners, setBanners] = useState<BannerData[]>([]);
   const [brandsData, setBrandsData] = useState<BrandData[]>([]);
@@ -46,6 +47,11 @@ export default function HomePage() {
     fetchData();
   }, [setLoading]);
 
+// export default async function Home() {
+//   const brandsData = await getPopular();
+//   const banners = await getBanner({ routePath: "/" });
+  // console.log(banners);
+  
   return (
     <>
       <Banner banner={banners} loading={loading} />

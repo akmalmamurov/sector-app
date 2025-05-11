@@ -37,7 +37,7 @@ export const InfoList = ({ news, loading }: { news: NewsData[], loading: boolean
         {/* news */}
         <div className="bg-white p-[23px] rounded-t-[10px]">
           {loading ? (
-            <Skeleton className="w-[180px] h-7 rounded-full" />
+            <Skeleton className="w-[180px] h-7 rounded-full skeleton-shimmer" />
           ) : (
             <Link href="/news" className={className}>
               <p>Новости</p>
@@ -51,8 +51,8 @@ export const InfoList = ({ news, loading }: { news: NewsData[], loading: boolean
           {loading ? (
             [1, 2].map((_, i) => (
               <div key={i} className="flex flex-col mt-4 gap-2  px-[23px] py-[15px]">
-              <Skeleton className="w-[250px] h-4 rounded-full " /> 
-              <Skeleton  className="w-[150px] h-3 rounded-full  mb-5" />
+              <Skeleton className="w-[250px] h-4 rounded-full skeleton-shimmer" /> 
+              <Skeleton  className="w-[150px] h-3 rounded-full  mb-5 skeleton-shimmer" />
               </div>
             ))
           ) : (
@@ -90,7 +90,7 @@ export const InfoList = ({ news, loading }: { news: NewsData[], loading: boolean
       <div className="shadow-infoShadow">
         <div className="bg-white p-[23px] rounded-t-[10px]">
           {loading ? (
-            <Skeleton className="w-[180px] h-7 rounded-full" />
+            <Skeleton className="w-[180px] h-7 rounded-full skeleton-shimmer" />
           ) : (
             <p className="font-normal text-[26px] leading-[31px] text-stoneCold w-fit">
               Наши проекты
@@ -100,7 +100,7 @@ export const InfoList = ({ news, loading }: { news: NewsData[], loading: boolean
         <div className="bg-transparent px-[23px] py-5 flex flex-col gap-[15px]">
           {loading
             ? [1, 2].map((_, i) => (
-                <Skeleton key={i} className="w-[200px] h-4 rounded-full" />
+                <Skeleton key={i} className="w-[200px] h-4 rounded-full skeleton-shimmer" />
               ))
             : projects.map((item, index) => (
                 <Link
@@ -122,7 +122,7 @@ export const InfoList = ({ news, loading }: { news: NewsData[], loading: boolean
       <div className="shadow-infoShadow">
         <div className="bg-white p-[23px] rounded-t-[10px]">
           {loading ? (
-            <Skeleton className="w-[200px] h-7 rounded-full" />
+            <Skeleton className="w-[200px] h-7 rounded-full skeleton-shimmer" />
           ) : (
             <p className="font-normal text-[26px] leading-[31px] text-stoneCold w-fit">
               Как мы работаем
@@ -132,7 +132,7 @@ export const InfoList = ({ news, loading }: { news: NewsData[], loading: boolean
         <div className="bg-transparent px-[23px] py-5 flex flex-col gap-[15px]">
           {loading
             ? Array.from({ length: items.length }).map((_, i) => (
-                <Skeleton key={i} className="w-[250px] h-4 rounded-full" />
+                <Skeleton key={i} className="w-[250px] h-4 rounded-full skeleton-shimmer" />
               ))
             : items.map((item, index) => (
                 <Link

@@ -31,7 +31,7 @@ export const Banner = ({ banner}: BannerProps) => {
           <div className="w-full h-[413px] flex gap-4">
             {/* Asosiy banner skeleton */}
             <div className="relative w-[78%] h-full rounded-lg bg-[#c7c7c7]">
-              <Skeleton className="w-full h-full rounded-lg skeleton-shimmer" />
+              <Skeleton className="w-full h-full rounded-lg " />
               <Skeleton className="absolute top-[30%] left-5 w-[40%] h-8 rounded-full skeleton-shimmer" />
               <Skeleton className="absolute top-[50%] left-5 w-[50%] h-8 rounded-full skeleton-shimmer" />
               <Skeleton className="absolute top-[20%] right-7 w-[40%] h-[70%] rounded-3xl skeleton-shimmer" />

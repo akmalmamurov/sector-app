@@ -1,5 +1,6 @@
 import { AddressData } from "./address";
 import { KontrAgents } from "./agent-delivery";
+import { IssuesData } from "./issues";
 
 export interface ProductDetails {
   productId: string;
@@ -78,6 +79,7 @@ export interface OrdersData {
   };
   validEndDate: string;
   validStartDate: string;
+  requests: IssuesData[];
 }
 export interface OrderResponse {
   page: number;

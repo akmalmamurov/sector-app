@@ -33,7 +33,9 @@ export default function RootLayout({
             <Header />
             <CartSync />
             <LoadingProvider>
+              <div className="min-h-[80vh]">
               {children}
+              </div>
           </LoadingProvider>
             <div className="lg:hidden flex">
               <BottomNavbar />

@@ -36,12 +36,10 @@ const HeaderMenu = () => {
   });
   console.log(searchData);
 
-  // Menu closed when page changes
   useEffect(() => {
     closeMenu();
   }, [pathname, closeMenu]);
 
-  // sahifa o‘zgarganda menyuni yopamiz
   useEffect(() => {
     closeMenu();
   }, [pathname, closeMenu]);
@@ -62,7 +60,7 @@ const HeaderMenu = () => {
         </Link>
 
         {/* search */}
-        <Form action="/search" className="flex-1 relative">
+        <Form action="/catalog/search" className="flex-1 relative">
           <div className="relative w-full">
             <input
               type="text"

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrandData } from "@/types";
 import { InfoHeader } from "../div";
 import { InfoTitle } from "../title";
@@ -10,6 +10,7 @@ import {
   getLatinLettersForDisplay,
   getCyrillicLettersForDisplay,
 } from "@/utils";
+import { getBrands } from "@/api";
 
 interface BrandsClientProps {
   groupedBrands: Record<string, BrandData[]>;
@@ -20,6 +21,7 @@ interface BrandsClientProps {
 export default function BrandList(props: BrandsClientProps) {
   const { groupedBrands, latinLetters, cyrillicLetters } = props;
   const [selectedLetters, setSelectedLetters] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const displayLatinLetters = getLatinLettersForDisplay(
     groupedBrands,
@@ -42,6 +44,59 @@ export default function BrandList(props: BrandsClientProps) {
   const isLetterDisabled = (letter: string) => {
     return !groupedBrands[letter] || groupedBrands[letter].length === 0;
   };
+
+  useEffect (() => {
+    async function fetchData() {
+      try {
+        await getBrands()
+      } catch (error) {
+        console.error("Error identified", error)
+      } finally{
+        setLoading(false)
+      }
+    }
+
+    fetchData()
+  }, [])
+
+  if (loading) {
+    return (
+      <div className="flex flex-col gap-8">
+        {/* Buttons Skeleton */}
+        <div className="flex flex-col md:grid grid-cols-2 gap-8 lg:gap-20 md:px-6 pb-6">
+          <div className="flex flex-wrap gap-2 justify-center md:justify-start">
+            {Array.from({ length: 27 }).map((_, idx) => (
+              <div key={idx} className="w-[60px] h-[55px] bg-gray-300 animate-pulse rounded-md"></div>
+            ))}
+          </div>
+          <div className="flex flex-wrap gap-2 justify-center md:justify-start">
+            {Array.from({ length: 23 }).map((_, idx) => (
+              <div key={idx} className="w-[60px] h-[55px] bg-gray-300 animate-pulse rounded-md"></div>
+            ))}
+          </div>
+        </div>
+  
+        {/* Title Skeleton */}
+        <div className="flex justify-center">
+          <div className="w-[250px] h-[32px] bg-gray-300 animate-pulse rounded-full"></div>
+        </div>
+  
+        {/* Brands List Skeleton */}
+        <div className="flex flex-wrap justify-center md:justify-start gap-6 mt-10 px-6">
+          {Array.from({ length: 10 }).map((_, idx) => (
+            <div
+              key={idx}
+              className="w-full xs:w-[265px] sm:w-[245px] md:w-[255px] h-[145px] flex flex-col items-center justify-center gap-3 border border-superSilver bg-white animate-pulse"
+            >
+              <div className="w-[120px] h-[50px] bg-gray-300 rounded-md"></div>
+              <div className="w-[80px] h-[15px] bg-gray-300 rounded-full"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+  
 
   return (
     <div>
