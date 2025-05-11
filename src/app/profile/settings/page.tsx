@@ -1,14 +1,12 @@
 "use client";
-import { TelegramBlueIcon } from "@/assets/icons";
+import React from "react";
 import Link from "next/link";
+import { TelegramBlueIcon } from "@/assets/icons";
 import { Label } from "@/components/ui/label";
 import { AccountMe, AccountPassword } from "@/components/profile";
-import React from "react";
 import EditNumber from "@/components/profile/EditNumber";
 
 const SettingsPage = () => {
-  
-
   return (
     <section className="p-6 bg-white">
       <div className="flex items-center gap-3 border border-cerulean h-[51px] px-4 mb-4">
