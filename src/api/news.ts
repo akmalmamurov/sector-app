@@ -1,24 +1,9 @@
 import { GET_NEWS, GET_NEWS_BY_SLUG } from "@/constants";
 import request from "@/services";
 
-interface INewsParams {
-  page?: string;
-  home?: boolean; 
-}
-
-export const getNews = async ({ page, home }: INewsParams) => {
+export const getNews = async ({ page }: { page: string }) => {
   try {
-    let query = "";
-
-    if (page) {
-      query += `?page=${page}`;
-    }
-
-    if (home) {
-      query += query ? `&home=true` : `?home=true`;
-    }
-
-    const res = await request(GET_NEWS + query);
+    const res = await request(page ? GET_NEWS + `?page=${page}` : GET_NEWS);
     return res.data.data || [];
   } catch (error) {
     console.log(error);

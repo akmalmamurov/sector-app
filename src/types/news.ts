@@ -6,5 +6,6 @@ export interface NewsData {
   description: string;
   slug: string;
   createdAt: string;
+  home: boolean;
 }
 

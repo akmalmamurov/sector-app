@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import {  useRef} from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
@@ -12,36 +12,41 @@ import Link from "next/link";
 import { BannerData } from "@/types";
 import { BannerIcon } from "@/assets/icons";
 import { Swiper as SwiperType } from "swiper";
-import { Skeleton } from "../skeleton/skeleton";
-
-export const Banner = ({
-  banner,
-  loading,
-}: {
+import Skeleton from "../skeleton/skeleton";
+import { useLoading } from "@/context/LoadingContext";
+interface BannerProps {
   banner: BannerData[];
   loading: boolean;
-}) => {
+}
+
+export const Banner = ({ banner}: BannerProps) => {
   const swiperRef = useRef<SwiperType | null>(null);
-  const [isClient, setIsClient] = useState(false);
+  const { loading } = useLoading();
+
   const pagination = {
     clickable: true,
     renderBullet: function (index: number, className: string) {
       return '<span class="' + className + '"></span>';
     },
   };
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
-  if (!isClient || loading) {
+  if (loading) {
     return (
       <div className="slider-container pt-[51px] hidden lgl:block relative">
         <Container>
-          <div className="relative w-full h-[413px]">
-            <Skeleton className="w-full h-full rounded-lg bg-[#c7c7c7]" />
-            <Skeleton className="absolute top-1/2 left-5 w-[40%] h-8 rounded-full skeleton-shimmer" />
-            <Skeleton className="absolute top-1/2 mt-[7%] 2xl:mt-[4%] left-5 w-[50%] h-8 rounded-full skeleton-shimmer" />
-            <Skeleton className="absolute top-[20%] right-7 w-[40%] h-[70%] rounded-3xl skeleton-shimmer" />
+          <div className="w-full h-[413px] flex gap-4">
+            {/* Asosiy banner skeleton */}
+            <div className="relative w-[78%] h-full rounded-lg bg-[#c7c7c7]">
+              <Skeleton className="w-full h-full rounded-lg " />
+              <Skeleton className="absolute top-[30%] left-5 w-[40%] h-8 rounded-full skeleton-shimmer" />
+              <Skeleton className="absolute top-[50%] left-5 w-[50%] h-8 rounded-full skeleton-shimmer" />
+              <Skeleton className="absolute top-[20%] right-7 w-[40%] h-[70%] rounded-3xl skeleton-shimmer" />
+            </div>
+            {/* Yon banner skeleton */}
+            <div className="w-[22%] h-full rounded-lg bg-[#c7c7c7] flex flex-col justify-center items-center gap-4">
+              <Skeleton className="w-[60%] h-[50%] rounded-3xl skeleton-shimmer" />
+              <Skeleton className="w-[40%] h-5 rounded-full skeleton-shimmer" />
+            </div>
           </div>
         </Container>
       </div>
@@ -52,6 +57,7 @@ export const Banner = ({
     <div className="slider-container pt-[51px] hidden lgl:block relative">
       <Container>
         <div className="flex gap-5">
+          {/* Asosiy Banner */}
           <div className="relative w-[77%]">
             <Swiper
               pagination={pagination}
@@ -76,7 +82,7 @@ export const Banner = ({
                         src={`${process.env.NEXT_PUBLIC_API_URL}/${item?.imagePath}`}
                         alt={`Banner ${item?.id}`}
                         fill
-                        style={{ objectFit: "cover" }}
+                        className="object-cover"
                         priority
                       />
                     </div>
@@ -84,28 +90,30 @@ export const Banner = ({
                 </SwiperSlide>
               ))}
             </Swiper>
+            {/* Navigatsiya tugmalar */}
             <div
-              className="custom-swiper-button-prev cursor-pointer absolute left-0 top-0 h-full hover:bg-bannerBg px-[5px] 
-              flex items-center z-[1] duration-150 ease-in-out"
+              className="custom-swiper-button-prev cursor-pointer absolute left-0 top-0 h-full hover:bg-bannerBg px-2 flex items-center z-[1] duration-150"
               onClick={() => swiperRef.current?.slidePrev()}
             >
               <BannerIcon className="rotate-180" />
             </div>
             <div
-              className="custom-swiper-button-next cursor-pointer absolute right-0 top-0 h-full hover:bg-bannerBg duration-150 
-              ease-in-out px-[5px] flex items-center z-[1]"
+              className="custom-swiper-button-next cursor-pointer absolute right-0 top-0 h-full hover:bg-bannerBg px-2 flex items-center z-[1] duration-150"
               onClick={() => swiperRef.current?.slideNext()}
             >
               <BannerIcon />
             </div>
           </div>
-          <Link href={"/action"} className="w-[23%] h-[413px] rounded-none">
+
+          {/* Yon Banner */}
+          <Link href={"/action"} className="w-[23%] h-[413px]">
             <Image
-              className="w-full h-full object-cover"
-              width={100}
-              height={413}
               src="/banner.png"
-              alt="banner"
+              alt="Side Banner"
+              width={500}
+              height={413}
+              className="object-cover w-full h-full"
+              priority
             />
           </Link>
         </div>

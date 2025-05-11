@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 const News = async () => {
-  const news: NewsData[] = await getNews({ page: "" });
+  const news: NewsData[] = await getNews({ page: "news", home: false });
   const years = news.map((item) => item.createdAt.split("-")[0]);
   const uniqueYears = [...new Set(years)];
 
