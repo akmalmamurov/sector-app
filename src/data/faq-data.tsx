@@ -56,11 +56,11 @@ export const faqData: FaqData[] = [
       <>
         Самое главное —{" "}
         <Link
-          href="https://www.sector.app.uz/"
+          href="https://sectortechnology.uz/"
           target="_blank"
           className="text-cerulean hover:underline hoverEffect"
         >
-          Sector.App.Uz
+          Sectortechnology.Uz
         </Link>{" "}
         дает гарантию на все поставляемое оборудование — от 3 месяцев до 3-х
         лет.

@@ -78,11 +78,12 @@ const CalculatorVideos = () => {
             <div className="flex flex-col items-center">
               <iframe
                 className="w-full sm:w-[230px] h-[140px] rounded-md"
-                src="https://www.youtube.com/embed/EjL__dI-xVM"
+                src="https://www.youtube.com/embed/tSOD9M-Vx-4?si=c7Z_iqdi4ZIaOG0N"
                 title="1 Мбит/c"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                frameBorder={0}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
-              ></iframe>
+              />
               <p className="pt-2 text-center text-sm font-medium">
                 Битрейт 1 Мбит
               </p>
@@ -92,11 +93,13 @@ const CalculatorVideos = () => {
             <div className="flex flex-col items-center">
               <iframe
                 className="w-full sm:w-[230px] h-[140px] rounded-md"
-                src="https://www.youtube.com/embed/ak7QkmrIy9w"
-                title="2 Мбит/c"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                src="https://www.youtube.com/embed/38nNIzin7zI?si=tWB6TeV9pBkUUTMc"
+                title="8 Мбит/c"
+                frameBorder={0}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
-              ></iframe>
+              />
+
               <p className="mt-2 text-center text-sm font-medium">
                 Битрейт 2 Мбит
               </p>
@@ -106,11 +109,13 @@ const CalculatorVideos = () => {
             <div className="flex flex-col items-center">
               <iframe
                 className="w-full sm:w-[230px] h-[140px] rounded-md"
-                src="https://www.youtube.com/embed/u94vEmA-Om4"
+                src="https://www.youtube.com/embed/B7q680Rn5U4?si=Qa5ljekfwyr2PaT6"
                 title="4 Мбит/c"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                frameBorder={0}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
-              ></iframe>
+              />
+
               <p className="mt-2 text-center text-sm font-medium">
                 Битрейт 4 Мбит
               </p>
@@ -120,11 +125,12 @@ const CalculatorVideos = () => {
             <div className="flex flex-col items-center">
               <iframe
                 className="w-full sm:w-[230px] h-[140px] rounded-md"
-                src="https://www.youtube.com/embed/FQR-a0BwvVM"
-                title="8 Мбит/c"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                src="https://www.youtube.com/embed/_8-Ho_WSJKI?si=XEEfCNNwqffSJglb"
+                title="2 Мбит/c"
+                frameBorder={0}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
-              ></iframe>
+              />
               <p className="mt-2 text-center text-sm font-medium">
                 Битрейт 8 Мбит
               </p>

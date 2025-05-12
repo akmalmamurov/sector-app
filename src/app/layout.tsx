@@ -9,6 +9,7 @@ import { Providers } from "@/components/providers";
 import { ScrollTop } from "@/components/scroll-top";
 import { RootProviders } from "./RootProviders";
 import CartSync from "@/components/store-sync/CartSync";
+import { LoadingProvider } from "@/context/LoadingContext";
 
 export const metadata: Metadata = {
   title: "Sector App",
@@ -23,7 +24,8 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <head>
-        <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+        <link rel="icon" type="image/png" href="/sector.png" />
+        <meta name="google-site-verification" content="cFIUZDc9u_J2IHNxtKQH7MywR2wb73by2EUA5huh7S4" />
       </head>
       <body>
         <RootProviders>
@@ -31,7 +33,11 @@ export default function RootLayout({
           <Providers>
             <Header />
             <CartSync />
-            {children}
+            <LoadingProvider>
+              <div className="min-h-[80vh]">
+              {children}
+              </div>
+          </LoadingProvider>
             <div className="lg:hidden flex">
               <BottomNavbar />
             </div>
@@ -46,7 +52,7 @@ export default function RootLayout({
               right: "50px",
               top: "20px",
             }}
-          />
+            />
           <Footer />
         </RootProviders>
         <script src="//code.jivosite.com/widget/UP0xqFFMzr" async></script>

@@ -1,15 +1,21 @@
 "use client";
-import { TelegramBlueIcon } from "@/assets/icons";
+import React from "react";
 import Link from "next/link";
-import { Pencil } from "lucide-react";
-
+import { TelegramBlueIcon } from "@/assets/icons";
 import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
-import { useRequireAuth } from "@/hooks";
 import { AccountMe, AccountPassword } from "@/components/profile";
+import EditNumber from "@/components/profile/EditNumber";
+import { useRequireAuth } from "@/hooks";
+import sessionStore from "@/context/session-store";
 
 const SettingsPage = () => {
   useRequireAuth();
+  const rowCol = sessionStore((s) => s.rowCol);
+  const toggleRowCol = sessionStore((s) => s.toggleRowCol);
+
+  const handleTableCol = (row: boolean) => {
+    toggleRowCol(row);
+  };
   return (
     <section className="p-6 bg-white">
       <div className="flex items-center gap-3 border border-cerulean h-[51px] px-4 mb-4">
@@ -27,117 +33,9 @@ const SettingsPage = () => {
         </div>
         <AccountMe />
         <AccountPassword />
-        <div className="border-b border-superSilver py-5">
-          <div className="block lg:grid lg:grid-cols-11 gap-6 items-center mb-3">
-            <p className="text-[#000000DE] col-span-2 text-sm pt-8 lg:pt-0">
-              Контакты
-            </p>
-            <div className="pb-8 lg:pb-12 col-span-3 pt-10 lg:pt-0">
-              <p className="text-sm text-[#000000DE] font-normal pb-5 lg:pt-0">
-                Телефон
-              </p>
-              <span className="text-base font-normal ">+998 99 861 6951</span>
-            </div>
-          </div>
-          <button className="border border-cerulean rounded-xl flex items-center gap-2 h-[42px] p-4 justify-self-end">
-            <Pencil className="text-cerulean w-[22px] h-[22px]" />
-            <span className="text-cerulean text-base font-semibold">
-              Изменить
-            </span>
-          </button>
-        </div>
-        <div className="border-b border-superSilver pt-5 pb-2 hidden">
-          <div className="block lg:grid grid-cols-11 gap-6 items-center mb-3">
-            <p className="text-[#000000DE] text-sm col-span-2">Уведомления</p>
-            <div className="col-span-9 -ml-3 sm:-ml-0 place-self-start">
-              <table className="w-full border-separate border-spacing-y-3">
-                <tbody>
-                  <tr>
-                    <th className="bg-whiteOut border border-superSilver text-start p-3 text-[#000000DE] text-sm font-normal">
-                      <p>Выставлен счёт</p>
-                    </th>
-                    <td className="border border-superSilver border-r-0 pl-1 px-2">
-                      <div className="flex items-center space-x-2">
-                        <Switch id="airplane-mode" />
-                        <Label
-                          style={{ fontWeight: 400 }}
-                          htmlFor="airplane-mode text-textColor text-xs "
-                        >
-                          E-mail
-                        </Label>
-                      </div>
-                    </td>
-                    <td className="border border-superSilver border-l-0 pl-1 px-2">
-                      <div className="flex items-center space-x-2">
-                        <Switch id="airplane-mode" />
-                        <Label
-                          style={{ fontWeight: 400 }}
-                          htmlFor="airplane-mode text-textColor text-xs"
-                        >
-                          Telegram
-                        </Label>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th className="bg-whiteOut border border-superSilver text-start p-3 text-[#000000DE] text-sm font-normal">
-                      <p>Изменение статуса заказа</p>
-                    </th>
-                    <td className="border border-superSilver border-r-0 pl-1 px-2">
-                      <div className="flex items-center space-x-2">
-                        <Switch id="airplane-mode" />
-                        <Label
-                          style={{ fontWeight: 400 }}
-                          htmlFor="airplane-mode text-textColor text-xs "
-                        >
-                          E-mail
-                        </Label>
-                      </div>
-                    </td>
-                    <td className="border border-superSilver border-l-0 pl-1 px-2">
-                      <div className="flex items-center space-x-2">
-                        <Switch id="airplane-mode" />
-                        <Label
-                          style={{ fontWeight: 400 }}
-                          htmlFor="airplane-mode text-textColor text-xs"
-                        >
-                          Telegram
-                        </Label>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th className="bg-whiteOut border border-superSilver text-start p-3 text-[#000000DE] text-sm font-normal">
-                      <p>Рассылка прайс-листа</p>
-                    </th>
-                    <td className="border border-superSilver border-r-0 pl-1 px-2">
-                      <div className="flex items-center space-x-2">
-                        <Switch id="airplane-mode" />
-                        <Label
-                          style={{ fontWeight: 400 }}
-                          htmlFor="airplane-mode text-textColor text-xs"
-                        >
-                          E-mail
-                        </Label>
-                      </div>
-                    </td>
-                    <td className="border border-superSilver border-l-0 pl-1 px-2">
-                      <div className="flex items-center space-x-2">
-                        <Switch id="airplane-mode" />
-                        <Label
-                          style={{ fontWeight: 400 }}
-                          htmlFor="airplane-mode text-textColor text-xs "
-                        >
-                          Telegram
-                        </Label>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+        <EditNumber />
+
+        {/* Дополнительные настройки */}
         <div className="pt-5 pb-2">
           <div className="block lg:grid grid-cols-11 gap-6 items-center mb-3">
             <p className="text-[#000000DE] text-sm col-span-2">
@@ -163,10 +61,24 @@ const SettingsPage = () => {
                   Отображение каталога
                 </Label>
                 <div className="flex items-center w-full">
-                  <button className="bg-white w-1/2 py-1.5 text-[#8C8C8C] border border-superSilver text-base font-semibold text-center ">
+                  <button
+                    onClick={() => handleTableCol(false)}
+                    className={`w-1/2 py-1.5 border text-base font-semibold text-center ${
+                      !rowCol
+                        ? "bg-greenLight text-white border-greenLight"
+                        : "bg-white text-weekColor border-superSilver"
+                    }`}
+                  >
                     Таблица
                   </button>
-                  <button className="bg-greenLight w-1/2 py-1.5 text-white border text-base font-semibold text-center border-greenLight">
+                  <button
+                    onClick={() => handleTableCol(true)}
+                    className={`w-1/2 py-1.5 border text-base font-semibold text-center ${
+                      rowCol
+                        ? "bg-greenLight text-white border-greenLight"
+                        : "bg-white text-weekColor border-superSilver"
+                    }`}
+                  >
                     Плитка
                   </button>
                 </div>

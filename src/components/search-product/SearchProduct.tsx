@@ -28,7 +28,7 @@ const SearchProduct = () => {
   const [nameSort, setNameSort] = useState<"asc" | "desc" | null>(null);
   const page = sessionStore((s) => s.pageSearch);
   const setPage = sessionStore((s) => s.setPageSearch);
-  const rowCol = sessionStore((s) => s.rowSearch);
+  const rowCol = sessionStore((s) => s.rowCol);
 
   const { data: searchData, isLoading } = useQuery({
     queryKey: [
@@ -53,8 +53,6 @@ const SearchProduct = () => {
       ),
   });
 
-  console.log(searchData);
-
   const props = {
     selected,
     inStock,
@@ -68,8 +66,9 @@ const SearchProduct = () => {
     setLimit,
     priceSort,
     nameSort,
-    searchTrue: true,
   };
+  console.log("searchData", searchData);
+
   return (
     <div>
       <div className="grid grid-cols-12 gap-6">
@@ -91,34 +90,42 @@ const SearchProduct = () => {
             </div>
             <div className="p-6">
               {searchData?.groupedByCatalog?.map(
-                (
-                  { catalogName, catalogSlug, categories }: SearchCatalog,
-                  index: number
-                ) => (
-                  <div key={index}>
-                    <li className=" list:disc font-normal text-sm text-cerulean">
+                ({
+                  catalogName,
+                  subcatalogs,
+                  productsCount,
+                  url,
+                }: SearchCatalog) => (
+                  <div key={catalogName}>
+                    <li className="list-disc font-normal text-sm text-cerulean">
                       <Link
-                        href={`/catalog/${catalogSlug}`}
+                        href={url}
                         className="text-xs font-normal text-textColor hover:text-celBlue hoverEffect"
                       >
-                        {catalogName} ({categories?.length})
+                        {catalogName} ({productsCount})
                       </Link>
                     </li>
                     <div className="ml-[15px]">
-                      {categories?.map(
-                        ({ categoryName, categorySlug ,productCodes}, index: number) => (
-                          <li
-                            className=" list:disc text-sm text-cerulean"
-                            key={index}
-                          >
-                            <Link
-                              href={`/catalog/${catalogSlug}/${categorySlug}`}
-                              className="text-xs font-normal text-textColor hover:text-celBlue hoverEffect"
-                            >
-                              {categoryName} ({productCodes?.length})
-                            </Link>
-                          </li>
-                        )
+                      {subcatalogs?.flatMap(
+                        ({ categories }, subIndex: number) =>
+                          categories?.map(
+                            (
+                              { categoryName, productsCount, url },
+                              catIndex
+                            ) => (
+                              <li
+                                className="list-disc text-sm text-cerulean"
+                                key={`${catalogName}-${subIndex}-${catIndex}`}
+                              >
+                                <Link
+                                  href={url}
+                                  className="text-xs font-normal text-textColor hover:text-celBlue hoverEffect"
+                                >
+                                  {categoryName} ({productsCount})
+                                </Link>
+                              </li>
+                            )
+                          )
                       )}
                     </div>
                   </div>

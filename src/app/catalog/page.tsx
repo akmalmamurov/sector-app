@@ -1,17 +1,12 @@
-import Link from "next/link";
-
-import { getCatalog } from "@/api/catalog";
-import { CatalogChevronIcon } from "@/assets/icons";
 import { HomeCrumb } from "@/components/bread-crumb";
 import { Container } from "@/components/container";
 import { InfoHeader } from "@/components/div";
 import { Section } from "@/components/section";
 import { InfoTitle } from "@/components/title";
-import { CatalogData } from "@/types";
+import Catalog from "@/components/catalog-menu/Catalog";
 
 
 const CatalogPage = async () => {
-  const catalogData = await getCatalog();
 
   return (
     <Container className="pb-[58px]">
@@ -20,34 +15,7 @@ const CatalogPage = async () => {
         <InfoHeader className="mb-5">
           <InfoTitle>Каталог товаров</InfoTitle>
         </InfoHeader>
-        <div className="p-4  md:p-6 grid grid-cols-2">
-          {catalogData?.map((item: CatalogData) => (
-            <div key={item?.id} className="mb-[50px]">
-              <div className="mb-7">
-                <Link
-                  href={`/catalog/${item?.slug}`}
-                  className="font-normal text-[16px] sm:text-[21px] text-textColor hover:text-celBlue duration-150 ease-in-out text-wrap"
-                >
-                  {item?.title}
-                </Link>
-              </div>
-              <div className="flex flex-col gap-2">
-                {item.subcatalogs?.map((subcatalog) => (
-                  <Link
-                    key={subcatalog?.id}
-                    href={`/catalog/${subcatalog?.slug}`}
-                    className="flex items-center text-xs text-textColor hover:text-celBlue duration-150 ease-in-out text-wrap"
-                  >
-                    <span className="mr-[4.68px]">
-                      <CatalogChevronIcon />
-                    </span>
-                    {subcatalog?.title}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
+        <Catalog/>
       </Section>
     </Container>
   );

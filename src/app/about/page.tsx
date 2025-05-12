@@ -43,7 +43,7 @@ const About = () => {
             />
             <div className="xl:absolute top-[190px] left-0 p-6 bg-opacity-50 ">
               <Link href="#" className="text-[29px] text-cerulean">
-                НАГ сегодня это —
+                Sector Technology сегодня это —
               </Link>
               <p className="text-[24px] text-textColor max-w-[580px]">
                 Открытый и честный каталог, который помогает IT и Телеком
@@ -51,7 +51,7 @@ const About = () => {
               </p>
             </div>
           </div>
-          <div className="flex flex-wrap justify-center gap-8 pt-12">
+          <div className="hidden flex-wrap justify-center gap-8 pt-12">
             <div>
               <Image
                 src={secondImageAbout}
@@ -92,21 +92,21 @@ const About = () => {
                 <Image src={seventhImageAbout} alt="pic" />
                 <p className="text-[29px] text-textColor">Офисы</p>
                 <p className="text-[18px] text-[#8C8C8C] max-w-[200px] text-center">
-                  Ташкент, Алматы{" "}
+                  Узбекистан, Ташкент{" "}
                 </p>
               </div>
               <div className="border bg-white border-superSilver flex flex-col justify-center items-center md:py-20 py-11 w-[330px]">
                 <Image src={eighthImageAbout} alt="pic" />
                 <p className="text-[29px] text-textColor">Склады</p>
                 <p className="text-[18px] text-[#8C8C8C] max-w-[200px] text-center">
-                  Ташкент, Алматы{" "}
+                  Узбекистан, Ташкент{" "}
                 </p>
               </div>
               <div className="border bg-white border-superSilver flex flex-col justify-center items-center md:py-[67px] py-[31px] w-[330px]">
                 <Image src={ninethImageAbout} alt="pic" />
                 <p className="text-[29px] text-textColor">Центры логистики</p>
                 <p className="text-[18px] text-[#8C8C8C] max-w-[270px] text-center">
-                  Узбекистан, Казахстан, Китай, Соединённые Штаты Америки
+                  Узбекистан, Казахстан
                 </p>
               </div>
             </div>
@@ -236,7 +236,7 @@ const About = () => {
               />
               <div className="md:pl-[40px]">
                 <Link href="#" className="text-cerulean text-[24px]">
-                  НАГ — свобода выбора
+                  Sector Technology — свобода выбора
                 </Link>
                 <p className="pt-[30px]">
                   В нашем каталоге более 1000 брендов и более 45000 наименований

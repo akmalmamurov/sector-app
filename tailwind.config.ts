@@ -42,7 +42,7 @@ export default {
         cerulean: "#0054AE",
         whiteOut: "#FBFBFB",
         greenLight: "#6AB04C",
-        noghreiSilver:"#BDBDBD",
+        noghreiSilver: "#BDBDBD",
         background: "#FAFAFA",
         superSilver: "#EEEEEE",
         bleachedSilk: "#F3F3F3",
@@ -119,6 +119,7 @@ export default {
       },
       boxShadow: {
         sectionShadow: "rgba(0, 0, 0, 0.07) 0px 7px 10px",
+        searchShadow: "0 2px 10px rgba(0, 0, 0, .1)",
         discountWadow: "0 10px 36px rgba(0,0,0,.1)",
         promotionShadow: "0 3px 31.5px 0 rgba(0, 0, 0, 0.1)",
         cartMenuShadow: "rgba(0, 0, 0, 0.1) 0px 2px 10px",

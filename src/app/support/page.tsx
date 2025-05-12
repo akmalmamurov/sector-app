@@ -23,10 +23,10 @@ const SupportPage = () => {
           <h5 className="info-text">Уважаемые клиенты!</h5>
           <p className="info-text">
             Если у Вас возникли вопросы по приобретенному у нас оборудованию, Вы
-            можете обратиться в службу технической поддержки НАГ с
+            можете обратиться в службу технической поддержки Sector Technology с
             использованием системы{" "}
             <Link
-              href={"https://www.nag.support/"}
+              href={"mailto:info@sectortechnology.uz"}
               className="hover:underline hoverEffect text-cerulean"
             >
               Help Desk.
@@ -34,7 +34,7 @@ const SupportPage = () => {
           </p>
           <div>
             <p className="info-text">
-              Доступ к системе предоставляется для всех клиентов НАГ бесплатно.
+              Доступ к системе предоставляется для всех клиентов Sector Technology бесплатно.
             </p>
             <p className="info-text">
               Пожалуйста, ознакомьтесь с инструкцией и регламентом работы
@@ -43,7 +43,7 @@ const SupportPage = () => {
           </div>
 
           <p className="info-text">
-            На все телекоммуникационное оборудование производства компании НАГ
+            На все телекоммуникационное оборудование производства компании Sector Technology
             распространяется услуга гарантийного обслуживания. Подробнее с
             условиями и регламентом Вы можете ознакомиться в разделе «
             <Link
@@ -59,13 +59,13 @@ const SupportPage = () => {
             оборудования.
           </p>
           <p className="info-text">
-            Вы можете воспользоваться услугами Сервисного центра НАГ и получить
+            Вы можете воспользоваться услугами Сервисного центра Sector Technology и получить
             предварительную стоимость диагностики и ремонта.
           </p>
           <p className="info-text">
             Для этого вам необходимо зарегистрировать заявку в службе{" "}
             <Link
-              href={"https://www.nag.support/"}
+              href={"mailto:info@sectortechnology.uz"}
               className="hover:underline hoverEffect text-cerulean"
             >
               Help Desk.
@@ -91,7 +91,7 @@ const SupportPage = () => {
             Уважаемые клиенты, мы постоянно стараемся улучшить качество
             оказываемого сервиса и уменьшить сроки обработки обращений. Если у
             Вас есть пожелания или вопросы, пишите нам на{" "}
-            <Link href="mailto:fb@nag.uz" className="hover:underline text-cerulean">fb@nag.uz</Link>
+            <Link href="mailto:info@sectortechnology.uz" className="hover:underline text-cerulean">info@sectortechnology.uz</Link>
           </p>
         </div>
       </Section>

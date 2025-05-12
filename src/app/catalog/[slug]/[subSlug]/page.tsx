@@ -5,8 +5,7 @@ import { Container } from "@/components/container";
 import { HomeIcon } from "@/assets/icons";
 import { CategoryCrumb } from "@/components/bread-crumb";
 import { getCategoryBreadcrumbPaths, getTitleBySlug } from "@/utils";
-import CategoryLeft from "@/components/category/CategoryLeft";
-import { CategoryRight } from "@/components/category";
+import { CatalogWrapper } from "@/components/catalog-wrapper/CatalogWrapper";
 
 type Props = {
   params: Promise<{ slug: string; subSlug: string }>;
@@ -49,16 +48,21 @@ export default async function CategoryPage({ params }: Props) {
         ))}
       </div>
       {/* Products filters */}
-      <div className="grid grid-cols-12 gap-6">
-        {/* Filters */}
+      <CatalogWrapper
+        paramKey="categorySlug"
+        slug={subSlug}
+        categoryTitle={categoryTitle}
+        mainSlug={slug}
+      />
+      {/* <div className="grid grid-cols-12 gap-6">
         <CategoryLeft slug={subSlug} mainSlug={slug} paramKey="categorySlug" />
-        {/* Products */}
+
         <CategoryRight
           slug={subSlug}
-          title={categoryTitle}
+          title={categoryTitle || ""}
           paramKey="categorySlug"
         />
-      </div>
+      </div> */}
     </Container>
   );
 }

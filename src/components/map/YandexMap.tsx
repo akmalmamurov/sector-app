@@ -62,19 +62,19 @@ export default function YandexMap() {
           </p>
           <div className="flex flex-col">
             <Link
-              href="tel:+998883431313"
+              href="tel:+998953731313"
               className="text-sm text-textColor mb-4"
             >
               <span className="font-medium">Телефон: </span>
               <span className="text-cerulean hover:underline">
-                +998 88 343 13 13
+                +998 95 373 13 13
               </span>
             </Link>
             <Link
-              href="mailto:sales@nag.uz"
+              href="mailto:sales@sectortechnology.uz"
               className="text-sm text-cerulean hover:underline"
             >
-              sales@nag.uz
+              sales@sectortechnology.uz
             </Link>
           </div>
           <div className="flex gap-[22px]">
