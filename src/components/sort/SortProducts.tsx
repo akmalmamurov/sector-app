@@ -68,7 +68,6 @@ export const SortProducts: React.FC<SortProductsProps> = (props) => {
     return null;
   };
   const currentSort = getCurrentSort();
-  console.log(rowCol);
   
 
   return (

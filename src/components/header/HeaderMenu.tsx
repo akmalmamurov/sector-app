@@ -3,23 +3,20 @@
 import Image from "next/image";
 import { Container } from "../container";
 import { logo } from "@/assets/images";
-import Form from "next/form";
-import { SearchIcon } from "@/assets/icons";
 import Link from "next/link";
 import HeaderMenuLink from "./HeaderMenuLink";
 
-import { useEffect, useState } from "react";
+import { useEffect,  } from "react";
 import { Menu, X } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { getCatalog } from "@/api/catalog";
 import HeaderMobile from "./HeaderMobile";
 import { usePathname } from "next/navigation";
 import { useMobileMenuStore } from "@/stores/mobileMenuStore";
-import { getSearchProduct } from "@/api";
+import SearchMenu from "../menu/SearchMenu";
 
 const HeaderMenu = () => {
   const pathname = usePathname();
-  const [search, setSearch] = useState("");
 
   const isOpen = useMobileMenuStore((state) => state.isOpen);
   const toggleMenu = useMobileMenuStore((state) => state.toggleMenu);
@@ -29,12 +26,6 @@ const HeaderMenu = () => {
     queryKey: ["catalog"],
     queryFn: getCatalog,
   });
-  const { data: searchData = [] } = useQuery({
-    queryKey: ["search-data"],
-    queryFn: () => getSearchProduct(),
-    enabled: search.length > 0,
-  });
-  console.log(searchData);
 
   useEffect(() => {
     closeMenu();
@@ -59,22 +50,7 @@ const HeaderMenu = () => {
           />
         </Link>
 
-        {/* search */}
-        <Form action="/catalog/search" className="flex-1 relative">
-          <div className="relative w-full">
-            <input
-              type="text"
-              name="query"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Введите поисковый запрос"
-              className="input-autofill w-full py-[12px] xl:py-[12px] pl-4 pr-[40px] rounded-[10px] border bg-background focus:outline-none focus:border-transparent focus:shadow-lg focus:bg-white placeholder-opacity-0 text-ellipsis overflow-hidden whitespace-nowrap"
-            />
-            <button className="absolute top-1/2 right-[15px] -translate-y-1/2">
-              <SearchIcon />
-            </button>
-          </div>
-        </Form>
+        <SearchMenu />
 
         <div className="flex">
           <div className="hidden lg:block">
@@ -87,7 +63,11 @@ const HeaderMenu = () => {
                 onClick={toggleMenu}
                 className="p-2 rounded-md text-cerulean flex items-center justify-center z-50"
               >
-                {isOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
+                {isOpen ? (
+                  <X className="w-8 h-8" />
+                ) : (
+                  <Menu className="w-8 h-8" />
+                )}
               </button>
               <HeaderMobile
                 isOpen={isOpen}

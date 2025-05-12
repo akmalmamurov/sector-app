@@ -53,7 +53,6 @@ const SearchProduct = () => {
       ),
   });
 
-  console.log("Search data:", searchData);
 
   const props = {
     selected,
@@ -91,16 +90,13 @@ const SearchProduct = () => {
             </div>
             <div className="p-6">
               {searchData?.groupedByCatalog?.map(
-                (
-                  {
-                    catalogName,
-                    subcatalogs,
-                    productsCount,
-                    url,
-                  }: SearchCatalog,
-                  index: number
-                ) => (
-                  <div key={index}>
+                ({
+                  catalogName,
+                  subcatalogs,
+                  productsCount,
+                  url,
+                }: SearchCatalog) => (
+                  <div key={catalogName}>
                     <li className="list-disc font-normal text-sm text-cerulean">
                       <Link
                         href={url}
@@ -119,7 +115,7 @@ const SearchProduct = () => {
                             ) => (
                               <li
                                 className="list-disc text-sm text-cerulean"
-                                key={subIndex + catIndex}
+                                key={`${catalogName}-${subIndex}-${catIndex}`}
                               >
                                 <Link
                                   href={url}
