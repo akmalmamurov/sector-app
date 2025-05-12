@@ -17,7 +17,7 @@ export const PhoneModal = ({ isOpen, toggleOpen }: Props) => {
   const [phone, setPhone] = useState<string>("+998 __ ___ ____");
   const [error, setError] = useState(false);
   const [isPhoneComplete, setIsPhoneComplete] = useState(false);
-  console.log(phone.length);
+  console.log(setError(true));
 
   return (
     <Dialog open={isOpen} onOpenChange={toggleOpen}>
