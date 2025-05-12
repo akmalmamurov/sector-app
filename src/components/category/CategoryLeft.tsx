@@ -9,12 +9,7 @@ import { Section } from "../section";
 import { SearchIcon } from "@/assets/icons";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import {
-  CatalogData,
-  CategoryData,
-  ProductData,
-  SubcatalogData,
-} from "@/types";
+import { CatalogData, CategoryData, SubcatalogData } from "@/types";
 import CustomRangeSlider from "../slider/CustomRangeSlider";
 import { useSetOptionsQuery } from "@/hooks/useSetOptionsQuery";
 import { useGetOptionsQuery } from "@/hooks/useGetOptionsQuery";
@@ -34,11 +29,6 @@ interface FilterItem {
   title: string;
   options: FilterOption[];
   withSearch?: boolean;
-}
-
-interface FilterSearchItem {
-  filteredCategoryFilter: FilterItem[];
-  filteredProducts: ProductData[];
 }
 
 interface CategoryLeftProps {
@@ -90,6 +80,7 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
         options: filter.options.map((option) => ({ name: option.name || "" })),
       }))
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterCheckedData]);
   const [isShow, setIsShow] = useState(false);
 
@@ -155,7 +146,7 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
   };
 
   return (
-    <div className="col-span-3 hidden lg:flex" >
+    <div className="col-span-3 hidden lg:flex">
       <Section className="rounded-[10px] p-0 shadow-sectionShadow">
         <div className="flex items-center gap-4 bg-white p-5 rounded-[10px]">
           <FilterIcon className="w-6 h-6" />
