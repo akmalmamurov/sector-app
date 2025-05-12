@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { getFilter, getFilterSearch } from "@/api";
+import { getFilter } from "@/api";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import FilterIcon from "@/assets/icons/FilterIcon";
@@ -67,20 +67,21 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
   });
   const { setOptions } = useSetOptionsQuery();
 
-  const { data: filterSearch } = useQuery<FilterSearchItem>({
-    queryKey: ["filterSearch", filterCheckedData, mainSlug, slug, paramKey],
-    queryFn: () =>
-      getFilterSearch({
-        subcatalogSlug: mainSlug ? null : slug,
-        categorySlug: mainSlug ? slug : null,
-        options: filterCheckedData.map((filter) => ({
-          name: filter.name,
-          options: filter.options.map((option) => ({
-            name: option.name || null,
-          })),
-        })),
-      }),
-  });
+  // const { data: filterSearch } = useQuery<FilterSearchItem>({
+  //   queryKey: ["filterSearch", filterCheckedData, mainSlug, slug, paramKey],
+  //   queryFn: () =>
+  //     getFilterSearch({
+  //       subcatalogSlug: mainSlug ? null : slug,
+  //       categorySlug: mainSlug ? slug : null,
+  //       options: filterCheckedData.map((filter) => ({
+  //         name: filter.name,
+  //         options: filter.options.map((option) => ({
+  //           name: option.name || null,
+  //         })),
+  //       })),
+  //     }),
+  // });
+  // console.log(filterSearch);
 
   useEffect(() => {
     setOptions(

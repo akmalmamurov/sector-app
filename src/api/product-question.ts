@@ -3,6 +3,7 @@ import { AxiosError } from "axios";
 import request from "@/services";
 import { QuestionProduct } from "@/types";
 import { showError, showSuccess } from "@/components/toast/Toast";
+import { CREATE_PRODUCT_QUESTIONS, GET_PRODUCT_QUESTIONS } from "@/constants";
 
 interface QuestionPayload {
   body: string;
@@ -10,7 +11,7 @@ interface QuestionPayload {
 }
 
 const postQuestion = async (data: QuestionPayload): Promise<QuestionProduct> => {
-  const res = await request.post<QuestionProduct>("/user/question/add", data);
+  const res = await request.post<QuestionProduct>(CREATE_PRODUCT_QUESTIONS, data);
   return res.data;
 };
 
@@ -27,4 +28,15 @@ export const usePostQuestion = () => {
      showError(`Something went wrong!`);
     },
   });
+};
+
+
+export const getProductQuestions = async (productId: string) => {
+  try {
+    const res = await request(`${GET_PRODUCT_QUESTIONS}/${productId}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
 };
