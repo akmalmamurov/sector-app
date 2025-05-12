@@ -100,7 +100,7 @@ const SearchMenu = () => {
             ))}
             <div className="flex justify-center py-[15px] px-5 bg-white">
               <button onClick={handleGo} className="text-dangerColor text-sm">
-                Смотреть все {searchData?.products?.length} товаров
+                Смотреть все {searchData?.total} товаров
               </button>
             </div>
           </div>

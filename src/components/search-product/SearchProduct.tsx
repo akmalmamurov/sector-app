@@ -53,7 +53,6 @@ const SearchProduct = () => {
       ),
   });
 
-
   const props = {
     selected,
     inStock,
@@ -67,8 +66,9 @@ const SearchProduct = () => {
     setLimit,
     priceSort,
     nameSort,
-    searchTrue: true,
   };
+  console.log("searchData", searchData);
+
   return (
     <div>
       <div className="grid grid-cols-12 gap-6">

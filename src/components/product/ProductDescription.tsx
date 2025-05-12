@@ -49,7 +49,6 @@ interface EditorData {
 const sections = [
   { id: "description", label: "Описание" },
   { id: "specs", label: "Характеристики" },
-  { id: "related", label: "Сопутствующие товары" },
   { id: "reviews", label: "Отзывы" },
   { id: "questions", label: "Вопросы" },
 ];
@@ -109,18 +108,23 @@ function renderEditorBlocks(editorJson: EditorData, fullImages: string[]) {
         imageIndex++;
         if (DOMAIN && !imageUrl.startsWith("http")) {
           imageUrl = DOMAIN + (imageUrl.startsWith("/") ? "" : "/") + imageUrl;
-        } 
+        }
         const caption = block.data.caption || "";
         return (
           <div className="flex gap-8 my-4">
             <div key={block.id} className="w-20">
               <div className="relative w-12 h-12">
-                <Image src={imageUrl} alt={caption} fill className="object-cover rounded" />
-              {caption && (
-                <p className="text-center text-sm mt-1 text-textColor">
-                  {caption}
-                </p>
-              )} 
+                <Image
+                  src={imageUrl}
+                  alt={caption}
+                  fill
+                  className="object-cover rounded"
+                />
+                {caption && (
+                  <p className="text-center text-sm mt-1 text-textColor">
+                    {caption}
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -187,14 +191,11 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        // Filter out only entries that are intersecting.
         const visibleEntries = entries.filter((entry) => entry.isIntersecting);
         if (visibleEntries.length) {
-          // Sort by the distance from the top of the viewport.
           visibleEntries.sort(
             (a, b) => a.boundingClientRect.top - b.boundingClientRect.top
           );
-          // The section closest to the top becomes active.
           setActiveTab(visibleEntries[0].target.id);
         }
       },
@@ -280,11 +281,11 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
     <>
       <div>
         <div
-          className={`hidden sm:block sticky ${isScroll ? "top-[78px] lg:top-[130px]" : "top-0"} bg-white border-b shadow-sectionShadow overflow-x-auto whitespace-nowrap scrollbar-hide`}
+          className={`hidden sm:block sticky z-10 ${isScroll ? "top-[78px] lg:top-[129px]" : "top-0"} bg-white border-b shadow-sectionShadow overflow-x-auto whitespace-nowrap scrollbar-hide`}
         >
-          {sections.map(({ id, label}, index) => (
+          {sections.map(({ id, label }, index) => (
             <button
-              key={index}
+              key={id + index}
               ref={(el) => {
                 buttonRefs.current[id] = el;
               }}
@@ -363,25 +364,6 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
           )}
 
           <section
-            id="related"
-            ref={(el: HTMLElement | null): void => {
-              sectionRefs.current.related = el;
-            }}
-            className="py-[53px] bg-whiteOut"
-            style={{ scrollMarginTop: "100px" }}
-          >
-            <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
-              <h2 className="text-xl font-semibold mb-4 flex items-center">
-                Сопутствующие товары
-              </h2>
-            </div>
-            <div className="max-w-none pl-[31px]">
-              <p className="text-base font-normal text-textColor mb-6">
-                API hali tayyor emas
-              </p>
-            </div>
-          </section>
-          <section
             id="reviews"
             ref={(el: HTMLElement | null): void => {
               sectionRefs.current.reviews = el;
@@ -457,7 +439,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
                   Уважаемые покупатели. <br />
                   Обращаем Ваше внимание, что размещенная на данном сайте
                   справочная информация о товарах не является офертой, наличие и
-                  стоимость оборудования необходимо уточнить у менеджеров  "НАГ
+                  стоимость оборудования необходимо уточнить у менеджеров "НАГ
                   Узбекистан", которые с удовольствием помогут Вам в выборе
                   оборудования и оформлении на него заказа.
                 </p>
