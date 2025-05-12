@@ -36,6 +36,9 @@ interface CategoryLeftProps {
   paramKey?: string;
   catalogItem?: CatalogData;
   mainSlug?: string;
+  data?: FilterItem[];
+  isLoading?: boolean;
+  isError?: boolean;
 }
 export interface FilterOptionRequest {
   name: string;
