@@ -1,8 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { getFilter } from "@/api";
-import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import FilterIcon from "@/assets/icons/FilterIcon";
 import { Section } from "../section";
@@ -33,6 +31,9 @@ interface CategoryLeftProps {
   paramKey?: string;
   catalogItem?: CatalogData;
   mainSlug?: string;
+  data?: FilterItem[];
+  isLoading?: boolean;
+  isError?: boolean;
 }
 interface FilterOptionRequest {
   name: string;
@@ -41,14 +42,12 @@ interface FilterOptionRequest {
 
 export const CategoryLeft: React.FC<CategoryLeftProps> = ({
   slug,
-  paramKey,
   catalogItem,
   mainSlug,
+  data,
+  isLoading,
+  isError,
 }) => {
-  const { data, isLoading, isError } = useQuery<FilterItem[]>({
-    queryKey: ["filter", slug, paramKey],
-    queryFn: () => getFilter(slug || "", paramKey || ""),
-  });
   const [isShow, setIsShow] = useState(false);
   const [isShowOptionsMap, setIsShowOptionsMap] = useState<{
     [key: string]: boolean;
@@ -61,8 +60,11 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
     return <div>Loading filters...</div>;
   }
 
-  if (isError || !data) {
+  if (isError) {
     return <div>Error loading filters.</div>;
+  }
+  if (!data) {
+    return <div>Filters not found</div>;
   }
   function handleLinkClick(filterName: string, url: string) {
     console.log(url);
@@ -116,8 +118,6 @@ export const CategoryLeft: React.FC<CategoryLeftProps> = ({
       ]);
     }
   };
-
-  console.log(filterCheckedData);
 
   const toggleShowOptions = (filterName: string) => {
     setIsShowOptionsMap((prev) => ({

@@ -38,6 +38,7 @@ export const getProductSingle = async (slug: string) => {
     return [];
   }
 };
+
 export const getProductCategory = async (
   queryParams: string,
   page: number,

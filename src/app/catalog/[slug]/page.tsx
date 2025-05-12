@@ -7,7 +7,7 @@ import { findCatalogItem, getTitleBySlug } from "@/utils/catalog-slug";
 import BreadcrumbHoverLink from "@/components/bread-crumb/CatalogCrumb";
 import { ChevronRightIcon } from "lucide-react";
 import { getBreadcrumbPaths, getSlugString } from "@/utils";
-import { CategoryLeft, CategoryRight } from "@/components/category";
+import { CatalogWrapper } from "@/components/catalog-wrapper/CatalogWrapper";
 import { CategoryData, SubcatalogData } from "@/types";
 
 type Props = {
@@ -27,11 +27,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function SingleCatalogPage({ params }: Props) {
   const { slug } = await params;
   const catalogData = await getCatalog();
-
   const slugString = getSlugString(slug);
   const catalogItem = slugString
     ? findCatalogItem(catalogData, slugString)
     : undefined;
+    
   const breadcrumbPaths = getBreadcrumbPaths(catalogData, slugString);
   const categoryTitle = getTitleBySlug(catalogData, slug);
 
@@ -57,7 +57,6 @@ export default async function SingleCatalogPage({ params }: Props) {
           />
         ))}
       </div>
-
       <div className="bg-white border p-[23px] shadow-sectionShadow mb-[23px]">
         <div className="flex flex-wrap items-start">
           {catalogItem?.subcatalogs?.length ? (
@@ -86,17 +85,12 @@ export default async function SingleCatalogPage({ params }: Props) {
         </div>
       </div>
 
-      {/* Filter product */}
-      <div className="lg:grid lg:grid-cols-12 lg:gap-6">
-        {/* Filters */}
-          <CategoryLeft
-            slug={slug}
-            paramKey="subcatalogSlug"
-            catalogItem={catalogItem}
-          />
-        {/* Products */}
-        <CategoryRight slug={slug} title={categoryTitle} paramKey="slug" />
-      </div>
+      <CatalogWrapper
+        paramKey="slug"
+        catalogItem={catalogItem}
+        slug={slug}
+        categoryTitle={categoryTitle}
+      />
     </Container>
   );
 }
