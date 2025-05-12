@@ -10,4 +10,4 @@ export const getFilter = async (queryParams: string, paramKey: string) => {
     console.log(error);
     return [];
   }
-};
+

@@ -25,9 +25,20 @@ import {
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { StarRating } from "../star-rating/StarRating";
-import { useCreateComment } from "@/api/product-comment";
-import { usePostQuestion } from "@/api/product-question";
+import { getProductComments, useCreateComment } from "@/api/product-comment";
+import { getProductQuestions, usePostQuestion } from "@/api/product-question";
 import { useScrollDirection } from "@/hooks";
+import { useQuery } from "@tanstack/react-query";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import SortAmountDownIcon from "@/assets/icons/SortAmountDownIcon";
+import SortAmountUpIcon from "@/assets/icons/SortAmountUpIcon";
+import QuestionCheckIcon from "@/assets/icons/QuestionCheckIcon";
 interface Block {
   id: string;
   type: string;
@@ -49,6 +60,7 @@ interface EditorData {
 const sections = [
   { id: "description", label: "Описание" },
   { id: "specs", label: "Характеристики" },
+  { id: "related", label: "Сопутствующие товары" },
   { id: "reviews", label: "Отзывы" },
   { id: "questions", label: "Вопросы" },
 ];
@@ -191,11 +203,14 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
+        // Filter out only entries that are intersecting.
         const visibleEntries = entries.filter((entry) => entry.isIntersecting);
         if (visibleEntries.length) {
+          // Sort by the distance from the top of the viewport.
           visibleEntries.sort(
             (a, b) => a.boundingClientRect.top - b.boundingClientRect.top
           );
+          // The section closest to the top becomes active.
           setActiveTab(visibleEntries[0].target.id);
         }
       },
@@ -277,15 +292,32 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
     }
   }, [activeTab]);
 
+  const { data: commentsData } = useQuery({
+    queryKey: ["comments", product.id],
+    queryFn: () => getProductComments(product.id),
+  });
+
+  const { data: questionsData } = useQuery({
+    queryKey: ["questions", product.id],
+    queryFn: () => getProductQuestions(product.id),
+  });
+
+  const handleSort = (value: string) => {
+    console.log(value);
+  };
+  const handleSort2 = (value: string) => {
+    console.log(value);
+  };
+
   return (
     <>
       <div>
         <div
-          className={`hidden sm:block sticky z-10 ${isScroll ? "top-[78px] lg:top-[129px]" : "top-0"} bg-white border-b shadow-sectionShadow overflow-x-auto whitespace-nowrap scrollbar-hide`}
+          className={`hidden sm:block sticky ${isScroll ? "top-[78px] lg:top-[130px]" : "top-0"} bg-white border-b shadow-sectionShadow overflow-x-auto whitespace-nowrap scrollbar-hide`}
         >
           {sections.map(({ id, label }, index) => (
             <button
-              key={id + index}
+              key={index}
               ref={(el) => {
                 buttonRefs.current[id] = el;
               }}
@@ -301,14 +333,14 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
           ))}
         </div>
 
-        <div className="bg-whiteOut shadow-sectionShadow p-[23px] ">
+        <div className="bg-whiteOut shadow-sectionShadow py-[23px]">
           {editorContent && (
             <section
               id="description"
               ref={(el) => {
                 if (el) sectionRefs.current.description = el;
               }}
-              className="py-[53px]"
+              className="py-[53px] px-[23px]"
             >
               <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
                 <h2 className="text-xl font-semibold mb-4 flex items-center">
@@ -325,7 +357,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
               ref={(el) => {
                 if (el) sectionRefs.current.specs = el;
               }}
-              className="py-[53px]"
+              className="py-[53px] px-[23px]"
             >
               <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
                 <h2 className="text-xl font-semibold mb-6">Характеристики</h2>
@@ -364,11 +396,30 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
           )}
 
           <section
+            id="related"
+            ref={(el: HTMLElement | null): void => {
+              sectionRefs.current.related = el;
+            }}
+            className="py-[53px] bg-white px-[23px]"
+            style={{ scrollMarginTop: "100px" }}
+          >
+            <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
+              <h2 className="text-xl font-semibold mb-4 flex items-center">
+                Сопутствующие товары
+              </h2>
+            </div>
+            <div className="max-w-none pl-[31px]">
+              <p className="text-base font-normal text-textColor mb-6">
+                API hali tayyor emas
+              </p>
+            </div>
+          </section>
+          <section
             id="reviews"
             ref={(el: HTMLElement | null): void => {
               sectionRefs.current.reviews = el;
             }}
-            className="py-[53px] bg-whiteOut"
+            className="py-[53px] bg-whiteOut px-[23px]"
             style={{ scrollMarginTop: "100px" }}
           >
             <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
@@ -380,27 +431,118 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
               <p className="text-base font-normal text-textColor mb-6">
                 Пока нет ни одного отзыва
               </p>
-              <div className="flex gap-5 items-center">
-                <button
-                  onClick={handleOpen}
-                  className="bg-cerulean hover:opacity-90 transition-opacity px-6 py-[10px] text-base font-semibold text-white inline-flex items-center justify-center gap-2"
+              <div className="flex items-center justify-between mb-12">
+                <div className="flex gap-5 items-center">
+                  <button
+                    onClick={handleOpen}
+                    className="bg-cerulean hover:opacity-90 transition-opacity px-6 py-[10px] text-base font-semibold text-white inline-flex items-center justify-center gap-2"
+                  >
+                    <CirclePlus className="text-white w-5 h-5" />
+                    <span>Добавить отзыв</span>
+                  </button>
+                  <div className="flex gap-2 items-center">
+                    {comments?.star && comments?.star > 0 ? (
+                      <Star
+                        className={`w-[25px] h-[22px]} text-[#FBCE13] fill-[#FBCE13]`}
+                      />
+                    ) : (
+                      <Star
+                        className={`w-[25px] h-[22px]} text-[#A3A3A3] fill-[#A3A3A3]`}
+                      />
+                    )}
+                    <span className="text-[26px] font-normal text-textColor leading-[39px]">
+                      {comments?.star ? comments?.star : 0}
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className={`${commentsData?.length > 0 ? "block" : "hidden"}`}
                 >
-                  <CirclePlus className="text-white w-5 h-5" />
-                  <span>Добавить отзыв</span>
-                </button>
-                <div className="flex gap-2 items-center">
-                  {comments?.star && comments?.star > 0 ? (
-                    <Star
-                      className={`w-[25px] h-[22px]} text-[#FBCE13] fill-[#FBCE13]`}
-                    />
-                  ) : (
-                    <Star
-                      className={`w-[25px] h-[22px]} text-[#A3A3A3] fill-[#A3A3A3]`}
-                    />
-                  )}
-                  <span className="text-[26px] font-normal text-textColor leading-[39px]">
-                    {comments?.star ? comments?.star : 0}
-                  </span>
+                  <Select defaultValue="ratingDown" onValueChange={handleSort}>
+                    <SelectTrigger className="px-4 h-[42px]">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="ratingDown">
+                        <div className="flex items-center gap-2">
+                          <SortAmountDownIcon className="w-[16.5px] h-[16.5px] text-textColor" />
+                          <span className="font-normal text-base text-textColor">
+                            По оценке
+                          </span>
+                        </div>
+                      </SelectItem>
+                      <SelectItem value="ratingUp">
+                        <div className="flex items-center gap-2">
+                          <SortAmountUpIcon className="w-[16.5px] h-[16.5px] text-textColor" />
+                          <span className="font-normal text-base text-textColor">
+                            По оценке
+                          </span>
+                        </div>
+                      </SelectItem>
+                      <SelectItem value="dateDown">
+                        <div className="flex items-center gap-2">
+                          <SortAmountDownIcon className="w-[16.5px] h-[16.5px] text-textColor" />
+                          <span className="font-normal text-base text-textColor">
+                            По дате
+                          </span>
+                        </div>
+                      </SelectItem>
+                      <SelectItem value="dateUp">
+                        <div className="flex items-center gap-2">
+                          <SortAmountUpIcon className="w-[16.5px] h-[16.5px] text-textColor" />
+                          <span className="font-normal text-base text-textColor">
+                            По дате
+                          </span>
+                        </div>
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              <div>
+                <div className="flex items-center gap-2 justify-between mb-4">
+                  <h4 className="info-semibold">Алексеенко Роман</h4>
+                  <span className="info-semibold">26.10.2022, 14:48</span>
+                </div>
+                <div className="flex items-center gap-2 mb-4">
+                  <Star
+                    className={`w-[25px] h-[22px]} text-[#FBCE13] fill-[#FBCE13]`}
+                  />
+                  <Star
+                    className={`w-[25px] h-[22px]} text-[#FBCE13] fill-[#FBCE13]`}
+                  />
+                  <Star
+                    className={`w-[25px] h-[22px]} text-[#FBCE13] fill-[#FBCE13]`}
+                  />
+                  <Star
+                    className={`w-[25px] h-[22px]} text-[#FBCE13] fill-[#FBCE13]`}
+                  />
+                  <Star
+                    className={`w-[25px] h-[22px]} text-[#FBCE13] fill-[#FBCE13]`}
+                  />
+                </div>
+                <p className="info-text mb-4">
+                  Добрый день! Скажите пожалуйста, есть ли у шлюза SNR-VG-2000-16S функция HotLine?
+                </p>
+                <div className="bg-whiteOut p-4">
+                  <div className="flex gap-6">
+                    <div className="w-[58px] h-[58px] border-[1px] border-transparent border-l-darkSoul  border-b-darkSoul"></div>
+                    <div className="flex-1">
+                      <div className=" flex items-center gap-2 justify-between mb-4">
+                        <div className="flex items-center gap-2">
+                          <h4 className="info-semibold">Sector Technology</h4>
+                          <QuestionCheckIcon className="w-[25px] h-[25px] text-cerulean" />
+                        </div>
+                        <p className="info-semibold">27.10.2022, 06:19</p>
+                      </div>
+                      <p className="info-text">
+                        Добрый день, Роман!
+                        Данная функция присутствует, ее настройка доступна в настройках web-интерфейса аналогового порта:
+                        - Offhook Auto-dial - указываете номер для автоматического набора номера
+                        - Auto-dial Delay Time - указываете 0 для автоматического набора номера. 
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -410,7 +552,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
             ref={(el: HTMLElement | null): void => {
               sectionRefs.current.questions = el;
             }}
-            className="pt-[53px] pb-[30px] mb-10"
+            className="pt-[53px] pb-[30px] mb-10 px-[23px] bg-white"
             style={{ scrollMarginTop: "100px" }}
           >
             <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
@@ -419,19 +561,91 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
               </h2>
             </div>
             <div className="max-w-none pl-[31px]">
-              <p className="text-base font-normal text-textColor mb-6">
-                Пока нет ни одного вопроса.
-              </p>
-              <button
-                onClick={handleOpen2}
-                className="bg-cerulean hover:opacity-90 transition-opacity px-6 py-[10px] text-base font-semibold text-white inline-flex items-center justify-center gap-2"
-              >
-                <CirclePlus className="text-white w-5 h-5" />
-                <span>Задать вопрос</span>
-              </button>
+              <p className="info-text mb-6">Пока нет ни одного вопроса.</p>
+              <div className="flex items-center justify-between mb-12">
+                <button
+                  onClick={handleOpen2}
+                  className="bg-cerulean hover:opacity-90 transition-opacity px-6 py-[10px] text-base font-semibold text-white inline-flex items-center justify-center gap-2"
+                >
+                  <CirclePlus className="text-white w-5 h-5" />
+                  <span>Задать вопрос</span>
+                </button>
+                <div
+                  className={`${questionsData?.length > 0 ? "block" : "hidden"}`}
+                >
+                  <Select defaultValue="dateDown2" onValueChange={handleSort2}>
+                    <SelectTrigger className="px-4 h-[42px]">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="ratingDown2">
+                        <div className="flex items-center gap-2">
+                          <SortAmountDownIcon className="w-[16.5px] h-[16.5px] text-textColor" />
+                          <span className="font-normal text-base text-textColor">
+                            По оценке
+                          </span>
+                        </div>
+                      </SelectItem>
+                      <SelectItem value="ratingUp2">
+                        <div className="flex items-center gap-2">
+                          <SortAmountUpIcon className="w-[16.5px] h-[16.5px] text-textColor" />
+                          <span className="font-normal text-base text-textColor">
+                            По оценке
+                          </span>
+                        </div>
+                      </SelectItem>
+                      <SelectItem value="dateDown2">
+                        <div className="flex items-center gap-2">
+                          <SortAmountDownIcon className="w-[16.5px] h-[16.5px] text-textColor" />
+                          <span className="font-normal text-base text-textColor">
+                            По дате
+                          </span>
+                        </div>
+                      </SelectItem>
+                      <SelectItem value="dateUp2">
+                        <div className="flex items-center gap-2">
+                          <SortAmountUpIcon className="w-[16.5px] h-[16.5px] text-textColor" />
+                          <span className="font-normal text-base text-textColor">
+                            По дате
+                          </span>
+                        </div>
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              <div>
+                <div className="flex items-center gap-2 justify-between mb-4">
+                  <h4 className="info-semibold">Алексеенко Роман</h4>
+                  <span className="info-semibold">26.10.2022, 14:48</span>
+                </div>
+                <p className="info-text mb-4">
+                  Добрый день! Скажите пожалуйста, есть ли у шлюза SNR-VG-2000-16S функция HotLine?
+                </p>
+                <div className="bg-whiteOut p-4">
+                  <div className="flex gap-6">
+                    <div className="w-[58px] h-[58px] border-[1px] border-transparent border-l-darkSoul  border-b-darkSoul"></div>
+                    <div className="flex-1">
+                      <div className=" flex items-center gap-2 justify-between mb-4">
+                        <div className="flex items-center gap-2">
+                          <h4 className="info-semibold">Sector Technology</h4>
+                          <QuestionCheckIcon className="w-[25px] h-[25px] text-cerulean" />
+                        </div>
+                        <p className="info-semibold">27.10.2022, 06:19</p>
+                      </div>
+                      <p className="info-text">
+                        Добрый день, Роман!
+                        Данная функция присутствует, ее настройка доступна в настройках web-интерфейса аналогового порта:
+                        - Offhook Auto-dial - указываете номер для автоматического набора номера
+                        - Auto-dial Delay Time - указываете 0 для автоматического набора номера. 
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
-          <div className="">
+          <div className="px-[23px]">
             <div className="flex items-center gap-4 border rounded-[10px] border-cerulean p-3.5">
               <CircleAlert className="w-5 h-5 text-cerulean" />
               <div className="flex flex-col gap-5 flex-1">

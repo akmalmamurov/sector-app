@@ -47,3 +47,7 @@ export const GET_ISSUES = "/user/request/all";
 export const UPDATE_ISSUES = "/user/request";
 export const GET_NEWS = "/user/news/all";
 export const GET_NEWS_BY_SLUG = (slug: string) => `/user/news/by-slug/${slug}`;
+export const GET_PRODUCT_COMMENTS = "/user/comment/by-productId";
+export const CREATE_PRODUCT_COMMENTS = "/user/comment/add";
+export const GET_PRODUCT_QUESTIONS = "/user/question/by-productId";
+export const CREATE_PRODUCT_QUESTIONS = "/user/question/add";

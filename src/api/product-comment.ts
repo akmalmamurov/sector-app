@@ -4,6 +4,8 @@ import request from "@/services";
 import { CommentProduct } from "@/types";
 import { showError, showSuccess } from "@/components/toast/Toast";
 
+import { CREATE_PRODUCT_COMMENTS, GET_PRODUCT_COMMENTS } from "@/constants";
+
 interface CommentPayload {
   body: string;
   productId: string;
@@ -11,7 +13,7 @@ interface CommentPayload {
 }
 
 const createComment = async (data: CommentPayload): Promise<CommentProduct> => {
-  const res = await request.post<{data: CommentProduct}>("/user/comment/add", data);
+  const res = await request.post<{data: CommentProduct}>(CREATE_PRODUCT_COMMENTS, data);
   return res.data.data;
 };
 
@@ -29,4 +31,15 @@ export const useCreateComment = () => {
      showError(`Error`);
     },
   });
+};
+
+
+export const getProductComments = async (productId: string) => {
+  try {
+    const res = await request(`${GET_PRODUCT_COMMENTS}/${productId}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
 };
