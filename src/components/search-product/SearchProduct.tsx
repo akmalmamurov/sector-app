@@ -28,7 +28,7 @@ const SearchProduct = () => {
   const [nameSort, setNameSort] = useState<"asc" | "desc" | null>(null);
   const page = sessionStore((s) => s.pageSearch);
   const setPage = sessionStore((s) => s.setPageSearch);
-  const rowCol = sessionStore((s) => s.rowSearch);
+  const rowCol = sessionStore((s) => s.rowCol);
 
   const { data: searchData, isLoading } = useQuery({
     queryKey: [

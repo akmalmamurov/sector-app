@@ -47,7 +47,7 @@ export const CategoryRight: React.FC<CategoryRightProps> = ({
 
   const setPage = sessionStore((s) => s.setPageCatalog);
 
-  const rowCol = sessionStore((state) => state.rowColProduct);
+  const rowCol = sessionStore((state) => state.rowCol);
 
   const props = {
     selected,

@@ -5,8 +5,17 @@ import { TelegramBlueIcon } from "@/assets/icons";
 import { Label } from "@/components/ui/label";
 import { AccountMe, AccountPassword } from "@/components/profile";
 import EditNumber from "@/components/profile/EditNumber";
+import { useRequireAuth } from "@/hooks";
+import sessionStore from "@/context/session-store";
 
 const SettingsPage = () => {
+  useRequireAuth();
+  const rowCol = sessionStore((s) => s.rowCol);
+  const toggleRowCol = sessionStore((s) => s.toggleRowCol);
+
+  const handleTableCol = (row: boolean) => {
+    toggleRowCol(row);
+  };
   return (
     <section className="p-6 bg-white">
       <div className="flex items-center gap-3 border border-cerulean h-[51px] px-4 mb-4">
@@ -52,10 +61,24 @@ const SettingsPage = () => {
                   Отображение каталога
                 </Label>
                 <div className="flex items-center w-full">
-                  <button className="bg-white w-1/2 py-1.5 text-[#8C8C8C] border border-superSilver text-base font-semibold text-center ">
+                  <button
+                    onClick={() => handleTableCol(false)}
+                    className={`w-1/2 py-1.5 border text-base font-semibold text-center ${
+                      !rowCol
+                        ? "bg-greenLight text-white border-greenLight"
+                        : "bg-white text-weekColor border-superSilver"
+                    }`}
+                  >
                     Таблица
                   </button>
-                  <button className="bg-greenLight w-1/2 py-1.5 text-white border text-base font-semibold text-center border-greenLight">
+                  <button
+                    onClick={() => handleTableCol(true)}
+                    className={`w-1/2 py-1.5 border text-base font-semibold text-center ${
+                      rowCol
+                        ? "bg-greenLight text-white border-greenLight"
+                        : "bg-white text-weekColor border-superSilver"
+                    }`}
+                  >
                     Плитка
                   </button>
                 </div>

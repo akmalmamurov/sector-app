@@ -19,7 +19,6 @@ interface SortProductsProps {
   nameSort: "asc" | "desc" | null;
   limit: number;
   setLimit: (limit: number) => void;
-  searchTrue?: boolean;
 }
 export const SortProducts: React.FC<SortProductsProps> = (props) => {
   const {
@@ -34,12 +33,9 @@ export const SortProducts: React.FC<SortProductsProps> = (props) => {
     setNameSort,
     limit,
     setLimit,
-    searchTrue,
   } = props;
-  const toggleRowColProduct = sessionStore((s) => s.toggleRowColProduct);
-  const toggleRowColSearch = sessionStore((s) => s.toggleRowSearch);
-  const rowColProduct = sessionStore((s) => s.rowColProduct);
-  const rowColSearch = sessionStore((s) => s.rowSearch);
+  const toggleRowCol = sessionStore((s) => s.toggleRowCol);
+  const rowCol = sessionStore((s) => s.rowCol);
   const [open, setOpen] = useState(false);
   const [openLimit, setOpenLimit] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -63,19 +59,17 @@ export const SortProducts: React.FC<SortProductsProps> = (props) => {
     };
   }, []);
   const handleToggleRowCol = (row: boolean) => {
-    if (searchTrue) {
-      toggleRowColSearch(row);
-    } else {
-      toggleRowColProduct(row);
-    }
+    toggleRowCol(row);
   };
-  const rowCol = searchTrue ? rowColSearch : rowColProduct;
+
   const getCurrentSort = () => {
     if (selected === "Цена") return priceSort;
     if (selected === "Наименование") return nameSort;
     return null;
   };
   const currentSort = getCurrentSort();
+  console.log(rowCol);
+  
 
   return (
     <div className="p-[15px] lgl:flex justify-between items-center border-b border-superSilver hidden">

@@ -17,8 +17,9 @@ export const PhoneModal = ({ isOpen, toggleOpen }: Props) => {
   const [phone, setPhone] = useState<string>("+998 __ ___ ____");
   const [error, setError] = useState(false);
   const [isPhoneComplete, setIsPhoneComplete] = useState(false);
-  console.log(setError(true));
-
+  const submitClick = () => {
+    console.log("PHONE", phone);
+  };
   return (
     <Dialog open={isOpen} onOpenChange={toggleOpen}>
       <DialogContent className="max-w-[600px] sm:rounded-none p-0 border-none">
@@ -32,7 +33,9 @@ export const PhoneModal = ({ isOpen, toggleOpen }: Props) => {
             </button>
           </div>
         </DialogHeader>
-        <DialogDescription className="hidden">asd</DialogDescription>
+        <DialogDescription onClick={() => setError(true)} className="hidden">
+          asd
+        </DialogDescription>
         <Separator className=" h-[0.5px]" />
         <div className="px-[23px] pt-1 pb-[23px]">
           <div className="relative">
@@ -59,6 +62,7 @@ export const PhoneModal = ({ isOpen, toggleOpen }: Props) => {
           <div className="mt-10 flex justify-end">
             <button
               disabled={!isPhoneComplete}
+              onClick={submitClick}
               className="py-2 px-[23px] disabled:bg-superSilver bg-cerulean text-white disabled:text-darkSoul font-semibold"
             >
               Сохранить
