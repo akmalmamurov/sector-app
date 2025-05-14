@@ -2,6 +2,9 @@ import { UserData } from "./user";
 export interface IssueesMessage {
   createdAt: string;
   message: string;
+  adminId?: string;
+  userId: string;
+  filePath?: string;
 }
 export interface IssuesData {
   id: string;
