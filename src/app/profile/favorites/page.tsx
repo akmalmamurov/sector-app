@@ -24,9 +24,11 @@ import request from "@/services";
 import { showError, showSuccess } from "@/components/toast/Toast";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Skeleton from "@/components/skeleton/skeleton";
 
 const FavoritesPage = () => {
   const { favorites, resetFavorites, deleteFavorites, auth, cart, addToCart } = useStore();
+  const [isLoading, setIsLoading] = useState(true);
   const { data: saved = [] } = useQuery({
     queryKey: ["saved"],
     queryFn: () => getSaved(),
@@ -95,6 +97,67 @@ const FavoritesPage = () => {
     );
   };
 
+  useEffect(() => {
+    if (savedProduct.length > 0) {
+      setIsLoading(false);
+    }
+  }, [savedProduct]);
+
+  {
+    if (isLoading) {
+      return (
+         <div>
+          
+<div className="hidden md:block">
+<div className="flex flex-col gap-4  mt-16 mx-6">
+        {Array.from({ length: 6 }).map((_, index) => (
+          <div
+            key={index}
+            className="w-full border rounded-md p-3 shadow-sm bg-white flex flex-col md:grid md:grid-cols-[100px_1fr_120px_120px_120px_60px_60px] gap-4 items-center"
+          >
+            <div className="w-[70px] h-[70px] bg-superSilver rounded-md animate-pulse mx-auto md:mx-0" />
+            <div className="flex flex-col w-full gap-2">
+              <div className="h-4 w-3/4 bg-superSilver rounded animate-pulse" />
+              <div className="h-3 w-1/2 bg-superSilver rounded animate-pulse" />
+            </div> 
+            <div className="h-3 w-3/4 bg-superSilver rounded animate-pulse  " />
+            <div className="h-4 w-1/2 bg-superSilver rounded animate-pulse  " />
+            <div className="h-4 w-3/4 bg-superSilver rounded animate-pulse  " />
+            <div className="w-6 h-6 bg-superSilver rounded-full animate-pulse self-center" />
+            <div className="w-6 h-6 bg-superSilver rounded-full animate-pulse self-center" />
+          </div>
+        ))}
+      </div>
+</div>
+        <div className=" md:hidden">
+                <div className="flex flex-col gap-4 mt-16 mx-6">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <div
+              key={index}
+              className="w-full h-[148px] border rounded-md p-4 shadow-sm  flex flex-row gap-4"
+            >
+              {/* Image Skeleton */}
+              <p className="w-[60px] sm:w-[100px] h-[60px] sm:h-[100px] bg-superSilver rounded-md animate-pulse" />
+              {/* Content Skeleton */}
+              <div className="flex flex-col flex-1 justify-between gap-2">
+                <div className="h-4 w-3/4 bg-superSilver rounded animate-pulse" />
+                <div className="h-3 w-1/2 bg-superSilver rounded animate-pulse" />
+                <div className="h-3 w-1/3 bg-superSilver rounded animate-pulse" />
+                <div className="h-5 w-1/4 bg-superSilver rounded animate-pulse mt-2" />
+              </div>
+  
+            </div>
+          ))}
+          <div className="w-2/3 h-6 bg-superSilver rounded-full self-start md:self-center animate-pulse" />
+        </div>
+        </div>
+      </div>
+        
+      );
+    }
+  }
+  
+
   return (
     <section className="p-6 bg-white">
       {savedProduct.length > 0 ? (
@@ -107,6 +170,8 @@ const FavoritesPage = () => {
               Очистить избранное
             </span>
           </div>
+          <div className="w-full overflow-x-auto">
+
           <Table className="hidden lg:block border border-superSilver  overflow-hidden w-full">
             <TableHeader>
               <TableRow className="bg-whiteOut text-left">
@@ -204,6 +269,7 @@ const FavoritesPage = () => {
               ))}
             </TableBody>
           </Table>
+          </div>
           <div className="lg:hidden">
   <div className="grid grid-cols-1 gap-4">
     {savedProduct?.map((product: ProductData) => (
