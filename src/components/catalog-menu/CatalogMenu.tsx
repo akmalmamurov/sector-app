@@ -3,6 +3,7 @@ import { Container } from "../container";
 import Link from "next/link";
 import { CloseIcon } from "@/assets/icons";
 import { CatalogData } from "@/types";
+import { usePathname } from "next/navigation";
 
 interface Props {
   setMenuOpen: (open: boolean) => void;
@@ -21,6 +22,8 @@ const CatalogMenu = ({
   const [delayedHoveredParentIndex, setDelayedHoveredParentIndex] =
     useState<number>(0);
   const menuRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+  console.log(pathname.split("/"));
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
@@ -68,11 +71,17 @@ const CatalogMenu = ({
               <ul className="flex flex-col">
                 {catalogData?.map((item, parentIndex) => (
                   <Link
-                    href={`/catalog/${item.slug}`}
+                    href={`${pathname.split("/")[2] === item.slug ? "" : `/catalog/${item.slug}`}`}
                     key={`parent-${parentIndex}`}
-                    onClick={() => setMenuOpen(false)}
+                    onClick={() => {
+                      if (pathname.split("/")[2] === item.slug) {
+                        setMenuOpen(true);
+                      } else {
+                        setMenuOpen(false);
+                      }
+                    }}
                     onMouseEnter={() => setHoveredParentIndex(parentIndex)}
-                    className={`relative block py-[10px] px-3 xl:px-4 text-xs xl:text-sm font-normal transition-all duration-300 text-black
+                    className={`relative ${pathname.split("/")[2] === item.slug ? "text-cerulean cursor-default" : "text-black"} block py-[10px] px-3 xl:px-4 text-xs xl:text-sm font-normal transition-all duration-300 
                       ${
                         hoveredParentIndex === parentIndex
                           ? "bg-whisperBlue"
@@ -100,9 +109,18 @@ const CatalogMenu = ({
                             key={`sub-${delayedHoveredParentIndex}-${subIndex}`}
                           >
                             <Link
-                              onClick={() => setMenuOpen(false)}
-                              href={`/catalog/${subCatalog.slug}`}
-                              className="text-sm block font-semibold mb-3 text-black hover:text-cerulean duration-150"
+                              onClick={() => {
+                                if (
+                                  pathname.split("/")[2] === subCatalog.slug &&
+                                  !pathname.split("/")[3]
+                                ) {
+                                  setMenuOpen(true);
+                                } else {
+                                  setMenuOpen(false);
+                                }
+                              }}
+                              href={`${pathname.split("/")[2] === subCatalog.slug && !pathname.split("/")[3] ? null : `/catalog/${subCatalog.slug}`}`}
+                              className={`text-sm block font-semibold mb-3 ${pathname.split("/")[2] === subCatalog.slug && !pathname.split("/")[3] ? "text-cerulean cursor-default" : "text-black"} hover:text-cerulean duration-150`}
                             >
                               {subCatalog?.title}
                             </Link>
@@ -110,16 +128,26 @@ const CatalogMenu = ({
                               {subCatalog?.categories?.map(
                                 (category, linkIndex) => (
                                   <Link
-                                    onClick={() => setMenuOpen(false)}
-                                    href={`/catalog/${subCatalog.slug}/${category?.slug}`}
+                                    onClick={() => {
+                                      if (
+                                        pathname.split("/")[2] ===
+                                          subCatalog.slug &&
+                                        pathname.split("/")[3] ===
+                                          category?.slug
+                                      ) {
+                                        setMenuOpen(true);
+                                      } else {
+                                        setMenuOpen(false);
+                                      }
+                                    }}
+                                    href={`${pathname.split("/")[2] === subCatalog.slug && pathname.split("/")[3] === category?.slug ? "" : `/catalog/${subCatalog.slug}/${category?.slug}`}`}
                                     key={`link-${delayedHoveredParentIndex}-${subIndex}-${linkIndex}`}
-                                    className="font-normal text-black text-xs hover:text-cerulean duration-150"
+                                    className={`font-normal text-black text-xs hover:text-cerulean duration-150 ${pathname.split("/")[2] === subCatalog.slug && pathname.split("/")[3] === category?.slug ? "text-cerulean cursor-default" : "text-black"}`}
                                   >
                                     {category?.title}
                                   </Link>
                                 )
                               )}
-                              
                             </div>
                           </li>
                         )

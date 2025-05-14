@@ -50,7 +50,6 @@ export const CatalogWrapper = ({
         nameSort
       ),
   });
-  console.log(data);
   
   return (
     <>

@@ -71,7 +71,7 @@ const LoginPassword = ({ handleClose, formMethods, fullClose }: Props) => {
                       placeholder="Введите E-mail"
                       type="email"
                       {...field}
-                      className={`w-full px-3 py-[12px] text-sm placeholder:text-darkSoul focus:outline-none ring-1 
+                      className={`w-full border-2 px-3 py-[12px] text-sm placeholder:text-darkSoul focus:outline-none ring-1 
                         ring-darkSoul focus:ring-2 hover:ring-cerulean/70
                       ${errors.email ? "ring-red-500 focus:ring-red-500" : "focus:ring-cerulean/70"}`}
                     />
@@ -90,7 +90,7 @@ const LoginPassword = ({ handleClose, formMethods, fullClose }: Props) => {
                       placeholder="Введите пароль"
                       type="password"
                       {...field}
-                      className={`w-full px-3 py-[12px] mt-2 text-sm placeholder:text-darkSoul focus:outline-none 
+                      className={`w-full border-2 px-3 py-[12px] mt-2 text-sm placeholder:text-darkSoul focus:outline-none 
                         ring-1 ring-darkSoul focus:ring-2 hover:ring-cerulean/70
                         ${
                           errors.password
