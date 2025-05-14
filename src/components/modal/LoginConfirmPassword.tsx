@@ -114,7 +114,7 @@ const LoginConfirmPassword = ({
                         field.onChange(e);
                         onInputChange(e);
                       }}
-                      className={`w-full px-3 py-[12px] mt-2 text-sm placeholder:text-darkSoul focus:outline-none 
+                      className={`w-full border-2 px-3 py-[12px] mt-2 text-sm placeholder:text-darkSoul focus:outline-none 
                         ring-1 ring-darkSoul focus:ring-2 hover:ring-cerulean/70
                         ${
                           errors.optCode

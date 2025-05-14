@@ -93,8 +93,8 @@ const Login = ({ handleClose, formMethods, fullClose }: Props) => {
                       type="text"
                       {...field}
                       onChange={onInputChange}
-                      className={`w-full px-3 py-[12px] text-sm placeholder:text-darkSoul focus:outline-none 
-                        ring-1 ring-darkSoul focus:ring-2 hover:ring-cerulean/70
+                      className={`w-full px-3 py-[12px] border-2 text-sm placeholder:text-darkSoul focus:outline-none 
+                        ring-2 ring-darkSoul focus:ring-2 hover:ring-cerulean/70
                         ${
                           errors.contact
                             ? "ring-red-500 focus:ring-red-500"
