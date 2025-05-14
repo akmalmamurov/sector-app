@@ -34,8 +34,6 @@ const SearchMenu = () => {
     }
   };
 
-  console.log(searchData);
-  console.log(search);
   const handleGo = () => {
     router.push(`/catalog/search?query=${encodeURIComponent(search)}`);
     setOpen(false);

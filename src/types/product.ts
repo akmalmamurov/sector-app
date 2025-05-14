@@ -74,3 +74,60 @@ export interface QuestionProduct {
     updatedAt?: string | null;
   };
 }
+
+export interface CommentResponse {
+  body: string;
+  id: string;
+  star: number;
+  createdAt: string;
+  products: {
+    id: string;
+    title: string;
+    slug: string;
+    mainImage: string;
+    price: number;
+    inStock: string;
+    articul: string;
+    productCode: string;
+  },
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    phone: string;
+  },
+  reply: {
+    id: string;
+    adminId: string;
+    createdAt: string;
+    message: string;
+  }[]
+}
+export interface QuestionResponse {
+  body: string;
+  id: string;
+  createdAt: string;
+  products: {
+    id: string;
+    title: string;
+    slug: string;
+    mainImage: string;
+    price: number;
+    inStock: string;
+    articul: string;
+    productCode: string;
+  },
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    phone: string;
+  },
+  reply: {
+    id: string;
+    adminId: string;
+    createdAt: string;
+    message: string;
+  }[]
+}
+

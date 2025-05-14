@@ -50,11 +50,12 @@ export const CatalogWrapper = ({
         nameSort
       ),
   });
-
+  console.log(data);
+  
   return (
     <>
       {/* Filter product */}
-      <div className="lg:grid lg:grid-cols-12 lg:gap-6">
+      <div className="lg:grid lg:grid-cols-12 lg:gap-6 items-start">
         {/* Filters */}
         <CategoryLeft
           slug={slug}

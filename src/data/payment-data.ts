@@ -2,16 +2,16 @@ export const paymentData = [
   {
     title: "Банковские реквизиты в UZS",
     subInfo: [
-      "Счет 00000000000000000000",
+      "Счет 20208000505699338001",
       "XATB «TRANSBANK»",
       "Sodiq Azimov Street, Tashkent, Mirzo Ulugbek, Tashkent, Uzbekistan",
-      "МФО 12345",
+      "МФО 00491",
     ],
   },
   {
     title: "Банковские реквизиты в USD",
     subInfo: [
-      "Счет 00000000000000000000",
+      "Счет 20208000505699338001",
       "XATB «TRANSBANK»",
       "Sodiq Azimov Street, Tashkent, Mirzo Ulugbek, Tashkent, Uzbekistan",
       "SWIFT - ORFBUZ00",
@@ -20,7 +20,7 @@ export const paymentData = [
   {
     title: "Банковские реквизиты в RUB",
     subInfo: [
-      "Счет 00000000000000000000",
+      "Счет 20208000505699338001",
       "XATB «TRANSBANK»",
       "Sodiq Azimov Street, Tashkent, Mirzo Ulugbek, Tashkent, Uzbekistan",
       "SWIFT- ORFBUZ00",
@@ -29,7 +29,7 @@ export const paymentData = [
   {
     title: "Банковские реквизиты в EUR",
     subInfo: [
-      "Счет 00000000000000000000",
+      "Счет 20208000505699338001",
       "XATB «TRANSBANK»",
       "Sodiq Azimov Street, Tashkent, Mirzo Ulugbek, Tashkent, Uzbekistan",
       "SWIFT - ORFBUZ00",
