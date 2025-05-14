@@ -26,9 +26,9 @@ const BankAccounts = () => {
           Ташкент, Чиланзарский район, массив Чиланзар, 17-й квартал, 6
           </p>
           <p className="pt-4">ООО SECTOR TECHNOLOGY </p>
-          <p className="pt-4">TAX IDENTIFICATION NUMBER 123456789</p>
+          <p className="pt-4">TAX IDENTIFICATION NUMBER 310813407</p>
           <p className="pt-4">TRANSIT CURRENCY ACCOUNT IN UZS</p>
-          <p className="pt-4">Bank account: 00000000000000000000</p>
+          <p className="pt-4">Bank account: 20208000505699338001</p>
           <p className="pt-4">
             Beneficiary’s Bank: XATB «TRANSBANK» Sodiq Azimov Street, Tashkent, Mirzo Ulugbek, Tashkent, Uzbekistan
           </p>

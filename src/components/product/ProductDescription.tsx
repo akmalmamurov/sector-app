@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import React, { useState, useEffect, useRef } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DOMAIN } from "@/constants";
-import { CommentProduct, ProductData } from "@/types";
+import { CommentResponse, ProductData, QuestionResponse } from "@/types";
 import { CircleAlert, CirclePlus, Star, X } from "lucide-react";
 import {
   Dialog,
@@ -60,7 +60,7 @@ interface EditorData {
 const sections = [
   { id: "description", label: "Описание" },
   { id: "specs", label: "Характеристики" },
-  { id: "related", label: "Сопутствующие товары" },
+  // { id: "related", label: "Сопутствующие товары" },
   { id: "reviews", label: "Отзывы" },
   { id: "questions", label: "Вопросы" },
 ];
@@ -155,7 +155,6 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
   const [rating, setRating] = useState(0);
-  const [comments, setComments] = useState<CommentProduct | null>(null);
 
   const formSchema = z.object({
     body: z.string().min(3, "Текст должен содержать не менее 3 символов"),
@@ -255,11 +254,10 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
         star: rating,
       },
       {
-        onSuccess: (responseData) => {
+        onSuccess: () => {
           handleOpen();
           reset();
           setRating(0);
-          setComments(responseData);
         },
       }
     );
@@ -301,6 +299,8 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
     queryKey: ["questions", product.id],
     queryFn: () => getProductQuestions(product.id),
   });
+
+  console.log(questionsData);
 
   const handleSort = (value: string) => {
     console.log(value);
@@ -400,7 +400,7 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
             ref={(el: HTMLElement | null): void => {
               sectionRefs.current.related = el;
             }}
-            className="py-[53px] bg-white px-[23px]"
+            className="py-[53px] bg-white px-[23px] hidden"
             style={{ scrollMarginTop: "100px" }}
           >
             <div className="border-l-[8px] pl-[23px] mb-[23px] border-linkColor">
@@ -428,7 +428,9 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
               </h2>
             </div>
             <div className="max-w-none pl-[31px]">
-              <p className="text-base font-normal text-textColor mb-6">
+              <p
+                className={`${commentsData?.data?.comments.length > 0 ? "hidden" : "block"} info-text mb-6`}
+              >
                 Пока нет ни одного отзыва
               </p>
               <div className="flex items-center justify-between mb-12">
@@ -441,7 +443,8 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
                     <span>Добавить отзыв</span>
                   </button>
                   <div className="flex gap-2 items-center">
-                    {comments?.star && comments?.star > 0 ? (
+                    {commentsData?.data?.mediaStar &&
+                    commentsData?.data?.mediaStar > 0 ? (
                       <Star
                         className={`w-[25px] h-[22px]} text-[#FBCE13] fill-[#FBCE13]`}
                       />
@@ -451,12 +454,14 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
                       />
                     )}
                     <span className="text-[26px] font-normal text-textColor leading-[39px]">
-                      {comments?.star ? comments?.star : 0}
+                      {commentsData?.data?.mediaStar
+                        ? commentsData?.data?.mediaStar.toFixed(1)
+                        : 0}
                     </span>
                   </div>
                 </div>
                 <div
-                  className={`${commentsData?.length > 0 ? "block" : "hidden"}`}
+                  className={`${commentsData?.data?.length > 0 ? "block" : "hidden"}`}
                 >
                   <Select defaultValue="ratingDown" onValueChange={handleSort}>
                     <SelectTrigger className="px-4 h-[42px]">
@@ -499,52 +504,78 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
                   </Select>
                 </div>
               </div>
-              <div>
-                <div className="flex items-center gap-2 justify-between mb-4">
-                  <h4 className="info-semibold">Алексеенко Роман</h4>
-                  <span className="info-semibold">26.10.2022, 14:48</span>
-                </div>
-                <div className="flex items-center gap-2 mb-4">
-                  <Star
-                    className={`w-[25px] h-[22px]} text-[#FBCE13] fill-[#FBCE13]`}
-                  />
-                  <Star
-                    className={`w-[25px] h-[22px]} text-[#FBCE13] fill-[#FBCE13]`}
-                  />
-                  <Star
-                    className={`w-[25px] h-[22px]} text-[#FBCE13] fill-[#FBCE13]`}
-                  />
-                  <Star
-                    className={`w-[25px] h-[22px]} text-[#FBCE13] fill-[#FBCE13]`}
-                  />
-                  <Star
-                    className={`w-[25px] h-[22px]} text-[#FBCE13] fill-[#FBCE13]`}
-                  />
-                </div>
-                <p className="info-text mb-4">
-                  Добрый день! Скажите пожалуйста, есть ли у шлюза SNR-VG-2000-16S функция HotLine?
-                </p>
-                <div className="bg-whiteOut p-4">
-                  <div className="flex gap-6">
-                    <div className="w-[58px] h-[58px] border-[1px] border-transparent border-l-darkSoul  border-b-darkSoul"></div>
-                    <div className="flex-1">
-                      <div className=" flex items-center gap-2 justify-between mb-4">
-                        <div className="flex items-center gap-2">
-                          <h4 className="info-semibold">Sector Technology</h4>
-                          <QuestionCheckIcon className="w-[25px] h-[25px] text-cerulean" />
-                        </div>
-                        <p className="info-semibold">27.10.2022, 06:19</p>
+              {commentsData?.data?.comments.length > 0 &&
+                commentsData?.data?.comments.map(
+                  (
+                    comment: CommentResponse,
+                    index: number,
+                    array: CommentResponse[]
+                  ) => (
+                    <div
+                      className={`${index === array.length - 1 ? "pb-0 mb-0 border-transparent" : "border-b border-noghreiSilver mb-10 pb-5"}`}
+                      key={comment.id}
+                    >
+                      <div className="flex items-center gap-2 justify-between mb-4 px-4">
+                        <h4 className="info-semibold">{comment.user.name}</h4>
+                        <span className="info-semibold">
+                          {new Date(comment.createdAt).toLocaleDateString(
+                            "uz-UZ",
+                            {
+                              day: "2-digit",
+                              month: "2-digit",
+                              year: "numeric",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              hour12: false,
+                            }
+                          )}
+                        </span>
                       </div>
-                      <p className="info-text">
-                        Добрый день, Роман!
-                        Данная функция присутствует, ее настройка доступна в настройках web-интерфейса аналогового порта:
-                        - Offhook Auto-dial - указываете номер для автоматического набора номера
-                        - Auto-dial Delay Time - указываете 0 для автоматического набора номера. 
-                      </p>
+                      <div className="flex items-center gap-2 mb-4 px-4">
+                        {Array.from({ length: comment.star }, (_, index) => (
+                          <Star
+                            key={index}
+                            className={`w-[25px] h-[22px]} text-[#FBCE13] fill-[#FBCE13]`}
+                          />
+                        ))}
+                      </div>
+                      <p className="info-text mb-4 px-4">{comment.body}</p>
+                      <div className="bg-whiteOut p-4 flex flex-col gap-10">
+                        {comment.reply.length > 0 &&
+                          comment.reply.map((item) => (
+                            <div key={item.id}>
+                              <div className="flex gap-6">
+                                <div className="w-[58px] h-[58px] border-[1px] border-transparent border-l-darkSoul  border-b-darkSoul"></div>
+                                <div className="flex-1">
+                                  <div className=" flex items-center gap-2 justify-between mb-4">
+                                    <div className="flex items-center gap-2">
+                                      <h4 className="info-semibold">
+                                        Sector Technology
+                                      </h4>
+                                      <QuestionCheckIcon className="w-[25px] h-[25px] text-cerulean" />
+                                    </div>
+                                    <p className="info-semibold">
+                                      {new Date(
+                                        item.createdAt
+                                      ).toLocaleDateString("uz-UZ", {
+                                        day: "2-digit",
+                                        month: "2-digit",
+                                        year: "numeric",
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                        hour12: false,
+                                      })}
+                                    </p>
+                                  </div>
+                                  <p className="info-text">{item.message}</p>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </div>
+                  )
+                )}
             </div>
           </section>
           <section
@@ -561,7 +592,11 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
               </h2>
             </div>
             <div className="max-w-none pl-[31px]">
-              <p className="info-text mb-6">Пока нет ни одного вопроса.</p>
+              <p
+                className={`${questionsData?.data?.length > 0 ? "hidden" : "block"} info-text mb-6`}
+              >
+                Пока нет ни одного вопроса.
+              </p>
               <div className="flex items-center justify-between mb-12">
                 <button
                   onClick={handleOpen2}
@@ -614,35 +649,58 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
                   </Select>
                 </div>
               </div>
-              <div>
-                <div className="flex items-center gap-2 justify-between mb-4">
-                  <h4 className="info-semibold">Алексеенко Роман</h4>
-                  <span className="info-semibold">26.10.2022, 14:48</span>
-                </div>
-                <p className="info-text mb-4">
-                  Добрый день! Скажите пожалуйста, есть ли у шлюза SNR-VG-2000-16S функция HotLine?
-                </p>
-                <div className="bg-whiteOut p-4">
-                  <div className="flex gap-6">
-                    <div className="w-[58px] h-[58px] border-[1px] border-transparent border-l-darkSoul  border-b-darkSoul"></div>
-                    <div className="flex-1">
-                      <div className=" flex items-center gap-2 justify-between mb-4">
-                        <div className="flex items-center gap-2">
-                          <h4 className="info-semibold">Sector Technology</h4>
-                          <QuestionCheckIcon className="w-[25px] h-[25px] text-cerulean" />
-                        </div>
-                        <p className="info-semibold">27.10.2022, 06:19</p>
-                      </div>
-                      <p className="info-text">
-                        Добрый день, Роман!
-                        Данная функция присутствует, ее настройка доступна в настройках web-интерфейса аналогового порта:
-                        - Offhook Auto-dial - указываете номер для автоматического набора номера
-                        - Auto-dial Delay Time - указываете 0 для автоматического набора номера. 
-                      </p>
+
+              {questionsData?.data?.length > 0 &&
+                questionsData?.data?.map((question: QuestionResponse) => (
+                  <div key={question.id}>
+                    <div className="flex items-center gap-2 justify-between mb-4 px-4">
+                      <h4 className="info-semibold">{question.user.name}</h4>
+                      <span className="info-semibold">
+                        {new Date(question.createdAt).toLocaleDateString(
+                          "uz-UZ",
+                          {
+                            day: "2-digit",
+                            month: "2-digit",
+                            year: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            hour12: false,
+                          }
+                        )}
+                      </span>
+                    </div>
+                    <p className="info-text mb-4 px-4">{question.body}</p>
+                    <div className="bg-whiteOut p-4 flex flex-col gap-10">
+                      {question.reply.length > 0 &&
+                        question.reply.map((item) => (
+                          <div key={item.id} className="flex gap-6">
+                            <div className="w-[58px] h-[58px] border-[1px] border-transparent border-l-darkSoul  border-b-darkSoul"></div>
+                            <div className="flex-1">
+                              <div className=" flex items-center gap-2 justify-between mb-4">
+                                <div className="flex items-center gap-2">
+                                  <h4 className="info-semibold">
+                                    Sector Technology
+                                  </h4>
+                                  <QuestionCheckIcon className="w-[25px] h-[25px] text-cerulean" />
+                                </div>
+                                <p className="info-semibold">
+                                  {new Date(item.createdAt).toLocaleDateString(
+                                    "uz-UZ",
+                                    {
+                                      day: "2-digit",
+                                      month: "2-digit",
+                                      year: "numeric",
+                                    }
+                                  )}
+                                </p>
+                              </div>
+                              <p className="info-text">{item.message}</p>
+                            </div>
+                          </div>
+                        ))}
                     </div>
                   </div>
-                </div>
-              </div>
+                ))}
             </div>
           </section>
           <div className="px-[23px]">

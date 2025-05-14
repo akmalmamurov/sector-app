@@ -39,7 +39,7 @@ const SettingsPage = () => {
         <div className="pt-5 pb-2">
           <div className="block lg:grid grid-cols-11 gap-6 items-center mb-3">
             <p className="text-[#000000DE] text-sm col-span-2">
-              Дополнительные <br /> настройки
+              Дополнительные <br /> настройки 
             </p>
             <div className="col-span-7 place-self-start block lg:flex items-center w-full gap-4 pt-10 lg:pt-0">
               <div className="flex flex-col flex-1">

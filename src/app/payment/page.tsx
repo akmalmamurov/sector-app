@@ -38,10 +38,10 @@ const PaymentPage = () => {
               <p className="info-text">
                 Общество с ограниченной ответственностью «SECTOR TECHNOLOGY»
               </p>
-              <p className="info-text">ИНН – 123456789</p>
+              <p className="info-text">ИНН – 310813407</p>
               <p className="info-text">НДС – 111111111111</p>
               <p className="info-text">РН – 1234567</p>
-              <p className="info-text">ОКЭД – 12345</p>
+              <p className="info-text">ОКЭД – 47430</p>
               <p className="info-text">ОКПО – 12345678</p>
             </div>
             {/* data */}
