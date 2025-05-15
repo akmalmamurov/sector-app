@@ -31,9 +31,9 @@ const IssuesPage = () => {
 
   return (
     <section className="bg-white p-6">
-      <div className="pt-5 pb-10 flex gap-[30px]">
+      <div className="pt-5 pb-10 flex flex-col md:flex-row gap-[30px]">
         <Select value={status} onValueChange={setStatus}>
-          <SelectTrigger className="w-[300px] text-[14px] leading-[25px] h-[41px] focus:ring-cerulean">
+          <SelectTrigger className="w-full md:w-[300px] text-[14px] leading-[25px] h-[41px] focus:ring-cerulean">
             <SelectValue placeholder="Выберите статус" />
           </SelectTrigger>
           <SelectContent>
@@ -45,7 +45,7 @@ const IssuesPage = () => {
           </SelectContent>
         </Select>
 
-        <div className="relative w-[300px]">
+        <div className="relative w-full md:w-[300px]">
           <Input
             type="text"
             placeholder="Введите поисковый запрос"
@@ -62,7 +62,7 @@ const IssuesPage = () => {
         <button
           type="button"
           onClick={() => setIsOpen(true)}
-          className="bg-cerulean text-white rounded-md w-[215px]"
+          className="bg-cerulean text-white rounded-md w-full md:w-[215px] h-[41px]"
         >
           <span>Подать заявку</span>
         </button>

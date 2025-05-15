@@ -48,14 +48,14 @@ export const AccountMe = () => {
   return (
     <div className="border-b border-superSilver pt-5">
       <form noValidate onSubmit={handleSubmit(onSubmit)} className="pb-5">
-        <div className="grid grid-cols-4">
+        <div className="grid lg:grid-cols-4">
           <div className="col-span-3">
-            <div className="flex gap-[100px]">
+            <div className="flex lg:gap-[100px] flex-col lg:flex-row">
               <div className="w-[125px] shrink-0">
                 <p className="text-[#000000DE] text-sm pt-5">Основные данные</p>
               </div>
 
-              <div className="grid grid-cols-2 gap-[22px] flex-1 min-w-0">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-[22px] flex-1 lg:min-w-0">
                 {/* Имя */}
                 <div className="flex flex-col">
                   <label
