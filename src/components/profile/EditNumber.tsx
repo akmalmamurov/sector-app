@@ -11,6 +11,7 @@ export const EditNumber = () => {
     queryFn: getUser,
   });
 const toggleOpen = () => setIsOpen(!isOpen);
+const [step, setStep] = useState(1);
   return (
     <div className="border-b border-superSilver pt-5">
       <div className="pb-5">
@@ -54,7 +55,7 @@ const toggleOpen = () => setIsOpen(!isOpen);
         </button>
       </div>
 
-      <PhoneModal isOpen={isOpen} toggleOpen={toggleOpen} />
+      <PhoneModal isOpen={isOpen} toggleOpen={toggleOpen} step={step} setStep={setStep} />
     </div>
   );
 };

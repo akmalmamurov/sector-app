@@ -141,6 +141,7 @@ export default {
     animation: {
       "loading-bar": "loading 1s ease-in-out infinite",
       "cart-loading": "cartLoading 1s ease-in-out infinite",
+      "caret-blink": "caret-blink 1.25s ease-out infinite",
     },
     keyframes: {
       loading: {
@@ -151,6 +152,10 @@ export default {
         "0%": { width: "0%" },
         "50%": { width: "50%" },
         "100%": { width: "100%" },
+      },
+      "caret-blink": {
+        "0%,70%,100%": { opacity: "1" },
+        "20%,50%": { opacity: "0" },
       },
     },
   },
