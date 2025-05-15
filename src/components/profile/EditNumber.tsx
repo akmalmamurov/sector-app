@@ -10,7 +10,6 @@ export const EditNumber = () => {
     queryKey: ["user"],
     queryFn: getUser,
   });
-  console.log(userData);
   
 const toggleOpen = () => setIsOpen(!isOpen);
   return (
