@@ -24,10 +24,10 @@ import request from "@/services";
 import { showError, showSuccess } from "@/components/toast/Toast";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Skeleton from "@/components/skeleton/skeleton";
 
 const FavoritesPage = () => {
-  const { favorites, resetFavorites, deleteFavorites, auth, cart, addToCart } = useStore();
+  const { favorites, resetFavorites, deleteFavorites, auth, cart, addToCart } =
+    useStore();
   const [isLoading, setIsLoading] = useState(true);
   const { data: saved = [] } = useQuery({
     queryKey: ["saved"],
@@ -42,7 +42,9 @@ const FavoritesPage = () => {
     closeModal,
     onConfirm,
   } = useConfirmModal();
-  const [isAddedToCart, setIsAddedToCart] = useState<{ [key: string]: boolean }>({});
+  const [isAddedToCart, setIsAddedToCart] = useState<{
+    [key: string]: boolean;
+  }>({});
 
   const handleToCart = (product: ProductData) => {
     if (!isAddedToCart[product.id]) {
@@ -56,7 +58,9 @@ const FavoritesPage = () => {
   useEffect(() => {
     const newIsAddedToCart: { [key: string]: boolean } = {};
     savedProduct.forEach((product: ProductData) => {
-      newIsAddedToCart[product.id] = cart.some((item) => item.id === product.id);
+      newIsAddedToCart[product.id] = cart.some(
+        (item) => item.id === product.id
+      );
     });
     setIsAddedToCart(newIsAddedToCart);
   }, [cart, savedProduct]);
@@ -106,57 +110,53 @@ const FavoritesPage = () => {
   {
     if (isLoading) {
       return (
-         <div>
-          
-<div className="hidden md:block">
-<div className="flex flex-col gap-4  mt-16 mx-6">
-        {Array.from({ length: 6 }).map((_, index) => (
-          <div
-            key={index}
-            className="w-full border rounded-md p-3 shadow-sm bg-white flex flex-col md:grid md:grid-cols-[100px_1fr_120px_120px_120px_60px_60px] gap-4 items-center"
-          >
-            <div className="w-[70px] h-[70px] bg-superSilver rounded-md animate-pulse mx-auto md:mx-0" />
-            <div className="flex flex-col w-full gap-2">
-              <div className="h-4 w-3/4 bg-superSilver rounded animate-pulse" />
-              <div className="h-3 w-1/2 bg-superSilver rounded animate-pulse" />
-            </div> 
-            <div className="h-3 w-3/4 bg-superSilver rounded animate-pulse  " />
-            <div className="h-4 w-1/2 bg-superSilver rounded animate-pulse  " />
-            <div className="h-4 w-3/4 bg-superSilver rounded animate-pulse  " />
-            <div className="w-6 h-6 bg-superSilver rounded-full animate-pulse self-center" />
-            <div className="w-6 h-6 bg-superSilver rounded-full animate-pulse self-center" />
-          </div>
-        ))}
-      </div>
-</div>
-        <div className=" md:hidden">
-                <div className="flex flex-col gap-4 mt-16 mx-6">
-          {Array.from({ length: 6 }).map((_, index) => (
-            <div
-              key={index}
-              className="w-full h-[148px] border rounded-md p-4 shadow-sm  flex flex-row gap-4"
-            >
-              {/* Image Skeleton */}
-              <p className="w-[60px] sm:w-[100px] h-[60px] sm:h-[100px] bg-superSilver rounded-md animate-pulse" />
-              {/* Content Skeleton */}
-              <div className="flex flex-col flex-1 justify-between gap-2">
-                <div className="h-4 w-3/4 bg-superSilver rounded animate-pulse" />
-                <div className="h-3 w-1/2 bg-superSilver rounded animate-pulse" />
-                <div className="h-3 w-1/3 bg-superSilver rounded animate-pulse" />
-                <div className="h-5 w-1/4 bg-superSilver rounded animate-pulse mt-2" />
-              </div>
-  
+        <div>
+          <div className="hidden md:block">
+            <div className="flex flex-col gap-4  mt-16 mx-6">
+              {Array.from({ length: 6 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="w-full border rounded-md p-3 shadow-sm bg-white flex flex-col md:grid md:grid-cols-[100px_1fr_120px_120px_120px_60px_60px] gap-4 items-center"
+                >
+                  <div className="w-[70px] h-[70px] bg-superSilver rounded-md animate-pulse mx-auto md:mx-0" />
+                  <div className="flex flex-col w-full gap-2">
+                    <div className="h-4 w-3/4 bg-superSilver rounded animate-pulse" />
+                    <div className="h-3 w-1/2 bg-superSilver rounded animate-pulse" />
+                  </div>
+                  <div className="h-3 w-3/4 bg-superSilver rounded animate-pulse  " />
+                  <div className="h-4 w-1/2 bg-superSilver rounded animate-pulse  " />
+                  <div className="h-4 w-3/4 bg-superSilver rounded animate-pulse  " />
+                  <div className="w-6 h-6 bg-superSilver rounded-full animate-pulse self-center" />
+                  <div className="w-6 h-6 bg-superSilver rounded-full animate-pulse self-center" />
+                </div>
+              ))}
             </div>
-          ))}
-          <div className="w-2/3 h-6 bg-superSilver rounded-full self-start md:self-center animate-pulse" />
+          </div>
+          <div className=" md:hidden">
+            <div className="flex flex-col gap-4 mt-16 mx-6">
+              {Array.from({ length: 6 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="w-full h-[148px] border rounded-md p-4 shadow-sm  flex flex-row gap-4"
+                >
+                  {/* Image Skeleton */}
+                  <p className="w-[60px] sm:w-[100px] h-[60px] sm:h-[100px] bg-superSilver rounded-md animate-pulse" />
+                  {/* Content Skeleton */}
+                  <div className="flex flex-col flex-1 justify-between gap-2">
+                    <div className="h-4 w-3/4 bg-superSilver rounded animate-pulse" />
+                    <div className="h-3 w-1/2 bg-superSilver rounded animate-pulse" />
+                    <div className="h-3 w-1/3 bg-superSilver rounded animate-pulse" />
+                    <div className="h-5 w-1/4 bg-superSilver rounded animate-pulse mt-2" />
+                  </div>
+                </div>
+              ))}
+              <div className="w-2/3 h-6 bg-superSilver rounded-full self-start md:self-center animate-pulse" />
+            </div>
+          </div>
         </div>
-        </div>
-      </div>
-        
       );
     }
   }
-  
 
   return (
     <section className="p-6 bg-white">
@@ -171,178 +171,180 @@ const FavoritesPage = () => {
             </span>
           </div>
           <div className="w-full overflow-x-auto">
-
-          <Table className="hidden lg:block border border-superSilver  overflow-hidden w-full">
-            <TableHeader>
-              <TableRow className="bg-whiteOut text-left">
-                <TableHead className="px-2 text-center border-r text-xs text-textColor">
-                  Наименование товара
-                </TableHead>
-                <TableHead className="px-2 text-center border-r text-xs text-textColor">
-                  Артикул
-                </TableHead>
-                <TableHead className="px-2 text-center border-r text-xs text-textColor">
-                  Цена
-                </TableHead>
-                <TableHead className="px-2 text-left border-r text-xs text-textColor font-normal">
-                  Доступно / всего
-                </TableHead>
-                <TableHead className="px-2 text-center border-r"></TableHead>
-                <TableHead className="px-2 text-center border-r"></TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {savedProduct?.map((product: ProductData, index: number) => (
-                <TableRow
-                  key={product.id}
-                  className={`${index % 2 === 1 ? "bg-whiteOut hover:bg-whiteOut" : " hover:bg-transparent"}`}
-                >
-                  <TableCell className="border-r p-0">
-                    <div className="flex items-center gap-2 justify-start">
-                      <div className="w-[65px] h-full">
-                        <Image
-                          src={`${DOMAIN}/${product.mainImage}`}
-                          alt={product.title}
-                          width={65}
-                          height={65}
-                          className="p-2 w-full h-full"
-                        />
+            <Table className="hidden lg:block border border-superSilver  overflow-hidden w-full">
+              <TableHeader>
+                <TableRow className="bg-whiteOut text-left">
+                  <TableHead className="px-2 text-center border-r text-xs text-textColor">
+                    Наименование товара
+                  </TableHead>
+                  <TableHead className="px-2 text-center border-r text-xs text-textColor">
+                    Артикул
+                  </TableHead>
+                  <TableHead className="px-2 text-center border-r text-xs text-textColor">
+                    Цена
+                  </TableHead>
+                  <TableHead className="px-2 text-left border-r text-xs text-textColor font-normal">
+                    Доступно / всего
+                  </TableHead>
+                  <TableHead className="px-2 text-center border-r"></TableHead>
+                  <TableHead className="px-2 text-center border-r"></TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {savedProduct?.map((product: ProductData, index: number) => (
+                  <TableRow
+                    key={product.id}
+                    className={`${index % 2 === 1 ? "bg-whiteOut hover:bg-whiteOut" : " hover:bg-transparent"}`}
+                  >
+                    <TableCell className="border-r p-0">
+                      <div className="flex items-center gap-2 justify-start">
+                        <div className="w-[65px] h-full">
+                          <Image
+                            src={`${DOMAIN}/${product.mainImage}`}
+                            alt={product.title}
+                            width={65}
+                            height={65}
+                            className="p-2 w-full h-full"
+                          />
+                        </div>
+                        <Link
+                          href={`/catalog/${product.subcatalog?.slug}/${product.category?.slug}/${product?.slug}`}
+                          className="text-cerulean text-xs font-normal"
+                        >
+                          {product.title}
+                        </Link>
                       </div>
+                    </TableCell>
+                    <TableCell className="px-3 py-4 border-r text-xs text-textColor">
+                      <div className="flex items-center gap-2 justify-between">
+                        <p className="flex-1">{product.articul}</p>
+                        <span
+                          className="cursor-pointer text-explosiveGrey hover:text-cerulean hoverEffect"
+                          onClick={() =>
+                            copyToClipboard(
+                              product.title,
+                              "Наименование скопировано в буфер обмена"
+                            )
+                          }
+                        >
+                          <CopyIcon />
+                        </span>
+                      </div>
+                    </TableCell>
+                    <TableCell className="px-2 text-end py-[14.5px] text-xs font-normal text-textColor border-r">
+                      <PriceFormatter
+                        amount={product.price}
+                        className="text-xs text-textColor font-normal"
+                      />
+                    </TableCell>
+                    <TableCell className="px-2 py-[14.5px] text-xs font-normal text-textColor border-r">
+                      {product?.inStock && product.inStock > "0" ? (
+                        <span>
+                          В наличии:{" "}
+                          {product.inStock > "10" ? "10+" : product.inStock} шт
+                        </span>
+                      ) : (
+                        <span className="text-dangerColor">Нет в наличии</span>
+                      )}
+                    </TableCell>
+                    <TableCell className="px-4 py-[14.5px] text-xs font-normal text-textColor border-r">
+                      <div className="w-full flex justify-center items-center">
+                        <AddToCart saved={true} product={product} />
+                      </div>
+                    </TableCell>
+                    <TableCell className="px-4 py-[14.5px] text-xs font-normal text-textColor ">
+                      <div className="w-full flex justify-center items-center">
+                        <button
+                          onClick={() => handleDeleteFavorite(product.id)}
+                          className="w-[42px] h-[42px] rounded-full bg-lightBg flex hoverEffect items-center justify-center hover:bg-dangerColor group"
+                        >
+                          <span>
+                            <Trash2Icon className="text-dangerColor w-[18px] h-[18px] group-hover:text-white hoverEffect " />
+                          </span>
+                        </button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+          <div className="lg:hidden">
+            <div className="grid grid-cols-1 gap-4">
+              {savedProduct?.map((product: ProductData) => (
+                <div
+                  key={product.id}
+                  className="border border-superSilver rounded-lg p-3 bg-white"
+                >
+                  <div className="flex gap-3">
+                    <Image
+                      src={`${DOMAIN}/${product.mainImage}`}
+                      alt={product.title}
+                      width={80}
+                      height={80}
+                      className="rounded object-contain"
+                    />
+                    <div className="flex flex-col justify-between flex-1">
                       <Link
                         href={`/catalog/${product.subcatalog?.slug}/${product.category?.slug}/${product?.slug}`}
-                        className="text-cerulean text-xs font-normal"
+                        className="text-cerulean text-sm font-medium hover:underline"
                       >
                         {product.title}
                       </Link>
+                      <p className="text-xs text-textColor mt-1">
+                        Артикул: {product.articul}
+                      </p>
+                      <p className="text-xs text-textColor mt-1">
+                        {product?.inStock && product.inStock > "0" ? (
+                          <>
+                            В наличии:{" "}
+                            {product.inStock > "10" ? "10+" : product.inStock}{" "}
+                            шт
+                          </>
+                        ) : (
+                          <span className="text-dangerColor">
+                            Нет в наличии
+                          </span>
+                        )}
+                      </p>
+                      <div className="flex items-center justify-between">
+                        <p className="text-sm text-textColor font-semibold mt-2">
+                          <PriceFormatter amount={product.price} />
+                        </p>
+                        <button
+                          onClick={() => handleDeleteFavorite(product.id)}
+                          className=" lg:hidden w-[42px] h-[42px] rounded-full bg-lightBg flex items-center justify-center hover:bg-dangerColor group"
+                        >
+                          <Trash2Icon className="text-dangerColor w-[18px] h-[18px] group-hover:text-white" />
+                        </button>
+                      </div>
                     </div>
-                  </TableCell>
-                  <TableCell className="px-3 py-4 border-r text-xs text-textColor">
-                    <div className="flex items-center gap-2 justify-between">
-                      <p className="flex-1">{product.articul}</p>
-                      <span
-                        className="cursor-pointer text-explosiveGrey hover:text-cerulean hoverEffect"
-                        onClick={() =>
-                          copyToClipboard(
-                            product.title,
-                            "Наименование скопировано в буфер обмена"
-                          )
-                        }
-                      >
-                        <CopyIcon />
-                      </span>
-                    </div>
-                  </TableCell>
-                  <TableCell className="px-2 text-end py-[14.5px] text-xs font-normal text-textColor border-r">
-                    <PriceFormatter
-                      amount={product.price}
-                      className="text-xs text-textColor font-normal"
-                    />
-                  </TableCell>
-                  <TableCell className="px-2 py-[14.5px] text-xs font-normal text-textColor border-r">
-                    {product?.inStock && product.inStock > "0" ? (
-                      <span>
-                        В наличии:{" "}
-                        {product.inStock > "10" ? "10+" : product.inStock} шт
-                      </span>
-                    ) : (
-                      <span className="text-dangerColor">Нет в наличии</span> 
-                    )}
-                  </TableCell>
-                  <TableCell className="px-4 py-[14.5px] text-xs font-normal text-textColor border-r">
-                    <div className="w-full flex justify-center items-center">
+                  </div>
+
+                  <div className="flex justify-between items-center mt-4 gap-2">
+                    <div className="hidden lg:flex">
                       <AddToCart saved={true} product={product} />
                     </div>
-                  </TableCell>
-                  <TableCell className="px-4 py-[14.5px] text-xs font-normal text-textColor ">
-                    <div className="w-full flex justify-center items-center">
-                      <button
-                        onClick={() => handleDeleteFavorite(product.id)}
-                        className="w-[42px] h-[42px] rounded-full bg-lightBg flex hoverEffect items-center justify-center hover:bg-dangerColor group"
-                      >
-                        <span>
-                          <Trash2Icon className="text-dangerColor w-[18px] h-[18px] group-hover:text-white hoverEffect " />
-                        </span>
-                      </button>
-                    </div>
-                  </TableCell>
-                </TableRow>
+                    <button
+                      onClick={() => handleToCart(product)}
+                      className="lg:hidden flex bg-cerulean w-full hover:opacity-90 transition-opacity px-6 py-[8px] text-base font-semibold text-white items-center justify-center gap-2 md:bottom-0 bottom-5"
+                    >
+                      <CartIcon color="#fff" className="w-5 h-5" />
+                      {isAddedToCart[product.id]
+                        ? "Перейти в корзину"
+                        : "В корзине"}
+                    </button>
+                    <button
+                      onClick={() => handleDeleteFavorite(product.id)}
+                      className="hidden lg:flex w-[42px] h-[42px] rounded-full bg-lightBg  items-center justify-center hover:bg-dangerColor group"
+                    >
+                      <Trash2Icon className="text-dangerColor w-[18px] h-[18px] group-hover:text-white" />
+                    </button>
+                  </div>
+                </div>
               ))}
-            </TableBody>
-          </Table>
-          </div>
-          <div className="lg:hidden">
-  <div className="grid grid-cols-1 gap-4">
-    {savedProduct?.map((product: ProductData) => (
-      <div
-        key={product.id}
-        className="border border-superSilver rounded-lg p-3 bg-white"
-      >
-        <div className="flex gap-3">
-          <Image
-            src={`${DOMAIN}/${product.mainImage}`}
-            alt={product.title}
-            width={80}
-            height={80}
-            className="rounded object-contain"
-          />
-          <div className="flex flex-col justify-between flex-1">
-            <Link
-              href={`/catalog/${product.subcatalog?.slug}/${product.category?.slug}/${product?.slug}`}
-              className="text-cerulean text-sm font-medium hover:underline"
-            >
-              {product.title}
-            </Link>
-            <p className="text-xs text-textColor mt-1">
-              Артикул: {product.articul}
-            </p>
-            <p className="text-xs text-textColor mt-1">
-              {product?.inStock && product.inStock > "0" ? (
-                <>
-                  В наличии: {product.inStock > "10" ? "10+" : product.inStock} шт
-                </>
-              ) : (
-                <span className="text-dangerColor">Нет в наличии</span>
-              )}
-            </p>
-            <div className="flex items-center justify-between">
-
-            <p className="text-sm text-textColor font-semibold mt-2">
-              <PriceFormatter amount={product.price} />
-            </p>
-          <button
-            onClick={() => handleDeleteFavorite(product.id)}
-            className=" lg:hidden w-[42px] h-[42px] rounded-full bg-lightBg flex items-center justify-center hover:bg-dangerColor group"
-          >
-            <Trash2Icon className="text-dangerColor w-[18px] h-[18px] group-hover:text-white" />
-          </button>
             </div>
           </div>
-        </div>
-
-        <div className="flex justify-between items-center mt-4 gap-2">
-          
-          <div className="hidden lg:flex">
-          
-          <AddToCart saved={true} product={product}  />
-          </div>
-          <button
-          onClick={() => handleToCart(product)}
-          className="lg:hidden flex bg-cerulean w-full hover:opacity-90 transition-opacity px-6 py-[8px] text-base font-semibold text-white items-center justify-center gap-2 md:bottom-0 bottom-5"
-        >
-          <CartIcon color="#fff" className="w-5 h-5" />
-          {isAddedToCart[product.id] ? "Перейти в корзину" : "В корзине"}
-        </button>
-        <button
-            onClick={() => handleDeleteFavorite(product.id)}
-            className="hidden lg:flex w-[42px] h-[42px] rounded-full bg-lightBg  items-center justify-center hover:bg-dangerColor group"
-          >
-            <Trash2Icon className="text-dangerColor w-[18px] h-[18px] group-hover:text-white" />
-          </button>
-        </div>
-      </div>
-    ))}
-  </div>
-</div>
         </div>
       ) : (
         <div className="w-full">

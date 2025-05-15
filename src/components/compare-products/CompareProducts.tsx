@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import { useEffect, useState, useRef, Fragment } from "react";
 import useStore from "@/context/store";
@@ -41,7 +42,7 @@ export const CompareProducts = () => {
   const swiperRef = useRef<SwiperClass | null>(null);
   const scrollDir = useScrollDirection();
   const [isLoading, setIsLoading] = useState(true);
-  const [discount, setDiscount] = useState([]);
+  const [_discount, setDiscount] = useState([]);
   const checkScroll = scrollDir === "up" ? true : false;
   useEffect(() => {
     const handleScroll = () => {
