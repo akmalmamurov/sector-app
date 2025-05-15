@@ -24,7 +24,6 @@ import request from "@/services";
 import { showError, showSuccess } from "@/components/toast/Toast";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-
 const FavoritesPage = () => {
   const { favorites, resetFavorites, deleteFavorites, auth, cart, addToCart } =
     useStore();

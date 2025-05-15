@@ -65,11 +65,11 @@ console.log(userData);
       <form noValidate onSubmit={handleSubmit(onSubmit)} className="pb-5">
         <div className="grid grid-cols-4">
           <div className="col-span-4">
-            <div className="flex gap-[100px]">
+            <div className="flex flex-col lg:flex-row lg:gap-[100px]">
               <div className="w-[125px] shrink-0">
                 <p className="text-[#000000DE] text-sm pt-5">Основные данные</p>
               </div>
-              <div className="grid grid-cols-3 gap-[22px] flex-1 min-w-0">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-[22px] flex-1 min-w-0">
                 {/* Старый пароль */}
                 <div className="flex flex-col">
                   <label
@@ -196,7 +196,7 @@ console.log(userData);
         </div>
 
         {/* Внимание: требования к паролю */}
-        <div className="bg-whiteOut flex items-center gap-2 p-5 pl-0 ml-[225px] mt-[10px]">
+        <div className="bg-whiteOut flex items-center gap-2 p-5 pl-0 lg:ml-[225px] mt-[10px]">
           <div className="w-[70px] flex justify-center items-center">
             <TriangleAlert className="text-[#8C8C8C] w-[24px] h-[24px]" />
           </div>

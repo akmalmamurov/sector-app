@@ -20,9 +20,9 @@ export const ProfileIssueTable = ({ issues }: { issues: IssuesData[] }) => {
     <Table className="w-full table-auto bg-white border-separate border-spacing-y-2">
       <TableHeader className="bg-whiteOut text-center ">
         <TableRow>
-          <TableHead className="px-[10px] py-[7px] text-center border border-superSilver text-sm leading-[25px] h-[50px] text-textColor relative">
+          <TableHead className="px-[10px] py-[7px] text-center border border-superSilver text-sm leading-[25px] h-[65px] w-[110px] text-textColor relative flex items-center justify-center gap-2">
             <span>Номер</span>
-            <div className=" absolute right-3 top-1/2 -translate-y-1/2 flex flex-col justify-center gap-[3px]">
+            <div className="flex flex-col justify-center gap-[3px]">
               <button>
                 <ProfileUpIcon />
               </button>

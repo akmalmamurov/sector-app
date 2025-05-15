@@ -55,7 +55,7 @@ export default function RootLayout({
             />
           <Footer />
         </RootProviders>
-        <script src="//code.jivosite.com/widget/UP0xqFFMzr" async></script>
+        <script className="mb-16 mr-16" src="//code.jivosite.com/widget/UP0xqFFMzr" async></script>
       </body>
     </html>
   );

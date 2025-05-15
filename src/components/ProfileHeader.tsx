@@ -3,6 +3,7 @@ import useStore from "@/context/store";
 import { useScrollDirection } from "@/hooks";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
 
 const allTabs = [
   { name: "Мои заказы", href: "/profile/orders" },
@@ -22,16 +23,38 @@ const ProfileHeader = () => {
     ? allTabs
     : allTabs.filter((tab) => tab.href === "/profile/favorites");
 
+  const tabRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
+
+  useEffect(() => {
+    const activeTab = tabs.find((tab) => {
+      if (tab.href === "/profile/orders") {
+        return (
+          pathname === "/profile/orders" ||
+          pathname.startsWith("/profile/orders/")
+        );
+      }
+      return pathname === tab.href;
+    });
+
+    if (activeTab && tabRefs.current[activeTab.href]) {
+      tabRefs.current[activeTab.href]?.scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest",
+      });
+    }
+  }, [pathname, tabs]);
+
   return (
     <div
       style={{
         scrollbarWidth: "none",
         msOverflowStyle: "none",
       }}
-      className={`sticky z-10 bg-white border border-superSilver transition-top duration-150 ease-out 
+      className={`sticky z-10 bg-white border border-superSilver transition-top duration-150 ease-out overflow-x-auto    
         ${isScroll ? "top-[126px]" : "top-0 "}`}
     >
-      <div className={`grid grid-cols-5`}>
+      <div className="flex">
         {tabs.map((tab) => {
           const isActive =
             tab.href === "/profile/orders"
@@ -42,7 +65,12 @@ const ProfileHeader = () => {
             <Link
               key={tab.name}
               href={tab.href}
-              className="group relative px-6 py-4 flex justify-center transition-all duration-150 ease-out text-text-color hover:bg-hoverBg"
+              ref={(el) => {
+                if (el) {
+                  tabRefs.current[tab.href] = el;
+                }
+              }}
+              className="text-nowrap group relative px-6 py-4 flex justify-center transition-all duration-150 ease-out text-text-color hover:bg-hoverBg"
             >
               {tab.name}
               <span
