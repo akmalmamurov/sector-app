@@ -170,8 +170,8 @@ const FavoritesPage = () => {
             </span>
           </div>
           <div className="w-full overflow-x-auto">
-            <Table className="hidden lg:block border border-superSilver  overflow-hidden w-full">
-              <TableHeader>
+          <Table className="hidden lg:table border border-superSilver min-w-full">
+          <TableHeader>
                 <TableRow className="bg-whiteOut text-left">
                   <TableHead className="px-2 text-center border-r text-xs text-textColor">
                     Наименование товара
