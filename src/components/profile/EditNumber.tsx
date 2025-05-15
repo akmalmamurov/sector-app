@@ -21,7 +21,6 @@ const toggleOpen = () => setIsOpen(!isOpen);
                 <p className="text-[#000000DE] text-sm pt-5">Контакты</p>
               </div>
               <div className="grid grid-cols-3 gap-[22px] flex-1 min-w-0">
-                {/* Старый пароль */}
                 <div className="flex flex-col">
                   <label
                     htmlFor="oldPassword"
@@ -43,7 +42,6 @@ const toggleOpen = () => setIsOpen(!isOpen);
             </div>
           </div>
         </div>
-        {/* Кнопка сохранения */}
         <button
           type="button"
           onClick={toggleOpen}
