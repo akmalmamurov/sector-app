@@ -68,7 +68,6 @@ const LoginConfirmPassword = ({
             },
           }
         );
-        console.log(response);
         
         fullClose();
         setAuth(true);

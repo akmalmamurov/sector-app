@@ -5,10 +5,13 @@ import { Separator } from "../ui/separator";
 import { PhoneInput } from "../phone-input";
 import { Button } from "../ui/button";
 import { InputOTP, InputOTPSlot } from "../ui/input-otp";
+import Countdown from "react-countdown";
 
 interface Props {
   isOpen: boolean;
   toggleOpen: () => void;
+  step: number;
+  setStep: (step: number) => void;
 }
 
 export const PhoneModal = ({ isOpen, toggleOpen }: Props) => {
@@ -19,11 +22,21 @@ export const PhoneModal = ({ isOpen, toggleOpen }: Props) => {
   const [phoneError, setPhoneError] = useState(false);
 
   const [otp, setOtp] = useState<string>("");
+  const [isExpired, setIsExpired] = useState(false);
+  const [countdownEnd, setCountdownEnd] = useState<number | null>(null);
 
+  const resendCode = () => {
+    setIsExpired(false);
+
+    setCountdownEnd(Date.now() + 40 * 1000);
+  };
   const handleNext = () => {
     if (isPhoneComplete) {
       setStep(2);
       setPhoneError(false);
+      if (!countdownEnd) {
+        setCountdownEnd(Date.now() + 60 * 1000);
+      }
     } else {
       setPhoneError(true);
     }
@@ -100,30 +113,66 @@ export const PhoneModal = ({ isOpen, toggleOpen }: Props) => {
               <p className="mb-4 text-sm text-darkSoul">
                 Мы отправили код на номер <strong>{phone}</strong>
               </p>
-              <div className="flex justify-center mb-6">
-                <InputOTP
-                  maxLength={4}
-                  value={otp}
-                  onChange={(value) => setOtp(value)}
-                  type="numeric"
-                  autoFocus
-                  className="space-x-2"
-                >
-                  <InputOTPSlot index={0} />
-                  <InputOTPSlot index={1} />
-                  <InputOTPSlot index={2} />
-                  <InputOTPSlot index={3} />
-                </InputOTP>
-              </div>
-              <div className="flex justify-end">
+              {!isExpired ? (
+                <div>
+                  <div className="flex justify-center items-center mb-2 gap-1">
+                    <p className="font-normal text-base text-textColor">
+                      Отправить код повторно через
+                    </p>
+                    {countdownEnd && (
+                      <Countdown
+                        date={countdownEnd}
+                        onComplete={() => setIsExpired(true)}
+                        renderer={({ minutes, seconds }) => (
+                          <span className="font-normal text-base text-textColor">
+                            0{minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+                          </span>
+                        )}
+                      />
+                    )}
+
+                    <p className="font-normal text-base text-textColor">
+                      {" "}
+                      минута
+                    </p>
+                  </div>
+                  <div className="flex justify-center mb-6">
+                    <InputOTP
+                      maxLength={4}
+                      value={otp}
+                      onChange={(value) => setOtp(value)}
+                      type="numeric"
+                      autoFocus
+                      className="space-x-2"
+                    >
+                      <InputOTPSlot index={0} />
+                      <InputOTPSlot index={1} />
+                      <InputOTPSlot index={2} />
+                      <InputOTPSlot className="rounded-r-md" index={3} />
+                    </InputOTP>
+                  </div>
+                  <div className="flex justify-end">
+                    <Button
+                      onClick={handleConfirm}
+                      disabled={otp.length < 4}
+                      className="px-[23px] py-2 bg-cerulean text-white disabled:bg-superSilver disabled:text-darkSoul"
+                    >
+                      Подтвердить
+                    </Button>
+                  </div>
+                </div>
+              ) : (
                 <Button
-                  onClick={handleConfirm}
-                  disabled={otp.length < 4}
-                  className="px-[23px] py-2 bg-cerulean text-white disabled:bg-superSilver disabled:text-darkSoul"
+                  type="submit"
+                  onClick={resendCode}
+                  // disabled={!isValid}
+                  //   className={`mt-6 w-full h-12 bg-cerulean text-white pt-[15px] pb-[17px] font-bold text-base leading-[18px] rounded-[9px] hover:bg-cerulean/90 hoverEffect
+                  // ${!isValid ? " bg-darkSoul " : ""}`}
+                  className={`mt-6 w-full h-12 bg-cerulean text-white pt-[15px] pb-[17px] font-bold text-base leading-[18px] rounded-[9px] hover:bg-cerulean/90 hoverEffect`}
                 >
-                  Подтвердить
+                  Отправить код повторно
                 </Button>
-              </div>
+              )}
             </>
           )}
         </div>
