@@ -7,7 +7,7 @@ export const PromotionCardSkeleton = () => {
   return (
     <div className="p-2 rounded-[10px] ">
       {/* Image Skeleton */}    
-      <Skeleton className="w-full h-[148px] rounded-md" />
+      <Skeleton className="w-full h-[248px] rounded-md" />
 
       {/* Text Skeleton */}
       <div className="flex flex-col justify-between gap-2 mt-2 overflow-hidden">

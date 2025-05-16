@@ -10,6 +10,8 @@ export const EditNumber = () => {
     queryKey: ["user"],
     queryFn: getUser,
   });
+  console.log(userData);
+  
 const toggleOpen = () => setIsOpen(!isOpen);
 const [step, setStep] = useState(1);
   return (
@@ -22,7 +24,6 @@ const [step, setStep] = useState(1);
                 <p className="text-[#000000DE] text-sm pt-5">Контакты</p>
               </div>
               <div className="grid grid-cols-3 gap-[22px] flex-1 min-w-0">
-                {/* Старый пароль */}
                 <div className="flex flex-col">
                   <label
                     htmlFor="oldPassword"
@@ -44,7 +45,6 @@ const [step, setStep] = useState(1);
             </div>
           </div>
         </div>
-        {/* Кнопка сохранения */}
         <button
           type="button"
           onClick={toggleOpen}

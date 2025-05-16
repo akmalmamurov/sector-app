@@ -96,11 +96,18 @@ const SearchMenu = () => {
                 </Link>
               </div>
             ))}
-            <div className="flex justify-center py-[15px] px-5 bg-white">
-              <button onClick={handleGo} className="text-dangerColor text-sm">
-                Смотреть все {searchData?.total} товаров
-              </button>
-            </div>
+
+            {searchData?.products?.length > 0 ? (
+              <div className="flex justify-center py-[15px] px-5 bg-white">
+                <button onClick={handleGo} className="text-dangerColor text-sm">
+                  Смотреть все {searchData?.total} товаров
+                </button>
+              </div>
+            ) : (
+              <div className="flex justify-center py-[15px] px-5 bg-white">
+                <p>Ничего не найдено</p>
+              </div>
+            )}
           </div>
         )}
       </div>

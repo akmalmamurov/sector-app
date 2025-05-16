@@ -24,6 +24,7 @@ interface FilterItem {
   type: string;
   title: string;
   options: FilterOption[];
+  withSearch?: boolean;
 }
 
 interface CategoryLeftProps {

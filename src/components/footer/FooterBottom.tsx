@@ -8,7 +8,7 @@ const FooterBottom = () => {
   return (
     <div className="bg-[#003c82]">
       <Container>
-        <div className="py-[55px] flex items-center justify-center md:justify-between flex-wrap md:flex-nowrap gap-8 gap-y-8">
+        <div className="py-[55px] sm:pb-16 flex items-center justify-center md:justify-between flex-wrap md:flex-nowrap gap-2 md:gap-8 gap-y-4 md:gap-y-8">
           <p className="text-linkColor sm:text-white font-normal text-sm">
             © 2023–{currentYear} sectortechnology.uz
           </p>
@@ -45,7 +45,7 @@ const FooterBottom = () => {
               href={"#"}
             >
               <Image
-                className="md:w-[35px] md:h-[25px] w-[27px] h-[27px]"
+                className="md:w-[35px] md:h-[25px] w-[20px] h-[20px]"
                 src="/facebook.svg"
                 alt="facebook"
                 width={39}
@@ -53,7 +53,7 @@ const FooterBottom = () => {
               />
             </Link>
           </div>
-          <div className="flex flex-col gap-2 gap-y-3">
+          <div className="flex flex-col gap-2 gap-y-3 pb-6 sm:pb-0">
             <Link
               href="#"
               className="text-end text-linkColor sm:text-white font-normal text-sm hover:opacity-80"

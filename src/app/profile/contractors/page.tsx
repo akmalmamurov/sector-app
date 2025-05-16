@@ -49,7 +49,7 @@ const ContractorsPage = () => {
         <input
           type="text"
           placeholder="Поиск контрагента"
-          className=" w-full h-[41px] px-3 border border-superSilver hover:border-cerulean/70 focus:outline-none
+          className="w-full h-[41px] px-3 border border-superSilver hover:border-cerulean/70 focus:outline-none
            focus:ring-1 focus:ring-cerulean focus:border-transparent transition"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -58,12 +58,12 @@ const ContractorsPage = () => {
           <SearchIcon />
         </span>
       </div>
-      <div className="grid grid-cols-4 border-b border-superSilver pb-8 gap-[22px] w-full ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border-b border-superSilver pb-8 gap-[22px] w-full ">
         <div className="flex flex-col">
           <button
             type="button"
             onClick={toggleOpen}
-            className={` min-h-[229px]  cursor-pointer bg-custom border border-dashed  border-superSilver flex justify-center items-center flex-col gap-2`}
+            className={`min-w-[180px] w-full min-h-[229px]  cursor-pointer bg-custom border border-dashed  border-superSilver flex justify-center items-center flex-col gap-2`}
           >
             <CirclePlus className="text-weekColor w-10 h-10" />
             <p className="text-weekColor mt-2">Добавить контрагенты</p>

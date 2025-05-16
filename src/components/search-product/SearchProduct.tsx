@@ -67,7 +67,6 @@ const SearchProduct = () => {
     priceSort,
     nameSort,
   };
-  console.log("searchData", searchData);
 
   return (
     <div>

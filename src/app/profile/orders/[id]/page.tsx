@@ -11,7 +11,6 @@ const SingleOrder = () => {
     queryFn: () => getSingleOrder(id as string),
   });
 
-  console.log("SingleOrder", order);
   
   return (
     <section className="p-6">

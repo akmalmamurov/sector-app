@@ -10,7 +10,6 @@ interface SingleOrderRightProps {
 }
 
 export const SingleOrderRight = ({ order }: SingleOrderRightProps) => {
-  console.log(order);
 
   return (
     <div className="col-span-9">
