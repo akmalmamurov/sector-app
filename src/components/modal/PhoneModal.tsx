@@ -11,25 +11,23 @@ interface Props {
   isOpen: boolean;
   toggleOpen: () => void;
   step: number;
-  setStep: (step: number) => void;
+  setStep: (step: 1 | 2) => void;
 }
 
-export const PhoneModal = ({ isOpen, toggleOpen }: Props) => {
-  const [step, setStep] = useState<1 | 2>(1);
-
-  const [phone, setPhone] = useState<string>("+998 __ ___ ____");
+export const PhoneModal = ({ isOpen, toggleOpen, step, setStep }: Props) => {
   const [isPhoneComplete, setIsPhoneComplete] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
 
   const [otp, setOtp] = useState<string>("");
   const [isExpired, setIsExpired] = useState(false);
   const [countdownEnd, setCountdownEnd] = useState<number | null>(null);
-
+  const [phone, setPhone] = useState<string>("+998 __ ___ ____");
   const resendCode = () => {
     setIsExpired(false);
-
+    setOtp("");
     setCountdownEnd(Date.now() + 40 * 1000);
   };
+
   const handleNext = () => {
     if (isPhoneComplete) {
       setStep(2);
