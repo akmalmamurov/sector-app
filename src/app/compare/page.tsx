@@ -7,7 +7,7 @@ import { InfoTitle } from "@/components/title";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Сравнение товаров | Sector App",
+  title: "Сравнение товаров | Sector Technology",
   description: "Сравните товары и найдите лучший вариант!",
 };
 const ComparePage = () => {

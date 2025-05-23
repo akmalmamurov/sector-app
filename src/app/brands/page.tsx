@@ -9,7 +9,7 @@ import { BrandData } from "@/types";
 import { cyrillicLetters, groupBrandsByFirstLetter, latinLetters } from "@/utils";
 import { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "Каталог производителей официальных товаров брендов | Sector App",
+  title: "Каталог производителей официальных товаров брендов | Sector Technology",
   description: "Каталог производителей официальных товаров брендов",
 };
 const BrandsPage = async () => {

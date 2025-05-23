@@ -9,7 +9,7 @@ import { InfoTitle } from "@/components/title";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Акции, расподажи и скидки | Sector App",
+  title: "Акции, расподажи и скидки | Sector Technology",
   description: "Акции, расподажи и скидки",
 };
 const DiscountPage = async () => {

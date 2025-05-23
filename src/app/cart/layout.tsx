@@ -3,7 +3,7 @@ import { Container } from "@/components/container";
 
 import { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "Корзина | Sector App",
+  title: "Корзина | Sector Technology",
   description: "Системная интеграция от Sector",
 };
 export default function CartLayout({

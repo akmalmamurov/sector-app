@@ -10,7 +10,7 @@ import Image from "next/image";
 import React from "react";
 import Link from "next/link";
 export const metadata: Metadata = {
-  title: "Системная интеграция от Sector | Sector App",
+  title: "Системная интеграция от Sector | Sector Technology",
   description: "Системная интеграция от Sector",
 };
 const SystemIntegration = () => {

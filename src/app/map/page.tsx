@@ -10,7 +10,7 @@ import Link from "next/link";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "Карта сайта | Sector App",
+  title: "Карта сайта | Sector Technology",
   description: "Расположение нашего сайта",
 };
 

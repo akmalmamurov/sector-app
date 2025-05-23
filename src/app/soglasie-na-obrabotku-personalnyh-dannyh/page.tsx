@@ -7,7 +7,7 @@ import { Metadata } from "next";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "Согласие на обработку персональных данных | Sector App",
+  title: "Согласие на обработку персональных данных | Sector Technology",
   description: "O подключении Wi-Fi).",
 };
 

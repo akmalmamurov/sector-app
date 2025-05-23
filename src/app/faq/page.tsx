@@ -7,7 +7,7 @@ import { faqData, faqLinks } from "@/data";
 import { Metadata } from "next";
 import Link from "next/link";
 export const metadata: Metadata = {
-  title: "Вопросы и ответы | Sector App",
+  title: "Вопросы и ответы | Sector Technology",
   description: "Вопросы и ответы на часто задаваемые вопросы",
 };
 const FaqPage = () => {

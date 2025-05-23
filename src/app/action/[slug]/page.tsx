@@ -12,7 +12,7 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 export const metadata: Metadata = {
-  title: "Акции, расподажи и скидки | Sector App",
+  title: "Акции, расподажи и скидки | Sector Technology",
   description: "Акции, расподажи и скидки",
 };
 const SingleDiscount = async ({ params }: Props) => {

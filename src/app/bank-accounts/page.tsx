@@ -7,7 +7,7 @@ import { Metadata } from "next";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "Банковские реквизиты | Sector App",
+  title: "Банковские реквизиты | Sector Technology",
   description: "Платежные реквизиты компании",
 };
 

@@ -8,7 +8,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 export const metadata: Metadata = {
-  title: "On-line поддержка | Sector App",
+  title: "On-line поддержка | Sector Technology",
   description: "Поддержка на нашем сайте",
 };
 const SupportPage = () => {

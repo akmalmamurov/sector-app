@@ -78,22 +78,22 @@ const OrderCart = ({
           <p className="text-textColor font-normal text-[18px] leading-[27px]">
             Итого
           </p>
-          <PriceFormatter
+          {/* <PriceFormatter
             className="text-cerulean font-normal text-[18px] leading-[27px]"
             amount={selectedCards.length ? total : 0}
-          />
+          /> */}
         </div>
 
         {showCart && (
           <Fragment>
-            <button
+            {/* <button
               type={auth ? "submit" : "button"}
               disabled={!selectedCards.length}
               onClick={auth ? orderHandle : handleOpen}
               className="bg-cerulean hover:opacity-90 transition-opacity text-white w-full py-[13px] mb-3 disabled:opacity-50 font-semibold"
             >
               Оформить заказ
-            </button>
+            </button> */}
             <p className="text-xs font-normal text-textColor">
               Прочитал и согласен с {" "}
               <Link className="text-cerulean hover:underline" href={"/"}>

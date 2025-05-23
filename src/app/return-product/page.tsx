@@ -6,7 +6,7 @@ import { Section } from "@/components/section";
 import { InfoTitle } from "@/components/title";
 import { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "Возврат товара | Sector App",
+  title: "Возврат товара | Sector Technology",
   description: "Описание возврата товара или услуги.",
 };
 const oneItem = [

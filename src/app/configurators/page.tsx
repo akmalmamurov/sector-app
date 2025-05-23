@@ -18,7 +18,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Конфигураторы оборудования | Sector App",
+  title: "Конфигураторы оборудования | Sector Technology",
   description: "Поддержка на нашем сайте",
 };
 
