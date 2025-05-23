@@ -31,6 +31,7 @@ export const CartMenu = () => {
   const cartProduct = auth ? product : cart;
   const containerHeight = cartProduct?.length > 10;
   const queryClient = useQueryClient();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleDelete = (id: string) => {
     openModal("Вы уверены, что хотите удалить товар из корзины?", async () => {
       try {

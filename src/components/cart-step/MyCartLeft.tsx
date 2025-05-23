@@ -102,7 +102,8 @@ const MyCartLeft: React.FC<CartLeftProps> = ({
     setValue,
     getValues,
   };
-
+  console.log(productProps);
+  
   return (
     <div className="col-span-3">
       {/* Выбор города */}
