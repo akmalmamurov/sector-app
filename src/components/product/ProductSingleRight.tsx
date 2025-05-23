@@ -9,7 +9,7 @@ import QuestionCommentIcon from "@/assets/icons/QuestionCommentIcon";
 import { copyToClipboard, isProductInList } from "@/utils";
 import { CartIcon, CopyIcon } from "@/assets/icons";
 import { AddToCompare, AddToFavorites } from "../add-storage";
-import PriceFormatter from "../format-price/PriceFormatter";
+// import PriceFormatter from "../format-price/PriceFormatter";
 import FreePickUpIcon from "@/assets/icons/FreePickUpIcon";
 import InStockIcon from "@/assets/icons/InStockIcon";
 import { ProductData } from "@/types";

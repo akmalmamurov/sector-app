@@ -5,7 +5,9 @@ import Link from "next/link";
 import { ProductData } from "@/types";
 import { CopyIcon } from "@/assets/icons";
 import { AddToCart, AddToCompare, AddToFavorites } from "../add-storage";
-import { copyToClipboard, formatPrice } from "@/utils";
+import { copyToClipboard
+  // , formatPrice
+ } from "@/utils";
 import { cn } from "@/lib/utils";
 interface ProductCardProps {
   product: ProductData;

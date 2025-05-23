@@ -11,7 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import useStore, { StoreItem } from "@/context/store";
 import { ConfirmModal } from "../modal";
 import { useCartLeft } from "@/hooks";
-import CartProducts from "./CartProducts";
+// import CartProducts from "./CartProducts";
 import { getRegion } from "@/api";
 import { OrderRequest } from "@/types";
 import { CartState } from "@/context/form-store";

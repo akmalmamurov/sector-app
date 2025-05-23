@@ -3,14 +3,16 @@ import { X } from "lucide-react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { CartIcon, DeleteIcon } from "@/assets/icons";
+import { CartIcon
+  // , DeleteIcon
+ } from "@/assets/icons";
 import useStore from "@/context/store";
 import { getCart } from "@/api/cart";
 import { ProductData } from "@/types";
 import Image from "next/image";
 import { DOMAIN, TOGGLE_CART } from "@/constants";
 import Link from "next/link";
-import PriceFormatter from "../format-price/PriceFormatter";
+// import PriceFormatter from "../format-price/PriceFormatter";
 import request from "@/services";
 import { useConfirmModal } from "@/hooks";
 import { ConfirmModal } from "../modal";

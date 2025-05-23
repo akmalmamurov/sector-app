@@ -2,9 +2,9 @@ import { CircleAlert, Share2 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
-import PriceFormatter from "../format-price/PriceFormatter";
+// import PriceFormatter from "../format-price/PriceFormatter";
 import { OrderRequest, ProductData } from "@/types";
-import useStore from "@/context/store";
+// import useStore from "@/context/store";
 import { LoginModal } from "../modal";
 import { useScrollDirection } from "@/hooks";
 import formStore from "@/context/form-store";
@@ -19,7 +19,7 @@ const OrderCart = ({
 }) => {
   const scrollDir = useScrollDirection();
   const isScroll = scrollDir === "up" ? true : false;
-  const { selectedCardsList, auth } = useStore();
+  // const { selectedCardsList, auth } = useStore();
   const garanteePrice = formStore((s) => s.garanteePrice);
 
   const selectedTotal = selectedCards.reduce(
@@ -37,9 +37,9 @@ const OrderCart = ({
   const pathname = usePathname();
   const showDelivery = pathname === "/cart/delivery";
   const showCart = pathname === "/cart";
-  const orderHandle = () => {
-    selectedCardsList(selectedCards);
-  };
+  // const orderHandle = () => {
+  //   selectedCardsList(selectedCards);
+  // };
   return (
     <div
       className={`hidden lgl:block bg-white border border-superSilver shadow-sectionShadow p-[23px] sticky ${isScroll ? "top-[140px]" : "top-2"}`}
