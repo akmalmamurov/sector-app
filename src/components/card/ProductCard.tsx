@@ -70,18 +70,17 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
       </div>
       {product?.inStock === "Под заказ" ? (
         <p className="text-cerulean text-xs leading-[18px]">
-         {product?.inStock}
+          {product?.inStock}
         </p>
       ) : (
         <p className="text-cerulean text-xs leading-[18px]">
-        В наличии {product?.inStock}
-      </p>
+          В наличии {product?.inStock}
+        </p>
       )}
 
-      <p className="text-titleColor font-semibold text-end">
+      {/* <p className="text-titleColor font-semibold text-end">
         {formatPrice(product?.price)}
-      </p>
-      {/* footer */}
+      </p> */}
       <div className="flex justify-end gap-[15px] mt-[25px]">
         <AddToFavorites product={product} />
         <AddToCompare product={product} />

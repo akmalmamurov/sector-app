@@ -12,7 +12,7 @@ import CartSync from "@/components/store-sync/CartSync";
 import { LoadingProvider } from "@/context/LoadingContext";
 
 export const metadata: Metadata = {
-  title: "Sector App",
+  title: "Sector Technology",
   description: "Sector technology",
 };
 

@@ -6,14 +6,17 @@ import { PhoneModal } from "../modal";
 
 export const EditNumber = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [step, setStep] = useState<1 | 2>(1);
+  
   const { data: userData } = useQuery({
     queryKey: ["user"],
     queryFn: getUser,
   });
-  console.log(userData);
-  
-const toggleOpen = () => setIsOpen(!isOpen);
-const [step, setStep] = useState(1);
+
+  const toggleOpen = () => {
+    setIsOpen(!isOpen);
+    setStep(1);
+  };
   return (
     <div className="border-b border-superSilver pt-5">
       <div className="pb-5">
@@ -55,7 +58,12 @@ const [step, setStep] = useState(1);
         </button>
       </div>
 
-      <PhoneModal isOpen={isOpen} toggleOpen={toggleOpen} step={step} setStep={setStep} />
+      <PhoneModal
+        isOpen={isOpen}
+        toggleOpen={toggleOpen}
+        step={step}
+        setStep={setStep}
+      />
     </div>
   );
 };
