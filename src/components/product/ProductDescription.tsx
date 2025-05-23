@@ -300,8 +300,6 @@ export function ProductDescription({ product }: ProductDescriptionProps) {
     queryFn: () => getProductQuestions(product.id),
   });
 
-  console.log(questionsData);
-
   const handleSort = (value: string) => {
     console.log(value);
   };

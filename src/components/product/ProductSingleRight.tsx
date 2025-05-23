@@ -148,10 +148,10 @@ const ProductSingleRight: React.FC<ProductSingleRightProps> = ({ product }) => {
                   <ShareButtons url={currentUrl} />
                 </div>
               </div>
-              <PriceFormatter
+              {/* <PriceFormatter
                 amount={product.price}
                 className="text-textColor font-extrabold text-[29px] leading-[44px] mb-6"
-              />
+              /> */}
               {/* ADD TO CART */}
               <button
                 onClick={handleToCart}
