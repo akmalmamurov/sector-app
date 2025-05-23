@@ -10,7 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Условия оплаты и поставки | Sector App",
+  title: "Условия оплаты и поставки | Sector Technology",
   description: "Безналичный расчет (все цены на сайте содержат НДС!).",
 };
 const PaymentPage = () => {

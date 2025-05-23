@@ -16,7 +16,7 @@ import Link from "next/link";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "Wi-Fi «под ключ» | Sector App",
+  title: "Wi-Fi «под ключ» | Sector Technology",
   description: "O подключении Wi-Fi).",
 };
 

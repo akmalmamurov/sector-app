@@ -106,8 +106,7 @@ export const CartMenu = () => {
   )}
 </div>
 
-              {/* product price */}
-              <div className="h-[21px] min-w-[54px] relative flex items-center text-sm text-textColor gap-[3px] ">
+              {/* <div className="h-[21px] min-w-[54px] relative flex items-center text-sm text-textColor gap-[3px] ">
                 <span className="font-semibold group-hover:opacity-0">
                   1 шт
                 </span>
@@ -116,14 +115,13 @@ export const CartMenu = () => {
                   amount={product.price}
                   className="text-sm group-hover:opacity-0 text-right hoverEffect"
                 />
-                {/* delete button */}
                 <button
                   onClick={() => handleDelete(product.id)}
                   className="opacity-0 group-hover:opacity-100 pr-[45px] tran absolute right-0 top-0 transition-opacity duration-300 ease-in-out hover:text-dangerColor"
                 >
                   <DeleteIcon className="" />
                 </button>
-              </div>
+              </div> */}
             </div>
           ))}
         </div>
@@ -131,12 +129,12 @@ export const CartMenu = () => {
           <div className="m-[15px] flex justify-end">
             <div className="text-sm text-cerulean flex gap-2">
               <p>Итого:</p>
-              <PriceFormatter
+              {/* <PriceFormatter
                 amount={cartProduct?.reduce(
                   (acc: number, item: ProductData) => acc + item.price,
                   0
                 )}
-              />
+              /> */}
             </div>
           </div>
           <div className="m-[15px] flex">

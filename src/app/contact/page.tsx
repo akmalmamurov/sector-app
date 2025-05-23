@@ -16,7 +16,7 @@ import React from "react";
 
 export const metadata: Metadata = {
   title:
-    "Офисы продаж и склады магазина Sector Technology в г. Ташкент | Sector App",
+    "Офисы продаж и склады магазина Sector Technology в г. Ташкент | Sector Technology",
   description: "Офисы продаж и склады магазина Sector Technology в г. Ташкент",
 };
 

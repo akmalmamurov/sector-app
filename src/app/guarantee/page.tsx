@@ -7,7 +7,7 @@ import { guaranteeData } from "@/data";
 import { Metadata } from "next";
 import Link from "next/link";
 export const metadata: Metadata = {
-  title: "Положение о гарантийном обслуживании | Sector App",
+  title: "Положение о гарантийном обслуживании | Sector Technology",
   description: "Доставка товара по адресу приема на гарантийное обслуживание осуществляется за счет Покупателя, обратная доставка товара до адреса Покупателя после гарантийного обслуживания осуществляется за счет Поставщика.",
 };
 const GuaranteePage = () => {

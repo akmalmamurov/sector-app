@@ -6,7 +6,7 @@ import { logo } from "@/assets/images";
 import Link from "next/link";
 import HeaderMenuLink from "./HeaderMenuLink";
 
-import { useEffect,  } from "react";
+import { useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { getCatalog } from "@/api/catalog";

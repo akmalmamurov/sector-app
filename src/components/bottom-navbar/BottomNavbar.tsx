@@ -107,7 +107,7 @@ const BottomNavbar = () => {
           {menuOpen && (
             <div className="fixed inset-0 z-30 bg-transparent backdrop-blur-sm">
               <div className="absolute  bottom-0 left-0 w-full h-full overflow-y-auto bg-white border shadow-lg animate-in slide-in-from-bottom-2 duration-200">
-                {/* header */}
+              
                 <div className="mb-4 border-b">
                   <div className="p-[25px] flex justify-between items-center border-b">
                     <h3 className="text-lg text-textColor">Профиль</h3>
@@ -122,7 +122,6 @@ const BottomNavbar = () => {
                     </p>
                   </div>
 
-                  {/* content */}
                   <div className="mt-[15px] mb-5 border-t mx-[10%] ">
                     <div className="bg-[#f8f8f8] border flex justify-between items-center py-4 px-2 mt-3">
                       {}

@@ -222,7 +222,7 @@ const MyCartLeft: React.FC<CartLeftProps> = ({
         </div>
       </div>
 
-      <CartProducts {...productProps} />
+      {/* <CartProducts {...productProps} /> */}
       <ConfirmModal
         isOpen={isConfirmOpen}
         message={message}

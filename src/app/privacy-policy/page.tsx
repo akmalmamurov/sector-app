@@ -6,7 +6,7 @@ import { InfoTitle } from "@/components/title";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Политика конфиденциальности | Sector App",
+  title: "Политика конфиденциальности | Sector Technology",
   description: "Информация о Политика конфиденциальности",
 };
 

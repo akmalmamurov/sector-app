@@ -11,7 +11,7 @@ import Link from "next/link";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "Расширенная гарантия | Sector App",
+  title: "Расширенная гарантия | Sector Technology",
   description: "Информация о гарантии нашей компании",
 };
 

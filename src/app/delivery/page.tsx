@@ -15,7 +15,7 @@ import {
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Доставка товара | Sector App",
+  title: "Доставка товара | Sector Technology",
   description: "Информация о доставке товаров по Узбекистану и за его пределы.",
 };
 const data = [
