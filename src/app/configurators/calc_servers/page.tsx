@@ -20,6 +20,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Cpu } from "lucide-react";
 import { CounterInput } from "@/components/configurators-page";
+import { Unit, Processor, Memory, Disk, Installition, Platform, Brand } from "@/assets/icons/config-icons";
 
 const CalculatorServers = () => {
   const [onlyAvailable, setOnlyAvailable] = useState(false);
@@ -133,6 +134,7 @@ const CalculatorServers = () => {
                 <BrandIcon />
               </InfoHeader>
             </div>
+            {/* Brands */}
             <div className="flex flex-wrap gap-4 p-8 items-center justify-center md:justify-normal">
               <div className="w-[166px] h-[96px] flex items-center justify-center border-2 group  hover:border-greenLight hover:border-2 border-transparent duration-200">
                 <Image
@@ -140,7 +142,7 @@ const CalculatorServers = () => {
                   alt="snr"
                   width={100}
                   height={30}
-                  className="w-[100px] h-[30px] opacity-45 group-hover:opacity-100 duration-200"
+                  className="w-[100px] h-[40px] opacity-45 group-hover:opacity-100 duration-200"
                 />
               </div>
               <div className="w-[166px] h-[96px] flex items-center justify-center border-2  hover:border-greenLight hover:border-2 border-transparent duration-200 group">
@@ -148,8 +150,8 @@ const CalculatorServers = () => {
                   src={dellIcon}
                   alt="snr"
                   width={100}
-                  height={30}
-                  className="w-[50px] h-[30px] opacity-45 group-hover:opacity-100 duration-200"
+                  height={40}
+                  className="w-[45px] h-[40px] opacity-45 group-hover:opacity-100 duration-200"
                 />
               </div>
               <div className="w-[166px] h-[96px] flex items-center justify-center border-2  hover:border-greenLight hover:border-2 border-transparent duration-200 group">
@@ -158,7 +160,7 @@ const CalculatorServers = () => {
                   alt="snr"
                   width={100}
                   height={30}
-                  className="w-[50px] h-[30px] opacity-45 group-hover:opacity-100 duration-200"
+                  className="w-[40px] h-[35px] opacity-45 group-hover:opacity-100 duration-200"
                 />
               </div>
               <div className="w-[166px] h-[96px] flex items-center justify-center border-2  hover:border-greenLight hover:border-2 border-transparent duration-200 group">
@@ -167,7 +169,7 @@ const CalculatorServers = () => {
                   alt="snr"
                   width={100}
                   height={30}
-                  className="w-[100px] h-[30px] opacity-45 group-hover:opacity-100 duration-200"
+                  className="w-[90px] h-[30px] opacity-45 group-hover:opacity-100 duration-200"
                 />
               </div>
               <div className="w-[166px] h-[96px] flex items-center justify-center border-2  hover:border-greenLight hover:border-2 border-transparent duration-200 group">
@@ -176,7 +178,7 @@ const CalculatorServers = () => {
                   alt="snr"
                   width={100}
                   height={40}
-                  className="w-[100px] h-[30px] opacity-45 group-hover:opacity-100 duration-200"
+                  className="w-[90px] h-[55px] opacity-45 group-hover:opacity-100 duration-200"
                 />
               </div>
             </div>
@@ -384,6 +386,7 @@ const CalculatorServers = () => {
             </div>
           </Section>
         </div>
+        {/* Right Sticky Bar */}
         <div className="sticky ml-5 top-8 h-full w-[260px] bg-white border rounded-md p-4 hidden  md:flex flex-col gap-6">
           {/* Progress Bar */}
           <div className="flex items-center justify-center gap-1">
@@ -400,37 +403,19 @@ const CalculatorServers = () => {
             {/* Active buttons */}
             <button className="flex items-center gap-3 p-3 bg-gray-50 rounded-md shadow-sm text-celBlue font-semibold">
               <div className="w-5 h-5">
-                <Image
-                  width={19}
-                  height={19}
-                  src="/icons/tag-icon.svg"
-                  alt="SNR"
-                  className="w-full h-full object-contain"
-                />
+                <Brand />
               </div>
               SNR
             </button>
             <button className="flex items-center gap-3 p-3 bg-gray-50 rounded-md shadow-sm text-celBlue font-semibold">
               <div className="w-5 h-5">
-                <Image
-                  width={19}
-                  height={19}
-                  src="/icons/harddisk-icon.svg"
-                  alt="1U"
-                  className="w-full h-full object-contain"
-                />
+                <Unit />
               </div>
               1U
             </button>
             <button className="flex items-center gap-3 p-3 bg-gray-50 rounded-md shadow-sm text-celBlue font-semibold">
               <div className="w-5 h-5">
-                <Image
-                  width={19}
-                  height={19}
-                  src="/icons/server-icon.svg"
-                  alt="SNR 1U"
-                  className="w-full h-full object-contain"
-                />
+                <Platform />
               </div>
               SNR 1U
             </button>
@@ -439,49 +424,25 @@ const CalculatorServers = () => {
             <div className="flex flex-col gap-2 mt-4">
               <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-md text-gray-400 font-medium">
                 <div className="w-5 h-5">
-                  <Image
-                    width={19}
-                    height={19}
-                    src="/icons/cpu-icon.svg"
-                    alt="Процессор"
-                    className="w-full h-full object-contain"
-                  />
+                  <Processor />
                 </div>
                 4. Процессор
               </div>
               <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-md text-gray-400 font-medium">
                 <div className="w-5 h-5">
-                  <Image
-                    width={19}
-                    height={19}
-                    src="/icons/ram-icon.svg"
-                    alt="Оперативная память"
-                    className="w-full h-full object-contain"
-                  />
+                  <Memory />
                 </div>
                 5. Оперативная память
               </div>
               <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-md text-gray-400 font-medium">
                 <div className="w-5 h-5">
-                  <Image
-                    width={19}
-                    height={19}
-                    src="/icons/hdd-icon.svg"
-                    alt="Диски"
-                    className="w-full h-full object-contain"
-                  />
+                  <Disk />
                 </div>
                 6. Диски
               </div>
               <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-md text-gray-400 font-medium">
                 <div className="w-5 h-5">
-                  <Image
-                    width={19}
-                    height={19}
-                    src="/icons/pci-icon.svg"
-                    alt="PCI"
-                    className="w-full h-full object-contain"
-                  />
+                  <Installition />
                 </div>
                 7. PCI-экспресс устройства
               </div>
