@@ -8,7 +8,10 @@ import { ArrowRightIcon } from "@/assets/icons";
 import { BrandData } from "@/types";
 import Skeleton from "../skeleton/skeleton";
 
-export const HomeBrands = ({ brands, loading }: {
+export const HomeBrands = ({
+  brands,
+  loading,
+}: {
   brands: BrandData[];
   loading: boolean;
 }) => {
@@ -20,34 +23,35 @@ export const HomeBrands = ({ brands, loading }: {
         ) : (
           <Title className="mb-5">Популярные бренды</Title>
         )}
-        {loading ? (
-          <div className="flex lg:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 overflow-x-auto whitespace-nowrap lg:whitespace-normal scrollbar-hide">
-            {Array.from({ length: 6 }).map((_, idx) => (
-              <Skeleton
-                key={idx}
-                className="h-[70px] w-[220px] rounded-md flex items-center justify-center"
-              >
-                <Skeleton className="w-[70%] m-[5%] mx-4 h-[40%] rounded-full skeleton-shimmer" />
-              </Skeleton>
-            ))}
-          </div>
-        ) : (
-          <div className="flex lg:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 overflow-x-auto whitespace-nowrap lg:whitespace-normal scrollbar-hide">
-            {(brands || []).slice(0, 5)?.map((el: BrandData, index: number) => (
-              <Link
-                href={`/brands/${el.slug}`}
-                key={index}
-                className="bg-white py-[5px] px-[35px] flex justify-center items-center opacity-80 hover:opacity-100 hoverEffect shadow-md rounded-[10px] min-w-[150px] lg:min-w-0 mb-4"
-              >
-                <Image
-                  src={`${process.env.NEXT_PUBLIC_API_URL}/${el.path}`}
-                  alt={el.slug}
-                  width={200}
-                  height={200}
-                  className="max-h-[60px] w-full object-contain"
-                />
-              </Link>
-            ))}
+
+        <div className="flex lg:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 overflow-x-auto whitespace-nowrap lg:whitespace-normal scrollbar-hide">
+          {loading
+            ? Array.from({ length: 6 }).map((_, idx) => (
+                <Skeleton
+                  key={idx}
+                  className="min-w-[150px] max-w-[200px] w-full h-[50px] lg:h-[70px] rounded-md flex items-center justify-center shrink-0"
+                >
+                  <Skeleton className="w-[70%] h-[40%] rounded-full skeleton-shimmer" />
+                </Skeleton>
+              ))
+            : (brands || [])
+                .slice(0, 5)
+                .map((el: BrandData, index: number) => (
+                  <Link
+                    href={`/brands/${el.slug}`}
+                    key={index}
+                    className="bg-white py-[5px] px-[35px] flex justify-center items-center opacity-80 hover:opacity-100 hoverEffect shadow-md rounded-[10px] min-w-[150px] lg:min-w-0 mb-4"
+                  >
+                    <Image
+                      src={`${process.env.NEXT_PUBLIC_API_URL}/${el.path}`}
+                      alt={el.slug}
+                      width={200}
+                      height={200}
+                      className="max-h-[60px] w-full object-contain"
+                    />
+                  </Link>
+                ))}
+          {!loading && (
             <Link
               href="/brands"
               className="bg-white text-cerulean font-medium text-sm leading-[21px] gap-3 items-center py-[5px] px-8 flex justify-center opacity-80 hover:opacity-100 hoverEffect shadow-md rounded-[10px] min-w-[150px] lg:min-w-0 mb-4"
@@ -57,8 +61,8 @@ export const HomeBrands = ({ brands, loading }: {
                 <ArrowRightIcon className="text-textColor w-6 h-6" />
               </span>
             </Link>
-          </div>
-        )}
+          )}
+        </div>
       </Container>
     </div>
   );

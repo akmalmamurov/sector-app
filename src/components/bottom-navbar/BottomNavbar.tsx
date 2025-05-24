@@ -74,26 +74,25 @@ const BottomNavbar = () => {
     };
   }, [menuOpen]);
 
-
-  
   return (
-<div className="fixed bottom-0 left-0 w-full z-[20] bg-white shadow-md border-t flex justify-around py-2 will-change-transform">
-<NavItem src={NavBottomHome} label="Главная" href="/" />
+    <>
+    <div className="fixed bottom-0 left-0 w-full z-[30] bg-white shadow-md border-t flex justify-around py-2 will-change-transform">
+      <NavItem src={NavBottomHome} label="Главная" href="/" />
       <NavItem src={NavBottomInfo} label="Информация" href="/about" />
       <NavCatalogItem
-  src={NavBottomCatalog}
-  label="Каталог"
-  href="#"
-  onClick={(e) => {
-    e.preventDefault();
-    openMenu(); // headerdagi mobile menyuni ochadi
-  }}
-/>
-     <NavItem src={NavBottomCart} label="Корзина" href="/cart" />
+        src={NavBottomCatalog}
+        label="Каталог"
+        href="#"
+        onClick={(e) => {
+          e.preventDefault();
+          openMenu(); 
+        }}
+      />
+      <NavItem src={NavBottomCart} label="Корзина" href="/cart" />
 
       {/* Profile */}
       {auth ? (
-        <div ref={menuRef} className="relative">
+        <div ref={menuRef} >
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="header-menu-item"
@@ -107,7 +106,6 @@ const BottomNavbar = () => {
           {menuOpen && (
             <div className="fixed inset-0 z-30 bg-transparent backdrop-blur-sm">
               <div className="absolute  bottom-0 left-0 w-full h-full overflow-y-auto bg-white border shadow-lg animate-in slide-in-from-bottom-2 duration-200">
-              
                 <div className="mb-4 border-b">
                   <div className="p-[25px] flex justify-between items-center border-b">
                     <h3 className="text-lg text-textColor">Профиль</h3>
@@ -223,13 +221,13 @@ const BottomNavbar = () => {
           <span className="text-[9px] pt-1">Профиль</span>
         </button>
       )}
-      <LoginModal isOpen={isOpen} handleOpen={() => setIsOpen(!isOpen)} />
+    </div>
+      <LoginModal isOpen={isOpen} handleOpen={() => setIsOpen(!isOpen)}  />
       <ContrAgentModal
         isOpen={modalOpen}
         toggleOpen={() => setModalOpen(!modalOpen)}
       />
-    </div>
-    
+    </>
   );
 };
 const NavItem = ({

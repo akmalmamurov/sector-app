@@ -77,10 +77,10 @@ const ProductTabs = () => {
         )}
         <TabsContent
           value={activeTab}
-          className={`grid px-5 mt-0 ${
+          className={`grid px-3 md:px-5 mt-0 ${
             activeTab === "promotion"
               ? "grid-cols-2 lg:grid-cols-3 gap-7"
-              : "grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+              : "grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4"
           }`}
         >
           {loading

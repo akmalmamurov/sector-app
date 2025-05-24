@@ -122,7 +122,7 @@ export const CreateIssues: React.FC<{
         <form
           noValidate
           onSubmit={handleSubmit(onSubmit)}
-          className="pb-5 grid grid-cols-7 gap-6 mt-12"
+          className="pb-5 flex flex-col gap-3 md:grid md:grid-cols-7 md:gap-6 mt-12"
         >
           {/* Тема обращения */}
           <FormField
@@ -260,7 +260,7 @@ export const CreateIssues: React.FC<{
           />
 
           {/* Прикрепить файл */}
-          <div className="col-span-3">
+          <div className="col-span-3 gap-2">
             <Label htmlFor="fileInput" className="text-textColor text-sm pb-2">
               Прикрепите файл
             </Label>
@@ -272,7 +272,7 @@ export const CreateIssues: React.FC<{
               ref={fileInputRef}
               onChange={handleFileChange}
             />
-            <div className="flex items-center">
+            <div className="flex items-center gap-2">
               <Input
                 type="text"
                 readOnly

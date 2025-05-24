@@ -46,7 +46,7 @@ export const ProfileIssueTable = ({ issues }: { issues: IssuesData[] }) => {
           <TableHead className="px-[10px] py-[7px] text-center border border-superSilver text-sm leading-[25px] h-[50px] text-textColor ">
             <span>Подана</span>
           </TableHead>
-          <TableHead className="px-[10px] py-[7px] text-center border border-superSilver text-sm leading-[25px] h-[50px] text-textColor ">
+          <TableHead className="px-[10px] py-[7px] text-center border border-superSilver text-sm leading-[25px] h-[50px] text-textColor text-nowrap">
             <span>Последний ответ</span>
           </TableHead>
         </TableRow>
@@ -55,7 +55,7 @@ export const ProfileIssueTable = ({ issues }: { issues: IssuesData[] }) => {
         {issues?.length > 0
           ? issues?.map((item) => (
               <TableRow key={item?.id}>
-                <TableCell className="py-[7px] px-[10px] border-l border-t border-b text-center lg:w-[191px]">
+                <TableCell className="py-[7px] px-[10px] border-l border-t border-b text-center lg:w-[191px] text-nowrap">
                   <button
                     type="button"
                     onClick={() => {
@@ -67,13 +67,13 @@ export const ProfileIssueTable = ({ issues }: { issues: IssuesData[] }) => {
                     {item?.requestNumber}
                   </button>
                 </TableCell>
-                <TableCell className="py-[7px] px-[10px] border-l border-t border-b text-center text-textColor">
+                <TableCell className="py-[7px] px-[10px] border-l border-t border-b text-center text-textColor text-nowrap">
                   {item?.orderNumber || "-"}
                 </TableCell>
-                <TableCell className="py-[7px] px-[10px] border-l border-t border-b text-center text-textColor">
+                <TableCell className="py-[7px] px-[10px] border-l border-t border-b text-center text-textColor text-nowrap">
                   {item?.topic}
                 </TableCell>
-                <TableCell className="py-[7px] px-[10px] border-l border-t border-b text-center text-textColor">
+                <TableCell className="py-[7px] px-[10px] border-l border-t border-b text-center text-textColor text-nowrap">
                   <span
                     className={`py-[6px] px-[17px] border ${item?.status === "new" ? "border-cerulean" : item?.status === "closed" ? "border-dangerColor" : "border-superSilver "} rounded-sm`}
                   >
@@ -84,15 +84,15 @@ export const ProfileIssueTable = ({ issues }: { issues: IssuesData[] }) => {
                         : "Закрыто"}
                   </span>
                 </TableCell>
-                <TableCell className="py-[7px] px-[10px] border-l border-t border-b text-center text-textColor">
+                <TableCell className="py-[7px] px-[10px] border-l border-t border-b text-center text-textColor text-nowrap">
                   {item?.messages?.length}
                 </TableCell>
-                <TableCell className="py-[7px] px-[10px] border-l border-t border-b text-center text-textColor">
+                <TableCell className="py-[7px] px-[10px] border-l border-t border-b text-center text-textColor text-nowrap">
                   {item.createdAt
                     ? format(new Date(item.createdAt), "dd.MM.yyyy HH:mm")
                     : "-"}
                 </TableCell>
-                <TableCell className="py-[7px] px-[10px] border-l border-t border-b text-center text-textColor border-r">
+                <TableCell className="py-[7px] px-[10px] border-l border-t border-b text-center text-textColor text-nowrap border-r">
                   {item?.messages?.length
                     ? format(
                         new Date(

@@ -75,9 +75,9 @@ export const CategoryRight: React.FC<CategoryRightProps> = ({
         {/* sorts*/}
         <SortProducts {...props} />
         {/* products */}
-        <div className={!rowCol ? "p-5" : "p-0"}>
+        <div className={!rowCol ? "p-3 md:p-5" : "p-0"}>
           {!rowCol ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-[21px]">
+            <div className="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-3 mg:gap-[21px]">
               {productData?.map((item, index) => (
                 <ProductCard key={index} product={item} />
               ))}

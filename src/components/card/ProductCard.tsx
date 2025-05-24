@@ -17,7 +17,7 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
   return (
     <div
       className={cn(
-        "px-[13px] border border-superSilver rounded-[10px] group hover:border-cerulean hoverEffect",
+        "px-[8px] md:px-[13px] border border-superSilver rounded-[10px] group hover:border-cerulean hoverEffect",
         className
       )}
     >

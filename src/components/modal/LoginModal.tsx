@@ -91,7 +91,8 @@ export const LoginModal = ({ isOpen, handleOpen }: Props) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpen}>
-      <DialogContent className="w-[100%] h-[100vh] sm:h-auto sm:max-w-[500px] rounded-none sm:rounded-none p-0">
+      <DialogContent className="w-[100%] h-[100vh] absolute bottom-0 left-0 top-0
+       sm:h-auto sm:max-w-[500px] rounded-none sm:rounded-none p-0">
         {step === 1 && (
           <Login
             handleClose={handleClose}

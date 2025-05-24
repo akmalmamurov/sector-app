@@ -90,7 +90,7 @@ export const ProfileOrderTable = ({ orders }: Props) => {
         {sortedOrders && sortedOrders?.length > 0
           ? sortedOrders?.map((order, index) => (
               <TableRow key={order?.id} className="">
-                <TableCell className="py-[7px] px-[10px] border-l border-t border-b lg:w-[189px]">
+                <TableCell className="py-[7px] px-[10px] border-l border-t border-b lg:w-[189px] text-nowrap">
                   <div className="flex flex-col gap-2 items-center">
                     <Link
                       href={`/profile/orders/${order?.id}`}
@@ -105,7 +105,7 @@ export const ProfileOrderTable = ({ orders }: Props) => {
                     <p>от {formatDate(order?.validStartDate)}</p>
                   </div>
                 </TableCell>
-                <TableCell className="py-[7px] px-[10px]  border-t border-b lg:w-[328px]">
+                <TableCell className="py-[7px] px-[10px]  border-t border-b lg:w-[328px] text-nowrap">
                   <div className="flex items-center gap-2">
                     <span>
                       <ProfileWarIcon />
@@ -116,7 +116,7 @@ export const ProfileOrderTable = ({ orders }: Props) => {
                     </div>
                   </div>
                 </TableCell>
-                <TableCell className="py-[7px] px-[10px]  border-t border-b lg:w-[265px]">
+                <TableCell className="py-[7px] px-[10px]  border-t border-b lg:w-[265px] text-nowrap">
                   <div className="flex flex-col gap-2">
                     <p>Прочее</p>
                     <span className="border-b border-dashed border-cerulean text-cerulean w-fit">
@@ -130,7 +130,7 @@ export const ProfileOrderTable = ({ orders }: Props) => {
                     </span>
                   </div>
                 </TableCell>
-                <TableCell className="py-[7px] px-[10px]  border-t border-b lg:w-[220px]">
+                <TableCell className="py-[7px] px-[10px]  border-t border-b lg:w-[220px] text-nowrap">
                   <div className="flex flex-col items-center justify-center gap-2">
                     <div className="border border-dangerColor w-full flex justify-center items-center h-[30px] rounded-[4px] text-dangerColor text-sm">
                       {order?.orderPriceStatus === "not paid"
@@ -144,7 +144,7 @@ export const ProfileOrderTable = ({ orders }: Props) => {
                     </div>
                   </div>
                 </TableCell>
-                <TableCell className="py-[7px] px-[10px]  border-t border-b">
+                <TableCell className="py-[7px] px-[10px]  border-t border-b text-nowrap">
                   <div className="flex justify-between">
                     <span className="text-darkSoul text-xs leading-[18px]">
                       UZS
@@ -160,7 +160,7 @@ export const ProfileOrderTable = ({ orders }: Props) => {
                     </div>
                   </div>
                 </TableCell>
-                <TableCell className="py-[7px] px-[10px]  border-t border-b text-center border-r">
+                <TableCell className="py-[7px] px-[10px]  border-t border-b text-center border-r text-nowrap">
                   <div className="cursor-pointer flex justify-center">
                     <Popover
                       open={open === index}
